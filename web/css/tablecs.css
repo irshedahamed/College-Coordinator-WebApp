@@ -1,0 +1,309 @@
+		@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+		
+		* {margin: 0; padding: 0; }
+		
+		body {
+			font-family: Ubuntu, arial, verdana;
+			background: #0586AD;
+		}
+                #welcomeDiv{
+    display:none;
+}
+#welcomeDiv1{
+    display:none;
+}
+#welcomeDiv2{
+    display:none;
+}
+		#welcomeDiv:target{
+    display:block;
+    
+}
+#welcomeDiv1:target{
+    display:block;
+}
+#welcomeDiv2:target{
+    display:block;
+}
+		/*----------
+		Blocks
+		----------*/
+		/*Pricing table and price blocks*/
+		.pricing_table {
+			line-height: 150%; 
+			font-size: 12px; 
+			margin: 0 auto; 
+			width: 100%; 
+			max-width: auto; 
+			padding-top: 10px;
+			margin-top: 100px;
+		}
+		
+		.price_block {
+			text-align: center; 
+			width: 100%; 
+			color: #fff; 
+			float: left; 
+			list-style-type: none; 
+			transition: all 0.25s; 
+			position: relative; 
+			box-sizing: border-box;
+			
+			margin-bottom: 10px; 
+			border-bottom: 1px solid transparent; 
+		}
+		
+		/*Price heads*/
+		.pricing_table h3 {
+			text-transform: uppercase; 
+			padding: 5px 0; 
+			background: #333; 
+			margin: -10px 0 1px 0;
+		}
+		
+		/*Price tags*/
+		.price {
+			display: table; 
+			background: #444; 
+			width: 100%; 
+			height: 70px; 
+		}
+		.price_figure {
+			font-size: 24px; 
+			text-transform: uppercase; 
+			vertical-align: middle; 
+			display: table-cell;
+		}
+		.price_number {
+			font-weight: bold; 
+			display: block;
+		}
+		.price_tenure {
+			font-size: 11px; 
+		}
+		
+		/*Features*/
+		.features {
+			background: #DEF0F4; 
+			color: #000;
+		}
+		.features li {
+			padding: 8px 15px;
+			border-bottom: 1px solid #ccc; 
+			font-size: 11px; 
+			list-style-type: none;
+		}
+		
+		.footer {
+			padding: 15px; 
+			background: #DEF0F4;
+		}
+		.action_button {
+			text-decoration: none; 
+			color: #fff; 
+			font-weight: bold; 
+			border-radius: 5px; 
+			background: linear-gradient(#666, #333); 
+			padding: 5px 20px; 
+			font-size: 11px; 
+			text-transform: uppercase;
+		}
+		
+		.price_block:hover {
+			box-shadow: 0 0 0px 5px rgba(0, 0, 0, 0.5); 
+			transform: scale(1.04) translateY(-5px); 
+			z-index: 1; 
+			border-bottom: 0 none;
+		}
+		.price_block:hover .price {
+			background:linear-gradient(#DB7224, #F9B84A); 
+			box-shadow: inset 0 0 45px 1px #DB7224;
+		}
+		.price_block:hover h3 {
+			background: #222;
+		}
+		.price_block:hover .action_button {
+			background: linear-gradient(#F9B84A, #DB7224); 
+		}
+		
+		
+		@media only screen and (min-width : 480px) and (max-width : 768px) {
+			.price_block {width: 50%;}
+			.price_block:nth-child(odd) {border-right: 1px solid transparent;}
+			.price_block:nth-child(3) {clear: both;}
+			
+			.price_block:nth-child(odd):hover {border: 0 none;}
+		}
+		@media only screen and (min-width : 768px){
+			.price_block {width: 25%;}
+			.price_block {border-right: 1px solid transparent; border-bottom: 0 none;}
+			.price_block:last-child {border-right: 0 none;}
+			
+			.price_block:hover {border: 0 none;}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		.skeleton, .skeleton ul, .skeleton li, .skeleton div, .skeleton h3, .skeleton span, .skeleton p {
+			border: 5px solid rgba(255, 255, 255, 0.9);
+			border-radius: 5px;
+			margin: 7px !important;
+			background: rgba(0, 0, 0, 0.05) !important;
+			padding: 0 !important;
+			text-align: left !important;
+			display: block !important;
+			
+			width: auto !important;
+			height: auto !important;
+			
+			font-size: 10px !important;
+			font-style: italic !important;
+			text-transform: none !important;
+			font-weight: normal !important;
+			color: black !important;
+		}
+		.skeleton .label {
+			font-size: 11px !important;
+			font-style: italic !important;
+			text-transform: none !important;
+			font-weight: normal !important;
+			color: white !important;
+			border: 0 none !important;
+			padding: 5px !important; 
+			margin: 0 !important;
+			float: none !important;
+			text-align: left !important;
+			text-shadow: 0 0 1px white;
+			background: none !important;
+		}
+		.skeleton {
+			display: none !important;
+			margin: 100px !important;
+			clear: both;
+		}
+	
+	
+
+
+
+	html, body, div, span, object, iframe,
+	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+	abbr, address, cite, code,
+	del, dfn, em, img, ins, kbd, q, samp,
+	small, strong, sub, sup, var,
+	b, i,
+	dl, dt, dd, ol, ul, li,
+	fieldset, form, label, legend,
+	table, caption, tbody, tfoot, thead, tr, th, td {
+		margin:0;
+		padding:0;
+		border:0;
+		outline:0;
+		font-size:100%;
+		vertical-align:baseline;
+		background:transparent;
+	}
+	
+	body {
+		margin:0;
+		padding:0;
+		font:12px/15px "Helvetica Neue",Arial, Helvetica, sans-serif;
+		color: #555;
+		background:#f5f5f5 url(bg.jpg);
+	}
+	
+	a {color:#666;}
+	
+	#content {width:65%; max-width:690px; margin:6% auto 0;}
+	
+	/*
+	Pretty Table Styling
+	CSS Tricks also has a nice writeup: http://css-tricks.com/feature-table-design/
+	*/
+	
+	table {
+		overflow:hidden;
+		border:1px solid #d3d3d3;
+		background:#fefefe;
+		max-width:85%;
+		margi:5% auto 0;
+		-moz-border-radius:5px; /* FF1+ */
+		-webkit-border-radius:5px; /* Saf3-4 */
+		border-radius:5px;
+		-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+		-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+	}
+	
+	th, td {padding:12px 20px 12px;  }
+	
+	th {padding-top:22px; text-shadow: 1px 1px 1px #fff; background:#e8eaeb;}
+	
+	td {border-top:1px solid #e0e0e0; border-right:1px solid #e0e0e0;}
+	
+	tr.odd-row td {background:#f6f6f6;}
+	
+	td.first, th.first {text-align:left}
+	
+	td.last {border-right:none;}
+	
+	/*
+	Background gradients are completely unnecessary but a neat effect.
+	*/
+	
+	td {
+		background: -moz-linear-gradient(100% 25% 90deg, #fefefe, #f9f9f9);
+		background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#f9f9f9), to(#fefefe));
+	}
+	
+	tr.odd-row td {
+		background: -moz-linear-gradient(100% 25% 90deg, #f6f6f6, #f1f1f1);
+		background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#f1f1f1), to(#f6f6f6));
+	}
+	
+	th {
+		background: -moz-linear-gradient(100% 20% 90deg, #e8eaeb, #ededed);
+		background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(#ededed), to(#e8eaeb));
+	}
+	
+	/*
+	I know this is annoying, but we need additional styling so webkit will recognize rounded corners on background elements.
+	Nice write up of this issue: http://www.onenaught.com/posts/266/css-inner-elements-breaking-border-radius
+	
+	And, since we've applied the background colors to td/th element because of IE, Gecko browsers also need it.
+	*/
+	
+	tr:first-child th.first {
+		-moz-border-radius-topleft:5px;
+		-webkit-border-top-left-radius:5px; /* Saf3-4 */
+	}
+	
+	tr:first-child th.last {
+		-moz-border-radius-topright:5px;
+		-webkit-border-top-right-radius:5px; /* Saf3-4 */
+	}
+	
+	tr:last-child td.first {
+		-moz-border-radius-bottomleft:5px;
+		-webkit-border-bottom-left-radius:5px; /* Saf3-4 */
+	}
+	
+	tr:last-child td.last {
+		-moz-border-radius-bottomright:5px;
+		-webkit-border-bottom-right-radius:5px; /* Saf3-4 */
+	}
+

@@ -1,0 +1,186 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import dbconnection.dbcon;
+
+/**
+ *
+ * @author Lenovo
+ */
+public class LoginServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+   
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+  
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+       
+                String regno=request.getParameter("uname");
+		String dob=request.getParameter("pass");
+                String s3="student";
+		response.setContentType("text/html");
+                Boolean flag=false;
+		
+		try{    
+			Class.forName("com.mysql.jdbc.Driver");  
+                       PrintWriter out = response.getWriter();
+                      
+                        //response.sendRedirect("index1.html");
+                    
+                     
+                    //response.sendRedirect("index1.html");
+                    
+                    String sql = "select * from student_login_details where rollno='"+regno+"' and password='"+dob+"'"  ;  
+                    
+                    
+                   
+                  dbcon d = new dbcon();
+                  Connection con = d.getConnection("login");
+                  Statement statement = con.createStatement();
+                    ResultSet rs = statement.executeQuery(sql);
+                    if(!rs.isBeforeFirst())
+                    {
+                        sql = "select * from staff_login_details where staffid='"+regno+"' and password='"+dob+"'";
+                        rs = statement.executeQuery(sql);
+                        if(!rs.isBeforeFirst())
+                        {
+                            sql = "select * from other_login_details where id='"+regno+"' and password='"+dob+"'";
+                            rs= statement.executeQuery(sql);
+                          flag = true;
+                        }
+                        else
+                        {
+                        s3="staff";
+                        }
+                    }
+                   
+             
+            //rs.getString("regno");
+                    if(rs.isBeforeFirst())
+                    {
+            while(rs.next())
+            {  String s1=rs.getString(1);
+               String s2=rs.getString(2);
+               if(flag==true)
+               {
+                  s3=rs.getString("type");
+               }
+              
+              HttpSession session = request.getSession(true);
+               //  RequestDispatcher rd=request.getRequestDispatcher("index1.html");
+               //  rd.forward(request, response);
+               if(s1.equalsIgnoreCase(regno) && s2.equalsIgnoreCase(dob))
+               {   session.setAttribute("username", s1);
+                   session.setAttribute("password",s2);
+                   session.setAttribute("deptname", "cse");
+                   request.setAttribute("tt","new");
+                  if(s3.equals("student"))
+                   response.sendRedirect("student/home.jsp");
+                  else if(s3.equals("staff"))
+                    
+                   response.sendRedirect("staff/home.jsp");  
+                  
+                  
+                  else if(s3.equals("dept"))
+                  
+                      response.sendRedirect("dept/home.jsp");  
+                  else if(s3.equals("exam"))
+                      response.sendRedirect("exam/home.jsp");
+                  else 
+                  {
+                      
+                      response.sendRedirect("index.jsp");
+                  }
+                
+                  // response.sendRedirect("index.jsp");                 
+               }
+               else
+               {
+                   
+                    response.sendRedirect("index.jsp");
+               }
+               //else
+               //{
+                 // response.sendRedirect("index.html");
+               
+                   /*out.println("<html>");
+                   out.println("<font color='white'><h2>Login Successful</h2>");
+                   out.println("</font>");
+                   out.println("<body bgcolor='black'>");
+                   out.println("</body>");
+                   out.println("</html>");
+                   */
+               
+              // }    
+            }  
+            
+		//close connection
+            con.close();
+                    }
+                    else
+                    {
+                        response.sendRedirect("index.jsp");
+                    }
+		
+		    }catch(Exception ex){
+                         response.sendRedirect("index.jsp");
+		      PrintWriter out = response.getWriter();
+                      out.println(ex);
+		    }
+               
+                
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}
