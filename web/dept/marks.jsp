@@ -99,6 +99,9 @@
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marksreport.jsp">Mark Sheet</a>
 
 </li>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="studentanalysis.jsp">Student Analysis</a>
+
+</li>
 </ul>						</nav>
 					</div>
 				</div>

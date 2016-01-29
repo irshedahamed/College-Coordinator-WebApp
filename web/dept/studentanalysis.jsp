@@ -38,17 +38,18 @@
     <link href="../css/simple-sidebar.css" rel="stylesheet">
     
     <script>
-        function process()
+        function process(obj)
         {
             var val = document.getElementById("rollno").value;
-            document.write(val);
+            var sem = obj.value;
+            //document.write(sem);
             var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
      document.getElementById("content").innerHTML = xhttp.responseText;
     }
   };
-  xhttp.open("GET", "alldetails.jsp?rollno="+val, true);
+  xhttp.open("GET", "alldetails.jsp?rollno="+val+"&sem="+sem, true);
   xhttp.send();
 }
         
@@ -144,7 +145,7 @@
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notes.jsp">View Notes</a></li>
 	</ul></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="circular.jsp">Circular</a>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
 <li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="cireveupdates.jsp">Department Uploads</a>
     </li>
@@ -153,7 +154,7 @@
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marksreport.jsp">Mark Sheet</a>
 
 </li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="studentanalysis.jsp">Student Analysis</a>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="studentanalysis.jsp">Student Analysis</a>
 
 </li>
 </ul>						</nav>
@@ -167,8 +168,21 @@
 
             <center>
             <input type="text" class="form-group" id="rollno" width="50%" >
-            <button  class="form-group" onclick="process();">Search</button></center>
-            <div id="content"></div>
+            <button  class="form-group" onclick="process(this);" value="01">Search</button></center>
+            <br>
+            <br>
+            <center>
+            <button class="actions-group" onclick="process(this);" value="01">SEM 1</button>
+            <button class="actions-group" onclick="process(this);" value="02">SEM 2</button>
+            <button class="actions-group" onclick="process(this);" value="03">SEM 3</button>
+            <button class="actions-group" onclick="process(this);" value="04">SEM 4</button>
+            <button class="actions-group" onclick="process(this);" value="05">SEM 5</button>
+            <button class="actions-group" onclick="process(this);" value="06">SEM 6</button>
+            <button class="actions-group" onclick="process(this);" value="07">SEM 7</button>
+            <button class="actions-group" onclick="process(this);" value="08">SEM 8</button></center>
+            <div id="content">
+                
+            </div>
 </div></div></section>
 
 </section>

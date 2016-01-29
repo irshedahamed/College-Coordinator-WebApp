@@ -1,59 +1,100 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="dbconnection.dbcon"%>
+<%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>Bootstrap Case</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        
+        <link href="../css/tabledesign.css" rel="stylesheet">
 
-        <script src="../js/tabsjs.js"></script>
-
-        <script src="../js/bootstrap.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $(".nav-tabs a").click(function() {
-                    $(this).tab('show');
-                });
-            });
-        </script>
     </head>
     <body>
 
-        <div class="container">
-            <h2>Dynamic Tabs</h2>
-            <ul class="nav nav-tabs">
+        
 
-                <li class="active"><a href="#sem1">SEM 1</a></li>
-                <li><a href="#sem2">SEM 2</a></li>
-                <li><a href="#sem3">SEM 3</a></li>
-                <li><a href="#sem4">SEM 4</a></li>
-                <li><a href="#sem5">SEM 5</a></li>
-                <li><a href="#sem6">SEM 6</a></li>
-                <li><a href="#sem7">SEM 7</a></li>
-                <li><a href="#sem8">SEM 8</a></li>
-
-            </ul>
-
-            <div class="tab-content">
+           
                 <%
                     String rollno = request.getParameter("rollno");
+                    String batch="";
+                    String sem = request.getParameter("sem");
+                    
+                    Connection con = new dbcon().getConnection("cse");
+                    Statement st1 = con.createStatement();
+                    String name="";
+                    ResultSet rs1= st1.executeQuery("select name from student_personal where rollno='"+rollno+"'");
+                    String subname="",subcode="",cycle1="",cycle2="",cycle3="",model1="",model2="",model3="";
+                   if(rs1.next())
+                   {
+                       name=rs1.getString("name");
+                              
+                   }
+                       
+                   
+                    
 
                 %>
-                <div id="menu1" class="tab-pane fade">
-                    <h3>Menu 1</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-                <div id="menu2" class="tab-pane fade">
-                    <h3>Menu 2</h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
-                </div>
-                <div id="menu3" class="tab-pane fade">
-                    <h3>Menu 3</h3>
-                    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                </div>
-            </div>
-        </div>
-
+                
+                
+    <center><h3>SEM <%=sem%></h3></center> 
+                    
+                    <center><table class="bordered"><tr>
+                                <th>SUBCODE</th>
+                                <th>SUBJECT NAME</th>
+                                <th>CYCLE 1</th>
+                                <th>MODEL 1</th>
+                                <th>CYCLE 2</th>
+                                <th>MODEL 2</th>
+                                <th>CYCLE 3</th>
+                                <th>MODEL 3</th>
+                            </tr>
+                            <%
+                    try
+                    {
+                    PreparedStatement st = con.prepareStatement("select marks_table.*,subject_sem_table.subname from marks_table,subject_sem_table where marks_table.subcode=subject_sem_table.subcode and marks_table.sem=? and rollno=?");
+                    st.setString(2, rollno);
+                    st.setString(1, sem);
+                   
+                    ResultSet rs= st.executeQuery();
+                    while(rs.next())
+                    {
+                        subcode=rs.getString("subcode");
+                        subname=rs.getString("subname");
+                        cycle1=rs.getString("cycle1");
+                        cycle2=rs.getString("cycle2");
+                        cycle3=rs.getString("cycle3");
+                        model1=rs.getString("model1");
+                        model2=rs.getString("model2");
+                        model3=rs.getString("model3");
+                    
+                    
+                    %>
+                            <tr>
+                                <td><%=subcode%></td>
+                                <td><%=subname%></td>
+                                <td><%=cycle1%></td>
+                                <td><%=model1%></td>
+                                <td><%=cycle2%></td>
+                                <td><%=model2%></td>
+                                <td><%=cycle3%></td>
+                                <td><%=model3%></td>
+                            </tr>
+                        <%
+                    }
+                    }catch(Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                        
+                        %>
+                      
+                        
+                        </table></center>
+                
 
 
     </body>
