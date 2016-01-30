@@ -69,6 +69,8 @@ public class updatemodeltype extends HttpServlet {
          try {
             HttpSession session = request.getSession();
             String[] regno = new String[80];
+            
+            
             regno = request.getParameterValues("id");
             String dept = session.getAttribute("dept").toString();
             Connection  con = new dbcon().getConnection(dept);
@@ -77,6 +79,7 @@ public class updatemodeltype extends HttpServlet {
             Statement st1=null;
             ResultSet rs1=null;
             st1 = con.createStatement();
+            
             
             for(int i =0;i<=regno.length;i++)
             {
@@ -92,6 +95,7 @@ public class updatemodeltype extends HttpServlet {
             
         } catch (Exception ex) {
             response.getWriter().print(ex);
+            ex.printStackTrace();
         }
     }
 
@@ -109,7 +113,11 @@ public class updatemodeltype extends HttpServlet {
         
         try {
             HttpSession session = request.getSession();
+            PrintWriter out=response.getWriter();
+            
             String[] regno = request.getParameterValues("id");
+            
+            
             String dept = session.getAttribute("dept").toString();
             Connection  con = new dbcon().getConnection(dept);
   
@@ -117,11 +125,12 @@ public class updatemodeltype extends HttpServlet {
             Statement st1=null;
             ResultSet rs1=null;
             st1 = con.createStatement();
-            
+            out.println("Hello");
             for(int i =0;i<regno.length;i++)
             {
                             
-            String sql1 = "update student_personal set model_type ='spl' where regno = '"+regno[i]+"'" ;
+                
+                String sql1 = "update student_personal set model_type ='spl' where regno = '"+regno[i]+"'" ;
              
             st1.executeUpdate(sql1);
             

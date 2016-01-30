@@ -100,7 +100,7 @@ public class markupdate extends HttpServlet {
             st4 = con.createStatement();
             
             
-            String sql1 = "select * from subject_sem_table where regulation='"+regulation+"' and sem='"+sem+"' order by subcode" ;
+            String sql1 = "select * from subject_sem_table where regulation='"+regulation+"' and sem='"+sem+"' and subtype='theory' order by subcode" ;
              String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
              
             rs1=st1.executeQuery(sql1);
@@ -131,10 +131,11 @@ public class markupdate extends HttpServlet {
                         String sql5="update marks_table set "+exam+"='"+mark+"' where rollno='"+rollno+"' and subcode='"+subcode+"'";
                         st4.executeUpdate(sql5);
                     }
-                    count++;
+                    
                     rs3.close();
                     
                 }
+                count++;
             }
             response.getWriter().printf("updated");
             
