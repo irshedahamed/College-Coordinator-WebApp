@@ -125,13 +125,15 @@ public class updatemodeltype extends HttpServlet {
             Statement st1=null;
             ResultSet rs1=null;
             st1 = con.createStatement();
+          
             out.println("Hello");
             for(int i =0;i<regno.length;i++)
             {
                             
-                
+                String sql = "update student_personal set model_type='gen'";
                 String sql1 = "update student_personal set model_type ='spl' where regno = '"+regno[i]+"'" ;
              
+            st1.executeUpdate(sql);
             st1.executeUpdate(sql1);
             
            
