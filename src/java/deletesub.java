@@ -8,22 +8,19 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Arrays;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author aravind
+ * @author Divya Sri
  */
-public class updatemodeltype extends HttpServlet {
+public class deletesub extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +40,10 @@ public class updatemodeltype extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet markupdate</title>");            
+            out.println("<title>Servlet deletesub</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet markupdate at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet deletesub at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -66,37 +63,7 @@ public class updatemodeltype extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         try {
-            HttpSession session = request.getSession();
-            String[] regno = new String[80];
-            
-            
-            regno = request.getParameterValues("id");
-            String dept = session.getAttribute("dept").toString();
-            Connection  con = new dbcon().getConnection(dept);
-  
-         
-            Statement st1=null;
-            ResultSet rs1=null;
-            st1 = con.createStatement();
-            
-            
-            for(int i =0;i<=regno.length;i++)
-            {
-                            
-            String sql1 = "update student_personal set model_type ='spl' where regno = '"+regno[i]+"'" ;
-             
-            st1.executeUpdate(sql1);
-            
-           
-           
-            }
-            response.getWriter().printf("updated");
-            
-        } catch (Exception ex) {
-            response.getWriter().print(ex);
-            ex.printStackTrace();
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -110,41 +77,37 @@ public class updatemodeltype extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         try {
-            HttpSession session = request.getSession();
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Connection connection1 = new dbcon().getConnection("cse");
+            Statement statement1 = connection1.createStatement();
+            String[] n=request.getParameterValues("delete");
             PrintWriter out=response.getWriter();
-            
-            String[] regno = request.getParameterValues("id");
-            
-            
-            String dept = session.getAttribute("dept").toString();
-            Connection  con = new dbcon().getConnection(dept);
-  
-         
-            Statement st1=null;
-            ResultSet rs1=null;
-            st1 = con.createStatement();
-          
-            out.println("Hello");
-            for(int i =0;i<regno.length;i++)
-            {
-                            
-                String sql = "update student_personal set model_type='gen'";
-                String sql1 = "update student_personal set model_type ='spl' where regno = '"+regno[i]+"'" ;
-             
-            st1.executeUpdate(sql);
-            st1.executeUpdate(sql1);
-            
-           
-           
-            }
-            response.getWriter().printf("updated");
-            
-        } catch (Exception ex) {
-            response.getWriter().print(ex);
-        }
        
+            
+            for(int i=0;i<n.length;i++)
+            {
+                String[] parts  = n[i].split("_");
+               
+                 
+String acyear = parts[0]; // 004
+String staffid = parts[1];
+String batch = parts[2]; // 004
+String sem = parts[3];
+String dept = parts[4]; // 004
+String subcode = parts[5];
+
+String sec = parts[6]; // 004
+ 
+        String sql = "delete from subject_allocation where acyear='"+acyear+"' and staffid='"+staffid+"'and sem='"+sem+"' and dept='"+dept+"' and subcode='"+subcode+"' and sec='"+sec+"'";
+        
+         statement1.executeUpdate(sql);
+            }
+        }
+        catch (Exception ex) {
+               PrintWriter out = response.getWriter();
+            out.println(ex);
+        }
     }
 
     /**

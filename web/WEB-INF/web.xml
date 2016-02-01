@@ -61,8 +61,8 @@
         <servlet-class>exam_upload</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>updatebatch</servlet-name>
-        <servlet-class>updatebatch</servlet-class>
+        <servlet-name>deletesub</servlet-name>
+        <servlet-class>deletesub</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -125,8 +125,8 @@
         <url-pattern>/exam_upload</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>updatebatch</servlet-name>
-        <url-pattern>/updatebatch</url-pattern>
+        <servlet-name>deletesub</servlet-name>
+        <url-pattern>/deletesub</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

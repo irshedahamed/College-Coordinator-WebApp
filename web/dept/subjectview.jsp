@@ -381,7 +381,7 @@ document.getElementById("displaycontent").innerHTML = response;
             
                     </section>       
             <div align="left">
-            <input type="submit" id="submit" value="Submit" /></div>
+                <input type="submit" id="submit" value="View" onclick="javascript: form.action='showallocatedsubjects.jsp'" /> <input type="submit" id="edit" value="Edit" onclick="javascript: form.action='Editallocatedsubjects.jsp'" /></div>
             <br>
     </fieldset>
    
