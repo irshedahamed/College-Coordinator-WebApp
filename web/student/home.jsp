@@ -57,22 +57,46 @@
                 <br>
                 <br>
                 
+                
+                <%
+        Connection conection = new dbcon().getConnection("cse");
+    Statement st1 = conection.createStatement();
+    String name="",rollno="",course="",sec="";
+   
+    ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
+    if(rs1.next())
+    {
+        name= rs1.getString("name");
+        rollno = rs1.getString("rollno");
+        course = rs1.getString("course");
+        sec = rs1.getString("sec");
+        session.setAttribute("name1", name);
+        session.setAttribute("rollno1", rollno);
+        session.setAttribute("course1", course);
+        session.setAttribute("sec1",sec );
+        
+    }
+        
+        
+        
+        %>
+                
                 <li >
                 
                     
-                    <a href="#"><b>NAME : Aravind S</b></a>
+                    <a href="#"><b>NAME : <%=name%></b></a>
                 </li>
                 <li>
-                    <a href="#"><b>ROLL NO : 12CS1203</b></a>
+                    <a href="#"><b>ROLL NO : <%=rollno%></b></a>
                 </li>
                 <li >
-                    <a href="#"><b>COURSE : B.E</b></a>
+                    <a href="#"><b>COURSE : <%=course%></b></a>
                 </li>
                 <li >
                     <a href="#"><b>DEPT : CSE</b></a>
                 </li>
               <li >
-                    <a href="#"><b>SECTION : A</b></a>
+                    <a href="#"><b>SECTION : <%=sec%></b></a>
                 </li>
             </ul>
         </div>

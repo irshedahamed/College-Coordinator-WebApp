@@ -101,7 +101,7 @@
 
     
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-            <center>  <form action="getmarks.jsp" class="sky-form" method="post" target="_blank">
+            <center>  <form action="editmarks.jsp" class="sky-form" method="post" target="_blank">
     <header>Update Marks</header>
     <fieldset>					
 					<section>

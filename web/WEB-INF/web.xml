@@ -60,6 +60,10 @@
         <servlet-name>exam_upload</servlet-name>
         <servlet-class>exam_upload</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updatebatch</servlet-name>
+        <servlet-class>updatebatch</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>exam_upload</servlet-name>
         <url-pattern>/exam_upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updatebatch</servlet-name>
+        <url-pattern>/updatebatch</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

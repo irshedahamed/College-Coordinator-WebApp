@@ -54,20 +54,31 @@
                 <br>
                 <br>
                 
-                <li>
-                    <a href="#"><b>NAME : Aravind S</b></a>
+                <%
+                    String name1 = session.getAttribute("name1").toString();
+                    String rollno1 = session.getAttribute("rollno1").toString();
+                    String course1 = session.getAttribute("course1").toString();
+                    String sec1 = session.getAttribute("sec1").toString();
+                    
+                    
+                    %>
+                
+                <li >
+                
+                    
+                    <a href="#"><b>NAME : <%=name1%></b></a>
                 </li>
                 <li>
-                    <a href="#"><b>ROLL NO : 12CS1203</b></a>
+                    <a href="#"><b>ROLL NO : <%=rollno1%></b></a>
                 </li>
                 <li >
-                    <a href="#"><b>COURSE : B.E</b></a>
+                    <a href="#"><b>COURSE : <%=course1%></b></a>
                 </li>
                 <li >
                     <a href="#"><b>DEPT : CSE</b></a>
                 </li>
               <li >
-                    <a href="#"><b>SECTION : A</b></a>
+                    <a href="#"><b>SECTION : <%=sec1%></b></a>
                 </li>
             </ul>
         </div>
