@@ -64,6 +64,10 @@
         <servlet-name>deletesub</servlet-name>
         <servlet-class>deletesub</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>formsdownload</servlet-name>
+        <servlet-class>formsdownload</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>deletesub</servlet-name>
         <url-pattern>/deletesub</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>formsdownload</servlet-name>
+        <url-pattern>/formsdownload</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
