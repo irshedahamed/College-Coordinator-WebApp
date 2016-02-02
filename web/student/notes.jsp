@@ -106,7 +106,7 @@
     </ul>
 </li>
 
-                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="courses/index.html">Attendance</a>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Attendance</a>
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="overallattendance.jsp">Overall Attendance</a></li>
 	
@@ -128,7 +128,7 @@
 </ul><li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Fee</a>
 
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Forms</a>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="forms.jsp">Forms</a>
 
 </li>
 </ul>						</nav>
@@ -151,16 +151,16 @@
                 <label class="select">
             <select id="ayear" name="ayear">
                <option>Select</option>
-               <option value="13">2013-2014</option>
-               <option value="14">2014-2015</option>
-               <option value="15">2015-2016</option>
-               <option value="16">2016-2017</option>
-               <option value="17">2017-2018</option>
-               <option value="18">2018-2019</option>
-               <option value="19">2019-2020</option>
-               <option value="20">2020-2021</option>
-               <option value="21">2021-2022</option>
-               <option value="22">2023-2024</option>
+               <option value="2013-2014">2013-2014</option>
+               <option value="2014-2015">2014-2015</option>
+               <option value="2015-2016">2015-2016</option>
+               <option value="2016-2017">2016-2017</option>
+               <option value="2017-2018">2017-2018</option>
+               <option value="2018-2019">2018-2019</option>
+               <option value="2019-2020">2019-2020</option>
+               <option value="2020-2021">2020-2021</option>
+               <option value="2021-2022">2021-2022</option>
+               <option value="2022-2023">2022-2023</option>
             
             </select>
                     <i></i>

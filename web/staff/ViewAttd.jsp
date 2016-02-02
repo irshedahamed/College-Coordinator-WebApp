@@ -26,7 +26,7 @@
     <tr>
         <th name="cc">Roll No</th>
         <th>Name</th>
-        <th>No. of hours</th>
+        <th>No. of hours Absent</th>
     </tr>
     </thead>
         <%
