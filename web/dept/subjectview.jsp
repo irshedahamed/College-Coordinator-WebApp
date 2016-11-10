@@ -1,3 +1,4 @@
+<%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
 <%@page import="java.sql.*"%>
@@ -272,39 +273,42 @@ document.getElementById("displaycontent").innerHTML = response;
 
 						<nav id="main-nav">
 							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
-<li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="subjectallocation.jsp">Subject Allocation</a>
+<li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="subjectallocation.jsp">Subject Allocation</a>
  <ul class="sub-menu">  <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="subjectallocation.jsp">Allocate</a></li>
 	
 	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="subjectview.jsp">View</a></li> 
  </ul>
  </li>
-
-                                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="courses/index.html">Attendance</a>
+<li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Elective Selection</a>
+ <ul class="sub-menu">  <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectSelection.jsp">Assign</a></li>
+	
+	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="ElectiveView.jsp">View</a></li> 
+ </ul>
+ </li>
+ 
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Student</a>
 <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="memberships/index.html">Update Attendance</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="Attd.jsp">View Attendance</a>
-	
-</li>
-</ul>
-</li>
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="YrAttendance.jsp">View Attendance</a></li>
+                
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="marks.jsp">View Marks</a></li>
+                
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="BonusQuery.jsp">Bonus Remove</a></li>
+	</ul></li>
 
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marks.jsp">Marks</a></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Notes</a>
+
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Notes</a>
     <ul class="sub-menu">
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notes.jsp">View Notes</a></li>
 	</ul></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="cireveupdates.jsp">Department Uploads</a>
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="cireveupdates.jsp">Department Uploads</a>
     </li>
 
 
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marksreport.jsp">Mark Sheet</a>
 
 </li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="studentanalysis.jsp">Student Analysis</a>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="studentanalysis.jsp">Student Analysis</a>
 
 </li>
 </ul>						</nav>
@@ -334,11 +338,13 @@ document.getElementById("displaycontent").innerHTML = response;
             %>
                     <select id="acyear" name="acyear" >
                 <option value="0">select</option>
-                <option value="<%=year%>-<%=year+1%>"><%=year%>-<%=year+1%></option>
-                <option value="<%=year+1%>-<%=year+2%>"><%=year+1%>-<%=year+2%></option>
-                <option value="<%=year+2%>-<%=year+3%>"><%=year+2%>-<%=year+3%></option>
-                <option value="<%=year+3%>-<%=year+4%>"><%=year+3%>-<%=year+4%></option>
-                <option value="<%=year+4%>-<%=year+5%>"><%=year+4%>-<%=year+5%></option>
+                <option value="<%=year-2-2000%>"><%=year-2%>-<%=year-1%></option>
+                 <option value="<%=year-1-2000%>"><%=year-1%>-<%=year%></option>
+                <option value="<%=year-2000%>"><%=year%>-<%=year+1%></option>
+                <option value="<%=year+1-2000%>"><%=year+1%>-<%=year+2%></option>
+                <option value="<%=year+2-2000%>"><%=year+2%>-<%=year+3%></option>
+                <option value="<%=year+3-2000%>"><%=year+3%>-<%=year+4%></option>
+                <option value="<%=year+4-2000%>"><%=year+4%>-<%=year+5%></option>
             </select>
                     <i></i>
                     </label>
@@ -354,7 +360,7 @@ document.getElementById("displaycontent").innerHTML = response;
                 <%
                     //int i=Integer.parseInt(request.getParameter("val"));
                     Class.forName("com.mysql.jdbc.Driver").newInstance();
-              Connection connection = new dbcon().getConnection("cse");
+              Connection connection = new dbcon().getConnection(Find.dept(username));
               Statement statement = connection.createStatement();
                     
               ResultSet rs= statement.executeQuery("select staffid,staffname from staff_table");
@@ -375,13 +381,29 @@ document.getElementById("displaycontent").innerHTML = response;
                     <i></i>
                 </label>
             </label>
-            
-         
+                    <br>
+                <br>
+                    
+         <label class="input">
+                                                    <div align="left" size="3px"><b>
+                                                             Sem </b></div>
+                <label class="select">
+           
+      
+                    <select id="sem" name="sem" >
+                <option value="#">select</option>
+                <option value="Odd">Odd</option>
+                 <option value="Even">Even</option>
+            </select>
+                    <i></i>
+                    </label>
+            </label><br><br>
             
             
                     </section>       
             <div align="left">
-                <input type="submit" id="submit" value="View" onclick="javascript: form.action='showallocatedsubjects.jsp'" /> <input type="submit" id="edit" value="Edit" onclick="javascript: form.action='Editallocatedsubjects.jsp'" /></div>
+                <input type="submit" id="submit" value="View" onclick="javascript: form.action='showallocatedsubjects.jsp'" />
+                <input type="submit" id="submit" value="Edit" onclick="javascript: form.action='Editallocatedsubjects.jsp'" /></div>
             <br>
     </fieldset>
    
@@ -403,16 +425,14 @@ document.getElementById("displaycontent").innerHTML = response;
 
 	<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
 <li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
 </ul>			</nav>
 		</div>
 	</footer>
-
-
 
 
 
@@ -438,7 +458,11 @@ document.getElementById("displaycontent").innerHTML = response;
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
 <%
-    }
+   
+                            if(statement!=null)
+                            statement.close();
+                              if(connection!=null)
+                                connection.close();}
         else
     {
         response.sendRedirect("../index.jsp");
@@ -448,6 +472,11 @@ document.getElementById("displaycontent").innerHTML = response;
     {
         response.sendRedirect("../index.jsp");
     }
+
+                            if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

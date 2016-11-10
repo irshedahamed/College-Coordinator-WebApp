@@ -1,4 +1,4 @@
-<%-- 
+      <%-- 
     Document   : getmarks
     Created on : 26 May, 2015, 2:39:34 PM
     Author     : aravind
@@ -11,18 +11,30 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <% 
+   try
+    {
+    String username = session.getAttribute("username").toString();
+    String password = session.getAttribute("password").toString();
     
+    Connection connn = new dbcon().getConnection("login");
+    Statement sttt = connn.createStatement();
+    String type1 ="";
+    ResultSet rsss = sttt.executeQuery("select * from student_login_details where rollno='"+username+"' and password='"+password+"'");
+    if(rsss.isBeforeFirst())
+    {
+        
+    %>
     <head>
         <link href="../css/tabledesign.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <%
-        String dept = "cse",rollno1="12cs1203",subname="";
-        if(dept==null)
-        {
-            dept= session.getAttribute("dept").toString();
-        }
+        String dept = "",rollno1=username,subname="";
+        
+            dept= session.getAttribute("deptname").toString();
+        
        
         Connection con = new dbcon().getConnection(dept);
    Statement st1= con.createStatement();
@@ -111,4 +123,31 @@
    
         
     </body>
+    <%
+            if(st!=null)
+                            st.close();
+              if(st1!=null)
+                            st1.close();
+                              if(con1!=null)
+                                con1.close();
+                              if(con!=null)
+                                con.close();
+    }
+    else
+    {
+        response.sendRedirect("../index.jsp");
+    }
+  if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
+    }
+catch(Exception e)
+    {
+        e.printStackTrace();
+        response.sendRedirect("../index.jsp");
+    }
+    
+          
+          %>
 </html>

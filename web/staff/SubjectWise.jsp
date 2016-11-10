@@ -4,6 +4,7 @@
     Author     : Aravind Tyson
 --%>
 
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -227,14 +228,22 @@ document.getElementById("div5").innerHTML = response;
 	
 		
 		</head>
-		
+	
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
 <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
+    
+    <% 
+    Connection con=new dbcon().getConnection(Find.sdept(username));
+    Statement stmtd=con.createStatement();
+    ResultSet rsd=stmtd.executeQuery("select * from staff_general where staffid='"+username+"'");
+    if(rsd.next())
+    {
+    %>
+    <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#menu-toggle1" id="menu-toggle1">
-                       Aravind S
+                       
                     </a>
                 </li>
                 <center>
@@ -250,25 +259,34 @@ document.getElementById("div5").innerHTML = response;
                 
                 <li >
                 
-                    
-                    <a href="#"><b>NAME : Aravind S</b></a>
-                </li>
+                    <center>
+                    <a href="#"><b><%=rsd.getString("tittle")+rsd.getString("name")%></b></a>
+                    </center>
+                    </li>
                 <li>
-                    <a href="#"><b>ROLL NO : 12CS1203</b></a>
+                    <center>
+                    <a href="#"><b><%=username%></b></a>
+                    </center>
+                    </li>
+                <li >
+                <center>
+                    <a href="#"><b><%=rsd.getString("desg")%></b></a>
+                </center>
                 </li>
                 <li >
-                    <a href="#"><b>COURSE : B.E</b></a>
-                </li>
-                <li >
-                    <a href="#"><b>DEPT : CSE</b></a>
-                </li>
-              <li >
-                    <a href="#"><b>SECTION : A</b></a>
+                <center>
+                    <a href="#"><b><%=Find.sdept(username).toUpperCase()%></b></a>
+                </center>
                 </li>
             </ul>
         </div>
 		        
-	
+	<%}
+        if(stmtd!=null)
+            stmtd.close();
+        if(con!=null)
+            con.close();
+        %>
 		
 		<header id="page-header"  class="fixed-header">
 		
@@ -295,21 +313,23 @@ document.getElementById("div5").innerHTML = response;
 						
 
 						<nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="home.jsp">Home</a></li>
 <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Profile</a>
     <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="general.jsp">General Details</a></li>
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personal.jsp">Personal Details</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="education.jsp">Education Details</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="experience.jsp">Experience Details</a></li>
 	
 
-        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="other.jsp">Other Details</a></li>
     </ul>
 </li>
 
-                                                            <li id="menu-item-764" class="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Attendance</a>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Log Book</a>
 <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="HourAttd.jsp">Update Attendance</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Update Attendance</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="SubjectWise.jsp">View Attendance</a>
+	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="#">Syllabus Coverage</a>
 	
 </li>
 </ul>
@@ -328,8 +348,6 @@ document.getElementById("div5").innerHTML = response;
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
 	</ul></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
 
 
 
@@ -339,7 +357,6 @@ document.getElementById("div5").innerHTML = response;
 				</div>
 			</div>
 		</header>
-
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
 
@@ -360,10 +377,10 @@ document.getElementById("div5").innerHTML = response;
                 <%
                     //int i=Integer.parseInt(request.getParameter("val"));
                     Class.forName("com.mysql.jdbc.Driver").newInstance();
-              Connection connection = new dbcon().getConnection("cse");
+              Connection connection = new dbcon().getConnection(Find.sdept(username));
               Statement statement = connection.createStatement();
                     
-              ResultSet rs= statement.executeQuery("select distinct(dept) from subject_allocation where staffid='cs009'");
+              ResultSet rs= statement.executeQuery("select distinct(dept) from subject_allocation where staffid='"+username+"'");
                    
               String dept;
                     
@@ -376,7 +393,12 @@ document.getElementById("div5").innerHTML = response;
               
               %>
               <option value="<%=dept%>"><%=dept%></option>
-              <% } %>
+              <% } 
+              
+                            if(statement!=null)
+                            statement.close();
+                              if(connection!=null)
+                                connection.close();%>
                
             </select>
                     <i></i>                                    </label>
@@ -530,6 +552,11 @@ document.getElementById("div5").innerHTML = response;
     {
         response.sendRedirect("../index.jsp");
     }
+
+                            if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }catch(Exception e)
     {
         e.printStackTrace();

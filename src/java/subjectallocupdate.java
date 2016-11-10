@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import com.action.Find;
 import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -81,11 +82,12 @@ public class subjectallocupdate extends HttpServlet {
             throws ServletException, IOException {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection1 = new dbcon().getConnection("cse");
-            Statement statement1 = connection1.createStatement();
             
 
             String staffid=request.getParameter("staff");
+            
+            Connection connection1 = new dbcon().getConnection(Find.sdept(staffid));
+            Statement statement1 = connection1.createStatement();
             String num = request.getParameter("numbersub");
             Integer n = Integer.parseInt(num);
             String num1 = request.getParameter("numberlab");
@@ -104,9 +106,11 @@ public class subjectallocupdate extends HttpServlet {
             subcode = parts[0];
             String sec= request.getParameter("sec"+i);
             String hour = request.getParameter("nh"+i);
-                                    
+            String sbatch=request.getParameter("sbatch"+i);
+                                    if(sbatch==null)
+                                        sbatch="0";
            
-            statement1.executeUpdate("insert into subject_allocation values('"+batch+"','"+staffid+"','"+sem+"','"+dept+"','"+subcode+"','"+sec+"','theory','"+acyear+"','"+hour+"')");
+            statement1.executeUpdate("insert into subject_allocation values('"+batch+"','"+staffid+"','"+sem+"','"+dept+"','"+subcode+"','"+sec+"','theory','"+acyear+"','"+hour+"','"+sbatch+"')");
             
             }
              for(int i =1; i<=m; i++)
@@ -119,17 +123,72 @@ public class subjectallocupdate extends HttpServlet {
             lsubcode = parts[0];
             String lsec= request.getParameter("lsec"+i);
             String lhour = request.getParameter("lnh"+i);
+            String lsbatch=request.getParameter("lsbatch"+i);
                                     
            
-            statement1.executeUpdate("insert into subject_allocation values('"+lbatch+"','"+staffid+"','"+lsem+"','"+ldept+"','"+lsubcode+"','"+lsec+"','lab','"+acyear+"','"+lhour+"')");
+            statement1.executeUpdate("insert into subject_allocation values('"+lbatch+"','"+staffid+"','"+lsem+"','"+ldept+"','"+lsubcode+"','"+lsec+"','lab','"+acyear+"','"+lhour+"','"+lsbatch+"')");
             
             }
+             
+             String[] acommittee=request.getParameterValues("accommittee");
+             String combine1="";
+             
+             if(acommittee!=null)
+             for(String a:acommittee)
+                 combine1+=a+",";
+             
+             String[] otherinc=request.getParameterValues("otherinc");
+             String allothers=request.getParameter("allothers");
+             String combine="";
+             String semister=request.getParameter("semister");
+             
+             if(otherinc!=null)
+             for(String a:otherinc)
+                 combine+=a+",";
+             if(combine1!="")
+             {
+             combine+=combine1;
+             }
+             
+             if(allothers!="")
+             combine+=allothers;
+                 
+             if(combine!="")
+             {
+                 statement1=connection1.createStatement();
+                 statement1.execute("insert into other_incharge values('"+staffid+"','"+acyear+"','"+combine+"','"+semister+"')");
+             
+             }
+             
+             if(combine1!="")
+             {
+               //  statement1=connection1.createStatement();
+               //  statement1.execute("insert into  academic_committee values('"+staffid+"','"+acyear+"','"+combine1+"','"+semister+"')");
+             
+             }
+             
+             String cbatch=request.getParameter("cbatch");
+             String cdept=request.getParameter("cdept");
+             String csection=request.getParameter("csection");
+             if(cbatch!=null&&cdept!=null&&csection!=null)
+             {
+                 statement1=connection1.createStatement();
+                 statement1.execute("insert into  councillor values('"+staffid+"','"+acyear+"','"+cdept+"','"+csection+"','"+cbatch+"','"+semister+"')");
+             
+             }
+             
              PrintWriter out = response.getWriter();
              out.println("Successfully Updated");
              
+             
+             if(statement1!=null)
+                            statement1.close();
+                              if(connection1!=null)
+                                connection1.close();
         } catch (Exception ex) {
-               PrintWriter out = response.getWriter();
-            out.println(ex);
+               ex.printStackTrace();
+               response.getWriter().println("Error Occured:"+ex);
+              
         }
     }
 

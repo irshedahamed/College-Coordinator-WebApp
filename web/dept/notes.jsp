@@ -1,3 +1,4 @@
+<%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
 <%@page import="java.sql.*"%>
@@ -39,14 +40,16 @@
    var sem = $("select#sem").val();
         var dept = $("select#dept").val();
         var batch = $("select#batch").val();
-        
-        if(dept !== 'null' && batch !== 'null')
+        var ayear=$("select#ayear").val();
+                        
+        if(dept !== 'null' && batch !== 'null' && ayear!== 'null')
         {
             
         $.get('${pageContext.request.contextPath}/JsonServlet', {
                 semester : sem, 
                 department : dept,
-                batch : batch
+                batch : batch,
+                ayear : ayear
                 
         },function(response) {
 
@@ -73,8 +76,7 @@
 
 		        
 	
-		
-		<header id="page-header"  class="fixed-header">
+		  <header id="page-header"  class="fixed-header">
 		
 			<div id="page-header-inner">
 
@@ -100,33 +102,35 @@
 	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="subjectview.jsp">View</a></li> 
  </ul>
  </li>
-
-                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="courses/index.html">Attendance</a>
+<li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Elective Selection</a>
+ <ul class="sub-menu">  <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectSelection.jsp">Assign</a></li>
+	
+	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="ElectiveView.jsp">View</a></li> 
+ </ul>
+ </li>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Student</a>
 <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="memberships/index.html">Update Attendance</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="Attd.jsp">View Attendance</a>
-	
-</li>
-</ul>
-</li>
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="YrAttendance.jsp">View Attendance</a></li>
+                
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="marks.jsp">View Marks</a></li>
+                
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="BonusQuery.jsp">Bonus Remove</a></li>
+	</ul></li>
 
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marks.jsp">Marks</a></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Notes</a>
+
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Notes</a>
     <ul class="sub-menu">
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notes.jsp">View Notes</a></li>
 	</ul></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="cireveupdates.jsp">Department Uploads</a>
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="cireveupdates.jsp">Department Uploads</a>
     </li>
 
 
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marksreport.jsp">Mark Sheet</a>
 
 </li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="studentanalysis.jsp">Student Analysis</a>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="studentanalysis.jsp">Student Analysis</a>
 
 </li>
 </ul>						</nav>
@@ -134,6 +138,7 @@
 				</div>
 			</div>
 		</header>
+		
 
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
@@ -175,24 +180,13 @@
                 <%
     try {
       
-  String departmentname="cse";
-             Connection connection = new dbcon().getConnection(departmentname);
-              Statement statement = connection.createStatement();
-              ResultSet rs= statement.executeQuery("select course,dept,batch from student_personal where rollno='12cs1203'");
-              String  course="", dept="",batch="";
-              while(rs.next())
-              {
-                  course=rs.getString("course");              
-                  dept=rs.getString("dept");
-                  batch = rs.getString("batch");
-                  
-              }
-              
+  String departmentname=Find.dept(username);
+             
     
 		  %>   
     
                
-                <option value="<%= course %>"><%= course %></option>
+                <option value="be">B.E</option>
                
             </select>
                     <i></i>
@@ -207,7 +201,7 @@
             
            <select id="dept" name="dept">
             
-                <option value="cse"><%= dept %></option>
+               <option value=<%=departmentname%>><%= departmentname %></option>
                 
                 
                
@@ -222,8 +216,26 @@
                 <label class="select">
             
            <select id="batch" name="batch">
-            
-                <option value="<%= batch %>"><%= batch %></option>
+            <%
+                Connection conbatch = new dbcon().getConnection("sjitportal");
+                    Statement stmt = conbatch.createStatement();
+                    ResultSet rs=stmt.executeQuery("select batch from regulations");
+                    String batch=null;
+                    rs.beforeFirst();
+                    while(rs.next())
+                    {
+                        batch=rs.getString("batch");
+                %>
+                <option value=<%=batch%>><%=batch%></option>
+                <%
+                }
+
+                            if(stmt!=null)
+                            stmt.close();
+                              if(conbatch!=null)
+                                conbatch.close();
+                %>
+                
                 
                 <%
     }
@@ -315,14 +327,16 @@
 
 	<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
 <li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
 </ul>			</nav>
 		</div>
 	</footer>
+
+
 
 
 
@@ -360,6 +374,11 @@
     {
         response.sendRedirect("../index.jsp");
     }
+
+                            if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

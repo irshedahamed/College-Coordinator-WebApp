@@ -150,6 +150,13 @@
         }
         session.setAttribute("count",count);
         rs.close();
+
+                            if(st!=null)
+                            st.close();
+                            if(st1!=null)
+                                st1.close();
+                              if(con!=null)
+                                con.close();
         %>
         
          

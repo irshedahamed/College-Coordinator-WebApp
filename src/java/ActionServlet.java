@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import com.google.gson.Gson;
 import dbconnection.dbcon;
 
 import javax.servlet.http.HttpSession;
@@ -55,6 +54,10 @@ protected void doGet(HttpServletRequest request,
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(jo.toString());
+          if(stmt!=null)
+                            stmt.close();
+                              if(connection!=null)
+                                connection.close();
     }
     catch(Exception e){
      System.out.println(e);

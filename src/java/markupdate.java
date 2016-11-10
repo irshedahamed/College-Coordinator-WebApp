@@ -80,7 +80,7 @@ public class markupdate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession();
             String regulation = session.getAttribute("regulation").toString();
@@ -101,8 +101,9 @@ public class markupdate extends HttpServlet {
             
             
             String sql1 = "select * from subject_sem_table where regulation='"+regulation+"' and sem='"+sem+"' and subtype='theory' order by subcode" ;
-             String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
-             
+             //String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
+                  String sql2= "select *,CONVERT(regno,UNSIGNED INT) as sno from student_personal where batch='"+batch+"' and sec='"+sec+"' order by sno,name";
+  
             rs1=st1.executeQuery(sql1);
             
            
@@ -110,14 +111,16 @@ public class markupdate extends HttpServlet {
             {
                
                 subcode=rs1.getString("subcode");
-                 response.getWriter().println(subcode);
+                 //response.getWriter().println(subcode);
                 rs2=st2.executeQuery(sql2);
                 while(rs2.next())
                 {
                     rollno=rs2.getString("rollno");
                     String a1=rollno+"_"+count;
-                     response.getWriter().println(a1);
+                   //  response.getWriter().println(a1);
                     mark = request.getParameter(a1);
+                    if(mark==null)
+                        continue;
                     String sql3 = "select * from marks_table where rollno='"+rollno+"' and subcode='"+subcode+"'";
                     
                     rs3 = st3.executeQuery(sql3);
@@ -137,8 +140,17 @@ public class markupdate extends HttpServlet {
                 }
                 count++;
             }
-            response.getWriter().printf("updated");
-            
+            response.getWriter().println("<center><h1>UPDATED SUCCESSFULLY</h1></center>");
+              if(st1!=null)
+                            st1.close();
+                if(st2!=null)
+                            st2.close();
+                              if(st3!=null)
+                                st3.close();
+                                if(st4!=null)
+                            st4.close();
+                              if(con!=null)
+                                con.close();
         } catch (Exception ex) {
             response.getWriter().print(ex);
         }

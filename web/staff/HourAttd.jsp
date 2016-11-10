@@ -328,9 +328,6 @@ document.getElementById("div5").innerHTML = response;
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
 	</ul></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
-
 
 
 
@@ -376,7 +373,12 @@ document.getElementById("div5").innerHTML = response;
               
               %>
               <option value="<%=dept%>"><%=dept%></option>
-              <% } %>
+              <% }
+
+                            if(statement!=null)
+                            statement.close();
+                              if(connection!=null)
+                                connection.close();%>
                
             </select>
                     <i></i>                                    </label>
@@ -469,7 +471,7 @@ document.getElementById("div5").innerHTML = response;
                                                              Date</b></div>
                 <label class="select">
             
-            <input type="text" id="datepicker" placeholder="dd/mm/yyyy" name="datepicker" />
+            <input type="text" id="datepicker" placeholder="yyy/mm/dd" name="datepicker" />
             
              <i></i>
             <br> <br>
@@ -543,6 +545,11 @@ document.getElementById("div5").innerHTML = response;
     {
         response.sendRedirect("../index.jsp");
     }
+
+                            if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }catch(Exception e)
     {
         e.printStackTrace();

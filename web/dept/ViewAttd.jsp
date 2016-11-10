@@ -18,8 +18,22 @@
     </head>
     
     <body>
+        <%
+String batch=request.getParameter("batch");
+        String sec=request.getParameter("section");
+        String sem=request.getParameter("sem");
+        
+
+
+%>       
+<div id="yourTableIdName1">
+        <center><h1><u>CSE <%=sec%></u></h1></center>
+        <center><h1><u>BATCH:</u> <%=batch%>      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                      <u> SEM:</u> <%=sem%></h1></center>
+        <center><h1>ATTENDANCE REPORT</h1></center>
+        </div>
         
         <form action="UpdatedAttendance.jsp">
+            <center>
         <table class="bordered">
     <thead>
 
@@ -32,9 +46,6 @@
         
        
             
-        String batch=request.getParameter("batch");
-        String sec=request.getParameter("section");
-        String sem=request.getParameter("sem");
         
         
         Connection con = new dbcon().getConnection("cse");
@@ -43,7 +54,7 @@
         Statement st2=con.createStatement();
         
         int count =0;
-        String sql="select * from student_personal where batch='"+batch+"' and dept='cse' and sec='"+sec+"' group by rollno";
+        String sql="select * from student_personal where batch='"+batch+"' and dept='"+request.getSession().getAttribute("deptname").toString()+"' and sec='"+sec+"' group by rollno";
         ResultSet rs=st.executeQuery(sql);
         ResultSet rs1,rs2;
         String rollno=null,name=null,subject=null;
@@ -114,13 +125,18 @@
         }
         session.setAttribute("count",count);
         rs.close();
+
+                            if(st!=null)
+                            st.close();
+                              if(con!=null)
+                                con.close();
         %>
         
          
    
     
         
-</table>
+</table></center>
         </form>
     </body>
 </html>

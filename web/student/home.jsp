@@ -1,3 +1,9 @@
+<%@page import="Circular.Exam"%>
+<%@page import="Circular.Department"%>
+<%@page import="Circular.Circular"%>
+<%@page import="Circular.College"%>
+<%@page import="com.action.Base"%>
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -19,7 +25,7 @@
     if(rsss.isBeforeFirst())
     {
         
-    
+    session.setAttribute("deptname",Find.sdept(username) );
     
     %>
 
@@ -28,40 +34,43 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
-	<link href="../css/bootstrap.min.css" rel="stylesheet">
-
+		     <link rel="stylesheet" href="../css/main.css">
+     
+        <link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
+	
     <!-- Custom CSS -->
     <link href="../css/simple-sidebar.css" rel="stylesheet">
-	
-		
+	    
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+	 <script src="../js/jquery.js"></script>
+         
+     
+
+
+
+<link rel="stylesheet" href="../css/angular-material.css">
+
+<link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
+
+
+<link rel="stylesheet" href="../css/angulartab.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"> </script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+<script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.js"></script>
+
+<script src="../js/angulartab.js"></script>
 		</head>
 		
-<body class="home page page-id-115 page-template-default has-toolbar">
-<div id="wrapper" class="toggled">
-<div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#menu-toggle1" id="menu-toggle1">
-                       Aravind S
-                    </a>
-                </li>
-                <center>
-                    <img src="../images/face.jpg" height="95px">
-                    
-                               
-                           
-                        
-                   
-                </center>
-                <br>
-                <br>
-                
                 
                 <%
-        Connection conection = new dbcon().getConnection("cse");
+        Connection conection = new dbcon().getConnection(Find.sdept(username));
     Statement st1 = conection.createStatement();
-    String name="",rollno="",course="",sec="";
+    String batch="",name="",rollno="",course="",sec="";
    
     ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
     if(rs1.next())
@@ -70,16 +79,41 @@
         rollno = rs1.getString("rollno");
         course = rs1.getString("course");
         sec = rs1.getString("sec");
+        batch= rs1.getString("batch");
         session.setAttribute("name1", name);
         session.setAttribute("rollno1", rollno);
         session.setAttribute("course1", course);
         session.setAttribute("sec1",sec );
         
     }
+      if(st1!=null)
+                            st1.close();
+                              if(conection!=null)
+                                conection.close();
         
         
         
         %>
+                
+<body class="home page page-id-115 page-template-default has-toolbar">
+<div id="wrapper" class="toggled">
+<div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#menu-toggle1" id="menu-toggle1">
+                      
+                    </a>
+                </li>
+                <center>
+                    
+                    <img src="../../StudentPhotos/Batch<%=batch%>/<%=rollno.toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                               
+                           
+                        
+                   
+                </center>
+                <br>
+                <br>
                 
                 <li >
                 
@@ -93,14 +127,16 @@
                     <a href="#"><b>COURSE : <%=course%></b></a>
                 </li>
                 <li >
-                    <a href="#"><b>DEPT : CSE</b></a>
+                    <a href="#"><b>DEPT : <%=Find.sdept(rollno).toUpperCase()%></b></a>
                 </li>
               <li >
                     <a href="#"><b>SECTION : <%=sec%></b></a>
                 </li>
             </ul>
         </div>
-		        
+		     	
+                                  	
+					
 	
 		
 		<header id="page-header"  class="fixed-header">
@@ -111,7 +147,7 @@
 					<div class="container clearfix">
 						<div id="main-logo">
 							<a href="#">
-								<img src="../images/sjit.png"  height="70px"></a>
+                                                           	<img src="../images/sjit.png"  height="70px"></a>
 						</div>
                                             <ul id="auth-nav">
 							<li>
@@ -133,7 +169,7 @@
     <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personal.jsp">Personal Details</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="contact.jsp">Contact Details</a></li>
+	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="contact.jsp">General Details</a></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="other.jsp">Other Details</a></li>
     </ul>
 </li>
@@ -142,7 +178,6 @@
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="overallattendance.jsp">Overall Attendance</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="Attd.jsp">Hour Attendance</a>
 	
 </li>
 </ul>
@@ -150,16 +185,6 @@
 
 <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marks.jsp">Marks</a></li>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="notes.jsp">Notes</a>
-<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Circular</a>
-<ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="circular.jsp">General Circular</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="examcircular.jsp">Exam Circular</a>
-	
-</li>
-</ul>
-
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Fee</a>
 
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="forms.jsp">Forms</a>
@@ -172,129 +197,69 @@
 			</div>
 		</header>
 
-
-<section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-
-
-<div class="dm3-tabs-testimonials" data-autoscroll=""><div class="dm3-tabs">
-<div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>Department Circular</h2><br><br>
-<div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
-<div align="left">
-<% 
-              //  String deptname = request.getSession().getAttribute("deptname").toString();
-String deptname = "CSE";
-        String path = "C:/"+deptname+"/";
-        List<String> list = new ArrayList<String>();
-        List<String> list1 = new ArrayList<String>();
-        List<String> list2 = new ArrayList<String>();
-          try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection1 = new dbcon().getConnection("cse");
-            Statement statement1 = connection1.createStatement();
-            ResultSet rs = statement1.executeQuery("select * from deptuploads");
-            
-            
-            while(rs.next())
-            {
-                String file = rs.getString("name");
-                String desc = rs.getString("desc");
-                String type = rs.getString("type");
-                 list.add(file);
-                 list1.add(desc);
-                 list2.add(type);
-                 
-            }
-            
-            %>
-            
-            <%
-           
-            for(int i=0; i<list.size();i++)
-              {
-                  String str=list.get(i);
-                  //session.setAttribute(str,list.get(i));
-                  session.setAttribute("path",path);
-                  if(list2.get(i).equals("circular"))
-                  {
-                      
-            %>
-            <a href="${pageContext.request.contextPath}/download?ind1=<%=str %>&type1=<%=list2.get(i)%>" ><%= list1.get(i) %></a>
-<br>
-<%
-                  }
-           }
-            session.setAttribute("size",list.size());
-          }
-          catch(Exception e)
-          {
-               
-          }
-%>
-</div>
-</center>
-</div>
-</div>
-
-
-<div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>Department Events</h2><br><br>
-<div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2; background-color: #fff;">
-<div align="left">
-<% 
-                
-
+ 		
+              					
+             
+<center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
+                <br><br><br><br>
+           <section class="landing">
+                   
        
-        List<String> list3 = new ArrayList<String>();
-        List<String> list4 = new ArrayList<String>();
-        List<String> list5 = new ArrayList<String>();
-          try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection2 = new dbcon().getConnection("cse");
-            Statement statement2 = connection2.createStatement();
-            ResultSet rs = statement2.executeQuery("select * from deptuploads");
+               <md-toolbar class="demo-toolbar md-primary _md _md-toolbar-transitions" style="width: 70%">
+                   
+        <div class="md-toolbar-tools">
             
+            <h3 class="ng-binding" style="text-align:center;">Circulars</h3>
+          <span flex="" class="flex"></span>
+        
+        </div>
+      </md-toolbar>
+               <div ng-cloak="" class="tabsdemoDynamicHeight" ng-app="MyApp" style="width:70%"> 
+  <md-content>
+    <md-tabs md-dynamic-height="" md-border-bottom="">
+      <md-tab label="College">
+        <md-content class="md-padding">
+          <h1 class="md-display-2"></h1>
+        
+          <%out.write(Circular.getHTMLContent(College.getAll("circular")));%>
+        </md-content>
+      </md-tab>
+      <md-tab label="Department">
+        <md-content class="md-padding">
+          <h1 class="md-display-2"></h1>
+          <%out.write(Circular.getHTMLContent(Department.getAll(Find.sdept(rollno),"%")));%>
+         
+        </md-content>
+      </md-tab>
+      <md-tab label="Exam">
+        <md-content class="md-padding">
+          <h1 class="md-display-2"></h1>
+          
+          <%out.write(Circular.getHTMLContent(Exam.getAll()));%>
+         
+        </md-content>
+      </md-tab>
+            <md-tab label="Events">
+        <md-content class="md-padding">
+          <h1 class="md-display-2"></h1>
+        <%out.write(Circular.getHTMLContent(College.getAll("event")));%>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
             
-            while(rs.next())
-            {
-                String file = rs.getString("name");
-                String desc = rs.getString("desc");
-                String type = rs.getString("type");
-                 list3.add(file);
-                 list4.add(desc);
-                 list5.add(type);
-                 
-            }
+        
             
-            %>
-            
-            <%
-           
-            for(int i=0; i<list3.size();i++)
-              {
-                  String str=list3.get(i);
-                  //session.setAttribute(str,list.get(i));
-                  
-                  if(list5.get(i).equals("event"))
-                  {
-            %>
-            <a href="${pageContext.request.contextPath}/download?ind1=<%=str %>&type1=<%=list5.get(i) %>" ><%= list4.get(i) %></a>
-<br>
-<%
-                  }
-           }
-            session.setAttribute("size",list3.size());
-          }
-          catch(Exception e)
-          {
-               
-          }
-%></div>
-</div>
-</center></div></div>
-</div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li></ul></div>
-</div></div></section>
+        </section>
 
-</section>
-						<footer id="footer-widgets">
+            
+
+</div></div>
+
+<br><br></section></center>		
+
+<footer id="footer-widgets">
+    
 			<div class="container clearfix">
 								Powered by St.Joseph's
 							</div>
@@ -305,13 +270,11 @@ String deptname = "CSE";
 
 	<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
-<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
-<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
 </ul>			</nav>
 		</div>
 	</footer>
@@ -320,13 +283,16 @@ String deptname = "CSE";
 
 
 
-<script src="../js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/mobileToggle.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
+
+    
+    
+    
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
@@ -348,6 +314,10 @@ String deptname = "CSE";
     {
         response.sendRedirect("../index.jsp");
     }
+      if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

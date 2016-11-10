@@ -200,6 +200,11 @@
         <% }
         session.setAttribute("count",count);
         rs.close();
+
+                            if(st!=null)
+                            st.close();
+                              if(con!=null)
+                                con.close();
         %>
    
     

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import com.action.Base;
 import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,8 +19,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import static java.lang.System.out;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -112,7 +117,7 @@ public class notesupdates extends HttpServlet {
         String subcode = "";
        
         String notes = "";
-        
+        String descp="";
 String name="";
 String UPLOAD_DIRECTORY="hello";
         
@@ -144,6 +149,10 @@ String UPLOAD_DIRECTORY="hello";
                 sem = item.getString();
                 // Do something with the value
             }
+               if (item.getFieldName().equals("desc")) {
+                descp = item.getString();
+                // Do something with the value
+            }
                 if (item.getFieldName().equals("notes")) {
                 notes = item.getString();
                 // Do something with the value
@@ -157,8 +166,9 @@ String UPLOAD_DIRECTORY="hello";
             }
                      // if(!ayear.equals("")&&!dept.equals("")&&!batch.equals("")&&!sem.equals("")&&!subcode.equals("")&&!notes.equals(""))
                       {
-                      UPLOAD_DIRECTORY = "C:/notes/"+ayear+"/"+dept+"/"+batch+"/"+sem+"/"+subcode+"/"+notes+"/";
+                      UPLOAD_DIRECTORY = Base.path+"/notes/"+ayear+"/"+dept+"/"+batch+"/"+sem+"/"+subcode+"/"+notes+"/";
     File file = new File(UPLOAD_DIRECTORY);
+    
  Boolean a = file.mkdirs();
                 
         }
@@ -187,12 +197,56 @@ String UPLOAD_DIRECTORY="hello";
         
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection1 = new dbcon().getConnection("cse");
+            Connection connection1 = new dbcon().getConnection(dept);
             Statement statement1 = connection1.createStatement();
 
-            statement1.executeUpdate("insert into notes values('" + ayear + "','" + sem + "','" + subcode + "','" + notes + "','" + name + "','" + UPLOAD_DIRECTORY + "')");
-             request.getRequestDispatcher("dept/result.jsp").forward(request, response);
-            
+            statement1.executeUpdate("insert into notes values("+null+",'" + ayear + "','" + sem + "','" + subcode + "','" + notes + "','" + name + "','" + UPLOAD_DIRECTORY + "','"+descp+"')");
+             if(statement1!=null)
+                            statement1.close();
+                              if(connection1!=null)
+                                connection1.close();
+                              List<String> depts=new ArrayList<String>();
+                              depts.add("cse");
+                              depts.add("eee");
+                              depts.add("ece");
+                              depts.add("mech");
+                              depts.add("it");
+                              depts.add("civil");
+                              
+                              for(String department:depts){
+                                  String newsem;
+                                  if(!department.equals(dept)){
+                                  ResultSet rs;
+                                  connection1 = new dbcon().getConnection(department);
+                                  statement1 = connection1.createStatement();
+                                  response.getWriter().println(department);
+                                  rs=statement1.executeQuery("select * from subject_sem_table where subcode like '"+subcode+"'");
+                                  if(rs.next())
+                                  {
+                                      response.getWriter().println(department+"insert");
+                                  newsem=rs.getString("sem");
+                                  if(rs!=null)
+                                  rs.close();
+                                  FileInputStream in=new FileInputStream(new File(UPLOAD_DIRECTORY + File.separator + name));
+                                   UPLOAD_DIRECTORY = Base.path+"/notes/"+ayear+"/"+department+"/"+batch+"/"+newsem+"/"+subcode+"/"+notes+"/";
+                                   File filecopy = new File(UPLOAD_DIRECTORY);
+                                   Boolean a = filecopy.mkdirs();
+                                  FileOutputStream out=new FileOutputStream(new File(UPLOAD_DIRECTORY + File.separator + name));
+                                   byte data[] = new byte[4096];
+                                  while(in.read(data)!=-1){
+                                  out.write(data);
+                                  }
+                                   
+                                  
+            statement1.executeUpdate("insert into notes values("+null+",'" + ayear + "','" + newsem + "','" + subcode + "','" + notes + "','" + name + "','" + UPLOAD_DIRECTORY + "','"+descp+"')");
+                                  
+                                  
+                                  }
+                                  
+                                  }
+                              }
+                                 request.getRequestDispatcher("dept/result.jsp").forward(request, response);
+           
 
         } catch (Exception ex) {
             PrintWriter out = response.getWriter();

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import com.action.Base;
 import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -135,7 +136,7 @@ public class cvrupdates extends HttpServlet {
             }
               
                      // if(!ayear.equals("")&&!dept.equals("")&&!batch.equals("")&&!sem.equals("")&&!subcode.equals("")&&!notes.equals(""))
-                      UPLOAD_DIRECTORY = "C:/"+deptname+"/"+type+"/";
+                      UPLOAD_DIRECTORY = Base.path+"/"+deptname+"/"+type+"/";
     File file = new File(UPLOAD_DIRECTORY);
  Boolean a = file.mkdirs();
                     }
@@ -162,12 +163,15 @@ public class cvrupdates extends HttpServlet {
         
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection1 = new dbcon().getConnection("cse");
+            Connection connection1 = new dbcon().getConnection(request.getSession().getAttribute("deptname").toString());
             Statement statement1 = connection1.createStatement();
 
-            statement1.executeUpdate("insert into deptuploads values('" + name + "','" + desc + "','" + type + "','"+ UPLOAD_DIRECTORY + "')");
+            statement1.executeUpdate("insert into deptuploads values("+null+",'" + name + "','" + desc + "','" + type + "','"+ UPLOAD_DIRECTORY + "')");
              request.getRequestDispatcher("dept/result.jsp").forward(request, response);
-            
+              if(statement1!=null)
+                            statement1.close();
+                              if(connection1!=null)
+                                connection1.close();
 
         } catch (Exception ex) {
             PrintWriter out = response.getWriter();

@@ -1,3 +1,5 @@
+<%@page import="com.action.Base"%>
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -59,46 +61,9 @@
 		
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
-<div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#menu-toggle1" id="menu-toggle1">
-                       Aravind S
-                    </a>
-                </li>
-                <center>
-                    <img src="../images/face.jpg" height="95px">
-                    
-                               
-                           
-                        
-                   
-                </center>
-                <br>
-                <br>
-                
-                <li >
-                
-                    
-                    <a href="#"><b>NAME : Aravind S</b></a>
-                </li>
-                <li>
-                    <a href="#"><b>ROLL NO : 12CS1203</b></a>
-                </li>
-                <li >
-                    <a href="#"><b>COURSE : B.E</b></a>
-                </li>
-                <li >
-                    <a href="#"><b>DEPT : CSE</b></a>
-                </li>
-              <li >
-                    <a href="#"><b>SECTION : A</b></a>
-                </li>
-            </ul>
-        </div>
+
 		        
 	
-		
 		<header id="page-header"  class="fixed-header">
 		
 			<div id="page-header-inner">
@@ -109,7 +74,7 @@
 							<a href="#">
 								<img src="../images/sjit.png"  height="70px"></a>
 						</div>
-                                            
+                                           
 
 						
 						
@@ -125,33 +90,36 @@
 	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="subjectview.jsp">View</a></li> 
  </ul>
  </li>
-
-                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="courses/index.html">Attendance</a>
+ <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Elective Selection</a>
+ <ul class="sub-menu">  <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectSelection.jsp">Assign</a></li>
+	
+	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="ElectiveView.jsp">View</a></li> 
+ </ul>
+ </li>
+ 
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Student</a>
 <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="memberships/index.html">Update Attendance</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="Attd.jsp">View Attendance</a>
-	
-</li>
-</ul>
-</li>
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="YrAttendance.jsp">View Attendance</a></li>
+                
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="marks.jsp">View Marks</a></li>
+                
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="BonusQuery.jsp">Bonus Remove</a></li>
+	</ul></li>
 
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marks.jsp">Marks</a></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Notes</a>
+
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Notes</a>
     <ul class="sub-menu">
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notes.jsp">View Notes</a></li>
 	</ul></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="cireveupdates.jsp">Department Uploads</a>
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="cireveupdates.jsp">Department Uploads</a>
     </li>
 
 
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marksreport.jsp">Mark Sheet</a>
 
 </li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="studentanalysis.jsp">Student Analysis</a>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="studentanalysis.jsp">Student Analysis</a>
 
 </li>
 </ul>						</nav>
@@ -160,47 +128,49 @@
 			</div>
 		</header>
 
-
-<section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-
-
-<div class="dm3-tabs-testimonials" data-autoscroll=""><div class="dm3-tabs">
-<div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>Department Events</h2><br><br>
-<div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
-<div align="left">
 <% 
-    String ayear = request.getParameter("ayear");
+        String ayear = request.getParameter("ayear");
         String course = request.getParameter("course");
         String dept = request.getParameter("dept");
         String batch = request.getParameter("batch");
         String sem = request.getParameter("sem");
-        String subject = request.getParameter("subject");
+        String subject1 = request.getParameter("subject");
         String subcode = request.getParameter("subject");
         String[] parts = subcode.split("-");
         subcode = parts[0];
-        subject = parts[1];
+        String subject = parts[1];
         String notes = request.getParameter("notes");
-        String path = "C:/notes/"+ayear+"/"+dept+"/"+batch+"/"+sem+"/"+subcode+"/"+notes+"/";
+        String path = Base.path+"/notes/"+ayear+"/"+dept+"/"+batch+"/"+sem+"/"+subcode+"/"+notes+"/";
         List<String> list = new ArrayList<String>();
         List<String> list1 = new ArrayList<String>();
+        List<String> listdescp=new ArrayList<String>();
+        String a = subject1.toUpperCase();
         
         list1.add(path);
           try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection1 = new dbcon().getConnection("cse");
+            Connection connection1 = new dbcon().getConnection(Find.dept(username));
             Statement statement1 = connection1.createStatement();
-            ResultSet rs = statement1.executeQuery("select filename from notes where path = '"+path+"'");
+            ResultSet rs = statement1.executeQuery("select filename,descp from notes where path = '"+path+"'");
             
-            
+          
             while(rs.next())
             {
                 String file = rs.getString("filename");
-                
+               
                  list.add(file);
-                 
+                 listdescp.add(rs.getString("descp"));
             }
             
             %>
+<section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
+
+
+<div class="dm3-tabs-testimonials" data-autoscroll=""><div class="dm3-tabs">
+<div class="dm3-tab"><div class="dm3-tab-inner"><center><h2><%=a%></h2><br><br>
+<div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
+<div align="left">
+
             
             <%
            
@@ -210,12 +180,16 @@
                   //session.setAttribute(str,list.get(i));
                   session.setAttribute("path",path);
             %>
-            <a href="${pageContext.request.contextPath}/notesdownload?ind1=<%=str %>" ><%= list.get(i) %></a>
+            <a href="${pageContext.request.contextPath}/notesdownload?ind1=<%=str %>" ><%= list.get(i)+"-"+listdescp.get(i) %></a>
 <br>
 <%
            
            }
             session.setAttribute("size",list.size());
+              if(statement1!=null)
+                            statement1.close();
+                              if(connection1!=null)
+                                connection1.close();
           }
           catch(Exception e)
           {
@@ -238,8 +212,7 @@
 </div><ul class="dm3-tabs-nav"></ul></div>
 </div></div></section>
 
-</section>
-						<footer id="footer-widgets">
+</section>						<footer id="footer-widgets">
 			<div class="container clearfix">
 								Powered by St.Joseph's
 							</div>
@@ -250,15 +223,14 @@
 
 	<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
 <li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
 </ul>			</nav>
 		</div>
 	</footer>
-
 
 
 
@@ -295,6 +267,11 @@
     {
         response.sendRedirect("../index.jsp");
     }
+
+                            if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

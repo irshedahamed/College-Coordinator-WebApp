@@ -17,9 +17,9 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-<title>Simple Responsive Template</title>
-<meta name="description" content="Simple Responsive Template is a template for responsive web design. Mobile first, responsive grid layout, toggle menu, navigation bar with unlimited drop downs, responsive slideshow">
-<meta name="keywords" content="">
+<title>St.Joseph's Institute of Technology Portal</title>
+<meta name="description" content="St.Josephs Student Portal">
+<meta name="keywords" content="St.Josephs Student Portal Technology">
 
 <!-- Mobile viewport -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
@@ -123,7 +123,7 @@ padding:20px 15px;
   			<div class="inset">
 	  			<p>
 	    		 <label for="email">USERNAME</label>
-   	 			<input type="text" name="uname" placeholder="" required/>
+   	 			<input type="text" name="uname" placeholder="" size="20" required/>
 				</p>
   				<p>
 				    <label for="password">PASSWORD</label>
@@ -141,7 +141,7 @@ padding:20px 15px;
 	</div>
 	</div>
 			
-
+       
    
 	   </div>
 	   </div>
@@ -162,8 +162,11 @@ padding:20px 15px;
 	<br><br>
     	St.Joseph's Institute of Technology
 		<br>
+               
 		<br>
+                 <center> Best viewed in Google Chrome and Mozilla Firefox</center>
 		<br>
+                <marquee>For any Queries or Help Contact :  <a href="mailto:portal@stjosephstechnology.ac.in">portal@stjosephstechnology.ac.in</a></marquee>
                 <br>
                 <br>
                 
@@ -176,7 +179,7 @@ padding:20px 15px;
 
 <!-- jQuery -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/jquery-1.9.0.min.js">\x3C/script>')</script>
+<script>window.jQuery || document.write('<script src="js/jquery-1.9.0.min.js">\x3C/script>');</script>
 
 <script defer src="js/jquery.flexslider-min.js"></script>
 

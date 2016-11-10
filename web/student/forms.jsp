@@ -112,6 +112,7 @@ document.getElementById("result").innerHTML = response;
 		        
 	
 		
+		
 		<header id="page-header"  class="fixed-header">
 		
 			<div id="page-header-inner">
@@ -120,7 +121,7 @@ document.getElementById("result").innerHTML = response;
 					<div class="container clearfix">
 						<div id="main-logo">
 							<a href="#">
-								<img src="../images/sjit.png"  height="70px"></a>
+                                                           	<img src="../images/sjit.png"  height="70px"></a>
 						</div>
                                             <ul id="auth-nav">
 							<li>
@@ -129,7 +130,6 @@ document.getElementById("result").innerHTML = response;
 								</div>
 							</li>
 						</ul>
-                                           
 
 						
 						
@@ -138,41 +138,32 @@ document.getElementById("result").innerHTML = response;
 						
 
 						<nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="home.jsp">Home</a></li>
 <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Profile</a>
     <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personal.jsp">Personal Details</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="contact.jsp">Contact Details</a></li>
+	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="contact.jsp">General Details</a></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="other.jsp">Other Details</a></li>
     </ul>
 </li>
 
-                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Attendance</a>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom "><a href="#">Attendance</a>
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="overallattendance.jsp">Overall Attendance</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="ViewAttd.jsp">Hour Attendance</a>
 	
 </li>
 </ul>
 </li>
 
 <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marks.jsp">Marks</a></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="notes.jsp">Notes</a>
-<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Circular</a>
-<ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="circular.jsp">General Circular</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="examcircular.jsp">Exam Circular</a>
-	
-</li>
-</ul><li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="notes.jsp">Notes</a>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Fee</a>
 
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="forms.jsp">Forms</a>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="forms.jsp">Forms</a>
 
 </li>
+
 </ul>						</nav>
 					</div>
 				</div>
@@ -194,9 +185,9 @@ document.getElementById("result").innerHTML = response;
             <select id="form" name="form" onchange="displayform();">
                 
                <option>Select Form Type</option>
-               <option value="abhs">ABHS Formats</option>
-               <option value="hostel">Hostel Formats</option>
-               <option value="student">Student Formats</option>
+               <option value="abhsformat">ABHS Formats</option>
+               <option value="hostelformat">Hostel Formats</option>
+               <option value="studentsformat">Student Formats</option>
                
             
             </select>
@@ -220,16 +211,13 @@ document.getElementById("result").innerHTML = response;
 			<!-- #page-container -->
 			</div>
 			</div>
-
-	<footer id="page-footer">
+<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
-<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
-<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
 </ul>			</nav>
 		</div>
 	</footer>
@@ -237,11 +225,10 @@ document.getElementById("result").innerHTML = response;
 
 
 
-
 <script src="../js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>    <script src="../js/mobileToggle.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
@@ -266,6 +253,10 @@ document.getElementById("result").innerHTML = response;
     {
         response.sendRedirect("../index.jsp");
     }
+  if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

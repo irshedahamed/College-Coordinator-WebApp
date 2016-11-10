@@ -1,3 +1,4 @@
+<%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
 <%@page import="java.sql.*"%>
@@ -35,14 +36,17 @@
    var sem = $("select#sem").val();
         var dept = $("select#dept").val();
         var batch = $("select#batch").val();
-        
-        if(dept !== 'null' && batch !== 'null')
+         var ayear=$("select#ayear").val();
+                        
+        if(dept !== 'null' && batch !== 'null' && ayear!== 'null')
         {
+            
             
         $.get('${pageContext.request.contextPath}/JsonServlet', {
                 semester : sem, 
                 department : dept,
-                batch : batch
+                batch : batch,
+                ayear : ayear
                 
         },function(response) {
 
@@ -64,11 +68,39 @@
 		
 		</head>
 		
+                <%
+        Connection conection = new dbcon().getConnection(Find.sdept(username));
+    Statement st1 = conection.createStatement();
+    String batch="",name="",rollno="",course="",sec="";
+   
+    ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
+    if(rs1.next())
+    {
+        name= rs1.getString("name");
+        rollno = rs1.getString("rollno");
+        course = rs1.getString("course");
+        sec = rs1.getString("sec");
+        batch= rs1.getString("batch");
+        
+    }
+      if(st1!=null)
+                            st1.close();
+                              if(conection!=null)
+                                conection.close();
+        
+        
+        
+        %>
+        
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
 
-		        
 	
+
+
+    	        
+	
+		
 		
 		<header id="page-header"  class="fixed-header">
 		
@@ -78,7 +110,7 @@
 					<div class="container clearfix">
 						<div id="main-logo">
 							<a href="#">
-								<img src="../images/sjit.png"  height="70px"></a>
+                                                           	<img src="../images/sjit.png"  height="70px"></a>
 						</div>
                                             <ul id="auth-nav">
 							<li>
@@ -87,7 +119,6 @@
 								</div>
 							</li>
 						</ul>
-                                           
 
 						
 						
@@ -96,12 +127,12 @@
 						
 
 						<nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
 <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Profile</a>
     <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personal.jsp">Personal Details</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="contact.jsp">Contact Details</a></li>
+	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="contact.jsp">General Details</a></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="other.jsp">Other Details</a></li>
     </ul>
 </li>
@@ -110,27 +141,19 @@
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="overallattendance.jsp">Overall Attendance</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="ViewAttd.jsp">Hour Attendance</a>
 	
 </li>
 </ul>
 </li>
 
 <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marks.jsp">Marks</a></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="notes.jsp">Notes</a>
-<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Circular</a>
-<ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="circular.jsp">General Circular</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="examcircular.jsp">Exam Circular</a>
-	
-</li>
-</ul><li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="notes.jsp">Notes</a>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Fee</a>
 
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="forms.jsp">Forms</a>
 
 </li>
+
 </ul>						</nav>
 					</div>
 				</div>
@@ -151,16 +174,16 @@
                 <label class="select">
             <select id="ayear" name="ayear">
                <option>Select</option>
-               <option value="2013-2014">2013-2014</option>
-               <option value="2014-2015">2014-2015</option>
-               <option value="2015-2016">2015-2016</option>
-               <option value="2016-2017">2016-2017</option>
-               <option value="2017-2018">2017-2018</option>
-               <option value="2018-2019">2018-2019</option>
-               <option value="2019-2020">2019-2020</option>
-               <option value="2020-2021">2020-2021</option>
-               <option value="2021-2022">2021-2022</option>
-               <option value="2022-2023">2022-2023</option>
+               <option value="13">2013-2014</option>
+               <option value="14">2014-2015</option>
+               <option value="15">2015-2016</option>
+               <option value="16">2016-2017</option>
+               <option value="17">2017-2018</option>
+               <option value="18">2018-2019</option>
+               <option value="19">2019-2020</option>
+               <option value="20">2020-2021</option>
+               <option value="21">2021-2022</option>
+               <option value="22">2022-2023</option>
             
             </select>
                     <i></i>
@@ -177,15 +200,14 @@
                 <%
     try {
       
-  String departmentname="cse";
+  String departmentname=Find.sdept(username);
              Connection connection = new dbcon().getConnection(departmentname);
               Statement statement = connection.createStatement();
-              ResultSet rs= statement.executeQuery("select course,dept,batch from student_personal where rollno='12cs1203'");
-              String  course="", dept="",batch="";
+              ResultSet rs= statement.executeQuery("select batch from student_personal where rollno='"+username+"'");
+              batch="";
               while(rs.next())
               {
-                  course=rs.getString("course");              
-                  dept=rs.getString("dept");
+                  
                   batch = rs.getString("batch");
                   
               }
@@ -194,7 +216,7 @@
 		  %>   
     
                
-                <option value="<%= course %>"><%= course %></option>
+                <option value="be">B.E</option>
                
             </select>
                     <i></i>
@@ -209,7 +231,7 @@
             
            <select id="dept" name="dept">
             
-                <option value="cse"><%= dept %></option>
+               <option value="<%=departmentname%>"><%=departmentname %></option>
                 
                 
                
@@ -228,6 +250,10 @@
                 <option value="<%= batch %>"><%= batch %></option>
                 
                 <%
+                      if(statement!=null)
+                            statement.close();
+                              if(connection!=null)
+                                connection.close();
     }
     catch(Exception e)
     {
@@ -314,28 +340,22 @@
 			<!-- #page-container -->
 			</div>
 			</div>
-
-	<footer id="page-footer">
+<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
-<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
-<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
 </ul>			</nav>
 		</div>
 	</footer>
 
 
-
-
-
 <script src="../js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>    <script src="../js/mobileToggle.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
@@ -360,6 +380,10 @@
     {
         response.sendRedirect("../index.jsp");
     }
+  if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

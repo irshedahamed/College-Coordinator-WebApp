@@ -1,7 +1,8 @@
 <%-- 
-    Document   : UpdatedAttendance
+    Document   : UpdatedAttendance Edited from Staff
     Created on : Jul 15, 2015, 9:19:26 PM
-    Author     : Ullas
+    Edited on  : May 13, 2016, 7:11:65 PM
+    Author     : Ullas Edited by Arun
 --%>
 
 <%@page import="java.sql.*"%>
@@ -27,8 +28,7 @@
         char ch=hour.charAt(0);
         Integer count=Integer.parseInt(n);
         %>
-        <h1><%=count %></h1>
-        <%
+             <%
         String subcode,check,str;
         for(int i=1;i<=count;i++)
         {
@@ -38,7 +38,7 @@
             {
                 %>
                 <br>
-                <h1><%=check %></h1>
+                
                 <%
                 
                 Connection con = new dbcon().getConnection(dept);
@@ -185,10 +185,18 @@
                      break;    
         }
         %>
-        <h1><%=rollno %></h1>
-        <h1><%=date %></h1>
+        
         <%
+                            if(st!=null)
+                            st.close();
+                            if(st1!=null)
+                                st1.close();
+                            if(st2!=null)
+                                st2.close();
+                              if(con!=null)
+                                con.close();
             }
+
         }
        /* Connection con = new dbcon().getConnection(dept);
         Statement st=con.createStatement();
@@ -204,5 +212,6 @@
                e.printStackTrace();
            }
        %>
+    <center><h1> Attendance successfully Updated</h1></center>
     </body>
 </html>

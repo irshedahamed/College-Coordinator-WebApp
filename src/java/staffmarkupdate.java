@@ -79,8 +79,13 @@ public class staffmarkupdate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int flag=0;
         try
+            
+            
         {
+            
+            response.setContentType("text/html");
       HttpSession session = request.getSession();
             String batch = session.getAttribute("batch").toString();
             String sem = session.getAttribute("sem").toString();
@@ -95,7 +100,9 @@ public class staffmarkupdate extends HttpServlet {
              Statement st1=con.createStatement();
              Statement st2=con.createStatement();
              int count=0;
-             ResultSet rs1 = st.executeQuery("select * from student_personal where batch='"+batch+"' and sec='"+sec+"' and rollno like '__c%' order by name");
+                  String sql= "select *,CONVERT(regno,UNSIGNED INT) as sno from student_personal where batch='"+batch+"' and sec='"+sec+"' order by sno,name";
+  
+             ResultSet rs1 = st.executeQuery(sql);
              
              
             while(rs1.next())
@@ -106,7 +113,7 @@ public class staffmarkupdate extends HttpServlet {
                
                      rollno=rs1.getString("rollno");
                     String a1=rollno+"_"+count;
-                     response.getWriter().println(a1);
+                     //response.getWriter().println(a1);
                     mark = request.getParameter(a1);
                     String sql3 = "select * from marks_table where rollno='"+rollno+"' and subcode='"+subcode+"'";
                     
@@ -122,7 +129,8 @@ public class staffmarkupdate extends HttpServlet {
                         String m = rs2.getString(exam);
                         if(m!=null)
                         {
-                            response.getWriter().println("ALREADY UPDATED");
+                            response.getWriter().println("<center><h1>ALREADY UPDATED<h1></center>");
+                          flag=1;  
                             break;
                         }
                         String sql5="update marks_table set "+exam+"='"+mark+"' where rollno='"+rollno+"' and subcode='"+subcode+"'";
@@ -132,49 +140,25 @@ public class staffmarkupdate extends HttpServlet {
                     rs2.close();
                     
                 }
-            ResultSet rs3 = st.executeQuery("select * from student_personal where batch='"+batch+"' and sec='"+sec+"' and rollno like '__l%' order by name");
-             
-             
-            while(rs3.next())
-            {
-               
-                
-               
-               
-                     rollno=rs3.getString("rollno");
-                    String a1=rollno+"_"+count;
-                     response.getWriter().println(a1);
-                    mark = request.getParameter(a1);
-                    String sql3 = "select * from marks_table where rollno='"+rollno+"' and subcode='"+subcode+"'";
-                    
-                    rs2 = st1.executeQuery(sql3);
-                    if(!rs2.isBeforeFirst())
-                    {
-                        String sql4="insert into marks_table(rollno,sem,subcode,"+exam+") values('"+rollno+"','"+sem+"','"+subcode+"','"+mark+"')";
-                        st2.executeUpdate(sql4);
-                    }
-                    else
-                    {
-                        rs2.next();
-                        String m = rs2.getString(exam);
-                        if(m!=null)
-                        {
-                            response.getWriter().println("ALREADY UPDATED");
-                            break;
-                        }
-                        String sql5="update marks_table set "+exam+"='"+mark+"' where rollno='"+rollno+"' and subcode='"+subcode+"'";
-                        st2.executeUpdate(sql5);
-                    }
-                    count++;
-                    rs2.close();
-                    
-                }
+             if(st1!=null)
+                            st1.close();
+                if(st2!=null)
+                            st2.close();
+                             
+                              if(con!=null)
+                                con.close();
             }
         
         catch(Exception e){
             e.printStackTrace();
         }
-            response.getWriter().printf("updated");
+        if(flag==0)
+        {
+             response.getWriter().println("<h1>updated</h1>");
+             response.sendRedirect("staff/updated.jsp");
+        }
+           
+            
     }
 
     /**

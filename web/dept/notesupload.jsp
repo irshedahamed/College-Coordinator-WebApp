@@ -42,13 +42,15 @@
    var sem = $("select#sem").val();
         var dept = $("select#dept").val();
         var batch = $("select#batch").val();
+        var ayear= $("select#ayear").val();
         
         if(dept !== 'null' && batch !== 'null')
         {
         $.get('${pageContext.request.contextPath}/JsonServlet', {
                 semester : sem, 
                 department : dept,
-                batch : batch
+                batch : batch,
+                ayear : ayear
                 
         },function(response) {
 
@@ -120,25 +122,25 @@
 
 
 
-            <header id="page-header"  class="fixed-header">
+             <header id="page-header"  class="fixed-header">
+		
+			<div id="page-header-inner">
 
-                <div id="page-header-inner">
+				<div id="header-container">
+					<div class="container clearfix">
+						<div id="main-logo">
+							<a href="#">
+								<img src="../images/sjit.png"  height="70px"></a>
+						</div>
+                                           
 
-                    <div id="header-container">
-                        <div class="container clearfix">
-                            <div id="main-logo">
-                                <a href="#">
-                                    <img src="../images/sjit.png"  height="70px"></a>
-                            </div>
+						
+						
 
+						
+						
 
-
-
-
-
-
-
-                            <nav id="main-nav">
+						<nav id="main-nav">
 							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
 <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="subjectallocation.jsp">Subject Allocation</a>
  <ul class="sub-menu">  <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="subjectallocation.jsp">Allocate</a></li>
@@ -146,40 +148,44 @@
 	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="subjectview.jsp">View</a></li> 
  </ul>
  </li>
+<li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Elective Selection</a>
+ <ul class="sub-menu">  <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectSelection.jsp">Assign</a></li>
+	
+	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="ElectiveView.jsp">View</a></li> 
+ </ul>
+ </li>
+ 
 
-                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="courses/index.html">Attendance</a>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Student</a>
 <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="memberships/index.html">Update Attendance</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="Attd.jsp">View Attendance</a>
-	
-</li>
-</ul>
-</li>
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="YrAttendance.jsp">View Attendance</a></li>
+                
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="marks.jsp">View Marks</a></li>
+                
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="BonusQuery.jsp">Bonus Remove</a></li>
+	</ul></li>
 
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marks.jsp">Marks</a></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Notes</a>
+
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Notes</a>
     <ul class="sub-menu">
-		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notes.jsp">View Notes</a></li>
 	</ul></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="cireveupdates.jsp">Department Uploads</a>
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="cireveupdates.jsp">Department Uploads</a>
     </li>
 
 
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marksreport.jsp">Mark Sheet</a>
 
 </li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="studentanalysis.jsp">Student Analysis</a>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="studentanalysis.jsp">Student Analysis</a>
 
 </li>
 </ul>						</nav>
-                        </div>
-                    </div>
-                </div>
-            </header>
+					</div>
+				</div>
+			</div>
+		</header>
 
 
             <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
@@ -236,12 +242,13 @@
 
                                                 <select id="dept" name="dept">
 
-                                                    <option value="CSE">CSE</option>
-                                                    <option value="ECE">ECE</option>
-                                                    <option value="MECH">MECH</option>
-                                                    <option value="IT">IT</option>
-                                                    <option value="CIVIL">CIVIL</option>
-                                                    <option value="EEE">EEE</option>
+                                      
+                        <option value="cse">CSE</option>
+                                                    <option value="ece">ECE</option>
+                                                    <option value="mech">MECH</option>
+                                                    <option value="it">IT</option>
+                                                    <option value="civil">CIVIL</option>
+                                                    <option value="eee">EEE</option>
                                                 </select>
                                                 <i></i>
                                             </label>
@@ -254,13 +261,25 @@
 
                                                 <select id="batch" name="batch">
 
-                                                    <option value="2012-2016">2012-2016</option>
-                                                    <option value="2013-2017">2013-2017</option>
-                                                    <option value="2014-2018">2014-2018</option>
-                                                    <option value="2015-2019">2015-2019</option>
-                                                    <option value="2016-2020">2016-2020</option>
-                                                    <option value="2020-2021">2017-2021</option>
-                                                    <option value="2021-2022">2018-2022</option>
+                                                    <%
+                Connection conbatch = new dbcon().getConnection("sjitportal");
+                    Statement stmt = conbatch.createStatement();
+                    ResultSet rs=stmt.executeQuery("select batch from regulations");
+                    String batch=null;
+                    rs.beforeFirst();
+                    while(rs.next())
+                    {
+                        batch=rs.getString("batch");
+                %>
+                <option value=<%=batch%>><%=batch%></option>
+                <%
+                }
+
+                            if(stmt!=null)
+                            stmt.close();
+                              if(conbatch!=null)
+                                conbatch.close();
+                %>
                                                     
                                                 </select>
                                                 <i></i>
@@ -333,6 +352,20 @@
                                             </label>
                                         </label>
 
+                                        <br><br>
+                                        <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    Description </b></div>
+                                            <br>
+                                            <label class="text" name="desc">
+
+                                                <textarea name="desc" rows="4" cols="50">
+                                                </textarea>
+
+
+                                            </label>
+                                        </label>
+
                                     </section>       
                                     <div align="left">
                                         <input type="submit" id="submit" value="Submit" /></div>
@@ -353,15 +386,15 @@
 </div>
 
 <footer id="page-footer">
-    <div class="container clearfix">
-        <div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-        <button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
-        <nav id="footer-nav">
-            <ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-                <li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
-            </ul>			</nav>
-    </div>
-</footer>
+		<div class="container clearfix">
+			<div class="copy"></div>
+			<nav id="footer-nav">
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
+</ul>			</nav>
+		</div>
+	</footer>
 
 
 
@@ -399,6 +432,11 @@
     {
         response.sendRedirect("../index.jsp");
     }
+
+                            if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

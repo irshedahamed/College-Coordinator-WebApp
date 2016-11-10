@@ -43,41 +43,7 @@
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
 <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#menu-toggle1" id="menu-toggle1">
-                       Aravind S
-                    </a>
-                </li>
-                <center>
-                    <img src="../images/face.jpg" height="95px">
-                    
-                               
-                           
-                        
-                   
-                </center>
-                <br>
-                <br>
-                
-                <li >
-                
-                    
-                    <a href="#"><b>NAME : Aravind S</b></a>
-                </li>
-                <li>
-                    <a href="#"><b>ROLL NO : 12CS1203</b></a>
-                </li>
-                <li >
-                    <a href="#"><b>COURSE : B.E</b></a>
-                </li>
-                <li >
-                    <a href="#"><b>DEPT : CSE</b></a>
-                </li>
-              <li >
-                    <a href="#"><b>SECTION : A</b></a>
-                </li>
-            </ul>
+         
         </div>
 		        
 	
@@ -106,25 +72,53 @@
     
 
 
-                                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="courses/index.html">Marks</a>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="#">Marks</a>
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="updatemarks.jsp">Update Marks</a></li>
 	
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmark.jsp">View Marks</a></li>
+        
+        
 	
 </li>
 </ul>
 </li>
 
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="reportgeneration.jsp">Report Generation</a></li>
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="updatemodeltype.jsp">Update Model Type</a></li>
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="regnoupdate.jsp">Update Register No.</a></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="events.jsp">Events</a>
+
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Report Generation</a>
+<ul class="sub-menu">
+    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="reportgeneration.jsp">Marks Report Staff</a></li>
+	
+        <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmarkbonus.jsp">Marks Report Student</a></li>
+        
+        
+	
+</li>
+</ul>
+</li>
+
+
+
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-pag"><a href="#">Student</a>
+<ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="updatemodeltype.jsp">Update Model Type</a></li>
+	
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="regnoupdate.jsp">Update Register No.</a></li>
+	
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="BonusQuery.jsp">Bonus Assignment</a></li>
+
+</ul>
+</li>
+
+
+
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 "><a href="circular.jsp">Circular</a>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="events.jsp">Events</a>
+
 
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="examuploads.jsp">Exam Uploads</a>
 
-</li></ul>						</nav>
+</li></ul>						</nav>		
 					</div>
 				</div>
 			</div>
@@ -138,11 +132,30 @@
 <div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>Department Events</h2><br><br>
 <div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
 <div align="left">
-<a href="deptcir/record_nodue.pdf" download>Sport Events</a>
+<%
+    Connection conbatch = new dbcon().getConnection("sjitportal");
+                    Statement stmt = conbatch.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from circular where type='event'");
+                    String com=null,name=null,description=null,path=null;
+                    rs.beforeFirst();
+                    while(rs.next())
+                    {
+                        name=rs.getString("name");
+                        description=rs.getString("des");
+                        path=rs.getString("path");
+                        com=name+" - "+description;
+                        %>
+                        <a href="${pageContext.request.contextPath}/formsdownload?ind1=<%=name %>&path=<%=path %>&type1=event" ><%=com%></a>
+    
               <br>
-              <a href="deptcir/iv.pdf" download>College Day Celebrations</a>
-              <br>
-              <a href="deptcir/timetable.pdf" download>Time Table</a></div>
+              <%
+              }
+
+                            if(stmt!=null)
+                            stmt.close();
+                              if(conbatch!=null)
+                                conbatch.close();
+              %>
 </div>
 </center>
 </div>
@@ -152,18 +165,14 @@
 <div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>Department Events</h2><br><br>
 <div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2; background-color: #fff;">
 <div align="left">
-<a href="deptcir/record_nodue.pdf" download>Record and No due Details</a>
-              <br>
-              <a href="deptcir/iv.pdf" download>Industrial Visit Details</a>
-              <br>
-              <a href="deptcir/timetable.pdf" download>Time Table</a></div>
+
 </div>
 </center></div></div>
 </div><ul class="dm3-tabs-nav"></ul></div>
 </div></div></section>
 
 </section>
-						<footer id="footer-widgets">
+								<footer id="footer-widgets">
 			<div class="container clearfix">
 								Powered by St.Joseph's
 							</div>
@@ -174,13 +183,11 @@
 
 	<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
-<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
-<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
 </ul>			</nav>
 		</div>
 	</footer>
@@ -221,6 +228,11 @@
     {
         response.sendRedirect("../index.jsp");
     }
+
+                            if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

@@ -4,6 +4,7 @@
     Author     : Divya sri
 --%>
 
+<%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.*"%>
 <%@page import="javax.sql.*"%>
 <html>
@@ -38,7 +39,9 @@
               out.print("<td><center><b>Department</b></center></td>");
                 out.print("<td><center><b>Subject</b></center></td>");
                 out.print("<td><center><b>Section</b></center></td>");
-                  out.print("<td><center><b>Hours</b></center></td>");
+                  out.print("<td><center><b>SBatch</b></center></td>");
+          
+                out.print("<td><center><b>Hours</b></center></td>");
                 out.print("</tr>");
                 
             
@@ -50,15 +53,16 @@
                out.print("<td>");
                out.print("<label class='input'><label class='select'>");
               out.print("<select id='lbatch"+i+"' name='lbatch"+i+"'>");
-                out.print("<option>select</option>");
-                out.print("<option value='2012-2016'>2012-2016</option>");
-                out.print("<option value='2013-2017'>2013-2017</option>");
-                out.print("<option value='2014-2018'>2014-2018</option>");
-                out.print("<option value='2015-2019'>2015-2019</option>");
-                out.print("<option value='2016-2020'>2016-2020</option>");
-                out.print("<option value='2017-2021'>2017-2021</option>");
-                out.print("<option value='2018-2022'>2018-2022</option>");
-                out.print("<option value='2019-2023'>2019-2023</option>");
+                out.print("<option>select</option>");Connection conbatch = new dbcon().getConnection("sjitportal");
+                    Statement stmt1 = conbatch.createStatement();
+                    ResultSet rs1=stmt1.executeQuery("select batch from regulations");
+                    String batch=null;
+                    rs1.beforeFirst();
+                    while(rs1.next())
+                    {
+                        batch=rs1.getString("batch");
+                        out.print("<option value="+batch+">"+batch+"</option>");
+                    }
             out.print("</select><i></i></label></label>");
             
                 out.print("</td>");
@@ -86,7 +90,7 @@
                 out.print("<option value='eee'>EEE</option>");
                 out.print("<option value='it'>IT</option>");
                 out.print("<option value='mech'>MECH</option>");
-                out.print("<option value='civ'>CIVIL</option>");
+                out.print("<option value='civil'>CIVIL</option>");
             out.print("</select><i></i></label></label>");
              out.print("</td>");
              out.print(" <td>");
@@ -101,7 +105,26 @@
                out.print(" <option>Select</option>");
                 out.print("<option value='a'>a</option>");
                out.print(" <option value='b'>b</option>");
-            out.print("</select><i></i></label></label>");
+                out.print("<option value='c'>c</option>");
+               out.print(" <option value='d'>d</option>");
+           
+               out.print("</select><i></i></label></label>");
+             out.print(" </td>");
+             
+             out.print("<td>");
+             out.print("<label class='input'><label class='select'>");
+            out.print("<select id='lsbatch"+i+"' class='lsbatch' name='lsbatch"+i+"'>");
+               out.print(" <option>Select</option>");
+                out.print("<option value='1'>1</option>");
+               out.print(" <option value='2'>2</option>");
+                out.print("<option value='3'>3</option>");
+               out.print(" <option value='4'>4</option>");
+               out.print("<option value='5'>5</option>");
+                out.print("<option value='6'>6</option>");
+                out.print("<option value='7'>7</option>");
+                out.print("<option value='8'>8</option>");
+             
+               out.print("</select><i></i></label></label>");
              out.print(" </td>");
               
               out.print("<td>");
@@ -110,8 +133,14 @@
               
             out.print("</label></label>");
              out.print(" </td>");
+             
+             
               out.print("</tr>");
               
+                            if(stmt1!=null)
+                            stmt1.close();
+                              if(conbatch!=null)
+                                conbatch.close();
            
           
               }

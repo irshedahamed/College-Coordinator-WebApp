@@ -1,7 +1,7 @@
 /* below line is used for online google font */
 @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
 select{
-width::80%;
+width:80%;
 border:3px solid rgb(200, 200, 207);
 height:42px;
 padding:5px;

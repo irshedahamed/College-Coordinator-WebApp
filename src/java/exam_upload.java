@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import com.action.Base;
 import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -136,7 +137,7 @@ public class exam_upload extends HttpServlet {
                     }
                     if(!item.isFormField()){
                         name = new File(item.getName()).getName();
-                         UPLOAD_DIRECTORY = "C:/portal/exam/";
+                         UPLOAD_DIRECTORY = Base.path+"/portal/exam/";
     File file = new File(UPLOAD_DIRECTORY);
  Boolean a = file.mkdirs();
                         
@@ -163,10 +164,13 @@ public class exam_upload extends HttpServlet {
             Connection connection1 = new dbcon().getConnection("sjitportal");
             Statement statement1 = connection1.createStatement();
 
-            statement1.executeUpdate("insert into exam_circular values('" + name + "','" + UPLOAD_DIRECTORY + "','" + desc + "')");
+            statement1.executeUpdate("insert into exam_circular values("+null+",'" + name + "','" + UPLOAD_DIRECTORY + "','" + desc + "')");
              request.getRequestDispatcher("dept/result.jsp").forward(request, response);
             
-
+                            if(statement1!=null)
+                            statement1.close();
+                              if(connection1!=null)
+                                connection1.close();
         } catch (Exception ex) {
             PrintWriter out = response.getWriter();
             out.println(ex);

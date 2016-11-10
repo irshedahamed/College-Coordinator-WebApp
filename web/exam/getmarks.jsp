@@ -108,7 +108,7 @@
     </thead>
     
     <%
-       String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
+       String sql2= "select *,CONVERT(regno,UNSIGNED INT) as sno from student_personal where batch='"+batch+"' and sec='"+sec+"' order by sno,name";
      rs=st.executeQuery(sql2);
      while(rs.next())
      {
@@ -135,6 +135,10 @@
      }
      rs.close();
      
+                            if(st!=null)
+                            st.close();
+                              if(con!=null)
+                                con.close();
      %>
     </tr>        
     
@@ -154,6 +158,11 @@
     {
         response.sendRedirect("../index.jsp");
     }
+
+                            if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

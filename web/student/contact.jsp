@@ -1,3 +1,4 @@
+<%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
 
@@ -16,9 +17,10 @@
     if(rsss.isBeforeFirst())
     {
         
-    
+   
     
     %>
+
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -34,19 +36,48 @@
 		
 		</head>
 		
+                	
+                
+                <%
+        Connection conection = new dbcon().getConnection(Find.sdept(username));
+    Statement st1 = conection.createStatement();
+    String batch="",name="",rollno="",course="",sec="";
+   
+    ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
+    if(rs1.next())
+    {
+        name= rs1.getString("name");
+        rollno = rs1.getString("rollno");
+        course = rs1.getString("course");
+        sec = rs1.getString("sec");
+        batch= rs1.getString("batch");
+        
+    }
+      if(st1!=null)
+                            st1.close();
+                              if(conection!=null)
+                                conection.close();
+        
+        
+        
+        %>
+        
+        
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
 <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#menu-toggle1" id="menu-toggle1">
-                       Aravind S
+                      
                     </a>
                 </li>
                 <center>
-                    <img src="../images/face.jpg" height="95px">
                     
+                        <img src="../../StudentPhotos/Batch<%=batch%>/<%=rollno.toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                
+                           
+                            
                            
                         
                    
@@ -54,37 +85,29 @@
                 <br>
                 <br>
                 
-                <%
-                    String name1 = session.getAttribute("name1").toString();
-                    String rollno1 = session.getAttribute("rollno1").toString();
-                    String course1 = session.getAttribute("course1").toString();
-                    String sec1 = session.getAttribute("sec1").toString();
-                    
-                    
-                    %>
-                
                 <li >
                 
                     
-                    <a href="#"><b>NAME : <%=name1%></b></a>
+                    <a href="#"><b>NAME : <%=name%></b></a>
                 </li>
                 <li>
-                    <a href="#"><b>ROLL NO : <%=rollno1%></b></a>
+                    <a href="#"><b>ROLL NO : <%=rollno%></b></a>
                 </li>
                 <li >
-                    <a href="#"><b>COURSE : <%=course1%></b></a>
+                    <a href="#"><b>COURSE : <%=course%></b></a>
                 </li>
                 <li >
-                    <a href="#"><b>DEPT : CSE</b></a>
+                    <a href="#"><b>DEPT : <%=Find.sdept(username)%></b></a>
                 </li>
               <li >
-                    <a href="#"><b>SECTION : <%=sec1%></b></a>
+                    <a href="#"><b>SECTION : <%=sec%></b></a>
                 </li>
             </ul>
         </div>
 
     
 	
+		
 		
 		<header id="page-header"  class="fixed-header">
 		
@@ -94,7 +117,7 @@
 					<div class="container clearfix">
 						<div id="main-logo">
 							<a href="#">
-								<img src="../images/sjit.png"  height="70px"></a>
+                                                           	<img src="../images/sjit.png"  height="70px"></a>
 						</div>
                                             <ul id="auth-nav">
 							<li>
@@ -111,12 +134,12 @@
 						
 
 						<nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
-<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-768"><a href="">Profile</a>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Profile</a>
     <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personal.jsp">Personal Details</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="contact.jsp">Contact Details</a></li>
+	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="contact.jsp">General Details</a></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="other.jsp">Other Details</a></li>
     </ul>
 </li>
@@ -125,7 +148,6 @@
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="overallattendance.jsp">Overall Attendance</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="ViewAttd.jsp">Hour Attendance</a>
 	
 </li>
 </ul>
@@ -133,20 +155,12 @@
 
 <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marks.jsp">Marks</a></li>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="notes.jsp">Notes</a>
-<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Circular</a>
-<ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="circular.jsp">General Circular</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="examcircular.jsp">Exam Circular</a>
-	
-</li>
-</ul>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Fee</a>
 
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="forms.jsp">Forms</a>
 
 </li>
+
 </ul>						</nav>
 					</div>
 				</div>
@@ -158,14 +172,14 @@
 
 
 <div class="dm3-tabs-testimonials" data-autoscroll="5"><div class="dm3-tabs">
-<center><font size="5px"><b>CONTACT DETAILS</b></font><br><br>
+<center><font size="5px"><b>GENERAL DETAILS</b></font><br><br>
 <%
-    username="12cs1203";
+    
 	       String departmentname= session.getAttribute("deptname").toString();
              Connection connection = new dbcon().getConnection(departmentname);
               Statement statement = connection.createStatement();
               ResultSet rs= statement.executeQuery("select * from student_personal where rollno="+"'"+username+"'");
-              String accomodation=null,rollno,regno;
+              String accomodation=null;
               while(rs.next())
               {
                    accomodation=rs.getString("accomodation");
@@ -178,9 +192,9 @@
               while(rs10.next())
               {
                   rollno=rs10.getString("rollno");
-                  regno=rs10.getString("regno");
+                  
                   doorno=rs10.getString("Doorno");
-                  streetno=rs10.getString("streetno");
+                  streetno=rs10.getString("street");
 				  area=rs10.getString("area");
 				  city=rs10.getString("city");
 				  district=rs10.getString("district");
@@ -234,20 +248,32 @@
               while(rs10.next())
               {
                   rollno=rs10.getString("rollno");
-                  regno=rs10.getString("regno");
+                  
                   doorno=rs10.getString("doorno");
-                  streetno=rs10.getString("streetno");
+                  streetno=rs10.getString("street");
 				  area=rs10.getString("area");
 				  city=rs10.getString("city");
 				  district=rs10.getString("district");
 				  country=rs10.getString("country");
 				  state=rs10.getString("state");
 				  pin=rs10.getString("pincode");
-			}	  				
+			}  if(statement!=null)
+                            statement.close();
+                              if(connection!=null)
+                                connection.close();	  				
 		  %> 
           <div class="dm3-tab"><div class="dm3-tab-inner">
                    
          <TABLE WIDTH=30% align ="center" border="1">
+             <TR class="defaultText odd-row">
+                      <TD><font size="2px"><b>Roll No.</b></font></TD>
+                      <TD><font size="2px"><%= username %></font></TD>
+             </TR>
+             
+             <TR class="defaultText">
+                      <TD><font size="2px"><b>Name</b></font></TD>
+                      <TD><font size="2px"><%= name %></font></TD>
+             </TR>
              <TR class="defaultText odd-row">
                       <TD><font size="2px"><b>Door No.</b></font></TD>
                       <TD><font size="2px"><%= doorno %></font></TD>
@@ -257,7 +283,7 @@
                       <TD><font size="2px"><%= streetno %></font></TD>
              </TR>
 			 <TR class="defaultText odd-row">
-                      <TD<font size="2px"><b>Area</b></font></TD>
+                             <TD><font size="2px"><b>Area</b></font></TD>
                       <TD><font size="2px"><%= area %></font></TD>
              </TR>
 			 <TR class="defaultText">
@@ -289,10 +315,9 @@
 
        
            
-</div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li></div>
+</div>
 </div></div></section>
 
-</section>
 						<footer id="footer-widgets">
 			<div class="container clearfix">
 								Powered by St.Joseph's
@@ -302,27 +327,23 @@
 			</div>
 			</div>
 
-	<footer id="page-footer">
+<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
-<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
-<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
 </ul>			</nav>
 		</div>
 	</footer>
 
 
 
-
-
 <script src="../js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>    <script src="../js/mobileToggle.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
@@ -350,6 +371,10 @@
     {
         response.sendRedirect("../index.jsp");
     }
+      if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

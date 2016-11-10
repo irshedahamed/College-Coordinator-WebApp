@@ -13,10 +13,15 @@
     Connection connn = new dbcon().getConnection("login");
     Statement sttt = connn.createStatement();
     String type1 ="";
-    ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='"+username+"' and password='"+password+"'");
+    ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='"+username+"' and password='"+password+"'");
     if(rsss.isBeforeFirst())
     {
-        
+        while(rsss.next())
+        {
+            type1 = rsss.getString("type");
+        }
+        if(type1.equals("first"))
+        {
     
     
     %>
@@ -31,6 +36,26 @@
 
     <!-- Custom CSS -->
     <link href="../css/simple-sidebar.css" rel="stylesheet">
+    
+    <script>
+        function process(obj)
+        {
+            var val = document.getElementById("rollno").value;
+            var sem = obj.value;
+            //document.write(sem);
+            var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+     document.getElementById("content").innerHTML = xhttp.responseText;
+    }
+  };
+  xhttp.open("GET", "alldetails.jsp?rollno="+val+"&sem="+sem, true);
+  xhttp.send();
+}
+        
+        
+        
+    </script>
 	
 		
 		</head>
@@ -88,13 +113,7 @@
 								<img src="../images/sjit.png"  height="70px"></a>
 						</div>
                                            
-<ul id="auth-nav">
-							<li>
-								<div class="auth-nav-register">
-									<a class="button" href="#menu-toggle" id="menu-toggle">My Details</a>
-								</div>
-							</li>
-						</ul>
+
 						
 						
 
@@ -102,45 +121,36 @@
 						
 
 						<nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
-<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Profile</a>
-    <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personal.jsp">Personal Details</a></li>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
+<li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="subjectallocation.jsp">Subject Allocation</a>
+ <ul class="sub-menu">  <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="subjectallocation.jsp">Allocate</a></li>
 	
+	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="subjectview.jsp">View</a></li> 
+ </ul>
+ </li>
 
-        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="other.jsp">Other Details</a></li>
-    </ul>
-</li>
-
-                                                            <li id="menu-item-764" class="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Attendance</a>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="courses/index.html">Attendance</a>
 <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="HourAttd.jsp">Update Attendance</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="SubjectWise.jsp">View Attendance</a>
-	
-</li>
-</ul>
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="YrAttendance.jsp">View Attendance</a></li>
+	</ul>
 </li>
 
-<li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Marks</a>
-<ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="markupdate.jsp">Update Marks</a></li>
-	
-
-        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="marksview.jsp">View Marks</a></li>
-    </ul>
-</li>
+<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marks.jsp">Marks</a></li>
 <li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Notes</a>
     <ul class="sub-menu">
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
-		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
+		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notes.jsp">View Notes</a></li>
 	</ul></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="circular.jsp">Circular</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="cireveupdates.jsp">Department Uploads</a>
+    </li>
 
 
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marksreport.jsp">Mark Sheet</a>
 
+</li>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="studentanalysis.jsp">Student Analysis</a>
 
+</li>
 </ul>						</nav>
 					</div>
 				</div>
@@ -150,33 +160,18 @@
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
 
-
-<div class="dm3-tabs-testimonials" data-autoscroll=""><div class="dm3-tabs">
-<div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>College Circular</h2><br><br>
-<div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
-<div align="left">
-<a href="deptcir/record_nodue.pdf" download>Announcements</a>
-              <br>
-              <a href="deptcir/iv.pdf" download>Industrial Visit Details</a>
-              <br>
-              <a href="deptcir/timetable.pdf" download>Time Table</a></div>
-</div>
-</center>
-</div>
-</div>
-
-
-<div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>Department Events</h2><br><br>
-<div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2; background-color: #fff;">
-<div align="left">
-<a href="deptcir/record_nodue.pdf" download>Record and No due Details</a>
-              <br>
-              <a href="deptcir/iv.pdf" download>Industrial Visit Details</a>
-              <br>
-              <a href="deptcir/timetable.pdf" download>Time Table</a></div>
-</div>
-</center></div></div>
-</div><ul class="dm3-tabs-nav"></ul></div>
+            <center>
+            <input type="text" class="form-group" id="rollno" width="50%" >
+            <button  class="form-group" onclick="process(this);" value="01">Search</button></center>
+            <br>
+            <br>
+            <center>
+            <button class="actions-group" onclick="process(this);" value="01">SEM 1</button>
+            <button class="actions-group" onclick="process(this);" value="02">SEM 2</button>
+            </center>
+            <div id="content">
+                
+            </div>
 </div></div></section>
 
 </section>
@@ -191,10 +186,9 @@
 
 	<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
+				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="../cresits.html">Credits</a></li>
 
 <li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
 </ul>			</nav>
@@ -227,13 +221,23 @@
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
 <%
-   
+    }
+        else
+    {
+        response.sendRedirect("../index.jsp");
+    }
     }
     else
     {
         response.sendRedirect("../index.jsp");
     }
-    }catch(Exception e)
+
+                            if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
+    }
+catch(Exception e)
     {
         e.printStackTrace();
         response.sendRedirect("../index.jsp");

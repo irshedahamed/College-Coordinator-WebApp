@@ -92,7 +92,10 @@ public class MarkForm extends HttpServlet {
             List<String> list = new ArrayList<String>();
            Statement st=con.createStatement();
            ResultSet rs = st.executeQuery("select distinct(sem) from subject_allocation where dept='"+dept+"' and staffid='"+staffid+"'");
-          
+            if(st!=null)
+                            st.close();
+                              if(con!=null)
+                                con.close();
         }
        
     }catch(Exception e){

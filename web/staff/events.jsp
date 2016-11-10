@@ -135,7 +135,13 @@
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
 	</ul></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
+
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">General Circular</a>
+    <ul class="sub-menu">
+		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="circular.jsp">General Circular</a></li>
+		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="examcircular.jsp">Exam Circular</a></li>
+                <li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="deptcircular.jsp">Exam Circular</a></li>
+    </ul></li>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="events.jsp">Events</a>
 
 
@@ -158,31 +164,40 @@
 <div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>College Events</h2><br><br>
 <div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
 <div align="left">
-<a href="deptcir/record_nodue.pdf" download>Sport Events</a>
+<%
+    Connection conbatch = new dbcon().getConnection("sjitportal");
+                    Statement stmt = conbatch.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from circular where type='event'");
+                    String com=null,name=null,description=null,path=null;
+                    rs.beforeFirst();
+                    while(rs.next())
+                    {
+                        name=rs.getString("name");
+                        description=rs.getString("des");
+                        path=rs.getString("path");
+                        com=name+" - "+description;
+                        %>
+    <a href="${pageContext.request.contextPath}/formsdownload?ind1=<%=name %>&path=<%=path %>&type1=event" ><%=com%></a>
+    
               <br>
-              <a href="deptcir/iv.pdf" download>College Day Celebrations</a>
-              <br>
-              <a href="deptcir/timetable.pdf" download>Time Table</a></div>
+              <%
+              }
+
+                            if(stmt!=null)
+                            stmt.close();
+                              if(conbatch!=null)
+                                conbatch.close();
+              %>
 </div>
 </center>
 </div>
 </div>
 
 
-<div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>Department Events</h2><br><br>
-<div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2; background-color: #fff;">
-<div align="left">
-<a href="deptcir/record_nodue.pdf" download>Record and No due Details</a>
-              <br>
-              <a href="deptcir/iv.pdf" download>Industrial Visit Details</a>
-              <br>
-              <a href="deptcir/timetable.pdf" download>Time Table</a></div>
-</div>
-</center></div></div>
+
 </div><ul class="dm3-tabs-nav"></ul></div>
 </div></div></section>
 
-</section>
 						<footer id="footer-widgets">
 			<div class="container clearfix">
 								Powered by St.Joseph's
@@ -235,6 +250,11 @@
     {
         response.sendRedirect("../index.jsp");
     }
+
+                            if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

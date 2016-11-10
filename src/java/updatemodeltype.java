@@ -67,6 +67,7 @@ public class updatemodeltype extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          try {
+             response.setContentType("");
             HttpSession session = request.getSession();
             String[] regno = new String[80];
             
@@ -91,8 +92,11 @@ public class updatemodeltype extends HttpServlet {
            
            
             }
-            response.getWriter().printf("updated");
-            
+            response.getWriter().printf("<center><h1>UPDATE</h1></center>");
+             if(st1!=null)
+                            st1.close();
+                              if(con!=null)
+                                con.close();
         } catch (Exception ex) {
             response.getWriter().print(ex);
             ex.printStackTrace();

@@ -1,3 +1,4 @@
+<%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
 
@@ -33,20 +34,48 @@
 	
 		
 		</head>
-		
+	
+                
+                              <%
+        Connection conection = new dbcon().getConnection(Find.sdept(username));
+    Statement st1 = conection.createStatement();
+    String batch="",name="",rollno="",course="",sec="";
+   
+    ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
+    if(rs1.next())
+    {
+        name= rs1.getString("name");
+        rollno = rs1.getString("rollno");
+        course = rs1.getString("course");
+        sec = rs1.getString("sec");
+        batch= rs1.getString("batch");
+        
+    }
+      if(st1!=null)
+                            st1.close();
+                              if(conection!=null)
+                                conection.close();
+        
+        
+        
+        %>
+
+            	
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
 <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#menu-toggle1" id="menu-toggle1">
-                       Aravind S
+                      
                     </a>
                 </li>
                 <center>
-                    <img src="../images/face.jpg" height="95px">
                     
+                        <img src="../../StudentPhotos/Batch<%=batch%>/<%=rollno.toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                
+                           
+                            
                            
                         
                    
@@ -54,35 +83,25 @@
                 <br>
                 <br>
                 
-                <%
-                    String name1 = session.getAttribute("name1").toString();
-                    String rollno1 = session.getAttribute("rollno1").toString();
-                    String course1 = session.getAttribute("course1").toString();
-                    String sec1 = session.getAttribute("sec1").toString();
-                    
-                    
-                    %>
-                
                 <li >
                 
                     
-                    <a href="#"><b>NAME : <%=name1%></b></a>
+                    <a href="#"><b>NAME : <%=name%></b></a>
                 </li>
                 <li>
-                    <a href="#"><b>ROLL NO : <%=rollno1%></b></a>
+                    <a href="#"><b>ROLL NO : <%=rollno%></b></a>
                 </li>
                 <li >
-                    <a href="#"><b>COURSE : <%=course1%></b></a>
+                    <a href="#"><b>COURSE : <%=course%></b></a>
                 </li>
                 <li >
-                    <a href="#"><b>DEPT : CSE</b></a>
+                    <a href="#"><b>DEPT : <%=Find.sdept(username)%></b></a>
                 </li>
               <li >
-                    <a href="#"><b>SECTION : <%=sec1%></b></a>
+                    <a href="#"><b>SECTION : <%=sec%></b></a>
                 </li>
             </ul>
         </div>
-
     
 	
 		
@@ -94,7 +113,7 @@
 					<div class="container clearfix">
 						<div id="main-logo">
 							<a href="#">
-								<img src="../images/sjit.png"  height="70px"></a>
+                                                           	<img src="../images/sjit.png"  height="70px"></a>
 						</div>
                                             <ul id="auth-nav">
 							<li>
@@ -111,12 +130,12 @@
 						
 
 						<nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
-<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-768"><a href="">Profile</a>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="home.jsp">Home</a></li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Profile</a>
     <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personal.jsp">Personal Details</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="contact.jsp">Contact Details</a></li>
+	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="contact.jsp">General Details</a></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="other.jsp">Other Details</a></li>
     </ul>
 </li>
@@ -125,32 +144,24 @@
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="overallattendance.jsp">Overall Attendance</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="ViewAttd.jsp">Hour Attendance</a>
-	
+</li>
 </ul>
 </li>
 
 <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marks.jsp">Marks</a></li>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="notes.jsp">Notes</a>
-<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Circular</a>
-<ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="circular.jsp">General Circular</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="examcircular.jsp">Exam Circular</a>
-	
-</li>
-</ul>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Fee</a>
 
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Forms</a>
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="forms.jsp">Forms</a>
 
 </li>
+
 </ul>						</nav>
 					</div>
 				</div>
 			</div>
 		</header>
+		
 
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
@@ -164,9 +175,9 @@
   String departmentname= session.getAttribute("deptname").toString();
              Connection connection = new dbcon().getConnection(departmentname);
               Statement statement = connection.createStatement();
-              ResultSet rs= statement.executeQuery("select * from student_personal where rollno='12cs1203'");
-              String rollno="", regno="", initial="", name="", course="", sec="", dept="",gender="",food="",mobileno="", mailid="",bldgrp="",batch="",accomodation="";
-
+              ResultSet rs= statement.executeQuery("select * from student_personal where rollno='"+username+"'");
+              String  regno="", initial="",dept="",gender="",food="",mobileno="", mailid="",bldgrp="",accomodation="";
+ 
               while(rs.next())
               {
                   rollno=rs.getString("rollno");
@@ -194,7 +205,10 @@
                <TD><font size="3px"><%=rollno%></font></TD>
            </TR>
 		   
-		   
+		   <TR CLASS="defaultText odd-row">
+              <TD><font size="3px"><b>Register No</b></TD>
+               <TD><font size="3px"><%=regno%></font></TD>
+           </TR>
 		   <TR CLASS="defaultText">
                        <TD><font size="3px"><b>Name </b></font></TD>
                <TD><font size="3px"><%= name %></font></TD>
@@ -248,67 +262,11 @@
 </div>
 
 
-<div class="dm3-tab"><div class="dm3-tab-inner"><center> <font size="5px"><b>GENERAL DETAILS</b></font><br><br><br>
-		   <%
-         ResultSet rs1= statement.executeQuery("select * from student_general where rollno='12cs1203'");
-              String dob="", caste="", community="", religion="",nationality="",mothertongue="",memberof="";
-			  int annualincome=0;
 
-              while(rs1.next())
-              {
-                                rollno=rs1.getString("rollno");
-                               
-                                dob=rs1.getString("dob");
-                                caste=rs1.getString("caste");
-                                community=rs1.getString("community");
-                                annualincome=rs1.getInt("parents_annual_income");
-                                religion=rs1.getString("religion");
-                                nationality=rs1.getString("nationality");
-                                mothertongue=rs1.getString("mother_tongue");
-                                memberof=rs1.getString("club_member");
-		  %>   
-         <TABLE WIDTH=30% align ="center" border="1">
-             <TR class="defaultText odd-row">
-                      <TD><font size="3px"><b>Date of Birth</b></font></TD>
-                      <TD><font size="3px"><%= dob %></font></TD>
-             </TR>
-             <TR class="defaultText">
-                      <TD><font size="3px"><b>Caste</b></font></TD>
-                      <TD><font size="3px"><%= caste %></font></TD>
-             </TR>
-             <TR class="defaultText odd-row">
-                      <TD><font size="3px"><b>Community</b></font></TD>
-                      <TD><font size="3px"><%= community %></font></TD>
-             </TR>
-             <TR class="defaultText ">
-                      <TD><font size="3px"><b>Parents Annual Income</b></font></TD>
-                      <TD><font size="3px"><%= annualincome %></font></TD>
-             </TR>
-             <TR class="defaultText odd-row">
-                      <TD><font size="3px"><b>Religion</b></font></TD>
-                      <TD><font size="3px"><%= religion %></font></TD>
-             </TR>
-             <TR class="defaultText ">
-                      <TD><font size="3px"><b>Nationality</b></font></TD>
-                      <TD><font size="3px"><%= nationality %></font></TD>
-             </TR>
-             <TR class="defaultText odd-row">
-                      <TD><font size="3px"><b>Mother Tongue</b></font></TD>
-                      <TD><font size="3px"><%= mothertongue %></font></TD>
-             </TR>
-             <TR class="defaultText">
-                      <TD><font size="3px"><b>Member of( NSS/ YRC/NCC/Others)</b></font></TD>
-                      <TD><font size="3px"><%= memberof %></font></TD>
-             </TR>
-		   
-           <%
-               }
-           %>
-       </TABLE><br></center></div></div>
        <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>FATHER DETAILS</b></font><br><br><br>
 	   <%
-              ResultSet rs11= statement.executeQuery("select * from student_father_details where rollno='12cs1203'");
-              String fname="", fqual="",foccu="",faddress="",fdesig="",fmail="",fland="",fccode="",fstdcode="",fmobile="";
+              ResultSet rs11= statement.executeQuery("select * from student_father_details where rollno='"+username+"'");
+              String fname="", fqual="",foccu="",faddress="",fdesig="",fmail="",fland="",fmobile="";
 
               while(rs11.next())
               {
@@ -322,8 +280,7 @@
 				 foccu=rs11.getString("occupation");
 				 fdesig=rs11.getString("designation");
 				 fmail=rs11.getString("mailid");
-				 fccode=rs11.getString("country_code");
-				 fstdcode=rs11.getString("std_code");
+				 
 				 			
 			}
                   
@@ -361,19 +318,12 @@
                <TD><font size="3px"><b>Mail ID</b></font></TD>
                <TD><font size="3px"><%= fmail %></font></TD>
            </TR>
-		   <TR CLASS="defaultText odd-row">
-               <TD><font size="3px"><b>Country Code</b></font></TD>
-               <TD><font size="3px"><%= fccode %></font></TD>
-           </TR>
-		   <TR CLASS="defaultText">
-               <TD><font size="3px"><b>STD Code</b></font></TD>
-               <TD><font size="3px"><%= fstdcode %></font></TD>
-           </TR>
+		   
          </TABLE></center></div></div>
            <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>MOTHER DETAILS</b></font><br><br><br>
                     <%
-              ResultSet rs12= statement.executeQuery("select * from student_mother_details where rollno='12cs1203'");
-              String mname="", mqual="",moccu="",maddress="",mdesig="",mmail="",mland="",mccode="",mstdcode="",mmobile="";
+              ResultSet rs12= statement.executeQuery("select * from student_mother_details where rollno='"+username+"'");
+              String mname="", mqual="",moccu="",maddress="",mdesig="",mmail="",mland="",mmobile="";
 
               while(rs12.next())
               {
@@ -387,8 +337,7 @@
 				 moccu=rs12.getString("occupation");
 				 mdesig=rs12.getString("designation");
 				 mmail=rs12.getString("mailid");
-				 mccode=rs12.getString("country_code");
-				 mstdcode=rs12.getString("std_code");
+				
 				 			
 			}
     
@@ -427,23 +376,72 @@
                <TD><font size="3px"><b>Mail ID</b></font></TD>
                <TD><font size="3px"><%= mmail %></font></TD>
            </TR>
-		   <TR CLASS="defaultText odd-row">
-               <TD><font size="3px"><b>Country Code</b></font></TD>
-               <TD><font size="3px"><%= mccode %></font></TD>
+		   
+         </TABLE>
+  </center></div></div>
+
+
+       <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>LOCAL GUARDIAN DETAILS</b></font><br><br><br>
+	   <%
+              rs11= statement.executeQuery("select * from student_local_guardian where rollno='"+username+"'");
+              String lname="",lphno="",ldoorno="",lstreet="",larea="",lcity="",lpincode="";
+              while(rs11.next())
+              {
+                                 lname=rs11.getString("name");
+                                 lphno=rs11.getString("phno");
+                                 ldoorno=rs11.getString("Doorno");              
+                                 lstreet=rs11.getString("streetname");
+				 larea=rs11.getString("area");
+				 lcity=rs11.getString("city");
+				 lpincode=rs11.getString("pincode");
+				 
+				 			
+			}
+                  
+		  %>   
+         <TABLE WIDTH=30% align ="center" border="1">
+          <TR CLASS="defaultText odd-row">
+               <TD><font size="3px"><b>Name</b></font></TD>
+               <TD><font size="3px"><%= lname %></font></TD>
            </TR>
 		   <TR CLASS="defaultText">
-               <TD><font size="3px"><b>STD Code</b></font></TD>
-               <TD><font size="3px"><%= mstdcode %></font></TD>
+               <TD><font size="3px"><b>Phone Number</b></font></TD>
+               <TD><font size="3px"><%= lphno %></font></TD>
            </TR>
-         </TABLE>
-               <%}catch(Exception e)
+		   <TR CLASS="defaultText odd-row">
+               <TD><font size="3px"><b>Door Number</b></font></TD>
+               <TD><font size="3px"><%= ldoorno %></font></TD>
+           </TR>
+		   <TR CLASS="defaultText">
+               <TD><font size="3px"><b>Street name</b></font></TD>
+               <TD><font size="3px"><%= lstreet %></font></TD>
+           </TR>
+		   <TR CLASS="defaultText odd-row">
+               <TD><font size="3px"><b>Area </b></font></TD>
+               <TD><font size="3px"><%= larea %></font></TD>
+           </TR>
+		   <TR CLASS="defaultText">
+               <TD><font size="3px"><b>City</b> </font></TD>
+               <TD><font size="3px"><%= lcity %></font></TD>
+           </TR>
+           <TR CLASS="defaultText odd-row">
+               <TD><font size="3px"><b>Pin code</b> </font></TD>
+               <TD><font size="3px"><%= lpincode %></font></TD>
+           </TR>
+		   
+         </TABLE></center></div></div>
+
+</div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">4</a></li></ul></div>
+</div></div></section>
+             <%  if(statement!=null)
+                            statement.close();
+                              if(connection!=null)
+                                connection.close();
+                                         }catch(Exception e)
             {
                 System.out.println(e);
             }
-%></center></div></div>
-</div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">4</a></li></ul></div>
-</div></div></section>
-
+%>
 
 						<footer id="footer-widgets">
 			<div class="container clearfix">
@@ -453,20 +451,16 @@
 			<!-- #page-container -->
 			</div>
 			</div>
-
-	<footer id="page-footer">
+<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
-<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
-<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
 </ul>			</nav>
 		</div>
 	</footer>
-
 
 
 
@@ -499,7 +493,10 @@
     else
     {
         response.sendRedirect("../index.jsp");
-    }
+    }  if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

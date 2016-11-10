@@ -1,3 +1,4 @@
+<%@page import="com.action.Base"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -155,6 +156,7 @@
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="circular.jsp">General Circular</a></li>
 	
 	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="examcircular.jsp">Exam Circular</a>
+            <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href=" deptcircular.jsp">Department Circular</a>
 	
 </li>
 </ul>
@@ -181,7 +183,7 @@
             Connection connection1 = new dbcon().getConnection("sjitportal");
             Statement statement1 = connection1.createStatement();
             ResultSet rs = statement1.executeQuery("select * from exam_circular");
-            String path="C:/portal/exam/";
+            String path=Base.path+"/portal/exam/";
             session.setAttribute("path", path);
             
             
@@ -218,6 +220,10 @@
            
            }
             session.setAttribute("size",list.size());
+              if(statement1!=null)
+                            statement1.close();
+                              if(connection1!=null)
+                                connection1.close();
           }
           catch(Exception e)
           {
@@ -295,6 +301,10 @@
     {
         response.sendRedirect("../index.jsp");
     }
+      if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

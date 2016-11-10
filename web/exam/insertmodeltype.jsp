@@ -1,8 +1,3 @@
-<%-- 
-    Document   : insertmodeltype
-    Created on : Aug 25, 2015, 11:13:44 AM
-    Author     : Divya Sri
---%>
 
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -17,8 +12,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <body>
     
     <form action ="${pageContext.request.contextPath}/updatemodeltype" method="post">
+        <center><h1>SELECT THE CHECKBOXES IF SPECIAL MODEL</h1></center>
+        <center>
         <table class="bordered">
             <thead>
                 <th>SELECT IF SM </th>
@@ -52,14 +50,20 @@
             <tr>
                 <td>
             <center>   <input type="checkbox" name="id" value="<%= regno[i] %>"> </center>
-                </td><td><%= regno[i] %> </td><td> <%= name[i] %></td><BR>
+                </td><td><%= regno[i] %> </td><td> <%= name[i] %></td>
         </tr>
         
         <%
         i++;
         }
+
+                            if(st!=null)
+                            st.close();
+                              if(con!=null)
+                                con.close();
       %>      
         </table>
+        </center>
     <input type="submit" value="submit">
         </form>
     </body>

@@ -38,8 +38,9 @@
        
         %>
         <body>
-        <h1>Hello World!</h1>
+        <center> <h1>UPDATE REGISTER NUMBER</h1></center>
         <form action="${pageContext.request.contextPath}/regupdate" method="post">
+            <center>
         <table class="bordered">
     <thead>
 
@@ -58,23 +59,26 @@
     
     <%
         Statement st = con.createStatement();
-        String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
+        String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by regno,rollno";
      ResultSet rs=st.executeQuery(sql2);
      int i=1;
      while(rs.next())
      {
          rollno=rs.getString("rollno");
          name = rs.getString("name");
-      
+      String regno=rs.getString("regno");
          
        
         %>
       
     <tr>
         <td><%=rollno%></td>        
-        <td><%=name%></td>
+        <td>
+        
+        <input type="text" size="30"  value="<%=name.toUpperCase()%>" name="name<%=rollno%>" id="name<%=i%>">
+        </td>
                 
-        <td><input type="text" size="12" maxlength="12" name="reg<%=i%>" id="reg<%=i%>"></td>
+        <td><input type="text" size="12" maxlength="12" value="<%=regno%>" name="reg<%=rollno%>" id="reg<%=i%>"></td>
         </tr>       
 
        <%
@@ -83,13 +87,20 @@
      }
      
      rs.close();
+
+                            if(st!=null)
+                            st.close();
+                              if(con!=null)
+                                con.close();
      
      %>
      
     
         
 </table>
-    <input type="submit" value="submit">
+            </center>
+     <center><input type="submit" value="submit"></center>
         </form>
+     
     </body>
 </html>

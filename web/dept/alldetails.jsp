@@ -1,3 +1,4 @@
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Statement"%>
@@ -5,6 +6,28 @@
 <%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html lang="en">
+    <% 
+   try
+    {
+    String username = session.getAttribute("username").toString();
+    String password = session.getAttribute("password").toString();
+    
+    Connection connn = new dbcon().getConnection("login");
+    Statement sttt = connn.createStatement();
+    String type1 ="";
+    ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='"+username+"' and password='"+password+"'");
+    if(rsss.isBeforeFirst())
+    {
+        while(rsss.next())
+        {
+            type1 = rsss.getString("type");
+        }
+        if(type1.equals("dept"))
+        {
+    
+    
+    %>
+
     <head>
         <title>Bootstrap Case</title>
         <meta charset="utf-8">
@@ -23,7 +46,7 @@
                     String batch="";
                     String sem = request.getParameter("sem");
                     
-                    Connection con = new dbcon().getConnection("cse");
+                    Connection con = new dbcon().getConnection(Find.dept(username));
                     Statement st1 = con.createStatement();
                     String name="";
                     ResultSet rs1= st1.executeQuery("select name from student_personal where rollno='"+rollno+"'");
@@ -55,6 +78,7 @@
                             <%
                     try
                     {
+                       
                     PreparedStatement st = con.prepareStatement("select marks_table.*,subject_sem_table.subname from marks_table,subject_sem_table where marks_table.subcode=subject_sem_table.subcode and marks_table.sem=? and rollno=?");
                     st.setString(2, rollno);
                     st.setString(1, sem);
@@ -98,4 +122,33 @@
 
 
     </body>
+     <%
+         
+                            if(st1!=null)
+                            st1.close();
+                              if(con!=null)
+                                con.close();
+    }
+        else
+    {
+        response.sendRedirect("../index.jsp");
+    }
+    }
+    else
+    {
+        response.sendRedirect("../index.jsp");
+    }
+
+                            if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
+    }
+catch(Exception e)
+    {
+        e.printStackTrace();
+        response.sendRedirect("../index.jsp");
+    }
+    
+    %>
 </html>

@@ -111,7 +111,7 @@
 
                                                             <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="courses/index.html">Attendance</a>
 <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="memberships/index.html">Update Attendance</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="HourAttd.jsp">Update Attendance</a></li>
 	
 	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="Attd.jsp">View Attendance</a>
 	
@@ -144,36 +144,47 @@
 		</header>
 
 
-<section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
+<section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix">
 
 
 <div class="dm3-tabs-testimonials" data-autoscroll=""><div class="dm3-tabs">
 <div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>College Circular</h2><br><br>
 <div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
 <div align="left">
-<a href="deptcir/record_nodue.pdf" download>Announcements</a>
+    <%
+    Connection conbatch = new dbcon().getConnection("sjitportal");
+                    Statement stmt = conbatch.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from circular where type='circular'");
+                    String com=null,name=null,description=null,path=null;
+                    rs.beforeFirst();
+                    while(rs.next()) 
+                    {
+                        name=rs.getString("name");
+                        description=rs.getString("des");
+                        path=rs.getString("path");
+                        com=name+" - "+description;
+                        %>
+    <a href="${pageContext.request.contextPath}/formsdownload?ind1=<%=name %>&path=<%=path %>&type1=circular" ><%=com%></a>
+    
               <br>
-              <a href="deptcir/iv.pdf" download>Industrial Visit Details</a>
-              <br>
-              <a href="deptcir/timetable.pdf" download>Time Table</a></div>
+              <%
+              }
+
+                            if(stmt!=null)
+                            stmt.close();
+                              if(conbatch!=null)
+                                conbatch.close();
+              %>
 </div>
 </center>
 </div>
 </div>
-
-
-<div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>Department Events</h2><br><br>
-<div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2; background-color: #fff;">
-<div align="left">
-<a href="deptcir/record_nodue.pdf" download>Record and No due Details</a>
-              <br>
-              <a href="deptcir/iv.pdf" download>Industrial Visit Details</a>
-              <br>
-              <a href="deptcir/timetable.pdf" download>Time Table</a></div>
 </div>
-</center></div></div>
-</div><ul class="dm3-tabs-nav"></ul></div>
-</div></div></section>
+    </div>
+
+</div
+
+</section>
 
 </section>
 						<footer id="footer-widgets">
@@ -233,6 +244,11 @@
     {
         response.sendRedirect("../index.jsp");
     }
+
+                            if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

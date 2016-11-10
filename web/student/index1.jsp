@@ -4,9 +4,23 @@
     Author     : Aravind Tyson
 --%>
 
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.dbcon"%>
-
+<% 
+   try
+    {
+    String username = session.getAttribute("username").toString();
+    String password = session.getAttribute("password").toString();
+    
+    Connection connn = new dbcon().getConnection("login");
+    Statement sttt = connn.createStatement();
+    String type1 ="";
+    ResultSet rsss = sttt.executeQuery("select * from student_login_details where rollno='"+username+"' and password='"+password+"'");
+    if(rsss.isBeforeFirst())
+    {
+        
+    %>
       					
 		
                           <%
@@ -14,7 +28,7 @@
                               String index=request.getParameter("index");
                               String index1=request.getParameter("index1");
                               Class.forName("com.mysql.jdbc.Driver").newInstance();
-               Connection connection = new dbcon().getConnection("cse");
+               Connection connection = new dbcon().getConnection(Find.sdept(username));
                Statement statement = connection.createStatement();
             if(index.equals("i1"))
             {
@@ -29,7 +43,7 @@
                     //int i=Integer.parseInt(request.getParameter("val"));
                     
                     
-               ResultSet rs= statement.executeQuery("select distinct(batch) from subject_allocation where staffid='cs009'");
+               ResultSet rs= statement.executeQuery("select batch from student_personal where rollno like '"+username+"'");
                    
               String batch;
                     
@@ -64,21 +78,19 @@
                 <%
                     //int i=Integer.parseInt(request.getParameter("val"));
                     String batch=request.getParameter("index2");
-                   
-             ResultSet rs1= statement.executeQuery("select distinct(sem) from subject_allocation where staffid='cs009' and batch='"+batch+"'");
-                   
-              String sem;
-                    
-                    
-              while(rs1.next())
-              {
-                  sem=rs1.getString("sem");
-                  
                   
               
               %>
-              <option value="<%=sem%>"><%=sem%></option>
-              <% } %>
+              <option disabled selected>select</option>
+                <option value="01">1</option>
+                <option value="02">2</option>
+                <option value="03">3</option>
+                <option value="04">4</option>
+                <option value="05">5</option>
+                <option value="06">6</option>
+                <option value="07">7</option>
+                <option value="08">8</option>
+              
             </select>
                     <i></i>
                     </label>
@@ -105,7 +117,7 @@
                     String batch=request.getParameter("index2");
                     String sem=request.getParameter("index3");
                     
-               ResultSet rs1= statement.executeQuery("select distinct(sec) from subject_allocation where staffid='cs009' and batch='"+batch+"' and sem='"+sem+"'");
+               ResultSet rs1= statement.executeQuery("select sec from student_personal where rollno like '"+username+"'");
                    
               String section;
                     
@@ -211,7 +223,30 @@
             
                 %>
             
-                                       
+            <%
+  if(statement!=null)
+                            statement.close();
+                              if(connection!=null)
+                                connection.close();          
+    }
+    else
+    {
+        response.sendRedirect("../index.jsp");
+    }
+
+      if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
+    }
+catch(Exception e)
+    {
+        e.printStackTrace();
+        response.sendRedirect("../index.jsp");
+    }
+    
+          
+          %>                          
      
                            
              

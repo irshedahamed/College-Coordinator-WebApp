@@ -1,3 +1,4 @@
+<%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
 
@@ -34,19 +35,46 @@
 		
 		</head>
 		
+                <%
+        Connection conection = new dbcon().getConnection(Find.sdept(username));
+    Statement st1 = conection.createStatement();
+    String batch="",name="",rollno="",course="",sec="";
+   
+    ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
+    if(rs1.next())
+    {
+        name= rs1.getString("name");
+        rollno = rs1.getString("rollno");
+        course = rs1.getString("course");
+        sec = rs1.getString("sec");
+        batch= rs1.getString("batch");
+        
+    }
+      if(st1!=null)
+                            st1.close();
+                              if(conection!=null)
+                                conection.close();
+        
+        
+        
+        %>
+        
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
+
 <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#menu-toggle1" id="menu-toggle1">
-                       Aravind S
+                      
                     </a>
                 </li>
                 <center>
-                    <img src="../images/face.jpg" height="95px">
                     
+                        <img src="../../StudentPhotos/Batch<%=batch%>/<%=rollno.toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                
+                           
+                            
                            
                         
                    
@@ -54,24 +82,27 @@
                 <br>
                 <br>
                 
-                <li>
-                    <a href="#"><b>NAME : Aravind S</b></a>
+                <li >
+                
+                    
+                    <a href="#"><b>NAME : <%=name%></b></a>
                 </li>
                 <li>
-                    <a href="#"><b>ROLL NO : 12CS1203</b></a>
+                    <a href="#"><b>ROLL NO : <%=rollno%></b></a>
                 </li>
                 <li >
-                    <a href="#"><b>COURSE : B.E</b></a>
+                    <a href="#"><b>COURSE : <%=course%></b></a>
                 </li>
                 <li >
-                    <a href="#"><b>DEPT : CSE</b></a>
+                    <a href="#"><b>DEPT : <%=Find.sdept(username)%></b></a>
                 </li>
               <li >
-                    <a href="#"><b>SECTION : A</b></a>
+                    <a href="#"><b>SECTION : <%=sec%></b></a>
                 </li>
             </ul>
         </div>
 
+    
     
 	
 		
@@ -83,7 +114,7 @@
 					<div class="container clearfix">
 						<div id="main-logo">
 							<a href="#">
-								<img src="../images/sjit.png"  height="70px"></a>
+                                                           	<img src="../images/sjit.png"  height="70px"></a>
 						</div>
                                             <ul id="auth-nav">
 							<li>
@@ -100,12 +131,12 @@
 						
 
 						<nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
-<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-768"><a href="">Profile</a>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="home.jsp">Home</a></li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Profile</a>
     <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personal.jsp">Personal Details</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812 "><a href="personal.jsp">Personal Details</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="contact.jsp">Contact Details</a></li>
+	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="contact.jsp">General Details</a></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="other.jsp">Other Details</a></li>
     </ul>
 </li>
@@ -114,7 +145,6 @@
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="overallattendance.jsp">Overall Attendance</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="ViewAttd.jsp">Hour Attendance</a>
 	
 </li>
 </ul>
@@ -122,19 +152,12 @@
 
 <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="marks.jsp">Marks</a></li>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="notes.jsp">Notes</a>
-<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Circular</a>
-<ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="circular.jsp">General Circular</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="examcircular.jsp">Exam Circular</a>
-	
-</li>
-</ul><li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Fee</a>
 
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="forms.jsp">Forms</a>
 
 </li>
+
 </ul>						</nav>
 					</div>
 				</div>
@@ -147,19 +170,19 @@
 
 <div class="dm3-tabs-testimonials" data-autoscroll="5"><div class="dm3-tabs">
 <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>ADMISSION DETAILS</b></font><br><br>
- <% username="12cs1203";
+ <% 
               String departmentname= session.getAttribute("deptname").toString();
               Connection connection = new dbcon().getConnection(departmentname);
               Statement statement = connection.createStatement();
          ResultSet rs5= statement.executeQuery("select * from student_admission_details where rollno="+"'"+username+"'");
-              String  doa="", admall="", govt_mang="",ovrallrank="",cmtyrank="",sprtsad="", moi="", gamename="" ,rollno,regno;
+              String  doa="", admall="", govt_mang="",ovrallrank="",cmtyrank="",sprtsad="", moi="", gamename="";
               try
               {
 
               while(rs5.next())
               {
                   rollno=rs5.getString("rollno");
-                  regno=rs5.getString("regno");
+                 
                   doa=rs5.getString("doa");
                   admall=rs5.getString("adminallotment");
 				  govt_mang=rs5.getString("govt_mang");
@@ -218,27 +241,82 @@
 </div>
 </div>
 
+<div class="dm3-tab"><div class="dm3-tab-inner"><center> <font size="5px"><b>GENERAL DETAILS</b></font><br><br><br>
+		   <%
+         ResultSet rs11= statement.executeQuery("select * from student_general where rollno='"+username+"'");
+              String dob="", caste="", community="", religion="",nationality="",mothertongue="",memberof="";
+			  int annualincome=0;
 
+              while(rs11.next())
+              {
+                                rollno=rs11.getString("rollno");
+                               
+                                dob=rs11.getString("dob");
+                                caste=rs11.getString("caste");
+                                community=rs11.getString("community");
+                                annualincome=rs11.getInt("parents_annual_income");
+                                religion=rs11.getString("religion");
+                                nationality=rs11.getString("nationality");
+                                mothertongue=rs11.getString("mother_tongue");
+                                memberof=rs11.getString("club_member");
+		  %>   
+         <TABLE WIDTH=30% align ="center" border="1">
+             <TR class="defaultText odd-row">
+                      <TD><font size="3px"><b>Date of Birth</b></font></TD>
+                      <TD><font size="3px"><%= dob %></font></TD>
+             </TR>
+             <TR class="defaultText">
+                      <TD><font size="3px"><b>Caste</b></font></TD>
+                      <TD><font size="3px"><%= caste %></font></TD>
+             </TR>
+             <TR class="defaultText odd-row">
+                      <TD><font size="3px"><b>Community</b></font></TD>
+                      <TD><font size="3px"><%= community %></font></TD>
+             </TR>
+             <TR class="defaultText ">
+                      <TD><font size="3px"><b>Parents Annual Income</b></font></TD>
+                      <TD><font size="3px"><%= annualincome %></font></TD>
+             </TR>
+             <TR class="defaultText odd-row">
+                      <TD><font size="3px"><b>Religion</b></font></TD>
+                      <TD><font size="3px"><%= religion %></font></TD>
+             </TR>
+             <TR class="defaultText ">
+                      <TD><font size="3px"><b>Nationality</b></font></TD>
+                      <TD><font size="3px"><%= nationality %></font></TD>
+             </TR>
+             <TR class="defaultText odd-row">
+                      <TD><font size="3px"><b>Mother Tongue</b></font></TD>
+                      <TD><font size="3px"><%= mothertongue %></font></TD>
+             </TR>
+             <TR class="defaultText">
+                      <TD><font size="3px"><b>Member of( NSS/ YRC/NCC/Others)</b></font></TD>
+                      <TD><font size="3px"><%= memberof %></font></TD>
+             </TR>
+		   
+           <%
+               }
+           %>
+       </TABLE><br></center></div></div>
 <div class="dm3-tab"><div class="dm3-tab-inner"><center> <font size="5px"><b>OTHERS DETAILS</b></font><br><br><br>
 		   <%
          ResultSet rs4= statement.executeQuery("select * from student_other_details where rollno="+"'"+username+"'");
-              String tfoi="", instname="", readmitted="", trto="", inst="", ccit="",present_status="",rfd="" ;
-              int yor=0,yop=0;
-
+              String tfoi="", instname="", prev_addr="", group="", yearadm="", yearrelif="",coursecomp="",boardofstudy="" ;
+              String medium="",reason="";
               while(rs4.next())
               {
                   rollno=rs4.getString("rollno");
-                  regno=rs4.getString("regno");
+               
                   tfoi=rs4.getString("transfer_from_other_inst");
                   instname=rs4.getString("instname");
-				  readmitted=rs4.getString("readmitted_student");
-				  trto=rs4.getString("transfer_request_to_otherinst");
-				  inst=rs4.getString("inst_name");
-				  ccit=rs4.getString("course_completed_in_time");
-				  present_status=rs4.getString("present_status");
-				  rfd=rs4.getString("reason_for_discontinuation");
-				  yor=rs4.getInt("yoreadmission");
-				  yop=rs4.getInt("yopassing");
+				  prev_addr=rs4.getString("prev_addr");
+				  group=rs4.getString("group");
+				  yearadm=rs4.getString("yearadm");
+				  yearrelif=rs4.getString("yearrelif");
+				  coursecomp=rs4.getString("course_completed_in_time");
+				  boardofstudy=rs4.getString("boardofstudy");
+				  medium=rs4.getString("medium");
+				  reason=rs4.getString("reason_for_discontinuation");
 				                   
 		  %>   
                   
@@ -254,35 +332,35 @@
                       <TD><font size="2px"><%= instname %></font></TD>
              </TR>
 			 <TR class="defaultText odd-row">
-                      <TD><font size="2px"><b>Readmitted Student </b></font></TD>
-                      <TD><font size="2px"><%= readmitted %></font></TD>
+                      <TD><font size="2px"><b>Address </b></font></TD>
+                      <TD><font size="2px"><%= prev_addr %></font></TD>
              </TR>
 			 <TR class="defaultText">
-                      <TD><font size="2px"><b>year of Readmission</b></font></TD>
-                      <TD><font size="2px"><%= yor %></font></TD>
+                      <TD><font size="2px"><b>Group</b></font></TD>
+                      <TD><font size="2px"><%= group %></font></TD>
              </TR>
 			 <TR class="defaultText odd-row">
-                      <TD><font size="2px"><b>Transfer Reaquest to other Institution</b></font></TD>
-                      <TD><font size="2px"><%= trto %></font></TD>
+                      <TD><font size="2px"><b>Year & Month of Admission</b></font></TD>
+                      <TD><font size="2px"><%= yearadm %></font></TD>
              </TR>
 			 <TR class="defaultText">
-                      <TD><font size="2px"><b>Institution Name</b></font></TD>
-                      <TD><font size="2px"><%= inst %></font></TD>
+                      <TD><font size="2px"><b>Year & Month of Relief</b></font></TD>
+                      <TD><font size="2px"><%= yearrelif %></font></TD>
              </TR>
 			 <TR class="defaultText odd-row">
                       <TD><font size="2px"><b>Course completed in time</b></font></TD>
-                      <TD><font size="2px"><%= ccit %></font></TD>
+                      <TD><font size="2px"><%= coursecomp %></font></TD>
              </TR><TR class="defaultText">
-                      <TD><font size="2px"><b>Present Status </b></font></TD>
-                      <TD><font size="2px"><%= present_status %></font></TD>
+                      <TD><font size="2px"><b>Board </b></font></TD>
+                      <TD><font size="2px"><%= boardofstudy %></font></TD>
              </TR>
 			 <TR class="defaultText odd-row">
-                      <TD><font size="2px"><b>Year of Passing </b></font></TD>
-                      <TD><font size="2px"><%= yop %></font></TD>
+                      <TD><font size="2px"><b>Medium of Study </b></font></TD>
+                      <TD><font size="2px"><%= medium %></font></TD>
              </TR>
 			 <TR class="defaultText">
-                      <TD><font size="2px"><b>Reason for discontinuation</b></font></TD>
-                      <TD><font size="2px"><%= rfd %></font></TD>
+                      <TD><font size="2px"><b>Reason for Discontinuation</b></font></TD>
+                      <TD><font size="2px"><%= reason %></font></TD>
              </TR>
 			 
            <%
@@ -292,83 +370,144 @@
        <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>ACADEMIC DETAILS</b></font><br><br><br>
 	   <%
          ResultSet rs13= statement.executeQuery("select * from student_academic_details where rollno="+"'"+username+"'");
-              String  tenscl="",twlscl="",dipcoll="",ugcoll="",pgcoll="";
-			  float tenmrks=0,twlmrks=0,dipmrks=0,ugmrks=0, pgmrks=0 ;
+             
+			   String tenscl;
+        String tenmark;
+        String tenboard;
+        String tenmed;
+        String tenyop;
+        String twlscl;
+        String twlmark;
+        String twlboard;
+        String twlmed;
+        String twlyop;
+        String dipcol;
+        String dipmark;
+        String dipboard;
+        String dipmed;
+        String dipyop;
+
 
               while(rs13.next())
               {
                   rollno=rs13.getString("rollno");
-                  regno=rs13.getString("regno");
                   tenscl=rs13.getString("tenscl");
-                  tenmrks=rs13.getFloat("itenmrks");
-				  twlscl=rs13.getString("twlscl");
-                  twlmrks=rs13.getFloat("twlmrks");
-				  dipcoll=rs13.getString("dipcoll");
-                  dipmrks=rs13.getFloat("dipmrks");
-				  ugcoll=rs13.getString("ugcoll");
-                  ugmrks=rs13.getFloat("ugmrks");
-				  pgcoll=rs13.getString("pgcoll");
-                  pgmrks=rs13.getFloat("pgmrks");
-				  				
+                  tenmark=rs13.getString("tenmrks");
+                  tenboard=rs13.getString("tenboard");
+                  tenmed=rs13.getString("tenmed");
+                  tenyop=rs13.getString("tenyop");
+                  twlscl=rs13.getString("twlscl");
+                  twlmark=rs13.getString("twlmrks");
+                  twlboard=rs13.getString("twlboard");
+                  twlmed=rs13.getString("twlmed");
+                  twlyop=rs13.getString("twlyop");
+                  dipcol=rs13.getString("dipcoll");
+                  dipmark=rs13.getString("dipmrks");
+                  dipboard=rs13.getString("dipboard");
+                  dipmed=rs13.getString("dipmed");
+                  dipyop=rs13.getString("dipyop");
+                  
 		  %>   
 		  
   
                     <center><br>
          <TABLE WIDTH=30% align ="center" border="1">
+             <TR class="defaultText">
+                 <TD colspan="2"><center><font size="2px" ><b>Tenth</b></font></center></TD>
+             </TR>
+		
              <TR class="defaultText odd-row">
                       <TD><font size="2px"><b>Tenth School</b></font></TD>
                       <TD><font size="2px"><%= tenscl %></font></TD>
              </TR>
 			 <TR class="defaultText">
-                      <TD><font size="2px"><b>Tenth Percentage</b></font></TD>
-                      <TD><font size="2px"><%= tenmrks %></font></TD>
+                      <TD><font size="2px"><b>Percentage</b></font></TD>
+                      <TD><font size="2px"><%=tenmark %></font></TD>
              </TR>
+             
+             <TR class="defaultText odd-row">
+                      <TD><font size="2px"><b>Board</b></font></TD>
+                      <TD><font size="2px"><%= tenboard %></font></TD>
+             </TR>
+			 <TR class="defaultText">
+                      <TD><font size="2px"><b>Medium of Instruction</b></font></TD>
+                      <TD><font size="2px"><%=tenmed %></font></TD>
+             </TR>
+             
+             <TR class="defaultText odd-row">
+                      <TD><font size="2px"><b>Year of Passing</b></font></TD>
+                      <TD><font size="2px"><%= tenyop %></font></TD>
+             </TR>
+		<TR class="defaultText">
+                 <TD colspan="2"><center><font size="2px" ><b>Twelfth</b></font></center></TD>
+             </TR>
+             
              <TR class="defaultText odd-row">
                       <TD><font size="2px"><b>Twelfth School</b></font></TD>
-                      <TD><font size="2px"><%= twlscl %></font></TD>
+                      <TD><font size="2px"><%=twlscl %></font></TD>
+             </TR>
+             
+             <TR class="defaultText">
+                      <TD><font size="2px"><b>Percentage</b></font></TD>
+                      <TD><font size="2px"><%=twlmark %></font></TD>
+             </TR>
+             
+             <TR class="defaultText odd-row">
+                      <TD><font size="2px"><b>Board</b></font></TD>
+                      <TD><font size="2px"><%= twlboard %></font></TD>
              </TR>
 			 <TR class="defaultText">
-                      <TD><font size="2px"><b>Twelfth Percentage</b></font></TD>
-                      <TD><font size="2px"><%= twlmrks %></font></TD>
+                      <TD><font size="2px"><b>Medium of Instruction</b></font></TD>
+                      <TD><font size="2px"><%=twlmed %></font></TD>
              </TR>
-			 <TR class="defaultText odd-row">
+             
+             <TR class="defaultText odd-row">
+                      <TD><font size="2px"><b>Year of Passing</b></font></TD>
+                      <TD><font size="2px"><%= twlyop %></font></TD>
+             </TR>
+             
+		<TR class="defaultText">
+                 <TD colspan="2"><center><font size="2px" ><b>Diploma</b></font></center></TD>
+             </TR>
+             
+             <TR class="defaultText odd-row">
                       <TD><font size="2px"><b>Diploma College</b></font></TD>
-                      <TD><font size="2px"><%= dipcoll %></font></TD>
+                      <TD><font size="2px"><%=dipcol %></font></TD>
+             </TR>
+             
+             <TR class="defaultText">
+                      <TD><font size="2px"><b>Percentage</b></font></TD>
+                      <TD><font size="2px"><%=dipmark %></font></TD>
+             </TR>
+             
+             <TR class="defaultText odd-row">
+                      <TD><font size="2px"><b>Board</b></font></TD>
+                      <TD><font size="2px"><%= dipboard %></font></TD>
              </TR>
 			 <TR class="defaultText">
-                      <TD><font size="2px"><b>Diploma Percentage</b></font></TD>
-                      <TD><font size="2px"><%= dipmrks %></font></TD>
+                      <TD><font size="2px"><b>Medium of Instruction</b></font></TD>
+                      <TD><font size="2px"><%=dipmed %></font></TD>
              </TR>
-			 <TR class="defaultText odd-row">
-                      <TD><font size="2px"><b>UG College</b></font></TD>
-                      <TD><font size="2px"><%= ugcoll %></font></TD>
+             
+             <TR class="defaultText odd-row">
+                      <TD><font size="2px"><b>Year of Passing</b></font></TD>
+                      <TD><font size="2px"><%= dipyop %></font></TD>
              </TR>
-			 <TR class="defaultText">
-                      <TD><font size="2px"><b>UG Percentage</b></font></TD>
-                      <TD><font size="2px"><%= ugmrks %></font></TD>
-             </TR>
-			 <TR class="defaultText odd-row">
-                      <TD><font size="2px"><b>PG College</b></font></TD>
-                      <TD><font size="2px"><%= pgcoll %></font></TD>
-             </TR>
-			 <TR class="defaultText">
-                      <TD><font size="2px"><b>PG Percentage</b></font></TD>
-                      <TD><font size="2px"><%= pgmrks %></font></TD>
-             </TR>
-						 
+             
            <%
                }
            %>
        </TABLE></center></div></div>
-           <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>PASSPORT DETAILS</b></font><br><br><br>
+
+       <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>PASSPORT DETAILS</b></font><br><br><br>
                     <%
-         ResultSet rs8= statement.executeQuery("select * from student_passport_details where rollnno="+"'"+username+"'");
+         ResultSet rs8= statement.executeQuery("select * from student_passport_details where rollno="+"'"+username+"'");
               String  forgn="",passno="", doexp="" ;
 
               while(rs8.next())
               {
-                  rollno=rs8.getString("rollnno");
-                  regno=rs8.getString("regno");
+                  rollno=rs8.getString("rollno");
+                 
                   doexp=rs8.getString("doe");
                   forgn=rs8.getString("forgn");
 				  passno=rs8.getString("passno");
@@ -396,13 +535,13 @@
        </TABLE></center></div></div>
        <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>VISA DETAILS</b></font><br><br><br>
                    <%
-         ResultSet rs6= statement.executeQuery("select * from student_visa_details where rollnno="+"'"+username+"'");
+         ResultSet rs6= statement.executeQuery("select * from student_visa_details where rollno="+"'"+username+"'");
               String visano="",typeofvisa="", doe="" ;
 
               while(rs6.next())
               {
-                  rollno=rs6.getString("rollnno");
-                  regno=rs6.getString("regno");
+                  rollno=rs6.getString("rollno");
+                  
                   doe=rs6.getString("doe");
                   visano=rs6.getString("visano");
 				  typeofvisa=rs6.getString("typeofvisa");
@@ -428,10 +567,15 @@
               }catch(Exception e)
               {
                   System.out.println(e);
-              }
+              }finally{
+
+  if(statement!=null)
+                            statement.close();
+                              if(connection!=null)
+                                connection.close();}
            %>
        </TABLE></center><br></div></div>
-</div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">4</a></li><li><a href="#">5</a></li></ul></div>
+</div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">4</a></li><li><a href="#">5</a><li><a href="#">6</a></li></ul></div>
 </div></div></section>
 
 </section>
@@ -443,21 +587,16 @@
 			<!-- #page-container -->
 			</div>
 			</div>
-
-	<footer id="page-footer">
+<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
-<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
-<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
 </ul>			</nav>
 		</div>
 	</footer>
-
-
 
 
 
@@ -490,6 +629,10 @@
     {
         response.sendRedirect("../index.jsp");
     }
+  if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

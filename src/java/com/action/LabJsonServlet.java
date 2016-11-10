@@ -63,7 +63,10 @@ public class LabJsonServlet extends HttpServlet {
                         json = new Gson().toJson(list);
                         response.setContentType("application/json");
                         response.getWriter().write(json);
-                    
+                     if(st!=null)
+                            st.close();
+                              if(con!=null)
+                                con.close();
                 }catch(Exception ex)
         {
           

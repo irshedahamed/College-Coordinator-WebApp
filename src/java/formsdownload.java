@@ -13,7 +13,7 @@
     String str=request.getParameter("ind1");
     
       
-    String filepath = request.getSession().getAttribute("path").toString();
+    String filepath = request.getParameter("path");
    
     
     response.setContentType("APPLICATION/OCTET-STREAM");   

@@ -1,3 +1,5 @@
+<%@page import="java.io.InputStream"%>
+<%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
 
@@ -33,14 +35,23 @@
 	
 		
 		</head>
-		
+
 <body class="home page page-id-115 page-template-default has-toolbar">
+
+    <% 
+    Connection con=new dbcon().getConnection(Find.sdept(username));
+    Statement stmtd=con.createStatement();
+    ResultSet rsd=stmtd.executeQuery("select * from staff_general where staffid='"+username+"'");
+    if(rsd.next())
+    {
+    %>
 <div id="wrapper" class="toggled">
 <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
+    
+    <ul class="sidebar-nav">
                 <li class="sidebar-brand">
                     <a href="#menu-toggle1" id="menu-toggle1">
-                       Aravind S
+                       
                     </a>
                 </li>
                 <center>
@@ -54,26 +65,37 @@
                 <br>
                 <br>
                 
+                <li >
+                
+                    <center>
+                    <a href="#"><b><%=rsd.getString("tittle")+rsd.getString("name")%></b></a>
+                    </center>
+                    </li>
                 <li>
-                    <a href="#"><b>NAME : Aravind S</b></a>
-                </li>
-                <li>
-                    <a href="#"><b>ROLL NO : 12CS1203</b></a>
+                    <center>
+                    <a href="#"><b><%=username%></b></a>
+                    </center>
+                    </li>
+                <li >
+                <center>
+                    <a href="#"><b><%=rsd.getString("desg")%></b></a>
+                </center>
                 </li>
                 <li >
-                    <a href="#"><b>COURSE : B.E</b></a>
-                </li>
-                <li >
-                    <a href="#"><b>DEPT : CSE</b></a>
-                </li>
-              <li >
-                    <a href="#"><b>SECTION : A</b></a>
+                <center>
+                    <a href="#"><b><%=Find.sdept(username).toUpperCase()%></b></a>
+                </center>
                 </li>
             </ul>
         </div>
-
-    
-	
+		        
+	<%
+            }
+        if(stmtd!=null)
+            stmtd.close();
+        if(con!=null)
+            con.close();
+        %>
 		
 		<header id="page-header"  class="fixed-header">
 		
@@ -99,28 +121,30 @@
 						
 						
 
-						 <nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
+						<nav id="main-nav">
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="home.jsp">Home</a></li>
 <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Profile</a>
     <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="general.jsp">General Details</a></li>
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personal.jsp">Personal Details</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="education.jsp">Education Details</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="experience.jsp">Experience Details</a></li>
 	
 
-        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="other.jsp">Other Details</a></li>
     </ul>
 </li>
 
-                                                            <li id="menu-item-764" class="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Attendance</a>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Log Book</a>
 <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="HourAttd.jsp">Update Attendance</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Update Attendance</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="SubjectWise.jsp">View Attendance</a>
+	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="#">Syllabus Coverage</a>
 	
 </li>
 </ul>
 </li>
 
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="">Marks</a>
+<li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Marks</a>
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="markupdate.jsp">Update Marks</a></li>
 	
@@ -128,13 +152,11 @@
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="marksview.jsp">View Marks</a></li>
     </ul>
 </li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Notes</a>
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Notes</a>
     <ul class="sub-menu">
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
 	</ul></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
 
 
 
@@ -145,7 +167,6 @@
 			</div>
 		</header>
 
-
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
 
 
@@ -155,47 +176,49 @@
 <%
     
               Class.forName("com.mysql.jdbc.Driver").newInstance();
-              Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/project?user=root&password=root");
+              Connection connection = new dbcon().getConnection(Find.sdept(username));
               Statement statement = connection.createStatement();
-              ResultSet rs= statement.executeQuery("select * from personal where rollno="+"'"+username+"'");
-              String rollno="", name="", dept="", addr="", mobileno="", eid="";
-
-              while(rs.next())
+              ResultSet rs= statement.executeQuery("select * from staff_personal where staffid="+"'"+username+"'");
+              String dob="",bg="",father="",mother="",caste="",relegion="",nation="";
+             
+              if(rs.next())
               {
-                  rollno=rs.getString("rollno");
-				   name=rs.getString("name");
-				   dept=rs.getString("dept");
-                  addr=rs.getString("addr");            
-                  mobileno=rs.getString("mobileno");
-                  eid=rs.getString("eid");
-		  %> 
+                  bg=rs.getString("bg");
+                  father=rs.getString("father");
+                  mother=rs.getString("mother");
+                  dob=String.valueOf(rs.getDate("dob"));
+                  caste=rs.getString("caste");
+                  relegion=rs.getString("relegion");
+                  nation=rs.getString("nation");
+                  %> 
                
          
           <TR CLASS="defaultText odd-row">
-               <TD><b>rollno</b></TD>
-               <TD><%= rollno %></TD>
+               <TD><b>Father's Name</b></TD>
+               <TD><%= father %></TD>
            </TR>
 		   <TR CLASS="defaultText">
-               <TD><b>Name</b></TD>
-               <TD><%= name %></TD>
+               <TD><b>Mother's Name</b></TD>
+               <TD><%= mother %></TD>
            </TR>
-		   <TR CLASS="defaultText odd-row">
-               <TD><b>Department</b></TD>
-               <TD><%= dept %></TD>
-           </TR>
-		   <TR CLASS="defaultText">
-               <TD><b>Contact address</b></TD>
-               <TD><%= addr %></TD>
-           </TR>
-		   <TR CLASS="defaultText odd-row">
-               <TD><b>Mobile No.</b></TD>
-               <TD><%= mobileno %></TD>
+		   
+           		   <TR CLASS="defaultText odd-row">
+               <TD><b>Date Of Birth</b></TD>
+               <TD><%= dob %></TD>
            </TR>
 		   <TR CLASS="defaultText">
-               <TD><b>Mail ID</b></TD>
-               <TD><%= eid %></TD>
+               <TD><b>Caste</b></TD>
+               <TD><%= caste %></TD>
            </TR>
-           </center>
+	   <TR CLASS="defaultText odd-row">
+               <TD><b>Religion</b></TD>
+               <TD><%= relegion %></TD>
+           </TR>
+		   <TR CLASS="defaultText">
+               <TD><b>Nationality</b></TD>
+               <TD><%= nation %></TD>
+           </TR>
+
 		
            <%
                }
@@ -206,140 +229,72 @@
 </div>
 
 
-<div class="dm3-tab"><div class="dm3-tab-inner"><center> <font size="5px"><b>UG DETAILS</b></font><br><br><br>
-             <TABLE WIDTH=30% align ="center" border="1"><br>
-		    <%
-              ResultSet rs2= statement.executeQuery("select * from q where rollno="+"'"+username+"'");
-              String dr="", yr="", course="", cgpa="", clg="",university="";
-
-              while(rs2.next())
-              {
-                   rollno=rs2.getString("rollno");
-			      dr=rs2.getString("dr");
-                   yr=rs2.getString("yr");				   
-                  course=rs2.getString("course");              
-                  cgpa=rs2.getString("cgpa");
-                  clg=rs2.getString("clg");
-                  university=rs2.getString("university"); 
-		  %>   
-         <center> 
-                
-          <TR CLASS="defaultText odd-row">
-              <TD><b>Degree</b></TD>
-               <TD><%= dr %></TD>
-           </TR>
-		   <TR CLASS="defaultText">
-               <TD><b>Year of PAssing</b></TD>
-               <TD><%= yr %></TD>
-           </TR>		   
-		   <TR CLASS="defaultText odd-row">
-               <TD><b>Course</b></TD>
-               <TD><%= course %></TD>
-           </TR>
-		   <TR CLASS="defaultText">
-               <TD><b>CGPA</b></TD>
-               <TD><%= cgpa %></TD>
-           </TR>
-		   <TR CLASS="defaultText odd-row">
-               <TD><b>College</b></TD>
-               <TD><%= clg %></TD>
-           </TR>
-		   <TR CLASS="defaultText">
-               <TD><b>University</b></TD>
-               <TD><%= university %></TD>
-           </TR>
-           </center>
-          
-		
+      
+<div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>PERSONAL DETAILS</b></font><br><br><br>
+            <TABLE WIDTH=30% align ="center" border="1">
            <%
-               }
-              %></table><br></center></div></div>
-       <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>PG DETAILS</b></font><br><br><br>
-                   <TABLE WIDTH=30% align ="center" border="1"><br>
-	   <%
-              ResultSet rs3= statement.executeQuery("select * from q1 where rollno="+"'"+username+"'");
-              String dr1="", yr1="", course1="", cgpa1="", clg1="", university1="";
-
-              while(rs3.next())
+    
+              Class.forName("com.mysql.jdbc.Driver").newInstance();
+              
+             rs= statement.executeQuery("select * from staff_files where staffid="+"'"+username+"'");
+             String pan="",aadhar="",pf="",passport="";
+             
+              if(rs.next())
               {
-                  rollno=rs3.getString("rollno");
-			      dr1=rs3.getString("dr1");
-                  yr1=rs3.getString("yr1");				   
-                  course1=rs3.getString("course1");              
-                  cgpa1=rs3.getString("cgpa1");
-                  clg1=rs3.getString("clg1");
-                  university1=rs3.getString("university1"); 
-		  %>   
-         
-                  <center> 
-                      
-          <TR CLASS="defaultText odd-row">
-               <TD><b>Degree</b></TD>
-               <TD><%= dr1 %></TD>
+                  pan=rs.getString("panno");
+                  aadhar=rs.getString("aadharno");
+                  passport=rs.getString("passno");
+                  pf=rs.getString("pfno");
+                  %> 
+                  <TR CLASS="defaultText odd-row">
+               <TD><b>Provident Fund Number</b></TD>
+               <TD><%= pf %></TD>
            </TR>
+           <%if(aadhar.length()>0 && aadhar!=null)
+           {
+           %>
 		   <TR CLASS="defaultText">
-               <TD> <b>Year of Passing</b></TD>
-               <TD><%= yr1 %></TD>
-           </TR>		   
-		   <TR CLASS="defaultText odd-row">
-               <TD><b>Course</b></TD>
-               <TD><%= course1 %></TD>
+               <TD><b>AADHAR Card Number</b></TD>
+               <TD><a href="../StaffFileDownload?staffid=<%=username%>&option=aadharsc&ext=<%= aadhar.substring(aadhar.indexOf('.'),aadhar.length()) %>"><%= aadhar.substring(0, aadhar.indexOf('.')) %></a></TD>
            </TR>
-		   <TR CLASS="defaultText">
-               <TD><b>CGPA</b></TD>
-               <TD><%= cgpa1 %></TD>
-           </TR>
-		   <TR CLASS="defaultText odd-row">
-               <TD><b>College</b></TD>
-               <TD><%= clg1 %></TD>
-           </TR>
-		   <TR CLASS="defaultText">
-               <TD><b>University</b></TD>
-               <TD><%= university1 %></TD>
-           </TR>
-          
-		
+	<%
+        }
+        %>	   
            <%
-               }
-           %></TABLE></center></div></div>
-           <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>Ph.D DETAILS</b></font><br><br><br>
+               if(pan.length()>0 && pan!=null)
+           {
+           %>
+
+        <TR CLASS="defaultText odd-row">
+               <TD><b>PAN Card Number</b></TD>
+               <TD><a href="../StaffFileDownload?staffid=<%=username%>&option=pansc&ext=<%= pan.substring(pan.indexOf('.'),pan.length()) %>"><%= pan.substring(0, pan.indexOf('.')) %></a></TD>
+          </TR>
+	<%}%>
                    <%
-              ResultSet rs4= statement.executeQuery("select * from q2 where rollno="+"'"+username+"'");
-              String dr2="", yr2="", university2="", tt="";
+                       if(passport.length()>0 && passport!=null)
+           {
+           %>
 
-              while(rs4.next())
-              {
-                  rollno=rs4.getString("rollno");
-			      dr2=rs4.getString("dr2");
-                  yr2=rs4.getString("yr2");				                                                 
-                  university2=rs4.getString("university2"); 
-				  tt=rs4.getString("tt"); 
-		  %>   
-        
-                   <center> 
-                           <TABLE>
-          <TR CLASS="defaultText odd-row">
-               <TD><b>Degree</b></TD>
-               <TD><%= dr2 %></TD>
+          <TR CLASS="defaultText">
+                <TD><b>PASSPORT  Number</b></TD>
+               <TD><a href="../StaffFileDownload?staffid=<%=username%>&option=passsc&ext=<%= passport.substring(passport.indexOf('.'),passport.length()) %>"><%= passport.substring(0, passport.indexOf('.')) %></a></TD>
            </TR>
-		   <TR CLASS="defaultText">
-               <TD><b> Year of Ph.D Awarded</b></TD>
-               <TD><%= yr2 %></TD>
-           </TR>		   		   
-		   <TR CLASS="defaultText odd-row">
-               <TD><b>University</b></TD>
-               <TD><%= university2 %></TD>
-           </TR>
-		   <TR CLASS="defaultText">
-               <TD><b>Thesis Topic</b></TD>
-               <TD><%= tt %></TD>
-           </TR>
-           </center>
-		</TABLE>
+           <%
+           }
+           %>
+          </TABLE> <br>
+</center>
+</div>
+</div>
+           	
            <%
                }
-           %></center></div></div>
-</div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">4</a></li></ul></div>
+                        if(statement!=null)
+                            statement.close();
+                              if(connection!=null)
+                                connection.close();
+           %>
+</div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li></ul></div>
 </div></div></section>
 
 </section>
@@ -351,17 +306,16 @@
 			<!-- #page-container -->
 			</div>
 			</div>
-
-	<footer id="page-footer">
+<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
+			<!--<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>-->
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
-<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
-<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
-</ul>			</nav>
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="../credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-770"><a href="../index.jsp">Logout</a></li>
+
+                                </ul>			</nav>
 		</div>
 	</footer>
 

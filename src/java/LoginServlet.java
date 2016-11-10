@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dbconnection.dbcon;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -62,7 +65,8 @@ public class LoginServlet extends HttpServlet {
                 String s3="student";
 		response.setContentType("text/html");
                 Boolean flag=false;
-		
+		Connection con=null;
+                Statement   statement=null;
 		try{    
 			Class.forName("com.mysql.jdbc.Driver");  
                        PrintWriter out = response.getWriter();
@@ -77,8 +81,8 @@ public class LoginServlet extends HttpServlet {
                     
                    
                   dbcon d = new dbcon();
-                  Connection con = d.getConnection("login");
-                  Statement statement = con.createStatement();
+               con = d.getConnection("login");
+                  statement = con.createStatement();
                     ResultSet rs = statement.executeQuery(sql);
                     if(!rs.isBeforeFirst())
                     {
@@ -106,6 +110,7 @@ public class LoginServlet extends HttpServlet {
                if(flag==true)
                {
                   s3=rs.getString("type");
+                   System.out.println(s3);
                }
               
               HttpSession session = request.getSession(true);
@@ -114,24 +119,31 @@ public class LoginServlet extends HttpServlet {
                if(s1.equalsIgnoreCase(regno) && s2.equalsIgnoreCase(dob))
                {   session.setAttribute("username", s1);
                    session.setAttribute("password",s2);
-                   session.setAttribute("deptname", "cse");
+                   //session.setAttribute("deptname", "cse");
                    request.setAttribute("tt","new");
                   if(s3.equals("student"))
-                   response.sendRedirect("student/home.jsp");
+                   response.sendRedirect("student/home.jsp?user="+s1);
                   else if(s3.equals("staff"))
                     
-                   response.sendRedirect("staff/home.jsp");  
+                   response.sendRedirect("staff/home.jsp?user="+s1);  
+                    else if(s3.equals("first"))
                   
+                      response.sendRedirect("firstyr/home.jsp?user="+s1); 
+                  else if(s3.equals("admin")||s3.equals("dataentry"))
+                  
+                      response.sendRedirect("admin/home.jsp?user="+s1); 
                   
                   else if(s3.equals("dept"))
                   
-                      response.sendRedirect("dept/home.jsp");  
+                      response.sendRedirect("dept/home.jsp?user="+s1);  
                   else if(s3.equals("exam"))
-                      response.sendRedirect("exam/home.jsp");
-                  else 
+                      response.sendRedirect("exam/home.jsp?user="+s1);
+                  else if(s3.equals("yearincharge"))
+                      response.sendRedirect("attendanceincharge/home.jsp?user="+s1);
+                  else
                   {
                       
-                      response.sendRedirect("index.jsp");
+                      response.sendRedirect("index.jsp?user="+s1);
                   }
                 
                   // response.sendRedirect("index.jsp");                 
@@ -139,7 +151,7 @@ public class LoginServlet extends HttpServlet {
                else
                {
                    
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("index.jsp?user="+s1);
                }
                //else
                //{
@@ -168,7 +180,16 @@ public class LoginServlet extends HttpServlet {
                          response.sendRedirect("index.jsp");
 		      PrintWriter out = response.getWriter();
                       out.println(ex);
-		    }
+		    }finally{
+                    try {
+                        if(statement!=null)
+                            statement.close();
+                        if(con!=null)
+                            con.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                
                 
     }

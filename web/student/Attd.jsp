@@ -4,6 +4,7 @@
     Author     : Aravind Tyson
 --%>
 
+<%@page import="com.action.Find"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.*"%>
@@ -11,6 +12,22 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+     <% 
+   try
+    {
+    String username = session.getAttribute("username").toString();
+    String password = session.getAttribute("password").toString();
+    
+    Connection connn = new dbcon().getConnection("login");
+    Statement sttt = connn.createStatement();
+    String type1 ="";
+    ResultSet rsss = sttt.executeQuery("select * from student_login_details where rollno='"+username+"' and password='"+password+"'");
+    if(rsss.isBeforeFirst())
+    {
+        
+    
+    
+    %>
     <head>
         <link href="../css/tabledesign.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,26 +37,27 @@
     <body>
         
         <form action="UpdatedAttendance.jsp">
-        <table class="bordered">
+            <center>
+            <table class="bordered">
     <thead>
 
     <tr>
         <th name="cc">Subject</th>
-        <th>No. of hours</th>
+        <th>No. of hours Absent</th>
     </tr>
     </thead>
         <%
         
         
        
-            
+       
         String sem=request.getParameter("sem");
         String fdate=request.getParameter("datepicker1");
         String tdate=request.getParameter("datepicker2");
         
         
         
-        Connection con = new dbcon().getConnection("cse");
+        Connection con = new dbcon().getConnection(Find.sdept(username));
         Statement st=con.createStatement();
         Statement st1=con.createStatement();
         
@@ -95,7 +113,7 @@
         {
             String dt=simpledataformat.format(c1.getTime());
              
-                String sql1="select * from hourattendence where rollno='12cs1204'";
+                String sql1="select * from hourattendence where rollno='"+username+"'";
         rs1=st1.executeQuery(sql1);
         %>
          <!--    <h1><%=dt %></h1> -->
@@ -135,6 +153,12 @@
         }
         session.setAttribute("count",count);
         rs.close();
+                    if(st!=null)
+                       st=null;
+                     if(st1!=null)
+                            st1.close();
+                              if(con!=null)
+                                con.close();
         %>
         
          
@@ -142,6 +166,27 @@
     
         
 </table>
+            </center>
         </form>
     </body>
+    <%
+          
+    }
+    else
+    {
+        response.sendRedirect("../index.jsp");
+    }
+  if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
+    }
+catch(Exception e)
+    {
+        e.printStackTrace();
+        response.sendRedirect("../index.jsp");
+    }
+    
+          
+          %>
 </html>

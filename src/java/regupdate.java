@@ -100,7 +100,7 @@ public class regupdate extends HttpServlet {
             st4 = con.createStatement();
             
             
-                String sql3 = "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
+                String sql3 = "select * from student_personal where batch='"+batch+"' and sec='"+sec+"'";
                 rs3 = st3.executeQuery(sql3);
                  int j = 1;
                 while(rs3.next())
@@ -108,16 +108,27 @@ public class regupdate extends HttpServlet {
                     
                     rollno = rs3.getString("rollno");
                    
-                    String str="reg"+j;
+                    String str="reg"+rollno;
                     String regno = request.getParameter(str);
-                    String sql5="update student_personal set regno='"+regno+"' where rollno='"+rollno+"'";
+                    String name=request.getParameter("name"+rollno);
+                    String sql5="update student_personal set regno='"+regno+"',name='"+name+"' where rollno='"+rollno+"'";
+                    
+                    
+                    if(regno!=null)
+                    if(regno.trim()!="")
                     st4.executeUpdate(sql5);
                     j++; 
                    
                 } 
             
-            response.getWriter().printf("updated");
-            
+            response.getWriter().printf("Updated Successfully !!");
+       
+                              if(st3!=null)
+                                st3.close();
+                                if(st4!=null)
+                            st4.close();
+                              if(con!=null)
+                                con.close();
         } catch (Exception ex) {
             response.getWriter().print(ex);
         }

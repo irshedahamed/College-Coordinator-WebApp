@@ -61,36 +61,64 @@
 
 						
 						
-
-						
-						
-
-						<nav id="main-nav">
+				
+<nav id="main-nav">
 							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
 
     
 
 
-                                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Marks</a>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page   current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Marks</a>
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="updatemarks.jsp">Update Marks</a></li>
 	
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmark.jsp">View Marks</a></li>
+        
+        
 	
 </li>
 </ul>
 </li>
 
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="reportgeneration.jsp">Report Generation</a></li>
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="updatemodeltype.jsp">Update Model Type</a></li>
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="regnoupdate.jsp">Update Register No.</a></li>
+
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Report Generation</a>
+<ul class="sub-menu">
+    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="reportgeneration.jsp">Marks Report Staff</a></li>
+	
+        <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmarkbonus.jsp">Marks Report Student</a></li>
+        
+        
+	
+</li>
+</ul>
+</li>
+
+
+
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Student</a>
+<ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="updatemodeltype.jsp">Update Model Type</a></li>
+	
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="regnoupdate.jsp">Update Register No.</a></li>
+	
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="BonusQuery.jsp">Bonus Assignment</a></li>
+
+</ul>
+</li>
+
+
+
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
 
 
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="examuploads.jsp">Exam Uploads</a>
 
-</li></ul>						</nav>
+</li></ul>						</nav>	
+						
+						
+
+						
 					</div>
 				</div>
 			</div>
@@ -120,6 +148,28 @@
                                                 </label>
                                         
                                             <br><br>
+                                              <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    Academic Year:</b></div>
+                                            <label class="select">
+                                                <select id="ayear" name="ayear">
+                                                    <option>Select</option>
+                                                    <option value="13">2013-2014</option>
+                                                    <option value="14">2014-2015</option>
+                                                    <option value="15">2015-2016</option>
+                                                    <option value="16">2016-2017</option>
+                                                    <option value="17">2017-2018</option>
+                                                    <option value="18">2018-2019</option>
+                                                    <option value="19">2019-2020</option>
+                                                    <option value="20">2020-2021</option>
+                                                    <option value="21">2021-2022</option>
+                                                    <option value="22">2023-2024</option>
+
+                                                </select>
+                                                <i></i>
+                                            </label>
+                                        </label>
+                                        <br> <br>
             
             <label class="input">
                                                     <div align="left" size="3px"><b>
@@ -127,14 +177,25 @@
                 <label class="select">
             <select id="batch" name="batch" required>
                 <option disabled selected>Select   </option>
-                <option value="2011-2015">2011-2015</option>
-                <option value="2012-2016">2012-2016</option>
-                <option value="2013-2017">2013-2017</option>
-                <option value="2014-2018">2014-2018</option>
-                <option value="2015-2019">2015-2019</option>
-                <option value="2016-2020">2016-2020</option>
-                <option value="2017-2021">2017-2021</option>
-                <option value="2018-2022">2018-2022</option>
+                <%
+                Connection conbatch = new dbcon().getConnection("sjitportal");
+                    Statement stmt = conbatch.createStatement();
+                    ResultSet rs=stmt.executeQuery("select batch from regulations");
+                    String batch=null;
+                    rs.beforeFirst();
+                    while(rs.next())
+                    {
+                        batch=rs.getString("batch");
+                %>
+                <option value=<%=batch%>><%=batch%></option>
+                <%
+                }
+
+                            if(stmt!=null)
+                            stmt.close();
+                              if(conbatch!=null)
+                                conbatch.close();
+                %>
             </select>
                     <i></i>
                 </label></label>
@@ -206,7 +267,7 @@
 </section>
 
 </section>
-						<footer id="footer-widgets">
+								<footer id="footer-widgets">
 			<div class="container clearfix">
 								Powered by St.Joseph's
 							</div>
@@ -217,13 +278,11 @@
 
 	<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
-<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
-<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
 </ul>			</nav>
 		</div>
 	</footer>
@@ -255,6 +314,11 @@
     {
         response.sendRedirect("../index.jsp");
     }
+
+                            if(sttt!=null)
+                            sttt.close();
+                              if(connn!=null)
+                                connn.close();
     }
 catch(Exception e)
     {

@@ -4,6 +4,7 @@
     Author     : Divya Sri
 --%>
 
+<%@page import="com.action.Base"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -25,20 +26,20 @@
 <% 
     String form = request.getParameter("index");
         
-        String path = "C:/forms/"+form+"/";
+        String path = Base.path+"/forms/"+form+"/";
         List<String> list = new ArrayList<String>();
-        
+        List<String> listdescp=new ArrayList<String>();        
           try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection connection1 = new dbcon().getConnection("sjitportal");
             Statement statement1 = connection1.createStatement();
-            ResultSet rs = statement1.executeQuery("select filename from forms where location = '"+path+"'");
+            ResultSet rs = statement1.executeQuery("select filename,descp from forms where location = '"+path+"'");
             
             
             while(rs.next())
             {
                 String file = rs.getString("filename");
-                
+                    listdescp.add(rs.getString("descp"));
                  list.add(file);
                  
             }
@@ -53,12 +54,16 @@
                   //session.setAttribute(str,list.get(i));
                   session.setAttribute("path",path);
             %>
-            <a href="${pageContext.request.contextPath}/formsdownload?ind1=<%=str %>" ><%= str %></a>
+            <a href="${pageContext.request.contextPath}/notesdownload?ind1=<%=str %>" ><%= str %> - <%=listdescp.get(i)%></a>
 <br>
 <%
            
            }
             session.setAttribute("size",list.size());
+              if(statement1!=null)
+                            statement1.close();
+                              if(connection1!=null)
+                                connection1.close();
           }
           catch(Exception e)
           {

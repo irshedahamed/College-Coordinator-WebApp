@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import com.action.Find;
 import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -79,17 +80,15 @@ public class deletesub extends HttpServlet {
             throws ServletException, IOException {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection1 = new dbcon().getConnection("cse");
-            Statement statement1 = connection1.createStatement();
+           
             String[] n=request.getParameterValues("delete");
             PrintWriter out=response.getWriter();
-       
-            
+            String incharge=request.getParameter("incharge");
+            if(n!=null)
             for(int i=0;i<n.length;i++)
             {
                 String[] parts  = n[i].split("_");
                
-                 
 String acyear = parts[0]; // 004
 String staffid = parts[1];
 String batch = parts[2]; // 004
@@ -99,10 +98,43 @@ String subcode = parts[5];
 
 String sec = parts[6]; // 004
  
+                  Connection connection1 = new dbcon().getConnection(Find.sdept(staffid));
+            Statement statement1 = connection1.createStatement();
         String sql = "delete from subject_allocation where acyear='"+acyear+"' and staffid='"+staffid+"'and sem='"+sem+"' and dept='"+dept+"' and subcode='"+subcode+"' and sec='"+sec+"'";
         
          statement1.executeUpdate(sql);
+         
+       
+            
+              if(statement1!=null)
+                            statement1.close();
+                              if(connection1!=null)
+                                connection1.close();
             }
+            
+            if(incharge!=null)
+              if(incharge.equals("yes")){
+                  String acyear=request.getParameter("acyear");
+                  String staffid=request.getParameter("staffid");
+                  String sem=request.getParameter("semister");
+                   Connection connection1 = new dbcon().getConnection(Find.sdept(staffid));
+            Statement statement1 = connection1.createStatement();
+        String sql = "delete from other_incharge where acyear='"+acyear+"' and staffid='"+staffid+"'and semister='"+sem+"' ";
+        
+         statement1.executeUpdate(sql);
+         
+       sql = "delete from councillor where academicyr='"+acyear+"' and staffid='"+staffid+"'and semister='"+sem+"' ";
+        
+         statement1.executeUpdate(sql);
+            
+              if(statement1!=null)
+                            statement1.close();
+                              if(connection1!=null)
+                                connection1.close();
+                  
+         }
+         response.getWriter().print("Deleted Successfully!!");
+         
         }
         catch (Exception ex) {
                PrintWriter out = response.getWriter();

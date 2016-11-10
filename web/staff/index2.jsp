@@ -4,17 +4,18 @@
     Author     : Aravind Tyson
 --%>
 
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.dbcon"%>
 
       					
 		
                           <%
-                              
+                              String username = session.getAttribute("username").toString();
                               String index=request.getParameter("index");
                               String index1=request.getParameter("index1");
                               Class.forName("com.mysql.jdbc.Driver").newInstance();
-               Connection connection = new dbcon().getConnection("cse");
+               Connection connection = new dbcon().getConnection(Find.dept(username));
                Statement statement = connection.createStatement();
             if(index.equals("i1"))
             {
@@ -29,7 +30,7 @@
                     //int i=Integer.parseInt(request.getParameter("val"));
                     
                     
-               ResultSet rs= statement.executeQuery("select distinct(batch) from subject_allocation where staffid='cs009'");
+               ResultSet rs= statement.executeQuery("select distinct(batch) from subject_allocation where staffid='"+username+"'");
                    
               String batch;
                     
@@ -65,7 +66,7 @@
                     //int i=Integer.parseInt(request.getParameter("val"));
                     String batch=request.getParameter("index2");
                    
-             ResultSet rs1= statement.executeQuery("select distinct(sem) from subject_allocation where staffid='cs009' and batch='"+batch+"'");
+             ResultSet rs1= statement.executeQuery("select distinct(sem) from subject_allocation where staffid='"+username+"' and batch='"+batch+"'");
                    
               String sem;
                     
@@ -105,7 +106,7 @@
                     String batch=request.getParameter("index2");
                     String sem=request.getParameter("index3");
                     
-               ResultSet rs1= statement.executeQuery("select distinct(sec) from subject_allocation where staffid='cs009' and batch='"+batch+"' and sem='"+sem+"'");
+               ResultSet rs1= statement.executeQuery("select distinct(sec) from subject_allocation where staffid='"+username+"' and batch='"+batch+"' and sem='"+sem+"'");
                    
               String section;
                     
@@ -145,7 +146,7 @@
                     String section=request.getParameter("index4");
                     String sem=request.getParameter("index3");
                     
-               ResultSet rs1= statement.executeQuery("select * from subject_allocation where batch='"+batch+"' and staffid='cs009' and sem='"+sem+"' and sec='"+section+"'");
+               ResultSet rs1= statement.executeQuery("select * from subject_allocation where batch='"+batch+"' and staffid='"+username+"' and sem='"+sem+"' and sec='"+section+"'");
                    
               String sub;
                     
@@ -197,7 +198,10 @@
                 </label></label>
             <%
             }
-            
+              if(statement!=null)
+                            statement.close();
+                              if(connection!=null)
+                                connection.close();
                 %>
             
                                        
