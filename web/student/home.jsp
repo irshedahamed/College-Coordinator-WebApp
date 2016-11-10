@@ -1,7 +1,7 @@
-<%@page import="Circular.Exam"%>
-<%@page import="Circular.Department"%>
-<%@page import="Circular.Circular"%>
-<%@page import="Circular.College"%>
+<%@page import="Downloads.Exam"%>
+<%@page import="Downloads.Department"%>
+<%@page import="Downloads.Circular"%>
+<%@page import="Downloads.College"%>
 <%@page import="com.action.Base"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
