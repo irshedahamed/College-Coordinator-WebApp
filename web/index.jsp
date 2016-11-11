@@ -28,7 +28,7 @@
 
 <!-- CSS-->
 <!-- Google web fonts. You can get your own bundle at http://www.google.com/fonts. Don't forget to update the CSS accordingly!-->
-<link href='http://fonts.googleapis.com/css?family=Droid+Serif|Ubuntu' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Droid+Serif|Ubuntu' rel='stylesheet' type='text/css'>
 
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/flexslider.css">
@@ -38,7 +38,6 @@
 <!-- end CSS-->
     
 <!-- JS-->
-<script src="js/libs/modernizr-2.6.2.min.js"></script>
 <!-- end JS-->
 
 
@@ -178,7 +177,7 @@ padding:20px 15px;
 
 
 <!-- jQuery -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/jquery-1.9.0.min.js">\x3C/script>');</script>
 
 <script defer src="js/jquery.flexslider-min.js"></script>
