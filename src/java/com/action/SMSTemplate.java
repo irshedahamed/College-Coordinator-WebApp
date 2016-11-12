@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.net.ssl.HttpsURLConnection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -62,8 +63,9 @@ public class SMSTemplate {
                // number="9444902605";
                 number.trim();
                 message=message.replace(" ","%20");
-                URL url =  url = new URL("https://www.portal.stjosephstechnology.ac.in/sms.jsp?url=http://smscenter.co.in/API/pushsms.aspx?loginID="+user+"&password="+pass+"&mobile="+number+"&text="+message+"&senderid=STJOSE&route_id=2&Unicode=0".replace("&", "%26"));
+              URL url =  new URL("http://smscenter.co.in/API/pushsms.aspx?loginID="+user+"&password="+pass+"&mobile="+number+"&text="+message+"&senderid=STJOSE&route_id=2&Unicode=0");
                 
+              
               
                 
                 
@@ -75,6 +77,7 @@ public class SMSTemplate {
                 while ((c = (char) input.read()) != (char) -1)
                     s += c;
                 
+               // System.out.println(s);
                 Document doc=Jsoup.parse(s);
                 Elements ele=doc.select("#Label5");
                 if(ele.html().contains("sent")){
