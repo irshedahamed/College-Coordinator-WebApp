@@ -47,7 +47,7 @@
                         var patt = /^[0-9]+$/;
                         var result = patt.test($(this).val());
    
-                        var result1=$(this).val()==='A';
+                        var result1=($(this).val()==='A'||$(this).val()==='N');
                         if($(this).val()=== ''||(result===false && result1===false))
                         {
                             $(this).focus();

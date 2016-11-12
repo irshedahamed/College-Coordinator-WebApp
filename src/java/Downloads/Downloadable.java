@@ -44,15 +44,17 @@ public class Downloadable {
     }
     
         
-    public static String getHTMLContent(List<Circular> circular){
+    public static String getHTMLContent(List<? extends Downloadable> list){
         String HTML="<div align='left' style='margin-left:25px;'>";
-        for(Circular c:circular){
+        for(Downloadable c:list){
             
         HTML+="<a href='../formsdownload?ind1="+c.getName()+""
-                + "&path="+c.getPath()+" ' >"
+                + "&path="+c.getPath().replace("&", "%26")+" ' >"
                 + c.getDesc()+"</a>"+"<br><br>";
         }
                  HTML+="</div>";
     return HTML;
     }
+    
+    
 }

@@ -51,7 +51,9 @@
            //         console.log($(this)[0].id);
                     var id=$(this)[0].id;
                     var words=inWords(parseInt($(this).val()));
-                    if($(this).val()==='A')
+                    if($(this).val()==='N')
+                    $("#words"+id).html("No Exam");    
+                    else if($(this).val()==='A')
                     $("#words"+id).html("Absent");    
                     else
                     $("#words"+id).html(words);
@@ -68,7 +70,7 @@
         var patt = /^[0-9]+$/;
                         var result = patt.test($(this).val());
    
-                        var result1=$(this).val()==='A';
+                        var result1=($(this).val()==='A'||$(this).val()==='N');
                         if($(this).val()=== ''||(result===false && result1===false))
                         {
                             $(this).focus();
@@ -141,7 +143,7 @@
         <body>
             <center><h1>Mark Update for <%=dept.toUpperCase()%> Department <%=batch%> batch  <%=sem%>th semester <%=sec%> section</h1></center>
         
-            <center><h3 style="color: red;">Note- use "A" for absentees</h3></center>
+            <center><h3 style="color: red;">Note- <li>use "A" for Absentees</li><li>use "N" for No Exam</li></h3></center>
             <form action="${pageContext.request.contextPath}/staffmarkupdate"  id="marks" method="post">
                 <div align="right" style="margin-right: 150px;">
                     <br>

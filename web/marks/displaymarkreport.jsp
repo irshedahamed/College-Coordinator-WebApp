@@ -333,43 +333,30 @@ h2{
        
         if(rs2.next())
         {
-            if(exam.equals("model1"))
-            {
-                String m1= rs2.getString("model1");
-                String c1= rs2.getString("cycle1");
+           
+                String m1= rs2.getString("model"+exam.substring(exam.length()-1,exam.length() ));
+                String c1= rs2.getString("cycle"+exam.substring(exam.length()-1,exam.length() ));
                 if(m1==null || c1==null)
                 {m1="0";c1="0";}
-                if(!m1.equals("A"))
-                {
-                m = Integer.parseInt(m1);
-                c = Integer.parseInt(c1);
-                sum = m+c;
-                sum = sum /130;
-                m3 = sum*100;
-                }
+                if(m1.equals("A"))
+                    m1="0";
+                if(c1.equals("A"))
+                    c1="0";
                 
-            }
-            else if(exam.equals("model2"))
-            {
-                String m1= rs2.getString("model2");
-                String c1= rs2.getString("cycle2");
-                if(m1==null || c1==null)
-                {m1="0";c1="0";}
-                m = Integer.parseInt(m1);
-                c = Integer.parseInt(c1);
-                sum = m+c;
-                sum = sum /130;
-                m3 = sum*100;
                 
+                boolean noexam=false;
+        
+        if(c1!=null)
+            if(c1.equals("N")){
+            noexam=true;
             }
-            else if(exam.equals("model3"))
-            {
-                String m1= rs2.getString("model3");
-                String c1= rs2.getString("cycle3");
-                if(m1==null || c1==null)
-                {m1="0";c1="0";}
+        
+            if(noexam)
+                m3=sum=Integer.parseInt(m1);
+            else{
                 m = Integer.parseInt(m1);
                 c = Integer.parseInt(c1);
+                
                 sum = m+c;
                 sum = sum /130;
                 m3 = sum*100;

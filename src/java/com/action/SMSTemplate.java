@@ -62,7 +62,7 @@ public class SMSTemplate {
                // number="9444902605";
                 number.trim();
                 message=message.replace(" ","%20");
-                URL url =  url = new URL("http://smscenter.co.in/API/pushsms.aspx?loginID="+user+"&password="+pass+"&mobile="+number+"&text="+message+"&senderid=STJOSE&route_id=2&Unicode=0");
+                URL url =  url = new URL("https://www.portal.stjosephstechnology.ac.in/sms.jsp?url=http://smscenter.co.in/API/pushsms.aspx?loginID="+user+"&password="+pass+"&mobile="+number+"&text="+message+"&senderid=STJOSE&route_id=2&Unicode=0".replace("&", "%26"));
                 
               
                 

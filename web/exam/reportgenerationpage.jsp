@@ -259,7 +259,11 @@ h2{
             if(ct==null)
             {et="0";ct="0";}
                 
-            
+            boolean noexam=false;
+               if(ct!=null)
+            if(ct.equals("N")){
+            noexam=true;
+            }
             
              if(et.equals("A") && ct.equals("A"))
                 a++;
@@ -273,9 +277,14 @@ h2{
                 p++;
                 et1=Integer.parseInt(et);
                 ct1=Integer.parseInt(ct);
+                if(noexam){
+                    combined=(int)et1;
+                }else{
                 combined=(float)et1+(float)ct1;
                 combined/=1.3;
                 combined=(int)(combined+0.5);//Rounding
+                }
+                
             total=total+combined;
             if(max<combined)
                 max=(int)combined;

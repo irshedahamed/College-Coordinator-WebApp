@@ -27,14 +27,23 @@ public class Result {
     try{
     conn=new dbcon().getConnection(Find.sdept(rollno));
     stmt=conn.createStatement();
-    ResultSet rs=stmt.executeQuery("SELECT MIN(CONVERT(model"+exam+",unsigned int)+CONVERT(cycle"+exam+",unsigned int)) as combined FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
+    ResultSet rs=stmt.executeQuery("SELECT model"+exam+",cycle"+exam+",MIN(CONVERT(model"+exam+",unsigned int)+CONVERT(cycle"+exam+",unsigned int)) as combined FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
         if(rs.next())
         {
+            if(rs.getString("cycle"+exam).equals("N")){
+            if(Integer.parseInt(rs.getString("model"+exam))<45)
+            result=false;
+            else
+            result=true;
+           
+                }
+            else{
         int a=rs.getInt("combined");
         if(a<58)
             result=false;
         else
             result=true;
+            }
         }
     }catch(Exception e){e.printStackTrace();}finally{
         try {
@@ -56,13 +65,18 @@ public class Result {
     try{
     conn=new dbcon().getConnection(Find.sdept(rollno));
     stmt=conn.createStatement();
-    ResultSet rs=stmt.executeQuery("SELECT (CONVERT(model"+exam+",unsigned int)+CONVERT(cycle"+exam+",unsigned int)) as combined FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
+    ResultSet rs=stmt.executeQuery("SELECT model"+exam+",cycle"+exam+",(CONVERT(model"+exam+",unsigned int)+CONVERT(cycle"+exam+",unsigned int)) as combined FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
         while(rs.next())
         {
+            if(rs.getString("cycle"+exam).equals("N")){
+            if(Integer.parseInt(rs.getString("model"+exam))<45)
+            fail++;
+            }
+            else{
         int a=rs.getInt("combined");
         if(a<58)
             fail++;
-        
+            }
         }
     }catch(Exception e){e.printStackTrace();}finally{
         try {
