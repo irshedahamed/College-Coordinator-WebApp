@@ -121,6 +121,7 @@ public class StudentAdd extends HttpServlet {
       String sadmission=request.getParameter("sadmission");
       String gname=request.getParameter("gname");
       String moi=request.getParameter("moi");
+      String scholarship=request.getParameter("scholarship");
       
       String doorno=request.getParameter("doorno");
       String street=request.getParameter("street");
@@ -233,7 +234,7 @@ public class StudentAdd extends HttpServlet {
               +"')";
       
       String sql3="insert into student_admission_details values('"+rollno+"',"+"?"+",'"+adminalot
-              +"','"+counormn+"','"+orank+"','"+crank+"','"+sadmission+"','"+gname+"','"+moi
+              +"','"+counormn+"','"+orank+"','"+crank+"','"+sadmission+"','"+gname+"','"+moi+"','"+scholarship
               +"')";
       
       String sql4="insert into student_contact_details values('"+rollno+"','"+doorno+"','"+street+"','"+area+"','"

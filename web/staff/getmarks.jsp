@@ -143,7 +143,7 @@
         <body>
             <center><h1>Mark Update for <%=dept.toUpperCase()%> Department <%=batch%> batch  <%=sem%>th semester <%=sec%> section</h1></center>
         
-            <center><h3 style="color: red;">Note- <li>use "A" for Absentees</li><li>use "N" for No Exam</li></h3></center>
+            <center><h3 style="color: red;">Note- use "A" for Absentees</h3></center>
             <form action="${pageContext.request.contextPath}/staffmarkupdate"  id="marks" method="post">
                 <div align="right" style="margin-right: 150px;">
                     <br>

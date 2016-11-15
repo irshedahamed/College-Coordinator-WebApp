@@ -452,6 +452,20 @@
                                         <label>Medium of Instruction :</label><input type="text" class="check"  style="background: white" id="moi" name="moi">
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                          <label>Scholarship :</label>
+                                       <select name="scholarship" id="religion">
+                                           <option value="NA">NA</option>
+                                                    <option value="First Graduate">First Graduate</option>
+                                                    <option value="Fee Waiver">Fee Waiver</option>
+                                                    <option value="SC/ST Scholarship">SC/ST Scholarship</option>
+                                                    
+                                                    
+                                        </select>
+                               
+                                    </td>
+                                </tr>
                             </table>
                             <br><center><h3>Contact Details</h3></center>
                             <table>
