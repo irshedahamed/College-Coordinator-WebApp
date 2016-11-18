@@ -36,7 +36,7 @@ public class MarkSMS {
             i++;
             int mark;
             String subcode=rs.getString("subcode").toUpperCase();
-            //subcode="Subject "+i;
+            subcode="Sub"+i+"("+subcode+")";
              if(rs.getString("cycle"+exam).equals("N"))
              {
                  String a=rs.getString("model"+exam);

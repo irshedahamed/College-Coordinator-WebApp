@@ -168,6 +168,10 @@
         <servlet-name>JsonSMS</servlet-name>
         <servlet-class>com.action.JsonSMS</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addEntry</servlet-name>
+        <servlet-class>addEntry</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -335,6 +339,10 @@
     <servlet-mapping>
         <servlet-name>JsonSMS</servlet-name>
         <url-pattern>/JsonSMS</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addEntry</servlet-name>
+        <url-pattern>/addEntry</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

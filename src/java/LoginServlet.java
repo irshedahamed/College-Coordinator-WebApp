@@ -132,7 +132,9 @@ public class LoginServlet extends HttpServlet {
                   else if(s3.equals("admin")||s3.equals("dataentry"))
                   
                       response.sendRedirect("admin/home.jsp?user="+s1); 
+                    else if(s3.equals("reception"))
                   
+                      response.sendRedirect("reception/home.jsp?user="+s1); 
                   else if(s3.equals("dept"))
                   
                       response.sendRedirect("dept/home.jsp?user="+s1);  

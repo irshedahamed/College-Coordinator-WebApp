@@ -39,17 +39,19 @@ public class Downloadable {
         return path;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setPath(String path) {      
+        this.path=path;
+        
     }
     
         
     public static String getHTMLContent(List<? extends Downloadable> list){
         String HTML="<div align='left' style='margin-left:25px;'>";
+        
         for(Downloadable c:list){
             
-        HTML+="<a href='../formsdownload?ind1="+c.getName()+""
-                + "&path="+c.getPath().replace("&", "%26")+" ' >"
+        HTML+="<a href='../formsdownload?ind1="+c.getName().replace("&", "%26")+""
+                + "&path="+c.getPath()+" ' >"
                 + c.getDesc()+"</a>"+"<br><br>";
         }
                  HTML+="</div>";
