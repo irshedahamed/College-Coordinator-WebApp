@@ -50,27 +50,6 @@
          
      
 
-
-
-<link rel="stylesheet" href="../css/angular-material.css">
-
-<link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
-
-
-<link rel="stylesheet" href="../css/angulartab.css">
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"> </script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
-<script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.js"></script>
-
-<script src="../js/angulartab.js"></script>
-         
-     
-	
 		
 		</head>
 		
@@ -99,7 +78,7 @@
 						
 
 						<nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="home.jsp">Home</a></li>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="home.jsp">Home</a></li>
 
     
 
@@ -112,7 +91,7 @@
 </li>
 
 
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#"> Report</a>
+<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#"> Report</a>
 <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personalReport.jsp">Personal Report</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="dailyReport.jsp">Daily Report</a>
@@ -140,35 +119,6 @@
           <section class="landing">
                    
        
-               <md-toolbar class="demo-toolbar md-primary _md _md-toolbar-transitions" style="width: 70%">
-                   
-        <div class="md-toolbar-tools">
-            
-            <h3 class="ng-binding" style="text-align:center;">Circulars</h3>
-          <span flex="" class="flex"></span>
-        
-        </div>
-      </md-toolbar>
-               <div ng-cloak="" class="tabsdemoDynamicHeight" ng-app="MyApp" style="width:70%"> 
-  <md-content>
-    <md-tabs md-dynamic-height="" md-border-bottom="">
-      <md-tab label="College">
-        <md-content class="md-padding">
-          <h1 class="md-display-2"></h1>
-        
-          <%out.write(Circular.getHTMLContent(College.getAll("circular")));%>
-        </md-content>
-      </md-tab>
-    
-      </md-tab>
-            <md-tab label="Events">
-        <md-content class="md-padding">
-          <h1 class="md-display-2"></h1>
-        <%out.write(Circular.getHTMLContent(College.getAll("event")));%>
-        </md-content>
-      </md-tab>
-    </md-tabs>
-  </md-content>
             
         
             

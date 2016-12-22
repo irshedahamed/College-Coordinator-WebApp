@@ -4,6 +4,7 @@
     Author     : Home
 --%>
 
+<%@page import="Actor.Guest"%>
 <%@page import="General.Batch"%>
 <%-- 
     Document   : addStudent
@@ -254,6 +255,7 @@ $(document).ready(function(){
         $("#newguest").hide();
       
         $(".guest").click(function(){
+            $("#old").hide();
               $("#newguest").show();
         });
         
@@ -280,7 +282,16 @@ $(document).ready(function(){
                  $("#sublistbatch").html("");
                  $("#sublistperson").html("");
             }
-            $("#sublist").after("<input type='hidden' name='person' id='hperson' value='"+data+"'>");
+            
+             
+                    var value=$(this).data("once");
+                    if(value === "yup")
+                    {
+                        return;            
+                    }
+         $(this).data("once","yup");
+        
+            $("#sublist").after("<input type='hidden' name='hperson' id='hperson' value='"+data+"'>");
         });
          $(document).on('change','#batch',function(){
              batch=$(this).val();
@@ -365,8 +376,72 @@ $(document).ready(function(){
             
                   
  <input  type="button"  id="submit" class="guest" value="New Guest" />
+         <%
+           String id=request.getParameter("search");
+                        Connection con=null;
+                        Statement stmt=null;
+                    if(request.getParameter("search")!=null){
+                        Guest g=Guest.getById(id);
+         %>
+         <div id="old">
+            <table>
+             <tr><td rowspan="7">
+                    
+                    <img src="../../Guest/<%=g.getId()%>.jpg" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                
+          
+                 </td></tr>
+             
+             <tr><td>
+             <label>Category : </label><select name="category" style="background: white" disabled>
+                 <option value=""><%=Find.category(g.getId())%></option>
+                 
+             </select>
+                 </td></tr>
+             <tr><td>
+                     <label>Name : </label><input type="text" value="<%=g.getName()%>" style="background: white" id="name" name="gname" disabled>
+                 </td></tr>
+             
+                  <tr><td>
+                     <label>Sex : </label><input type="text" value="<%=g.getSex()%>" style="background: white" id="name" name="gname" disabled>
+                 </td></tr>
+             <tr><td>
+                     <label class="textarea" style="width:150px;">Address :<textarea  disabled style="background: white;position: relative;left: 150px;"  name="address" rows="5" cols="20"><%=g.getAddress()%></textarea> </label>
+                 </td></tr>
+             
+                          <tr><td>
+         <label>City : </label><input type="text" value="<%=g.getCity()%>" disabled style="background: white" id="city" name="city">
+                 </td></tr>
+                                     <tr><td>
+         <label>Mobile : </label><input type="text" value="<%=g.getMobile()%>" disabled style="background: white" id="mobile" name="mobile">
+                 </td></tr>
+                                     <tr><td>
+         <label>Mail : </label><input type="text" value="<%=g.getMail()%>" disabled style="background: white" id="mail" name="mail">
+                 </td></tr>
+                                     
                 
-        
+               
+                                                       <tr><td>
+                                                               <label>Date & Time : </label><input disabled type="text" style="background: white" id="mail" value="<%=new Date()%>" disabled >
+                 </td></tr>                
+         </table>
+                 
+  <form id="submitform" action="../addEntry" method="post">
+                  
+            <input type="hidden" class="button" name="rollno" value="<%=id.toUpperCase()%>">
+            <input type="hidden" class="button" value=""  name="entry" >
+            
+               <input type="submit" value="IN" class="button" id="submit">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="OUT" class="button" id="submit">
+          
+           
+            </form>
+        </div>
+        <%
+        }
+        %>
  <br><br>
  <div id="newguest">
      <form method="post" id="submitform" action="${pageContext.request.contextPath}/GuestEntry" >
@@ -382,16 +457,23 @@ $(document).ready(function(){
              <tr><td>
              <label>Category : </label><select name="category" style="background: white">
                  <option value="">Select</option>
-                 <option value="Admission">Admission</option>
-                 <option value="Vendor">Vendor</option>
-                 <option value="Visitor">Visitor</option>
+                 <option value="AD">Admission</option>
+                 <option value="VE">Vendor</option>
+                 <option value="VI">Visitor</option>
              </select>
                  </td></tr>
              <tr><td>
          <label>Name : </label><input type="text" style="background: white" id="name" name="gname">
                  </td></tr>
+                          <tr><td>
+                                  <label>Gender : </label><select  style="background: white" id="name" name="sex">
+                                      <option value="Male">Male</option>
+                                      <option value="Female">Female</option>
+                                      
+                                  </select>
+                 </td></tr>
              <tr><td>
-                     <label class="textarea" style="width:150px;">Address :<textarea style="background: white;position: relative;left: 150px;"  rows="5" cols="20"></textarea> </label>
+                     <label class="textarea" style="width:150px;">Address :<textarea style="background: white;position: relative;left: 150px;" name="address" rows="5" cols="20"></textarea> </label>
                  </td></tr>
              
                           <tr><td>

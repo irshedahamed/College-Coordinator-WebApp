@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 
+import Actor.Guest;
 import General.BarCode;
+import General.Entry;
 import com.action.Base;
 import com.lowagie.text.Image;
 import com.lowagie.text.pdf.BarcodeEAN;
@@ -87,7 +89,7 @@ public class GuestEntry extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
-       
+        String  UPLOAD_DIRECTORY = Base.path+"/"+request.getSession().getAttribute("username").toString()+"/";
         if(ServletFileUpload.isMultipartContent(request)){
             try {
                 
@@ -97,7 +99,8 @@ public class GuestEntry extends HttpServlet {
                 for(FileItem item : multiparts){
                   
                       if(!item.isFormField()){
-                     String  UPLOAD_DIRECTORY = Base.path+"/"+request.getSession().getAttribute("username").toString()+"/";
+                          
+                    
                      File file = new File(UPLOAD_DIRECTORY);
     
             file.mkdirs(); 
@@ -112,16 +115,41 @@ public class GuestEntry extends HttpServlet {
             }catch(Exception e){
                 e.printStackTrace();
             }
-        }
+        }else{
        
-        
+        Guest g=new Guest();
+        String action=request.getParameter("entry");
+       String category=request.getParameter("category");
+       g.setSex(request.getParameter("sex"));
+        g.setMail(request.getParameter("mail"));
+        g.setReason(request.getParameter("reason"));
+        g.setMeet(request.getParameter("hperson"));
+        g.setMobile(request.getParameter("mobile"));
+        g.setCity(request.getParameter("city"));
+        g.setAddress(request.getParameter("address"));
+       g.setName(request.getParameter("gname"));
+       g.insert(category, UPLOAD_DIRECTORY+"photo.jpg");
        
+      Entry e=new Entry();
+       boolean act=false;
+       e.setRollno(g.getId());
        
-       String id="14cs1230";
-        BarCode.generate(id,getServletContext().getRealPath("")+request.getSession().getAttribute("username").toString()+"/");
+        if(action.equals("IN"))
+             act=e.insertin();
+         else if(action.equals("OUT"))
+             act=e.insertout();
+       
+            if(act)
+            {
+                  BarCode.generate(g.getId(),getServletContext().getRealPath("")+request.getSession().getAttribute("username").toString()+"/");
          response.setContentType("text/html;charset=UTF-8");
-        response.getWriter().write("<img src='"+request.getSession().getAttribute("username").toString()+"/"+id+"/"+id+".png'  />");
-       
+          response.getWriter().write("<h1>"+category+"</h1><br>");
+        response.getWriter().write("<img src='"+request.getSession().getAttribute("username").toString()+"/"+g.getId()+"/"+g.getId()+".png'  />");
+      
+            }
+       else
+           response.getWriter().println("<center><h1>Entry Failed</h1>");
+        
         
         /*  //For Delete 
         String path=getServletContext().getRealPath("")+"/"+request.getSession().getAttribute("username").toString()+"/"+id+File.separator;
@@ -130,6 +158,8 @@ public class GuestEntry extends HttpServlet {
         if(dir.exists())
            FileUtils.deleteDirectory(dir);
         */
+        
+        }
     }
 
     /**

@@ -21,6 +21,15 @@ public class Entry {
     private String rollno;
     private Timestamp in;
     private Timestamp out;
+    private String by;
+
+    public String getBy() {
+        return by;
+    }
+
+    public void setBy(String by) {
+        this.by = by;
+    }
 
     public Timestamp getIn() {
         return in;
@@ -56,7 +65,9 @@ public class Entry {
        try{
            conn=new dbcon().getConnection("sjitportal");
            stmt=conn.createStatement();
-           String sql="insert into entry values('"+rollno+"',now(),'0000-00-00 00:00:00')";
+           if(by==null)
+               by="self";
+           String sql="insert into entry values('"+rollno+"',now(),'0000-00-00 00:00:00','"+by+"')";
        update+=stmt.executeUpdate(sql);
        
      
@@ -87,9 +98,22 @@ public class Entry {
        try{
            conn=new dbcon().getConnection("sjitportal");
            stmt=conn.createStatement();
-           String sql="insert into entry values('"+rollno+"','0000-00-00 00:00:00',now())";
+            if(by==null)
+               by="self";
+           String sql="select * from entry where rollno like '"+rollno+"' and intime > now() - INTERVAL 24 HOUR";
+           ResultSet rs=stmt.executeQuery(sql);
+           if(rs.next()){
+               String intime=rs.getTimestamp("intime").toString();
+               intime=intime.substring(0, intime.length()-2);
+            sql="update  entry set outtime=now() , `by`='"+by+"' where rollno like '"+rollno+"' and intime like'"+intime+"'";
+               System.err.println(sql);
+            rs.close();
        update+=stmt.executeUpdate(sql);
-       
+               
+           }else{
+            sql="insert into entry values('"+rollno+"','0000-00-00 00:00:00',now(),'"+by+"')";
+       update+=stmt.executeUpdate(sql);
+           }
      
        
        }catch(Exception e){

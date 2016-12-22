@@ -146,6 +146,7 @@
         $("#rollno").prop( "disabled", false );
         $(".button").prop( "disabled", false );
         $("select").prop("disabled",true);
+        $(".enable").prop( "disabled", false );
         $(".button").click(function(){
             
             
@@ -269,6 +270,9 @@
                                     </center>
                                     </td>
                                 </tr>
+                                
+                                
+                          
                             </table>
                             <br><br>
                            
@@ -277,15 +281,25 @@
             </div>
             <br><br>
             <form id="submitform" action="../addEntry" method="post">
-                  
+                
+                    
+                                        
+                              
+                <center>             
             <input type="hidden" class="button" name="rollno" value="<%=rs10.getString("rollno")%>">
             <input type="hidden" class="button" value=""  name="entry" >
-            
+            <div style="position: relative;left: -30px;"> 
+            <label> Self  :</label>  <input type="radio"  style="background: white" name="by" value="Self" class="enable">
+             <label> Parent  :</label>  <input type="radio"  style="background: white" name="by" value="Parent" class="enable">
+             <label> Local Guardian  :</label>  <input type="radio"  style="background: white" name="by" value="Local Guardian" class="enable">
+            </div>
+             <br>
+             <br>
                <input type="submit" value="IN" class="button" id="submit">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input type="submit" value="OUT" class="button" id="submit">
-          
+                </center>
            
             </form>
                         </center>
@@ -379,7 +393,7 @@ con.close();
             </div>
             <br><br>
             <form id="submitform" action="../addEntry" method="post">
-                  
+              
             <input type="hidden" class="button" name="rollno" value="<%=rollno.toUpperCase()%>">
             <input type="hidden" class="button" value=""  name="entry" >
             

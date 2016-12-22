@@ -5,6 +5,7 @@
  */
 
 import General.Entry;
+import com.action.Find;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -78,6 +79,7 @@ public class addEntry extends HttpServlet {
        Entry e=new Entry();
        boolean act=false;
        e.setRollno(request.getParameter("rollno"));
+       e.setBy(request.getParameter("by"));
        String action=request.getParameter("entry");
         response.setContentType("text/html;charset=UTF-8");
          response.getWriter().println("<link href='css/bootstrap.min.css' rel='stylesheet'><br><br><br>");
@@ -92,8 +94,11 @@ public class addEntry extends HttpServlet {
            response.getWriter().println("<center><h1>Entry added Successfully!!!</h1>");
        else
            response.getWriter().println("<center><h1>Entry Failed</h1>");
-       
-       response.getWriter().println("<br><br><a href='reception/studentAdd.jsp'><input type='button' id='sumbit' value='back'></a></center>");
+       if(Find.category(e.getRollno())==null)
+       response.getWriter().println("<br><br><a href='reception/entry.jsp'><input type='button' id='sumbit' value='back'></a></center>");
+       else
+       response.getWriter().println("<br><br><a href='reception/guest.jsp'><input type='button' id='sumbit' value='back'></a></center>");
+           
     }
 
     /**
