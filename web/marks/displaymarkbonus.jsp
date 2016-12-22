@@ -284,6 +284,12 @@ h2{
         String markc= rs2.getString("cycle"+exam);
         String markm=rs2.getString("model"+exam);
         int ABminus=0;
+        boolean noexam=false;
+        
+        if(markc!=null)
+            if(markc.equals("N")){
+            noexam=true;
+            }
         
         if(markm!=null)
         if(markm.equals("A"))
@@ -302,6 +308,9 @@ h2{
         else
         c = Integer.parseInt(markc);
         }
+        if(noexam)
+            total=m;
+        else
         total = (int)(((m+c)/1.3)+0.5); 
                 total+=bonus-ABminus;
                 

@@ -29,14 +29,27 @@ public class MarkSMS {
     try{
     conn=new dbcon().getConnection(Find.sdept(rollno));
     stmt=conn.createStatement();
-    ResultSet rs=stmt.executeQuery("SELECT subcode,CONVERT(model"+exam+",unsigned int)+CONVERT(cycle"+exam+",unsigned int) as combined FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
+    ResultSet rs=stmt.executeQuery("SELECT model"+exam+",cycle"+exam+",subcode,CONVERT(model"+exam+",unsigned int)+CONVERT(cycle"+exam+",unsigned int) as combined FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
     int i=0;    
     while(rs.next())
         {
             i++;
+            int mark;
             String subcode=rs.getString("subcode").toUpperCase();
-            subcode="Subject "+i;
-            int mark=(int) ((rs.getInt("combined")/1.3)+0.5);
+            subcode="Sub"+i+"("+subcode+")";
+             if(rs.getString("cycle"+exam).equals("N"))
+             {
+                 String a=rs.getString("model"+exam);
+                 if(a.equals("A"))
+                     a="0";
+                 mark=Integer.parseInt(a);
+             }
+             else
+            mark=(int) ((rs.getInt("combined")/1.3)+0.5);
+            
+             if((rs.getString("cycle"+exam).equals("A")||(rs.getString("cycle"+exam).equals("N")))&&rs.getString("model"+exam).equals("A"))
+                marks+=subcode+":"+"A"+", ";
+             else
             marks+=subcode+":"+mark+", ";
         }
         if(rs!=null)
@@ -59,14 +72,17 @@ public class MarkSMS {
         }
     }
     
-    if(Result.passed(rollno, sem, exam))
+    
+    int num=Result.numSubFailed(rollno, sem, exam);
+    if(num==0)
     {pass="PASSED";status="happy";}
     else
-    {   int num=Result.numSubFailed(rollno, sem, exam);
+    {   
         pass="FAILED in "+num+" Subjects";
     if(num==1)
         pass=pass.substring(0, pass.length()-1);
-    status="sorry";}
+    status="sorry";
+    }
     
     content="Dear Parents, " +
 "We are "+status+" to inform you that your ward "+name+" ("+rollno+") has "+pass+" in the Model-"+exam+" Examination,Securing the following Marks "+marks.substring(0, marks.length()-2)+".Refer Portal for further details";

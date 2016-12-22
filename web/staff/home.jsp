@@ -1,3 +1,7 @@
+<%@page import="Downloads.Department"%>
+<%@page import="Downloads.Exam"%>
+<%@page import="Downloads.Circular"%>
+<%@page import="Downloads.College"%>
 <%@page import="com.action.Base"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
@@ -40,21 +44,23 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 	 <script src="../js/jquery.js"></script>
          
-        <script src="../js/tabtab.min.js"></script>
-    
-          
-        
-       
-        <!-- Google Analytics -->
-        <script src="../js/analytics.js">
-          
+      
+<link rel="stylesheet" href="../css/angular-material.css">
 
-        </script>
+<link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
 
-        <script src="../js/plugin.js"></script>
-        <script>
-$(window).load(function(){$(".tabs").tabtab({animateHeight:!1,fixedHeight:!1}),$(".tabdemo--one").tabtab({animateHeight:!0,fixedHeight:!1,scale:1,rotateX:0,speed:500,transformOrigin:"center left",rotateY:90,easing:"easeInOutCubic",translateX:0,tabMenu:".tabdemo__menu",tabContent:".tabdemo__content"}),$(".tabdemo--two").tabtab({animateHeight:!0,fixedHeight:!1,scale:1,rotateX:0,speed:500,transformOrigin:"center left",rotateY:90,easing:"easeInOutCubic",translateX:0,tabMenu:".tabdemo__menu",tabContent:".tabdemo__content"}),$(".package-managers-toggle").toggle({"class":"open",target:!1})});
-</script>
+
+<link rel="stylesheet" href="../css/angulartab.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"> </script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+<script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.js"></script>
+
+<script src="../js/angulartab.js"></script>
 		</head>
 			
 <body class="home page page-id-115 page-template-default has-toolbar">
@@ -189,242 +195,53 @@ $(window).load(function(){$(".tabs").tabtab({animateHeight:!1,fixedHeight:!1}),$
 
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
-           <section class="landing">
-            
-            <div class="tabs" role="tabs">
-                
-                
-                <div class="tabs__content">
-                    <div class="tabs__content-item active">
-                        <center><div style="color:#333333; margin-top: -75px;font-family: inherit;font-size:2.5em;">College Circular<br><br></div></center>
-                        <div style="width:100%;height:300px;line-height:3em;overflow-y:scroll;padding:5px; solid #149dd2;">
-<div align="left">
-        <%
-    Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt = conbatch.createStatement();
-                    ResultSet rst=stmt.executeQuery("select * from circular where type='circular'");
-                    String com1=null,name1=null,description1=null,path1=null;
-                    rst.beforeFirst();
-                    while(rst.next())
-                    {
-                        name1=rst.getString("name");
-                        description1=rst.getString("des");
-                        path1=rst.getString("path");
-                        com1=name1+" - "+description1;
-                        %>
-    <a href="${pageContext.request.contextPath}/formsdownload?ind1=<%=name1 %>&path=<%=path1 %>&type1=circular" ><%=com1%></a>
-    
-              <br>
-              <%
-              }  if(stmt!=null)
-                            stmt.close();
-                              if(conbatch!=null)
-                                conbatch.close();
-              %>
-    </div></div>
-                    </div>
-                    
-                    <div class="tabs__content-item">
-                          <center><div style="color:#333333; margin-top: -75px;font-family: inherit;font-size:2.5em;">Department Circular<br><br></div></center>
-        <div style="width:100%;height:300px;line-height:3em;overflow-y:scroll;padding:5px; solid #149dd2;">
-                    
-<div align="left">
-<% 
-              //  String deptname = request.getSession().getAttribute("deptname").toString();
-String deptname = Find.sdept(username);
-        String path = Base.path+"/"+deptname+"/";
-        List<String> list = new ArrayList<String>();
-        List<String> list1 = new ArrayList<String>();
-        List<String> list2 = new ArrayList<String>();
-        List<String> listp=new ArrayList<String>();
-          try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection1 = new dbcon().getConnection(Find.sdept(username));
-            Statement statement1 = connection1.createStatement();
-            ResultSet rs = statement1.executeQuery("select * from deptuploads");
-            
-            
-            while(rs.next())
-            {
-                String file = rs.getString("name");
-                String desc = rs.getString("desc");
-                String type = rs.getString("type");
-                String loc=rs.getString("path");
-                 list.add(file);
-                 list1.add(desc);
-                 list2.add(type);
-                 listp.add(loc);
-                 
-            }
-            
-            %>
-            
-            <%
-           
-            for(int i=0; i<list.size();i++)
-              {
-                  String str=list.get(i);
-                  //session.setAttribute(str,list.get(i));
-                  
-                  if(list2.get(i).equals("circular"))
-                  {
-                      
-            %>
-            <a href="${pageContext.request.contextPath}/formsdownload?ind1=<%=str %>&path=<%=listp.get(i)%>&type1=<%=list2.get(i)%>" ><%= list1.get(i) %></a>
-<br>
-<%
-                  }
-           }
-            session.setAttribute("size",list.size());
-              if(statement1!=null)
-                            statement1.close();
-                              if(connection1!=null)
-                                connection1.close();
-          }
-          catch(Exception e)
-          {
-               
-          }
-%>
-</div></div>
-           
-                    </div>
-
-           
-
- <div class="tabs__content-item">
-     
-                   <center><div style="color:#333333; margin-top: -75px;font-family: inherit;font-size:2.5em;">Exam Circular<br><br></div></center>
-     <div style="width:100%;height:300px;line-height:3em;overflow-y:scroll;padding:5px; solid #149dd2;">
-<div align="left">
-        <% 
-    
-        
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection1 = new dbcon().getConnection("sjitportal");
-            Statement statement1 = connection1.createStatement();
-            ResultSet rs11 = statement1.executeQuery("select * from exam_circular");
-            String path2=Base.path+"/portal/exam/";
-            
-            
-            
-            while(rs11.next())
-            {
-                String file = rs11.getString("file_name");
-                String desc = rs11.getString("descp");
-                 String loc =rs11.getString("location");
-                
-            
-            %>
-            
-            <a href="${pageContext.request.contextPath}/formsdownload?ind1=<%=file%>&path=<%=loc%>" ><%=desc%></a>
-<br>
-<%
-    }  if(statement1!=null)
-                            statement1.close();
-                              if(connection1!=null)
-                                connection1.close();
-%>
-    </div></div>
-                </div>
-                    
-                    <div class="tabs__content-item">
-                        <center><div style="color:#333333; margin-top: -75px;font-family: inherit;font-size:2.5em;">Events<br><br></div></center>
-                          <div style="width:100%;height:300px;line-height:3em;overflow-y:scroll;padding:5px; solid #149dd2;">
-                                        
-<div align="left">
-<% 
-                
-
+               <section class="landing">
+                   
        
-        List<String> list3 = new ArrayList<String>();
-        List<String> list4 = new ArrayList<String>();
-        List<String> list5 = new ArrayList<String>();
-          try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection2 = new dbcon().getConnection(Find.sdept(username));
-            Statement statement2 = connection2.createStatement();
-            ResultSet rs = statement2.executeQuery("select * from deptuploads");
+               <md-toolbar class="demo-toolbar md-primary _md _md-toolbar-transitions" style="width: 70%">
+                   
+        <div class="md-toolbar-tools">
             
+            <h3 class="ng-binding" style="text-align:center;">Circulars</h3>
+          <span flex="" class="flex"></span>
+        
+        </div>
+      </md-toolbar>
+               <div ng-cloak="" class="tabsdemoDynamicHeight" ng-app="MyApp" style="width:70%"> 
+  <md-content>
+    <md-tabs md-dynamic-height="" md-border-bottom="">
+      <md-tab label="College">
+        <md-content class="md-padding">
+          <h1 class="md-display-2"></h1>
+        
+          <%out.write(Circular.getHTMLContent(College.getAll("circular")));%>
+        </md-content>
+      </md-tab>
+      <md-tab label="Department">
+        <md-content class="md-padding">
+          <h1 class="md-display-2"></h1>
+          <%out.write(Circular.getHTMLContent(Department.getAll(Find.sdept(username),"%")));%>
+         
+        </md-content>
+      </md-tab>
+      <md-tab label="Exam">
+        <md-content class="md-padding">
+          <h1 class="md-display-2"></h1>
+          
+          <%out.write(Circular.getHTMLContent(Exam.getAll()));%>
+         
+        </md-content>
+      </md-tab>
+            <md-tab label="Events">
+        <md-content class="md-padding">
+          <h1 class="md-display-2"></h1>
+        <%out.write(Circular.getHTMLContent(College.getAll("event")));%>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
             
-            while(rs.next())
-            {
-                String file = rs.getString("name");
-                String desc = rs.getString("desc");
-                String type = rs.getString("type");
-                 list3.add(file);
-                 list4.add(desc);
-                 list5.add(type);
-                 
-            }
-            
-            %>
-            
-            <%
-           
-            for(int i=0; i<list3.size();i++)
-              {
-                  String str=list3.get(i);
-                  //session.setAttribute(str,list.get(i));
-                  
-                  if(list5.get(i).equals("event"))
-                  {
-                      String str1=path+"event/";
-                      session.setAttribute("path",str1);
-                      
-            %>
-            <a href="${pageContext.request.contextPath}/notesdownload?ind1=<%=str %>&type1=<%=list5.get(i) %>" ><%= list4.get(i) %></a>
-<br>
-<%
-                  }
-           }
-            session.setAttribute("size",list3.size());
-              if(statement2!=null)
-                            statement2.close();
-                              if(connection2!=null)
-                                connection2.close();
-          }
-          catch(Exception e)
-          {
-               
-          }
-%>
-<%
-     conbatch = new dbcon().getConnection("sjitportal");
-                     stmt = conbatch.createStatement();
-    
-    rst=stmt.executeQuery("select * from circular where type='event'");
-                    rst.beforeFirst();
-                    while(rst.next())
-                    {
-                        name1=rst.getString("name");
-                        description1=rst.getString("des");
-                        path1=rst.getString("path");
-                        com1=name1+" - "+description1;
-                        %>
-    <a href="${pageContext.request.contextPath}/formsdownload?ind1=<%=name1 %>&path=<%=path1 %>&type1=circular" ><%=com1%></a>
-    
-              <br>
-              <%
-              }  if(stmt!=null)
-                            stmt.close();
-                              if(conbatch!=null)
-                                conbatch.close();
-              %>
-
-</div>
-</div>
-                    </div>
-
-                </div>
-
-<ul class="tabs__menu">
-                    <li class="tabs__menu-item yanone active"><a href="#">College Circular</a></li>
-                    <li class="tabs__menu-item"><a href="#">Dept Circular</a></li>
-                    <li class="tabs__menu-item"><a href="#">Exam Circular</a></li>
-                    <li class="tabs__menu-item"><a href="#">Events</a></li>
-                </ul>
-            </div>
+        
             
         </section>
 

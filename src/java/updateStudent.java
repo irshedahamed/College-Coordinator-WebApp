@@ -118,6 +118,7 @@ public class updateStudent extends HttpServlet {
       String sadmission=request.getParameter("sadmission");
       String gname=request.getParameter("gname");
       String moi=request.getParameter("moi");
+      String scholarship=request.getParameter("scholarship");
       
       String doorno=request.getParameter("doorno");
       String street=request.getParameter("street");
@@ -192,7 +193,7 @@ public class updateStudent extends HttpServlet {
       PreparedStatement pstmt;
       String sql1="update student_general set dob="+"?"+", caste='"+caste+"', community='"+community+"', parents_annual_income='"+pincome+"', religion='"+religion+"', nationality='"+nationality+"', mother_tongue='"+mothertongue+"', club_member='"+clubmember+"', boardingpt='"+boardingpt+"' where rollno like '"+rollno+"'";
       String sql2="update student_academic_details set tenscl='"+school10+"', tenmrks='"+marks10+"', tenboard='"+board10+"', tenmed='"+med10+"', tenyop='"+yop10+"', twlscl='"+school12+"', twlmrks='"+marks12+"', twlboard='"+board12+"', twlmed='"+med12+"', twlyop='"+yop12+"', dipcoll='"+dipcoll+"', dipmrks='"+dipmark+"', dipboard='"+dipboard+"', dipmed='"+dipmed+"', dipyop='"+dipyop+"' where rollno like '"+rollno+"'";
-      String sql3="update student_admission_details set doa="+"?"+", adminallotment='"+adminalot+"', govt_mang='"+counormn+"', overallrank='"+orank+"', community_rank='"+crank+"', sports_admin='"+sadmission+"', gamename='"+gname+"', MOI='"+moi+"' where rollno like '"+rollno+"'";
+      String sql3="update student_admission_details set doa="+"?"+", adminallotment='"+adminalot+"', govt_mang='"+counormn+"', overallrank='"+orank+"', community_rank='"+crank+"', sports_admin='"+sadmission+"', gamename='"+gname+"', MOI='"+moi+"',scholarship='"+scholarship+"' where rollno like '"+rollno+"'";
       String sql4="update student_contact_details set Doorno='"+doorno+"', street='"+street+"', area='"+area+"', city='"+city+"',district='"+district+"', state='"+state+"', country='"+country+"', pincode='"+pincode+"' where rollno like '"+rollno+"'";
       String sql5="update student_father_details set fathers_name='"+fathername+"', qualification='"+qualification+"', occupation='"+occupation+"', designation='"+designation+"', address='"+address+"', landline='"+landline+"', mobile='"+mobile+"', mailid='"+mail+"' where rollno like '"+rollno+"'";
       String sql6="update student_mother_details set mothers_name='"+mothername+"', qualification='"+mqualification+"', occupation='"+moccupation+"', designation='"+mdesignation+"', address='"+maddress+"', landline='"+mlandline+"', mobile='"+mmobile+"', mailid='"+mmail+"' where rollno like '"+rollno+"'";

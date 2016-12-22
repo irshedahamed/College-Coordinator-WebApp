@@ -20,21 +20,34 @@ import java.util.logging.Logger;
  */
 public class Result {
     
-    public static Boolean passed(String rollno,String sem,String exam){
+   /* public static Boolean passed(String rollno,String sem,String exam){
     Boolean result=false;
     Connection conn=null;
     Statement stmt=null;
     try{
     conn=new dbcon().getConnection(Find.sdept(rollno));
     stmt=conn.createStatement();
-    ResultSet rs=stmt.executeQuery("SELECT MIN(CONVERT(model"+exam+",unsigned int)+CONVERT(cycle"+exam+",unsigned int)) as combined FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
+    ResultSet rs=stmt.executeQuery("SELECT model"+exam+",cycle"+exam+",(CONVERT(model"+exam+",unsigned int)+CONVERT(cycle"+exam+",unsigned int)) as combined FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
         if(rs.next())
         {
+            if(rs.getString("cycle"+exam).equals("N")){
+                if(rs.getString("model"+exam).equals("A"))
+                    result=true;
+                else if(Integer.parseInt(rs.getString("model"+exam))<45)
+                { result=false;}
+                else
+                result=true;
+           
+                }
+            else{
         int a=rs.getInt("combined");
-        if(a<58)
+        if(rs.getString("cycle"+exam).equals("A") && rs.getString("model"+exam).equals("A"))
+            result=true;
+        else if(a<58)
             result=false;
         else
             result=true;
+            }
         }
     }catch(Exception e){e.printStackTrace();}finally{
         try {
@@ -47,7 +60,7 @@ public class Result {
         }
     }
         return result;
-    }
+    }*/
     
     public static int numSubFailed(String rollno,String sem,String exam){
     int fail=0;
@@ -56,13 +69,20 @@ public class Result {
     try{
     conn=new dbcon().getConnection(Find.sdept(rollno));
     stmt=conn.createStatement();
-    ResultSet rs=stmt.executeQuery("SELECT (CONVERT(model"+exam+",unsigned int)+CONVERT(cycle"+exam+",unsigned int)) as combined FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
+    ResultSet rs=stmt.executeQuery("SELECT model"+exam+",cycle"+exam+",(CONVERT(model"+exam+",unsigned int)+CONVERT(cycle"+exam+",unsigned int)) as combined FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
         while(rs.next())
         {
+            if(!rs.getString("model"+exam).equals("A"))
+            if(rs.getString("cycle"+exam).equals("N")){
+            if(Integer.parseInt(rs.getString("model"+exam))<45)
+            fail++;
+            }
+            else{
         int a=rs.getInt("combined");
+        if(!(rs.getString("model"+exam).equals("A")&&  rs.getString("cyle"+exam).equals("A")))
         if(a<58)
             fail++;
-        
+            }
         }
     }catch(Exception e){e.printStackTrace();}finally{
         try {

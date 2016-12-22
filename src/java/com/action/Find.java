@@ -1,5 +1,7 @@
 package com.action;
 
+import java.util.Date;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -47,6 +49,30 @@ public class Find {
     return "first";
         
         
+    }
+    
+    public static String  getDate(){
+     String year=String.valueOf(new Date().getYear()+1900);
+    String month,day;
+    if(new Date().getMonth()+1<10)
+     month="0"+String.valueOf((new Date().getMonth()+1));
+    else 
+        month=String.valueOf((new Date().getMonth()+1));
+    if(new Date().getDate()<10)
+        day="0"+String.valueOf((new Date().getDate()));
+        else
+        day=String.valueOf((new Date().getDate()));
+    return year+month+day;
+    }
+    public static String category(String id){
+    if(id.contains("AD"))
+        return "Admission";
+    else if(id.contains("VE"))
+        return "Vendor";
+    else if(id.contains("VI"))
+        return "Visitor";
+    
+    return null;
     }
     
 }

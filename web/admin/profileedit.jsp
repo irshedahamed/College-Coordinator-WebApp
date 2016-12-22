@@ -70,13 +70,24 @@
         }
 
         $(document).ready(function(){
-            
+             $(document).on('change keyup','#religion',function(){
+               if($("#religion option:selected").val()==="others"){
+                   $("#religion").after('<input type="text" style="background: white" name="religion">');
+                   $("#religion").remove();
+               }
+            });
             $(document).on('change keyup','#counormn',function(){
                 
                 $("#adminalot option").remove();
                 console.log($("#counormn option:selected").val());
                 if($("#counormn option:selected").val()==="Counseling"){
-                    $("#adminalot").append(' <option value="GENERAL">GENERAL</option>'+
+                    $("#adminalot").append(' <option value="OC">OPEN</option>'+
+                                            ' <option value="BC">BC</option>'+
+                                            ' <option value="MBC">MBC</option>'+
+                                            ' <option value="BCM">BCM</option>'+
+                                            ' <option value="SC">SC</option>'+
+                                            ' <option value="SCA">SCA</option>'+
+                                            ' <option value="ST">ST</option>'+
                                            ' <option value="SPORTS">SPORTS</option>'+
                                            ' <option value="VOCATIONAL">VOCATIONAL</option>   '+                                       
                                            ' <option value="EX-SERVICEMAN">EX-SERVICEMAN</option>'+
@@ -88,6 +99,7 @@
                                            ' <option value="SPORTS">SPORTS</option>'+
                                            ' <option value="CHRISTIAN MINORITY">CHRISTIAN MINORITY</option>   '+                                       
                                            ' <option value="NRICGC">NRICGC</option>'+
+                                            ' <option value="FOREIGN">FOREIGN</option>'+
                                             '<option value="LAPS">LAPS</option>'+
                                         '');
                     
@@ -303,13 +315,36 @@
                                 </td></tr>
                                 <tr>
 
-                                <td><label>Community :</label><input type="text" style="background: white" id="community" name="community" value="<%=rs.getString("community")%>"></td>
+                                <td><label>Community :</label>
+                                    
+                                    
+                                 <select name="community">
+                                     <option value="<%=rs.getString("community")%>"><%=rs.getString("community")%></option>
+                                <option value="OC">OC</option>
+                                                    <option value="BC">BC</option>
+                                                    <option value="MBC">MBC</option>
+                                                    <option value="DC">DC</option>
+                                                    <option value="SC">SC</option>
+                                                    <option value="ST">ST</option>
+                                </select>
+                                
+                                
+                                </td>
                                     <td>
                                         <label>Parents Annual Income :</label><input type="text" style="background: white" id="pincome" name="pincome" value="<%=rs.getString("parents_annual_income")%>">
                                     </td>
 
                                     <td>
-                                        <label>Religion :</label><input type="text" style="background: white" id="religion" name="religion" value="<%=rs.getString("religion")%>">
+                                        <label>Religion :</label>
+                                       <select name="religion" id="religion">
+                                            <option value="<%=rs.getString("religion")%>"><%=rs.getString("religion")%></option>
+                                                    <option value="Hindu">Hindu</option>
+                                                    <option value="Muslim">Muslim</option>
+                                                    <option value="Christian">Christian</option>
+                                                    <option value="others">Others</option>
+                                                    
+                                        </select>
+                                        
                                     </td>
 
                                     <td>
@@ -464,6 +499,21 @@
                                     </td>
                                     <td>
                                         <label>Medium of Instruction :</label><input type="text"  style="background: white" id="moi" name="moi" value="<%=rs2.getString("MOI")%>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                          <label>Scholarship :</label>
+                                       <select name="scholarship" id="religion">
+                                            <option value="<%=rs2.getString("scholarship")%>" > <%=rs2.getString("scholarship")%></option>
+                                            <option value="NA">NA</option>
+                                                    <option value="First Graduate">First Graduate</option>
+                                                    <option value="Fee Waiver">Fee Waiver</option>
+                                                    <option value="SC/ST Scholarship">SC/ST Scholarship</option>
+                                                    
+                                                    
+                                        </select>
+                               
                                     </td>
                                 </tr>
                             </table>
