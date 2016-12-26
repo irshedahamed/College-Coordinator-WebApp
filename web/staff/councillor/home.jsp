@@ -1,3 +1,4 @@
+<%@page import="Actor.Staff"%>
 <%@page import="General.AcademicYear"%>
 <%@page import="Downloads.Department"%>
 <%@page import="Downloads.Exam"%>
@@ -198,7 +199,11 @@
                 <br><br><br><br>
                <section class="landing">
                    
-       <%=AcademicYear.getCurrentYear().getYear()%> 
+       <%
+       Staff s=new Staff(username);
+       out.write(s.getCouncillorDetails().getBatch());
+       
+       %> 
             
         </section>
 

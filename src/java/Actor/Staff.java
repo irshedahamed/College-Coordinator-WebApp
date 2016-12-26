@@ -11,6 +11,21 @@ package Actor;
  */
 public class Staff {
  
+    String id;
+    Councillor councillor;
+    
+    public Staff(String id){
+    
+        this.id=id;
+    }
+    
+    public  Councillor getCouncillorDetails(){
+        if(councillor==null){
+        councillor=new Councillor();
+        councillor.getCouncillor(id);
+        }
+    return councillor; 
+    }
     
     
 }
