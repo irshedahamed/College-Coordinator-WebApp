@@ -106,7 +106,7 @@ public class GuestEntry extends HttpServlet {
             file.mkdirs(); 
           String  name = new File(item.getName()).getName();
                         
-                        item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
+                        item.write( new File(UPLOAD_DIRECTORY + name));
                       }
                     
                 
@@ -115,6 +115,8 @@ public class GuestEntry extends HttpServlet {
             }catch(Exception e){
                 e.printStackTrace();
             }
+            
+            response.getWriter().print("Written");
         }else{
        
         Guest g=new Guest();
@@ -141,10 +143,10 @@ public class GuestEntry extends HttpServlet {
        
             if(act)
             {
-                  BarCode.generate(g.getId(),getServletContext().getRealPath("")+request.getSession().getAttribute("username").toString()+"/");
+                  BarCode.generate(g.getId(),getServletContext().getRealPath("")+File.separator+request.getSession().getAttribute("username").toString()+"/");
          response.setContentType("text/html;charset=UTF-8");
           response.getWriter().write("<h1>"+category+"</h1><br>");
-        response.getWriter().write("<img src='"+request.getSession().getAttribute("username").toString()+"/"+g.getId()+"/"+g.getId()+".png'  />");
+        response.getWriter().write("<img src='/"+request.getSession().getAttribute("username").toString()+"/"+g.getId()+"/"+g.getId()+".png'  />");
       
             }
        else

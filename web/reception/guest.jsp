@@ -178,7 +178,7 @@
                                 xmlhttp.onreadystatechange=function(respone){
                                     if(xmlhttp.status===200 && xmlhttp.readyState===4){
                                         
-                                        //console.log(xmlhttp.responseText);
+                                        console.log(xmlhttp.responseText);
                                     }
                                 };
                                 xmlhttp.send(fd);

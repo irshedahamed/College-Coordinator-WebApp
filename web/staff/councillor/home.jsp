@@ -1,3 +1,4 @@
+<%@page import="Actor.Student"%>
 <%@page import="Actor.Staff"%>
 <%@page import="General.AcademicYear"%>
 <%@page import="Downloads.Department"%>
@@ -201,7 +202,14 @@
                    
        <%
        Staff s=new Staff(username);
-       out.write(s.getCouncillorDetails().getBatch());
+       
+       for(Student stu:Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(),s.getCouncillorDetails().getSec())){
+       
+       
+      out.println(stu.getName());
+       }
+       
+           
        
        %> 
             
@@ -263,7 +271,7 @@
     }
     else
     {
-        response.sendRedirect("../index.jsp");
+        response.sendRedirect("../../index.jsp");
     }
                     if(sttt!=null)
                             sttt.close();
@@ -273,7 +281,7 @@
 catch(Exception e)
     {
         e.printStackTrace();
-        response.sendRedirect("../index.jsp");
+        response.sendRedirect("../../index.jsp");
     }
     
           
