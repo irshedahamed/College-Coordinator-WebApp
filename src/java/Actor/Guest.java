@@ -118,7 +118,8 @@ public class Guest {
     try{
     conn=new dbcon().getConnection("sjitportal");
     stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from guest where id like '"+id+"%'");
+    String id;
+                    ResultSet rs=stmt.executeQuery("select * from guest where id like '"+this.id+"%'");
                     
                     rs.afterLast();
                     if(rs.previous()){
@@ -126,28 +127,21 @@ public class Guest {
                     }
                     
                     if(previd==null)
-                        id+="001";
+                        this.id+="001";
                     else{
                         id=previd.substring(previd.length()-3, previd.length());
                         id=String.valueOf(Integer.valueOf(id)+1);
-                    while(id.length()<3)
+                      
+                        while(id.length()<3)
                         id+="0"+id;
+                        
+                        this.id=this.id+id;
                     }
                     
-                    stmt.execute("insert into guest values('"+id+"','"+name+"','"+city+"','"+mobile+"','"+mail+"','"+address+"','"+reason
+                    stmt.execute("insert into guest values('"+this.id+"','"+name+"','"+city+"','"+mobile+"','"+mail+"','"+address+"','"+reason
                     +"','"+meet+"','"+sex+"')");
                     
-                    FileInputStream input=new FileInputStream(new File(path));
-                    File op=new File("../../Guest/"+id+".jpg");
-                    op.createNewFile();
-                    FileOutputStream output=new FileOutputStream(new File("../../Guest/"+id+".jpg"));
-                    int b ;
-                    while((b=input.read())!=-1)
-                    output.write(b);
-                    
-                    File dir=new File(path);
-        if(dir.exists())
-           FileUtils.deleteDirectory(dir);
+   
                    
                 return true;
     }catch(Exception e){

@@ -106,7 +106,7 @@ public class GuestEntry extends HttpServlet {
             file.mkdirs(); 
           String  name = new File(item.getName()).getName();
                         
-                        item.write( new File(UPLOAD_DIRECTORY + name));
+                        item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
                       }
                     
                 
@@ -143,9 +143,11 @@ public class GuestEntry extends HttpServlet {
        
             if(act)
             {
+            File file = new File(UPLOAD_DIRECTORY + File.separator +"photo.jpg");
+            file.renameTo(new File(UPLOAD_DIRECTORY + File.separator +g.getId()+".jpg"));
                   BarCode.generate(g.getId(),getServletContext().getRealPath("")+File.separator+request.getSession().getAttribute("username").toString()+"/");
          response.setContentType("text/html;charset=UTF-8");
-          response.getWriter().write("<h1>"+category+"</h1><br>");
+          response.getWriter().write("<h1>"+g.getId()+"</h1><br>");
         response.getWriter().write("<img src='/"+request.getSession().getAttribute("username").toString()+"/"+g.getId()+"/"+g.getId()+".png'  />");
       
             }

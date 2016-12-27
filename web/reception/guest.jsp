@@ -4,6 +4,9 @@
     Author     : Home
 --%>
 
+<%@page import="java.io.FileOutputStream"%>
+<%@page import="java.io.FileInputStream"%>
+<%@page import="java.io.File"%>
 <%@page import="Actor.Guest"%>
 <%@page import="General.Batch"%>
 <%-- 
@@ -382,12 +385,22 @@ $(document).ready(function(){
                         Statement stmt=null;
                     if(request.getParameter("search")!=null){
                         Guest g=Guest.getById(id);
+                        if(g!=null){
          %>
          <div id="old">
             <table>
              <tr><td rowspan="7">
+                    <%
+                         FileInputStream input=new FileInputStream(new File(Base.path+"/reception/"+g.getId()+".jpg"));
+                    File op=new File("./guest.jpg");
+                    //op.createNewFile();
+                    FileOutputStream output=new FileOutputStream(new File(getServletContext().getRealPath("")+"/guest.jpg"));
+                    int b ;
+                    while((b=input.read())!=-1)
+                    output.write(b);
                     
-                    <img src="../../Guest/<%=g.getId()%>.jpg" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                    %>
+                     <img src="../guest.jpg" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                 
           
                  </td></tr>
@@ -440,6 +453,7 @@ $(document).ready(function(){
             </form>
         </div>
         <%
+            }
         }
         %>
  <br><br>
