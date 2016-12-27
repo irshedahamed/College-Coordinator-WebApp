@@ -474,6 +474,7 @@ $(document).ready(function(){
                  <option value="AD">Admission</option>
                  <option value="VE">Vendor</option>
                  <option value="VI">Visitor</option>
+                 <option value="AL">Alumni</option>
              </select>
                  </td></tr>
              <tr><td>

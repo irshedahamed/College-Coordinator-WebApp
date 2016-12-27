@@ -1,4 +1,9 @@
 <%-- 
+    Document   : personalReport
+    Created on : 27 Dec, 2016, 9:23:01 PM
+    Author     : Home
+--%>
+<%-- 
     Document   : home
     Created on : 18 Nov, 2016, 5:57:23 PM
     Author     : Home
@@ -120,53 +125,21 @@
           <section class="landing">
                    
        
-             <center><form action="display.jsp" class="sky-form" method="post" target="_blank">
+             <center><form action="personalDisplay.jsp" class="sky-form" method="post" target="_blank">
     <header>DAILY REPORT</header>
     <fieldset>					
 					<section>
-                                            
-                                            <label class="input">
-                                                    <div align="left" size="3px"><b>USER TYPE</b></div>
-							<label class="select">
-           
-               <select name="choose" required>
-                <option  disabled selected>Select</option>
-    
-                        <option value="staff">STAFF</option>
-                                                    <option value="student">STUDENT</option>
-                                                    <option value="guest">GUEST</option>
-               
-            </select>
-                    <i></i>                                    </label>
-                                                </label>
-                                 <br><br>           
-						<label class="input">
-                                                    <div align="left" size="3px"><b>DEPARTMENT</b></div>
-							<label class="select">
-           
-               <select id="dept" name="dept" required>
-                <option  disabled selected>Select</option>
-    
-                        <option value="cse">CSE</option>
-                                                    <option value="ece">ECE</option>
-                                                    <option value="mech">MECH</option>
-                                                    <option value="it">IT</option>
-                                                    <option value="civil">CIVIL</option>
-                                                    <option value="eee">EEE</option>
-               
-            </select>
-                    <i></i>                                    </label>
-                                                </label>
+
                                         
                                             <br><br>
             
             
             <label class="input">
                                                     <div align="left" size="3px" id="div7"><b>
-                                                             Date</b></div>
+                                                             ID</b></div>
                 <label class="input">
             
-            <input type="date" id="datepicker" placeholder="yyyy/mm/dd" name="datepicker" />
+            <input type="text"  placeholder="Student/Staff/Guest" name="id" />
             
              <i></i>
             <br> <br>

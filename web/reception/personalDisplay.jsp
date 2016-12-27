@@ -1,3 +1,8 @@
+<%-- 
+    Document   : personalDisplay
+    Created on : 27 Dec, 2016, 9:25:23 PM
+    Author     : Home
+--%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
@@ -58,14 +63,15 @@
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
 <%
     int i=0;
-String user=request.getParameter("choose");
-String dept=request.getParameter("dept");
-String dateonentry=request.getParameter("datepicker");
-String enddate;
-if(request.getParameter("enddatepicker")==null)
-    enddate=dateonentry;
-else
-    enddate=request.getParameter("enddatepicker");
+    String id=request.getParameter("id");
+    String dept=Find.sdept(id);
+    String user;
+    if(id.length()>8)
+        user="guest";
+    else if(Character.isDigit(id.charAt(0)))
+        user="student";
+    else
+        user="staff";
     
     
 
@@ -84,9 +90,9 @@ try
                            stmt=conn.createStatement();
                             String sql;
                             if(user.equals("student"))
-                            sql="select a.rollno,a.intime,a.outtime,b.rollno,b.name,b.mobileno from entry a,"+dept+".student_personal b where ( (intime >= '"+dateonentry+"%' and intime <= '"+enddate+"%') or (outtime >= '"+dateonentry+"%' and outtime <= '"+enddate+"%')) and a.rollno=b.rollno";
+                            sql="select a.rollno,a.intime,a.outtime,b.rollno,b.name,b.mobileno from entry a,"+dept+".student_personal b where a.rollno like '"+id+"' and a.rollno=b.rollno";
                             else
-                                sql="select a.rollno,a.intime,a.outtime,CONCAT(b.tittle,b.name) as name,b.mobile1 as mobileno,b.desg from entry a,"+dept+".staff_general b where ( (intime >= '"+dateonentry+"%' and intime <= '"+enddate+"%') or (outtime >= '"+dateonentry+"%' and outtime <= '"+enddate+"%')) and a.rollno=b.staffid";
+                                sql="select a.rollno,a.intime,a.outtime,CONCAT(b.tittle,b.name) as name,b.mobile1 as mobileno,b.desg from entry a,"+dept+".staff_general b where a.rollno like '"+id+"' and a.rollno=b.staffid";
                             ResultSet rs=stmt.executeQuery(sql);
                        
                             
@@ -94,7 +100,8 @@ try
 %>
                             
 <center>
-    <h3>Entry Report from <%=dateonentry%> till <%=enddate%></h3>
+    
+      <h3>Personal Report </h3>
     <h3>Category: <%=user.toUpperCase()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Department: <%=dept.toUpperCase()%></h3>
     <br>    
                             <table class="bordered">
@@ -183,7 +190,7 @@ try
                            stmt=conn.createStatement();
                             String sql;
               
-                                sql="select a.rollno,a.intime,a.outtime,b.name,b.sex,b.mobile,b.meet,b.reason from entry a,guest b where ( (intime >= '"+dateonentry+"%' and intime <= '"+enddate+"%') or (outtime >= '"+dateonentry+"%' and outtime <= '"+enddate+"%')) and a.rollno=b.id";
+                                sql="select a.rollno,a.intime,a.outtime,b.name,b.sex,b.mobile,b.meet,b.reason from entry a,guest b where a.rollno like '"+id+"' and a.rollno=b.id";
                             ResultSet rs=stmt.executeQuery(sql);
                        
                       
@@ -191,7 +198,7 @@ try
 %>
                             
 <center>
-      <h3>Entry Report from <%=dateonentry%> till <%=enddate%></h3>
+      <h3>Personal Report </h3>
     <h3>Category: <%=user.toUpperCase()%></h3>
     <br>    
                             <table class="bordered">
@@ -221,7 +228,7 @@ try
                                 
                                 <td> <%=rs.getString("sex")%> </td>
                                 <td> <%=rs.getString("mobile")%> </td>
-                                <%
+                                  <%
                                 String[] meet=rs.getString("meet").split("_");
                                 %>
                                  <td> <%=meet[meet.length-1]%> </td>

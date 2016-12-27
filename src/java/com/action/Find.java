@@ -71,6 +71,8 @@ public class Find {
         return "Vendor";
     else if(id.contains("VI"))
         return "Visitor";
+    else if(id.contains("AL"))
+        return "Alumni";
     
     return null;
     }
