@@ -63,7 +63,9 @@
         
         $(document).ready(function(){
                 $("form").submit(function(){
-
+                    console.log($(this).attr('class'));
+                    if($(this).attr('class').includes("batchupdate"))
+                        return true;
         flag=0;
                     $(".check").each(function(index){
                         if($(this).val()=== '')
@@ -776,7 +778,7 @@
                 </div>
             <div id="excel">
                 <center>
-                   <form action="${pageContext.request.contextPath}/ExcelStudentUpload" class="sky-form" method="post" enctype="multipart/form-data">
+                   <form action="${pageContext.request.contextPath}/ExcelStudentUpload" class="sky-form batchupdate" method="post" enctype="multipart/form-data">
                 <header>BATCH UPDATE</header>
     <fieldset>					
 					<section>
@@ -795,7 +797,7 @@
                  
                  <br><br> 
                  <div align="right">
-            <input type="submit" id="submit" value="Submit" /></div>
+            <input type="submit"  id="submit" value="Submit" /></div>
                                         </section>
     </fieldset>
                 

@@ -5,6 +5,7 @@
  */
 package Actor;
 
+import com.action.Find;
 import dbconnection.dbcon;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -115,5 +116,44 @@ public class Student {
         
     
     return list;
+    }
+    
+      public static Student getById(String id){
+        
+               Connection conn=null;
+    Statement stmt=null;
+    Student s=new Student();
+        try{
+            
+    conn=new dbcon().getConnection(Find.sdept(id));
+    stmt = conn.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from student_personal where rollno like '"+id+"'");
+                    
+                    
+                    rs.beforeFirst();
+                    while(rs.next()){
+                        s.setBatch(rs.getString("batch"));
+                        s.setDept(rs.getString("dept"));
+                        s.setRegno(rs.getString("regno"));
+                        s.setName(rs.getString("name"));
+                        s.setId(rs.getString("rollno"));
+                        s.setSec(rs.getString("sec"));
+                        
+                    }
+    }catch(Exception e){
+    e.printStackTrace();
+    }finally{
+        try {
+            if(stmt!=null)
+                stmt.close();
+            if(conn!=null)
+                conn.close();
+        } catch (SQLException ex) {
+      ex.printStackTrace();
+        }
+    }
+        
+    
+    return s;
     }
 }

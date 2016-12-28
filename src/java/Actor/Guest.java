@@ -203,4 +203,49 @@ public class Guest {
     }
     return g;
     }
+    
+    
+     public static Guest getByMobile(String mobile){
+        Guest g=new  Guest();
+        
+        
+          Connection conn=null;
+    Statement stmt=null;
+   String previd=null;
+   
+   
+    
+    try{
+    conn=new dbcon().getConnection("sjitportal");
+    stmt = conn.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from guest where mobile like '"+mobile+"'");
+                    
+                    
+                    if(rs.next()){
+                     g.setId(rs.getString("id"));
+                     g.setAddress(rs.getString("address"));
+                     g.setCity(rs.getString("city"));
+                     g.setReason(rs.getString("reason"));
+                     g.setMeet(rs.getString("meet"));
+                     g.setMail(rs.getString("mail"));
+                     g.setMobile(rs.getString("mobile"));
+                     g.setName(rs.getString("name"));
+                     g.setSex(rs.getString("sex"));
+                    }
+                    
+                    
+    }catch(Exception e){
+    e.printStackTrace();
+    }finally{
+        try {
+            if(stmt!=null)
+                stmt.close();
+            if(conn!=null)
+                conn.close();
+        } catch (SQLException ex) {
+      ex.printStackTrace();
+        }
+    }
+    return g;
+    }
 }

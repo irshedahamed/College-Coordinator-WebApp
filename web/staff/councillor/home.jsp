@@ -209,6 +209,8 @@
       out.println(stu.getName());
        }
        
+       session.setAttribute("Councillor",s.getCouncillorDetails());
+       
            
        
        %> 

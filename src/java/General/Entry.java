@@ -5,6 +5,7 @@
  */
 package General;
 
+import Actor.Student;
 import com.action.Find;
 import dbconnection.dbcon;
 import java.sql.Connection;
@@ -12,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  *
@@ -56,7 +58,13 @@ public class Entry {
         this.rollno = rollno;
     }
 
-   
+   public String getSMSContent(String action){
+       if(action.equals("IN"))
+           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") has entered our premises at "+new Date();
+       else
+           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") left our premises at "+new Date();
+       
+   }
     
     public boolean insertin(){
         Connection conn=null;

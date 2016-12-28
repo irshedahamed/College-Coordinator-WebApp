@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -174,11 +175,14 @@ public class GuestEntry extends HttpServlet {
             
         
           response.getWriter().write("Meet: "+g.getMeet()+"<br>");
-           response.getWriter().write("Reason: "+g.getReason());
+           response.getWriter().write("Reason: "+g.getReason()+"<br>");
+            response.getWriter().write("Time : "+new Date());
         response.getWriter().write("</div>");
         
-        response.getWriter().write("<br><br><center><img src='/"+request.getSession().getAttribute("username").toString()+"/"+g.getId()+"/"+g.getId()+".png'  /><br><br>");
-          response.getWriter().write(g.getId()+"</center><br>");
+     //   response.getWriter().write("<br><br><center><img src='/"+request.getSession().getAttribute("username").toString()+"/"+g.getId()+"/"+g.getId()+".png'  /><br><br>");
+      response.getWriter().write("<center><br>");
+           
+      response.getWriter().write(g.getId()+"</center><br>");
        response.getWriter().write("</div>");
             }
        else

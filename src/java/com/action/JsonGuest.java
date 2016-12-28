@@ -3,13 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package com.action;
 
-import General.Entry;
-import General.Parent;
-import com.action.Find;
-import com.action.SMSTemplate;
+import Actor.Guest;
+import com.google.gson.Gson;
+import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Home
  */
-public class addEntry extends HttpServlet {
+public class JsonGuest extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +45,10 @@ public class addEntry extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet addEntry</title>");            
+            out.println("<title>Servlet JsonGuest</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet addEntry at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet JsonGuest at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -76,40 +82,16 @@ public class addEntry extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
+      //  processRequest(request, response);
+       String mobile=request.getParameter("mobile");
+     Guest g=Guest.getByMobile(mobile);
        
-       Entry e=new Entry();
-       boolean act=false;
-       e.setRollno(request.getParameter("rollno"));
-       e.setBy(request.getParameter("by"));
-       String action=request.getParameter("entry");
-        response.setContentType("text/html;charset=UTF-8");
-         response.getWriter().println("<link href='css/bootstrap.min.css' rel='stylesheet'><br><br><br>");
-       
-         if(action.equals("IN"))
-             act=e.insertin();
-         else if(action.equals("OUT"))
-             act=e.insertout();
-             
-         if(Character.isDigit(e.getRollno().charAt(0))){
-             String message;
-             message=e.getSMSContent(action);
-        
-             
-             
-             
-             //SMSTemplate.send(Parent.getNumber(e.getRollno()),message);
-         }
-        
-         if(act)
-           response.getWriter().println("<center><h1>Entry added Successfully!!!</h1>");
-       else
-           response.getWriter().println("<center><h1>Entry Failed</h1>");
-       if(Find.category(e.getRollno())==null)
-       response.getWriter().println("<br><br><a href='reception/entry.jsp'><input type='button' id='sumbit' value='back'></a></center>");
-       else
-       response.getWriter().println("<br><br><a href='reception/guest.jsp'><input type='button' id='sumbit' value='back'></a></center>");
-           
+              
+                String json;
+                json=new Gson().toJson(g);
+                response.setContentType("application/json");
+                response.getWriter().print(json);
+               
     }
 
     /**
