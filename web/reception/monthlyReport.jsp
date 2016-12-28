@@ -118,7 +118,21 @@
 					</div>
 				</div>
 			</div>
-		</header>
+	
+                    <script>
+                        
+                        $(document).ready(function(){
+            $("#choose").on('change keydown',function(){
+                
+                if($(this).val()==="guest")
+                    $(".dept").hide();
+                else
+                    $(".dept").show();
+            });            
+                        });
+                        
+                    </script>
+                </header>
 
 
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
@@ -127,7 +141,7 @@
                    
        
              <center><form action="display.jsp" class="sky-form" method="post" target="_blank">
-    <header>DAILY REPORT</header>
+    <header>MONTHLY REPORT</header>
     <fieldset>					
 					<section>
                                             
@@ -135,7 +149,7 @@
                                                     <div align="left" size="3px"><b>USER TYPE</b></div>
 							<label class="select">
            
-               <select name="choose" required>
+               <select id="choose" name="choose" required>
                 <option  disabled selected>Select</option>
     
                         <option value="staff">STAFF</option>
@@ -145,7 +159,8 @@
             </select>
                     <i></i>                                    </label>
                                                 </label>
-                                 <br><br>           
+                <div class="dept">
+                                            <br><br>           
 						<label class="input">
                                                     <div align="left" size="3px"><b>DEPARTMENT</b></div>
 							<label class="select">
@@ -163,7 +178,7 @@
             </select>
                     <i></i>                                    </label>
                                                 </label>
-                                        
+                </div>                    
                                             <br><br>
             
             

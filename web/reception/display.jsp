@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
@@ -46,7 +48,8 @@
 	
 		
 		</head>
-		
+<center>
+    <img src="../images/logo2.png" height="165px" width="700px" />	</center>	
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
 		        
@@ -56,7 +59,8 @@
 
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-<%
+
+            <%
     int i=0;
 String user=request.getParameter("choose");
 String dept=request.getParameter("dept");
@@ -68,7 +72,11 @@ else
     enddate=request.getParameter("enddatepicker");
     
     
-
+SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+Calendar c = Calendar.getInstance();
+c.setTime(sdf.parse(enddate));
+c.add(Calendar.DATE, 1);  
+enddate = sdf.format(c.getTime());
 
 
 if(user.equals("student")||user.equals("staff"))
@@ -83,7 +91,7 @@ try
                             
                            stmt=conn.createStatement();
                             String sql;
-                            if(user.equals("student"))
+                                if(user.equals("student"))
                             sql="select a.rollno,a.intime,a.outtime,b.rollno,b.name,b.mobileno from entry a,"+dept+".student_personal b where ( (intime >= '"+dateonentry+"%' and intime <= '"+enddate+"%') or (outtime >= '"+dateonentry+"%' and outtime <= '"+enddate+"%')) and a.rollno=b.rollno";
                             else
                                 sql="select a.rollno,a.intime,a.outtime,CONCAT(b.tittle,b.name) as name,b.mobile1 as mobileno,b.desg from entry a,"+dept+".staff_general b where ( (intime >= '"+dateonentry+"%' and intime <= '"+enddate+"%') or (outtime >= '"+dateonentry+"%' and outtime <= '"+enddate+"%')) and a.rollno=b.staffid";
@@ -94,8 +102,24 @@ try
 %>
                             
 <center>
-    <h3>Entry Report from <%=dateonentry%> till <%=enddate%></h3>
-    <h3>Category: <%=user.toUpperCase()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Department: <%=dept.toUpperCase()%></h3>
+    <h3>Entry Report from <%=dateonentry%> till <%=enddate%></h3><br>
+    <h4>Category: <%=user.toUpperCase()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Department: <%=dept.toUpperCase()%></h4>
     <br>    
                             <table class="bordered">
                                 <tr>   
@@ -191,8 +215,8 @@ try
 %>
                             
 <center>
-      <h3>Entry Report from <%=dateonentry%> till <%=enddate%></h3>
-    <h3>Category: <%=user.toUpperCase()%></h3>
+      <h3>Entry Report from <%=dateonentry%> till <%=enddate%></h3><br>
+    <h4>Category: <%=user.toUpperCase()%></h4>
     <br>    
                             <table class="bordered">
                                 <tr>   

@@ -50,6 +50,8 @@
     
 	
 		
+<center>
+    <img src="../images/logo2.png" height="165px" width="700px" />	</center>
 		</head>
 		
 <body class="home page page-id-115 page-template-default has-toolbar">
@@ -101,9 +103,24 @@ try
                             
 <center>
     
-      <h3>Personal Report </h3>
-    <h3>Category: <%=user.toUpperCase()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Department: <%=dept.toUpperCase()%></h3>
-    <br>    
+      <h3>Personal Report </h3><br>
+   <h4>Category: <%=user.toUpperCase()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Department: <%=dept.toUpperCase()%></h4> <br>    
                             <table class="bordered">
                                 <tr>   
                                 <th>S.No</th>
@@ -198,8 +215,8 @@ try
 %>
                             
 <center>
-      <h3>Personal Report </h3>
-    <h3>Category: <%=user.toUpperCase()%></h3>
+      <h3>Personal Report </h3><br>
+    <h4>Category: <%=user.toUpperCase()%></h4>
     <br>    
                             <table class="bordered">
                                 <tr>   

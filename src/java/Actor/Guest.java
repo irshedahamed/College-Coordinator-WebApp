@@ -185,6 +185,7 @@ public class Guest {
                      g.setMail(rs.getString("mail"));
                      g.setMobile(rs.getString("mobile"));
                      g.setName(rs.getString("name"));
+                     g.setSex(rs.getString("sex"));
                     }
                     
                     

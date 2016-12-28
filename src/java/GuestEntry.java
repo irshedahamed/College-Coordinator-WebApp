@@ -8,9 +8,12 @@ import Actor.Guest;
 import General.BarCode;
 import General.Entry;
 import com.action.Base;
+import com.action.Find;
 import com.lowagie.text.Image;
 import com.lowagie.text.pdf.BarcodeEAN;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -147,21 +150,41 @@ public class GuestEntry extends HttpServlet {
             file.renameTo(new File(UPLOAD_DIRECTORY + File.separator +g.getId()+".jpg"));
                   BarCode.generate(g.getId(),getServletContext().getRealPath("")+File.separator+request.getSession().getAttribute("username").toString()+"/");
          response.setContentType("text/html;charset=UTF-8");
-          response.getWriter().write("<h1>"+g.getId()+"</h1><br>");
-        response.getWriter().write("<img src='/"+request.getSession().getAttribute("username").toString()+"/"+g.getId()+"/"+g.getId()+".png'  />");
-      
+       
+         response.getWriter().write("<div style=\"width:300px\n" +
+"              ;border:black 1px solid;\">\n" +
+"  <div style=\"background-color:grey;height:50px;margin-top:-21px;\">\n" +
+"    \n" +
+"");
+          response.getWriter().write("<center>    <h1 style=\"color:white;padding: 5px;\">"+Find.category(g.getId()).toUpperCase()+"</h1><br></center></div>");
+          
+                    FileInputStream input=new FileInputStream(new File(Base.path+"/reception/"+g.getId()+".jpg"));
+                    File op=new File("./guest.jpg");
+                    //op.createNewFile();
+                    FileOutputStream output=new FileOutputStream(new File(getServletContext().getRealPath("")+"/guest.jpg"));
+                    int b ;
+                    while((b=input.read())!=-1)
+                    output.write(b);
+                    
+                    response.getWriter().print("   <img src=\"guest.jpg\" height=\"95px\" width='50%' onerror=\"this.onerror=null;this.src='images/face.jpg';\" />");
+                    
+                  
+         response.getWriter().write("<div style=\"float:right;width:50%;overflow-wrap: break-word;\">");
+            response.getWriter().write("Name: "+g.getName()+"<br>");
+            
+        
+          response.getWriter().write("Meet: "+g.getMeet()+"<br>");
+           response.getWriter().write("Reason: "+g.getReason());
+        response.getWriter().write("</div>");
+        
+        response.getWriter().write("<br><br><center><img src='/"+request.getSession().getAttribute("username").toString()+"/"+g.getId()+"/"+g.getId()+".png'  /><br><br>");
+          response.getWriter().write(g.getId()+"</center><br>");
+       response.getWriter().write("</div>");
             }
        else
            response.getWriter().println("<center><h1>Entry Failed</h1>");
         
         
-        /*  //For Delete 
-        String path=getServletContext().getRealPath("")+"/"+request.getSession().getAttribute("username").toString()+"/"+id+File.separator;
-      
-      File dir=new File(path);
-        if(dir.exists())
-           FileUtils.deleteDirectory(dir);
-        */
         
         }
     }

@@ -112,6 +112,22 @@
 					</div>
 				</div>
 			</div>
+                    
+
+                <script>
+
+                    $(document).ready(function(){
+        $("#choose").on('change keydown',function(){
+
+            if($(this).val()==="guest")
+                $(".dept").hide();
+            else
+                $(".dept").show();
+        });            
+                    });
+
+                </script>
+                    
 		</header>
 
 
@@ -129,7 +145,7 @@
                                                     <div align="left" size="3px"><b>USER TYPE</b></div>
 							<label class="select">
            
-               <select name="choose" required>
+               <select id="choose" name="choose" required>
                 <option  disabled selected>Select</option>
     
                         <option value="staff">STAFF</option>
@@ -139,8 +155,10 @@
             </select>
                     <i></i>                                    </label>
                                                 </label>
-                                 <br><br>           
-						<label class="input">
+                                 <div class="dept">
+			
+                                            <br><br>        
+                        			<label class="input">
                                                     <div align="left" size="3px"><b>DEPARTMENT</b></div>
 							<label class="select">
            
@@ -157,6 +175,7 @@
             </select>
                     <i></i>                                    </label>
                                                 </label>
+                                 </div>
                                         
                                             <br><br>
             
