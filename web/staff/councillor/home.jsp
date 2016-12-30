@@ -1,3 +1,4 @@
+<%@page import="Actor.Councillor"%>
 <%@page import="Actor.Student"%>
 <%@page import="Actor.Staff"%>
 <%@page import="General.AcademicYear"%>
@@ -211,8 +212,8 @@
        
        session.setAttribute("Councillor",s.getCouncillorDetails());
        
-           
-       
+        Councillor c=(Councillor)session.getAttribute("councillor");
+      
        %> 
             
         </section>
