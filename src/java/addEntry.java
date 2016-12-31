@@ -5,7 +5,7 @@
  */
 
 import General.Entry;
-import General.Parent;
+import Actor.Parent;
 import com.action.Find;
 import com.action.SMSTemplate;
 import java.io.IOException;

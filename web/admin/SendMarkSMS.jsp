@@ -3,7 +3,7 @@
     Created on : 19 Oct, 2016, 8:11:20 PM
     Author     : Home
 --%>
-<%@page import="General.Parent"%>
+<%@page import="Actor.Parent"%>
 <%-- 
     Document   : SendSMS
     Created on : Jul 21, 2016, 2:52:23 PM

@@ -5,6 +5,7 @@
  */
 package com.action;
 
+import Actor.Parent;
 import com.google.gson.Gson;
 import dbconnection.dbcon;
 import java.io.IOException;
@@ -85,45 +86,7 @@ public class SMSSender extends HttpServlet {
        Connection conn=null;
        Statement stmt=null;
        String number="";
-       try{
-           conn=new dbcon().getConnection(Find.sdept(rollno));
-           stmt=conn.createStatement();
-           String sql="select mobile from student_father_details where rollno='"+rollno+"'";
-       ResultSet rs=stmt.executeQuery(sql);
-       
-       if(rs.next())
-       {
-       number=rs.getString("mobile");
-      
-       if(number==null || number.trim().equals(""))
-       {  
-       
-           sql="select mobileno from student_mother_details where rollno='"+rollno+"'";
-           rs=stmt.executeQuery(sql);
-           if(rs.next())
-       {
-           
-       number=rs.getString("mobileno");
-       
-       }
-       }   
-           
-       }
-       
-       
-       }catch(Exception e){
-       e.printStackTrace();
-       }finally{
-           try {
-               if(stmt!=null)
-                   stmt.close();
-               if(conn!=null)
-                   conn.close();
-           } catch (SQLException ex) {
-               ex.printStackTrace();
-           }
-       
-       }
+       number=Parent.getNumber(rollno);
                         String message="";
                         
                         if(reason.equals("AB"))

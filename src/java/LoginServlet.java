@@ -121,6 +121,7 @@ public class LoginServlet extends HttpServlet {
                    session.setAttribute("password",s2);
                    //session.setAttribute("deptname", "cse");
                    request.setAttribute("tt","new");
+                   
                   if(s3.equals("student"))
                    response.sendRedirect("student/home.jsp?user="+s1);
                   else if(s3.equals("staff"))
@@ -142,6 +143,8 @@ public class LoginServlet extends HttpServlet {
                       response.sendRedirect("exam/home.jsp?user="+s1);
                   else if(s3.equals("yearincharge"))
                       response.sendRedirect("attendanceincharge/home.jsp?user="+s1);
+                  else if(s3.equals("hostel"))
+                      response.sendRedirect("hostel/home.jsp?user="+s1);
                   else
                   {
                       
