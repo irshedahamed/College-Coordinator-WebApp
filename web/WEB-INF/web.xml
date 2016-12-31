@@ -77,8 +77,8 @@
         <servlet-class>batchupdate</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>batchdelete</servlet-name>
-        <servlet-class>batchdelete</servlet-class>
+        <servlet-name>batchStatus</servlet-name>
+        <servlet-class>batchStauts</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>formupload</servlet-name>
@@ -257,8 +257,8 @@
         <url-pattern>/batchupdate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>batchdelete</servlet-name>
-        <url-pattern>/batchdelete</url-pattern>
+        <servlet-name>batchStatus</servlet-name>
+        <url-pattern>/batchStatus</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>formupload</servlet-name>

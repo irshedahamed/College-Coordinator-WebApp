@@ -23,6 +23,15 @@ public class Batch {
     
     private String batch;
     private String regulation;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getBatch() {
         return batch;
@@ -56,6 +65,7 @@ public class Batch {
                     Batch b=new Batch();
                     b.setBatch(rs.getString("batch"));
                     b.setRegulation(rs.getString("regulation"));
+                    b.setStatus(rs.getString("status"));
                     batch.add(b);
                     
                     }

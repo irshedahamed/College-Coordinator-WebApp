@@ -3,10 +3,12 @@
  * and open the template in the editor.
  */
 
+import General.Batch;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Aravind Tyson
  */
-public class batchdelete extends HttpServlet {
+public class batchStauts extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -79,14 +81,19 @@ public class batchdelete extends HttpServlet {
         //processRequest(request, response);
         try
         {
-    String[] values = request.getParameterValues("delselect");
-    for(String a:values)
+    for(Batch batch:Batch.getAll())
     {
-        String uvalues[] = a.split("_");
+            String value = request.getParameter("status_"+batch.getBatch());
+    
+        
         Connection con= new dbconnection.dbcon().getConnection("sjitportal");
         Statement st = con.createStatement();
-       st.executeUpdate("delete from regulations where batch='"+uvalues[0]+"' and regulation='"+uvalues[1]+"'");
-       response.sendRedirect("admin/deletebatch.jsp");
+        if(value.equals("Delete"))
+       st.executeUpdate("delete from regulations where batch='"+batch.getBatch()+"'");           
+            else
+       st.executeUpdate("update  regulations set status='"+value+"' where batch='"+batch.getBatch()+"'");
+        
+     
           if(st!=null)
                             st.close();
                               if(con!=null)
@@ -96,6 +103,7 @@ public class batchdelete extends HttpServlet {
     {
         e.printStackTrace();
     }
+          response.sendRedirect("admin/deletebatch.jsp");
     }
 
     /**
