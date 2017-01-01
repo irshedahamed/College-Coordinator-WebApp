@@ -5,6 +5,12 @@
  */
 package General;
 
+import dbconnection.dbcon;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  *
  * @author Home
@@ -57,5 +63,49 @@ public class Holidays {
         this.till = till;
     }
    
+    public boolean insert(){
+        Connection conn=null;
+       Statement stmt=null;
+       int update=0;
+       try{
+           conn=new dbcon().getConnection(dept);
+           stmt=conn.createStatement();
+           
+           String sql;
+           sql="select * from holidays where name='"+name+"' and batch ='"+batch+"'";
+           ResultSet rs=stmt.executeQuery(sql);
+           if(rs.next()){
+           update+=update(stmt);
+           }else{
+           sql="insert into holidays values('"+name+"','"+batch+"','"+from+"','"+till+"')";
+       update+=stmt.executeUpdate(sql);
+           }
+     
+       
+       }catch(Exception e){
+       e.printStackTrace();
+       }finally{
+           try {
+               if(stmt!=null)
+                   stmt.close();
+               if(conn!=null)
+                   conn.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       
+       }
+       if(update==1)
+           return true;
+       else
+           return false;
+    }
+    
+    public int update(Statement stmt) throws SQLException{
+        
+        return stmt.executeUpdate("update holidays set from='"+from+"',till='"+till+"' where batch ='"+batch+"' and name='"+name+"'");
+    
+    }
+
     
 }
