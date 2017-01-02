@@ -3,6 +3,8 @@
     Created on : 18 Nov, 2016, 5:57:23 PM
     Author     : Home
 --%>
+<%@page import="General.Holidays"%>
+<%@page import="General.Batch"%>
 <%@page import="Downloads.Circular"%>
 <%@page import="Downloads.College"%>
 <%@page import="java.util.ArrayList"%>
@@ -53,23 +55,10 @@
 
 
 <link rel="stylesheet" href="../css/angular-material.css">
-
-<link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
-
-
-<link rel="stylesheet" href="../css/angulartab.css">
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"> </script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
-<script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.js"></script>
-
-<script src="../js/angulartab.js"></script>
-         
+      
      
+<link rel="stylesheet" href="../css/sky-forms.css">
+      
 	
 		
 		</head>
@@ -128,45 +117,120 @@
 					</div>
 				</div>
 			</div>
+                    
+                    <script>
+                        $(document).ready(function(){
+                            
+                         console.log();   
+                            $(".change").on('change keydown',function(){
+                              var batch=$("#batch").val();
+                              var dept=$("#dept").val();
+                              var holiday=$("#holidayname").val();
+                                    if(batch!== null && dept!==null&&holiday!== null ){
+                                        $.post('../HolidayData',{
+                                            batch : batch,
+                                            dept : dept,
+                                            name : holiday
+                                        },function(response){
+                                            
+                                            console.log(response);
+                                            
+                                        });
+                                          //console.log($(this).val());
+                                      }
+                            });
+                        });
+                        
+                    </script>
 		</header>
 
 
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
           <section class="landing">
-                   
-       
-               <md-toolbar class="demo-toolbar md-primary _md _md-toolbar-transitions" style="width: 70%">
-                   
-        <div class="md-toolbar-tools">
-            
-            <h3 class="ng-binding" style="text-align:center;">Circulars</h3>
-          <span flex="" class="flex"></span>
-        
-        </div>
-      </md-toolbar>
-               <div ng-cloak="" class="tabsdemoDynamicHeight" ng-app="MyApp" style="width:70%"> 
-  <md-content>
-    <md-tabs md-dynamic-height="" md-border-bottom="">
-      <md-tab label="College">
-        <md-content class="md-padding">
-          <h1 class="md-display-2"></h1>
-        
-          <%out.write(Circular.getHTMLContent(College.getAll("circular")));%>
-        </md-content>
-      </md-tab>
+                  <center><form action="" class="sky-form" method="post" >
+    <header>HOLIDAY SETUP</header>
+    <fieldset>					
+					<section>
+						<label class="input">
+                                                    <div align="left" size="3px"><b>DEPARTMENT</b></div>
+							<label class="select">
+           
+               <select id="dept" name="dept" class="change" required>
+                <option  disabled selected value="">Select</option>
     
-      </md-tab>
-            <md-tab label="Events">
-        <md-content class="md-padding">
-          <h1 class="md-display-2"></h1>
-        <%out.write(Circular.getHTMLContent(College.getAll("event")));%>
-        </md-content>
-      </md-tab>
-    </md-tabs>
-  </md-content>
+                                                    <option value="cse">CSE</option>
+                                                    <option value="ece">ECE</option>
+                                                    <option value="mech">MECH</option>
+                                                    <option value="it">IT</option>
+                                                    <option value="civil">CIVIL</option>
+                                                    <option value="eee">EEE</option>
+               
+            </select>
+                    <i></i>                                    </label>
+                                                </label>
+                                        
+                                            <br><br>
+            <label class="input">
+                                                    <div align="left" size="3px"><b>BATCH</b></div>
+							<label class="select">
+           
+               <select id="batch" class="change" name="batch" required>
+                <option  disabled selected value="">Select</option>
+  
+                <%=Batch.getHTMLContent() %>
+            </select>
+                    <i></i>                                    </label>
+                                                </label>
+                                        
+                                            <br><br>
+           <label class="input">
+                                                    <div align="left" size="3px"><b>NAME</b></div>
+							<label class="select">
+           
+               <select id="holidayname" class="change" name="holidayname" required>
+                <option  disabled selected value="">Select</option>
+                
+                <%for(String name:Holidays.getAllNames()){%>
+                <option  value="<%=name%>"><%=name%></option>
+                <% }
+                %>
+            </select>
+                    <i></i>                                    </label>
+                                                </label>
+                                        
+                                            <br><br>
             
-        
+                                            <label class="input">
+                                                    <div align="left" size="3px" id="div7"><b>
+                                                             FROM</b></div>
+                <label class="input">
+            
+            <input type="date" id="fromdate"   name="from" />
+            
+             <i></i>
+            <br> <br>
+                </label></label>
+            
+                                             <label class="input">
+                                                    <div align="left" size="3px" id="div7"><b>
+                                                             TILL</b></div>
+                <label class="input">
+            
+            <input type="date" id="tilldate"   name="tilldate" />
+            
+             <i></i>
+            <br> <br>
+                </label></label>
+                                        </section>
+            
+                           
+             <div align="left">
+            <input type="submit" id="submit" value="Submit" /></div>
+            <br>
+    </fieldset>
+                </form></center>     
+              
             
         </section>
 

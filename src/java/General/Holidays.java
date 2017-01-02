@@ -10,6 +10,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -107,5 +111,74 @@ public class Holidays {
     
     }
 
+    public static List<String> getAllNames(){
+        List<String> list=new ArrayList<String>();
+        Connection conbatch=null;
+        Statement stmt=null;
+        try{
+         conbatch = new dbcon().getConnection("sjitportal");
+                     stmt = conbatch.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from holidays");
+                    
+                    rs.beforeFirst();
+                    while(rs.next())
+                    {
+                    String name;
+                    name=rs.getString("name");
+                    list.add(name);
+                    }
+        }catch(Exception e){
+        e.printStackTrace();
+        }
+        finally{
+            try {
+                if(stmt!=null)
+                    stmt.close();
+                if(conbatch!=null)
+                    conbatch.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return list;
+    }
     
+    
+    public static List<Holidays> getAll(String dept){
+        List<Holidays> list=new ArrayList<Holidays>();
+        Connection conbatch=null;
+        Statement stmt=null;
+        try{
+         conbatch = new dbcon().getConnection(dept);
+                     stmt = conbatch.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from holidays");
+                    
+                    rs.beforeFirst();
+                    while(rs.next())
+                    {
+                    Holidays l=new Holidays();
+                    l.setName(rs.getString("name"));
+                    l.setDept(dept);
+                    l.setFrom(rs.getString("from"));
+                    l.setTill(rs.getString("till"));
+                    l.setBatch(rs.getString("batch"));
+                    list.add(l);
+                    }
+        }catch(Exception e){
+        e.printStackTrace();
+        }
+        finally{
+            try {
+                if(stmt!=null)
+                    stmt.close();
+                if(conbatch!=null)
+                    conbatch.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return list;
+    }
 }
