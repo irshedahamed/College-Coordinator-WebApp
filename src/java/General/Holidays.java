@@ -105,9 +105,9 @@ public class Holidays {
            return false;
     }
     
-    public int update(Statement stmt) throws SQLException{
+    private int update(Statement stmt) throws SQLException{
         
-        return stmt.executeUpdate("update holidays set from='"+from+"',till='"+till+"' where batch ='"+batch+"' and name='"+name+"'");
+        return stmt.executeUpdate("update holidays set `from`='"+from+"',till='"+till+"' where batch ='"+batch+"' and name='"+name+"'");
     
     }
 

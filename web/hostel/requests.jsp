@@ -1,4 +1,11 @@
 <%-- 
+    Document   : requests
+    Created on : 2 Jan, 2017, 5:22:49 PM
+    Author     : Home
+--%>
+<%@page import="Actor.Student"%>
+<%@page import="Forms.OutPass"%>
+<%-- 
     Document   : home
     Created on : 18 Nov, 2016, 5:57:23 PM
     Author     : Home
@@ -120,26 +127,15 @@
                     
                     <script>
                         $(document).ready(function(){
-                            
-                         console.log();   
-                            $(".change").on('change keydown',function(){
-                              var batch=$("#batch").val();
-                              var dept=$("#dept").val();
-                              var holiday=$("#holidayname").val();
-                                    if(batch!== null && dept!==null&&holiday!== null ){
-                                        $.post('../HolidayData',{
-                                            batch : batch,
-                                            dept : dept,
-                                            name : holiday
-                                        },function(response){
-                                            
-                                           // console.log(response);
-                                            $("#from").val(response.from);
-                                            $("#till").val(response.till);
-                                        });
-                                          
-                                      }
+                            $("#display").hide();
+                    $(".pending").on('click',function(){
+                               $(this).parents("#pendingrequest").css('float','left');
+                               $("#display").show();
+                               var rollno=$(this).children().val();
+                              
+                               
                             });
+          
                         });
                         
                     </script>
@@ -149,88 +145,88 @@
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
           <section class="landing">
-              <center><form action="${pageContext.request.contextPath}/updateHolidays" class="sky-form" method="post" >
-    <header>HOLIDAY SETUP</header>
-    <fieldset>					
-					<section>
-						<label class="input">
-                                                    <div align="left" size="3px"><b>DEPARTMENT</b></div>
-							<label class="select">
-           
-               <select id="dept" name="dept" class="change" required>
-                <option  disabled selected value="">Select</option>
-    
-                                                    <option value="cse">CSE</option>
-                                                    <option value="ece">ECE</option>
-                                                    <option value="mech">MECH</option>
-                                                    <option value="it">IT</option>
-                                                    <option value="civil">CIVIL</option>
-                                                    <option value="eee">EEE</option>
+              <center>
                
-            </select>
-                    <i></i>                                    </label>
-                                                </label>
-                                        
-                                            <br><br>
-            <label class="input">
-                                                    <div align="left" size="3px"><b>BATCH</b></div>
-							<label class="select">
+                      <br>
+                  						<label class="input">
+                                                    <b>Roll No : </b>
+                                                    <label class="input" style="background: white;">
            
-               <select id="batch" class="change" name="batch" required>
-                <option  disabled selected value="">Select</option>
-  
-                <%=Batch.getHTMLContent() %>
-            </select>
+          <input type="text" id="rollno"   name="rollno" />
                     <i></i>                                    </label>
                                                 </label>
-                                        
-                                            <br><br>
-           <label class="input">
-                                                    <div align="left" size="3px"><b>NAME</b></div>
-							<label class="select">
-           
-               <select id="holidayname" class="change" name="name" required>
-                <option  disabled selected value="">Select</option>
-                
-                <%for(String name:Holidays.getAllNames()){%>
-                <option  value="<%=name%>"><%=name%></option>
-                <% }
-                %>
-            </select>
-                    <i></i>                                    </label>
-                                                </label>
-                                        
-                                            <br><br>
-            
-                                            <label class="input">
-                                                    <div align="left" size="3px" id="div7"><b>
-                                                             FROM</b></div>
-                <label class="input">
-            
-            <input type="date" id="from"   name="from" />
-            
-             <i></i>
-            <br> <br>
-                </label></label>
-            
+                  
+                      &nbsp;&nbsp;&nbsp;&nbsp;   <input type="submit" id="submit" class="search"   value="Submit" />
+                  <br><br>
+                 <br><br>
+                 <div id="wardenentry"></div>
+                 <div id="display" style="display: block;float: right;width: 45%;">
+                    
+                         <form class="sky-form">
+                     <header>REQUEST DETAILS</header>
+                                <br><br>
                                              <label class="input">
-                                                    <div align="left" size="3px" id="div7"><b>
-                                                             TILL</b></div>
-                <label class="input">
-            
-            <input type="date" id="till"   name="till" />
-            
-             <i></i>
-            <br> <br>
-                </label></label>
-                                        </section>
-            
-                           
-             <div align="left">
-            <input type="submit" id="submit" value="Submit" /></div>
-            <br>
-    </fieldset>
-                </form></center>     
+                                         
+                                            <br>
+                                            <label class="text" >
+                                                <div  class="pending">
+                                                    <input type="text"  value="14CS1230" disabled>
+                                                </div> 
+                                                   </label>
+                                        </label>
+                                
+                                <br><br>
+                    </form>
+                 </div>
+                
+                 <div id="pendingrequest" style="width: 45%;">
+                     <form class="sky-form">
+                     <header>PENDING REQUESTS</header>
+                                <br><br>
+                                       
+                                                   <%
+                                                   List<OutPass> outpass=OutPass.getAllPending();
+                                                   for(OutPass op:outpass){
+                                                       if(username.contains("girl")){
+                                                           Student s=Student.getById(op.getRollno());
+                                                       if(s.getSex().contains("F")){
+                                                   %>
+                                                    <label class="input">
+                                         
+                                            <br>
+                                            <label class="text" >
+                                                <div  class="pending">
+                                                    <input type="text"  value="<%=op.getRollno()+" - "+s.getName() %>" disabled>
+                                                </div> 
+                                                   </label>
+                                        </label>
+                                                <%
+                                                      }
+                                                    }else{
+                                                        Student s=Student.getById(op.getRollno());
+                                                      if(!s.getSex().contains("F")){
+                                                   %>
+                                                           <label class="input">
+                                         
+                                           
+                                            <label class="text" >
+                                                <div class="pending">
+                                                <input type="text"  value="<%=op.getRollno()+" - "+s.getName() %>" disabled>
+                                                </div>       
+                                                </label>
+                                        </label>
+                                                <%
+                                                        }
+                                                    }
+                                                }
+                                                    %>
+
+                                       
+                                <br><br>
+
+                     </form>
+                 </div>
+              </center>     
               
             
         </section>

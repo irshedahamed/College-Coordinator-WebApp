@@ -112,7 +112,7 @@ public class OutPass {
            return false;
     }
 
-    public List<OutPass> getAll(){
+    public List<OutPass> getbyIdAll(){
         Connection conn=null;
     Statement stmt=null;
     List<OutPass> list=new ArrayList<OutPass>();
@@ -151,27 +151,28 @@ public class OutPass {
     return list;
     }
     
-      public static Student getById(String id){
-        
-               Connection conn=null;
+    public static List<OutPass> getAllPending(){
+        Connection conn=null;
     Statement stmt=null;
-    Student s=new Student();
-        try{
+    List<OutPass> list=new ArrayList<OutPass>();
+     
+    try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon().getConnection("sjitportal");
     stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_personal where rollno like '"+id+"'");
+                    ResultSet rs=stmt.executeQuery("select * from outpassform where status like 'Waiting%'");
                     
                     
                     rs.beforeFirst();
                     while(rs.next()){
-                        s.setBatch(rs.getString("batch"));
-                        s.setDept(rs.getString("dept"));
-                        s.setRegno(rs.getString("regno"));
-                        s.setName(rs.getString("name"));
-                        s.setId(rs.getString("rollno"));
-                        s.setSec(rs.getString("sec"));
-                        
+                        OutPass o=new OutPass();
+                        o.setFrom(rs.getString("from"));
+                        o.setTill(rs.getString("till"));
+                        o.setLetter(rs.getString("letter"));
+                        o.setReason(rs.getString("reason"));
+                        o.setRollno(rs.getString("rollno"));
+                        o.setStatus(rs.getString("status"));
+                        list.add(o);
                     }
     }catch(Exception e){
     e.printStackTrace();
@@ -185,9 +186,8 @@ public class OutPass {
       ex.printStackTrace();
         }
     }
-        
     
-    return s;
     
+    return list;
     }
 }

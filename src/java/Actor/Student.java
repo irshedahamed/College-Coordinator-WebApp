@@ -25,6 +25,15 @@ public class Student {
     String sec;
     String batch;
     String regno;
+    String sex;
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
     
     
 
@@ -99,6 +108,7 @@ public class Student {
                         s.setName(rs.getString("name"));
                         s.setId(rs.getString("rollno"));
                         s.setSec(rs.getString("sec"));
+                        s.setSex(rs.getString("gender"));
                         list.add(s);
                     }
     }catch(Exception e){
@@ -138,6 +148,8 @@ public class Student {
                         s.setName(rs.getString("name"));
                         s.setId(rs.getString("rollno"));
                         s.setSec(rs.getString("sec"));
+                        s.setSex(rs.getString("gender"));
+
                         
                     }
     }catch(Exception e){

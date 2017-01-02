@@ -14,6 +14,9 @@ import java.util.Date;
  */
 public class Find {
     
+    
+    public static final String[] Depts={"cse","mech","it","civil","eee","ece"};
+    
     static public String dept(String username){
     if(username.contains("cse"))
         return "cse";
