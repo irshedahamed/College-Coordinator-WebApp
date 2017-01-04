@@ -192,6 +192,14 @@
         <servlet-name>updateHolidays</servlet-name>
         <servlet-class>updateHolidays</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>pendingDetails</servlet-name>
+        <servlet-class>Forms.pendingDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processOutPass</servlet-name>
+        <servlet-class>processOutPass</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -383,6 +391,14 @@
     <servlet-mapping>
         <servlet-name>updateHolidays</servlet-name>
         <url-pattern>/updateHolidays</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pendingDetails</servlet-name>
+        <url-pattern>/pendingDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processOutPass</servlet-name>
+        <url-pattern>/processOutPass</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

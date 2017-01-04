@@ -132,10 +132,25 @@
                                $(this).parents("#pendingrequest").css('float','left');
                                $("#display").show();
                                var rollno=$(this).children().val();
-                              
-                               
+                              //console.log(rollno);
+                               $.post('../pendingDetails',{
+                                   rollno:rollno.split('-')[0]
+                               },function(response){
+                                   $("#pname").val(rollno.split('-')[1]);
+                                   $("#preason").val(response.reason);
+                                   $("#pfrom").val(response.from);
+                                   $("#prollno").val(response.rollno);
+                                   $("#ptill").val(response.till);
+                               });
                             });
           
+          
+                $(".button").click(function(){
+            
+            
+          $("[name='status']").val($(this).val());
+         $("[disabled]").removeAttr('disabled');
+        });
                         });
                         
                     </script>
@@ -162,19 +177,64 @@
                  <div id="wardenentry"></div>
                  <div id="display" style="display: block;float: right;width: 45%;">
                     
-                         <form class="sky-form">
+                     <form class="sky-form" action="${pageContext.request.contextPath}/processOutPass" method="post">
                      <header>REQUEST DETAILS</header>
-                                <br><br>
-                                             <label class="input">
+                              
+                          <fieldset>                  
                                          
-                                            <br>
-                                            <label class="text" >
+                                       
+                                            
                                                 <div  class="pending">
-                                                    <input type="text"  value="14CS1230" disabled>
+                                                      <label class="input">
+                                                    <label class="input">
+                                                          <div align="left" size="3px"><b>
+                                                            Name: </b></div> 
+                                                    <input type="text" id="pname"  value="" disabled>
+                                                    
+                                                    </label> </label>
+                                                    <label class="input"><label class="input">
+                                                          <div align="left" size="3px"><b>
+                                                            Rollno: </b></div> 
+                                                    <input type="text" id="prollno" name="rollno" value="" disabled>
+                                                    </label> </label>
+                                                    
+                                                    <label class="input"><label class="input">
+                                                         <div align="left" size="3px"><b>
+                                                            Reason: </b></div> 
+                                                    <input type="text" id="preason" name="reason"  value="" disabled>
+                                                    </label> </label>
+                                                    <label class="date"><label class="input">
+                                                        <div align="left" size="3px"><b>
+                                                            From: </b></div> 
+                                                    <input type="date" id="pfrom"  name="from" disabled>
+                                                   </label> </label>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                     &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <label class="date"><label class="input">
+                                                          <div align="left" size="3px"><b>
+                                                            Till: </b></div> 
+                                                    <input type="date" id="ptill"  name="till" disabled>
+                                                    </label> </label>
+                                                      <br>
+                                                      <br>
+                                                      <input type="hidden" name="status">
+                                                           <input type="submit" class="button" value="Rejected" id="submit" value="Reject">
+                                                
+                                                    <input type="submit" class="button" value="Accepted" id="submit" value="Accept">
+                                           
+                                                  
+                                                   
                                                 </div> 
-                                                   </label>
-                                        </label>
-                                
+                                                  
+                                        
+                          </fieldset>
                                 <br><br>
                     </form>
                  </div>

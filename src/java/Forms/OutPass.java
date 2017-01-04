@@ -25,7 +25,11 @@ public class OutPass {
     private String reason;
     private String from;
     private String till;
-    private String letter;
+    private String requestid;
+
+    public String getRequestid() {
+        return requestid;
+    }
     private String status;
 
     public String getStatus() {
@@ -70,14 +74,7 @@ public class OutPass {
         this.till = till;
     }
 
-    public String getLetter() {
-        return letter;
-    }
-
-    public void setLetter(String letter) {
-        this.letter = letter;
-    }
-    
+ 
     
      public boolean insert(){
         Connection conn=null;
@@ -86,11 +83,26 @@ public class OutPass {
        try{
            conn=new dbcon().getConnection("sjitportal");
            stmt=conn.createStatement();
+           String sql;
+           sql="select * from outpassform where rollno='"+rollno+"' and status='Waiting for Response' and reason='"+reason+"'";
+           ResultSet rs=stmt.executeQuery(sql);
            
-           String sql="insert into outpassform values('OUTPASS',null,'"+rollno+"','"+reason+"','"
-                   +"','"+from+"','"+till+"','"+letter+"','Waitng for Response')";
+           if(rs.next())
+               update+=update(stmt);
+           else{
+          sql="insert into outpassform values('OUTPASS',null,'"+rollno+"','"+reason+"'"
+                   +",'"+from+"','"+till+"','"+""+"','Waiting for Response')";
        update+=stmt.executeUpdate(sql);
-       
+           }
+           
+           sql="select * from outpassform where rollno='"+rollno+"' and status='Accepted' and reason='"+reason+"' and `from`='"+from+"'";
+          
+           rs=stmt.executeQuery(sql);
+           if(rs.next()){
+               requestid=rs.getString("prefix")+rs.getString("sno");
+           }
+           
+           
      
        
        }catch(Exception e){
@@ -111,6 +123,14 @@ public class OutPass {
        else
            return false;
     }
+     
+     private int update(Statement stmt) throws SQLException{
+   
+         return stmt.executeUpdate("update outpassform set status='"+status+"',`from`='"+from+"',till='"+till+
+                 "' where rollno='"+rollno+"' and status like 'Waiting for Response'");
+     }
+     
+     
 
     public List<OutPass> getbyIdAll(){
         Connection conn=null;
@@ -128,7 +148,7 @@ public class OutPass {
                         OutPass o=new OutPass();
                         o.setFrom(rs.getString("from"));
                         o.setTill(rs.getString("till"));
-                        o.setLetter(rs.getString("letter"));
+                       // o.setLetter(rs.getString("letter"));
                         o.setReason(rs.getString("reason"));
                         o.setRollno(rs.getString("rollno"));
                         o.setStatus(rs.getString("status"));
@@ -168,7 +188,7 @@ public class OutPass {
                         OutPass o=new OutPass();
                         o.setFrom(rs.getString("from"));
                         o.setTill(rs.getString("till"));
-                        o.setLetter(rs.getString("letter"));
+                       // o.setLetter(rs.getString("letter"));
                         o.setReason(rs.getString("reason"));
                         o.setRollno(rs.getString("rollno"));
                         o.setStatus(rs.getString("status"));

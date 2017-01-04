@@ -38,9 +38,7 @@ public class OutPass {
         return expiry;
     }
 
-    public void setExpiry(String expiry) {
-        this.expiry = expiry;
-    }
+    
     
       public boolean insert(String requestid){
         Connection conn=null;
@@ -50,7 +48,7 @@ public class OutPass {
            conn=new dbcon().getConnection("sjitportal");
            stmt=conn.createStatement();
            
-           String sql="insert into outpass values('OUTPASS','"+requestid+"','"+this.id+"','"+expiry+"')";
+           String sql="insert into outpass values('"+requestid+"','"+this.id+"',now())";
        update+=stmt.executeUpdate(sql);
        
      
@@ -84,7 +82,7 @@ public class OutPass {
             
     conn=new dbcon().getConnection("sjitportal");
     stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from outpass where rollno like '"+id+"' and expiry >= now()");
+                    ResultSet rs=stmt.executeQuery("select * from outpass where rollno like '"+id+"' and expiry >= now()-INTERVAL 6 HOURS");
                     
                     
                     rs.beforeFirst();
