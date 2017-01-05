@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import General.Batch;
 import com.action.Base;
 import dbconnection.dbcon;
 import java.io.IOException;
@@ -220,7 +221,12 @@ String UPLOAD_DIRECTORY="hello";
                                   connection1 = new dbcon().getConnection(department);
                                   statement1 = connection1.createStatement();
                                   response.getWriter().println(department);
-                                  rs=statement1.executeQuery("select * from subject_sem_table where subcode like '"+subcode+"'");
+                                  String regulation="";
+                                  for(Batch b:Batch.getAll()){
+                                  if(b.getBatch().equals(batch))
+                                      regulation=b.getRegulation();
+                                  }
+                                  rs=statement1.executeQuery("select * from subject_sem_table where subcode like '"+subcode+"' and regulation like'"+regulation+"'");
                                   if(rs.next())
                                   {
                                       response.getWriter().println(department+"insert");
