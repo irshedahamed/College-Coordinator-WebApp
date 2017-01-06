@@ -91,7 +91,7 @@ public class OutPass {
                update+=update(stmt);
            else{
           sql="insert into outpassform values('OUTPASS',null,'"+rollno+"','"+reason+"'"
-                   +",'"+from+"','"+till+"','"+""+"','Waiting for Response')";
+                   +",'"+from+"','"+till+"','"+""+"','"+status+"')";
        update+=stmt.executeUpdate(sql);
            }
            

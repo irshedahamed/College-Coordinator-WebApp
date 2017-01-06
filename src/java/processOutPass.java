@@ -81,13 +81,14 @@ public class processOutPass extends HttpServlet {
      p.setTill(request.getParameter("till"));
      p.setStatus(request.getParameter("status"));    
         boolean res=p.insert();
-        System.err.println(p.getStatus().equals("Accepted"));
+        //System.err.println(p.getStatus().equals("Accepted"));
         
-        System.err.println(res);
+      //  System.err.println(res);
         if(p.getStatus().equals("Accepted")&&res){
         General.OutPass op=new General.OutPass(p.getRollno());
      
-        op.insert(p.getRequestid());
+        if(op.insert(p.getRequestid()))
+           response.getWriter().write("Out Pass Generated and valid for 6 hours<br>");
         }
         
         if(res)

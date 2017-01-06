@@ -103,10 +103,11 @@ public class Student {
                     while(rs.next()){
                         Student s=new Student();
                         s.setBatch(rs.getString("batch"));
-                        s.setDept(rs.getString("dept"));
+                        s.setId(rs.getString("rollno"));
+                        s.setDept(Find.sdept(s.getId()));
                         s.setRegno(rs.getString("regno"));
                         s.setName(rs.getString("name"));
-                        s.setId(rs.getString("rollno"));
+                        
                         s.setSec(rs.getString("sec"));
                         s.setSex(rs.getString("gender"));
                         list.add(s);
@@ -143,7 +144,7 @@ public class Student {
                     rs.beforeFirst();
                     while(rs.next()){
                         s.setBatch(rs.getString("batch"));
-                        s.setDept(rs.getString("dept"));
+                        s.setDept(Find.sdept(id));
                         s.setRegno(rs.getString("regno"));
                         s.setName(rs.getString("name"));
                         s.setId(rs.getString("rollno"));

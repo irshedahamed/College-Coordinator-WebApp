@@ -3,6 +3,7 @@
     Created on : 2 Jan, 2017, 5:22:49 PM
     Author     : Home
 --%>
+<%@page import="com.action.Find"%>
 <%@page import="Actor.Student"%>
 <%@page import="Forms.OutPass"%>
 <%-- 
@@ -93,28 +94,20 @@
 
 						
 						
-
-						<nav id="main-nav">
+<nav id="main-nav">
                                                     
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="home.jsp">Home</a></li>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
 
     
 
 
-   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="">Add Entry</a>
-    <ul class="sub-menu">
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="guest.jsp">Guest</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="entry.jsp">Staff & Students</a>
-</ul>
+   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="requests.jsp">Grant OutPass</a>
+  
 </li>
 
 
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#"> Report</a>
-<ul class="sub-menu">
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personalReport.jsp">Personal Report</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="dailyReport.jsp">Daily Report</a>
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="monthlyReport.jsp">Monthly Report</a>
-</ul>
+<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="Setup.jsp">Holiday Setup</a>
+
 
 </li>
 
@@ -124,7 +117,40 @@
 					</div>
 				</div>
 			</div>
-                    
+                         <script>
+                        $(document).ready(function(){
+                            
+                         <%
+                     Student stu=new Student();
+                     if(request.getParameter("rollno")!=null)
+                        stu=Student.getById(request.getParameter("rollno"));
+                 
+                        if(stu.getId()!=null){
+                         %>
+                            $(".change").on('change keydown',function(){
+                                
+                              var batch='<%=stu.getBatch() %>';
+                              var dept='<%=stu.getDept() %>';
+                              var holiday=$(this).val();
+                                
+                             if(batch!== null && dept!==null&&holiday!== null ){
+                                        $.post('../HolidayData',{
+                                            batch : batch,
+                                            dept : dept,
+                                            name : holiday
+                                        },function(response){
+                                            
+                                           // console.log(response);
+                                            $("#nfrom").val(response.from);
+                                            $("#ntill").val(response.till);
+                                        });
+                                          
+                                      }
+                            });
+                            <%}%>
+                        });
+                        
+                    </script>
                     <script>
                         $(document).ready(function(){
                             $("#display").hide();
@@ -163,7 +189,8 @@
               <center>
                
                       <br>
-                  						<label class="input">
+                      <form method="get" action="requests.jsp">
+                      <label class="input">
                                                     <b>Roll No : </b>
                                                     <label class="input" style="background: white;">
            
@@ -172,10 +199,100 @@
                                                 </label>
                   
                       &nbsp;&nbsp;&nbsp;&nbsp;   <input type="submit" id="submit" class="search"   value="Submit" />
-                  <br><br>
+                  </form>
+                      <br><br>
                  <br><br>
-                 <div id="wardenentry"></div>
-                 <div id="display" style="display: block;float: right;width: 45%;">
+                 <%
+                     if( stu.getId()!=null){
+                   
+                 
+                 
+                 
+                 %>
+                 <div id="wardenentry">
+          
+                     <form class="sky-form" action="${pageContext.request.contextPath}/processOutPass" method="post">
+          
+                     <header>OUTPASS</header>
+                         
+                          <fieldset>                  
+                                                        
+                                       
+                                            
+                                                <div  class="newoutpass">
+                                                      <label class="input">
+                                                    <label class="input">
+                                                          <div align="left" size="3px"><b>
+                                                            Name: </b></div> 
+                                                        <input type="text" id="nname"  value="<%=stu.getName() %>" disabled >
+                                                    
+                                                    </label> </label>
+                                                    <label class="input"><label class="input">
+                                                          <div align="left" size="3px"><b>
+                                                            Rollno: </b></div> 
+                                                            <input type="text" id="nrollno" name="rollno" value="<%=stu.getId() %>" disabled >
+                                                    </label> </label>
+                                                    
+                                                    <label class="select"><label class="select">
+                                                         <div align="left" size="3px"><b>
+                                                            Reason: </b></div> 
+                                                            <select id="nreason" class="change" name="reason">
+                                                                <option value="">Select</option>
+                                                                <%
+                                                                for(Holidays h:Holidays.getAll(Find.sdept(stu.getId()))){
+                                                                %>
+                                                               
+                                                                <% if(h.getBatch().equals(stu.getBatch())) {%>
+                                                                <option value="<%=h.getName() %>"><%=h.getName() %></option>
+                                                                <%
+                                                                    }
+                                                                %>
+                                                              
+                                                                <%
+                                                                }
+                                                                %>
+                                                              <option value="others">Others</option>
+                                                            </select>
+                                                    </label> </label>
+                                                    <label class="date"><label class="input">
+                                                        <div align="left" size="3px"><b>
+                                                            From: </b></div> 
+                                                    <input type="date" id="nfrom"  name="from" >
+                                                   </label> </label>
+                                                   &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <label class="date"><label class="input">
+                                                          <div align="left" size="3px"><b>
+                                                            Till: </b></div> 
+                                                    <input type="date" id="ntill"  name="till" >
+                                                    </label> </label>
+                                                      <br>
+                                                      <br>
+                                                      <input type="hidden" name="status" value="Accepted"> 
+                                                       
+                                                    <input type="submit" class="button" value="Accepted" id="submit" value="Accept">
+                                           
+                                                  
+                                        
+                                       
+                                                </div> 
+                                                  
+                  
+                          </fieldset>
+                  <br><br>
+                     </form>
+          
+                     
+                     
+                 </div>
+                 <%
+                 }
+ else{
+                 %>
+                     <div id="display" style="display: block;float: right;width: 45%;">
                     
                      <form class="sky-form" action="${pageContext.request.contextPath}/processOutPass" method="post">
                      <header>REQUEST DETAILS</header>
@@ -206,21 +323,17 @@
                                                     <label class="date"><label class="input">
                                                         <div align="left" size="3px"><b>
                                                             From: </b></div> 
-                                                    <input type="date" id="pfrom"  name="from" disabled>
+                                                    <input type="date" id="pfrom"  name="from" >
                                                    </label> </label>
+                                                   &nbsp;&nbsp;&nbsp;&nbsp;
                                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                                     <label class="date"><label class="input">
                                                           <div align="left" size="3px"><b>
                                                             Till: </b></div> 
-                                                    <input type="date" id="ptill"  name="till" disabled>
+                                                    <input type="date" id="ptill"  name="till" >
                                                     </label> </label>
                                                       <br>
                                                       <br>
@@ -286,6 +399,10 @@
 
                      </form>
                  </div>
+              <%
+              } 
+
+              %>
               </center>     
               
             
