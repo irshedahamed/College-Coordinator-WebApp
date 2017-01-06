@@ -1,3 +1,4 @@
+<%@page import="General.Batch"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -719,7 +720,11 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label>Batch :</label><input type="text" class="check"  style="background: white" id="batch" name="batch">
+                                        <label>Batch :</label>
+                                        <select name="batch">
+                                            <option value="">Select</option>
+                                             <%= Batch.getHTMLContent() %>
+                                        </select>
                                     </td>
                                      <td>
                                         <label>Course :</label><select name="course">
