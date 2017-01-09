@@ -82,8 +82,9 @@ public class OutPass {
             
     conn=new dbcon().getConnection("sjitportal");
     stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from outpass where rollno like '"+id+"' and expiry >= now()-INTERVAL 6 HOURS");
-                    
+    String sql="select * from outpass where rollno like '"+id+"' and expiry >= now()-INTERVAL 6 HOUR";
+    
+    ResultSet rs=stmt.executeQuery(sql);
                     
                     rs.beforeFirst();
                     if(rs.next()){

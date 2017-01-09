@@ -586,6 +586,9 @@ $(document).ready(function(){
                  </td>
                                                 </tr>
                                                                        <tr><td>
+         <label>No of People : </label><input class="check" type="text" style="background: white" id="numpeople" name="numpeople">
+                 </td></tr>
+                                                <tr><td>
          <label>Reason : </label><input class="check" type="text" style="background: white" id="reason" name="reason">
                  </td></tr>
                                                 

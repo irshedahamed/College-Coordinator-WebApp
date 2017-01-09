@@ -117,6 +117,9 @@
 					</div>
 				</div>
 			</div>
+                    
+        <script type="text/javascript" src="../js/toggleSelect.js"></script>
+
                          <script>
                         $(document).ready(function(){
                             
@@ -177,6 +180,13 @@
           $("[name='status']").val($(this).val());
          $("[disabled]").removeAttr('disabled');
         });
+        
+        
+             $(document).on('change keyup','#nreason',function(){
+                
+                 toggle("nreason","reason");
+             });
+
                         });
                         
                     </script>
@@ -204,10 +214,17 @@
                  <br><br>
                  <%
                      if( stu.getId()!=null){
-                   
+                       boolean flag=false;
+                         if(username.contains("girl")){
+                         if(stu.getSex().contains("F"))
+                                flag=true;
+                         }else{
+                         if(!stu.getSex().contains("F"))
+                                flag=true;
+                         
+                         }
                  
-                 
-                 
+                 if(flag){
                  %>
                  <div id="wardenentry">
           
@@ -290,7 +307,9 @@
                  </div>
                  <%
                  }
- else{
+
+}
+            else{
                  %>
                      <div id="display" style="display: block;float: right;width: 45%;">
                     

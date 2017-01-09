@@ -34,6 +34,15 @@ public class Guest {
     String meet;
     String reason;
     String sex;
+    String numpeople;
+
+    public String getNumpeople() {
+        return numpeople;
+    }
+
+    public void setNumpeople(String numpeople) {
+        this.numpeople = numpeople;
+    }
 
     public String getSex() {
         return sex;

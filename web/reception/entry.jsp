@@ -3,6 +3,7 @@
     Created on : 18 Nov, 2016, 7:16:34 PM
     Author     : Home
 --%>
+<%@page import="General.OutPass"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.action.Find"%>
 <%-- 
@@ -211,8 +212,25 @@
                                                           
                                     <tr> 
                                         <td>
-                                        <label>Out Pass Status :</label><input type="text"  style="background: white" id="stuname" name="stuname" value="Comming Soon">
-                                    </td><td></td>
+                        
+                                            <label>Out Pass Status :</label>
+                                            <%
+                                            OutPass op=new OutPass(rollno);
+                                            boolean outallowed=op.isExpired();
+                                            
+                                            if(outallowed)
+                                            {
+                                            %>
+                                            
+                                            <input type="text"  style="background: white" value="PERMITTED">
+                                   <%
+                                   }else{
+                                   %>
+                                   <input type="text"  style="background: white" value="NOT ALLOWED PERMITTED">
+                                        <%
+                                        }
+                                        %>
+                                        </td><td></td>
                                     <td>
                                         <label>Category :</label><select name="acc" >
                                             <option value="<%=rs10.getString("accomodation")%>">Student(<%=rs10.getString("accomodation")%>)</option>
@@ -298,7 +316,11 @@
                <input type="submit" value="IN" class="button" id="submit">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <%
+            if(outallowed){
+            %>
             <input type="submit" value="OUT" class="button" id="submit">
+                <%}%>
                 </center>
            
             </form>

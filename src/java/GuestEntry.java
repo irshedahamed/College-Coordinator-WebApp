@@ -134,6 +134,7 @@ public class GuestEntry extends HttpServlet {
         g.setCity(request.getParameter("city"));
         g.setAddress(request.getParameter("address"));
        g.setName(request.getParameter("gname"));
+       g.setNumpeople(request.getParameter("numpeople"));
        g.insert(category, UPLOAD_DIRECTORY+"photo.jpg");
        
       Entry e=new Entry();
