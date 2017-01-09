@@ -107,4 +107,8 @@ public class OutPass {
     
     return valid;
     }
+      
+      public static String getnextID(String type){
+      return null;
+      }
 }
