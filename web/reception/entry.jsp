@@ -222,11 +222,11 @@
                                             {
                                             %>
                                             
-                                            <input type="text"  style="background: white" value="PERMITTED">
+                                            <input type="text"  style="background: greenyellow" value="PERMITTED">
                                    <%
                                    }else{
                                    %>
-                                   <input type="text"  style="background: white" value="NOT ALLOWED PERMITTED">
+                                   <input type="text"  style="background: red" value="PERMISSION DENIED">
                                         <%
                                         }
                                         %>
@@ -356,7 +356,26 @@ con.close();
                           
                             <table cellspacing="10">
                                 <tr>
-                                    <td></td><td></td>
+                                    <td>
+                        
+                                            <label>Out Pass Status :</label>
+                                            <%
+                                            OutPass op=new OutPass(rollno);
+                                            boolean outallowed=op.isExpired();
+                                            
+                                            if(outallowed)
+                                            {
+                                            %>
+                                            
+                                            <input type="text"  style="background: greenyellow" value="PERMITTED">
+                                   <%
+                                   }else{
+                                   %>
+                                   <input type="text"  style="background: red" value="PERMISSION DENIED">
+                                        <%
+                                        }
+                                        %>
+                                        </td><td></td>
                                <td>
                                     <label> Category :</label><input type="text" style="background: white" id="dob" name="dob" value="Teaching">
                                     </td>
@@ -422,8 +441,13 @@ con.close();
                <input type="submit" value="IN" class="button" id="submit">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <%
+            if(outallowed){
+            %>
             <input type="submit" value="OUT" class="button" id="submit">
-          
+          <%
+          }
+          %>
            
             </form>
                         </center>
