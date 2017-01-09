@@ -76,6 +76,8 @@ public class Find {
         return "Visitor";
     else if(id.contains("AL"))
         return "Alumni";
+    else if(id.contains("PA"))
+        return "Parent";
     
     return null;
     }

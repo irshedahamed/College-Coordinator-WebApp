@@ -148,7 +148,7 @@ public class Guest {
                     }
                     
                     stmt.execute("insert into guest values('"+this.id+"','"+name+"','"+city+"','"+mobile+"','"+mail+"','"+address+"','"+reason
-                    +"','"+meet+"','"+sex+"')");
+                    +"','"+meet+"','"+sex+"','+"+numpeople+"')");
                     
    
                    

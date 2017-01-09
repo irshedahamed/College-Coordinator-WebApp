@@ -200,6 +200,10 @@
         <servlet-name>processOutPass</servlet-name>
         <servlet-class>processOutPass</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>processOutPassStaff</servlet-name>
+        <servlet-class>processOutPassStaff</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -399,6 +403,10 @@
     <servlet-mapping>
         <servlet-name>processOutPass</servlet-name>
         <url-pattern>/processOutPass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processOutPassStaff</servlet-name>
+        <url-pattern>/processOutPassStaff</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
