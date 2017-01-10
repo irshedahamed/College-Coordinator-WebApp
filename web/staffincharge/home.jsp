@@ -110,10 +110,6 @@
 </li>
 
 
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="Setup.jsp">Holiday Setup</a>
-
-
-</li>
 
 
 </ul>						

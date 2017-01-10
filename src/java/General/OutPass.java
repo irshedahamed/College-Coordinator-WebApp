@@ -109,6 +109,34 @@ public class OutPass {
     }
       
       public static String getnextID(String type){
-      return null;
+        Connection  conn=null;
+        Statement stmt=null;
+        int res=0;
+          try{
+            
+    conn=new dbcon().getConnection("sjitportal");
+    stmt = conn.createStatement();
+    String sql="select MAX(CONVERT(SUBSTR(id,13,8),unsigned int)) as res  from sjitportal.outpass where id like '%STAFF%'";
+    
+    ResultSet rs=stmt.executeQuery(sql);
+                    
+                    rs.beforeFirst();
+                    if(rs.next()){
+                        res=rs.getInt("res");
+                    }
+    }catch(Exception e){
+    e.printStackTrace();
+    }finally{
+        try {
+            if(stmt!=null)
+                stmt.close();
+            if(conn!=null)
+                conn.close();
+        } catch (SQLException ex) {
+      ex.printStackTrace();
+        }
+    }
+          
+          return "OUTPASSSTAFF"+res;
       }
 }
