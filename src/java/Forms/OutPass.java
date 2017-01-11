@@ -95,7 +95,7 @@ public class OutPass {
        update+=stmt.executeUpdate(sql);
            }
            
-           sql="select * from outpassform where rollno='"+rollno+"' and status='Accepted' and reason='"+reason+"' and `from`='"+from+"' orderby sno desc";
+           sql="select * from outpassform where rollno='"+rollno+"' and status='Accepted' and reason='"+reason+"' and `from`='"+from+"' order by sno desc";
           
            rs=stmt.executeQuery(sql);
            if(rs.next()){
