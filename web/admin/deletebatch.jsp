@@ -196,7 +196,7 @@
                 <tr>
                     <td> 
                         <select name="status_<%=batch%>">
-                            <option value="I"><%=rs.getString("status") %></option>
+                            <option value="<%=rs.getString("status") %>"><%=rs.getString("status") %></option>
                             <option value="I">First Year</option>
                             <option value="II">Second Year</option>
                             <option value="III">Third Year</option>
