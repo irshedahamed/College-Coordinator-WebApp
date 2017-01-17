@@ -4,6 +4,7 @@
     Author     : Home
 --%>
 
+<%@page import="Actor.Student.Admission"%>
 <%@page import="Fee.SpecialFee"%>
 <%@page import="General.AcademicYear"%>
 <%@page import="Fee.BasicFee"%>
@@ -44,11 +45,37 @@
              $(document).ready(function(){
                  
                  $(".amount").on("change keydown",function(){
-                     console.log($(this).parent().parent().attr("id"));
-                     console.log($(this).parent().parent().find("#placement").val());
+                 //    console.log($(this).parent().parent().attr("id"));
+                  //   console.log($(this).parent().parent().find("#placement").val());
                      $(this).parent().parent().css('background','red');
                      
                  });
+                 
+                 $(".update").on("click",function(){
+                     console.log($(this).parent().parent().attr("id"));
+                    var changecolour=$(this);
+                    var id=$(this).parent().parent().attr("id");
+                     var tution=$(this).parent().parent().find("#tution").val();
+                     var transport=$(this).parent().parent().find("#transport").val();
+                     
+                      var placement=$(this).parent().parent().find("#placement").val();
+                        var hostel=$(this).parent().parent().find("#hostel").val();
+                        
+                        $.post('../updateSpecialFee',{
+                            id : id,
+                            tution : tution,
+                            transport : transport,
+                            placement : placement,
+                            hostel : hostel
+                        },function(response){
+                            console.log(response);
+                            if(response==="success")
+                                      changecolour.parent().parent().css('background','green');
+               
+                            });
+                        
+                 });
+                 
              });
              
          </script>
@@ -59,7 +86,7 @@
   <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
 
               <center><h1>Confirm List </h1></center>
-    <center> <form action="#" class="" method="post">
+    <center> <form action="SpecialFee.jsp" class="" method="post">
     <br><br><br>
             <table class="bordered">
     <thead>
@@ -86,7 +113,16 @@
         for(Student s:list){
             SpecialFee sfee=SpecialFee.getFee(s.getId(), cyear);
             if(sfee==null){
-                BasicFee bf=BasicFee.getByType(fee, "Government");
+                s.fetchAdmission();
+                String type="";
+                
+                if(s.admission.getGovt_mang().equals("Counseling"))
+                type="Government";
+                else if(s.admission.getSport().equals("Yes"))
+                    type="Sports";
+                else //if(s.admission.getGovt_mang().equals("Management"))
+                    type="Management";
+                BasicFee bf=BasicFee.getByType(fee, type);
     
 %>
    
@@ -98,7 +134,7 @@
            <td><input type="text" class="amount" value="<%=bf.getTransport()%>" id="transport" style="background:white"></td>
            <td><input type="text" class="amount" value="<%=bf.getPlacement()%>" id="placement" style="background:white"></td>
            <td><input type="text" class="amount" value="<%=bf.getHostel()%>" id="hostel" style="background:white"></td>
-           <td><input type="button" value="Update" id="submit"></td>
+           <td><input type="button" value="Update" id="submit" class="update" ></td>
         </tr>      
             
  
@@ -112,7 +148,7 @@
            <td><input type="text" class="amount" value="<%=sfee.getTransport()%>" id="transport" style="background:white"></td>
            <td><input type="text" class="amount" value="<%=sfee.getPlacement()%>" id="placement" style="background:white"></td>
            <td><input type="text" class="amount" value="<%=sfee.getHostel()%>" id="hostel" style="background:white"></td>
-           <td><input type="button" value="Update" id="submit"></td>
+           <td><input type="button" value="Update" id="submit" class="update"></td>
         </tr>      
         <%
 
@@ -129,7 +165,7 @@
 </table>
 <input type="hidden" name="dept" value="<%=dept%>">
 <br><br>   
-<input type="submit" id="submit" value="submit">
+<input type="submit" id="submit" value="Back">
        <br><br> 
         </form></center>
    

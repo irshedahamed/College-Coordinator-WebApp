@@ -19,6 +19,14 @@ import java.util.List;
  * @author Lenovo
  */
 public class Student {
+    String id;
+    String name;
+    String dept;
+    String sec;
+    String batch;
+    String regno;
+    String sex;
+
     
     public  class Admission{
     private String allotment;
@@ -58,58 +66,17 @@ public class Student {
             this.scholarship = scholarship;
         }
     
-    public  Admission getDetails(){
-    
-    
-         
-               Connection conn=null;
-    Statement stmt=null;
-   Admission a=null;
-    
-        try{
-            
-    conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_admission_details where rollno like '"+id+"'");
-                    
-                    
-                    rs.beforeFirst();
-                    while(rs.next()){
-                        a=new Admission();
-                        a.setAllotment(rs.getString("adminallotment"));
-                        a.setGovt_mang(rs.getString("govt_mang"));
-                        a.setScholarship(rs.getString("scholarship"));
-                        a.setSport(rs.getString("sports_admin"));
-                        
-
-                        
-                    }
-    }catch(Exception e){
-    e.printStackTrace();
-    }finally{
-        try {
-            if(stmt!=null)
-                stmt.close();
-            if(conn!=null)
-                conn.close();
-        } catch (SQLException ex) {
-      ex.printStackTrace();
-        }
-    }
-        
- 
-    return a;
-    }
+   
  
     }
-    String id;
-    String name;
-    String dept;
-    String sec;
-    String batch;
-    String regno;
-    String sex;
+    
+    public Admission admission;
+    
+    public void fetchAdmission(){
+    admission=getAdmissionDetails();
+    }
 
+    
     public String getSex() {
         return sex;
     }
@@ -168,7 +135,49 @@ public class Student {
         this.regno = regno;
     }
     
+     public  Admission getAdmissionDetails(){
     
+    
+         
+               Connection conn=null;
+    Statement stmt=null;
+   Admission a=null;
+    
+        try{
+            
+    conn=new dbcon().getConnection(Find.sdept(id));
+    stmt = conn.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from student_admission_details where rollno like '"+id+"'");
+                    
+                    
+                    rs.beforeFirst();
+                    if(rs.next()){
+                        a=new Admission();
+                        a.setAllotment(rs.getString("adminallotment"));
+                        a.setGovt_mang(rs.getString("govt_mang"));
+                        a.setScholarship(rs.getString("scholarship"));
+                        a.setSport(rs.getString("sports_admin"));
+                        
+
+                        
+                    }
+    }catch(Exception e){
+    e.printStackTrace();
+    }finally{
+        try {
+            if(stmt!=null)
+                stmt.close();
+            if(conn!=null)
+                conn.close();
+        } catch (SQLException ex) {
+      ex.printStackTrace();
+        }
+    }
+        
+        
+    return a;
+    }
+     
     public static List<Student> getAll(String dept,String batch,String sec){
         
                Connection conn=null;
