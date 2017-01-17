@@ -19,6 +19,89 @@ import java.util.List;
  * @author Lenovo
  */
 public class Student {
+    
+    public  class Admission{
+    private String allotment;
+    private String govt_mang;
+    private String sport;
+    private String scholarship;
+
+        public String getAllotment() {
+            return allotment;
+        }
+
+        public void setAllotment(String allotment) {
+            this.allotment = allotment;
+        }
+
+        public String getGovt_mang() {
+            return govt_mang;
+        }
+
+        public void setGovt_mang(String govt_mang) {
+            this.govt_mang = govt_mang;
+        }
+
+        public String getSport() {
+            return sport;
+        }
+
+        public void setSport(String sport) {
+            this.sport = sport;
+        }
+
+        public String getScholarship() {
+            return scholarship;
+        }
+
+        public void setScholarship(String scholarship) {
+            this.scholarship = scholarship;
+        }
+    
+    public  Admission getDetails(){
+    
+    
+         
+               Connection conn=null;
+    Statement stmt=null;
+   Admission a=null;
+    
+        try{
+            
+    conn=new dbcon().getConnection(Find.sdept(id));
+    stmt = conn.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from student_admission_details where rollno like '"+id+"'");
+                    
+                    
+                    rs.beforeFirst();
+                    while(rs.next()){
+                        a=new Admission();
+                        a.setAllotment(rs.getString("adminallotment"));
+                        a.setGovt_mang(rs.getString("govt_mang"));
+                        a.setScholarship(rs.getString("scholarship"));
+                        a.setSport(rs.getString("sports_admin"));
+                        
+
+                        
+                    }
+    }catch(Exception e){
+    e.printStackTrace();
+    }finally{
+        try {
+            if(stmt!=null)
+                stmt.close();
+            if(conn!=null)
+                conn.close();
+        } catch (SQLException ex) {
+      ex.printStackTrace();
+        }
+    }
+        
+ 
+    return a;
+    }
+ 
+    }
     String id;
     String name;
     String dept;
@@ -96,7 +179,7 @@ public class Student {
     conn=new dbcon().getConnection(dept);
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_personal where batch like '"+batch+"' "
-                            + "and sec like '"+sec+"'");
+                            + "and sec like '"+sec+"' order by CONVERT(regno,UNSIGNED)");
                     
                     
                     rs.beforeFirst();

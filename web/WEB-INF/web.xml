@@ -204,6 +204,14 @@
         <servlet-name>processOutPassStaff</servlet-name>
         <servlet-class>processOutPassStaff</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getFee</servlet-name>
+        <servlet-class>Fee.getFee</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>setFee</servlet-name>
+        <servlet-class>Fee.setFee</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -407,6 +415,14 @@
     <servlet-mapping>
         <servlet-name>processOutPassStaff</servlet-name>
         <url-pattern>/processOutPassStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getFee</servlet-name>
+        <url-pattern>/getFee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>setFee</servlet-name>
+        <url-pattern>/setFee</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

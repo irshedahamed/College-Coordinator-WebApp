@@ -48,7 +48,42 @@ public class Batch {
     public void setRegulation(String regulation) {
         this.regulation = regulation;
     }
+    public static Batch getByYrIncharge(String id){
+       Batch b=new Batch();
+        Connection conbatch=null;
+        Statement stmt=null;
+        try{
+         conbatch = new dbcon().getConnection("sjitportal");
+                     stmt = conbatch.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from regulations where batch in (select batch from yearincharge where id='"+id+"')");
+                    
+                    rs.beforeFirst();
+                    if(rs.next())
+                    {
+                    b=new Batch();
+                    b.setBatch(rs.getString("batch"));
+                    b.setRegulation(rs.getString("regulation"));
+                    b.setStatus(rs.getString("status"));
+                   
+                    
+                    }
+        }catch(Exception e){
+        e.printStackTrace();
+        }
+        finally{
+            try {
+                if(stmt!=null)
+                    stmt.close();
+                if(conbatch!=null)
+                    conbatch.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return b;
     
+    }
     public static List<Batch> getAll(){
     
         List<Batch> batch=new ArrayList<Batch>();
