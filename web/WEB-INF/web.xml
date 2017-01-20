@@ -184,6 +184,10 @@
         <servlet-name>JsonGuest</servlet-name>
         <servlet-class>com.action.JsonGuest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>councillorattupdate</servlet-name>
+        <servlet-class>councillorattupdate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -367,6 +371,10 @@
     <servlet-mapping>
         <servlet-name>JsonGuest</servlet-name>
         <url-pattern>/JsonGuest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>councillorattupdate</servlet-name>
+        <url-pattern>/councillorattupdate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

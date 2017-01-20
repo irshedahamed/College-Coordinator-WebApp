@@ -39,12 +39,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		     <link rel="stylesheet" href="../../css/main.css">
-      <link href="../../css/sky-forms.css" rel="stylesheet">
+   <link href="../../css/sky-forms.css" rel="stylesheet">
         <link type="text/css" media="all" href="../../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 	
     <!-- Custom CSS -->
     <link href="../../css/simple-sidebar.css" rel="stylesheet">
-	    
+	    <link href="../../css/tabledesign.css" rel="stylesheet">
+            
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 	 <script src="../../js/jquery.js"></script>
          
@@ -95,7 +96,7 @@
                 <br>
                 <br>
                 
-                <li>
+                <li >
                 
                     <center>
                     <a href="#"><b><%=rsd.getString("tittle")+rsd.getString("name")%></b></a>
@@ -199,21 +200,54 @@
 
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
-               
-                   <form action="attUpdate.jsp" class="sky-form">
-                       <label class="input">
-                           <label class="select">
-            Date:
-            <input type="date" id="datepicker" placeholder="yyyy/mm/dd" name="datepicker" />
-            
-             <i></i>
-            <br> <br>
-                           </label>  </label>
-                       <div align="center">
-            <input type="submit" id="submit" value="Submit" /></div>
-                       
-                   </form>      
-                  
+                                <form action="${pageContext.request.contextPath}/councillorattupdate" method="post">
+                   <table class="bordered">
+                       <thead>
+                           <th>Roll Number</th>
+                       <th>Name</th>
+                       <th>Tick if absent</th>
+                       <th>Reason</th>
+                       </thead>
+                       <tbody>
+       <%
+       Staff s=new Staff(username);
+       
+       for(Student stu:Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(),s.getCouncillorDetails().getSec())){
+       %>
+       <tr>
+           <td><%=stu.getId()%></td>
+           <td><%=stu.getName()%></td>
+           <td><input type="checkbox" name="<%=stu.getId()%>"></td>
+           <td>
+               <select name="reason">
+                   <option value="#">Select</option>
+                   <option value="absent">Absent</option>
+                   <option value="medical">Medical Leave</option>
+                   <option value="onduty">On Duty</option>
+                   <option value="permission">Previous Permission</option>
+                   <option value="suspended">Suspended</option>
+               </select>
+           </td>
+           
+       </tr>
+                   
+                   <%
+       
+     // out.println(stu.getName());
+       }%>
+       </tbody>
+       <%
+       session.setAttribute("Councillor",s.getCouncillorDetails());
+       
+        Councillor c=(Councillor)session.getAttribute("councillor");
+      
+       %> 
+      
+         </table>
+       <div align="center">
+           <input type="submit" name="submit" value="submit"></div>
+                                </form>
+       
         </section>
 
             
