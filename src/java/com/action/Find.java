@@ -67,6 +67,12 @@ public class Find {
         day=String.valueOf((new Date().getDate()));
     return year+month+day;
     }
+    
+    
+    public static String  getFormattedDate(){
+     String date=getDate();
+     return date.substring(6,8)+"-"+date.substring(4,6)+"-"+date.substring(0,4);
+    }
     public static String category(String id){
     if(id.contains("AD"))
         return "Admission";
