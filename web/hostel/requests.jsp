@@ -228,7 +228,7 @@
                  %>
                  <div id="wardenentry">
           
-                     <form class="sky-form" action="${pageContext.request.contextPath}/processOutPass" method="post">
+                     <form class="sky-form"  action="${pageContext.request.contextPath}/processOutPass" method="post">
           
                      <header>OUTPASS</header>
                          
@@ -237,24 +237,48 @@
                                        
                                             
                                                 <div  class="newoutpass">
-                                                      <label class="input">
+                                                    <div align="right" style="position: absolute;margin-left: 350px;margin-top: 50px;" >
+                                                        
+                                                           <center>
+                                                                       <img src="../../StudentPhotos/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                        </center>
+                                 
+                                                        
+                                                    </div>
+                                                     <div align="left"> <label class="date">
                                                     <label class="input">
                                                           <div align="left" size="3px"><b>
                                                             Name: </b></div> 
                                                         <input type="text" id="nname"  value="<%=stu.getName() %>" disabled >
                                                     
-                                                    </label> </label>
-                                                    <label class="input"><label class="input">
+                                                    </label> </label></div>
+                                                         <div align="left">
+                                                    <label class="date"><label class="input">
                                                           <div align="left" size="3px"><b>
                                                             Rollno: </b></div> 
                                                             <input type="text" id="nrollno" name="rollno" value="<%=stu.getId() %>" disabled >
                                                     </label> </label>
+                                                         </div>
                                                     
-                                                    <label class="select"><label class="select">
+                                                       <div align="left">
+                                                    <label class="date"><label class="input">
+                                                          <div align="left" size="3px"><b>
+                                                            Batch-Dept-Sec: </b></div> 
+                                                            <input type="text" id="nrollno" name="batchdeptsec" value="<%=stu.getBatch()+"-"+stu.getDept().toUpperCase()+"-"+stu.getSec()%>" disabled >
+                                                    </label> </label>
+                                                         </div>
+                                                    
+                                                    <div align="left">
+                                                    <label class="date"><label class="select">
                                                          <div align="left" size="3px"><b>
                                                             Reason: </b></div> 
                                                             <select id="nreason" class="change" name="reason">
-                                                                <option value="">Select</option>
+                                                                <option value="">Select&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                </option>
                                                                 <%
                                                                 for(Holidays h:Holidays.getAll(Find.sdept(stu.getId()))){
                                                                 %>
@@ -270,8 +294,12 @@
                                                                 %>
                                                               <option value="others">Others</option>
                                                             </select>
-                                                    </label> </label>
-                                                    <label class="date"><label class="input">
+                                                        </label> </label></div>
+                                                              
+                                                             
+                                                    
+                                                              
+                                                              <label class="date"><label class="input">
                                                         <div align="left" size="3px"><b>
                                                             From: </b></div> 
                                                     <input type="date" id="nfrom"  name="from" >
@@ -289,7 +317,24 @@
                                                       <br>
                                                       <br>
                                                       <input type="hidden" name="status" value="Accepted"> 
-                                                       
+                                                   
+              
+                                  
+                                                      <div align="left" style="position: absolute;"><h2>Father</h2>
+                                          <img src="../../Father/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                         </div>
+                                         <div align="left" style="position: absolute;margin-left:200px;">
+                                   <h2>Mother</h2>
+                                          <img src="../../Mother/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                         </div>
+                                         <div align="right">
+                                    <h2>Local Guardian</h2>
+                                    <div style="margin-right: 75px;">
+                                          <img src="../../LocalGuardian/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                    </div>  
+                                    </div>
+                                
+                                                     
                                                     <input type="submit" class="button" value="Accepted" id="submit" value="Accept">
                                            
                                                   

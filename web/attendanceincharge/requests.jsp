@@ -1,9 +1,9 @@
 <%-- 
     Document   : requests
-    Created on : Jan 9, 2017, 12:07:54 PM
-    Author     : Lenovo
+    Created on : 24 Jan, 2017, 8:13:34 PM
+    Author     : Home
 --%>
-<%@page import="Actor.Staff"%>
+
 <%-- 
     Document   : requests
     Created on : 2 Jan, 2017, 5:22:49 PM
@@ -48,7 +48,7 @@
         {
             type = rsss.getString("type");
         }
-        if(type.equals("staffincharge"))
+        if(type.equals("yearincharge"))
         {
     
     
@@ -112,6 +112,11 @@
 </li>
 
 
+<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="Setup.jsp">Holiday Setup</a>
+
+
+</li>
+
 
 </ul>						
                                                 </nav>
@@ -121,6 +126,40 @@
                     
         <script type="text/javascript" src="../js/toggleSelect.js"></script>
 
+                         <script>
+                        $(document).ready(function(){
+                            
+                         <%
+                     Student stu=new Student();
+                     if(request.getParameter("rollno")!=null)
+                        stu=Student.getById(request.getParameter("rollno"));
+                 
+                        if(stu.getId()!=null){
+                         %>
+                            $(".change").on('change keydown',function(){
+                                
+                              var batch='<%=stu.getBatch() %>';
+                              var dept='<%=stu.getDept() %>';
+                              var holiday=$(this).val();
+                                
+                             if(batch!== null && dept!==null&&holiday!== null ){
+                                        $.post('../HolidayData',{
+                                            batch : batch,
+                                            dept : dept,
+                                            name : holiday
+                                        },function(response){
+                                            
+                                           // console.log(response);
+                                            $("#nfrom").val(response.from);
+                                            $("#ntill").val(response.till);
+                                        });
+                                          
+                                      }
+                            });
+                            <%}%>
+                        });
+                        
+                    </script>
                     <script>
                         $(document).ready(function(){
                             $("#display").hide();
@@ -168,7 +207,7 @@
                       <br>
                       <form method="get" action="requests.jsp">
                       <label class="input">
-                                                    <b>Id : </b>
+                                                    <b>Roll No : </b>
                                                     <label class="input" style="background: white;">
            
           <input type="text" id="rollno"   name="rollno" />
@@ -179,15 +218,18 @@
                   </form>
                       <br><br>
                  <br><br>
- <%
- if(request.getParameter("rollno")!=null){
- Staff s=Staff.getByid(request.getParameter("rollno"));
- if(s!=null){
-    
- %>                
+                 <%
+                     if( stu.getId()!=null){
+                       boolean flag=false;
+                        //check batch
+                        if(stu.getBatch().equals(Batch.getByYrIncharge(username).getBatch()))
+                            flag=true;
+                 
+                 if(flag){
+                 %>
                  <div id="wardenentry">
           
-                     <form class="sky-form" action="${pageContext.request.contextPath}/processOutPassStaff" method="post">
+                     <form class="sky-form"  action="${pageContext.request.contextPath}/processOutPass" method="post">
           
                      <header>OUTPASS</header>
                          
@@ -196,55 +238,99 @@
                                        
                                             
                                                 <div  class="newoutpass">
-                                                    
-                                                            <div align="right" style="position: absolute;margin-left: 350px;margin-top: 50px;" >
+                                                    <div align="right" style="position: absolute;margin-left: 350px;margin-top: 50px;" >
                                                         
                                                            <center>
-                                                                    <img src="../../StaffPhotos/<%=s.getId().toUpperCase()%>.JPG" height="120px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
-              </center>
+                                                                       <img src="../../StudentPhotos/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                        </center>
                                  
                                                         
                                                     </div>
-                                                    <div align="left">
-                                                      <label class="date">
+                                                     <div align="left"> <label class="date">
                                                     <label class="input">
                                                           <div align="left" size="3px"><b>
                                                             Name: </b></div> 
-                                                        <input type="text" id="nname"  value="<%=s.getName() %>" disabled >
+                                                        <input type="text" id="nname"  value="<%=stu.getName() %>" disabled >
                                                     
                                                     </label> </label></div>
-                                                        
-                                                        <div align="left">
+                                                         <div align="left">
                                                     <label class="date"><label class="input">
                                                           <div align="left" size="3px"><b>
-                                                            Staff Id: </b></div> 
-                                                            <input type="text" id="nrollno" name="rollno" value="<%=s.getId()%>" disabled >
+                                                            Rollno: </b></div> 
+                                                            <input type="text" id="nrollno" name="rollno" value="<%=stu.getId() %>" disabled >
                                                     </label> </label>
-                                                        </div>
-                                                    <div align="left">
-                                                      <label class="date">
-                                                    <label class="input">
+                                                         </div>
+                                                    
+                                                       <div align="left">
+                                                    <label class="date"><label class="input">
                                                           <div align="left" size="3px"><b>
-                                                            Dept: </b></div> 
-                                                        <input type="text" id="nname"  value="<%=Find.sdept(s.getId())%>" disabled >
+                                                            Batch-Dept-Sec: </b></div> 
+                                                            <input type="text" id="nrollno" name="batchdeptsec" value="<%=stu.getBatch()+"-"+stu.getDept().toUpperCase()+"-"+stu.getSec()%>" disabled >
+                                                    </label> </label>
+                                                         </div>
                                                     
-                                                    </label> </label></div>
-                                                        
-                                                        
                                                     <div align="left">
-                                                      <label class="date">
-                                                    <label class="input">
+                                                    <label class="date"><label class="select">
+                                                         <div align="left" size="3px"><b>
+                                                            Reason: </b></div> 
+                                                            <select id="nreason" class="change" name="reason">
+                                                                <option value="">Select&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                </option>
+                                                                <%
+                                                                for(Holidays h:Holidays.getAll(Find.sdept(stu.getId()))){
+                                                                %>
+                                                               
+                                                                <% if(h.getBatch().equals(stu.getBatch())) {%>
+                                                                <option value="<%=h.getName() %>"><%=h.getName() %></option>
+                                                                <%
+                                                                    }
+                                                                %>
+                                                              
+                                                                <%
+                                                                }
+                                                                %>
+                                                              <option value="others">Others</option>
+                                                            </select>
+                                                        </label> </label></div>
+                                                              
+                                                             
+                                                    
+                                                              
+                                                              <label class="date"><label class="input">
+                                                        <div align="left" size="3px"><b>
+                                                            From: </b></div> 
+                                                    <input type="date" id="nfrom"  name="from" >
+                                                   </label> </label>
+                                                   &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <label class="date"><label class="input">
                                                           <div align="left" size="3px"><b>
-                                                            Designation: </b></div> 
-                                                        <input type="text" id="nname"  value="<%=s.getDesg()%>" disabled >
-                                                    
-                                                    </label> </label></div>
-                                                    
-                                                   
+                                                            Till: </b></div> 
+                                                    <input type="date" id="ntill"  name="till" >
+                                                    </label> </label>
                                                       <br>
                                                       <br>
                                                       <input type="hidden" name="status" value="Accepted"> 
-                                                       
+                                                   
+              
+                                  
+                                                      <div align="left" style="position: absolute;"><h2>Father</h2>
+                                          <img src="../../Father/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                         </div>
+                                         <div align="left" style="position: absolute;margin-left:200px;">
+                                   <h2>Mother</h2>
+                                          <img src="../../Mother/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                         </div>
+                                
+                                
+                                                     
                                                     <input type="submit" class="button" value="Accepted" id="submit" value="Accept">
                                            
                                                   
@@ -261,99 +347,10 @@
                      
                  </div>
                  <%
-                 
-}
-}
-            else{
-                 %>
-                     <div id="display" style="display: block;float: right;width: 45%;">
-                    
-                     <form class="sky-form" action="${pageContext.request.contextPath}/processOutPass" method="post">
-                     <header>REQUEST DETAILS</header>
-                              
-                          <fieldset>                  
-                                         
-                                       
-                                            
-                                                <div  class="pending">
-                                                      <label class="input">
-                                                    <label class="input">
-                                                          <div align="left" size="3px"><b>
-                                                            Name: </b></div> 
-                                                    <input type="text" id="pname"  value="" disabled>
-                                                    
-                                                    </label> </label>
-                                                    <label class="input"><label class="input">
-                                                          <div align="left" size="3px"><b>
-                                                            Rollno: </b></div> 
-                                                    <input type="text" id="prollno" name="rollno" value="" disabled>
-                                                    </label> </label>
-                                                    
-                                                    <label class="input"><label class="input">
-                                                         <div align="left" size="3px"><b>
-                                                            Reason: </b></div> 
-                                                    <input type="text" id="preason" name="reason"  value="" disabled>
-                                                    </label> </label>
-                                                    <label class="date"><label class="input">
-                                                        <div align="left" size="3px"><b>
-                                                            From: </b></div> 
-                                                    <input type="date" id="pfrom"  name="from" >
-                                                   </label> </label>
-                                                   &nbsp;&nbsp;&nbsp;&nbsp;
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <label class="date"><label class="input">
-                                                          <div align="left" size="3px"><b>
-                                                            Till: </b></div> 
-                                                    <input type="date" id="ptill"  name="till" >
-                                                    </label> </label>
-                                                      <br>
-                                                      <br>
-                                                      <input type="hidden" name="status">
-                                                           <input type="submit" class="button" value="Rejected" id="submit" value="Reject">
-                                                
-                                                    <input type="submit" class="button" value="Accepted" id="submit" value="Accept">
-                                           
-                                                  
-                                                   
-                                                </div> 
-                                                  
-                                        
-                          </fieldset>
-                                <br><br>
-                    </form>
-                 </div>
-                
-                                                   <%
-                                                     }   
-                                                       //Use for pending requests
-                                                       if(false){
-                                                   %>
-                 <div id="pendingrequest" style="width: 45%;">
-                     <form class="sky-form">
-                     <header>PENDING REQUESTS</header>
-                                <br><br>
-                                       
-                                                    <label class="input">
-                                         
-                                            <br>
-                                            <label class="text" >
-                                                <div  class="pending">
-                                                    <input type="text"  value="name" disabled>
-                                                </div> 
-                                                   </label>
-                                        </label>
-                                        
-                                <br><br>
+                 }
 
-                     </form>
-                 </div>
-              <%
-              } 
-
-              %>
+}
+      %>      
               </center>     
               
             
