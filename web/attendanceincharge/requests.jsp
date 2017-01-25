@@ -241,7 +241,7 @@
                                                     <div align="right" style="position: absolute;margin-left: 350px;margin-top: 50px;" >
                                                         
                                                            <center>
-                                                                       <img src="../../StudentPhotos/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                                                       <img src="../../StudentPhotos/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="120px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                         </center>
                                  
                                                         
@@ -320,19 +320,15 @@
                                                       <input type="hidden" name="status" value="Accepted"> 
                                                    
               
-                                  
-                                                      <div align="left" style="position: absolute;"><h2>Father</h2>
+                                                      <div align="left" style="position: absolute;margin-left: 100px;"><h4>Father</h4>
                                           <img src="../../Father/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                          </div>
-                                         <div align="left" style="position: absolute;margin-left:200px;">
-                                   <h2>Mother</h2>
+                                         <div align="right" style="margin-right: 150px;" >
+                                   <h4>Mother</h4>
                                           <img src="../../Mother/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                          </div>
                                 
-                                
-                                                     
                                                     <input type="submit" class="button" value="Accepted" id="submit" value="Accept">
-                                           
                                                   
                                         
                                        

@@ -137,6 +137,6 @@ public class OutPass {
         }
     }
           
-          return "OUTPASSSTAFF"+res;
+          return "OUTPASSSTAFF"+(res+1);
       }
 }

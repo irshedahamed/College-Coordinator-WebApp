@@ -226,7 +226,7 @@
                                                     <label class="input">
                                                           <div align="left" size="3px"><b>
                                                             Dept: </b></div> 
-                                                        <input type="text" id="nname"  value="<%=Find.sdept(s.getId())%>" disabled >
+                                                        <input type="text" id=""  value="<%=Find.sdept(s.getId())%>" disabled >
                                                     
                                                     </label> </label></div>
                                                         
@@ -236,7 +236,7 @@
                                                     <label class="input">
                                                           <div align="left" size="3px"><b>
                                                             Designation: </b></div> 
-                                                        <input type="text" id="nname"  value="<%=s.getDesg()%>" disabled >
+                                                        <input type="text" id=""  value="<%=s.getDesg()%>" disabled >
                                                     
                                                     </label> </label></div>
                                                     

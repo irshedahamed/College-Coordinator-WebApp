@@ -98,7 +98,7 @@ public class addEntry extends HttpServlet {
              
              
              
-             //SMSTemplate.send(Parent.getNumber(e.getRollno()),message);
+             SMSTemplate.send(Parent.getNumber(e.getRollno()),message);
          }
         
          if(act)
