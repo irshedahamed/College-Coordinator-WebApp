@@ -201,17 +201,28 @@
                 <br><br><br><br>
                
                    <form action="attUpdate.jsp" class="sky-form">
+                       
+                       <header>ATTENDANCE</header>
+                      
+                       <fieldset>
                        <label class="input">
-                           <label class="select">
-            Date:
+                    
+          <div align="left" size="3px"><b>
+                                                    Date:</b></div>
+                      <label class="input">                             
             <input type="date" id="datepicker" placeholder="yyyy/mm/dd" name="datepicker" />
             
              <i></i>
             <br> <br>
                            </label>  </label>
-                       <div align="center">
-            <input type="submit" id="submit" value="Submit" /></div>
                        
+                       
+                       
+                       
+                       
+            <input type="submit" id="submit" value="Submit">
+              </fieldset>
+                     
                    </form>      
                   
         </section>

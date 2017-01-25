@@ -217,9 +217,9 @@
        <tr>
            <td><%=stu.getId()%></td>
            <td><%=stu.getName()%></td>
-           <td><input type="checkbox" name="<%=stu.getId()%>"></td>
+           <td><input type="checkbox" name="<%=stu.getId()%>val" value="Absent"></td>
            <td>
-               <select name="reason">
+               <select name="<%=stu.getId()%>reason">
                    <option value="#">Select</option>
                    <option value="absent">Absent</option>
                    <option value="medical">Medical Leave</option>
@@ -239,11 +239,12 @@
        <%
        session.setAttribute("Councillor",s.getCouncillorDetails());
        
-        Councillor c=(Councillor)session.getAttribute("councillor");
+        Councillor c=(Councillor)session.getAttribute("Councillor");
       
        %> 
       
          </table>
+       <input type="hidden" name="datepicker" value="<%=request.getParameter("datepicker")%>">
        <div align="center">
            <input type="submit" name="submit" value="submit"></div>
                                 </form>

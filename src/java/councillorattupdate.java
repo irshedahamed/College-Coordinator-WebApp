@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import Actor.Councillor;
+import com.action.Find;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -79,14 +81,16 @@ public class councillorattupdate extends HttpServlet {
        // processRequest(request, response);
         try
         {
-            
-        
-      HttpSession session = request.getSession();
-      String sem="6";
-     // String sem = session.getAttribute("sem").toString();
-      String date = session.getAttribute("date").toString();
-      String batch = session.getAttribute("batch").toString();
-      String dept = session.getAttribute("dept").toString();
+             Councillor c=(Councillor)request.getSession().getAttribute("Councillor");
+      
+             
+      
+      String date = request.getParameter("datepicker");
+      String batch = c.getBatch();
+      String dept = c.getDept();
+      String acyr=c.getAcademicyr();
+      String semister=c.getSemister();
+      int sem=Find.getSem(batch, acyr, semister);
       Connection con = new dbconnection.dbcon().getConnection(dept);
       Statement st = con.createStatement();
       Statement st1 = con.createStatement();
