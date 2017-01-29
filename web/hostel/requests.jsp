@@ -67,7 +67,7 @@
      
 <link rel="stylesheet" href="../css/sky-forms.css">
       
-	
+<script src="../js/outpasscheck.js"></script>
 		
 		</head>
 		
@@ -228,7 +228,7 @@
                  %>
                  <div id="wardenentry">
           
-                     <form class="sky-form"  action="${pageContext.request.contextPath}/processOutPass" method="post">
+                     <form class="sky-form" id="outpassform"  action="${pageContext.request.contextPath}/processOutPass" method="post">
           
                      <header>OUTPASS</header>
                          
