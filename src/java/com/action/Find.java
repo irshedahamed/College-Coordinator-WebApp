@@ -16,7 +16,7 @@ public class Find {
     
     
     public static final String[] Depts={"cse","mech","it","civil","eee","ece"};
-    
+    public static final String SERVERURL="http://59.95.166.209:8080/newportal/";
     static public String dept(String username){
     if(username.contains("cse"))
         return "cse";

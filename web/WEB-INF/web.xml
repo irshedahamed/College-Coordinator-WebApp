@@ -228,6 +228,10 @@
         <servlet-name>redirectPay</servlet-name>
         <servlet-class>Fee.redirectPay</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>testRequest</servlet-name>
+        <servlet-class>General.testRequest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -455,6 +459,10 @@
     <servlet-mapping>
         <servlet-name>redirectPay</servlet-name>
         <url-pattern>/redirectPay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>testRequest</servlet-name>
+        <url-pattern>/testRequest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Fee;
+package General;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Home
  */
-public class redirectPay extends HttpServlet {
+public class testRequest extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class redirectPay extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet redirectPay</title>");            
+            out.println("<title>Servlet testRequest</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet redirectPay at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet testRequest at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -75,21 +75,14 @@ public class redirectPay extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
-       
-       String mode=request.getParameter("mode");
-       String munum=request.getParameter("munumber");
-       MUResponse mu=(MUResponse) request.getSession().getAttribute("MUResponse");
-       
-       if(mode.equals("offline")){
-       request.getRequestDispatcher("/student/Challan.jsp").forward(request, response);
-       }else if(mode.equals("indianbank")){
-       String url="https://www.indianbank.net.in/servlet/ibs.servlets.IBSMultiUtilityServlet?HandleID=H_MULTIUTILTY_PAY&ref_number=" + mu.getRefno() + "&RUrl="+com.action.Find.SERVERURL+"testRequest";
-       RequestDispatcher rd=request.getRequestDispatcher("/sendPost.jsp?RUrl="+(url).replace("&", "%26").replace(" ", "%20"));
-        rd.forward(request, response);
-       }
-       else{
-       response.getWriter().print("yet to implement");
-       }
+       String abc="";
+        Enumeration<String> params = request.getParameterNames();
+        while(params.hasMoreElements()){
+            String a=params.nextElement();
+            abc+=a+" "+request.getParameter(a)+"\n";
+        }
+        
+        response.getWriter().print(abc);
     }
 
     /**
