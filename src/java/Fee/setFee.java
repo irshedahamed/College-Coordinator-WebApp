@@ -5,6 +5,7 @@
  */
 package Fee;
 
+import General.AcademicYear;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -75,6 +76,7 @@ public class setFee extends HttpServlet {
             throws ServletException, IOException {
        // processRequest(request, response);
        BasicFee bf=new BasicFee();
+       bf.setAcyear(AcademicYear.getCurrentYear().getYear());
        bf.setBatch(request.getParameter("batch"));
        bf.setHostel(request.getParameter("hostel"));
        bf.setPlacement(request.getParameter("placement"));

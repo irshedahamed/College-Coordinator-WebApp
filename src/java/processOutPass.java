@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 
+import Actor.Parent;
 import Forms.OutPass;
+import com.action.SMSTemplate;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -87,8 +89,10 @@ public class processOutPass extends HttpServlet {
         if(p.getStatus().equals("Accepted")&&res){
         General.OutPass op=new General.OutPass(p.getRollno());
      
-        if(op.insert(p.getRequestid()))
+        if(op.insert(p.getRequestid())){
            response.getWriter().write("Out Pass Generated and valid for 6 hours");
+            SMSTemplate.send(Parent.getNumber(p.getRollno()),p.getSMSContent());
+        }
         }
         
         if(res)

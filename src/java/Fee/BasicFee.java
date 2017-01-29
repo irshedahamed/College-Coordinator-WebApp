@@ -28,6 +28,7 @@ public class BasicFee {
     private String transport;
     private String hostel;
     private String placement;
+    private String acyear;
 
     public String getBatch() {
         return batch;
@@ -76,7 +77,42 @@ public class BasicFee {
     public void setPlacement(String placement) {
         this.placement = placement;
     }
+    public boolean insertorupdate(){
+    Connection conn=null;
+       Statement stmt=null;
+       int update=0;
+       try{
+           conn=new dbcon().getConnection("sjitportal");
+           stmt=conn.createStatement();
+           
+           String sql;
+                  sql="delete from basic_fee where batch='"+batch+"' and type='"+type+"' and acyear='"+acyear+"'";
+                        stmt.executeUpdate(sql);
+       
+           sql="insert into basic_fee values('"+batch+"','"+acyear+"','"+type+"','"+tution+"','"+transport+"','"+placement+"','"+hostel+"')";
+       update+=stmt.executeUpdate(sql);
+       
+     
+       
+       }catch(Exception e){
+       e.printStackTrace();
+       }finally{
+           try {
+               if(stmt!=null)
+                   stmt.close();
+               if(conn!=null)
+                   conn.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       
+       }
+       if(update==1)
+           return true;
+       else
+           return false;
     
+    }
     public boolean insert(){
     Connection conn=null;
        Statement stmt=null;
@@ -86,10 +122,7 @@ public class BasicFee {
            stmt=conn.createStatement();
            
            String sql;
-                  sql="delete from basic_fee where batch='"+batch+"' and type='"+type+"'";
-                        stmt.executeUpdate(sql);
-       
-           sql="insert into basic_fee values('"+batch+"','"+type+"','"+tution+"','"+transport+"','"+placement+"','"+hostel+"')";
+           sql="insert into basic_fee values('"+batch+"','"+acyear+"','"+type+"','"+tution+"','"+transport+"','"+placement+"','"+hostel+"')";
        update+=stmt.executeUpdate(sql);
        
      
@@ -160,5 +193,13 @@ public class BasicFee {
     
     return list;
     
+    }
+
+    public String getAcyear() {
+        return acyear;
+    }
+
+    public void setAcyear(String acyear) {
+        this.acyear = acyear;
     }
 }

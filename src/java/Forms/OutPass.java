@@ -210,4 +210,8 @@ public class OutPass {
     
     return list;
     }
+    
+    public String getSMSContent(){
+    return "Dear Parent, Your request for outpass has been approved and your ward should return back on or before "+till+" 6 PM";
+    }
 }

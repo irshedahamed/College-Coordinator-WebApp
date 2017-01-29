@@ -47,18 +47,17 @@
       
 <link rel="stylesheet" href="../css/angular-material.css">
 
-<link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
 
 
 <link rel="stylesheet" href="../css/angulartab.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"> </script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
-<script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.js"></script>
+<script src="../js/angular.js"> </script>
+<script src="../js/angular-animate.min.js"></script>
+<script src="../js/angular-route.min.js"></script>
+<script src="../js/angular-aria.min.js"></script>
+<script src="../js/angular-message.min.js"></script>
+<script src="../js/svg-assert-cache.js"></script>
+<script src="../js/angular-material.js"></script>
 
 <script src="../js/angulartab.js"></script>
 		</head>
