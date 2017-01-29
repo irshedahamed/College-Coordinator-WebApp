@@ -42,4 +42,9 @@ public class Find {
         else
         return null;
     }
+    
+    public static String getUtilityCode(String Amount){
+    Float amt=Float.valueOf(Amount);
+    return amt<=5000?"0065JIT1":amt<=10000?"0065JIT2" : "0065JIT3";
+    }
 }
