@@ -4,6 +4,7 @@
     Author     : Home
 --%>
 
+<%@page import="Fee.Fee"%>
 <%@page import="Actor.Student.Admission"%>
 <%@page import="Fee.SpecialFee"%>
 <%@page import="General.AcademicYear"%>
@@ -108,53 +109,28 @@
           String batch=Batch.getByYrIncharge(username).getBatch();  
           List<Student> list=Student.getAll(dept, batch, "_");
             
-        List<BasicFee> fee=BasicFee.getByBatch(batch);
-       String cyear=AcademicYear.getCurrentYear().getYear();
+       
         for(Student s:list){
-            SpecialFee sfee=SpecialFee.getFee(s.getId(), cyear);
-            if(sfee==null){
-                s.fetchAdmission();
-                String type="";
-                
-                if(s.admission.getGovt_mang().equals("Counseling"))
-                type="Government";
-                else if(s.admission.getSport().equals("Yes"))
-                    type="Sports";
-                else //if(s.admission.getGovt_mang().equals("Management"))
-                    type="Management";
-                BasicFee bf=BasicFee.getByType(fee, type);
+          Fee f=Fee.getFeeById(s.getId());
     
 %>
    
-        <tr id="<%=s.getId()%>" >
-           <td><%=s.getRegno() %></td> 
-           <td><%=s.getId() %></td>
-           <td><%=s.getName()%></td>
-           <td><input type="text" class="amount" value="<%=bf.getTution() %>" id="tution" style="background:white"></td>
-           <td><input type="text" class="amount" value="<%=bf.getTransport()%>" id="transport" style="background:white"></td>
-           <td><input type="text" class="amount" value="<%=bf.getPlacement()%>" id="placement" style="background:white"></td>
-           <td><input type="text" class="amount" value="<%=bf.getHostel()%>" id="hostel" style="background:white"></td>
-           <td><input type="button" value="Update" id="submit" class="update" ></td>
-        </tr>      
-            
- 
-        <% }else{
-%>
+
         <tr id="<%=s.getId()%>">
            <td><%=s.getRegno() %></td> 
            <td><%=s.getId() %></td>
            <td><%=s.getName()%></td>
-          <td><input type="text" class="amount" value="<%=sfee.getTution() %>" id="tution" style="background:white"></td>
-           <td><input type="text" class="amount" value="<%=sfee.getTransport()%>" id="transport" style="background:white"></td>
-           <td><input type="text" class="amount" value="<%=sfee.getPlacement()%>" id="placement" style="background:white"></td>
-           <td><input type="text" class="amount" value="<%=sfee.getHostel()%>" id="hostel" style="background:white"></td>
+          <td><input type="text" class="amount" value="<%=f.getTution() %>" id="tution" style="background:white"></td>
+           <td><input type="text" class="amount" value="<%=f.getTransport()%>" id="transport" style="background:white"></td>
+           <td><input type="text" class="amount" value="<%=f.getPlacement()%>" id="placement" style="background:white"></td>
+           <td><input type="text" class="amount" value="<%=f.getHostel()%>" id="hostel" style="background:white"></td>
            <td><input type="button" value="Update" id="submit" class="update"></td>
         </tr>      
         <%
 
 }
 
-}
+
         %>
        
      

@@ -17,13 +17,10 @@ import java.util.List;
  *
  * @author Home
  */
-public class SpecialFee {
+public class SpecialFee extends Fee{
     private String rollno;
     private String academicyr;
-    private String tution;
-    private String transport;
-    private String placement;
-    private String hostel;
+    
 
     public String getRollno() {
         return rollno;
@@ -41,37 +38,7 @@ public class SpecialFee {
         this.academicyr = academicyr;
     }
 
-    public String getTution() {
-        return tution;
-    }
-
-    public void setTution(String tution) {
-        this.tution = tution;
-    }
-
-    public String getTransport() {
-        return transport;
-    }
-
-    public void setTransport(String transport) {
-        this.transport = transport;
-    }
-
-    public String getPlacement() {
-        return placement;
-    }
-
-    public void setPlacement(String placement) {
-        this.placement = placement;
-    }
-
-    public String getHostel() {
-        return hostel;
-    }
-
-    public void setHostel(String hostel) {
-        this.hostel = hostel;
-    }
+   
     
     public boolean insert(){
     Connection conn=null;

@@ -216,6 +216,18 @@
         <servlet-name>updateSpecialFee</servlet-name>
         <servlet-class>Fee.updateSpecialFee</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>generateMUP</servlet-name>
+        <servlet-class>Fee.generateMUP</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>receiveMUResponse</servlet-name>
+        <servlet-class>Fee.receiveMUResponse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>redirectPay</servlet-name>
+        <servlet-class>Fee.redirectPay</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -431,6 +443,18 @@
     <servlet-mapping>
         <servlet-name>updateSpecialFee</servlet-name>
         <url-pattern>/updateSpecialFee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>generateMUP</servlet-name>
+        <url-pattern>/generateMUP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>receiveMUResponse</servlet-name>
+        <url-pattern>/receiveMUResponse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>redirectPay</servlet-name>
+        <url-pattern>/redirectPay</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

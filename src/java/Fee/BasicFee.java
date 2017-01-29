@@ -19,15 +19,12 @@ import java.util.List;
  *
  * @author Home
  */
-public class BasicFee {
+public class BasicFee extends Fee{
     
     public static final String[] types={"Government","Management","Sports"};
     private String batch;
     private String type;
-    private String tution;
-    private String transport;
-    private String hostel;
-    private String placement;
+    
     private String acyear;
 
     public String getBatch() {
@@ -46,37 +43,8 @@ public class BasicFee {
         this.type = type;
     }
 
-    public String getTution() {
-        return tution;
-    }
-
-    public void setTution(String tution) {
-        this.tution = tution;
-    }
-
-    public String getTransport() {
-        return transport;
-    }
-
-    public void setTransport(String transport) {
-        this.transport = transport;
-    }
-
-    public String getHostel() {
-        return hostel;
-    }
-
-    public void setHostel(String hostel) {
-        this.hostel = hostel;
-    }
-
-    public String getPlacement() {
-        return placement;
-    }
-
-    public void setPlacement(String placement) {
-        this.placement = placement;
-    }
+ 
+  
     public boolean insertorupdate(){
     Connection conn=null;
        Statement stmt=null;
