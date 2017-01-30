@@ -131,7 +131,7 @@ return data;
                  String bankamount="<br>"+bcharge;
                  
                      Float bankchr=Float.valueOf(bcharge);
-             for(String type:Fee.Fee.subCategory)
+             for(String type:Fee.Fee.getsubCategory())
                  {
                      
              %> 
@@ -180,7 +180,7 @@ return data;
        
           <% 
                 Integer sum=0;
-                for(String type:Fee.Fee.subCategory){%>
+                for(String type:Fee.Fee.getsubCategory()){%>
             <tr>
                <td><%=Fee.Find.getType(type)%></td>
                <td align="right"><%= f.getByType(type)%></td>

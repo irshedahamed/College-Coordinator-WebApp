@@ -84,7 +84,7 @@ public class generateMUP extends HttpServlet {
         Fee f=Fee.getFeeById(s.getId());
         params += "HandleID=" + "H_MULTHIRD";
         int i=1;
-        for(String type:Fee.subCategory){
+        for(String type:Fee.getsubCategory()){
         params += ("&Amt"+i+"=" + f.getByType(type));
         
             sum+=Integer.valueOf(f.getByType(type));

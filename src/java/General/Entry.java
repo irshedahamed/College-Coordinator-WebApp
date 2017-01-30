@@ -62,7 +62,7 @@ public class Entry {
        if(action.equals("IN"))
            return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") has entered our premises at "+new Date();
        else
-           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") left our premises at "+new Date()+" and your ward should reach back before 30-01-2017 6 pm";
+           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") left our premises at "+new Date()+"";
        
    }
     
