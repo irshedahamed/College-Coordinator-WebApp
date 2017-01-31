@@ -393,7 +393,7 @@ public class ExcelStudentUpload extends HttpServlet {
       
       String sql3="insert into student_admission_details values('"+rollno+"',"+"?"+",'"+adminalot
               +"','"+counormn+"','"+orank+"','"+crank+"','"+sadmission+"','"+gname+"','"+moi
-              +"')";
+              +"','NA')";
       
       String sql4="insert into student_contact_details values('"+rollno+"','"+doorno+"','"+street+"','"+area+"','"
               +city+"','"+district+"','"+state+"','"+country+"','"+pincode

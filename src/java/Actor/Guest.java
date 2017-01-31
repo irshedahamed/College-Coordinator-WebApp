@@ -34,6 +34,15 @@ public class Guest {
     String meet;
     String reason;
     String sex;
+    String numpeople;
+
+    public String getNumpeople() {
+        return numpeople;
+    }
+
+    public void setNumpeople(String numpeople) {
+        this.numpeople = numpeople;
+    }
 
     public String getSex() {
         return sex;
@@ -118,7 +127,8 @@ public class Guest {
     try{
     conn=new dbcon().getConnection("sjitportal");
     stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from guest where id like '"+id+"%'");
+    String id;
+                    ResultSet rs=stmt.executeQuery("select * from guest where id like '"+this.id+"%'");
                     
                     rs.afterLast();
                     if(rs.previous()){
@@ -126,28 +136,21 @@ public class Guest {
                     }
                     
                     if(previd==null)
-                        id+="001";
+                        this.id+="001";
                     else{
                         id=previd.substring(previd.length()-3, previd.length());
                         id=String.valueOf(Integer.valueOf(id)+1);
-                    while(id.length()<3)
+                      
+                        while(id.length()<3)
                         id+="0"+id;
+                        
+                        this.id=this.id+id;
                     }
                     
-                    stmt.execute("insert into guest values('"+id+"','"+name+"','"+city+"','"+mobile+"','"+mail+"','"+address+"','"+reason
-                    +"','"+meet+"','"+sex+"')");
+                    stmt.execute("insert into guest values('"+this.id+"','"+name+"','"+city+"','"+mobile+"','"+mail+"','"+address+"','"+reason
+                    +"','"+meet+"','"+sex+"','+"+numpeople+"')");
                     
-                    FileInputStream input=new FileInputStream(new File(path));
-                    File op=new File("../../Guest/"+id+".jpg");
-                    op.createNewFile();
-                    FileOutputStream output=new FileOutputStream(new File("../../Guest/"+id+".jpg"));
-                    int b ;
-                    while((b=input.read())!=-1)
-                    output.write(b);
-                    
-                    File dir=new File(path);
-        if(dir.exists())
-           FileUtils.deleteDirectory(dir);
+   
                    
                 return true;
     }catch(Exception e){
@@ -191,6 +194,52 @@ public class Guest {
                      g.setMail(rs.getString("mail"));
                      g.setMobile(rs.getString("mobile"));
                      g.setName(rs.getString("name"));
+                     g.setSex(rs.getString("sex"));
+                    }
+                    
+                    
+    }catch(Exception e){
+    e.printStackTrace();
+    }finally{
+        try {
+            if(stmt!=null)
+                stmt.close();
+            if(conn!=null)
+                conn.close();
+        } catch (SQLException ex) {
+      ex.printStackTrace();
+        }
+    }
+    return g;
+    }
+    
+    
+     public static Guest getByMobile(String mobile){
+        Guest g=new  Guest();
+        
+        
+          Connection conn=null;
+    Statement stmt=null;
+   String previd=null;
+   
+   
+    
+    try{
+    conn=new dbcon().getConnection("sjitportal");
+    stmt = conn.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from guest where mobile like '"+mobile+"'");
+                    
+                    
+                    if(rs.next()){
+                     g.setId(rs.getString("id"));
+                     g.setAddress(rs.getString("address"));
+                     g.setCity(rs.getString("city"));
+                     g.setReason(rs.getString("reason"));
+                     g.setMeet(rs.getString("meet"));
+                     g.setMail(rs.getString("mail"));
+                     g.setMobile(rs.getString("mobile"));
+                     g.setName(rs.getString("name"));
+                     g.setSex(rs.getString("sex"));
                     }
                     
                     

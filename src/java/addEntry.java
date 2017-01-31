@@ -5,7 +5,9 @@
  */
 
 import General.Entry;
+import Actor.Parent;
 import com.action.Find;
+import com.action.SMSTemplate;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -89,7 +91,16 @@ public class addEntry extends HttpServlet {
          else if(action.equals("OUT"))
              act=e.insertout();
              
-         
+         if(Character.isDigit(e.getRollno().charAt(0))){
+             String message;
+             message=e.getSMSContent(action);
+        
+             
+             
+             
+             SMSTemplate.send(Parent.getNumber(e.getRollno()),message);
+         }
+        
          if(act)
            response.getWriter().println("<center><h1>Entry added Successfully!!!</h1>");
        else

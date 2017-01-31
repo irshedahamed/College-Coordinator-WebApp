@@ -1,0 +1,483 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jan 24, 2017, 9:24:23 AM
+    Author     : Lenovo
+*/
+
+body
+{
+	margin: 0px;
+	background-color: rgb(255, 255, 255);
+	font-family: Arial;
+	font-size: 12px;
+}
+
+*:focus
+{
+	outline: none;
+}
+
+.leftpan
+{
+	width: 200px;
+	height: 400px;
+	background-image: url(../Images/leftpanbg-new.png);
+	background-position: right top;
+	background-repeat: no-repeat;
+}
+
+.minspace
+{
+	height: 5px;
+}
+
+.lowspace
+{
+	height: 10px;
+}
+
+.largespace
+{
+	height: 15px;
+}
+
+.maxspace
+{
+	height: 20px;
+}
+
+.fineborder
+{
+	border-width: 1px;
+	border-style: solid;
+	border-color: Navy;
+}
+.error
+{
+	color: red;
+	font-weight: bold;
+}
+
+.errorsummary
+{
+	color: red;
+}
+
+.validationerrors ul
+{
+	margin: 0;
+	padding: 0;
+	margin-left: 80px;
+	list-style: square;
+}
+
+.emptybox
+{
+	position: relative;
+	border-style: none;
+	text-align: left;
+	padding-left: 0px;
+}
+
+.groupbox
+{
+	position: relative;
+	line-height: 1.5;
+	border: 1px solid #777777;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	padding-right: 10px;
+	text-align: left;
+}
+.groupheading
+{
+	margin-right: 2px;
+	font-weight: bold;
+	height: 20px;
+	position: relative;
+	margin-top: -1em;
+}
+
+.midspace
+{
+	width: 10%;
+}
+
+.row
+{
+	vertical-align: middle;
+	width: 100%;
+	text-align: left;
+	border-style: none;
+	display: inline-block;
+	padding-top: 5px;
+	overflow: hidden;
+}
+
+.column
+{
+	float: left;
+	display: table-cell;
+	text-align: left;
+	vertical-align: middle;
+	min-height: 25px;
+}
+
+.tbl
+{
+	border: 1px solid #555555;
+	border-collapse: collapse;
+	font-family: Arial;
+}
+
+.tbl td
+{
+	border: 1px solid #555555;
+	padding-left: 3px;
+}
+
+.link
+{
+	text-decoration: none;
+	font-family: Arial;
+	color: #eeeeee;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.link:hover
+{
+	text-decoration: underline;
+}
+
+.blacklink
+{
+	text-decoration: none;
+	font-family: Arial;
+	color: #000000;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.blacklink:hover
+{
+	text-decoration: underline;
+}
+
+.adminleftmenu
+{
+	display: block;
+	height: 26px;
+	width: 100%;
+	padding-left: 25px;
+	vertical-align: middle;
+	text-decoration: none;
+	color: Black;
+	background-color: #EAF3FA;
+}
+
+.adminleftmenu:hover
+{
+	background-color: #A7B0B7;
+}
+
+.btnrow
+{
+	height: 30px;
+	padding: 5px 10px 5px 0px;
+	text-align: right;
+}
+
+.btn
+{
+	background-image: url(../Images/btnbg-new.png);
+	background-repeat: no-repeat;
+	width: 92px;
+	height: 25px;
+	border-style: none;
+	color: white;
+	background-color: Transparent;
+	cursor: pointer;
+	font-size: 11px;
+	font-weight: bold;
+	padding-bottom: 1px;
+}
+
+
+.btnbig
+{
+	background-image: url(../Images/btnbigbg-new.png);
+	background-repeat: no-repeat;
+	width: 125px;
+	height: 30px;
+	border-style: none;
+	color: white;
+	font-size: 11px;
+	background-color: Transparent;
+	cursor: pointer;
+	font-weight: bold;
+	padding-bottom: 3px;
+}
+
+.btn:active
+{
+	padding-left: 8px;
+}
+
+.txtsmall
+{
+	width: 150px;
+}
+
+.txtnormal
+{
+	width: 185px;
+}
+
+.txtbig
+{
+	width: 210px;
+}
+
+
+.ddlsmall
+{
+	width: 143px;
+}
+.ddlnormal
+{
+	width: 173px;
+}
+.ddlbig
+{
+	width: 203px;
+}
+
+.footer
+{
+	width: 100%;
+	font-family: Arial;
+	font-size: 10px;
+	color: #444444;
+	text-align: center;
+	padding-bottom: 8px;
+}
+
+.header
+{
+	height: 100px;
+	background-image: url(../Images/headerbg.png);
+	background-repeat: repeat;
+}
+
+.pageheader
+{
+	height: 25px;
+	background-image: url(../Images/pageheader.png);
+	background-repeat: repeat;
+	vertical-align: middle;
+	font-weight: bold;
+	font-family: Arial;
+	font-size: 13px;
+}
+
+.panelheader
+{
+	height: 20px;
+	background-image: url(../Images/tblheader1.gif);
+	background-repeat: repeat;
+	vertical-align: middle;
+	font-weight: bold;
+	font-family: Arial;
+	font-size: 12px;
+	text-align: center;
+	padding-top: 5px;
+}
+
+.headerrow
+{
+	height: 25px;
+	background-image: url(../Images/menubg1.png);
+	background-repeat: repeat;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: White;
+}
+.headerrow1
+{
+	height: 25px;
+	background-color: #E0E0FF;
+	font-family: Arial;
+	font-size: 12px;
+	font-weight: bold;
+	color: Black;
+}
+
+.headerrow td
+{
+	border: 1px solid #000000;
+}
+
+.headerrow1 td
+{
+	border: 1px solid #000000;
+}
+
+.alternaterow
+{
+	height: 22px;
+	background-color: #C1CFDF;
+	border: 1px solid #555555;
+	font-family: Arial;
+	font-size: 12px;
+	color: Black;
+}
+
+.alternaterow td
+{
+	border: 1px solid #555555;
+}
+
+.normalrow
+{
+	height: 22px;
+	font-family: Arial;
+	border: 1px solid #555555;
+	font-size: 12px;
+	color: Black;
+}
+
+.normalrow td
+{
+	height: 22px;
+	font-family: Arial;
+	border: 1px solid #555555;
+	font-size: 12px;
+	color: Black;
+}
+
+.footerrow
+{
+	height: 25px;
+	border: 1px solid #555555;
+	color: Black;
+	background-color: #556E85;
+}
+
+.errorpanel
+{
+	border: 1px solid red;
+	width: 75%;
+	margin: 50px;
+	padding: 10px;
+}
+
+.errorlabel
+{
+	font-size: 18px;
+	font-family: Arial;
+	font-weight: bold;
+	color: Red;
+}
+
+.line
+{
+	height: 1px;
+	width: 100%;
+}
+
+.errorline
+{
+	height: 1px;
+	width: 100%;
+	color: Red;
+}
+
+.errordesc
+{
+	text-align: left;
+}
+
+.regards
+{
+	color: Blue;
+	text-align: left;
+}
+
+.clearthis
+{
+	clear: both;
+}
+
+.boldtext
+{
+	font-weight: bold;
+}
+
+.bigtext
+{
+	font-size: 13px;
+}
+
+.largetext
+{
+	font-size: 2.2em;
+}
+
+.padding_left_12
+{
+	padding-left: 12px;
+}
+
+.paddingtop15
+{
+	padding-top: 15px;
+}
+
+.margintop15
+{
+	margin-top: 15px;
+}
+
+.scroll
+{
+	text-transform: uppercase;
+}
+.caps
+{
+	text-transform: uppercase;
+}
+
+.hidden
+{
+	display: none;
+}
+
+.fontbold
+{
+	font-weight: bold !important;
+}
+
+.borderbottomgray
+{
+	border-bottom: 1px solid #BBBBBB;
+}
+
+.paddingleft20
+{
+	padding-left: 20px;
+}
+
+.paddingleft75
+{
+	padding-left: 75px;
+}
+.marginleft75
+{
+	margin-left: 75px;
+}

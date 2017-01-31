@@ -4,6 +4,9 @@
     Author     : Home
 --%>
 
+<%@page import="java.io.FileOutputStream"%>
+<%@page import="java.io.FileInputStream"%>
+<%@page import="java.io.File"%>
 <%@page import="Actor.Guest"%>
 <%@page import="General.Batch"%>
 <%-- 
@@ -178,7 +181,7 @@
                                 xmlhttp.onreadystatechange=function(respone){
                                     if(xmlhttp.status===200 && xmlhttp.readyState===4){
                                         
-                                        //console.log(xmlhttp.responseText);
+                                        console.log(xmlhttp.responseText);
                                     }
                                 };
                                 xmlhttp.send(fd);
@@ -346,9 +349,59 @@ $(document).ready(function(){
        
     });
     //alert('list');
-    }
-    });
     
+    }
+    function setSelectedValue(selectObj, valueToSet) {
+    for (var i = 0; i < selectObj.options.length; i++) {
+        if (selectObj.options[i].text=== valueToSet) {
+            selectObj.options[i].selected = true;
+            return;
+        }
+    }
+}
+    $("#mobile").on('keyup',function(){
+        
+        $.post('../JsonGuest',{
+            mobile : $(this).val()
+        },function(response){
+            if(response.id!==undefined){
+                $("#name").val(response.name);
+                $("#address").val(response.address);
+                $("#name").val(response.name);
+                $("#sex").val(response.sex);
+                $("#category").val(response.id.substring(0,2));
+                $("#city").val(response.city);
+                $("#mail").val(response.mail);
+                
+                
+            }
+            
+        });
+    });
+    });
+     $(document).ready(function(){
+                $("form").submit(function(){
+                   
+        flag=0;
+                    $(".check").each(function(index){
+                        if($(this).val()=== '')
+                        {
+                            $(this).focus();
+                            $(this).css({"border-color": "#9ecaed",
+    "box-shadow":" 0 0 10px #9ecaed"});
+                            flag=1;
+                        }else{
+                             $(this).css({"border-color": "",
+    "box-shadow":""});
+                        }
+                            
+                      //  console.log(index + ": " + $( this ).val());
+                    });
+                    if(flag===1)
+                    {   alert("Please Fill all Mandatory Fields");
+                        return false;}
+                });
+            });
  
         </script>
         
@@ -382,18 +435,28 @@ $(document).ready(function(){
                         Statement stmt=null;
                     if(request.getParameter("search")!=null){
                         Guest g=Guest.getById(id);
+                        if(g.getId()!=null){
          %>
          <div id="old">
             <table>
              <tr><td rowspan="7">
+                    <%
+                         FileInputStream input=new FileInputStream(new File(Base.path+"/reception/"+g.getId()+".jpg"));
+                    File op=new File("./guest.jpg");
+                    //op.createNewFile();
+                    FileOutputStream output=new FileOutputStream(new File(getServletContext().getRealPath("")+"/guest.jpg"));
+                    int b ;
+                    while((b=input.read())!=-1)
+                    output.write(b);
                     
-                    <img src="../../Guest/<%=g.getId()%>.jpg" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                    %>
+                     <img src="../guest.jpg" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                 
           
                  </td></tr>
              
              <tr><td>
-             <label>Category : </label><select name="category" style="background: white" disabled>
+             <label>Category : </label><select name="category"  style="background: white" disabled>
                  <option value=""><%=Find.category(g.getId())%></option>
                  
              </select>
@@ -440,6 +503,7 @@ $(document).ready(function(){
             </form>
         </div>
         <%
+            }
         }
         %>
  <br><br>
@@ -453,41 +517,44 @@ $(document).ready(function(){
                                                               <!--  <img src="../images/face.jpg" height="120px"  /> -->
           
                  </td></tr>
-             
+                                  <tr><td>
+                                          <label>Mobile : </label><input  class="check" type="text" style="background: white" id="mobile" name="mobile">
+                 </td></tr>
              <tr><td>
-             <label>Category : </label><select name="category" style="background: white">
+             <label>Category : </label><select id="category" class="check" name="category" style="background: white">
                  <option value="">Select</option>
                  <option value="AD">Admission</option>
                  <option value="VE">Vendor</option>
                  <option value="VI">Visitor</option>
+                 <option value="AL">Alumni</option>
+                 <option value="PA">Parent</option>
+             
              </select>
                  </td></tr>
              <tr><td>
-         <label>Name : </label><input type="text" style="background: white" id="name" name="gname">
+         <label>Name : </label><input type="text" id="name" class="check" style="background: white"  name="gname">
                  </td></tr>
                           <tr><td>
-                                  <label>Gender : </label><select  style="background: white" id="name" name="sex">
+                                  <label>Gender : </label><select   style="background: white" id="sex" name="sex">
                                       <option value="Male">Male</option>
                                       <option value="Female">Female</option>
                                       
                                   </select>
                  </td></tr>
              <tr><td>
-                     <label class="textarea" style="width:150px;">Address :<textarea style="background: white;position: relative;left: 150px;" name="address" rows="5" cols="20"></textarea> </label>
+                     <label class="textarea" style="width:150px;">Address :<textarea class="check" style="background: white;position: relative;left: 150px;" id="address" name="address" rows="5" cols="20"></textarea> </label>
                  </td></tr>
              
                           <tr><td>
-         <label>City : </label><input type="text" style="background: white" id="city" name="city">
+         <label>City : </label><input type="text" style="background: white" class="check" id="city" name="city">
                  </td></tr>
+                
                                      <tr><td>
-         <label>Mobile : </label><input type="text" style="background: white" id="mobile" name="mobile">
-                 </td></tr>
-                                     <tr><td>
-         <label>Mail : </label><input type="text" style="background: white" id="mail" name="mail">
+         <label>Mail : </label><input type="text" style="background: white" class="check" id="mail" name="mail">
                  </td></tr>
                                      
                                                 <tr><td>
-                                                        <label>Whom do you want to meet ?  </label><select id="meet" name="person">
+                                                        <label>Whom do you want to meet ?  </label><select class="check" id="meet" name="person">
                                                             <option value="">Select</option>
                                                             <option value="HOD">HOD</option>
                                                             <option value="Staff">Staff</option>
@@ -521,7 +588,10 @@ $(document).ready(function(){
                  </td>
                                                 </tr>
                                                                        <tr><td>
-         <label>Reason : </label><input type="text" style="background: white" id="reason" name="reason">
+         <label>No of People : </label><input class="check" type="text" style="background: white" id="numpeople" name="numpeople">
+                 </td></tr>
+                                                <tr><td>
+         <label>Reason : </label><input class="check" type="text" style="background: white" id="reason" name="reason">
                  </td></tr>
                                                 
                                                        <tr><td>

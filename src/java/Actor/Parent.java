@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package General;
+package Actor;
 
 import com.action.Find;
 import dbconnection.dbcon;
@@ -31,7 +31,7 @@ public class Parent {
        {
        number=rs.getString("mobile");
       
-       if(number==null || number.trim().equals(""))
+       if(number==null || number.trim().equals("")||number.equals("NA"))
        {  
        
            sql="select mobileno from student_mother_details where rollno='"+rollno+"'";

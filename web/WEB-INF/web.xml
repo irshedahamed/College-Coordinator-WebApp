@@ -77,8 +77,8 @@
         <servlet-class>batchupdate</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>batchdelete</servlet-name>
-        <servlet-class>batchdelete</servlet-class>
+        <servlet-name>batchStatus</servlet-name>
+        <servlet-class>batchStauts</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>formupload</servlet-name>
@@ -180,6 +180,58 @@
         <servlet-name>PersonList</servlet-name>
         <servlet-class>com.action.PersonList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>JsonGuest</servlet-name>
+        <servlet-class>com.action.JsonGuest</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HolidayData</servlet-name>
+        <servlet-class>com.action.HolidayData</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateHolidays</servlet-name>
+        <servlet-class>updateHolidays</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>pendingDetails</servlet-name>
+        <servlet-class>Forms.pendingDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processOutPass</servlet-name>
+        <servlet-class>processOutPass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processOutPassStaff</servlet-name>
+        <servlet-class>processOutPassStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getFee</servlet-name>
+        <servlet-class>Fee.getFee</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>setFee</servlet-name>
+        <servlet-class>Fee.setFee</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateSpecialFee</servlet-name>
+        <servlet-class>Fee.updateSpecialFee</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>generateMUP</servlet-name>
+        <servlet-class>Fee.generateMUP</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>receiveMUResponse</servlet-name>
+        <servlet-class>Fee.receiveMUResponse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>redirectPay</servlet-name>
+        <servlet-class>Fee.redirectPay</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>testRequest</servlet-name>
+        <servlet-class>General.testRequest</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -253,8 +305,8 @@
         <url-pattern>/batchupdate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>batchdelete</servlet-name>
-        <url-pattern>/batchdelete</url-pattern>
+        <servlet-name>batchStatus</servlet-name>
+        <url-pattern>/batchStatus</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>formupload</servlet-name>
@@ -359,6 +411,58 @@
     <servlet-mapping>
         <servlet-name>PersonList</servlet-name>
         <url-pattern>/PersonList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JsonGuest</servlet-name>
+        <url-pattern>/JsonGuest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HolidayData</servlet-name>
+        <url-pattern>/HolidayData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateHolidays</servlet-name>
+        <url-pattern>/updateHolidays</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>pendingDetails</servlet-name>
+        <url-pattern>/pendingDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processOutPass</servlet-name>
+        <url-pattern>/processOutPass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processOutPassStaff</servlet-name>
+        <url-pattern>/processOutPassStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getFee</servlet-name>
+        <url-pattern>/getFee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>setFee</servlet-name>
+        <url-pattern>/setFee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateSpecialFee</servlet-name>
+        <url-pattern>/updateSpecialFee</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>generateMUP</servlet-name>
+        <url-pattern>/generateMUP</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>receiveMUResponse</servlet-name>
+        <url-pattern>/receiveMUResponse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>redirectPay</servlet-name>
+        <url-pattern>/redirectPay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>testRequest</servlet-name>
+        <url-pattern>/testRequest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

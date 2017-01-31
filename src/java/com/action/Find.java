@@ -14,6 +14,9 @@ import java.util.Date;
  */
 public class Find {
     
+    
+    public static final String[] Depts={"cse","mech","it","civil","eee","ece"};
+    public static final String SERVERURL="http://59.95.166.209:8080/newportal/";
     static public String dept(String username){
     if(username.contains("cse"))
         return "cse";
@@ -64,6 +67,12 @@ public class Find {
         day=String.valueOf((new Date().getDate()));
     return year+month+day;
     }
+    
+    
+    public static String  getFormattedDate(){
+     String date=getDate();
+     return date.substring(6,8)+"-"+date.substring(4,6)+"-"+date.substring(0,4);
+    }
     public static String category(String id){
     if(id.contains("AD"))
         return "Admission";
@@ -71,6 +80,10 @@ public class Find {
         return "Vendor";
     else if(id.contains("VI"))
         return "Visitor";
+    else if(id.contains("AL"))
+        return "Alumni";
+    else if(id.contains("PA"))
+        return "Parent";
     
     return null;
     }

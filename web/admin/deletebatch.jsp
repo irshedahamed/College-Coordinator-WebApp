@@ -174,7 +174,7 @@
 
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-            <form action="${pageContext.request.contextPath}/batchdelete" method="post">
+            <form action="${pageContext.request.contextPath}/batchStatus" method="post">
                 <center>   <table class="bordered">
                     
                     <tr>
@@ -194,7 +194,22 @@
                 
                 %>
                 <tr>
-                    <td> <input type="checkbox" id="delselect" name="delselect" value="<%=batch%>_<%=reg%>"></td>
+                    <td> 
+                        <select name="status_<%=batch%>">
+                            <option value="<%=rs.getString("status") %>"><%=rs.getString("status") %></option>
+                            <option value="I">First Year</option>
+                            <option value="II">Second Year</option>
+                            <option value="III">Third Year</option>
+                            <option value="IV">Fourth Year</option>
+                            <option value="Alumni">Alumni</option>
+                            <option value="Delete">Delete</option>
+                            
+                            
+                        </select>
+                      
+                    
+                    
+                    </td>
                 <td><%=batch%></td>
                  <td><%=reg%></td>
                 </tr>
@@ -213,7 +228,7 @@
                 
                 </table></center>
                 <br>
-                <center><input type="submit" value="delete"></center>
+                <center><input type="submit" id="submit" value="Submit"></center>
             </form>
 </div></div></section>
 

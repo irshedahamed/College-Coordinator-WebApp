@@ -1,12 +1,13 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package General;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.Statement;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,14 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Aravind Tyson
+ * @author Home
  */
-public class batchdelete extends HttpServlet {
+public class testRequest extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP
-     * <code>GET</code> and
-     * <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request servlet request
      * @param response servlet response
@@ -37,21 +37,20 @@ public class batchdelete extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet batchdelete</title>");            
+            out.println("<title>Servlet testRequest</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet batchdelete at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet testRequest at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
-        } finally {            
+        } finally {
             out.close();
         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP
-     * <code>GET</code> method.
+     * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -65,8 +64,7 @@ public class batchdelete extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP
-     * <code>POST</code> method.
+     * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -76,26 +74,15 @@ public class batchdelete extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        try
-        {
-    String[] values = request.getParameterValues("delselect");
-    for(String a:values)
-    {
-        String uvalues[] = a.split("_");
-        Connection con= new dbconnection.dbcon().getConnection("sjitportal");
-        Statement st = con.createStatement();
-       st.executeUpdate("delete from regulations where batch='"+uvalues[0]+"' and regulation='"+uvalues[1]+"'");
-       response.sendRedirect("admin/deletebatch.jsp");
-          if(st!=null)
-                            st.close();
-                              if(con!=null)
-                                con.close();
-    }
-    }catch(Exception e)
-    {
-        e.printStackTrace();
-    }
+       // processRequest(request, response);
+       String abc="";
+        Enumeration<String> params = request.getParameterNames();
+        while(params.hasMoreElements()){
+            String a=params.nextElement();
+            abc+=a+" "+request.getParameter(a)+"\n";
+        }
+        
+        response.getWriter().print(abc);
     }
 
     /**
@@ -107,4 +94,5 @@ public class batchdelete extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

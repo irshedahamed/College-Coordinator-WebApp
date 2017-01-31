@@ -46,6 +46,7 @@
      
 	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/sky-forms.css" rel="stylesheet">
  <script src="../js/jquery.js"></script>
          
      
@@ -111,6 +112,22 @@
 					</div>
 				</div>
 			</div>
+                    
+
+                <script>
+
+                    $(document).ready(function(){
+        $("#choose").on('change keydown',function(){
+
+            if($(this).val()==="guest")
+                $(".dept").hide();
+            else
+                $(".dept").show();
+        });            
+                    });
+
+                </script>
+                    
 		</header>
 
 
@@ -119,7 +136,70 @@
           <section class="landing">
                    
        
+             <center><form action="display.jsp" class="sky-form" method="post" target="_blank">
+    <header>DAILY REPORT</header>
+    <fieldset>					
+					<section>
+                                            
+                                            <label class="input">
+                                                    <div align="left" size="3px"><b>USER TYPE</b></div>
+							<label class="select">
+           
+               <select id="choose" name="choose" required>
+                <option  disabled selected>Select</option>
+    
+                        <option value="staff">STAFF</option>
+                                                    <option value="student">STUDENT</option>
+                                                    <option value="guest">GUEST</option>
+               
+            </select>
+                    <i></i>                                    </label>
+                                                </label>
+                                 <div class="dept">
+			
+                                            <br><br>        
+                        			<label class="input">
+                                                    <div align="left" size="3px"><b>DEPARTMENT</b></div>
+							<label class="select">
+           
+               <select id="dept" name="dept" required>
+                <option  disabled selected>Select</option>
+    
+                        <option value="cse">CSE</option>
+                                                    <option value="ece">ECE</option>
+                                                    <option value="mech">MECH</option>
+                                                    <option value="it">IT</option>
+                                                    <option value="civil">CIVIL</option>
+                                                    <option value="eee">EEE</option>
+               
+            </select>
+                    <i></i>                                    </label>
+                                                </label>
+                                 </div>
+                                        
+                                            <br><br>
             
+            
+            <label class="input">
+                                                    <div align="left" size="3px" id="div7"><b>
+                                                             Date</b></div>
+                <label class="input">
+            
+            <input type="date" id="datepicker" placeholder="yyyy/mm/dd" name="datepicker" />
+            
+             <i></i>
+            <br> <br>
+                </label></label>
+            
+            
+                                        </section>
+            
+                           
+             <div align="left">
+            <input type="submit" id="submit" value="Submit" /></div>
+            <br>
+    </fieldset>
+                </form></center>
         
             
         </section>

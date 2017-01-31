@@ -26,7 +26,7 @@ import org.jsoup.select.Elements;
  * @author Home
  */
 public class SMSTemplate {
-   static boolean send(String number,String message){
+   public static boolean send(String number,String message){
          InputStream input = null;
             HttpURLConnection connection = null;
             int sent=0;
