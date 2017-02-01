@@ -67,7 +67,29 @@ public class JsonSMS extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       // processRequest(request, response);
+       
+       
+        String number=request.getParameter("number");
+        String message=request.getParameter("message");
+        String json=null;
+        
+        boolean proceed=false;
+        if(request.getParameter("auth").equals("fluffy"))
+        proceed=true;
+        
+        
+        
+        
+            json = new Gson().toJson("Authentication Error !!!");
+        if(proceed) 
+          if(SMSTemplate.sendwithID(number, message,request.getParameter("senderid")))
+                        json = new Gson().toJson("Sent");
+                        else
+                        json = new Gson().toJson("Error: "+number+" "+message);    
+          
+                        response.setContentType("application/json");
+                        response.getWriter().write(json);
     }
 
     /**

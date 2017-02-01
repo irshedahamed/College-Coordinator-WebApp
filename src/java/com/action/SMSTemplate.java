@@ -26,7 +26,8 @@ import org.jsoup.select.Elements;
  * @author Home
  */
 public class SMSTemplate {
-   public static boolean send(String number,String message){
+public static boolean sendwithID(String number,String message,String id){
+
          InputStream input = null;
             HttpURLConnection connection = null;
             int sent=0;
@@ -63,7 +64,7 @@ public class SMSTemplate {
                // number="9444902605";
                 number.trim();
                 message=message.replace(" ","%20");
-                String surl="http://88.198.25.115/API/pushsms.aspx?loginID="+user+"&password="+pass+"&mobile="+number+"&text="+message+"&senderid=STJOSE&route_id=2&Unicode=0";
+                String surl="http://88.198.25.115/API/pushsms.aspx?loginID="+user+"&password="+pass+"&mobile="+number+"&text="+message+"&senderid="+id+"&route_id=2&Unicode=0";
                 //surl=surl.replace("&","%26");
                 URL url =  new URL(surl);
                 
@@ -103,4 +104,10 @@ public class SMSTemplate {
         else
             return false;
     }
+
+
+    
+    public static boolean send(String number,String message){
+    return sendwithID(number,message,"STJOSE");
+}
 }
