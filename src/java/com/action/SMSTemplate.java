@@ -26,8 +26,8 @@ import org.jsoup.select.Elements;
  * @author Home
  */
 public class SMSTemplate {
-public static boolean sendwithID(String number,String message,String id){
-
+public static String sendwithID(String number,String message,String id){
+        String txnid="";
          InputStream input = null;
             HttpURLConnection connection = null;
             int sent=0;
@@ -85,6 +85,8 @@ public static boolean sendwithID(String number,String message,String id){
                 Elements ele=doc.select("#Label5");
                 if(ele.html().contains("sent")){
                 sent=1;
+                ele=doc.select("#lblTransactionID");
+                txnid=ele.html().substring(17);
                 }
             }catch (Exception e){
                 e.printStackTrace();
@@ -99,15 +101,12 @@ public static boolean sendwithID(String number,String message,String id){
                     connection.disconnect();
             }
         
-        if(sent==1)
-            return true;
-        else
-            return false;
-    }
+            return txnid;
+        }
 
 
     
-    public static boolean send(String number,String message){
+    public static String send(String number,String message){
     return sendwithID(number,message,"STJOSE");
 }
 }

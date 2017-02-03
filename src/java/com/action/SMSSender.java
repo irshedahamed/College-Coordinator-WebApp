@@ -101,7 +101,7 @@ public class SMSSender extends HttpServlet {
                             message="Your ward "+name.toUpperCase()+"("+rollno.toUpperCase()+") has taken OD on "+date;
                             
                         
-                        if(SMSTemplate.send(number, message))
+                        if(!SMSTemplate.send(number, message).equals(""))
                         json = new Gson().toJson("Sent");
                         else
                         json = new Gson().toJson("Error: "+number+message);    

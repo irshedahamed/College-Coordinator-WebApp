@@ -82,15 +82,17 @@ public class JsonSMS extends HttpServlet {
         
         
             json = new Gson().toJson("Authentication Error !!!");
-        if(proceed) 
-          if(SMSTemplate.sendwithID(number, message,request.getParameter("senderid")))
-                        json = new Gson().toJson("Sent");
+        if(proceed){ 
+          String res=SMSTemplate.sendwithID(number, message,request.getParameter("senderid"));
+            if(!res.equals(""))
+                        json = new Gson().toJson("Sent"+res);
                         else
                         json = new Gson().toJson("Error: "+number+" "+message);    
           
                         response.setContentType("application/json");
-                        response.getWriter().write(json);
-    }
+        }                response.getWriter().write(json);
+    
+        }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -133,15 +135,17 @@ public class JsonSMS extends HttpServlet {
         
         
             json = new Gson().toJson("Authentication Error !!!");
-        if(proceed) 
-          if(SMSTemplate.send(number, message))
-                        json = new Gson().toJson("Sent");
+        if(proceed){ 
+         String res=SMSTemplate.send(number, message);
+            if(!res.equals(""))
+                        json = new Gson().toJson("Sent"+res);
                         else
                         json = new Gson().toJson("Error: "+number+" "+message);    
           
                         response.setContentType("application/json");
                         response.getWriter().write(json);
-    }
+        }
+        }
 
     /**
      * Returns a short description of the servlet.

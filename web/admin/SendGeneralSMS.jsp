@@ -165,7 +165,7 @@
             <td id="name<%=rollno%>"><%=name %></td>
            
                <td id="mobile<%=rollno%>"><%=phone%></td>
-            <td id="msg<%=rollno%>"><%=message %></td>
+               <td id="msg<%=rollno%>"><%=message.replace("$name$", name).replace("$id$", rollno) %></td>
             
             <td>
                         
