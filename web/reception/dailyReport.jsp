@@ -164,7 +164,7 @@
            
                <select id="dept" name="dept" required>
                 <option  disabled selected>Select</option>
-    
+                         <option value="all">ALL</option>
                         <option value="cse">CSE</option>
                                                     <option value="ece">ECE</option>
                                                     <option value="mech">MECH</option>
