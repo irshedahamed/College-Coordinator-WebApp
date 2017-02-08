@@ -142,11 +142,14 @@
            if(batch.equals("staff"))
                sql="select staffid as rollno,name as name,mobile1 from staff_general";
            else
-        sql="select * from student_personal where  batch='"+batch+"'";
+        sql="select * from student_personal where  batch='"+batch+"' order by CONVERT(regno,UNSIGNED)";
         ResultSet rs1=st1.executeQuery(sql);
         while(rs1.next())
         {    
             String rollno=rs1.getString("rollno");
+            String regno=null;
+           if(!batch.equals("staff"))
+               regno=rs1.getString("regno");
             
             String name=rs1.getString("name");
             
@@ -161,7 +164,16 @@
         
         <tr>
             <td><input type="checkbox" id="selected<%=rollno%>" class="checkme" value="yes" checked></td>
-            <td id="rollno<%=rollno%>"><%=rollno %></td>
+            <%
+            if(!batch.equals("staff")){
+            %>
+            <td id="rollno<%=rollno%>"><%=regno+" ("+rollno+")" %></td>
+            <%
+            }else{
+            %>
+            <td id="rollno<%=rollno%>"><%=rollno%></td>
+            
+            <%}%>
             <td id="name<%=rollno%>"><%=name %></td>
            
                <td id="mobile<%=rollno%>"><%=phone%></td>
