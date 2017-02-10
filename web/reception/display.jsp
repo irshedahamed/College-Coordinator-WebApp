@@ -52,8 +52,13 @@
     <img src="../images/logo2.png" height="165px" width="700px" />	</center>	
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
-		        
-	
+</div>
+    <style rel="stylesheet">
+        .bordered td{
+            padding: 0px;
+        }
+        
+    </style>
 		
 	
 
@@ -187,8 +192,7 @@ try
                      
                             <%}
                             %>
-                              </table>
-</center>     
+                
                             <%}
 }
 catch(Exception e)
@@ -202,7 +206,10 @@ catch(Exception e)
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
-}
+}%>
+                                          </table>
+</center>     
+                            <%
 }
 else
 {
@@ -290,8 +297,7 @@ try
                       
                             <%}
                             %>
-                              </table>
-</center>    
+                
                             <%}
 catch(Exception e)
 {
@@ -306,7 +312,8 @@ catch(Exception e)
         }
 }
 %>
-
+              </table>
+</center>    
 <%
 }
 
@@ -315,8 +322,6 @@ catch(Exception e)
         </div></div></section>
 
 
-			</div>
-			</div>
 
 
 
