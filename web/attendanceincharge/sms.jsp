@@ -3,6 +3,7 @@
     Created on : Jul 20, 2016, 3:12:59 PM
     Author     : Lenovo
 --%>
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="dbconnection.dbcon"%>
@@ -134,12 +135,8 @@
                <select id="dept" name="dept" required>
                 <option  disabled selected>Select</option>
     
-                                                    <option value="cse">CSE</option>
-                                                    <option value="ece">ECE</option>
-                                                    <option value="mech">MECH</option>
-                                                    <option value="it">IT</option>
-                                                    <option value="civil">CIVIL</option>
-                                                    <option value="eee">EEE</option>
+                                                   
+                   <%=Find.getDeptHTMLContent() %>
                
             </select>
                     <i></i>                                    </label>

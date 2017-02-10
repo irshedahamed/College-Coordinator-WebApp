@@ -1,3 +1,4 @@
+<%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
 <%@page import="java.sql.*"%>
@@ -243,12 +244,8 @@
                                                 <select id="dept" name="dept">
 
                                       
-                        <option value="cse">CSE</option>
-                                                    <option value="ece">ECE</option>
-                                                    <option value="mech">MECH</option>
-                                                    <option value="it">IT</option>
-                                                    <option value="civil">CIVIL</option>
-                                                    <option value="eee">EEE</option>
+                                                    
+                   <%=Find.getDeptHTMLContent() %>
                                                 </select>
                                                 <i></i>
                                             </label>

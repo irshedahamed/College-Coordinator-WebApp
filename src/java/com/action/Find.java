@@ -48,7 +48,28 @@ public class Find {
         return "eee";
     else if(username.contains("cv")|| username.contains("CV") ||username.contains("ci")|| username.contains("CI")||username.contains("ce")|| username.contains("CE"))
         return "civil";
-    else
+    else if(username.contains("ch")|| username.contains("CH"))
+        return "chemical";
+    else if(username.contains("ic")|| username.contains("IC"))
+        return "instrumentation control";
+    else if(username.contains("ei")|| username.contains("EI"))
+        return "electronics instrumentation";
+   else if(username.contains("meps")|| username.contains("MEPS"))
+        return "me power systems";
+   else if(username.contains("meped")|| username.contains("MEPD"))
+        return "me power electronics drives";
+  else if(username.contains("mesc")|| username.contains("MESC"))
+        return "me sc";
+  else if(username.contains("meme")|| username.contains("MEME"))
+        return "me mechanical";
+ else if(username.contains("meest")|| username.contains("MEEST"))
+        return "me est";
+    else if(username.contains("meap")|| username.contains("MEAP"))
+        return "me ap";
+    else if(username.contains("mebt")|| username.contains("MEBT"))
+        return "me bio tech";
+    else if(username.contains("meci")|| username.contains("MECI"))
+        return "me ci";
     return "first";
         
         
@@ -87,5 +108,21 @@ public class Find {
     
     return null;
     }
+    public static String getDeptHTMLContent(){
     
+         String HTML="<option disabled selected>SELECT</option>";
+      
+        for(String dept:Depts){
+            
+        HTML+="<option value='"+dept+"'>"+dept.toUpperCase()+"</option>";
+        }
+                 HTML+="</div>";
+    return HTML;
+    
+    
+    
+    
+    
+    
+    }
 }

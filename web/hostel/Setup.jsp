@@ -3,6 +3,7 @@
     Created on : 18 Nov, 2016, 5:57:23 PM
     Author     : Home
 --%>
+<%@page import="com.action.Find"%>
 <%@page import="General.Holidays"%>
 <%@page import="General.Batch"%>
 <%@page import="Downloads.Circular"%>
@@ -153,12 +154,8 @@
                <select id="dept" name="dept" class="change" required>
                 <option  disabled selected value="">Select</option>
     
-                                                    <option value="cse">CSE</option>
-                                                    <option value="ece">ECE</option>
-                                                    <option value="mech">MECH</option>
-                                                    <option value="it">IT</option>
-                                                    <option value="civil">CIVIL</option>
-                                                    <option value="eee">EEE</option>
+                                                   
+                <%=Find.getDeptHTMLContent() %>
                
             </select>
                     <i></i>                                    </label>
