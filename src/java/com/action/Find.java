@@ -15,7 +15,9 @@ import java.util.Date;
 public class Find {
     
     
-    public static final String[] Depts={"cse","mech","it","civil","eee","ece"};
+   // public static final String[] Depts={"cse","mech","it","civil","eee","ece"};
+    public static final String[] Depts={"cse","mech","it","civil","eee","ece","chemical","ei","ic","mebiotech","meap","mesc","meps","mepd","meest","meci","meme","mba","mca"};
+    
     public static final String SERVERURL="https://portal.stjosephstechnology.ac.in/";
     static public String dept(String username){
     if(username.contains("cse"))
@@ -51,25 +53,31 @@ public class Find {
     else if(username.contains("ch")|| username.contains("CH"))
         return "chemical";
     else if(username.contains("ic")|| username.contains("IC"))
-        return "instrumentation control";
+        return "ic";
     else if(username.contains("ei")|| username.contains("EI"))
-        return "electronics instrumentation";
+        return "ei";
    else if(username.contains("meps")|| username.contains("MEPS"))
-        return "me power systems";
+        return "meps";
    else if(username.contains("meped")|| username.contains("MEPD"))
-        return "me power electronics drives";
+        return "meped";
   else if(username.contains("mesc")|| username.contains("MESC"))
         return "me sc";
   else if(username.contains("meme")|| username.contains("MEME"))
-        return "me mechanical";
+        return "meme";
  else if(username.contains("meest")|| username.contains("MEEST"))
-        return "me est";
+        return "meest";
     else if(username.contains("meap")|| username.contains("MEAP"))
-        return "me ap";
+        return "meap";
     else if(username.contains("mebt")|| username.contains("MEBT"))
-        return "me bio tech";
+        return "mebiotech";
     else if(username.contains("meci")|| username.contains("MECI"))
-        return "me ci";
+        return "meci";
+    else if(username.contains("mba")|| username.contains("MBA"))
+        return "mba";
+       else if(username.contains("mca")|| username.contains("MCA"))
+        return "mca";
+ 
+ 
     return "first";
         
         
