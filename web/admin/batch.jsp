@@ -82,7 +82,8 @@
         <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectAdd.jsp">Subject Add</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Subject View</a>
-                  <% for(String dept:Find.Depts){%>
+                 <ul class="sub-menu">
+                        <% for(String dept:Find.Depts){%>
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=<%=dept%>"><%=dept.toUpperCase() %></a>
                     <%}%>     </ul></li>
             </ul></li>
