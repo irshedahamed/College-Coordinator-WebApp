@@ -4,6 +4,7 @@
     Author     : Lenovo
 --%>
 
+<%@page import="java.time.LocalDate"%>
 <%@page import="Fee.MUResponse"%>
 <%@page import="java.util.Date"%>
 <%@page import="Actor.Student"%>
@@ -127,6 +128,7 @@ return data;
       <div class="row">
          
          <div class="row" id="divPrintChallan">
+             <div><b>This Challan valid upto <%=Find.getFormattedDate(LocalDate.now().plusDays(10).toString()) %></b></div>
              <%
                  Fee.Fee f=Fee.Fee.getFeeById(s.getId());
                  String bankcharge="<br>Bank Charges";

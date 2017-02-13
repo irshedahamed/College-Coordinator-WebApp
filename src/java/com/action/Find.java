@@ -80,28 +80,42 @@ public class Find {
  
     return "first";
         
-        
     }
     
-    public static String  getDate(){
-     String year=String.valueOf(new Date().getYear()+1900);
+    public static String  getDate(Date d){
+     String year=String.valueOf(d.getYear()+1900);
     String month,day;
     if(new Date().getMonth()+1<10)
-     month="0"+String.valueOf((new Date().getMonth()+1));
+     month="0"+String.valueOf((d.getMonth()+1));
     else 
-        month=String.valueOf((new Date().getMonth()+1));
+        month=String.valueOf((d.getMonth()+1));
     if(new Date().getDate()<10)
-        day="0"+String.valueOf((new Date().getDate()));
+        day="0"+String.valueOf((d.getDate()));
         else
-        day=String.valueOf((new Date().getDate()));
+        day=String.valueOf((d.getDate()));
     return year+month+day;
     }
     
     
-    public static String  getFormattedDate(){
-     String date=getDate();
-     return date.substring(6,8)+"-"+date.substring(4,6)+"-"+date.substring(0,4);
+    public static String  getDate(){
+    return getDate(new Date());
     }
+    
+    
+    public static String  getFormattedDate(){
+    return getFormattedDate(new Date());
+    }
+    
+    
+    public static String  getFormattedDate(Date d){
+     String date=getDate(d);
+     return getFormattedDate(date);
+    }
+    
+     public static String  getFormattedDate(String d){
+     return d.substring(6,8)+"-"+d.substring(4,6)+"-"+d.substring(0,4);
+    }
+    
     public static String category(String id){
     if(id.contains("AD"))
         return "Admission";
