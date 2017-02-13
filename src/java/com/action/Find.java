@@ -15,8 +15,8 @@ import java.util.Date;
 public class Find {
     
     
-   // public static final String[] Depts={"cse","mech","it","civil","eee","ece"};
-    public static final String[] Depts={"cse","mech","it","civil","eee","ece","chemical","ei","ic","mebiotech","meap","mesc","meps","mepd","meest","meci","meme","mba","mca"};
+    public static final String[] Depts={"cse","mech","it","civil","eee","ece"};
+   // public static final String[] Depts={"cse","mech","it","civil","eee","ece","chemical","ei","ic","mebiotech","meap","mesc","meps","mepd","meest","meci","meme","mba","mca"};
     
     public static final String SERVERURL="https://portal.stjosephstechnology.ac.in/";
     static public String dept(String username){

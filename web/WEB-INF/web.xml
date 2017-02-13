@@ -232,6 +232,10 @@
         <servlet-name>testRequest</servlet-name>
         <servlet-class>General.testRequest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>receiveIBResponse</servlet-name>
+        <servlet-class>Fee.receiveIBResponse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -463,6 +467,10 @@
     <servlet-mapping>
         <servlet-name>testRequest</servlet-name>
         <url-pattern>/testRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>receiveIBResponse</servlet-name>
+        <url-pattern>/receiveIBResponse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
