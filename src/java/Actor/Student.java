@@ -26,6 +26,15 @@ public class Student {
     String batch;
     String regno;
     String sex;
+    String accomodation;
+
+    public String getAccomodation() {
+        return accomodation;
+    }
+
+    public void setAccomodation(String accomodation) {
+        this.accomodation = accomodation;
+    }
 
     
     public  class Admission{
@@ -199,7 +208,7 @@ public class Student {
                         s.setDept(Find.sdept(s.getId()));
                         s.setRegno(rs.getString("regno"));
                         s.setName(rs.getString("name"));
-                        
+                        s.setAccomodation(rs.getString("accomodation"));
                         s.setSec(rs.getString("sec"));
                         s.setSex(rs.getString("gender"));
                         list.add(s);
@@ -242,6 +251,8 @@ public class Student {
                         s.setId(rs.getString("rollno"));
                         s.setSec(rs.getString("sec"));
                         s.setSex(rs.getString("gender"));
+                        s.setAccomodation(rs.getString("accomodation"));
+                       
 
                         
                     }

@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -212,6 +213,9 @@ public class OutPass {
     }
     
     public String getSMSContent(){
-    return "Dear Parent, Your request for outpass has been approved and your ward should return back on or before "+till+" 6 PM";
+        if(Student.getById(rollno).getAccomodation().equalsIgnoreCase("hostel"))
+    return "Dear Parent, On basis of your request  outpass has been granted from "+Find.getFormattedDate(from)+"  to "+Find.getFormattedDate(LocalDate.parse(till).plusDays(1).toString())+" 7 AM";
+    else
+            return null;
     }
 }

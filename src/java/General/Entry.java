@@ -59,11 +59,20 @@ public class Entry {
     }
 
    public String getSMSContent(String action){
+        if(Student.getById(rollno).getAccomodation().equalsIgnoreCase("hostel")){
+       if(action.equals("IN"))
+           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") reported to hostel on "+new Date();
+       else
+           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") left from  hostel at "+new Date()+"";
+        
+        }else{
+            
        if(action.equals("IN"))
            return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") has entered our premises at "+new Date();
        else
            return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") left our premises at "+new Date()+"";
        
+        }
    }
     
     public boolean insertin(){
