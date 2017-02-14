@@ -188,6 +188,10 @@
         <servlet-name>councillorattupdate</servlet-name>
         <servlet-class>councillorattupdate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CouncillorAttEdit</servlet-name>
+        <servlet-class>CouncillorAttEdit</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -375,6 +379,10 @@
     <servlet-mapping>
         <servlet-name>councillorattupdate</servlet-name>
         <url-pattern>/councillorattupdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CouncillorAttEdit</servlet-name>
+        <url-pattern>/CouncillorAttEdit</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
