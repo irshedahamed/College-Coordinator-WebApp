@@ -128,9 +128,10 @@ return data;
       <div class="row">
          
          <div class="row" id="divPrintChallan">
+             <% if(!feepaid){%>
              <div><b>This Challan valid upto <%=Find.getFormattedDate(LocalDate.now().plusDays(10).toString()) %></b></div>
              <%
-                 Fee.Fee f=Fee.Fee.getFeeById(s.getId());
+                 }Fee.Fee f=Fee.Fee.getFeeById(s.getId());
                  String bankcharge="<br>Bank Charges";
                  String bankamount="<br>"+bcharge;
                  
