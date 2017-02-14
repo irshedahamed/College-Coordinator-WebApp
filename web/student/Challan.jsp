@@ -137,13 +137,16 @@ return data;
                  String bankamount="<br>"+bcharge;
                  
                      Float bankchr=Float.valueOf(bcharge);
+                     int once=0;
              for(String type:Fee.Fee.getsubCategory())
                  {
                      
              %> 
              
                <div style="page-break-before: always;"><br><br><br>
-                     <% if(!feepaid){%>
+                     <% if( (!feepaid) &&once==0){
+                     once=1;
+                     %>
                       <div><b>This Challan valid upto <%=Find.getFormattedDate(LocalDate.now().plusDays(10).toString().replace("-","")) %></b></div>
                    <%}%>
                    
