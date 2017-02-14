@@ -129,10 +129,10 @@ return data;
       <div class="row">
          
          <div class="row" id="divPrintChallan">
-             <% if(!feepaid){%>
-             <div><b>This Challan valid upto <%=Find.getFormattedDate(LocalDate.now().plusDays(10).toString()) %></b></div>
+           
+            
              <%
-                 }Fee.Fee f=Fee.Fee.getFeeById(s.getId());
+                 Fee.Fee f=Fee.Fee.getFeeById(s.getId());
                  String bankcharge="<br>Bank Charges";
                  String bankamount="<br>"+bcharge;
                  
@@ -141,7 +141,12 @@ return data;
                  {
                      
              %> 
-               <div style="page-break-before: always;"><br><br><br><br>
+             
+               <div style="page-break-before: always;"><br><br><br>
+                     <% if(!feepaid){%>
+                      <div><b>This Challan valid upto <%=Find.getFormattedDate(LocalDate.now().plusDays(10).toString().replace("-","")) %></b></div>
+                   <%}%>
+                   
             <div style="border: 2px solid  #000; padding-left: 7px; float: left; padding-right: 7px;">
                <div style="float: none; clear: both;">
                    <%=getContent(s, f.getByType(type)+bankamount, Fee.Find.getFeeDetails(Fee.Find.getType(type))+bankcharge,Fee.Find.getType(type),String.valueOf((Integer.valueOf(f.getByType(type))+bankchr)),feepaid,mupno) %>
