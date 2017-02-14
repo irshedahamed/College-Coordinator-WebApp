@@ -72,7 +72,7 @@ public static String sendwithID(String number,String message,String id){
                 URL url =  new URL(surl);
                 
               //  String urlParameters = "loginID="+user+"&password="+pass+"&mobile="+number+"&text="+message+"&senderid="+id+"&route_id=2&Unicode=0";
-                System.out.println("Length: "+surl.length());
+               // System.out.println("Length: "+surl.length());
                 
                 
                 connection = (HttpURLConnection) url.openConnection();
@@ -90,7 +90,7 @@ public static String sendwithID(String number,String message,String id){
                     s += c;
                 
               
-                System.out.println("Response: "+s);
+              //  System.out.println("Response: "+s);
                 
                 Document doc=Jsoup.parse(s);
                 Elements ele=doc.select("#Label5");
