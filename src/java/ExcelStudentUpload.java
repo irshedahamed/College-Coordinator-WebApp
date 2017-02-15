@@ -262,11 +262,11 @@ public class ExcelStudentUpload extends HttpServlet {
                         if(row.getCell(i)==null)
                         {data[i]="";continue;}
                         if(row.getCell(i).getCellType()==Cell.CELL_TYPE_STRING)
-                            data[i]=row.getCell(i).getStringCellValue();
+                            data[i]=row.getCell(i).getStringCellValue().replace("'", "''");
                         else if(row.getCell(i).getCellType()==Cell.CELL_TYPE_BLANK)
                             data[i]="";
                         else if(row.getCell(i).getCellType()==Cell.CELL_TYPE_NUMERIC)
-                       data[i]=String.valueOf(row.getCell(i).getNumericCellValue());
+                       data[i]=String.valueOf(row.getCell(i).getNumericCellValue()).replace("'", "''");
                         else
                         response.getWriter().println(i+" Error: "+row.getCell(i).getCellType());
                           

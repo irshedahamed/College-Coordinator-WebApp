@@ -157,109 +157,109 @@ Statement stmt=null,stmt1=null;
                      if (item.isFormField()) {
                          
                     if(item.getFieldName().equals("title")){title=item.getString();}
-                    else if(item.getFieldName().equals("fname")){fname=item.getString();}
-else if(item.getFieldName().equals("staffid")){staffid=item.getString();}
-else if(item.getFieldName().equals("mname")){mname=item.getString();}
+                    else if(item.getFieldName().equals("fname")){fname=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("staffid")){staffid=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("mname")){mname=item.getString().replace("'", "''");}
 else if(item.getFieldName().equals("count")){counter=Integer.parseInt(item.getString());}
 else if(item.getFieldName().equals("ecount")){ecounter=Integer.parseInt(item.getString());}
-else if(item.getFieldName().equals("lname")){lname=item.getString();}
-else if(item.getFieldName().equals("dept")){dept=item.getString();}
-else if(item.getFieldName().equals("desg")){desg=item.getString();}
-else if(item.getFieldName().equals("doj")){doj=item.getString();}
-else if(item.getFieldName().equals("gender")){gender=item.getString();}
-else if(item.getFieldName().equals("add1")){add1=item.getString();}
-else if(item.getFieldName().equals("add2")){add2=item.getString();}
-else if(item.getFieldName().equals("city")){city=item.getString();}
-else if(item.getFieldName().equals("state")){state=item.getString();}
-else if(item.getFieldName().equals("pincode")){pincode=item.getString();}
-else if(item.getFieldName().equals("padd1")){padd1=item.getString();}
-else if(item.getFieldName().equals("padd2")){padd2=item.getString();}
-else if(item.getFieldName().equals("pcity")){pcity=item.getString();}
-else if(item.getFieldName().equals("pstate")){pstate=item.getString();}
-else if(item.getFieldName().equals("ppincode")){ppincode=item.getString();}
-else if(item.getFieldName().equals("mobile1")){mobile1=item.getString();}
-else if(item.getFieldName().equals("mobile2")){mobile2=item.getString();}
-else if(item.getFieldName().equals("ll")){ll=item.getString();}
-else if(item.getFieldName().equals("email")){email=item.getString();}
-else if(item.getFieldName().equals("dob")){dob=item.getString();}
-else if(item.getFieldName().equals("bg")){bg=item.getString();}
-else if(item.getFieldName().equals("father")){father=item.getString();}
-else if(item.getFieldName().equals("mother")){mother=item.getString();}
-else if(item.getFieldName().equals("caste")){caste=item.getString();}
-else if(item.getFieldName().equals("relegion")){relegion=item.getString();}
-else if(item.getFieldName().equals("nation")){nation=item.getString();}
-else if(item.getFieldName().equals("passno")){passno=item.getString();}
-else if(item.getFieldName().equals("panno")){panno=item.getString();}
-else if(item.getFieldName().equals("aadharno")){aadharno=item.getString();}
-else if(item.getFieldName().equals("pfno")){pfno=item.getString();}
+else if(item.getFieldName().equals("lname")){lname=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("dept")){dept=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("desg")){desg=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("doj")){doj=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("gender")){gender=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("add1")){add1=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("add2")){add2=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("city")){city=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("state")){state=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("pincode")){pincode=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("padd1")){padd1=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("padd2")){padd2=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("pcity")){pcity=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("pstate")){pstate=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("ppincode")){ppincode=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("mobile1")){mobile1=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("mobile2")){mobile2=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("ll")){ll=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("email")){email=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("dob")){dob=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("bg")){bg=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("father")){father=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("mother")){mother=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("caste")){caste=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("relegion")){relegion=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("nation")){nation=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("passno")){passno=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("panno")){panno=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("aadharno")){aadharno=item.getString().replace("'", "''");}
+else if(item.getFieldName().equals("pfno")){pfno=item.getString().replace("'", "''");}
 else if(item.getFieldName().contains("category")){
 category[Integer.parseInt(item.getFieldName().substring(8))]=new String();
-category[Integer.parseInt(item.getFieldName().substring(8))]=item.getString();
+category[Integer.parseInt(item.getFieldName().substring(8))]=item.getString().replace("'", "''");
 //response.getWriter().println(category[Integer.parseInt(item.getFieldName().substring(8))]);
 }
 else if(item.getFieldName().contains("nod")){
 nod[Integer.parseInt(item.getFieldName().substring(3))]=new String();
-nod[Integer.parseInt(item.getFieldName().substring(3))]=item.getString();
+nod[Integer.parseInt(item.getFieldName().substring(3))]=item.getString().replace("'", "''");
 //response.getWriter().println(nod[Integer.parseInt(item.getFieldName().substring(3))]);
 }
 else if(item.getFieldName().contains("spl")){
 spl[Integer.parseInt(item.getFieldName().substring(3))]=new String();
-spl[Integer.parseInt(item.getFieldName().substring(3))]=item.getString();
+spl[Integer.parseInt(item.getFieldName().substring(3))]=item.getString().replace("'", "''");
 //response.getWriter().println(spl[Integer.parseInt(item.getFieldName().substring(3))]);
 }
 else if(item.getFieldName().contains("yop")){
 yop[Integer.parseInt(item.getFieldName().substring(3))]=new String();
-yop[Integer.parseInt(item.getFieldName().substring(3))]=item.getString();
+yop[Integer.parseInt(item.getFieldName().substring(3))]=item.getString().replace("'", "''");
 //response.getWriter().println(yop[Integer.parseInt(item.getFieldName().substring(3))]);
 }
 else if(item.getFieldName().contains("college")){
 college[Integer.parseInt(item.getFieldName().substring(7))]=new String();
-college[Integer.parseInt(item.getFieldName().substring(7))]=item.getString();
+college[Integer.parseInt(item.getFieldName().substring(7))]=item.getString().replace("'", "''");
 //response.getWriter().println(college[Integer.parseInt(item.getFieldName().substring(7))]);
 
 }else if(item.getFieldName().contains("university")){
 university[Integer.parseInt(item.getFieldName().substring(10))]=new String();
-university[Integer.parseInt(item.getFieldName().substring(10))]=item.getString();
+university[Integer.parseInt(item.getFieldName().substring(10))]=item.getString().replace("'", "''");
 //response.getWriter().println(university[Integer.parseInt(item.getFieldName().substring(10))]);
 
 }else if(item.getFieldName().contains("gpa")){
 gpa[Integer.parseInt(item.getFieldName().substring(3))]=new String();
-gpa[Integer.parseInt(item.getFieldName().substring(3))]=item.getString();
+gpa[Integer.parseInt(item.getFieldName().substring(3))]=item.getString().replace("'", "''");
 //response.getWriter().println(gpa[Integer.parseInt(item.getFieldName().substring(3))]);
 
 }else if(item.getFieldName().contains("class")){
 pclass[Integer.parseInt(item.getFieldName().substring(5))]=new String();
-pclass[Integer.parseInt(item.getFieldName().substring(5))]=item.getString();
+pclass[Integer.parseInt(item.getFieldName().substring(5))]=item.getString().replace("'", "''");
 //response.getWriter().println(pclass[Integer.parseInt(item.getFieldName().substring(5))]);
 
 }else if(item.getFieldName().contains("edoj")){
 edoj[Integer.parseInt(item.getFieldName().substring(4))]=new String();
-edoj[Integer.parseInt(item.getFieldName().substring(4))]=item.getString();
+edoj[Integer.parseInt(item.getFieldName().substring(4))]=item.getString().replace("'", "''");
 //response.getWriter().println(pclass[Integer.parseInt(item.getFieldName().substring(5))]);
 
 }else if(item.getFieldName().contains("edor")){
 edor[Integer.parseInt(item.getFieldName().substring(4))]=new String();
-edor[Integer.parseInt(item.getFieldName().substring(4))]=item.getString();
+edor[Integer.parseInt(item.getFieldName().substring(4))]=item.getString().replace("'", "''");
 //response.getWriter().println(pclass[Integer.parseInt(item.getFieldName().substring(5))]);
 
 }else if(item.getFieldName().contains("enorg")){
 enorg[Integer.parseInt(item.getFieldName().substring(5))]=new String();
-enorg[Integer.parseInt(item.getFieldName().substring(5))]=item.getString();
+enorg[Integer.parseInt(item.getFieldName().substring(5))]=item.getString().replace("'", "''");
 //response.getWriter().println(pclass[Integer.parseInt(item.getFieldName().substring(5))]);
 
 }else if(item.getFieldName().contains("edesg")){
 edesg[Integer.parseInt(item.getFieldName().substring(5))]=new String();
-edesg[Integer.parseInt(item.getFieldName().substring(5))]=item.getString();
+edesg[Integer.parseInt(item.getFieldName().substring(5))]=item.getString().replace("'", "''");
 //response.getWriter().println(pclass[Integer.parseInt(item.getFieldName().substring(5))]);
 
 }else if(item.getFieldName().contains("enature")){
 enature[Integer.parseInt(item.getFieldName().substring(7))]=new String();
-enature[Integer.parseInt(item.getFieldName().substring(7))]=item.getString();
+enature[Integer.parseInt(item.getFieldName().substring(7))]=item.getString().replace("'", "''");
 //response.getWriter().println(pclass[Integer.parseInt(item.getFieldName().substring(5))]);
 
 }else if(item.getFieldName().contains("eaddr")){
 eaddr[Integer.parseInt(item.getFieldName().substring(5))]=new String();
-eaddr[Integer.parseInt(item.getFieldName().substring(5))]=item.getString();
+eaddr[Integer.parseInt(item.getFieldName().substring(5))]=item.getString().replace("'", "''");
 //response.getWriter().println(pclass[Integer.parseInt(item.getFieldName().substring(5))]);
 
 }

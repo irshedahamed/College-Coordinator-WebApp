@@ -46,6 +46,7 @@
      
 	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/sky-forms.css" rel="stylesheet">
  <script src="../js/jquery.js"></script>
          
      
@@ -80,7 +81,7 @@
 
 						<nav id="main-nav">
                                                     
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="home.jsp">Home</a></li>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
 
     
 
@@ -94,6 +95,13 @@
 
 
 </li>
+
+<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#"> Report</a>
+<ul class="sub-menu">
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personalReport.jsp">Personal Report</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="dailyReport.jsp">Daily Report</a>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="monthlyReport.jsp">Monthly Report</a>
+</ul></li>
 
 
 </ul>						
@@ -109,7 +117,7 @@
           <section class="landing">
                    
              <center><form action="personalDisplay.jsp" class="sky-form" method="post" target="_blank">
-    <header>DAILY REPORT</header>
+    <header>PERSONAL REPORT</header>
     <fieldset>					
 					<section>
 
@@ -122,7 +130,7 @@
                                                              ID</b></div>
                 <label class="input">
             
-            <input type="text"  placeholder="Student/Staff/Guest" name="id" />
+            <input type="text"  placeholder="Student Rollno" name="id" />
             
              <i></i>
             <br> <br>

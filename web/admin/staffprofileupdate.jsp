@@ -51,8 +51,7 @@
                 alert("Note:- \n\
             Please Enter Only Original Details\n\
             These Details Will be used for all furthur AICTE purposes   \n\
-            You are responsible for all the details you enter\n\
-            Please don't use apostrophe symbol(') anywhere ");
+            You are responsible for all the details you enter");
                  var counter =0;
                  var ecounter=0;
           document.getElementById("excel").style.display = 'none';
