@@ -108,7 +108,7 @@ if(user.equals("student")||user.equals("staff"))
         Department: <%=deptReq.toUpperCase()%></h4>
     <br>    
                             <table class="bordered">
-                                <tr>   
+                                <thead>  <tr>   
                                 <th>S.No</th>
                                 <th>ID</th>
                                 <th>NAME</th>
@@ -116,7 +116,7 @@ if(user.equals("student")||user.equals("staff"))
                                 <th>MOBILE NO</th>
                                 <th>DEPARTMENT</th>
                                 <th>IN TIME</th>
-                                <th>OUT TIME</th></tr>
+                                <th>OUT TIME</th></tr></thead>
             
             <%
     Connection conn=null;
@@ -236,7 +236,7 @@ try
     <h4>Category: <%=user.toUpperCase()%></h4>
     <br>    
                             <table class="bordered">
-                                <tr>   
+                                <thead>   <tr>   
                                 <th>S.No</th>
                                 <th>ID</th>
                                 <th>NAME</th>
@@ -246,7 +246,7 @@ try
                                 <th>MEET</th>
                                 <th>REASON</th>
                                 <th>IN TIME</th>
-                                <th>OUT TIME</th></tr>
+                                <th>OUT TIME</th></tr></thead>
                             <%while(rs.next())    
                             {
                             %>

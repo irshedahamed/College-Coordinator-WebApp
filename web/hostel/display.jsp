@@ -63,6 +63,11 @@
     <style rel="stylesheet">
         .bordered td{
             padding: 0px;
+            text-align: center;
+        }
+        .bordered th{
+            text-align: center;
+            
         }
         
     </style>
@@ -93,7 +98,7 @@ enddate = sdf.format(c.getTime());
 %>
             
 <center>
-    <h3>Out Pass Report from <%=dateonentry%> till <%=enddate%></h3><br>
+    <h3>Out Pass Report from <%=Find.getFormattedDate(dateonentry)%> till <%=Find.getFormattedDate(enddate)%></h3><br>
       <h4>Category: <%=username.toUpperCase()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -105,14 +110,11 @@ enddate = sdf.format(c.getTime());
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       
         Department: <%=deptReq.toUpperCase()%></h4> 
     <br>    
                             <table class="bordered">
+                                <thead>
                                 <tr>   
                                 <th>S.No</th>
                                 <th>ID</th>
@@ -120,7 +122,7 @@ enddate = sdf.format(c.getTime());
                                 <th>DEPT</th>
                                 <th>REASON</th>
                                 <th>FROM</th>
-                                <th>TILL</th></tr>
+                                <th>TILL</th></tr></thead>
             
             <%
     Connection conn=null;
@@ -167,11 +169,11 @@ try
                                 <td> <%=++i%> </td>
                                 <td> <%=rs.getString("rollno")%> </td>
                                 <td> <%=rs.getString("name")%> </td>
-                                <td><%=dept%> </td>
+                                <td><%=dept.toUpperCase() %> </td>
                                 
                                 <td> <%=rs.getString("reason")%> </td>
-                                <td> <%=rs.getString("from")%> </td>
-                                <td> <%=rs.getString("till")%> </td>
+                                <td> <%=Find.getFormattedDate(rs.getString("from"))%> </td>
+                                <td> <%=Find.getFormattedDate(rs.getString("till"))%> </td>
                                
                             </tr>
 

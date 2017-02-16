@@ -61,6 +61,17 @@
 	
 		
 	
+    <style rel="stylesheet">
+        .bordered td{
+            padding: 0px;
+            text-align: center;
+        }
+        .bordered th{
+            text-align: center;
+            
+        }
+        
+    </style>
 
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
@@ -114,6 +125,7 @@ try
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         Department: <%=dept.toUpperCase()%></h4> <br>    
                             <table class="bordered">
+                                <thead>
                                 <tr>   
                                 <th>S.No</th>
                                 <th>ID</th>
@@ -121,7 +133,7 @@ try
                                 <th>DEPT</th>
                                 <th>REASON</th>
                                 <th>FROM</th>
-                                <th>TILL</th></tr>
+                                <th>TILL</th></tr></thead>
                             <%while(rs.next())    
                             {
                                 
@@ -141,11 +153,11 @@ try
                                 <td> <%=++i%> </td>
                                 <td> <%=rs.getString("rollno")%> </td>
                                 <td> <%=rs.getString("name")%> </td>
-                                <td><%=dept%> </td>
+                                <td><%=dept.toUpperCase() %> </td>
                                 
                                 <td> <%=rs.getString("reason")%> </td>
-                                <td> <%=rs.getString("from")%> </td>
-                                <td> <%=rs.getString("till")%> </td>
+                                <td> <%=Find.getFormattedDate(rs.getString("from"))%> </td>
+                                <td> <%=Find.getFormattedDate(rs.getString("till"))%> </td>
                                
                             </tr>
 <%

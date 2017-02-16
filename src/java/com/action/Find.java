@@ -113,6 +113,7 @@ public class Find {
     }
     
      public static String  getFormattedDate(String d){
+         d=d.replace("-","");
      return d.substring(6,8)+"-"+d.substring(4,6)+"-"+d.substring(0,4);
     }
     
