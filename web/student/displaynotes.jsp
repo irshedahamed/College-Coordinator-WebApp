@@ -1,3 +1,4 @@
+<%@page import="Downloads.Notes"%>
 <%@page import="com.action.Base"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
@@ -194,27 +195,15 @@
         subcode = parts[0];
         String subject = parts[1];
         String notes = request.getParameter("notes");
-        String path = Base.path+"/notes/"+ayear+"/"+dept+"/"+batch+"/"+sem+"/"+subcode+"/"+notes+"/";
-        List<String> list = new ArrayList<String>();
-        List<String> list1 = new ArrayList<String>();
-        List<String> listdescp=new ArrayList<String>();
         String a = subject1.toUpperCase();
         
-        list1.add(path);
-          try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection1 = new dbcon().getConnection(Find.sdept(username));
-            Statement statement1 = connection1.createStatement();
-            ResultSet rs = statement1.executeQuery("select filename,descp from notes where path = '"+path+"'");
-            
-          
-            while(rs.next())
-            {
-                String file = rs.getString("filename");
-               
-                 list.add(file);
-                 listdescp.add(rs.getString("descp"));
-            }
+        Notes n=new Notes();
+        n.setAcademicyr(ayear);
+        n.setSem(sem);
+        n.setSubcode(subcode);
+        n.setType(notes);
+        
+    
             
             %>
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
@@ -222,48 +211,20 @@
 
 <div class="dm3-tabs-testimonials" data-autoscroll=""><div class="dm3-tabs">
 <div class="dm3-tab"><div class="dm3-tab-inner"><center><h2><%=a%></h2><br><br>
-<div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
+<div style="width:60%;height:300px;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
 <div align="left">
-
-            
-            <%
-           
-            for(int i=0; i<list.size();i++)
-              {
-                  String str=list.get(i);
-                  //session.setAttribute(str,list.get(i));
-                  session.setAttribute("path",path);
-            %>
-            <a href="${pageContext.request.contextPath}/notesdownload?ind1=<%=str %>" ><%= list.get(i)+"-"+listdescp.get(i) %></a>
-<br>
-<%
-           
-           }
-            session.setAttribute("size",list.size());
-              if(statement1!=null)
-                            statement1.close();
-                              if(connection1!=null)
-                                connection1.close();
-          }
-          catch(Exception e)
-          {
-               
-          }
-%></div>
+        
+    <%=Notes.getHTMLContent(Notes.getAll(dept, n)) %>
+    
+    
+    </div>
 </div>
 </center>
 </div>
 </div>
 
 
-<div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>Department Events</h2><br><br>
-<div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2; background-color: #fff;">
-<div align="left">
-   
-         </div>
-</div>
-</center></div></div>
-</div><ul class="dm3-tabs-nav"></ul></div>
+
 </div></div></section>
 
 </section>
