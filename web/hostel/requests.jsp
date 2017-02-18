@@ -331,14 +331,21 @@
                                                       <div align="left" style="position: absolute;"><h4>Father</h4>
                                           <img src="../../Father/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                          </div>
-                                         <div align="left" style="position: absolute;margin-left:200px;">
+                                         <div align="left" style="position: absolute;margin-left:125px;">
                                    <h4>Mother</h4>
                                           <img src="../../Mother/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                          </div>
-                                         <div align="right">
-                                    <h4 style="margin-right: 50px;">Local Guardian</h4>
-                                    <div style="margin-right: 75px;">
-                                          <img src="../../LocalGuardian/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                         <div align="left"  style="position: absolute;margin-left:255px;">
+                                    <h4 style="position: relative;right: 15px;">Local Guardian 1</h4>
+                                    <div style="">
+                                          <img src="../../LocalGuardian1/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                    </div>  
+                                    </div>
+                                    
+                                         <div align="left" >
+                                    <h4 style="margin-left: 390px;">Local Guardian 2</h4>
+                                    <div style="margin-left:  400px;">
+                                          <img src="../../LocalGuardian2/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                     </div>  
                                     </div>
                                 

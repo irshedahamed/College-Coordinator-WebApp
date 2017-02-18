@@ -273,7 +273,7 @@ $(document).ready(function(){
                 
                 var eledept="<select id='dept' style='background:white'>   <option value=''>Dept</option>"+
                                                         
-                <%=Find.getDeptHTMLContent() %>+
+                "<%=Find.getDeptHTMLContent() %>"+
                                                    " <option value=\"first\">Science & Humanities</option></select>";
                                            
                                            $("#sublist").html(eledept);
