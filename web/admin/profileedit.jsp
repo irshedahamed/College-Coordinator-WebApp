@@ -874,8 +874,8 @@
                                     <td>
                                         <label>Gender :</label><select name="gender" >
                                             <option value="<%=rs10.getString("gender")%>"><%=rs10.getString("gender")%></option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
                                         </select></td>
                                     <td>
                                         <label>Blood Group :</label><input type="text"  style="background: white" id="bloodgroup" name="bloodgroup" value="<%=rs10.getString("bloodgrp")%>">

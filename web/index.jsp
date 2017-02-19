@@ -163,8 +163,7 @@ padding:20px 15px;
 		<br>
                
 		<br>
-                 <center> Best viewed in Google Chrome and Mozilla Firefox</center>
-		<br>
+        	<br>
                 <marquee>For any Queries or Help Contact :  <a href="mailto:portal@stjosephstechnology.ac.in">portal@stjosephstechnology.ac.in</a></marquee>
                 <br>
                 <br>

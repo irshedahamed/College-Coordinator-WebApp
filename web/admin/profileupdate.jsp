@@ -702,8 +702,8 @@
                                    
                                     <td>
                                         <label>Gender :</label><select name="gender">
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
                                         </select></td>
                                     <td>
                                         <label>Blood Group :</label><input type="text" class="check"  style="background: white" id="bloodgroup" name="bloodgroup">
