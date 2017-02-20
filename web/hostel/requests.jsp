@@ -3,6 +3,7 @@
     Created on : 2 Jan, 2017, 5:22:49 PM
     Author     : Home
 --%>
+<%@page import="General.Hostel"%>
 <%@page import="com.action.Find"%>
 <%@page import="Actor.Student"%>
 <%@page import="Forms.OutPass"%>
@@ -104,6 +105,10 @@
    <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="requests.jsp">Grant OutPass</a>
   
 </li>
+<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="notreturned.jsp">SMS</a>
+
+
+</li>
 
 
 <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="Setup.jsp">Holiday Setup</a>
@@ -117,6 +122,8 @@
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personalReport.jsp">Personal Report</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="dailyReport.jsp">Daily Report</a>
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="monthlyReport.jsp">Monthly Report</a>
+      <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="notReturnedReport.jsp">Not Returned Report</a>
+
 </ul></li>
 
 
@@ -222,15 +229,7 @@
                  <br><br>
                  <%
                      if( stu.getId()!=null){
-                       boolean flag=false;
-                         if(username.contains("girl")){
-                         if(stu.getSex().contains("F"))
-                                flag=true;
-                         }else{
-                         if(!stu.getSex().contains("F"))
-                                flag=true;
-                         
-                         }
+                       boolean flag=Hostel.AuthenticateAccess(username, stu);
                  
                  if(flag){
                  %>

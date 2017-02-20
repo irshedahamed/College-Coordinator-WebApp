@@ -4,6 +4,7 @@
     Author     : Home
 --%>
 
+<%@page import="General.Hostel"%>
 <%@page import="com.action.Find"%>
 <%@page import="Forms.OutPass"%>
 <%@page import="Actor.Student"%>
@@ -128,7 +129,8 @@
         <%
         
    
-        
+        String username = session.getAttribute("username").toString();
+    
         String message="";
          String department=request.getParameter("dept");
 	String date=request.getParameter("date");
@@ -154,9 +156,9 @@
             String phone;
             phone=Parent.getNumber(rollno);
             OutPass o=OutPass.getbyIdReturnDate(rollno,date);
-                    message="Your ward "+name+" ("+rollno+") has not reported back to college"+o.getTill();   
+                    message="Your ward "+name+" ("+rollno+") left our premises on "+Find.getFormattedDate(o.getFrom())+" and has not reported back to college within the specified time.";   
                     
-                    if(Find.sdept(stu.getId()).equals(dept)){
+                    if(Find.sdept(stu.getId()).equals(dept)&&Hostel.AuthenticateAccess(username, stu)){
         
         %>
         

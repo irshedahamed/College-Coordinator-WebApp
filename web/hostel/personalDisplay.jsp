@@ -3,6 +3,7 @@
     Created on : 27 Dec, 2016, 9:25:23 PM
     Author     : Home
 --%>
+<%@page import="General.Hostel"%>
 <%@page import="Actor.Student"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.SQLException"%>
@@ -139,14 +140,7 @@ try
                                 
       Student stu=Student.getById(rs.getString("rollno"));
                                 
-                       boolean flag=false;
-                         if(username.contains("girl")){
-                         if(stu.getSex().contains("F"))
-                                flag=true;
-                         }else{
-                         if(!stu.getSex().contains("F"))
-                                flag=true;
-                         }
+                       boolean flag=Hostel.AuthenticateAccess(username, stu);
                          if(flag){
                             %>
                       <tr>

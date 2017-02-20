@@ -144,6 +144,12 @@ public class Student {
         this.regno = regno;
     }
     
+    public boolean isHostel(){
+    if(accomodation.equalsIgnoreCase("hostel"))
+        return true;
+    else
+        return false;
+    }
      public  Admission getAdmissionDetails(){
     
     

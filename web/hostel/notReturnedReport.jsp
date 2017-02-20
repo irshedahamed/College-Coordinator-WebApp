@@ -1,8 +1,14 @@
 <%-- 
+    Document   : notReturnedReport
+    Created on : Feb 20, 2017, 10:56:24 AM
+    Author     : Lenovo
+--%>
+<%-- 
     Document   : home
     Created on : 18 Nov, 2016, 5:57:23 PM
     Author     : Home
 --%>
+<%@page import="com.action.Find"%>
 <%@page import="Downloads.Circular"%>
 <%@page import="Downloads.College"%>
 <%@page import="java.util.ArrayList"%>
@@ -52,6 +58,9 @@
      
 
 
+         
+     
+	
 		
 		</head>
 		
@@ -89,6 +98,7 @@
    <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="requests.jsp">Grant OutPass</a>
   
 </li>
+
 <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="notreturned.jsp">SMS</a>
 
 
@@ -100,7 +110,7 @@
 
 </li>
 
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#"> Report</a>
+<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777   current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#"> Report</a>
 <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personalReport.jsp">Personal Report</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="dailyReport.jsp">Daily Report</a>
@@ -108,6 +118,7 @@
       <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="notReturnedReport.jsp">Not Returned Report</a>
 
 </ul></li>
+
 
 
 </ul>						
@@ -122,37 +133,56 @@
                 <br><br><br><br>
           <section class="landing">
                    
-             <center><form action="personalDisplay.jsp" class="sky-form" method="post" target="_blank">
-    <header>PERSONAL REPORT</header>
+        <center><form action="notReturnedDisplay.jsp" class="sky-form" method="post" >
+    <header>YET TO REPORT</header>
     <fieldset>					
-					<section>
-
+				    <div class="dept">
+			
+                                            <br><br>        
+                        			<label class="input">
+                                                    <div align="left" size="3px"><b>DEPARTMENT</b></div>
+							<label class="select">
+           
+               <select id="dept" name="dept" required>
+               
+                        
+                <%=Find.getDeptHTMLContent() %>
+                               <option value="all">ALL</option>
+               
+               
+               </select>
+                    <i></i>                                    </label>
+                                                </label>
+                                 </div>
                                         
                                             <br><br>
-            
-            
-            <label class="input">
+						
+                 
+    
+        
+                                            <label class="input">
                                                     <div align="left" size="3px" id="div7"><b>
-                                                             ID</b></div>
+                                                             DATE</b></div>
                 <label class="input">
             
-            <input type="text"  placeholder="Student Rollno" name="id" />
+            <input type="date" id="from"   name="date" />
             
              <i></i>
             <br> <br>
                 </label></label>
             
-            
-                                        </section>
+                                          
             
                            
              <div align="left">
             <input type="submit" id="submit" value="Submit" /></div>
             <br>
     </fieldset>
-                </form></center>
+                </form></center>     
+            
         
-       </section>
+            
+        </section>
 
 
             
