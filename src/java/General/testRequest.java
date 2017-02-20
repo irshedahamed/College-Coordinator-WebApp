@@ -5,6 +5,7 @@
  */
 package General;
 
+import Fee.TechProcess;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
@@ -61,7 +62,14 @@ public class testRequest extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       //  processRequest(request, response);
-        doPost(request, response);
+      //  doPost(request, response);
+      TechProcess tp=new TechProcess();
+      tp.setAmount("1");
+      tp.setCustID("12cs1206");
+      tp.setRefno("mup12345");
+      tp.setReturnURL("117.205.235.68:8080/newportal/testRequest");
+      
+      response.getWriter().print(tp.getRedirectURL());
     }
 
     /**
