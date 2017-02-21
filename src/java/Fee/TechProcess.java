@@ -103,7 +103,7 @@ public class TechProcess {
     public String  getRedirectURL(){
         String URL;
         reqBean=new TransactionRequestBean();
-        reqBean.setStrRequestType("T");
+        reqBean.setStrRequestType(reqtype);
         reqBean.setStrMerchantCode(merchantCode);
         reqBean.setMerchantTxnRefNumber(refno);
         reqBean.setStrAmount(amount);
@@ -118,8 +118,6 @@ public class TechProcess {
         reqBean.setStrCustomerName("Arun");
         reqBean.setStrTimeOut("1000");
         reqBean.setCustID("19872627");
-        reqBean.setStrBankCode("180");
-        reqBean.setAccountNo("1");
         URL=reqBean.getTransactionToken();
         
     return URL;

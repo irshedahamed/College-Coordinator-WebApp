@@ -191,6 +191,7 @@ table.bordered1 {
                         <th>DEPT</th>
                         <th>SEC</th>
                         <th>LAB HRS</th>
+                        <th>TOTAL HRS</th>
                    <th>In Charge</th>
                     </tr>
                     

@@ -67,7 +67,7 @@ public class testRequest extends HttpServlet {
       tp.setAmount("1");
       tp.setCustID("12cs1206");
       tp.setRefno("mup12345");
-      tp.setReturnURL("117.205.235.68:8080/newportal/testRequest");
+      tp.setReturnURL("https://portal.stjosephstechnology.ac.in/testRequest");
       
       response.getWriter().print(tp.getRedirectURL());
     }

@@ -219,7 +219,7 @@
                     {
                         batch=rs1.getString("batch");
                 %>
-                <option value=<%=batch.substring(2,4)%>><%=batch%></option>
+                <option value="<%=batch%>"><%=batch%></option>
                 <%
                 }
 
@@ -257,7 +257,7 @@
            
         <%
             batch=request.getParameter("batch");
-     
+           
              ResultSet rs = st.executeQuery("select l.*,p.name from student_login_details l,"+request.getParameter("dept")+".student_personal p where l.rollno=p.rollno and p.batch='"+batch+"'");
              
             while(rs.next())
