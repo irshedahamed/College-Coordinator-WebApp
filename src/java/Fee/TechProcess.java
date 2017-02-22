@@ -19,7 +19,7 @@ public class TechProcess {
    private String amount;
    private static String curCode="INR";
    private String ReturnURL;
-   private static String WebServiceLocator="https://www.tpsl-india.in/PaymentGateway/services/TransactionDetailsNew";
+   private static String WebServiceLocator="https://www.tekprocess.co.in/PaymentGateway/services/TransactionDetailsNew";
    private String CustID;
    private static String encKey="1672673692SHFPHU";
    private static String IV="2632355530WMVBPU";
@@ -107,17 +107,14 @@ public class TechProcess {
         reqBean.setStrMerchantCode(merchantCode);
         reqBean.setMerchantTxnRefNumber(refno);
         reqBean.setStrAmount(amount);
+        reqBean.setTxnDate(com.action.Find.getFormattedDate());
         reqBean.setStrCurrencyCode("INR");
         reqBean.setStrReturnURL(ReturnURL);
         reqBean.setWebServiceLocator(WebServiceLocator);
         reqBean.setCustID(CustID);
         reqBean.setKey(encKey.getBytes());
         reqBean.setIv(IV.getBytes());
-        reqBean.setStrITC("email:portal@stjosephstechnology.ac.in");
-        reqBean.setStrMobileNumber("9445155260");
-        reqBean.setStrCustomerName("Arun");
-        reqBean.setStrTimeOut("1000");
-        reqBean.setCustID("19872627");
+        reqBean.setCustID(CustID);
         URL=reqBean.getTransactionToken();
         
     return URL;

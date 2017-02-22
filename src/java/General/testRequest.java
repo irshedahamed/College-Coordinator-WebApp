@@ -64,7 +64,7 @@ public class testRequest extends HttpServlet {
       //  processRequest(request, response);
       //  doPost(request, response);
       TechProcess tp=new TechProcess();
-      tp.setAmount("1");
+      tp.setAmount("15");
       tp.setCustID("12cs1206");
       tp.setRefno("mup12345");
       tp.setReturnURL("https://portal.stjosephstechnology.ac.in/testRequest");
