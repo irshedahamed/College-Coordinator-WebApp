@@ -109,6 +109,7 @@ public class TechProcess {
         reqBean.setStrMerchantCode(merchantCode);
         reqBean.setMerchantTxnRefNumber(refno);
         reqBean.setStrAmount(amount);
+        reqBean.setTxnDate(com.action.Find.getFormattedDate());
         reqBean.setStrCurrencyCode("INR");
         reqBean.setStrReturnURL(ReturnURL);
         reqBean.setWebServiceLocator(WebServiceLocator);
@@ -117,7 +118,6 @@ public class TechProcess {
         reqBean.setIv(IV.getBytes());
         reqBean.setTxnDate(com.action.Find.getFormattedDate());
         reqBean.setStrShoppingCartDetails("SJIT_"+amount+"_0.0");
-        
         URL=reqBean.getTransactionToken();
         
     return URL;

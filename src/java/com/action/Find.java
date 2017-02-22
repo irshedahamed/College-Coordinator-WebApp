@@ -16,7 +16,7 @@ public class Find {
     
     
     public static final String[] Depts={"cse","mech","it","civil","eee","ece"};
-   // public static final String[] Depts={"cse","mech","it","civil","eee","ece","chemical","ei","ic","mebiotech","meap","mesc","meps","mepd","meest","meci","meme","mba","mca"};
+   // public static final String[] Depts={"cse","mech","it","civil","eee","ece","chemical","ei","ic","biotech","mebiotech","meap","mesc","meps","mepd","meest","meci","meme","mecs","mees","mepe","mba","mca"};
     
     public static final String SERVERURL="https://portal.stjosephstechnology.ac.in/";
     static public String dept(String username){
@@ -38,7 +38,31 @@ public class Find {
     
     static public String sdept(String username){
     
-    if(username.contains("cs") || username.contains("CS"))
+    if(username.contains("meps")|| username.contains("MEPS"))
+        return "meps";
+     else if(username.contains("mees")|| username.contains("MEES"))
+        return "mees";
+    else if(username.contains("meped")|| username.contains("MEPD"))
+        return "meped";
+     else if(username.contains("mepe")|| username.contains("MEPE"))
+        return "mepe";
+    else if(username.contains("mesc")|| username.contains("MESC"))
+        return "me sc";
+    else if(username.contains("meme")|| username.contains("MEME"))
+        return "meme";
+    else if(username.contains("meest")|| username.contains("MEEST"))
+        return "meest";
+    else if(username.contains("meap")|| username.contains("MEAP"))
+        return "meap";
+    else if(username.contains("mebt")|| username.contains("MEBT"))
+        return "mebiotech";
+    else if(username.contains("meci")|| username.contains("MECI"))
+        return "meci";
+    else if(username.contains("mba")|| username.contains("MBA"))
+        return "mba";
+       else if(username.contains("mca")|| username.contains("MCA"))
+        return "mca";
+    else if(username.contains("cs") || username.contains("CS"))
         return "cse";
     else if(username.contains("it")|| username.contains("IT"))
         return "it";
@@ -56,27 +80,9 @@ public class Find {
         return "ic";
     else if(username.contains("ei")|| username.contains("EI"))
         return "ei";
-   else if(username.contains("meps")|| username.contains("MEPS"))
-        return "meps";
-   else if(username.contains("meped")|| username.contains("MEPD"))
-        return "meped";
-  else if(username.contains("mesc")|| username.contains("MESC"))
-        return "me sc";
-  else if(username.contains("meme")|| username.contains("MEME"))
-        return "meme";
- else if(username.contains("meest")|| username.contains("MEEST"))
-        return "meest";
-    else if(username.contains("meap")|| username.contains("MEAP"))
-        return "meap";
-    else if(username.contains("mebt")|| username.contains("MEBT"))
-        return "mebiotech";
-    else if(username.contains("meci")|| username.contains("MECI"))
-        return "meci";
-    else if(username.contains("mba")|| username.contains("MBA"))
-        return "mba";
-       else if(username.contains("mca")|| username.contains("MCA"))
-        return "mca";
- 
+     else if(username.contains("bt")|| username.contains("BT"))
+        return "biotech";
+    
  
     return "first";
         
