@@ -87,8 +87,15 @@ public class redirectPay extends HttpServlet {
        RequestDispatcher rd=request.getRequestDispatcher("/sendPost.jsp?RUrl="+(url).replace("&", "%26").replace(" ", "%20"));
         rd.forward(request, response);
        }
-       else{
-       response.getWriter().print("yet to implement");
+       else if(mode.equals("others")){
+       
+           TechProcess tp=new TechProcess();
+      tp.setAmount("1");
+      tp.setCustID(mu.getRollno());
+      tp.setRefno(mu.getRefno());
+      tp.setReturnURL("http://" + request.getServerName()+"/receiveTechProcessResponse");
+      request.getSession().setAttribute("TPRequest", tp);
+      response.sendRedirect(tp.getRedirectURL());
        }
     }
 

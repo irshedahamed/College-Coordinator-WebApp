@@ -63,13 +63,7 @@ public class testRequest extends HttpServlet {
             throws ServletException, IOException {
       //  processRequest(request, response);
       //  doPost(request, response);
-      TechProcess tp=new TechProcess();
-      tp.setAmount("1");
-      tp.setCustID("12cs1206");
-      tp.setRefno("mup12345");
-      tp.setReturnURL("https://portal.stjosephstechnology.ac.in/testRequest");
       
-      response.getWriter().print(tp.getRedirectURL());
     }
 
     /**

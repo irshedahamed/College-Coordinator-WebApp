@@ -34,8 +34,8 @@
     session.setAttribute("deptname",Find.sdept(username) );
     MUResponse mu=(MUResponse)session.getAttribute("MUResponse");
         boolean feepaid=false;
-        if(request.getParameter("paid")!=null)
-        if(request.getParameter("paid").equals("Y"))
+        if(request.getAttribute("paid")!=null)
+        if(request.getAttribute("paid").toString().equals("Y"))
             feepaid=true;
         String mupno=mu.getRefno();
         String bcharge=mu.getBankchrge();

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Home
  */
-public class receiveIBResponse extends HttpServlet {
+public class receiveTechProcessResponse extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +36,10 @@ public class receiveIBResponse extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet receiveIBResponse</title>");            
+            out.println("<title>Servlet receiveTechProcessResponse</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet receiveIBResponse at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet receiveTechProcessResponse at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -59,8 +59,7 @@ public class receiveIBResponse extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        doPost(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -75,25 +74,54 @@ public class receiveIBResponse extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
-       IBResponse res=new IBResponse();
-       res.setRollno(request.getSession().getAttribute("username").toString());
-       res.setMup(request.getParameter("RefNo"));
-       res.setJournalno(request.getParameter("JournalNo"));
-       res.setStatus(request.getParameter("Status"));
-       res.setTxndate(request.getParameter("TxnDate"));
        
        
-       if(res.insert()){
-       if(res.getStatus().equals("Y")){
-        request.setAttribute("paid", res.getStatus());
+       String msg=request.getParameter("msg");
+       String mercode=request.getParameter("tpsl_mrct_cd");
+       MUResponse mu=(MUResponse) request.getSession().getAttribute("MUResponse");
+     
+       TechProcess tp=(TechProcess) request.getSession().getAttribute("TPRequest");
+       String resMsg=tp.getTransactionStatus(msg);
+       TechProcessResponse tpr=new TechProcessResponse();
+       if(resMsg.equals("failed T")){
+       tpr.setRollno(tp.getCustID());
+       tpr.setRefno(tp.getRefno());
+       tpr.setStatus("failed");
+       tpr.setMsg(resMsg);
+        response.getWriter().print("Transaction Failed Contact Server Admin");
+       }else{
+       String[] splitres=resMsg.split("\\|");
+       tpr.setRollno(tp.getCustID());
+       tpr.setRefno(tp.getRefno());
+       tpr.setStatus(splitres[0].split("=")[1]);
+       tpr.setMsg(splitres[1].split("=")[1]);
+       tpr.setErr_msg(splitres[2].split("=")[1]);
+       tpr.setClnt_txn_ref(splitres[3].split("=")[1]);
+       tpr.setTpsl_bank_cd(splitres[4].split("=")[1]);
+       tpr.setTpsl_txn_id(splitres[5].split("=")[1]);
+       tpr.setAmount(splitres[6].split("=")[1]);
+       tpr.setTime(splitres[7].split("=")[1]);
+       tpr.setBal_amount(splitres[9].split("=")[1]);
+       tpr.setRqst_token(splitres[11].split("=")[1]);
+       boolean flag=tpr.insert();
+       if(flag && tpr.getMsg().equals("SUCCESS")){
+           request.setAttribute("paid", "Y");
         request.getRequestDispatcher("/student/Challan.jsp").forward(request, response);
        }else{
-       response.getWriter().print("Transaction failed on Indian Bank Server");
-       
+               response.getWriter().print("Transaction Failed");
+        }
        }
-       }else{
-       response.getWriter().print("Transaction Response failed on server contact Admin");
-       }
+       /*txn_status=0300|
+    txn_msg=SUCCESS|
+            txn_err_msg=Normal SUCCESS Transaction|
+            clnt_txn_ref=TPSL209177648|
+                    tpsl_bank_cd=9980|
+                    tpsl_txn_id=228587|
+                    txn_amt=1.00|
+                    tpsl_txn_time=14-11-2014 10:03:25|
+            tpsl_rfnd_id=NA|
+                    bal_amt=NA|
+                    rqst_token=a4e3e263-bea5-4f63-ac04-e7a6822e03cb*/
     }
 
     /**

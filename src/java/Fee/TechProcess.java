@@ -6,6 +6,7 @@
 package Fee;
 
 import com.tp.pg.util.TransactionRequestBean;
+import com.tp.pg.util.TransactionResponseBean;
 
 /**
  *
@@ -13,19 +14,23 @@ import com.tp.pg.util.TransactionRequestBean;
  */
 public class TechProcess {
     
-   private static String reqtype="T";
+  
    private static String merchantCode="T100690";
    private String refno;
    private String amount;
    private static String curCode="INR";
    private String ReturnURL;
-   private static String WebServiceLocator="https://www.tpsl-india.in/PaymentGateway/services/TransactionDetailsNew";
+   private static String WebServiceLocator="https://www.tekprocess.co.in/PaymentGateway/services/TransactionDetailsNew";
    private String CustID;
    private static String encKey="1672673692SHFPHU";
    private static String IV="2632355530WMVBPU";
    private String resMessage;
    private String resMerchantCode;
+   private TransactionRequestBean  reqBean;
+   private static TransactionResponseBean resBean; 
 
+ 
+   
     public String getResMessage() {
         return resMessage;
     }
@@ -41,11 +46,7 @@ public class TechProcess {
     public void setResMerchantCode(String resMerchantCode) {
         this.resMerchantCode = resMerchantCode;
     }
-   private TransactionRequestBean  reqBean;
-    public String getReqtype() {
-        return reqtype;
-    }
-
+  
     
 
     public String getMerchantCode() {
@@ -102,8 +103,9 @@ public class TechProcess {
     
     public String  getRedirectURL(){
         String URL;
+        amount="1";
         reqBean=new TransactionRequestBean();
-        reqBean.setStrRequestType(reqtype);
+        reqBean.setStrRequestType("T");
         reqBean.setStrMerchantCode(merchantCode);
         reqBean.setMerchantTxnRefNumber(refno);
         reqBean.setStrAmount(amount);
@@ -113,14 +115,34 @@ public class TechProcess {
         reqBean.setCustID(CustID);
         reqBean.setKey(encKey.getBytes());
         reqBean.setIv(IV.getBytes());
-        reqBean.setStrITC("email:portal@stjosephstechnology.ac.in");
-        reqBean.setStrMobileNumber("9445155260");
-        reqBean.setStrCustomerName("Arun");
-        reqBean.setStrTimeOut("1000");
-        reqBean.setCustID("19872627");
+        reqBean.setTxnDate(com.action.Find.getFormattedDate());
+        reqBean.setStrShoppingCartDetails("SJIT_"+amount+"_0.0");
+        
         URL=reqBean.getTransactionToken();
         
     return URL;
     }
     
+    public static String getResponse(String msg){
+        resBean=new TransactionResponseBean();
+    resBean.setIv(IV.getBytes());
+    resBean.setKey(encKey.getBytes());
+    resBean.setResponsePayload(msg);
+   
+    return resBean.getResponsePayload();
+    }
+    
+    public  String getTransactionStatus(String msg){
+    
+        String message=getResponse(msg);
+        System.out.println(message);
+        String status=message.split("\\|")[1].split("=")[1];
+        if(status.equals("success")){
+        reqBean.setStrRequestType("S");
+        String response=reqBean.getTransactionToken();
+        System.err.print(response);
+        return response;
+        }
+    return "failed T";
+    }
 }
