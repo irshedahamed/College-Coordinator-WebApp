@@ -90,7 +90,7 @@ public class redirectPay extends HttpServlet {
        else if(mode.equals("others")){
        
            TechProcess tp=new TechProcess();
-      tp.setAmount("1");
+      tp.setAmount(mu.getTotalamt());
       tp.setCustID(mu.getRollno());
       tp.setRefno(mu.getRefno());
       tp.setReturnURL("https://" + request.getServerName()+"/receiveTechProcessResponse");
