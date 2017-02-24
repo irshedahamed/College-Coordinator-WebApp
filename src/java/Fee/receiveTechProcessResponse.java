@@ -88,7 +88,7 @@ public class receiveTechProcessResponse extends HttpServlet {
        tpr.setRefno(tp.getRefno());
        tpr.setStatus("failed");
        tpr.setMsg(resMsg);
-        response.getWriter().print("Transaction Failed Contact Server Admin");
+        response.getWriter().print("Transaction Failed");
        }else{
        String[] splitres=resMsg.split("\\|");
        tpr.setRollno(tp.getCustID());
@@ -102,13 +102,13 @@ public class receiveTechProcessResponse extends HttpServlet {
        tpr.setAmount(splitres[6].split("=")[1]);
        tpr.setTime(splitres[7].split("=")[1]);
        tpr.setBal_amount(splitres[9].split("=")[1]);
-       tpr.setRqst_token(splitres[11].split("=")[1]);
+       tpr.setRqst_token(splitres[10].split("=")[1]);
        boolean flag=tpr.insert();
        if(flag && tpr.getMsg().equals("SUCCESS")){
            request.setAttribute("paid", "Y");
         request.getRequestDispatcher("/student/Challan.jsp").forward(request, response);
        }else{
-               response.getWriter().print("Transaction Failed");
+               response.getWriter().print("Transaction Failed  Contact Server Admin");
         }
        }
        /*txn_status=0300|

@@ -93,7 +93,7 @@ public class redirectPay extends HttpServlet {
       tp.setAmount("1");
       tp.setCustID(mu.getRollno());
       tp.setRefno(mu.getRefno());
-      tp.setReturnURL("http://" + request.getServerName()+"/receiveTechProcessResponse");
+      tp.setReturnURL("https://" + request.getServerName()+"/receiveTechProcessResponse");
       request.getSession().setAttribute("TPRequest", tp);
       response.sendRedirect(tp.getRedirectURL());
        }

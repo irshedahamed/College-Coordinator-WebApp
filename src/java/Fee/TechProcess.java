@@ -15,15 +15,15 @@ import com.tp.pg.util.TransactionResponseBean;
 public class TechProcess {
     
   
-   private static String merchantCode="T100690";
+   private static String merchantCode="T145510";
    private String refno;
    private String amount;
    private static String curCode="INR";
    private String ReturnURL;
-   private static String WebServiceLocator="https://www.tekprocess.co.in/PaymentGateway/services/TransactionDetailsNew";
+   private static String WebServiceLocator="https://www.tpsl-india.in/PaymentGateway/services/TransactionDetailsNew";
    private String CustID;
-   private static String encKey="1672673692SHFPHU";
-   private static String IV="2632355530WMVBPU";
+   private static String encKey="1758021100MKLHMW";
+   private static String IV="2761839814TJTJQY";
    private String resMessage;
    private String resMerchantCode;
    private TransactionRequestBean  reqBean;
@@ -103,7 +103,7 @@ public class TechProcess {
     
     public String  getRedirectURL(){
         String URL;
-        amount="1";
+        //amount="8";
         reqBean=new TransactionRequestBean();
         reqBean.setStrRequestType("T");
         reqBean.setStrMerchantCode(merchantCode);
@@ -133,7 +133,7 @@ public class TechProcess {
     }
     
     public  String getTransactionStatus(String msg){
-    
+        System.out.println(msg);
         String message=getResponse(msg);
         System.out.println(message);
         String status=message.split("\\|")[1].split("=")[1];

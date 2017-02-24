@@ -96,7 +96,7 @@ public class generateMUP extends HttpServlet {
         params += ("&AddDet1=" + s.getName());
         params += ("&AddDet2=" + s.getId());
         params += ("&AddDet3=" + s.getDept());
-        params+="&ReturnURL=http://" + request.getServerName()+"/receiveMUResponse";
+        params+="&ReturnURL=https://" + request.getServerName()+"/receiveMUResponse";
         RequestDispatcher rd=request.getRequestDispatcher("/sendPost.jsp?RUrl="+(url+params).replace("&", "%26").replace(" ", "%20"));
         rd.forward(request, response);
     }
