@@ -15,15 +15,15 @@ import com.tp.pg.util.TransactionResponseBean;
 public class TechProcess {
     
   
-   private static String merchantCode="T145510";
+   private static String merchantCode="L2857";
    private String refno;
    private String amount;
    private static String curCode="INR";
    private String ReturnURL;
    private static String WebServiceLocator="https://www.tpsl-india.in/PaymentGateway/services/TransactionDetailsNew";
    private String CustID;
-   private static String encKey="1758021100MKLHMW";
-   private static String IV="2761839814TJTJQY";
+   private static String encKey="4171074046HIFPTP";
+   private static String IV="2518055670HTWQVR";
    private String resMessage;
    private String resMerchantCode;
    private TransactionRequestBean  reqBean;
