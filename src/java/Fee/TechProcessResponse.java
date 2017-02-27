@@ -16,6 +16,7 @@ import java.sql.Statement;
  */
 public class TechProcessResponse {
     private String rollno;
+    private String user;
     private String refno;
     private String amount;
     private String status;
@@ -138,7 +139,7 @@ public class TechProcessResponse {
            String sql;
            sql="insert into techprocess values('"+rollno+"','"+refno+"','"+status+
                    "','"+msg+"','"+err_msg+"','"+clnt_txn_ref+"','"+tpsl_bank_cd+
-                   "','"+tpsl_txn_id+"','"+time+"','"+bal_amount+"','"+rqst_token+"')";
+                   "','"+tpsl_txn_id+"','"+amount+"','"+time+"','"+bal_amount+"','"+rqst_token+"','"+user+"')";
        update+=stmt.executeUpdate(sql);
        
      
@@ -161,4 +162,32 @@ public class TechProcessResponse {
        else
            return false;
     }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+    
+    public void setFromResMsg(String resMsg,TechProcess tp){
+        
+       String[] splitres=resMsg.split("\\|");
+       setUser(tp.getUser());
+       setRollno(tp.getCustID());
+       setRefno(tp.getRefno());
+       setStatus(splitres[0].split("=")[1]);
+       setMsg(splitres[1].split("=")[1]);
+       setErr_msg(splitres[2].split("=")[1]);
+       setClnt_txn_ref(splitres[3].split("=")[1]);
+       setTpsl_bank_cd(splitres[4].split("=")[1]);
+       setTpsl_txn_id(splitres[5].split("=")[1]);
+       setAmount(splitres[6].split("=")[1]);
+       setTime(splitres[7].split("=")[1]);
+       setBal_amount(splitres[9].split("=")[1]);
+       setRqst_token(splitres[10].split("=")[1]);
+    
+    }
+    
 }

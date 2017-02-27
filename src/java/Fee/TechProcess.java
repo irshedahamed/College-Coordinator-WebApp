@@ -17,6 +17,7 @@ public class TechProcess {
   
    private static String merchantCode="L2857";
    private String refno;
+   private String user;
    private String amount;
    private static String curCode="INR";
    private String ReturnURL;
@@ -75,7 +76,13 @@ public class TechProcess {
         return curCode;
     }
 
-   
+     public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 
     public String getReturnURL() {
         return ReturnURL;

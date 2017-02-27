@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Fee;
+package API;
 
+import Fee.MUResponse;
+import Fee.TechProcessResponse;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Home
  */
-public class redirectPay extends HttpServlet {
+public class receiveTechProcessAPIResponse extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +39,10 @@ public class redirectPay extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet redirectPay</title>");            
+            out.println("<title>Servlet receiveTechProcessAPIResponse</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet redirectPay at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet receiveTechProcessAPIResponse at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -74,29 +76,32 @@ public class redirectPay extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
+        //processRequest(request, response);
+        
+        String msg=request.getParameter("msg");
+       String mercode=request.getParameter("tpsl_mrct_cd");
        
-       String mode=request.getParameter("mode");
-       String munum=request.getParameter("munumber");
-       MUResponse mu=(MUResponse) request.getSession().getAttribute("MUResponse");
+     
+       Fee.TechProcess tp=(Fee.TechProcess) request.getSession().getAttribute("TPRequest");
+       String resMsg=tp.getTransactionStatus(msg);
+       TechProcessResponse tpr=new TechProcessResponse();
+       if(resMsg.equals("failed T")){
+       tpr.setRollno(tp.getCustID());
+       tpr.setRefno(tp.getRefno());
+       tpr.setStatus("failed");
+       tpr.setMsg(resMsg);
+        response.getWriter().print("Transaction Failed");
+       }else{
+       tpr.setFromResMsg(resMsg, tp);
+       boolean flag=tpr.insert();
+       if(flag && tpr.getMsg().equals("SUCCESS")){
+    String  json = new Gson().toJson(tpr);
+                        response.setContentType("application/json");
+                        response.getWriter().write(json);
        
-       if(mode.equals("offline")){
-       request.getRequestDispatcher("/student/Challan.jsp").forward(request, response);
-       }else if(mode.equals("indianbank")){
-       String url="https://www.indianbank.net.in/servlet/ibs.servlets.IBSMultiUtilityServlet?HandleID=H_MULTIUTILTY_PAY&ref_number=" + mu.getRefno() + "&RUrl="+"https://" + request.getServerName()+"/receiveIBResponse";
-       RequestDispatcher rd=request.getRequestDispatcher("/sendPost.jsp?RUrl="+(url).replace("&", "%26").replace(" ", "%20"));
-        rd.forward(request, response);
-       }
-       else if(mode.equals("others")){
-       
-           TechProcess tp=new TechProcess();
-           tp.setUser("SJITPortal");
-      tp.setAmount(mu.getTotalamt());
-      tp.setCustID(mu.getRollno());
-      tp.setRefno(mu.getRefno());
-      tp.setReturnURL("https://" + request.getServerName()+"/receiveTechProcessResponse");
-      request.getSession().setAttribute("TPRequest", tp);
-      response.sendRedirect(tp.getRedirectURL());
+       }else{
+               response.getWriter().print("ERROR: Transaction Failed  Contact Server Admin");
+        }
        }
     }
 
