@@ -90,18 +90,17 @@ public class receiveTechProcessAPIResponse extends HttpServlet {
        tpr.setRefno(tp.getRefno());
        tpr.setStatus("failed");
        tpr.setMsg(resMsg);
-        response.getWriter().print("Transaction Failed");
+       response.sendRedirect(tp.getAPIReturnURL()+"?msg=Transaction Failed");
        }else{
        tpr.setFromResMsg(resMsg, tp);
        boolean flag=tpr.insert();
        if(flag && tpr.getMsg().equals("SUCCESS")){
     String  json = new Gson().toJson(tpr);
-                        response.setContentType("application/json");
-                        response.getWriter().write(json);
+                        response.sendRedirect(tp.getAPIReturnURL()+"?msg="+json);
        
        }else{
-               response.getWriter().print("ERROR: Transaction Failed  Contact Server Admin");
-        }
+           response.sendRedirect(tp.getAPIReturnURL()+"?msg=ERROR: Transaction Failed  Contact Server Admin");
+       }
        }
     }
 

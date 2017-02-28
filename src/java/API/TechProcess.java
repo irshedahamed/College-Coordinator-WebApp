@@ -86,7 +86,9 @@ public class TechProcess extends HttpServlet {
       tp.setAmount(request.getParameter("amount"));
       tp.setCustID(request.getParameter("custid"));
       tp.setRefno(request.getParameter("refno"));
+      tp.setAPIReturnURL(request.getParameter("returnURL"));
       tp.setReturnURL("https://" + request.getServerName()+"/receiveTechProcessAPIResponse");
+     
       request.getSession().setAttribute("TPRequest", tp);
       response.sendRedirect(tp.getRedirectURL());
     }

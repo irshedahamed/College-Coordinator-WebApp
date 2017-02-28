@@ -21,32 +21,16 @@ public class TechProcess {
    private String amount;
    private static String curCode="INR";
    private String ReturnURL;
+   private String APIReturnURL;
    private static String WebServiceLocator="https://www.tpsl-india.in/PaymentGateway/services/TransactionDetailsNew";
    private String CustID;
    private static String encKey="4171074046HIFPTP";
    private static String IV="2518055670HTWQVR";
-   private String resMessage;
-   private String resMerchantCode;
    private TransactionRequestBean  reqBean;
    private static TransactionResponseBean resBean; 
 
  
    
-    public String getResMessage() {
-        return resMessage;
-    }
-
-    public void setResMessage(String resMessage) {
-        this.resMessage = resMessage;
-    }
-
-    public String getResMerchantCode() {
-        return resMerchantCode;
-    }
-
-    public void setResMerchantCode(String resMerchantCode) {
-        this.resMerchantCode = resMerchantCode;
-    }
   
     
 
@@ -151,5 +135,13 @@ public class TechProcess {
         return response;
         }
     return "failed T";
+    }
+
+    public String getAPIReturnURL() {
+        return APIReturnURL;
+    }
+
+    public void setAPIReturnURL(String APIReturnURL) {
+        this.APIReturnURL = APIReturnURL;
     }
 }
