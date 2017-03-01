@@ -192,6 +192,10 @@
         <servlet-name>CouncillorAttEdit</servlet-name>
         <servlet-class>CouncillorAttEdit</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StaffProfileEdit</servlet-name>
+        <servlet-class>StaffProfileEdit</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -383,6 +387,10 @@
     <servlet-mapping>
         <servlet-name>CouncillorAttEdit</servlet-name>
         <url-pattern>/CouncillorAttEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffProfileEdit</servlet-name>
+        <url-pattern>/StaffProfileEdit</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,4 +1,7 @@
+<%@page import="Actor.Councillor"%>
+<%@page import="Actor.Student"%>
 <%@page import="Actor.Staff"%>
+<%@page import="General.AcademicYear"%>
 <%@page import="Downloads.Department"%>
 <%@page import="Downloads.Exam"%>
 <%@page import="Downloads.Circular"%>
@@ -35,23 +38,24 @@
 	<head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-		     <link rel="stylesheet" href="../css/main.css">
-     
-        <link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
-	 <link href="../../css/sky-forms.css" rel="stylesheet">
+		     <link rel="stylesheet" href="../../css/main.css">
+   <link href="../../css/sky-forms.css" rel="stylesheet">
+        <link type="text/css" media="all" href="../../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
+	
     <!-- Custom CSS -->
-    <link href="../css/simple-sidebar.css" rel="stylesheet">
-	    
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-	 <script src="../js/jquery.js"></script>
+    <link href="../../css/simple-sidebar.css" rel="stylesheet">
+	    <link href="../../css/tabledesign.css" rel="stylesheet">
+            
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+	 <script src="../../js/jquery.js"></script>
          
       
-<link rel="stylesheet" href="../css/angular-material.css">
+<link rel="stylesheet" href="../../css/angular-material.css">
 
 <link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
 
 
-<link rel="stylesheet" href="../css/angulartab.css">
+<link rel="stylesheet" href="../../css/angulartab.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"> </script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
@@ -61,7 +65,7 @@
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
 <script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.js"></script>
 
-<script src="../js/angulartab.js"></script>
+<script src="../../js/angulartab.js"></script>
 		</head>
 			
 <body class="home page page-id-115 page-template-default has-toolbar">
@@ -82,7 +86,7 @@
                     </a>
                 </li>
                 <center>
-                    <img src="../images/face.jpg" height="95px">
+                    <img src="../../images/face.jpg" height="95px">
                     
                                
                            
@@ -131,7 +135,7 @@
 					<div class="container clearfix">
 						<div id="main-logo">
 							<a href="#">
-								<img src="../images/sjit.png"  height="70px"></a>
+								<img src="../../images/sjit.png"  height="70px"></a>
 						</div>
                                             <ul id="auth-nav">
 							<li>
@@ -183,6 +187,18 @@
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
 	</ul></li>
+        
+        <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Councillor</a>
+<ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="attendance.jsp">Update Attendance</a></li>
+	
+	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="#">Modify Attendance</a>
+	
+</li>
+
+<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Report</a></li>
+</ul>
+</li>
 
 
 
@@ -196,113 +212,58 @@
 
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
-              <%
-              Connection connection=new dbcon().getConnection(Find.sdept(username));
-    Statement statement=connection.createStatement();
-    ResultSet rs11=statement.executeQuery("select * from staff_general where staffid='"+username+"'");
-    if(rs11.next())
-    {
-    %>
-    
-    
-    <center> <form method="post" name="general" action="${pageContext.request.contextPath}/StaffProfileEdit">
-                            <center><h3>General Details</h3></center>
-                           
+                                <form action="${pageContext.request.contextPath}/councillorattedit" method="post">
+                   <table class="bordered">
+                       <thead>
+                           <th>Roll Number</th>
+                       <th>Name</th>
+                       <th>Tick if Present</th>
+                       </thead>
+                       <tbody>
+       <%
+       Staff s=new Staff(username);
+       
+       for(Student stu:Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(),s.getCouncillorDetails().getSec())){
+       %>
+       <tr>
+           <td><%=stu.getId()%></td>
+           <td><%=stu.getName()%></td>
+           <td><input type="checkbox" name="<%=stu.getId()%>val" value="Absent"></td>
+           <td>
+               <select name="<%=stu.getId()%>reason">
+                   <option value="#">Select</option>
+                   <option value="absent">Absent</option>
+                   <option value="medical">Medical Leave</option>
+                   <option value="onduty">On Duty</option>
+                   <option value="permission">Previous Permission</option>
+                   <option value="suspended">Suspended</option>
+               </select>
+           </td>
+           
+       </tr>
+                   
+                   <%
+       
+     // out.println(stu.getName());
+       }%>
+       </tbody>
+       <%
+       session.setAttribute("Councillor",s.getCouncillorDetails());
+       
+        Councillor c=(Councillor)session.getAttribute("Councillor");
+      
+       %> 
+      
+         </table>
+       <input type="hidden" name="datepicker" value="<%=request.getParameter("datepicker")%>">
+       <div align="center">
+           <input type="submit" name="submit" value="submit"></div>
+                                </form>
+       
+        </section>
 
-                            <table cellspacing="10"><tr><td>
+            
 
-                                        <label> Staff ID :</label> <input type="text" style="background: white" id="rollno" name="rollno" value="<%=rs11.getString("staffid")%>" ></td>
-
-                                    <td>
-
-                                        <label>Title :</label> <input type="text" style="background: white"  value="<%=rs11.getString("tittle")%>" disabled>
-
-                                <td>
-                                    <label> Name :</label><input type="text" style="background: white" id="name" name="name" value="<%=rs11.getString("name")%>"></td>
-                                <td><label>Designation :</label><input type="text" style="background: white" id="desg" name="desg" value="<%=rs11.getString("desg")%>">
-                                </td></tr>
-                                <tr>
-                                    <br>
-                                <td>
-                                    <label>Date of Joining :</label><input type="date" style="background: white" id="doj" name="doj" value="<%=rs11.getString("doj")%>">
-                                </td>
-                                
-                                    <td>
-                                        <label>Gender :</label><input type="text" style="background: white" id="gender" name="gender" value="<%=rs11.getString("gender")%>">
-                                    </td>
-
-
-                                    <td>
-                                        <label>Address 1 :</label><input type="text" style="background: white" id="add1" name="add1" value="<%=rs11.getString("add1")%>">
-                                    </td>
-                                <td>
-                                    <label>Address 2 :</label><input type="text" style="background: white" id="add2" name="add2" value="<%=rs11.getString("add2")%>">
-                                </td>
-                                </tr>
-                                <tr>
-
-
-                                    <td>
-                                        <label> City :</label> <input type="text" style="background: white" id="city" name="city" value="<%=rs11.getString("city")%>">
-                                    </td>
-                                    <td>
-                                        <label>State :</label><input type="text" style="background: white" id="state" name="state" value="<%=rs11.getString("state")%>">
-                                    </td>
-                                    <td>
-                                        <label>Pin Code :</label><input type="text" style="background: white" id="pincode" name="pincode" value="<%=rs11.getString("pincode")%>">
-                                    </td>
-                                    
-                                    <td>
-                                        <label>Permanent Address 1 :</label><input type="text" style="background: white" id="padd1" name="padd1" value="<%=rs11.getString("padd1")%>">
-                                    </td>
-                                    
-                                </tr>
-                            
-                                <tr>
-                                    <td>
-                                        <label>Permanent Address 2 :</label><input type="text" style="background: white" id="padd2" name="padd2" value="<%=rs11.getString("padd2")%>">
-                                    </td>
-                                   
-                                    <td>
-                                        <label>Permanent City :</label><input type="text" style="background: white" id="pcity" name="pcity" value="<%=rs11.getString("pcity")%>">
-                                    </td>
-                                    <td>
-                                        <label>Permanent State :</label><input type="text" style="background: white" id="pstate" name="pstate" value="<%=rs11.getString("pstate")%>">
-                                    </td>
-                                    <td>
-                                        <label>Permanent Pin Code :</label><input type="text" style="background: white" id="ppincode" name="ppincode" value="<%=rs11.getString("ppincode")%>">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>Contact Number 1 :</label><input type="text" style="background: white" id="mobile1" name="mobile1" value="<%=rs11.getString("mobile1")%>">
-                                    </td>
-                                   <td>
-                                        <label>Contact Number 2 :</label><input type="text" style="background: white" id="mobile2" name="mobile2" value="<%=rs11.getString("mobile2")%>">
-                                    </td> 
-                                <td>
-                                        <label>E-mail ID :</label><input type="text" style="background: white" id="email" name="email" value="<%=rs11.getString("email")%>">
-                                    </td>
-                                    <td>
-                                        <label>Land line Number :</label><input type="text" style="background: white" id="ll" name="ll" value="<%=rs11.getString("ll")%>">
-                                    </td>
-                                </tr>
-                            </table>
-                            <input type="hidden" name="formtype" value="general">
-                            
-
-                                <div align="right">
-            <input type="submit" id="submit" value="Submit" /></div>
-            <br><br>
-                        </form></center>
-    <%}
-if(statement!=null)
-statement.close();
-if(connection!=null)
-connection.close();
-              %>
-                
-                
 </div></div>
 
 <br><br></section></center>		
@@ -357,7 +318,7 @@ connection.close();
     }
     else
     {
-        response.sendRedirect("../index.jsp");
+        response.sendRedirect("../../index.jsp");
     }
                     if(sttt!=null)
                             sttt.close();
@@ -367,7 +328,7 @@ connection.close();
 catch(Exception e)
     {
         e.printStackTrace();
-        response.sendRedirect("../index.jsp");
+        response.sendRedirect("../../index.jsp");
     }
     
           
