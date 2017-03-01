@@ -106,7 +106,7 @@
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
             <center><form action="viewattreport.jsp" class="sky-form" method="post" target="_blank">
-    <header>OVERALL ATTENDENCE</header>
+    <header>OVERALL ATTENDANCE</header>
     <fieldset>					
 					<section>
 						<label class="input">

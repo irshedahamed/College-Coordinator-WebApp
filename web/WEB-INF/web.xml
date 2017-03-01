@@ -232,6 +232,15 @@
         <servlet-name>testRequest</servlet-name>
         <servlet-class>General.testRequest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>councillorattupdate</servlet-name>
+        <servlet-class>councillorattupdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CouncillorAttEdit</servlet-name>
+        <servlet-class>CouncillorAttEdit</servlet-class>
+
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -417,6 +426,7 @@
         <url-pattern>/JsonGuest</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>HolidayData</servlet-name>
         <url-pattern>/HolidayData</url-pattern>
     </servlet-mapping>
@@ -463,6 +473,14 @@
     <servlet-mapping>
         <servlet-name>testRequest</servlet-name>
         <url-pattern>/testRequest</url-pattern>
+=======
+        <servlet-name>councillorattupdate</servlet-name>
+        <url-pattern>/councillorattupdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CouncillorAttEdit</servlet-name>
+        <url-pattern>/CouncillorAttEdit</url-pattern>
+>>>>>>> 0dd40098cedd9736613084ad20d931eff6644e03
     </servlet-mapping>
     <session-config>
         <session-timeout>
