@@ -1,9 +1,4 @@
-<%-- 
-    Document   : SubjectView
-    Created on : 16 May, 2016, 6:20:04 PM
-    Author     : Arun
---%>
-
+<%@page import="General.AcademicYear"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -183,58 +178,55 @@
 			</div>
 		</header>
 
-<link href="../css/tabledesign.css" rel="stylesheet">
+
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
             <center>
-            <table class="bordered">
-            <tr>
-                <th><center>REGULATION</center></th>
-        <th><center>SEM</center></th>
-<th><center>SUBJECT CODE</center></th>
-<th><center>SUBJECT NAME</center></th>
-<th><center>SUBJECT TYPE</center></th>
-        </tr>
+            <form action="${pageContext.request.contextPath}/BatchAssign" class="sky-form" method="post">
+                <header>ACADEMIC YEAR</header>
+    <fieldset>					
+					<section>
+            <label class="input">
+                                                    <div align="left" size="3px"><b>
+                                                            Academic Year : </b></div>
+                <label class="select">
+                    
+                 <select id="batch" name="Year" required>
+                <option disabled selected>Select   </option>
+                <%=AcademicYear.getHTMLContent()%>
+            </select>   
+           
+                <i></i>
+                    </label>
+            </label>
+                 <br><br>
+                 <label class="input">
+                                                    <div align="left" size="3px"><b>
+                                                            Current :  </b></div>
+                <label class="select">
+                    
+                 <select id="batch" name="current" required>
+                   <option disabled selected>select</option>
+                <option value="odd">odd</option>
+                <option value="even">even</option>
+             </select>  
+           
+                <i></i>
+                    </label>
+            </label>
+                 <br><br> 
+                 <div align="right">
+            <input type="submit" id="submit" value="Submit" /></div>
+                                        </section>
+    </fieldset>
+                
             
-            <%
-           try{
-            Connection con=new dbcon().getConnection(request.getParameter("dept"));
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from subject_sem_table order by regulation,sem");
-            String subcode,regulation,subname,sem,subtype;
-            while(rs.next())
-            {
-                subcode=rs.getString("subcode");
-                regulation=rs.getString("regulation");
-                subname=rs.getString("subname");
-                sem=rs.getString("sem");
-                subtype=rs.getString("subtype");
-               %>
-             <tr>
-             <td><%=regulation%></td>
-             <td><%=sem%></td>
-             <td><%=subcode%></td>
-             <td><%=subname%></td>
-             <td><%=subtype%></td>
-             </tr>
-             <%
-            }
-            
-                            if(st!=null)
-                            st.close();
-                              if(con!=null)
-                                con.close();
-}catch(Exception ex){
-ex.printStackTrace();
-            }
-            %>
-            </table>
-            </center>
+            </form></center>
 
 
 
 </div></div></section>
 
-
+</section>
 						<footer id="footer-widgets">
 			<div class="container clearfix">
 								Powered by St.Joseph's
@@ -282,7 +274,7 @@ ex.printStackTrace();
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
- <%
+<%
     }
         else
     {

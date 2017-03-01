@@ -49,7 +49,48 @@ public class AcademicYear {
         this.current = current;
     }
     
-    
+     public boolean insertYear(String YearString,String Year) throws SQLException
+    {
+        
+        Connection con = null;
+            Statement st = null;
+            
+            con = new dbcon().getConnection("sjitportal");
+            st = con.createStatement();
+           int i =   st.executeUpdate("insert into academicyr values('"+Year+"','"+YearString+"','n')");
+            
+              if(st!=null)
+                            st.close();
+                              if(con!=null)
+                                con.close();
+        if(i==1)
+        {return true;}
+        else
+        {return false;}
+     }
+    public boolean batchAssign(String Current,String Year) throws SQLException
+    {
+      
+        Connection con = null;
+            Statement st = null;
+            
+            con = new dbcon().getConnection("sjitportal");
+            st = con.createStatement();
+            
+                  st.executeUpdate("update academicyr set current = 'n'");   
+          
+                  int i =   st.executeUpdate("update academicyr set current ='"+Current+"' where year ='"+Year+"' "); 
+           
+            if(st!=null)
+                            st.close();
+                              if(con!=null)
+                                con.close();
+      if(i==1)
+       return true;
+      else
+        return false;
+      
+    }
     public static List<AcademicYear> getAll(){
     
         List<AcademicYear> list=new ArrayList<AcademicYear>();

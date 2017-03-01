@@ -232,6 +232,14 @@
         <servlet-name>testRequest</servlet-name>
         <servlet-class>General.testRequest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsertYear1</servlet-name>
+        <servlet-class>InsertYear1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BatchAssign</servlet-name>
+        <servlet-class>BatchAssign</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -463,6 +471,14 @@
     <servlet-mapping>
         <servlet-name>testRequest</servlet-name>
         <url-pattern>/testRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertYear1</servlet-name>
+        <url-pattern>/InsertYear1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BatchAssign</servlet-name>
+        <url-pattern>/BatchAssign</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
