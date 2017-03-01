@@ -78,7 +78,7 @@ public class StaffProfileEdit extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
-       int update=0;
+       
        String id=request.getParameter("rollno");
        String title=request.getParameter("title");
        String name=request.getParameter("name");
@@ -108,8 +108,10 @@ public class StaffProfileEdit extends HttpServlet {
        String sql="update staff_general set tittle='"+title+"', name='"+name+"', desg='"+desg+"', doj='"+doj+"',"
                + "gender='"+gender+"', add1='"+add1+"', add2='"+add2+"', city='"+city+"', state='"+state+"', "
                + "pincode='"+pincode+"', padd1='"+padd1+"', padd2='"+padd2+"', pcity='"+pcity+"', pstate='"+pstate+"',"
-               + "ppincode='"+ppincode+"', mobile1='"+mobile1+"', mobile2='"+mobile2+"', email='"+email+"', ll='"+ll+"'";
-       update=stmt.executeUpdate(sql);
+               + "ppincode='"+ppincode+"', mobile1='"+mobile1+"', mobile2='"+mobile2+"', email='"+email+"', ll='"+ll+"' where staffid='"+id+"'";
+       stmt.executeUpdate(sql);
+       sql="update staff_table set staffname='"+name+"' where staffid='"+id+"'";
+       stmt.executeUpdate(sql);
        response.getWriter().println("Successfully updated!!!");
        
        

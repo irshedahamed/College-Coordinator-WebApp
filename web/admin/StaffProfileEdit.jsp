@@ -21,12 +21,18 @@
     
     Connection connn = new dbcon().getConnection("login");
     Statement sttt = connn.createStatement();
-    String type1 ="";
-    ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='"+username+"' and password='"+password+"'");
+   String type ="";
+    ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='"+username+"' and password='"+password+"'");
     if(rsss.isBeforeFirst())
     {
+        while(rsss.next())
+        {
+            type = rsss.getString("type");
+        }
+        if(type.equals("admin"))
+        {
         
-    session.setAttribute("deptname", Find.sdept(username));
+    
     
     %>
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
@@ -66,140 +72,154 @@
 			
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
-<div id="sidebar-wrapper">
-    
-    <% 
-    Connection con=new dbcon().getConnection(Find.sdept(username));
-    Statement stmtd=con.createStatement();
-    ResultSet rsd=stmtd.executeQuery("select * from staff_general where staffid='"+username+"'");
-    if(rsd.next())
-    {
-    %>
-    <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#menu-toggle1" id="menu-toggle1">
-                       
-                    </a>
-                </li>
-                <center>
-                    <img src="../images/face.jpg" height="95px">
-                    
-                               
-                           
-                        
-                   
-                </center>
-                <br>
-                <br>
-                
-                <li >
-                
-                    <center>
-                    <a href="#"><b><%=rsd.getString("tittle")+rsd.getString("name")%></b></a>
-                    </center>
-                    </li>
-                <li>
-                    <center>
-                    <a href="#"><b><%=username%></b></a>
-                    </center>
-                    </li>
-                <li >
-                <center>
-                    <a href="#"><b><%=rsd.getString("desg")%></b></a>
-                </center>
-                </li>
-                <li >
-                <center>
-                    <a href="#"><b><%=Find.sdept(username).toUpperCase()%></b></a>
-                </center>
-                </li>
-            </ul>
-        </div>
-		        
-	<%}
-        if(stmtd!=null)
-            stmtd.close();
-        if(con!=null)
-            con.close();
-        %>
+</div>
 		
-		<header id="page-header"  class="fixed-header">
 		
-			<div id="page-header-inner">
+                <header id="page-header"  class="fixed-header">
 
-				<div id="header-container">
-					<div class="container clearfix">
-						<div id="main-logo">
-							<a href="#">
-								<img src="../images/sjit.png"  height="70px"></a>
-						</div>
-                                            <ul id="auth-nav">
-							<li>
-								<div class="auth-nav-register">
-									<a class="button" href="#menu-toggle" id="menu-toggle">My Details</a>
-								</div>
-							</li>
-						</ul>
+                        <div id="page-header-inner">
 
-						
-						
+                                <div id="header-container">
+                                        <div class="container clearfix">
+                                                <div id="main-logo">
+                                                        <a href="#">
+                                                                <img src="../images/sjit.png"  height="70px"></a>
+                                                </div>
 
-						
-						
 
-						<nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="home.jsp">Home</a></li>
-<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Profile</a>
+
+
+
+
+
+<nav id="main-nav">
+                                                        <ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Academics</a>
     <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="general.jsp">General Details</a></li>
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personal.jsp">Personal Details</a></li>
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="education.jsp">Education Details</a></li>
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="experience.jsp">Experience Details</a></li>
-	
+        <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Batch</a>
+            <ul class="sub-menu">
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="batch.jsp">Update Batch</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="deletebatch.jsp">Delete Batch</a>
+            </ul>
+        </li>
 
+        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="course.jsp">Course</a></li>
+        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="">Subjects</a>
+        <ul class="sub-menu">
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectAdd.jsp">Subject Add</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Subject View</a>
+                        <ul class="sub-menu">
+        <% for(String dept:Find.Depts){%>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=<%=dept%>"><%=dept.toUpperCase() %></a>
+                    <%}%> </ul></li>
+            </ul></li>
+        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="feedetails.jsp">Fee Details</a></li>
     </ul>
 </li>
 
-                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Log Book</a>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Students</a>
 <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Update Attendance</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="#">Syllabus Coverage</a>
-	
+        <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="studentprofiles.jsp">Profile</a>
+<ul class="sub-menu">
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="profileupdate.jsp">Add Profile</a>
+
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="profileedit.jsp">Update Profile</a>
+
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="profiledelete.jsp">Delete Profile</a>
+        </ul></li>
+        <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="studentpasswords.jsp">Passwords</a>
+
 </li>
 </ul>
 </li>
 
-<li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Marks</a>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Staff</a>
+    <ul class="sub-menu">
+        <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Profile</a>
 <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="markupdate.jsp">Update Marks</a></li>
-	
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="staffprofileupdate.jsp">Add Profile</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="staffprofiledelete.jsp">Delete Profile</a>
+<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="StaffProfileEdit.jsp">Edit Profile</a>       
+</ul></li>
 
-        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="marksview.jsp">View Marks</a></li>
+
+        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="staffpasswords.jsp">Passwords</a></li>
+
     </ul>
 </li>
-<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Notes</a>
+
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">SMS</a>
     <ul class="sub-menu">
-		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
-		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
-	</ul></li>
+        <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="generalsms.jsp">General</a></li>
+
+        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="absentieessms.jsp">Absentiees</a></li>
+        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="marksms.jsp">Mark</a></li>
+        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="staffsms.jsp">Staff</a></li>
+
+    </ul>
+</li>
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Email</a>
+<ul class="sub-menu">
+        <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="sendemail.jsp">Send Email</a></li>
+
+        <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="emailstatus.jsp">View Email Status</a>
+
+</li>
+</ul>
+
+<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circularupload.jsp">Circular Uploads</a>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Forms</a>
+    <ul class="sub-menu">
+        <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="formupload.jsp">Form Upload</a></li>
+
+        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="formmanage.jsp">Manage</a></li>
+
+    </ul>
+</li>
 
 
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Reports</a>
+<ul class="sub-menu">
+        <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="PasswordReport.jsp">Password</a></li>
+        <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="AddressReport.jsp">Address</a>
+        <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="verificationReport.jsp">Verification</a>
 
 
-</ul>						</nav>
-					</div>
-				</div>
-			</div>
-		</header>
+</li>
+</ul>
 
+</ul>
+
+
+                                                </nav>
+                                        </div>
+                                </div>
+                        </div>
+                </header>
+    <style>td {
+        padding: 10px;
+        }
+        label {
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+}
+</style>
 
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-                <br><br><br><br>
+                <br><br>
+                <form method="post" action="StaffProfileEdit.jsp" >
+                    <center> <label> Staff ID :</label><input type="text" style="background: white" id="rollno" name="search"></center>
+                    <div align="center">
+                        <br><br>
+                        <input type="submit" id="submit" value="Submit" />
+                    <br><br></div></form>
               <%
-              Connection connection=new dbcon().getConnection(Find.sdept(username));
+                  if(request.getParameter("search")!=null){
+                  String id=request.getParameter("search");
+              Connection connection=new dbcon().getConnection(Find.sdept(id));
     Statement statement=connection.createStatement();
-    ResultSet rs11=statement.executeQuery("select * from staff_general where staffid='"+username+"'");
+    ResultSet rs11=statement.executeQuery("select * from staff_general where staffid='"+id+"'");
     if(rs11.next())
     {
     %>
@@ -209,18 +229,25 @@
                             <center><h3>General Details</h3></center>
                            
 
-                            <table cellspacing="10"><tr><td>
+                            <table cellspacing="10">
+                                <tr>
+                                    <td>
 
-                                        <label> Staff ID :</label> <input type="text" style="background: white" id="rollno" name="rollno" value="<%=rs11.getString("staffid")%>" ></td>
+                                        <label> Staff ID :</label> <input type="text" style="background: white" id="rollno"  value="<%=rs11.getString("staffid")%>" disabled >
+                                        <input type="hidden" name="rollno" value="<%=rs11.getString("staffid")%>">
+                                    </td>
 
                                     <td>
 
-                                        <label>Title :</label> <input type="text" style="background: white"  value="<%=rs11.getString("tittle")%>" disabled>
-
+                                        <label>Title :</label> <input type="text" style="background: white"  value="<%=rs11.getString("tittle")%>" >
+                                    </td>
                                 <td>
-                                    <label> Name :</label><input type="text" style="background: white" id="name" name="name" value="<%=rs11.getString("name")%>"></td>
+                                    <label> Name :</label><input type="text" style="background: white" id="name" name="name" value="<%=rs11.getString("name")%>">
+                                </td>
                                 <td><label>Designation :</label><input type="text" style="background: white" id="desg" name="desg" value="<%=rs11.getString("desg")%>">
-                                </td></tr>
+                                </td>
+                                
+                                </tr>
                                 <tr>
                                     <br>
                                 <td>
@@ -300,6 +327,7 @@ if(statement!=null)
 statement.close();
 if(connection!=null)
 connection.close();
+}
               %>
                 
                 
@@ -353,13 +381,18 @@ connection.close();
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
 <%
-          
+    }
+        else
+    {
+        response.sendRedirect("../index.jsp");
+    }
     }
     else
     {
         response.sendRedirect("../index.jsp");
     }
-                    if(sttt!=null)
+
+                            if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
                                 connn.close();
@@ -370,6 +403,5 @@ catch(Exception e)
         response.sendRedirect("../index.jsp");
     }
     
-          
-          %>
+    %>
 </html>
