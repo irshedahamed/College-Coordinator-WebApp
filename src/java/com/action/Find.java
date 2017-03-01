@@ -137,6 +137,7 @@ public class Find {
     
     return null;
     }
+
     public static String getDeptHTMLContent(){
     
          String HTML="<option disabled selected>SELECT</option>";
@@ -147,11 +148,23 @@ public class Find {
         }
                  HTML+="</div>";
     return HTML;
-    
+    }
+    public static int getSem(String batch, String acyr, String semister)
+    {
+        
+    int temp=Integer.valueOf(batch.substring(2,4));
+    temp=Integer.valueOf(acyr)-temp;
+    temp*=2;
+    if(semister.equals("Odd"))
+        temp++;
+    else
+        temp+=2;
+    return temp;
+    }
     
     
     
     
     
     }
-}
+

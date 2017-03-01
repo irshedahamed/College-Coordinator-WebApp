@@ -39,7 +39,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		     <link rel="stylesheet" href="../../css/main.css">
-     
+      <link href="../../css/sky-forms.css" rel="stylesheet">
         <link type="text/css" media="all" href="../../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 	
     <!-- Custom CSS -->
@@ -95,7 +95,7 @@
                 <br>
                 <br>
                 
-                <li >
+                <li>
                 
                     <center>
                     <a href="#"><b><%=rsd.getString("tittle")+rsd.getString("name")%></b></a>
@@ -199,23 +199,41 @@
 
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
-               <section class="landing">
-                   
-       <%
-       Staff s=new Staff(username);
-       
-       for(Student stu:Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(),s.getCouncillorDetails().getSec())){
-       
-       
-      out.println(stu.getName());
-       }
-       
-       session.setAttribute("Councillor",s.getCouncillorDetails());
-       
-        Councillor c=(Councillor)session.getAttribute("councillor");
-      
-       %> 
-            
+               
+                   <form action="SemReportDisplay.jsp" class="sky-form">
+                       
+                       <header>OVERALL ATTENDANCE</header>
+                      
+                       <fieldset>
+                       <label class="input">
+                    
+          <div align="left" size="3px"><b>
+                                                    Semester:</b></div>
+                     <label class="select">
+           
+               <select id="sem" name="sem" required>
+                <option disabled selected>select</option>
+                <option value="01">1</option>
+                <option value="02">2</option>
+                <option value="03">3</option>
+                <option value="04">4</option>
+                <option value="05">5</option>
+                <option value="06">6</option>
+                <option value="07">7</option>
+                <option value="08">8</option>
+            </select>
+                    <i></i>                                    </label>
+                       </label>
+                       
+                       
+                       
+                       
+                       
+            <input type="submit" id="submit" value="Submit">
+              </fieldset>
+                     
+                   </form>      
+                  
         </section>
 
             

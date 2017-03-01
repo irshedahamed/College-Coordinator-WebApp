@@ -39,7 +39,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		     <link rel="stylesheet" href="../../css/main.css">
-     
+      <link href="../../css/sky-forms.css" rel="stylesheet">
+      <link href="../../css/tabledesign.css" rel="stylesheet">
         <link type="text/css" media="all" href="../../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 	
     <!-- Custom CSS -->
@@ -95,7 +96,7 @@
                 <br>
                 <br>
                 
-                <li >
+                <li>
                 
                     <center>
                     <a href="#"><b><%=rsd.getString("tittle")+rsd.getString("name")%></b></a>
@@ -199,23 +200,70 @@
 
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
-               <section class="landing">
-                   
+               
+                   <form action="${pageContext.request.contextPath}/CouncillorAttEdit" method="post">
+                       <table class="bordered">
+                           <thead>
+                               <th>Roll No</th>
+                               <th>Name</th>
+                               <th>Tick if Present</th>
+                           </thead>
+                           <tbody>
+                               <%int count=0;
+                                 Staff s=new Staff(username);
+                                 String date=request.getParameter("datepicker");
+                               //  System.out.println(date);
+       Connection connection = new dbcon().getConnection(s.getCouncillorDetails().getDept());
+       Statement statement = connection.createStatement();
+       String sql="select * from councillor_attendance where date like '"+date+"'";
+       ResultSet resultSet=statement.executeQuery(sql);
+       while(resultSet.next())
+       {
+       for(Student stu:Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(),s.getCouncillorDetails().getSec()))
+       {
+       if(stu.getId().equals(resultSet.getString("rollno")))
+       {
+                               %>
+       <tr>
+           <td>
+               <%=stu.getId()%>
+           </td>
+           <td>
+               <%=stu.getName()%>
+           </td>
+           <td>
+               <input type="checkbox" name="val<%=count%>" value="<%=stu.getId()%>">
+           </td>
+       </tr>
        <%
-       Staff s=new Staff(username);
-       
-       for(Student stu:Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(),s.getCouncillorDetails().getSec())){
-       
-       
-      out.println(stu.getName());
+       count++;}
        }
-       
-       session.setAttribute("Councillor",s.getCouncillorDetails());
-       
-        Councillor c=(Councillor)session.getAttribute("councillor");
-      
-       %> 
-            
+       }
+        
+        session.setAttribute("count",count);
+        session.setAttribute("date",date);
+try
+{
+if(statement!=null)
+statement.close();
+if(connection!=null)
+connection.close();
+}
+catch(Exception e){
+e.printStackTrace();
+}
+                               %>
+                           </tbody>
+                       </table>         
+                       
+                       
+                       
+                      
+            <input type= "submit" id="submit" value="Submit">
+              
+                     
+                   </form>      
+                  
         </section>
 
             

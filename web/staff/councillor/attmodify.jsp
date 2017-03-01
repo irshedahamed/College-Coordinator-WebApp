@@ -39,12 +39,13 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		     <link rel="stylesheet" href="../../css/main.css">
-     
+   <link href="../../css/sky-forms.css" rel="stylesheet">
         <link type="text/css" media="all" href="../../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 	
     <!-- Custom CSS -->
     <link href="../../css/simple-sidebar.css" rel="stylesheet">
-	    
+	    <link href="../../css/tabledesign.css" rel="stylesheet">
+            
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 	 <script src="../../js/jquery.js"></script>
          
@@ -186,6 +187,18 @@
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
 	</ul></li>
+        
+        <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Councillor</a>
+<ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="attendance.jsp">Update Attendance</a></li>
+	
+	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="#">Modify Attendance</a>
+	
+</li>
+
+<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Report</a></li>
+</ul>
+</li>
 
 
 
@@ -199,23 +212,54 @@
 
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
-               <section class="landing">
-                   
+                                <form action="${pageContext.request.contextPath}/councillorattedit" method="post">
+                   <table class="bordered">
+                       <thead>
+                           <th>Roll Number</th>
+                       <th>Name</th>
+                       <th>Tick if Present</th>
+                       </thead>
+                       <tbody>
        <%
        Staff s=new Staff(username);
        
        for(Student stu:Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(),s.getCouncillorDetails().getSec())){
+       %>
+       <tr>
+           <td><%=stu.getId()%></td>
+           <td><%=stu.getName()%></td>
+           <td><input type="checkbox" name="<%=stu.getId()%>val" value="Absent"></td>
+           <td>
+               <select name="<%=stu.getId()%>reason">
+                   <option value="#">Select</option>
+                   <option value="absent">Absent</option>
+                   <option value="medical">Medical Leave</option>
+                   <option value="onduty">On Duty</option>
+                   <option value="permission">Previous Permission</option>
+                   <option value="suspended">Suspended</option>
+               </select>
+           </td>
+           
+       </tr>
+                   
+                   <%
        
-       
-      out.println(stu.getName());
-       }
-       
+     // out.println(stu.getName());
+       }%>
+       </tbody>
+       <%
        session.setAttribute("Councillor",s.getCouncillorDetails());
        
-        Councillor c=(Councillor)session.getAttribute("councillor");
+        Councillor c=(Councillor)session.getAttribute("Councillor");
       
        %> 
-            
+      
+         </table>
+       <input type="hidden" name="datepicker" value="<%=request.getParameter("datepicker")%>">
+       <div align="center">
+           <input type="submit" name="submit" value="submit"></div>
+                                </form>
+       
         </section>
 
             

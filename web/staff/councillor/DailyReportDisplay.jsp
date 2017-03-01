@@ -39,7 +39,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		     <link rel="stylesheet" href="../../css/main.css">
-     
+      <link href="../../css/sky-forms.css" rel="stylesheet">
+      <link href="../../css/tabledesign.css" rel="stylesheet">
         <link type="text/css" media="all" href="../../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 	
     <!-- Custom CSS -->
@@ -95,7 +96,7 @@
                 <br>
                 <br>
                 
-                <li >
+                <li>
                 
                     <center>
                     <a href="#"><b><%=rsd.getString("tittle")+rsd.getString("name")%></b></a>
@@ -199,23 +200,152 @@
 
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
-               <section class="landing">
-                   
-       <%
-       Staff s=new Staff(username);
-       
-       for(Student stu:Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(),s.getCouncillorDetails().getSec())){
-       
-       
-      out.println(stu.getName());
-       }
-       
-       session.setAttribute("Councillor",s.getCouncillorDetails());
-       
-        Councillor c=(Councillor)session.getAttribute("councillor");
-      
-       %> 
+               
+                   <%
+                       Staff s=new Staff(username);
+            //String dept = request.getParameter("dept");
+              String date=request.getParameter("datepicker");
+           //String sem = request.getParameter("sem");
+             //  String batch=request.getParameter("batch");
+        
+        %>
+         <center><h2>St. Joseph's Institute of Technology, Chennai-119</h2></center>
+      <center><h2>Department Of <%=s.getCouncillorDetails().getDept().toUpperCase()%></h2></center>
+
+      <center><h2 >Daily Attendance Report</h2>
+             <h2>Batch :<%=s.getCouncillorDetails().getBatch()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;</h2>
+             <h2>Semester: <%=Find.getSem(s.getCouncillorDetails().getBatch(), s.getCouncillorDetails().getAcademicyr(), s.getCouncillorDetails().getSemister()) %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date: <%=date%></h2></center>
+   
+        
+      <center>  <table class="bordered">
+    <thead>
+  
+    <tr>
+        
+        <th> Sno</th>
+        <th name="cc">Roll No</th>
+        <th>Register No</th>
+        <th>Name</th>
+        <th>No Of Days Leave</th>
+        <th>Reason</th>
+        <th>Father Name<br>(Mobile)</th>
+        <th>Mother Name<br>(Mobile)</th>
+  
+    </tr>
+    </thead>
+        <%
+        
+        Connection conn=null;
+        Statement st=null;
+        Statement st1=null;
+        Statement st2=null;
+        
+        
+	try{
             
+       
+      
+       
+        
+         conn = new dbcon().getConnection(s.getCouncillorDetails().getDept());
+         st=conn.createStatement();
+         st1=conn.createStatement();
+         st2=conn.createStatement();
+         
+        int count =0;
+        
+        String sql="select * from councillor_attendance where date='"+date+"' and sem='"+Find.getSem(s.getCouncillorDetails().getBatch(), s.getCouncillorDetails().getAcademicyr(), s.getCouncillorDetails().getSemister())+"'";
+        ResultSet rs=st.executeQuery(sql);
+        int sno=1;
+        while(rs.next())
+        {
+           
+        String rollno=rs.getString("rollno");
+        String reason=rs.getString("reason");
+       // String date1=String.valueOf(rs.getDate("date"));
+        
+        sql="select * from student_personal where rollno='"+rollno+"' and batch='"+s.getCouncillorDetails().getBatch()+"' order by name";
+        ResultSet rs1=st1.executeQuery(sql);
+        if(rs1.next())
+        {    
+            
+            
+        String name=rs1.getString("name");
+        String regno=rs1.getString("regno");
+        ResultSet rs2=st2.executeQuery("select count(*) as days from councillor_attendance where rollno='"+rollno+"' and sem='"+Find.getSem(s.getCouncillorDetails().getBatch(), s.getCouncillorDetails().getAcademicyr(), s.getCouncillorDetails().getSemister())+"'");
+        String days="0";
+        if(rs2.next())
+        days=String.valueOf(rs2.getInt("days")-1);
+        
+        String fname="",fmobile="",mname="",mmobile="";
+         rs2=st2.executeQuery("select f.fathers_name,f.mobile,m.mothers_name,m.mobileno from student_father_details f,student_mother_details m where f.rollno='"+rollno+"' and m.rollno='"+rollno+"'");
+         if(rs2.next()){
+         fname=rs2.getString("fathers_name");
+         fmobile=rs2.getString("mobile");
+         mname=rs2.getString("mothers_name");
+         mmobile=rs2.getString("mobileno");
+         }
+        
+        %>
+              
+        <tr>
+            <td><%=sno++%></td>
+            <td><%=rollno.toUpperCase() %></td>
+            <td><%=regno %></td>
+            
+            <td><%=name.toUpperCase() %></td>
+           <td><%=days%></td>
+           <td><%=reason%></td>
+           <td><%=fname.toUpperCase()%><br>(<%=fmobile%>)</td>
+           <td><%=mname.toUpperCase()%><br>(<%=mmobile%>)</td>         
+        </tr>
+            
+ <input type="hidden" name="dept" value="<%= s.getCouncillorDetails().getDept() %>">
+        
+        <%
+            
+count++; 
+
+}
+}
+if(st2!=null)
+    st2.close();
+        
+        session.setAttribute("count",count);
+        session.setAttribute("date",date);
+        
+}catch(Exception e){
+e.printStackTrace();
+}finally{
+                            if(st!=null)
+                            st.close();
+                            if(st1!=null)
+                            st1.close();
+        
+                            if(conn!=null)
+                                conn.close();
+}       
+%>
+   
+    
+        
+</table></center>
+
+    
+                  
         </section>
 
             
