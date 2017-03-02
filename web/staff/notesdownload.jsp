@@ -258,13 +258,8 @@
             
            <select id="dept" name="dept">
             
-               <option  disabled selected>Select</option>
-               <option value="cse">CSE</option>
-               <option value="it">IT</option>
-               <option value="ece">ECE</option>
-               <option value="eee">EEE</option>
-               <option value="mech">MECH</option>
-               <option value="civil">CIVIL</option>
+              
+                <%=Find.getDeptHTMLContent() %>
                 
                 
                

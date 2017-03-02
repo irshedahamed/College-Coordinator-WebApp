@@ -4,6 +4,7 @@
     Author     : Divya sri
 --%>
 
+<%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.*"%>
 <%@page import="javax.sql.*"%>
@@ -84,13 +85,8 @@
                 out.print("<td>");
                 out.print("<label class='input'><label class='select'>");
             out.print("<select id='ldept"+i+"' name='ldept"+i+"'>");
-                out.print("<option value='null'>select</option>");
-                out.print("<option value='cse'>CSE</option>");
-                out.print("<option value='ece'>ECE</option>");
-                out.print("<option value='eee'>EEE</option>");
-                out.print("<option value='it'>IT</option>");
-                out.print("<option value='mech'>MECH</option>");
-                out.print("<option value='civil'>CIVIL</option>");
+                out.print(Find.getDeptHTMLContent());
+                
             out.print("</select><i></i></label></label>");
              out.print("</td>");
              out.print(" <td>");

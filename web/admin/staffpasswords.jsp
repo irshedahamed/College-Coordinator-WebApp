@@ -6,6 +6,7 @@
 
 
 
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -90,13 +91,9 @@
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectAdd.jsp">Subject Add</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Subject View</a>
                         <ul class="sub-menu">
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=cse">CSE</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=ece">ECE</a>
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=eee">EEE</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=mech">MECH</a>
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=civil">CIVIL</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=it">IT</a>
-            </ul></li>
+            <% for(String dept:Find.Depts){%>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=<%=dept%>"><%=dept.toUpperCase() %></a>
+                    <%}%></ul></li>
             </ul></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="feedetails.jsp">Fee Details</a></li>
     </ul>
@@ -195,12 +192,7 @@
                     
                     <select name="dept">
                         
-                        <option value="cse">CSE</option>
-                                                    <option value="ece">ECE</option>
-                                                    <option value="mech">MECH</option>
-                                                    <option value="it">IT</option>
-                                                    <option value="civil">CIVIL</option>
-                                                    <option value="eee">EEE</option>
+              <%=Find.getDeptHTMLContent() %>
                                                     <option value="first">Science & Humanities</option>
                                                     
                     </select>
@@ -242,19 +234,7 @@
 
         </tr>
         <%
-            dept=request.getParameter("dept");
-            if(dept.equals("cse"))
-            dept="cs";
-            else if(dept.equals("ece"))
-                dept="ec";
-            else if(dept.equals("eee"))
-                dept="ee";
-            else if(dept.equals("mech"))
-                dept="me";
-            else if(dept.equals("civil"))
-                dept="cv";
-            else if(dept.equals("first"))
-                dept="ma%' or staffid like '%sc%' or staffid like  '%py";
+          
             ResultSet rs = st.executeQuery("select l.*,g.name,g.tittle from staff_login_details l,"+request.getParameter("dept")+".staff_general g where g.staffid=l.staffid ");
             
             while(rs.next())

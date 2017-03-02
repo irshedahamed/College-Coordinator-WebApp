@@ -233,12 +233,35 @@
         <servlet-class>General.testRequest</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
+=======
+        <servlet-name>receiveIBResponse</servlet-name>
+        <servlet-class>Fee.receiveIBResponse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>receiveTechProcessResponse</servlet-name>
+        <servlet-class>Fee.receiveTechProcessResponse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TechProcess</servlet-name>
+        <servlet-class>API.TechProcess</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>receiveTechProcessAPIResponse</servlet-name>
+        <servlet-class>API.receiveTechProcessAPIResponse</servlet-class>
+ </servlet>
+    <servlet>
         <servlet-name>councillorattupdate</servlet-name>
         <servlet-class>councillorattupdate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CouncillorAttEdit</servlet-name>
         <servlet-class>CouncillorAttEdit</servlet-class>
+
+    </servlet>
+    <servlet>
+        <servlet-name>StaffProfileEdit</servlet-name>
+        <servlet-class>StaffProfileEdit</servlet-class>
 
     </servlet>
     <servlet-mapping>
@@ -426,7 +449,7 @@
         <url-pattern>/JsonGuest</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
+
         <servlet-name>HolidayData</servlet-name>
         <url-pattern>/HolidayData</url-pattern>
     </servlet-mapping>
@@ -473,14 +496,39 @@
     <servlet-mapping>
         <servlet-name>testRequest</servlet-name>
         <url-pattern>/testRequest</url-pattern>
-=======
+
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>receiveIBResponse</servlet-name>
+        <url-pattern>/receiveIBResponse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>receiveTechProcessResponse</servlet-name>
+        <url-pattern>/receiveTechProcessResponse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TechProcess</servlet-name>
+        <url-pattern>/TechProcess</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>receiveTechProcessAPIResponse</servlet-name>
+        <url-pattern>/receiveTechProcessAPIResponse</url-pattern>
+</servlet-mapping>
+    <servlet-mapping>
+
         <servlet-name>councillorattupdate</servlet-name>
         <url-pattern>/councillorattupdate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CouncillorAttEdit</servlet-name>
         <url-pattern>/CouncillorAttEdit</url-pattern>
->>>>>>> 0dd40098cedd9736613084ad20d931eff6644e03
+
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffProfileEdit</servlet-name>
+        <url-pattern>/StaffProfileEdit</url-pattern>
+
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

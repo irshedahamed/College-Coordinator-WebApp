@@ -83,12 +83,20 @@ public class redirectPay extends HttpServlet {
        if(mode.equals("offline")){
        request.getRequestDispatcher("/student/Challan.jsp").forward(request, response);
        }else if(mode.equals("indianbank")){
-       String url="https://www.indianbank.net.in/servlet/ibs.servlets.IBSMultiUtilityServlet?HandleID=H_MULTIUTILTY_PAY&ref_number=" + mu.getRefno() + "&RUrl="+com.action.Find.SERVERURL+"testRequest";
+       String url="https://www.indianbank.net.in/servlet/ibs.servlets.IBSMultiUtilityServlet?HandleID=H_MULTIUTILTY_PAY&ref_number=" + mu.getRefno() + "&RUrl="+"https://" + request.getServerName()+"/receiveIBResponse";
        RequestDispatcher rd=request.getRequestDispatcher("/sendPost.jsp?RUrl="+(url).replace("&", "%26").replace(" ", "%20"));
         rd.forward(request, response);
        }
-       else{
-       response.getWriter().print("yet to implement");
+       else if(mode.equals("others")){
+       
+           TechProcess tp=new TechProcess();
+           tp.setUser("SJIT");
+      tp.setAmount(mu.getTotalamt());
+      tp.setCustID(mu.getRollno());
+      tp.setRefno(mu.getRefno());
+      tp.setReturnURL("https://" + request.getServerName()+"/receiveTechProcessResponse");
+      request.getSession().setAttribute("TPRequest", tp);
+      response.sendRedirect(tp.getRedirectURL());
        }
     }
 

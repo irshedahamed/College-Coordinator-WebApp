@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -138,7 +139,7 @@ public class OutPass {
     List<OutPass> list=new ArrayList<OutPass>();
         try{
             
-    conn=new dbcon().getConnection(Find.dept(rollno));
+    conn=new dbcon().getConnection("sjitportal");
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from outpassform where rollno like '"+rollno+"'");
                     
@@ -212,6 +213,50 @@ public class OutPass {
     }
     
     public String getSMSContent(){
-    return "Dear Parent, Your request for outpass has been approved and your ward should return back on or before "+till+" 6 PM";
+        if(Student.getById(rollno).getAccomodation().equalsIgnoreCase("hostel"))
+    return "Dear Parent, On basis of your request  outpass has been granted from "+Find.getFormattedDate(from)+"  to "+Find.getFormattedDate(LocalDate.parse(till).plusDays(1).toString().replace("-",""))+" 7 AM";
+    else
+            return null;
+    }
+    
+    
+    
+     public static OutPass getbyIdReturnDate(String id,String till){
+        Connection conn=null;
+    Statement stmt=null;
+   OutPass o=new OutPass();
+        try{
+            
+                    conn=new dbcon().getConnection("sjitportal");
+                    stmt = conn.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from outpassform where rollno like '"+id+"' and till ='"+till+"' -  INTERVAL 24 HOUR ");
+                    
+                    
+                    rs.beforeFirst();
+                    if(rs.next()){
+                        
+                        o.setFrom(rs.getString("from"));
+                        o.setTill(rs.getString("till"));
+                       // o.setLetter(rs.getString("letter"));
+                        o.setReason(rs.getString("reason"));
+                        o.setRollno(rs.getString("rollno"));
+                        o.setStatus(rs.getString("status"));
+                       
+                    }
+    }catch(Exception e){
+    e.printStackTrace();
+    }finally{
+        try {
+            if(stmt!=null)
+                stmt.close();
+            if(conn!=null)
+                conn.close();
+        } catch (SQLException ex) {
+      ex.printStackTrace();
+        }
+    }
+        
+    
+    return o;
     }
 }

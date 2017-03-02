@@ -3,6 +3,7 @@
     Created on : 18 Nov, 2016, 5:57:23 PM
     Author     : Home
 --%>
+<%@page import="com.action.Find"%>
 <%@page import="Downloads.Circular"%>
 <%@page import="Downloads.College"%>
 <%@page import="java.util.ArrayList"%>
@@ -164,14 +165,10 @@
            
                <select id="dept" name="dept" required>
                 <option  disabled selected>Select</option>
-    
-                        <option value="cse">CSE</option>
-                                                    <option value="ece">ECE</option>
-                                                    <option value="mech">MECH</option>
-                                                    <option value="it">IT</option>
-                                                    <option value="civil">CIVIL</option>
-                                                    <option value="eee">EEE</option>
-               
+                         <option value="all">ALL</option>
+                        
+                <%=Find.getDeptHTMLContent() %>
+                <option value="first">Science & Humanities</option>
             </select>
                     <i></i>                                    </label>
                                                 </label>

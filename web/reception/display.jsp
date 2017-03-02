@@ -52,8 +52,13 @@
     <img src="../images/logo2.png" height="165px" width="700px" />	</center>	
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
-		        
-	
+</div>
+    <style rel="stylesheet">
+        .bordered td{
+            padding: 0px;
+        }
+        
+    </style>
 		
 	
 
@@ -63,7 +68,7 @@
             <%
     int i=0;
 String user=request.getParameter("choose");
-String dept=request.getParameter("dept");
+String deptReq=request.getParameter("dept");
 String dateonentry=request.getParameter("datepicker");
 String enddate;
 if(request.getParameter("enddatepicker")==null)
@@ -80,27 +85,8 @@ enddate = sdf.format(c.getTime());
 
 
 if(user.equals("student")||user.equals("staff"))
-{
-    Connection conn=null;
-    Statement stmt=null;
-try
-{
-                        
-                           // Class.forName("com.mysql.jdbc.Driver").newInstance();                      
-                             conn=new dbcon().getConnection("sjitportal?zeroDateTimeBehavior=convertToNull");
-                            
-                           stmt=conn.createStatement();
-                            String sql;
-                                if(user.equals("student"))
-                            sql="select a.rollno,a.intime,a.outtime,b.rollno,b.name,b.mobileno from entry a,"+dept+".student_personal b where ( (intime >= '"+dateonentry+"%' and intime <= '"+enddate+"%') or (outtime >= '"+dateonentry+"%' and outtime <= '"+enddate+"%')) and a.rollno=b.rollno";
-                            else
-                                sql="select a.rollno,a.intime,a.outtime,CONCAT(b.tittle,b.name) as name,b.mobile1 as mobileno,b.desg from entry a,"+dept+".staff_general b where ( (intime >= '"+dateonentry+"%' and intime <= '"+enddate+"%') or (outtime >= '"+dateonentry+"%' and outtime <= '"+enddate+"%')) and a.rollno=b.staffid";
-                            ResultSet rs=stmt.executeQuery(sql);
-                       
-                            
-
-%>
-                            
+{%>
+            
 <center>
     <h3>Entry Report from <%=dateonentry%> till <%=enddate%></h3><br>
     <h4>Category: <%=user.toUpperCase()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -119,10 +105,10 @@ try
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Department: <%=dept.toUpperCase()%></h4>
+        Department: <%=deptReq.toUpperCase()%></h4>
     <br>    
                             <table class="bordered">
-                                <tr>   
+                                <thead>  <tr>   
                                 <th>S.No</th>
                                 <th>ID</th>
                                 <th>NAME</th>
@@ -130,7 +116,35 @@ try
                                 <th>MOBILE NO</th>
                                 <th>DEPARTMENT</th>
                                 <th>IN TIME</th>
-                                <th>OUT TIME</th></tr>
+                                <th>OUT TIME</th></tr></thead>
+            
+            <%
+    Connection conn=null;
+    Statement stmt=null;
+try
+{
+                        String[] depts=new String[15];
+                    if(deptReq.equals("all"))
+                        depts=Find.Depts;
+                    else
+                        depts[0]=new String(deptReq);
+                        
+                           // Class.forName("com.mysql.jdbc.Driver").newInstance();                      
+                             conn=new dbcon().getConnection("sjitportal?zeroDateTimeBehavior=convertToNull");
+                            
+                           stmt=conn.createStatement();
+                            String sql;
+                            for(String dept:depts){
+                                if(user.equals("student"))
+                            sql="select a.rollno,a.intime,a.outtime,b.rollno,b.name,b.mobileno from entry a,"+dept+".student_personal b where ( (intime >= '"+dateonentry+"%' and intime <= '"+enddate+"%') or (outtime >= '"+dateonentry+"%' and outtime <= '"+enddate+"%')) and a.rollno=b.rollno";
+                            else
+                                sql="select a.rollno,a.intime,a.outtime,CONCAT(b.tittle,b.name) as name,b.mobile1 as mobileno,b.desg from entry a,"+dept+".staff_general b where ( (intime >= '"+dateonentry+"%' and intime <= '"+enddate+"%') or (outtime >= '"+dateonentry+"%' and outtime <= '"+enddate+"%')) and a.rollno=b.staffid";
+                            ResultSet rs=stmt.executeQuery(sql);
+                       
+                            
+
+%>
+                            
                             <%while(rs.next())    
                             {
                             %>
@@ -178,9 +192,9 @@ try
                      
                             <%}
                             %>
-                              </table>
-</center>     
+                
                             <%}
+}
 catch(Exception e)
 {
     e.printStackTrace(); 
@@ -192,7 +206,10 @@ catch(Exception e)
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
-}
+}%>
+                                          </table>
+</center>     
+                            <%
 }
 else
 {
@@ -219,7 +236,7 @@ try
     <h4>Category: <%=user.toUpperCase()%></h4>
     <br>    
                             <table class="bordered">
-                                <tr>   
+                                <thead>   <tr>   
                                 <th>S.No</th>
                                 <th>ID</th>
                                 <th>NAME</th>
@@ -229,7 +246,7 @@ try
                                 <th>MEET</th>
                                 <th>REASON</th>
                                 <th>IN TIME</th>
-                                <th>OUT TIME</th></tr>
+                                <th>OUT TIME</th></tr></thead>
                             <%while(rs.next())    
                             {
                             %>
@@ -280,8 +297,7 @@ try
                       
                             <%}
                             %>
-                              </table>
-</center>    
+                
                             <%}
 catch(Exception e)
 {
@@ -296,7 +312,8 @@ catch(Exception e)
         }
 }
 %>
-
+              </table>
+</center>    
 <%
 }
 
@@ -305,8 +322,6 @@ catch(Exception e)
         </div></div></section>
 
 
-			</div>
-			</div>
 
 
 
