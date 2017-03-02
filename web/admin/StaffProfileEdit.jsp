@@ -239,7 +239,7 @@
 
                                     <td>
 
-                                        <label>Title :</label> <input type="text" style="background: white"  value="<%=rs11.getString("tittle")%>" >
+                                        <label>Title :</label> <input type="text" style="background: white" name="title"  value="<%=rs11.getString("tittle")%>" >
                                     </td>
                                 <td>
                                     <label> Name :</label><input type="text" style="background: white" id="name" name="name" value="<%=rs11.getString("name")%>">

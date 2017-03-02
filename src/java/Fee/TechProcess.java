@@ -108,7 +108,7 @@ public class TechProcess {
         reqBean.setKey(encKey.getBytes());
         reqBean.setIv(IV.getBytes());
         reqBean.setTxnDate(com.action.Find.getFormattedDate());
-        reqBean.setStrShoppingCartDetails("SJIT_"+amount+"_0.0");
+        reqBean.setStrShoppingCartDetails(user+"_"+amount+"_0.0");
         URL=reqBean.getTransactionToken();
         
     return URL;
