@@ -247,7 +247,7 @@
     <servlet>
         <servlet-name>receiveTechProcessAPIResponse</servlet-name>
         <servlet-class>API.receiveTechProcessAPIResponse</servlet-class>
- </servlet>
+    </servlet>
     <servlet>
         <servlet-name>councillorattupdate</servlet-name>
         <servlet-class>councillorattupdate</servlet-class>
@@ -259,7 +259,10 @@
     <servlet>
         <servlet-name>StaffProfileEdit</servlet-name>
         <servlet-class>StaffProfileEdit</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>Authenticate</servlet-name>
+        <servlet-class>API.Authenticate</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -446,7 +449,6 @@
         <url-pattern>/JsonGuest</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>HolidayData</servlet-name>
         <url-pattern>/HolidayData</url-pattern>
     </servlet-mapping>
@@ -509,7 +511,7 @@
     <servlet-mapping>
         <servlet-name>receiveTechProcessAPIResponse</servlet-name>
         <url-pattern>/receiveTechProcessAPIResponse</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>councillorattupdate</servlet-name>
         <url-pattern>/councillorattupdate</url-pattern>
@@ -521,7 +523,10 @@
     <servlet-mapping>
         <servlet-name>StaffProfileEdit</servlet-name>
         <url-pattern>/StaffProfileEdit</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Authenticate</servlet-name>
+        <url-pattern>/Authenticate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
