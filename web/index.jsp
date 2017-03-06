@@ -11,7 +11,15 @@
          newsession.invalidate();
 
     }
+        if(request.getParameter("msg")!=null){
+        %>
+        <script>
+            alert("<%=request.getParameter("msg")%>");
+            
+        </script>
+    <%
         
+        }
         
         %>
 <meta charset="utf-8">

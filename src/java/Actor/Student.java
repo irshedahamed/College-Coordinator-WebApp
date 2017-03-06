@@ -240,7 +240,7 @@ public class Student {
         
                Connection conn=null;
     Statement stmt=null;
-    Student s=new Student();
+    Student s=null;
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
@@ -249,7 +249,8 @@ public class Student {
                     
                     
                     rs.beforeFirst();
-                    while(rs.next()){
+                    if(rs.next()){
+                        s=new Student();
                         s.setBatch(rs.getString("batch"));
                         s.setDept(Find.sdept(id));
                         s.setRegno(rs.getString("regno"));

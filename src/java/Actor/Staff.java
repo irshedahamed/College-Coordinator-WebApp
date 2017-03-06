@@ -97,13 +97,13 @@ public class Staff {
                     
                     
                     rs.beforeFirst();
-                    while(rs.next()){
+                    if(rs.next()){
                         s=new Staff(rs.getString("staffid"));
                         s.setName(rs.getString("tittle")+rs.getString("name").toUpperCase());
                         s.setSex(rs.getString("gender"));
                         s.setDesg(rs.getString("desg"));
                         s.setEmail(rs.getString("email"));
-                        s.setMobile(rs.getString("mobile"));
+                        s.setMobile(rs.getString("mobile1"));
                         
                     }
     }catch(Exception e){

@@ -264,6 +264,10 @@
         <servlet-name>Authenticate</servlet-name>
         <servlet-class>API.Authenticate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendPasswordSMS</servlet-name>
+        <servlet-class>SendPasswordSMS</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -527,6 +531,10 @@
     <servlet-mapping>
         <servlet-name>Authenticate</servlet-name>
         <url-pattern>/Authenticate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendPasswordSMS</servlet-name>
+        <url-pattern>/SendPasswordSMS</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
