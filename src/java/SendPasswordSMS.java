@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 
+import API.Authenticate;
 import Actor.Parent;
 import Actor.Staff;
 import Actor.Student;
+import com.action.SMSTemplate;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -80,24 +82,29 @@ public class SendPasswordSMS extends HttpServlet {
                  String number=null;
                  Student s=Student.getById(user);
                  if(s!=null)
-                 number=Parent.getNumber(s.getId()).substring(0, 7);
+                 number=Parent.getNumber(s.getId());
                  else{
                  Staff st=Staff.getByid(user);
                  if(st!=null)
-                     number=st.getMobile().substring(0, 7);
-                 if(number!=null){
+                     number=st.getMobile();
+               
+                 else{
+                    response.sendRedirect("index.jsp");
+                 }
+                 }
+                 
+                   if(number!=null){
                 
                      if(number.equals(request.getParameter("mobile"))){
                      //send sms
+                     Authenticate a=new Authenticate();
+                     a.setUsername(user);
+                         SMSTemplate.send(number,"Your password is : "+a.findPassword());
                     response.sendRedirect("index.jsp?msg=Your password has been sent to "+number);
                      }else{
                     response.sendRedirect("index.jsp?msg=Number does not match");
                      
                      }
-                 }else{
-                    response.sendRedirect("index.jsp");
-                             
-                             }
                  }
                  
     }
