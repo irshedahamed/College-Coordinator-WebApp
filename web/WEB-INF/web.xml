@@ -240,6 +240,14 @@
         <servlet-name>BatchAssign</servlet-name>
         <servlet-class>BatchAssign</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PaymentDetail</servlet-name>
+        <servlet-class>PaymentDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentDetails</servlet-name>
+        <servlet-class>PaymentDetails</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -479,6 +487,14 @@
     <servlet-mapping>
         <servlet-name>BatchAssign</servlet-name>
         <url-pattern>/BatchAssign</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentDetail</servlet-name>
+        <url-pattern>/PaymentDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentDetails</servlet-name>
+        <url-pattern>/PaymentDetails</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
