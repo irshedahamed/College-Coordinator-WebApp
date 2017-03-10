@@ -16,7 +16,9 @@ public class Find {
     
     
     public static final String[] Depts={"cse","mech","it","civil","eee","ece"};
-    public static final String SERVERURL="http://59.95.166.209:8080/newportal/";
+   // public static final String[] Depts={"cse","mech","it","civil","eee","ece","chemical","ei","ic","biotech","mebiotech","meap","mesc","meps","mepd","meest","meci","meme","mecs","mees","mepe","mba","mca"};
+    
+    public static final String SERVERURL="https://portal.stjosephstechnology.ac.in/";
     static public String dept(String username){
     if(username.contains("cse"))
         return "cse";
@@ -36,7 +38,31 @@ public class Find {
     
     static public String sdept(String username){
     
-    if(username.contains("cs") || username.contains("CS"))
+    if(username.contains("meps")|| username.contains("MEPS"))
+        return "meps";
+     else if(username.contains("mees")|| username.contains("MEES"))
+        return "mees";
+    else if(username.contains("meped")|| username.contains("MEPD"))
+        return "meped";
+     else if(username.contains("mepe")|| username.contains("MEPE"))
+        return "mepe";
+    else if(username.contains("mesc")|| username.contains("MESC"))
+        return "me sc";
+    else if(username.contains("meme")|| username.contains("MEME"))
+        return "meme";
+    else if(username.contains("meest")|| username.contains("MEEST"))
+        return "meest";
+    else if(username.contains("meap")|| username.contains("MEAP"))
+        return "meap";
+    else if(username.contains("mebt")|| username.contains("MEBT"))
+        return "mebiotech";
+    else if(username.contains("meci")|| username.contains("MECI"))
+        return "meci";
+    else if(username.contains("mba")|| username.contains("MBA"))
+        return "mba";
+       else if(username.contains("mca")|| username.contains("MCA"))
+        return "mca";
+    else if(username.contains("cs") || username.contains("CS"))
         return "cse";
     else if(username.contains("it")|| username.contains("IT"))
         return "it";
@@ -48,31 +74,55 @@ public class Find {
         return "eee";
     else if(username.contains("cv")|| username.contains("CV") ||username.contains("ci")|| username.contains("CI")||username.contains("ce")|| username.contains("CE"))
         return "civil";
-    else
+    else if(username.contains("ch")|| username.contains("CH"))
+        return "chemical";
+    else if(username.contains("ic")|| username.contains("IC"))
+        return "ic";
+    else if(username.contains("ei")|| username.contains("EI"))
+        return "ei";
+     else if(username.contains("bt")|| username.contains("BT"))
+        return "biotech";
+    
+ 
     return "first";
-        
         
     }
     
-    public static String  getDate(){
-     String year=String.valueOf(new Date().getYear()+1900);
+    public static String  getDate(Date d){
+     String year=String.valueOf(d.getYear()+1900);
     String month,day;
     if(new Date().getMonth()+1<10)
-     month="0"+String.valueOf((new Date().getMonth()+1));
+     month="0"+String.valueOf((d.getMonth()+1));
     else 
-        month=String.valueOf((new Date().getMonth()+1));
+        month=String.valueOf((d.getMonth()+1));
     if(new Date().getDate()<10)
-        day="0"+String.valueOf((new Date().getDate()));
+        day="0"+String.valueOf((d.getDate()));
         else
-        day=String.valueOf((new Date().getDate()));
+        day=String.valueOf((d.getDate()));
     return year+month+day;
     }
     
     
-    public static String  getFormattedDate(){
-     String date=getDate();
-     return date.substring(6,8)+"-"+date.substring(4,6)+"-"+date.substring(0,4);
+    public static String  getDate(){
+    return getDate(new Date());
     }
+    
+    
+    public static String  getFormattedDate(){
+    return getFormattedDate(new Date());
+    }
+    
+    
+    public static String  getFormattedDate(Date d){
+     String date=getDate(d);
+     return getFormattedDate(date);
+    }
+    
+     public static String  getFormattedDate(String d){
+         d=d.replace("-","");
+     return d.substring(6,8)+"-"+d.substring(4,6)+"-"+d.substring(0,4);
+    }
+    
     public static String category(String id){
     if(id.contains("AD"))
         return "Admission";
@@ -87,5 +137,34 @@ public class Find {
     
     return null;
     }
+
+    public static String getDeptHTMLContent(){
     
-}
+         String HTML="<option disabled selected>SELECT</option>";
+      
+        for(String dept:Depts){
+            
+        HTML+="<option value='"+dept+"'>"+dept.toUpperCase()+"</option>";
+        }
+                 HTML+="</div>";
+    return HTML;
+    }
+    public static int getSem(String batch, String acyr, String semister)
+    {
+        
+    int temp=Integer.valueOf(batch.substring(2,4));
+    temp=Integer.valueOf(acyr)-temp;
+    temp*=2;
+    if(semister.equals("Odd"))
+        temp++;
+    else
+        temp+=2;
+    return temp;
+    }
+    
+    
+    
+    
+    
+    }
+

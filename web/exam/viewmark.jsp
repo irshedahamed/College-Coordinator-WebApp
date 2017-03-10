@@ -1,3 +1,4 @@
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="dbconnection.dbcon"%>
@@ -135,13 +136,8 @@
 							<label class="select">
            
                <select id="dept" name="dept" required>
-                <option  disabled selected>Select</option>
-               <option value="cse">CSE</option>
-               <option value="it">IT</option>
-               <option value="ece">ECE</option>
-               <option value="eee">EEE</option>
-               <option value="mech">MECH</option>
-               <option value="civil">CIVIL</option>
+               
+                   <%=Find.getDeptHTMLContent() %>
                
             </select>
                     <i></i>                                    </label>

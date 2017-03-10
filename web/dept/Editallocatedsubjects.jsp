@@ -170,7 +170,7 @@ table.bordered1 {
                 
                 
                 %>
-                <center><h1>Department of CSE</h1></center>
+                <center><h1>Department of <%=Find.dept(username) %></h1></center>
                 <br>
                 
                 <center><b>Subject Allotment <%=acyear%></b></center>

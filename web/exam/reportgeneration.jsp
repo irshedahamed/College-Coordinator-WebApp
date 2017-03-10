@@ -4,6 +4,7 @@
     Author     : Aravind Tyson
 --%>
 
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -326,12 +327,8 @@ document.getElementById("div5").innerHTML = response;
            
                <select id="dept" name="dept">
                 <option  disabled selected>Select</option>
-                <option value="cse">CSE</option>
-                <option value="it">IT</option>
-                <option value="ece">ECE</option>
-                <option value="mech">MECH</option>
-                <option value="eee">EEE</option>
-                <option value="civil">CIVIL</option>
+               
+                   <%=Find.getDeptHTMLContent() %>
                 
                
             </select>

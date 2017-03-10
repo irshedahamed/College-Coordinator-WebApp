@@ -13,7 +13,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  *
@@ -59,11 +63,20 @@ public class Entry {
     }
 
    public String getSMSContent(String action){
+        if(Student.getById(rollno).getAccomodation().equalsIgnoreCase("hostel")){
+       if(action.equals("IN"))
+           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") reported to hostel on "+new Date();
+       else
+           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") left from  hostel at "+new Date()+"";
+        
+        }else{
+            
        if(action.equals("IN"))
            return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") has entered our premises at "+new Date();
        else
-           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") left our premises at "+new Date()+" and your ward should reach back before 30-01-2017 6 pm";
+           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") left our premises at "+new Date()+"";
        
+        }
    }
     
     public boolean insertin(){
@@ -141,5 +154,48 @@ public class Entry {
            return true;
        else
            return false;
+    }
+     
+     
+     public static Set<String> getUnreportedList(String date){
+        Connection conn=null;
+       Statement stmt=null;
+       Statement stmt2=null;
+       int update=0;
+       Set<String> list=new TreeSet<String>();
+       
+       try{
+           conn=new dbcon().getConnection("sjitportal");
+           stmt=conn.createStatement();
+           stmt2=conn.createStatement();
+           String sql="select opf.rollno,opf.`from`,opf.till,op.expiry,opf.sno,e.outtime from outpass op,outpassform opf,entry e where opf.till='"+date+"'- INTERVAL 24 HOUR and opf.status='Accepted' and op.id=CONCAT(opf.prefix,opf.sno) and e.rollno=opf.rollno and e.outtime>op.expiry and e.outtime<=op.expiry+interval 6 hour;";
+           ResultSet rs=stmt.executeQuery(sql);
+           if(rs.next()){
+             String sql1="select * from entry where intime>'"+rs.getString("outtime")+"' and rollno ='"+rs.getString("rollno")+"'";
+             ResultSet rs1=stmt2.executeQuery(sql1);
+             if(!rs1.next()){
+                 list.add(rs.getString("rollno"));
+           }
+           }
+     
+       
+       }catch(Exception e){
+       e.printStackTrace();
+       }finally{
+           try {
+               if(stmt!=null)
+                   stmt.close();
+               if(stmt2!=null)
+                   stmt2.close();
+               if(conn!=null)
+                   conn.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       
+       }
+       
+           return list;
+      
     }
 }

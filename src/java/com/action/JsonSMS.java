@@ -67,8 +67,32 @@ public class JsonSMS extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+       // processRequest(request, response);
+       
+       
+        String number=request.getParameter("number");
+        String message=request.getParameter("message");
+        String json=null;
+        
+        boolean proceed=false;
+        if(request.getParameter("auth").equals("fluffy"))
+        proceed=true;
+        
+        
+        
+        
+            json = new Gson().toJson("Authentication Error !!!");
+        if(proceed){ 
+          String res=SMSTemplate.sendwithID(number, message,request.getParameter("senderid"));
+            if(!res.equals(""))
+                        json = new Gson().toJson("Sent"+res);
+                        else
+                        json = new Gson().toJson("Error: "+number+" "+message);    
+          
+                        response.setContentType("application/json");
+        }                response.getWriter().write(json);
+    
+        }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -111,15 +135,17 @@ public class JsonSMS extends HttpServlet {
         
         
             json = new Gson().toJson("Authentication Error !!!");
-        if(proceed) 
-          if(SMSTemplate.send(number, message))
-                        json = new Gson().toJson("Sent");
+        if(proceed){ 
+         String res=SMSTemplate.send(number, message);
+            if(!res.equals(""))
+                        json = new Gson().toJson("Sent"+res);
                         else
                         json = new Gson().toJson("Error: "+number+" "+message);    
           
                         response.setContentType("application/json");
                         response.getWriter().write(json);
-    }
+        }
+        }
 
     /**
      * Returns a short description of the servlet.

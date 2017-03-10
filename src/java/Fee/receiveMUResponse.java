@@ -8,6 +8,7 @@ package Fee;
 import General.AcademicYear;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -76,6 +77,7 @@ public class receiveMUResponse extends HttpServlet {
             throws ServletException, IOException {
        // processRequest(request, response);
        MUResponse mu=new MUResponse();
+       if(request.getSession().getAttribute("username")!=null)
        mu.setRollno(request.getSession().getAttribute("username").toString());
        mu.setAcyear(AcademicYear.getCurrentYear().getYear());
        mu.setBankchrge(request.getParameter("bankChrge"));
@@ -87,7 +89,7 @@ public class receiveMUResponse extends HttpServlet {
        mu.setStatus(request.getParameter("status"));
        mu.setTotalamt(request.getParameter("TotalAmt"));
        mu.setUtilitycode(request.getParameter("UtilityCode"));
-       
+  
        if(mu.getMsg().equals("O.K"))
        {    if(mu.insert()){
                 request.getSession().setAttribute("MUResponse", mu);

@@ -11,7 +11,15 @@
          newsession.invalidate();
 
     }
+        if(request.getParameter("msg")!=null){
+        %>
+        <script>
+            alert("<%=request.getParameter("msg")%>");
+            
+        </script>
+    <%
         
+        }
         
         %>
 <meta charset="utf-8">
@@ -40,6 +48,7 @@
 <!-- JS-->
 <!-- end JS-->
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
 <!-- columns demo style. DELETE IT! -->
 <style type="text/css">
@@ -114,6 +123,18 @@ padding:20px 15px;
                   </ul>
               </div> 
 			</div>
+       <script>
+           function isEmpty(){
+             
+               if($("#uname").val()==="")
+               {
+           alert("Username cannot be Empty");
+               return false;
+           }
+           $("#forgotpass").attr("href","forgotPassword.jsp?Username="+$("#uname").val());
+           return true;
+           }
+       </script>
        <div class="grid_5 rightfloat">
 	   <div class="main">
             
@@ -122,13 +143,14 @@ padding:20px 15px;
   			<div class="inset">
 	  			<p>
 	    		 <label for="email">USERNAME</label>
-   	 			<input type="text" name="uname" placeholder="" size="20" required/>
+                         <input type="text" id="uname" name="uname" placeholder="" size="20" required/>
 				</p>
   				<p>
 				    <label for="password">PASSWORD</label>
 				    <input type="password" name="pass" onKeyPress="return detectCapsLock(event)" placeholder="" required/>
                                     <label id="capsDetect"></label>
-  				</p>
+                                    <a id="forgotpass" href="" onclick="return isEmpty();" style="position: absolute;margin-top: -25px;margin-left: 100px; font-size: 13px;">Forgot Password?</a>
+                                   </p>
 				  
  			 </div>
  	 
@@ -163,8 +185,7 @@ padding:20px 15px;
 		<br>
                
 		<br>
-                 <center> Best viewed in Google Chrome and Mozilla Firefox</center>
-		<br>
+        	<br>
                 <marquee>For any Queries or Help Contact :  <a href="mailto:portal@stjosephstechnology.ac.in">portal@stjosephstechnology.ac.in</a></marquee>
                 <br>
                 <br>
@@ -177,7 +198,6 @@ padding:20px 15px;
 
 
 <!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/jquery-1.9.0.min.js">\x3C/script>');</script>
 
 <script defer src="js/jquery.flexslider-min.js"></script>

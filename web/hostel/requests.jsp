@@ -3,6 +3,7 @@
     Created on : 2 Jan, 2017, 5:22:49 PM
     Author     : Home
 --%>
+<%@page import="General.Hostel"%>
 <%@page import="com.action.Find"%>
 <%@page import="Actor.Student"%>
 <%@page import="Forms.OutPass"%>
@@ -104,12 +105,26 @@
    <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="requests.jsp">Grant OutPass</a>
   
 </li>
+<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="notreturned.jsp">SMS</a>
+
+
+</li>
 
 
 <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="Setup.jsp">Holiday Setup</a>
 
 
 </li>
+
+
+<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#"> Report</a>
+<ul class="sub-menu">
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personalReport.jsp">Personal Report</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="dailyReport.jsp">Daily Report</a>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="monthlyReport.jsp">Monthly Report</a>
+      <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="notReturnedReport.jsp">Not Returned Report</a>
+
+</ul></li>
 
 
 </ul>						
@@ -214,15 +229,7 @@
                  <br><br>
                  <%
                      if( stu.getId()!=null){
-                       boolean flag=false;
-                         if(username.contains("girl")){
-                         if(stu.getSex().contains("F"))
-                                flag=true;
-                         }else{
-                         if(!stu.getSex().contains("F"))
-                                flag=true;
-                         
-                         }
+                       boolean flag=Hostel.AuthenticateAccess(username, stu);
                  
                  if(flag){
                  %>
@@ -323,14 +330,21 @@
                                                       <div align="left" style="position: absolute;"><h4>Father</h4>
                                           <img src="../../Father/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                          </div>
-                                         <div align="left" style="position: absolute;margin-left:200px;">
+                                         <div align="left" style="position: absolute;margin-left:125px;">
                                    <h4>Mother</h4>
                                           <img src="../../Mother/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                          </div>
-                                         <div align="right">
-                                    <h4 style="margin-right: 50px;">Local Guardian</h4>
-                                    <div style="margin-right: 75px;">
-                                          <img src="../../LocalGuardian/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                         <div align="left"  style="position: absolute;margin-left:255px;">
+                                    <h4 style="position: relative;right: 15px;">Local Guardian 1</h4>
+                                    <div style="">
+                                          <img src="../../LocalGuardian1/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                    </div>  
+                                    </div>
+                                    
+                                         <div align="left" >
+                                    <h4 style="margin-left: 390px;">Local Guardian 2</h4>
+                                    <div style="margin-left:  400px;">
+                                          <img src="../../LocalGuardian2/Batch<%=stu.getBatch() %>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                     </div>  
                                     </div>
                                 

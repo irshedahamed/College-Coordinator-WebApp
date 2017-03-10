@@ -1,3 +1,4 @@
+<%@page import="Downloads.Notes"%>
 <%@page import="com.action.Base"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
@@ -189,7 +190,7 @@
 
 <div class="dm3-tabs-testimonials" data-autoscroll=""><div class="dm3-tabs">
 <div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>Notes</h2><br><br>
-<div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
+<div style="width:60%;height:300px;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
 <div align="left">
 <% 
     String ayear = request.getParameter("ayear");
@@ -203,54 +204,24 @@
         subcode = parts[0];
         subject = parts[1];
         String notes = request.getParameter("notes");
-        String path = Base.path+"/notes/"+ayear+"/"+dept+"/"+batch+"/"+sem+"/"+subcode+"/"+notes+"/";
-        //out.write(path);
-        List<String> list = new ArrayList<String>();
-        List<String> list1 = new ArrayList<String>();
-        List<String> listdescp=new ArrayList<String>();
-        list1.add(path);
-          try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection1 = new dbcon().getConnection(dept);
-            Statement statement1 = connection1.createStatement();
-            ResultSet rs = statement1.executeQuery("select filename,descp from notes where path = '"+path+"'");
-            
-            
-            while(rs.next())
-            {
-                String file = rs.getString("filename");
-                listdescp.add(rs.getString("descp"));
-                 list.add(file);
-                 
-            }
-            
-            %>
-            
-            <%
-           
-            for(int i=0; i<list.size();i++)
-              {
-                  String str=list.get(i);
-                  //session.setAttribute(str,list.get(i));
-                  session.setAttribute("path",path);
-            %>
-            <a href="${pageContext.request.contextPath}/notesdownload?ind1=<%=str %>" ><%= list.get(i)+"-"+listdescp.get(i) %></a>
-<br>
-<%
-           
-           }
-            session.setAttribute("size",list.size());
+        
+  
+        Notes n=new Notes();
+        n.setAcademicyr(ayear);
+        n.setSem(sem);
+        n.setSubcode(subcode);
+        n.setType(notes);
+        
 
-                            if(statement1!=null)
-                            statement1.close();
-                              if(connection1!=null)
-                                connection1.close();
-          }
-          catch(Exception e)
-          {
+        %>
+        
+        
                
-          }
-%></div>
+    <%=Notes.getHTMLContent(Notes.getAll(dept, n)) %>
+    
+    
+        
+        </div>
 </div>
 </center>
 </div>

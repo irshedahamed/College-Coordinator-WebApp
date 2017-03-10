@@ -5,6 +5,7 @@
  */
 
 import Actor.Parent;
+import Actor.Student;
 import Forms.OutPass;
 import com.action.SMSTemplate;
 import java.io.IOException;
@@ -91,6 +92,7 @@ public class processOutPass extends HttpServlet {
      
         if(op.insert(p.getRequestid())){
            response.getWriter().write("Out Pass Generated and valid for 6 hours");
+            if(Student.getById(p.getRollno()).getAccomodation().equalsIgnoreCase("hostel"))
             SMSTemplate.send(Parent.getNumber(p.getRollno()),p.getSMSContent());
         }
         }

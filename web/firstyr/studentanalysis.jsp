@@ -65,37 +65,6 @@
 <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#menu-toggle1" id="menu-toggle1">
-                       Aravind S
-                    </a>
-                </li>
-                <center>
-                    <img src="../images/face.jpg" height="95px">
-                    
-                               
-                           
-                        
-                   
-                </center>
-                <br>
-                <br>
-                
-                <li >
-                
-                    
-                    <a href="#"><b>NAME : Aravind S</b></a>
-                </li>
-                <li>
-                    <a href="#"><b>ROLL NO : 12CS1203</b></a>
-                </li>
-                <li >
-                    <a href="#"><b>COURSE : B.E</b></a>
-                </li>
-                <li >
-                    <a href="#"><b>DEPT : CSE</b></a>
-                </li>
-              <li >
-                    <a href="#"><b>SECTION : A</b></a>
                 </li>
             </ul>
         </div>

@@ -5,6 +5,7 @@
  */
 package General;
 
+import Fee.TechProcess;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
@@ -60,7 +61,9 @@ public class testRequest extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+      //  processRequest(request, response);
+        doPost(request, response);
+    
     }
 
     /**

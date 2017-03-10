@@ -4,6 +4,7 @@
     Author     : Aravind Tyson
 --%>
 
+<%@page import="com.action.Find"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.HashSet"%>
@@ -222,7 +223,7 @@ h2{
     </tr>
     </thead>
         <%
-            String depts[]={"cse","mech","first","eee","ece","civil","it"};
+            String depts[]=Find.Depts;
             for(int i=0;i<7;i++)
             {
               
