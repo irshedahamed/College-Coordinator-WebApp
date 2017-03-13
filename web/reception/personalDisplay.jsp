@@ -147,7 +147,7 @@ try
                                 
                                 
                                 <td> <%=rs.getString("mobileno")%> </td>
-                                <td> <%=dept%> </td>
+                                <td> <%=dept.toUpperCase() %> </td>
                                  <%
                                 if(rs.getString("intime")!=null)
                                 {

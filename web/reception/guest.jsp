@@ -525,7 +525,10 @@ $(document).ready(function(){
                  <option value="VI">Visitor</option>
                  <option value="AL">Alumni</option>
                  <option value="PA">Parent</option>
-             
+                 <option value="LG">Guardian</option>
+                 <option value="DR">Driver</option>
+                 
+                 
              </select>
                  </td></tr>
              <tr><td>

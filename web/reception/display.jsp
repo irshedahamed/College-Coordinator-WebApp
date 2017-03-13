@@ -1,3 +1,4 @@
+<%@page import="Actor.Student"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.action.Find"%>
@@ -88,7 +89,7 @@ if(user.equals("student")||user.equals("staff"))
 {%>
             
 <center>
-    <h3>Entry Report from <%=dateonentry%> till <%=enddate%></h3><br>
+    <h3>Entry Report from <%=Find.getFormattedDate(dateonentry)%> till <%=Find.getFormattedDate(enddate)%></h3><br>
     <h4>Category: <%=user.toUpperCase()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -150,23 +151,32 @@ try
                             %>
                             <tr>
                                 <td> <%=++i%> </td>
-                                <td> <%=rs.getString("rollno")%> </td>
+                                <td> <center><%=rs.getString("rollno")%></center> </td>
                                 <td> <%=rs.getString("name")%> </td>
                                 
                                 <%if(user.equals("student")){%>
-                                <td> STUDENT </td>
+                                
+                                <%if(Student.getById(rs.getString("rollno")).isHostel()){ %>
+                                <td><center> STUDENT HS</center> </td>
+                                <%}
+                                else{
+                                %>
+                                <td><center> STUDENT DS</center> </td>
+                                <%
+                                }
+                                %>
                                 <%}else{%>
-                                <td><%=rs.getString("desg")%></td>
+                                <td><center><%=rs.getString("desg")%></center></td>
                                 <%}%>
                                 
                                 
-                                <td> <%=rs.getString("mobileno")%> </td>
-                                <td> <%=dept%> </td>
+                                <td><center> <%=rs.getString("mobileno")%></center> </td>
+                                <td><center> <%=dept.toUpperCase() %></center> </td>
                                  <%
                                 if(rs.getString("intime")!=null)
                                 {
                                 %>
-                                <td> <%=rs.getString("intime").substring(0,rs.getString("intime").length()-2) %> </td>
+                                <td><center> <%=rs.getString("intime").substring(0,rs.getString("intime").length()-2) %></center> </td>
                                  <%
                             }
                             else{
@@ -179,7 +189,7 @@ try
                                 if(rs.getString("outtime")!=null)
                                 {
                                 %>
-                                <td> <%=rs.getString("outtime").substring(0,rs.getString("outtime").length()-2) %> </td></tr>
+                                <td><center> <%=rs.getString("outtime").substring(0,rs.getString("outtime").length()-2) %></center> </td></tr>
                             <%
                             }
                             else{
@@ -232,7 +242,7 @@ try
 %>
                             
 <center>
-      <h3>Entry Report from <%=dateonentry%> till <%=enddate%></h3><br>
+    <h3>Entry Report from <%=Find.getFormattedDate(dateonentry)%> till <%=Find.getFormattedDate(enddate)%></h3><br>
     <h4>Category: <%=user.toUpperCase()%></h4>
     <br>    
                             <table class="bordered">
@@ -252,16 +262,16 @@ try
                             %>
                             <tr>
                                 <td> <%=++i%> </td>
-                                <td> <%=rs.getString("rollno")%> </td>
-                                <td> <%=rs.getString("name")%> </td>
+                                <td> <center><%=rs.getString("rollno")%></center> </td>
+                                <td> <center><%=rs.getString("name")%> </center></td>
                                 
                            
-                                <td><%=Find.category(rs.getString("rollno"))%></td>
+                                <td><center><%=Find.category(rs.getString("rollno"))%></center></td>
                              
                                 
                                 
-                                <td> <%=rs.getString("sex")%> </td>
-                                <td> <%=rs.getString("mobile")%> </td>
+                                <td><center> <%=rs.getString("sex")%> </center></td>
+                                <td><center> <%=rs.getString("mobile")%></center> </td>
                                 <%
                                 String[] meet=rs.getString("meet").split("_");
                                 %>

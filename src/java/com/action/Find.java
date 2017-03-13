@@ -83,8 +83,7 @@ public class Find {
      else if(username.contains("bt")|| username.contains("BT"))
         return "biotech";
     
- 
-    return "first";
+ return "first";
         
     }
     
@@ -134,6 +133,10 @@ public class Find {
         return "Alumni";
     else if(id.contains("PA"))
         return "Parent";
+    else if(id.contains("LG"))
+        return "Guardian";
+    else if(id.contains("DR"))
+        return "Driver";
     
     return null;
     }

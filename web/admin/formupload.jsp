@@ -185,6 +185,7 @@
                         <option value="studentsformat">Students Format</option>
                         <option value="abhsformat">ABHS Format</option>
                         <option value="hostelformat">Hostel Format</option>
+                        <option value="staffformat">Staff Format</option>
                         <option value="sampleformat">Sample Format</option>
                     </select>
            
