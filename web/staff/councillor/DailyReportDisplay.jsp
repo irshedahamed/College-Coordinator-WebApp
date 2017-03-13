@@ -289,6 +289,7 @@
         String days="0";
         if(rs2.next())
         days=String.valueOf(rs2.getInt("days")-1);
+         //   days=String.valueOf(rs2.getInt("days"));
         
         String fname="",fmobile="",mname="",mmobile="";
          rs2=st2.executeQuery("select f.fathers_name,f.mobile,m.mothers_name,m.mobileno from student_father_details f,student_mother_details m where f.rollno='"+rollno+"' and m.rollno='"+rollno+"'");

@@ -211,6 +211,7 @@
                        <tbody>
        <%
        Staff s=new Staff(username);
+       System.err.print(s.getCouncillorDetails().getBatch());
        
        for(Student stu:Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(),s.getCouncillorDetails().getSec())){
        %>

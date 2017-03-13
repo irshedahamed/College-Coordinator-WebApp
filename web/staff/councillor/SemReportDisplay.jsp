@@ -4,6 +4,7 @@
     Author     : aravind
 --%>
 
+<%@page import="Actor.Student"%>
 <%@page import="Actor.Staff"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.io.File"%>
@@ -177,6 +178,7 @@ table {
         
         %>
         <body>
+           
         <center>   <h2>ATTENDANCE REPORT FOR <%=dept.toUpperCase()%> DEPARTMENT</h2><h2> <%=batch%> BATCH <%=sem%>th SEM <%=sec%> SECTION</h2></center>
         <center>
           
@@ -194,17 +196,10 @@ table {
     </thead>
     
     <%
-       String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
-     Connection con= new dbcon().getConnection(dept);
+          for(Student stu:Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(),s.getCouncillorDetails().getSec())){
      
-     Statement st = con.createStatement();
-  
-     ResultSet rs=st.executeQuery(sql2);
-     
-     while(rs.next())
-     {
-         rollno=rs.getString("rollno");
-         name = rs.getString("name");
+         rollno=stu.getId();
+         name = stu.getName();
          %>
          <tr>
         <td><%=rollno.toUpperCase()%></td>        
@@ -212,8 +207,9 @@ table {
         
         <td>
        <%
-        
-         sql2 = "select * from councillor_attendance where rollno='"+rollno+"' and sem='"+sem+"'";
+        Connection con=new dbcon().getConnection(dept);
+           
+         String sql2 = "select * from councillor_attendance where rollno='"+rollno+"' and sem='"+sem+"'";
          Statement st1 = con.createStatement();
          ResultSet rs2= st1.executeQuery(sql2);
         int count=0;
@@ -234,31 +230,27 @@ table {
                 %>
        <%=date%>    <%
         
-        }
+     }   
             if(st1!=null)
                 st1.close();
-            %>
+                      if(con!=null)
+                                con.close();
+             
+%>
             
             </td>
             <td><%=count%></td>
-            <%
-        
-     
-     %>
     </tr>        
     
         
 
     
    <%
-    }
-     
-                            if(st!=null)
-                            st.close();
+       
                             
-                              if(con!=null)
-                                con.close();
+        
      
+} 
      %>
      
      </table>
@@ -267,7 +259,8 @@ table {
     </body>
      <%
        
-    }
+    
+}
     else
     {
         response.sendRedirect("../index.jsp");

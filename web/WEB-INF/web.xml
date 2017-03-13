@@ -233,8 +233,7 @@
         <servlet-class>General.testRequest</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
-=======
+
         <servlet-name>receiveIBResponse</servlet-name>
         <servlet-class>Fee.receiveIBResponse</servlet-class>
     </servlet>
