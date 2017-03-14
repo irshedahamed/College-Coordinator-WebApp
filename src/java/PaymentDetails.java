@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 
-import General.mup;
+import Fee.IBResponse;
+import Fee.MUResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -57,22 +59,29 @@ public class PaymentDetails extends HttpServlet {
         String Type = request.getParameter("banktype");
         String Batch = request.getParameter("Batch");
         String Dept = request.getParameter("dept");
-        
+        String Acyear = request.getParameter("Year");
+        if(Dept.equals("all"))
+        {
+            Dept="%";
+        }
       if(Type.equals("ibank"))
       {
           request.setAttribute("Batch", Batch);
           request.setAttribute("Dept", Dept);
-          List<mup> list = mup.getAll();
-         
-        for(mup s:list){
-         String mup = s.getMup();
-         
-          System.out.println(mup);
-        }
-          RequestDispatcher rd=request.getRequestDispatcher("admin/ibpay.jsp");
+          request.setAttribute("Acyear",Acyear);
+          
+          RequestDispatcher rd=request.getRequestDispatcher("account/ibpay.jsp");
           rd.forward(request, response);
-      } else {
-      }
+      } 
+        if(Type.equals("otherbank"))
+      {
+          request.setAttribute("Batch", Batch);
+          request.setAttribute("Dept", Dept);
+          request.setAttribute("Acyear",Acyear);
+          
+          RequestDispatcher rd=request.getRequestDispatcher("account/Techprocess.jsp");
+          rd.forward(request, response);
+      } 
         
     }
 

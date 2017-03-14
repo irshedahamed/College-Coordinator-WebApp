@@ -7,8 +7,10 @@ package Fee;
 
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -95,5 +97,42 @@ Connection conn=null;
        else
            return false;
     }
-
+ public static IBResponse fetchby(String mup)
+    {
+        IBResponse m = new IBResponse();
+      try{  
+        Connection con = null;
+        Statement st = null;
+        
+        con = new dbcon().getConnection("sjitportal");
+        
+        st = con.createStatement();
+        
+        ResultSet rs = st.executeQuery("Select * from ibresponse where mup = '"+mup+"'");
+        
+         rs.afterLast();
+         
+         if (rs.previous())
+        {
+            
+            m.setMup(rs.getString("mup"));
+            m.setRollno(rs.getString("rollno"));
+            m.setStatus(rs.getString("status"));
+            m.setJournalno(rs.getString("journalno"));
+            m.setTxndate(rs.getString("txndate"));
+         }
+                     
+        if(st!=null)
+                st.close();
+            if(con!=null)
+                con.close();
+           
+      }catch(Exception e){
+    e.printStackTrace();
+    }
+    
+       
+      return m;
+    
+    }
 }

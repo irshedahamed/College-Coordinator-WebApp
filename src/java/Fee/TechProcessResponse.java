@@ -7,6 +7,7 @@ package Fee;
 
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -189,5 +190,41 @@ public class TechProcessResponse {
        setRqst_token(splitres[10].split("=")[1]);
     
     }
+    public static TechProcessResponse fetchby(String mup)
+    {
+        TechProcessResponse m = new TechProcessResponse();
+      try{  
+        Connection con = null;
+        Statement st = null;
+        
+        con = new dbcon().getConnection("sjitportal");
+        
+        st = con.createStatement();
+        
+        ResultSet rs = st.executeQuery("Select * from techprocess where mupno = '"+mup+"'");
+        
+         rs.afterLast();
+         
+         if (rs.previous())
+        {
+            
+            m.setRefno(rs.getString("mupno"));
+            m.setRollno(rs.getString("rollno"));
+            m.setTime(rs.getString("time"));
+            m.setAmount(rs.getString("txn_amount"));
+        }
+                     
+        if(st!=null)
+                st.close();
+            if(con!=null)
+                con.close();
+           
+      }catch(Exception e){
+    e.printStackTrace();
+    }
     
+       
+      return m;
+    
+    }
 }

@@ -147,7 +147,8 @@ public class LoginServlet extends HttpServlet {
                       response.sendRedirect("hostel/home.jsp?user="+s1);
                   else if(s3.equals("staffincharge"))
                       response.sendRedirect("staffincharge/home.jsp?user="+s1);
-                 
+                  else if(s3.equals("account"))
+                      response.sendRedirect("account/home.jsp?user="+s1);
                   else
                   {
                       

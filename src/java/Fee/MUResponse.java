@@ -5,16 +5,22 @@
  */
 package Fee;
 
+import Actor.Student;
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Home
  */
 public class MUResponse {
+
+    
     private String utilitycode;
     private String rollno;
     private String acyear;
@@ -149,4 +155,47 @@ public class MUResponse {
        else
            return false;
     }
+    public static ArrayList<MUResponse> fetchby(String acyear)
+    {
+        ArrayList<MUResponse> List =  new ArrayList<MUResponse>();
+      try{  
+        Connection con = null;
+        Statement st = null;
+        
+        con = new dbcon().getConnection("sjitportal");
+        
+        st = con.createStatement();
+        
+        ResultSet rs = st.executeQuery("Select * from bank_mup where acyear = '"+acyear+"'");
+        
+         rs.beforeFirst();
+         
+         while (rs.next())
+        {
+            MUResponse m = new MUResponse();
+            m.setRefno(rs.getString("mup"));
+            m.setRollno(rs.getString("rollno"));
+            m.setTotalamt(rs.getString("totalamt"));
+            m.setBankchrge(rs.getString("bankchrg"));
+            m.setHandleID(rs.getString("handleid"));
+            m.setUtilitycode(rs.getString("utilitycode"));
+            m.setMsg(rs.getString("msg"));
+            
+            List.add(m);
+         }
+                     
+        if(st!=null)
+                st.close();
+            if(con!=null)
+                con.close();
+           
+      }catch(Exception e){
+    e.printStackTrace();
+    }
+    
+       
+      return List;
+    
+    }
+
 }
