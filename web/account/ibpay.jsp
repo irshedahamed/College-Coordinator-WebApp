@@ -74,7 +74,7 @@
         <td><%= stu.getName() %></td>
         <td><%= m.getTotalamt() %></td>
         <td><%= i.getTxndate() %></td>
-        <td>hi</td>
+        
     </tr>
     <%
         }
