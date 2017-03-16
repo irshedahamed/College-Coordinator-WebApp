@@ -1,3 +1,8 @@
+<%-- 
+    Document   : displayform
+    Created on : 1 Mar, 2017, 12:16:19 PM
+    Author     : Irshed
+--%>
 <%@page import="Downloads.Department"%>
 <%@page import="Downloads.Exam"%>
 <%@page import="Downloads.Circular"%>
@@ -197,53 +202,67 @@
 
 
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-                <br><br><br><br>
+                <br><br>
                <section class="landing">
                    
        
-               <md-toolbar class="demo-toolbar md-primary _md _md-toolbar-transitions" style="width: 70%">
-                   
-        <div class="md-toolbar-tools">
-            
-            <h3 class="ng-binding" style="text-align:center;">Circulars</h3>
-          <span flex="" class="flex"></span>
+              <div class="dm3-tabs-testimonials" data-autoscroll=""><div class="dm3-tabs">
+<div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>Forms</h2><br><br>
+<div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
+<div align="left">
+<% 
+    
         
-        </div>
-      </md-toolbar>
-               <div ng-cloak="" class="tabsdemoDynamicHeight" ng-app="MyApp" style="width:70%"> 
-  <md-content>
-    <md-tabs md-dynamic-height="" md-border-bottom="">
-      <md-tab label="College">
-        <md-content class="md-padding">
-          <h1 class="md-display-2"></h1>
-        
-          <%out.write(Circular.getHTMLContent(College.getAll("circular")));%>
-        </md-content>
-      </md-tab>
-      <md-tab label="Department">
-        <md-content class="md-padding">
-          <h1 class="md-display-2"></h1>
-          <%out.write(Circular.getHTMLContent(Department.getAll(Find.sdept(username),"%")));%>
-         
-        </md-content>
-      </md-tab>
-      <md-tab label="Exam">
-        <md-content class="md-padding">
-          <h1 class="md-display-2"></h1>
-          
-          <%out.write(Circular.getHTMLContent(Exam.getAll()));%>
-         
-        </md-content>
-      </md-tab>
-            <md-tab label="Events">
-        <md-content class="md-padding">
-          <h1 class="md-display-2"></h1>
-        <%out.write(Circular.getHTMLContent(College.getAll("event")));%>
-        </md-content>
-      </md-tab>
-    </md-tabs>
-  </md-content>
+        String path = "%/staff%";
+        List<String> list = new ArrayList<String>();
+        List<String> listdescp=new ArrayList<String>();        
+          try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Connection connection1 = new dbcon().getConnection("sjitportal");
+            Statement statement1 = connection1.createStatement();
+            ResultSet rs = statement1.executeQuery("select filename,descp from forms where location like '"+path+"'");
             
+            
+            while(rs.next())
+            {
+                String file = rs.getString("filename");
+                    listdescp.add(rs.getString("descp"));
+                 list.add(file);
+                 
+            }
+            
+            %>
+            
+            <%
+           
+            for(int i=0; i<list.size();i++)
+              {
+                  String str=list.get(i);
+                  //session.setAttribute(str,list.get(i));
+                  session.setAttribute("path",path);
+            %>
+            <a href="${pageContext.request.contextPath}/notesdownload?ind1=<%=str %>" ><%= str %> - <%=listdescp.get(i)%></a>
+<br>
+<%
+           
+           }
+            session.setAttribute("size",list.size());
+              if(statement1!=null)
+                            statement1.close();
+                              if(connection1!=null)
+                                connection1.close();
+          }
+          catch(Exception e)
+          {
+           e.printStackTrace();
+          }
+%></div>
+</div>
+</center>
+</div>
+</div>
+
+
         
             
         </section>

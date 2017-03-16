@@ -1,4 +1,3 @@
-<%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -7,8 +6,8 @@
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en-US">
-   
-<% 
+
+    <% 
    try
     {
     String username = session.getAttribute("username").toString();
@@ -43,6 +42,7 @@
 	
 		
 		</head>
+                
 		
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
@@ -86,10 +86,14 @@
         <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectAdd.jsp">Subject Add</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Subject View</a>
-                 <ul class="sub-menu">
-                        <% for(String dept:Find.Depts){%>
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=<%=dept%>"><%=dept.toUpperCase() %></a>
-                    <%}%>     </ul></li>
+                        <ul class="sub-menu">
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=cse">CSE</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=ece">ECE</a>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=eee">EEE</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=mech">MECH</a>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=civil">CIVIL</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=it">IT</a>
+            </ul></li>
             </ul></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="feedetails.jsp">Fee Details</a></li>
     </ul>
@@ -177,16 +181,16 @@
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
             <center>
-            <form action="${pageContext.request.contextPath}/batchupdate" class="sky-form" method="post">
-                <header>BATCH UPDATE</header>
+            <form action="${pageContext.request.contextPath}/InsertYear1" class="sky-form" method="post">
+                <header>NEW ACADEMIC YEAR</header>
     <fieldset>					
 					<section>
             <label class="input">
                                                     <div align="left" size="3px"><b>
-                                                            Batch: </b></div>
+                                                            Academic Year : </b></div>
                 <label class="input">
                     
-                    <input type="text" id="batch" name="batch">
+                    <input type="text" id="batch" name="YearString">
            
                 <i></i>
                     </label>
@@ -194,10 +198,10 @@
                  <br><br>
                  <label class="input">
                                                     <div align="left" size="3px"><b>
-                                                            Regulation: </b></div>
+                                                           Year : </b></div>
                 <label class="input">
                     
-                    <input type="text" id="regulation" name="regulation">
+                    <input type="text" id="regulation" name="Year">
            
                 <i></i>
                     </label>

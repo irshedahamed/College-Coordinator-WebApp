@@ -1,4 +1,4 @@
-<%@page import="com.action.Find"%>
+<%@page import="General.AcademicYear"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -86,10 +86,14 @@
         <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectAdd.jsp">Subject Add</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Subject View</a>
-                 <ul class="sub-menu">
-                        <% for(String dept:Find.Depts){%>
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=<%=dept%>"><%=dept.toUpperCase() %></a>
-                    <%}%>     </ul></li>
+                        <ul class="sub-menu">
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=cse">CSE</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=ece">ECE</a>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=eee">EEE</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=mech">MECH</a>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=civil">CIVIL</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=it">IT</a>
+            </ul></li>
             </ul></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="feedetails.jsp">Fee Details</a></li>
     </ul>
@@ -177,16 +181,19 @@
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
             <center>
-            <form action="${pageContext.request.contextPath}/batchupdate" class="sky-form" method="post">
-                <header>BATCH UPDATE</header>
+            <form action="${pageContext.request.contextPath}/BatchAssign" class="sky-form" method="post">
+                <header>ACADEMIC YEAR</header>
     <fieldset>					
 					<section>
             <label class="input">
                                                     <div align="left" size="3px"><b>
-                                                            Batch: </b></div>
-                <label class="input">
+                                                            Academic Year : </b></div>
+                <label class="select">
                     
-                    <input type="text" id="batch" name="batch">
+                 <select id="batch" name="Year" required>
+                <option disabled selected>Select   </option>
+                <%=AcademicYear.getHTMLContent()%>
+            </select>   
            
                 <i></i>
                     </label>
@@ -194,10 +201,14 @@
                  <br><br>
                  <label class="input">
                                                     <div align="left" size="3px"><b>
-                                                            Regulation: </b></div>
-                <label class="input">
+                                                            Current :  </b></div>
+                <label class="select">
                     
-                    <input type="text" id="regulation" name="regulation">
+                 <select id="batch" name="current" required>
+                   <option disabled selected>select</option>
+                <option value="odd">odd</option>
+                <option value="even">even</option>
+             </select>  
            
                 <i></i>
                     </label>
