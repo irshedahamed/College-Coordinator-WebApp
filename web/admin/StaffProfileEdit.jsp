@@ -224,9 +224,11 @@
     {
     %>
     
-    
+                            <img style="position:absolute;left: 1000px;top:250px;" src="../../StaffPhotos/<%=id.toUpperCase()%>.JPG" height="120px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                  
     <center> <form method="post" name="general" action="${pageContext.request.contextPath}/StaffProfileEdit">
-                            <center><h3>General Details</h3></center>
+                   
+            <center><h3>General Details</h3></center>
                            
 
                             <table cellspacing="10">

@@ -209,7 +209,7 @@ public class TechProcessResponse {
         {
             
             m.setRefno(rs.getString("mupno"));
-            m.setRollno(rs.getString("rollno"));
+            m.setRollno(rs.getString("clientid"));
             m.setTime(rs.getString("time"));
             m.setAmount(rs.getString("txn_amount"));
         }

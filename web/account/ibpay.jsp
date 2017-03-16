@@ -15,18 +15,20 @@
 
 <html>
     <head>
-        <link href="../css/tabledesign.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-          <link href="../css/sky-forms.css" rel="stylesheet">
-        <link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
+        	<link href="css/bootstrap.min.css" rel="stylesheet">
+   <link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 	<link href="css/tabledesign.css" rel="stylesheet">
         <title>JSP Page</title>
         
     </head>
     
+    <center>
+    <img src="images/logo2.png" height="165px" width="700px" />	</center>	
+
     <body>
   <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-        <center><h1>Payment List </h1></center>
+        <center><h1>PAYMENT LIST INDIAN BANK </h1></center>
        <center> 
     <br><br><br>
             <table class="bordered">
@@ -48,7 +50,7 @@
         String Acyear = (String) request.getAttribute("Acyear");
         String Batch = (String) request.getAttribute("Batch");
         String Dept = (String) request.getAttribute("Dept");
-               
+       int sno=0;        
          ArrayList<MUResponse> List = (ArrayList<MUResponse>) MUResponse.fetchby(Acyear);
            for(MUResponse m : List)
          {
@@ -68,11 +70,12 @@
     %>
             
     <tr>
-        <td> <%= r %> </td>
+         <td><%= ++sno %></td>
+        <td> <%= m.getRollno() %> </td>
         <td><%= stu.getRegno() %></td>
         <td><%= m.getRefno() %></td>
         <td><%= stu.getName() %></td>
-        <td><%= m.getTotalamt() %></td>
+        <td><%= (Float.valueOf(m.getTotalamt())+Float.valueOf(m.getBankchrge())) %></td>
         <td><%= i.getTxndate() %></td>
         
     </tr>

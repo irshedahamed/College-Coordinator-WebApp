@@ -215,6 +215,8 @@
         
         String path = "%/staff%";
         List<String> list = new ArrayList<String>();
+        
+        List<String> listpath = new ArrayList<String>();
         List<String> listdescp=new ArrayList<String>();        
           try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -227,6 +229,7 @@
             {
                 String file = rs.getString("filename");
                     listdescp.add(rs.getString("descp"));
+                    listpath.add(rs.getString("location"));
                  list.add(file);
                  
             }
@@ -239,9 +242,8 @@
               {
                   String str=list.get(i);
                   //session.setAttribute(str,list.get(i));
-                  session.setAttribute("path",path);
             %>
-            <a href="${pageContext.request.contextPath}/notesdownload?ind1=<%=str %>" ><%= str %> - <%=listdescp.get(i)%></a>
+            <a href="${pageContext.request.contextPath}/formsdownload?path=<%=listpath.get(i) %>ind1=<%=str %>" ><%= str %> - <%=listdescp.get(i)%></a>
 <br>
 <%
            
