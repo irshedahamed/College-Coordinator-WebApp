@@ -1,3 +1,4 @@
+<%@page import="Actor.Staff"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -113,6 +114,15 @@
     </ul></li>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="events.jsp">Events</a>
 
+<%
+Staff s = new Staff(username);
+if(s.getCouncillorDetails().getBatch()!=null)
+{
+%>
+ <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="councillor/home.jsp">Councillor View</a>
+        <%
+}
+%>
 
 
 
