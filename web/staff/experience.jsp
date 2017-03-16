@@ -3,6 +3,7 @@
     Created on : 12 Jul, 2016, 10:13:25 PM
     Author     : Home
 --%>
+<%@page import="Actor.Staff"%>
 <%-- 
     Document   : education
     Created on : 12 Jul, 2016, 9:53:02 PM
@@ -165,7 +166,15 @@
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
 	</ul></li>
 
-
+<%
+Staff s = new Staff(username);
+if(s.getCouncillorDetails().getBatch()!=null)
+{
+%>
+ <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="councillor/home.jsp">Councillor View</a>
+        <%
+}
+%>
 
 
 </ul>						</nav>

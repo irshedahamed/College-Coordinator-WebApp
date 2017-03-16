@@ -1,3 +1,4 @@
+<%@page import="Actor.Staff"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
@@ -189,7 +190,16 @@
 	</ul></li>
 
 
-
+<%
+Staff s = new Staff(username);
+if(s.getCouncillorDetails().getBatch()!=null)
+{
+%>
+ <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="councillor/home.jsp">Councillor View</a>
+        <%
+}
+%>
+        
 
 </ul>						</nav>
 					</div>
