@@ -3,6 +3,7 @@
     Created on : Aug 10, 2016, 9:38:34 AM
     Author     : Lenovo
 --%>
+<%@page import="Actor.Student"%>
 <%@page import="com.action.Find"%>
 <%-- 
     Document   : studentpassword
@@ -57,7 +58,7 @@
 		
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
-		        
+</div>
 	
 		
 		<header id="page-header"  class="fixed-header">
@@ -256,6 +257,13 @@
                 %>
                 
                 <br><br><br>
+                
+                <style>
+                    .bodered{
+                        padding: 0px;
+                    }
+                    
+                </style>
                 <link href="../css/tabledesign.css" rel="stylesheet">
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
            
@@ -268,17 +276,21 @@
             {
                 rollno=rs.getString("rollno");
                 pass=rs.getString("password");
-                %>
+                Student s=Student.getById(rollno);
+        %>
             <center>
             
-                <table class="bordered" style="border: 2px solid;">
+                <table class="bordered" style="border: 2px solid;page-break-inside: avoid;">
                 <tr>
-                  <th><center>URL</center></th>
+                    
+                  <th><center>Name</center></th>
+                  <th style="border: 2px solid;"><center>URL</center></th>
         <th style="border: 2px solid;"><center>User Name</center></th>
 <th style="border: 2px solid;"><center>Password</center></th>
 
         </tr>
                 <tr style="border: 2px solid;">
+                    <td style="border: 2px solid;"><center><%=s.getName()%></center></td>
                     <td style="border: 2px solid;"><center>www.portal.stjosephstechnology.ac.in</center></td>
                     <td style="border: 2px solid;"><center><%=rollno.toUpperCase()%></center></td>
              <td><center><%=pass%></center></td>
