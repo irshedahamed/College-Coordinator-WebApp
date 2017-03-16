@@ -120,7 +120,7 @@
     </thead>
 <%
     int sno=0;
-    for(Student s:Student.getAll(Find.dept(username), batch, "A")){
+    for(Student s:Student.getAll(Find.dept(username), batch, "%")){
 %>
     <tr>
     <td><%=++sno%></td>
@@ -217,8 +217,7 @@
    %> 
         
 </table>
-    <input type="submit" value="submit">
-        </form>
+   
     </body>
    <%
     }
