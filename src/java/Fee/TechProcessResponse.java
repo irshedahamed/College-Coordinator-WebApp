@@ -190,7 +190,7 @@ public class TechProcessResponse {
        setRqst_token(splitres[10].split("=")[1]);
     
     }
-    public static TechProcessResponse fetchby(String mup)
+    public static TechProcessResponse fetchby(String mup,String From,String To)
     {
         TechProcessResponse m = new TechProcessResponse();
       try{  
@@ -201,7 +201,7 @@ public class TechProcessResponse {
         
         st = con.createStatement();
         
-        ResultSet rs = st.executeQuery("Select * from techprocess where mupno = '"+mup+"'");
+        ResultSet rs = st.executeQuery("Select * from techprocess where mupno = '"+mup+"' and time >= '"+From+"' and time <= '"+To+"'");
         
          rs.afterLast();
          

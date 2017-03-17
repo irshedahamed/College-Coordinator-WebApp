@@ -35,7 +35,7 @@
     <thead>
      
     <tr>
-        
+        <th>S No</th>
         <th >Roll No</th>
         <th>Register Number</th>
         
@@ -50,21 +50,17 @@
         String Acyear = (String) request.getAttribute("Acyear");
         String Batch = (String) request.getAttribute("Batch");
         String Dept = (String) request.getAttribute("Dept");
+        String From = (String) request.getAttribute("From");
+        String To = (String) request.getAttribute("To");
+        
        int sno=0;        
          ArrayList<MUResponse> List = (ArrayList<MUResponse>) MUResponse.fetchby(Acyear);
            for(MUResponse m : List)
          {
-             String s = m.getRefno();
-             IBResponse i = IBResponse.fetchby(s);
-             String p = i.getMup();
-             
-             if(p!=null)
+             IBResponse i = IBResponse.fetchby(m.getRefno(),From,To);
+             if(i!=null)
              {
-                 
-             String r = m.getRollno();
-             
-             
-             Student stu = Student.getById(r);
+             Student stu = Student.getById(m.getRollno());
              if(Batch.equals(stu.getBatch()) && ((Dept.equals(stu.getDept()) || Dept.equals("%")) ))
              {
     %>
@@ -85,8 +81,7 @@
     }
 
 }
-        
-        %>
+    %>
             </table>
        </center>
           </div></div></section>
