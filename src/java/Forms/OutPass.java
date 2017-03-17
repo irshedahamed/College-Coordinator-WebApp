@@ -214,7 +214,7 @@ public class OutPass {
     
     public String getSMSContent(){
         if(Student.getById(rollno).getAccomodation().equalsIgnoreCase("hostel"))
-    return "Dear Parent, On basis of your request  outpass has been granted from "+Find.getFormattedDate(from)+"  to "+Find.getFormattedDate(LocalDate.parse(till).plusDays(1).toString().replace("-",""))+" 7 AM";
+    return "Dear Parent, Based on  your request  outpass has been granted from "+Find.getFormattedDate(from)+"  to "+Find.getFormattedDate(LocalDate.parse(till).plusDays(1).toString().replace("-",""))+" 7 AM";
     else
             return null;
     }
