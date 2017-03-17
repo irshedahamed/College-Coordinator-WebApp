@@ -27,6 +27,25 @@ public class Student {
     String regno;
     String sex;
     String accomodation;
+    String mobile;
+    String mailid;
+
+    public String getMailid() {
+        return mailid;
+    }
+
+    public void setMailid(String mailid) {
+        this.mailid = mailid;
+    }
+    
+    
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
     public String getAccomodation() {
         return accomodation;
@@ -42,6 +61,51 @@ public class Student {
     private String govt_mang;
     private String sport;
     private String scholarship;
+    private String doa;
+    private String orank;
+    private String crank;
+    private String gname;
+    private String moi;
+
+        public String getDoa() {
+            return doa;
+        }
+
+        public void setDoa(String doa) {
+            this.doa = doa;
+        }
+
+        public String getOrank() {
+            return orank;
+        }
+
+        public void setOrank(String orank) {
+            this.orank = orank;
+        }
+
+        public String getCrank() {
+            return crank;
+        }
+
+        public void setCrank(String crank) {
+            this.crank = crank;
+        }
+
+        public String getGname() {
+            return gname;
+        }
+
+        public void setGname(String gname) {
+            this.gname = gname;
+        }
+
+        public String getMoi() {
+            return moi;
+        }
+
+        public void setMoi(String moi) {
+            this.moi = moi;
+        }
 
         public String getAllotment() {
             return allotment;
@@ -79,10 +143,76 @@ public class Student {
  
     }
     
-    public Admission admission;
+    private Admission admission;
+    private Academic academic;
+    private FatherDetails fatherDetails;
+    private MotherDetails motherDetails;
+    private LocalGuardian localGuardian;
+    private OtherDetails otherDetails;
+    private Contact contact;
+    private Passport passport;
+    private Visa visa;
+    private General general;
+
+    public Academic getAcademic() {
+        if(academic==null)
+            academic=fetchAcademicDetails();
+        return academic;
+    }
+
+    public FatherDetails getFatherDetails() {
+        if(fatherDetails==null)
+            fatherDetails=fetchFatherDetails();
+        return fatherDetails;
+    }
+
+    public MotherDetails getMotherDetails() {
+        if(motherDetails==null)
+            motherDetails=fetchMotherDetails();
+        return motherDetails;
+    }
+
+    public LocalGuardian getLocalGuardian() {
+        if(localGuardian==null)
+            localGuardian=fetchLocalGuardianDetails();
+        return localGuardian;
+    }
+
+    public OtherDetails getOtherDetails() {
+        if(otherDetails==null)
+            otherDetails=fetchOtherDetails();
+        return otherDetails;
+    }
+
+    public Contact getContact() {
+        if(contact==null)
+            contact=fetchContactDetails();
+        return contact;
+    }
+
+    public Passport getPassport() {
+        if(passport==null)
+            passport=fetchPassportDetails();
+        return passport;
+    }
+
+    public Visa getVisa() {
+        if(visa==null)
+            visa=fetchVisaDetails();
+        return visa;
+    }
+
+    public General getGeneral() {
+        if(general==null)
+            general=fetchGeneralDetails();
+        return general;
+    }
     
-    public void fetchAdmission(){
-    admission=getAdmissionDetails();
+    public Admission getAdmissionDetails(){
+        if(admission==null)
+    admission=fetchAdmissionDetails();
+        
+        return admission;
     }
 
     
@@ -150,7 +280,7 @@ public class Student {
     else
         return false;
     }
-     public  Admission getAdmissionDetails(){
+     private  Admission fetchAdmissionDetails(){
     
     
          
@@ -172,6 +302,10 @@ public class Student {
                         a.setGovt_mang(rs.getString("govt_mang"));
                         a.setScholarship(rs.getString("scholarship"));
                         a.setSport(rs.getString("sports_admin"));
+                        a.setCrank(rs.getString("community_rank"));
+                        a.setOrank(rs.getString("overallrank"));
+                        a.setGname(rs.getString("gamename"));
+                        a.setDoa(rs.getString("doa"));
                         
 
                         
@@ -216,7 +350,9 @@ public class Student {
                         s.setName(rs.getString("name"));
                         s.setAccomodation(rs.getString("accomodation"));
                         s.setSec(rs.getString("sec"));
+                        s.setMobile(rs.getString("mobileno"));
                         s.setSex(rs.getString("gender"));
+                        s.setMailid(rs.getString("mailid"));
                         list.add(s);
                     }
     }catch(Exception e){
@@ -259,7 +395,8 @@ public class Student {
                         s.setSec(rs.getString("sec"));
                         s.setSex(rs.getString("gender"));
                         s.setAccomodation(rs.getString("accomodation"));
-                       
+                        s.setMobile(rs.getString("mobileno"));
+                        s.setMailid(rs.getString("mailid"));
 
                         
                     }
@@ -953,7 +1090,7 @@ public class Visa{
         }
     
 }
-  public Academic getAcademicDetails(){
+  private Academic fetchAcademicDetails(){
     
     
          
@@ -976,14 +1113,14 @@ public class Visa{
                         a.setTenthmedium(rs.getString("tenmed"));
                         a.setTenthyearofpass(rs.getString("tenyop"));
                         a.setTenthboard(rs.getString("tenboard"));
-                        a.setTwelfthschool(rs.getString("twlschool"));
-                        a.setTwelfthmark(rs.getString("twlmark"));
+                        a.setTwelfthschool(rs.getString("twlscl"));
+                        a.setTwelfthmark(rs.getString("twlmrks"));
                         a.setTwelfthmedium(rs.getString("twlmed"));
                         a.setTwelfthyearofpass(rs.getString("twlyop"));
                         a.setTwelfthboard(rs.getString("twlboard"));        
-                        a.setDiplomaclg(rs.getString("dipcol"));
+                        a.setDiplomaclg(rs.getString("dipcoll"));
                         a.setDiplomaboard(rs.getString("dipboard"));
-                        a.setDiplomamark(rs.getString("dipmark"));
+                        a.setDiplomamark(rs.getString("dipmrks"));
                         a.setDiplomamedium(rs.getString("dipmed"));
                         a.setDiplomayearofpass(rs.getString("dipyop"));
                         
@@ -1006,7 +1143,7 @@ public class Visa{
         
     return a;
     }
- public  Contact getContactDetails(){
+ private  Contact fetchContactDetails(){
     
     
          
@@ -1053,9 +1190,9 @@ public class Visa{
         
     return c;
     }
-public  FatherDetails getFatherDetails(){
+private  FatherDetails fetchFatherDetails(){
     
-    
+   
          
                Connection conn=null;
     Statement stmt=null;
@@ -1098,7 +1235,7 @@ public  FatherDetails getFatherDetails(){
         
     return c;
     }
-public  MotherDetails getMotherDetails(){
+private  MotherDetails fetchMotherDetails(){
     
     
          
@@ -1119,7 +1256,7 @@ public  MotherDetails getMotherDetails(){
                        c.setMothername(rs.getString("mothers_name"));
                        c.setOccupation(rs.getString("occupation"));
                        c.setQualification(rs.getString("qualification"));
-                       c.setMobile(rs.getString("mobile"));
+                       c.setMobile(rs.getString("mobileno"));
                        c.setMail(rs.getString("mailid"));
                        c.setAddress(rs.getString("address"));
                        c.setDesig(rs.getString("designation"));
@@ -1143,7 +1280,7 @@ public  MotherDetails getMotherDetails(){
         
     return c;
     }
-public  General getGeneralDetails(){
+private  General fetchGeneralDetails(){
     
     
          
@@ -1190,7 +1327,7 @@ public  General getGeneralDetails(){
     return c;
     }
 
-public  LocalGuardian getLocalGuardianDetails(){
+private  LocalGuardian fetchLocalGuardianDetails(){
     
     
          
@@ -1234,7 +1371,7 @@ public  LocalGuardian getLocalGuardianDetails(){
     return c;
     }
 
-public  OtherDetails getOtherDetails(){
+private  OtherDetails fetchOtherDetails(){
     
     
          
@@ -1280,7 +1417,7 @@ public  OtherDetails getOtherDetails(){
     return c;
     }
 
-public  Passport getPassportDetails(){
+private  Passport fetchPassportDetails(){
     
     
          
@@ -1318,7 +1455,7 @@ public  Passport getPassportDetails(){
         
     return c;
     }
-public Visa getVisaDetails(){
+private Visa fetchVisaDetails(){
     
     
          

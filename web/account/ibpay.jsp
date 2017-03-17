@@ -35,7 +35,7 @@
     <thead>
      
     <tr>
-        
+        <th>S No</th>
         <th >Roll No</th>
         <th>Register Number</th>
         

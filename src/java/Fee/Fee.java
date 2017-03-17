@@ -74,12 +74,12 @@ public class Fee {
     List<BasicFee> fee=BasicFee.getByBatch(s.getBatch());
     SpecialFee sfee=SpecialFee.getFee(id, cyear);
             if(sfee==null){
-                s.fetchAdmission();
+                
                 String type="";
                 
-                if(s.admission.getGovt_mang().equals("Counseling"))
+                if(s.getAdmissionDetails().getGovt_mang().equals("Counseling"))
                 type="Government";
-                else if(s.admission.getSport().equals("Yes"))
+                else if(s.getAdmissionDetails().getSport().equals("Yes"))
                     type="Sports";
                 else //if(s.admission.getGovt_mang().equals("Management"))
                     type="Management";
