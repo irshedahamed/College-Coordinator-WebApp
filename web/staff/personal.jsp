@@ -1,3 +1,4 @@
+<%@page import="Actor.Staff"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
@@ -160,7 +161,15 @@
     <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="displayform.jsp">Forms</a>
 
 </li>
-
+<%
+Staff s = new Staff(username);
+if(s.getCouncillorDetails().getBatch()!=null)
+{
+%>
+ <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="councillor/home.jsp">Councillor View</a>
+        <%
+}
+%>
 
 
 </ul>						</nav>

@@ -249,7 +249,7 @@
         <servlet-class>PaymentDetails</servlet-class>
     </servlet>
 <servlet>
-        <servlet-name>receiveIBResponse</servlet-name>
+    <servlet-name>receiveIBResponse</servlet-name>
         <servlet-class>Fee.receiveIBResponse</servlet-class>
     </servlet>
     <servlet>
@@ -271,6 +271,7 @@
     <servlet>
         <servlet-name>CouncillorAttEdit</servlet-name>
         <servlet-class>CouncillorAttEdit</servlet-class>
+
     </servlet>
     <servlet>
         <servlet-name>StaffProfileEdit</servlet-name>
@@ -515,6 +516,7 @@
     <servlet-mapping>
         <servlet-name>testRequest</servlet-name>
         <url-pattern>/testRequest</url-pattern>
+
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>InsertYear1</servlet-name>
@@ -549,17 +551,19 @@
         <url-pattern>/receiveTechProcessAPIResponse</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>councillorattupdate</servlet-name>
         <url-pattern>/councillorattupdate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CouncillorAttEdit</servlet-name>
         <url-pattern>/CouncillorAttEdit</url-pattern>
+
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StaffProfileEdit</servlet-name>
         <url-pattern>/StaffProfileEdit</url-pattern>
-    </servlet-mapping>
+</servlet-mapping>
     <servlet-mapping>
         <servlet-name>Authenticate</servlet-name>
         <url-pattern>/Authenticate</url-pattern>
