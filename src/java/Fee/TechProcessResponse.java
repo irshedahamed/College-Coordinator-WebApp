@@ -201,7 +201,7 @@ public class TechProcessResponse {
         
         st = con.createStatement();
         
-        ResultSet rs = st.executeQuery("Select * from techprocess where mupno = '"+mup+"' and time >= '"+From+"' and time <= '"+To+"'");
+        ResultSet rs = st.executeQuery("Select * from techprocess where mupno = '"+mup+"' and time >= '"+From+"' and time <= '"+To+"' ans status='0300'");
         
          rs.afterLast();
          

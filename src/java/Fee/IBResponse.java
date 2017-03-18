@@ -112,7 +112,7 @@ Connection conn=null;
         st = con.createStatement();
        
         
-        ResultSet rs = st.executeQuery("Select * from ibresponse where mup = '"+mup+"'");
+        ResultSet rs = st.executeQuery("Select * from ibresponse where mup = '"+mup+"' and status='Y'");
         
          rs.afterLast();
          
