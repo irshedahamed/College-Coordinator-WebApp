@@ -7,6 +7,10 @@ package Fee;
 
 import com.tp.pg.util.TransactionRequestBean;
 import com.tp.pg.util.TransactionResponseBean;
+import dbconnection.dbcon;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  *
@@ -14,6 +18,36 @@ import com.tp.pg.util.TransactionResponseBean;
  */
 public class TechProcess {
     
+    static{
+    Connection conn=null;
+         Statement stmt=null;
+         try{
+         conn=new dbcon().getConnection("sjitportal");
+         stmt=conn.createStatement();
+         String sql="select value from credentials where ckey like 'TPencKey'";
+         ResultSet rs=stmt.executeQuery(sql);
+         rs.next();
+         encKey=rs.getString("value");
+         rs.close();
+         sql="select value from credentials where ckey = 'TPIV'";
+         rs=stmt.executeQuery(sql);
+         rs.next();
+         IV=rs.getString("value");
+         rs.close();
+         }
+         catch(Exception e){
+         e.printStackTrace();
+         }finally{
+             try {
+                 if(stmt!=null)
+                     stmt.close();
+                 if(conn!=null)
+                     conn.close();
+             } catch (Exception ex) {
+             ex.printStackTrace();
+             }
+         }
+    }
   
    private static String merchantCode="L2857";
    private String refno;
@@ -24,8 +58,8 @@ public class TechProcess {
    private String APIReturnURL;
    private static String WebServiceLocator="https://www.tpsl-india.in/PaymentGateway/services/TransactionDetailsNew";
    private String CustID;
-   private static String encKey="4171074046HIFPTP";
-   private static String IV="2518055670HTWQVR";
+   private static String encKey;
+   private static String IV;
    private TransactionRequestBean  reqBean;
    private static TransactionResponseBean resBean; 
 
