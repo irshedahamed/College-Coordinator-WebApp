@@ -6,6 +6,7 @@
 
 import General.Batch;
 import com.action.Base;
+import com.action.Find;
 import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -207,12 +208,9 @@ String UPLOAD_DIRECTORY="hello";
                               if(connection1!=null)
                                 connection1.close();
                               List<String> depts=new ArrayList<String>();
-                              depts.add("cse");
-                              depts.add("eee");
-                              depts.add("ece");
-                              depts.add("mech");
-                              depts.add("it");
-                              depts.add("civil");
+                              for(String d:Find.Depts)
+                              depts.add(d);
+                              
                               
                               for(String department:depts){
                                   String newsem;

@@ -1,3 +1,4 @@
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="dbconnection.dbcon"%>
@@ -85,6 +86,10 @@
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="editattendance.jsp">Edit</a>
 </ul></li>
 
+   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="requests.jsp">Grant OutPass</a>
+  
+</li>
+
     <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="sms.jsp">SMS</a>
 
 
@@ -94,7 +99,11 @@
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SpecialFee.jsp">Individual Fee</a>
 </ul></li>
 
-
+<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 "><a href="#">Student Update</a>
+<ul class="sub-menu">
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812  "><a href="sectionUpdate.jsp">Section</a>
+                   
+</ul></li>
 
 </ul>						</nav>
 					</div>
@@ -106,7 +115,7 @@
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
             <center><form action="viewattreport.jsp" class="sky-form" method="post" target="_blank">
-    <header>OVERALL ATTENDENCE</header>
+    <header>OVERALL ATTENDANCE</header>
     <fieldset>					
 					<section>
 						<label class="input">
@@ -116,12 +125,8 @@
                <select id="dept" name="dept" required>
                 <option  disabled selected>Select</option>
         
-                        <option value="cse">CSE</option>
-                                                    <option value="ece">ECE</option>
-                                                    <option value="mech">MECH</option>
-                                                    <option value="it">IT</option>
-                                                    <option value="civil">CIVIL</option>
-                                                    <option value="eee">EEE</option>
+        
+                   <%=Find.getDeptHTMLContent() %>
                
             </select>
                     <i></i>                                    </label>

@@ -126,7 +126,7 @@
                    
        
              <center><form action="personalDisplay.jsp" class="sky-form" method="post" target="_blank">
-    <header>DAILY REPORT</header>
+    <header>PERSONAL REPORT</header>
     <fieldset>					
 					<section>
 

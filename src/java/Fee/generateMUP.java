@@ -84,7 +84,7 @@ public class generateMUP extends HttpServlet {
         Fee f=Fee.getFeeById(s.getId());
         params += "HandleID=" + "H_MULTHIRD";
         int i=1;
-        for(String type:Fee.subCategory){
+        for(String type:Fee.getsubCategory()){
         params += ("&Amt"+i+"=" + f.getByType(type));
         
             sum+=Integer.valueOf(f.getByType(type));
@@ -96,7 +96,7 @@ public class generateMUP extends HttpServlet {
         params += ("&AddDet1=" + s.getName());
         params += ("&AddDet2=" + s.getId());
         params += ("&AddDet3=" + s.getDept());
-        params+="&ReturnURL=" + com.action.Find.SERVERURL+"receiveMUResponse";
+        params+="&ReturnURL=https://" + request.getServerName()+"/receiveMUResponse";
         RequestDispatcher rd=request.getRequestDispatcher("/sendPost.jsp?RUrl="+(url+params).replace("&", "%26").replace(" ", "%20"));
         rd.forward(request, response);
     }

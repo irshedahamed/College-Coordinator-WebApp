@@ -283,8 +283,13 @@
                                           <img src="../../Mother/Batch<%=batch%>/<%=rollno.toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                     </center>
                                     </td>
-                                    <td><center><h2>Local Guardian</h2>
-                                          <img src="../../LocalGuardian/Batch<%=batch%>/<%=rollno.toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                    <td><center><h2>Local Guardian 1</h2>
+                                          <img src="../../LocalGuardian1/Batch<%=batch%>/<%=rollno.toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                                    </center>
+                                    </td>
+                                    
+                                    <td><center><h2>Local Guardian 2</h2>
+                                          <img src="../../LocalGuardian2/Batch<%=batch%>/<%=rollno.toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                     </center>
                                     </td>
                                 </tr>

@@ -4,6 +4,7 @@
     Author     : Lenovo
 --%>
 
+<%@page import="java.time.LocalDate"%>
 <%@page import="Fee.MUResponse"%>
 <%@page import="java.util.Date"%>
 <%@page import="Actor.Student"%>
@@ -33,6 +34,9 @@
     session.setAttribute("deptname",Find.sdept(username) );
     MUResponse mu=(MUResponse)session.getAttribute("MUResponse");
         boolean feepaid=false;
+        if(request.getAttribute("paid")!=null)
+        if(request.getAttribute("paid").toString().equals("Y"))
+            feepaid=true;
         String mupno=mu.getRefno();
         String bcharge=mu.getBankchrge();
         %>
@@ -125,17 +129,27 @@ return data;
       <div class="row">
          
          <div class="row" id="divPrintChallan">
+           
+            
              <%
                  Fee.Fee f=Fee.Fee.getFeeById(s.getId());
                  String bankcharge="<br>Bank Charges";
                  String bankamount="<br>"+bcharge;
                  
                      Float bankchr=Float.valueOf(bcharge);
-             for(String type:Fee.Fee.subCategory)
+                     int once=0;
+             for(String type:Fee.Fee.getsubCategory())
                  {
                      
              %> 
-               <div style="page-break-before: always;"><br><br><br><br>
+             
+               <div style="page-break-before: always;"><br><br><br>
+                     <% if( (!feepaid) &&once==0){
+                     once=1;
+                     %>
+                      <div><b>This Challan valid upto <%=Find.getFormattedDate(LocalDate.now().plusDays(10).toString().replace("-","")) %></b></div>
+                   <%}%>
+                   
             <div style="border: 2px solid  #000; padding-left: 7px; float: left; padding-right: 7px;">
                <div style="float: none; clear: both;">
                    <%=getContent(s, f.getByType(type)+bankamount, Fee.Find.getFeeDetails(Fee.Find.getType(type))+bankcharge,Fee.Find.getType(type),String.valueOf((Integer.valueOf(f.getByType(type))+bankchr)),feepaid,mupno) %>
@@ -180,7 +194,7 @@ return data;
        
           <% 
                 Integer sum=0;
-                for(String type:Fee.Fee.subCategory){%>
+                for(String type:Fee.Fee.getsubCategory()){%>
             <tr>
                <td><%=Fee.Find.getType(type)%></td>
                <td align="right"><%= f.getByType(type)%></td>

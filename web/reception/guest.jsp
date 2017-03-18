@@ -271,12 +271,9 @@ $(document).ready(function(){
              meet=data;
             if(data==="Student" ||data==="Staff" || data==="HOD"){
                 
-                var eledept="<select id='dept' style='background:white'>   <option value=''>Dept</option><option value='cse'>CSE</option>"+
-                                                  "  <option value=\"ece\">ECE</option>"+
-                                                  "  <option value=\"mech\">MECH</option>"+
-                                                  "  <option value=\"it\">IT</option>"+
-                                                   " <option value=\"civil\">CIVIL</option>"+
-                                                   " <option value=\"eee\">EEE</option>"+
+                var eledept="<select id='dept' style='background:white'>   <option value=''>Dept</option>"+
+                                                        
+                "<%=Find.getDeptHTMLContent() %>"+
                                                    " <option value=\"first\">Science & Humanities</option></select>";
                                            
                                            $("#sublist").html(eledept);
@@ -528,7 +525,10 @@ $(document).ready(function(){
                  <option value="VI">Visitor</option>
                  <option value="AL">Alumni</option>
                  <option value="PA">Parent</option>
-             
+                 <option value="LG">Guardian</option>
+                 <option value="DR">Driver</option>
+                 
+                 
              </select>
                  </td></tr>
              <tr><td>

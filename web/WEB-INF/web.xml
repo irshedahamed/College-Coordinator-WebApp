@@ -232,6 +232,59 @@
         <servlet-name>testRequest</servlet-name>
         <servlet-class>General.testRequest</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InsertYear1</servlet-name>
+        <servlet-class>InsertYear1</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BatchAssign</servlet-name>
+        <servlet-class>BatchAssign</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentDetail</servlet-name>
+        <servlet-class>PaymentDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PaymentDetails</servlet-name>
+        <servlet-class>PaymentDetails</servlet-class>
+    </servlet>
+<servlet>
+    <servlet-name>receiveIBResponse</servlet-name>
+        <servlet-class>Fee.receiveIBResponse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>receiveTechProcessResponse</servlet-name>
+        <servlet-class>Fee.receiveTechProcessResponse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TechProcess</servlet-name>
+        <servlet-class>API.TechProcess</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>receiveTechProcessAPIResponse</servlet-name>
+        <servlet-class>API.receiveTechProcessAPIResponse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>councillorattupdate</servlet-name>
+        <servlet-class>councillorattupdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CouncillorAttEdit</servlet-name>
+        <servlet-class>CouncillorAttEdit</servlet-class>
+
+    </servlet>
+    <servlet>
+        <servlet-name>StaffProfileEdit</servlet-name>
+        <servlet-class>StaffProfileEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Authenticate</servlet-name>
+        <servlet-class>API.Authenticate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendPasswordSMS</servlet-name>
+        <servlet-class>SendPasswordSMS</servlet-class>
+</servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -463,7 +516,62 @@
     <servlet-mapping>
         <servlet-name>testRequest</servlet-name>
         <url-pattern>/testRequest</url-pattern>
+
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertYear1</servlet-name>
+        <url-pattern>/InsertYear1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BatchAssign</servlet-name>
+        <url-pattern>/BatchAssign</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentDetail</servlet-name>
+        <url-pattern>/PaymentDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PaymentDetails</servlet-name>
+        <url-pattern>/PaymentDetails</url-pattern>
+   </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>receiveIBResponse</servlet-name>
+        <url-pattern>/receiveIBResponse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>receiveTechProcessResponse</servlet-name>
+        <url-pattern>/receiveTechProcessResponse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TechProcess</servlet-name>
+        <url-pattern>/TechProcess</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>receiveTechProcessAPIResponse</servlet-name>
+        <url-pattern>/receiveTechProcessAPIResponse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+
+        <servlet-name>councillorattupdate</servlet-name>
+        <url-pattern>/councillorattupdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CouncillorAttEdit</servlet-name>
+        <url-pattern>/CouncillorAttEdit</url-pattern>
+
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffProfileEdit</servlet-name>
+        <url-pattern>/StaffProfileEdit</url-pattern>
+</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Authenticate</servlet-name>
+        <url-pattern>/Authenticate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendPasswordSMS</servlet-name>
+        <url-pattern>/SendPasswordSMS</url-pattern>
+</servlet-mapping>
     <session-config>
         <session-timeout>
             30

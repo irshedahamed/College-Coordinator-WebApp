@@ -1,3 +1,4 @@
+<%@page import="Actor.Student"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.action.Find"%>
@@ -52,8 +53,13 @@
     <img src="../images/logo2.png" height="165px" width="700px" />	</center>	
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
-		        
-	
+</div>
+    <style rel="stylesheet">
+        .bordered td{
+            padding: 0px;
+        }
+        
+    </style>
 		
 	
 
@@ -63,7 +69,7 @@
             <%
     int i=0;
 String user=request.getParameter("choose");
-String dept=request.getParameter("dept");
+String deptReq=request.getParameter("dept");
 String dateonentry=request.getParameter("datepicker");
 String enddate;
 if(request.getParameter("enddatepicker")==null)
@@ -80,29 +86,10 @@ enddate = sdf.format(c.getTime());
 
 
 if(user.equals("student")||user.equals("staff"))
-{
-    Connection conn=null;
-    Statement stmt=null;
-try
-{
-                        
-                           // Class.forName("com.mysql.jdbc.Driver").newInstance();                      
-                             conn=new dbcon().getConnection("sjitportal?zeroDateTimeBehavior=convertToNull");
-                            
-                           stmt=conn.createStatement();
-                            String sql;
-                                if(user.equals("student"))
-                            sql="select a.rollno,a.intime,a.outtime,b.rollno,b.name,b.mobileno from entry a,"+dept+".student_personal b where ( (intime >= '"+dateonentry+"%' and intime <= '"+enddate+"%') or (outtime >= '"+dateonentry+"%' and outtime <= '"+enddate+"%')) and a.rollno=b.rollno";
-                            else
-                                sql="select a.rollno,a.intime,a.outtime,CONCAT(b.tittle,b.name) as name,b.mobile1 as mobileno,b.desg from entry a,"+dept+".staff_general b where ( (intime >= '"+dateonentry+"%' and intime <= '"+enddate+"%') or (outtime >= '"+dateonentry+"%' and outtime <= '"+enddate+"%')) and a.rollno=b.staffid";
-                            ResultSet rs=stmt.executeQuery(sql);
-                       
-                            
-
-%>
-                            
+{%>
+            
 <center>
-    <h3>Entry Report from <%=dateonentry%> till <%=enddate%></h3><br>
+    <h3>Entry Report from <%=Find.getFormattedDate(dateonentry)%> till <%=Find.getFormattedDate(enddate)%></h3><br>
     <h4>Category: <%=user.toUpperCase()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -119,10 +106,10 @@ try
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Department: <%=dept.toUpperCase()%></h4>
+        Department: <%=deptReq.toUpperCase()%></h4>
     <br>    
                             <table class="bordered">
-                                <tr>   
+                                <thead>  <tr>   
                                 <th>S.No</th>
                                 <th>ID</th>
                                 <th>NAME</th>
@@ -130,29 +117,66 @@ try
                                 <th>MOBILE NO</th>
                                 <th>DEPARTMENT</th>
                                 <th>IN TIME</th>
-                                <th>OUT TIME</th></tr>
+                                <th>OUT TIME</th></tr></thead>
+            
+            <%
+    Connection conn=null;
+    Statement stmt=null;
+try
+{
+                        String[] depts=new String[15];
+                    if(deptReq.equals("all"))
+                        depts=Find.Depts;
+                    else
+                        depts[0]=new String(deptReq);
+                        
+                           // Class.forName("com.mysql.jdbc.Driver").newInstance();                      
+                             conn=new dbcon().getConnection("sjitportal?zeroDateTimeBehavior=convertToNull");
+                            
+                           stmt=conn.createStatement();
+                            String sql;
+                            for(String dept:depts){
+                                if(user.equals("student"))
+                            sql="select a.rollno,a.intime,a.outtime,b.rollno,b.name,b.mobileno from entry a,"+dept+".student_personal b where ( (intime >= '"+dateonentry+"%' and intime <= '"+enddate+"%') or (outtime >= '"+dateonentry+"%' and outtime <= '"+enddate+"%')) and a.rollno=b.rollno";
+                            else
+                                sql="select a.rollno,a.intime,a.outtime,CONCAT(b.tittle,b.name) as name,b.mobile1 as mobileno,b.desg from entry a,"+dept+".staff_general b where ( (intime >= '"+dateonentry+"%' and intime <= '"+enddate+"%') or (outtime >= '"+dateonentry+"%' and outtime <= '"+enddate+"%')) and a.rollno=b.staffid";
+                            ResultSet rs=stmt.executeQuery(sql);
+                       
+                            
+
+%>
+                            
                             <%while(rs.next())    
                             {
                             %>
                             <tr>
                                 <td> <%=++i%> </td>
-                                <td> <%=rs.getString("rollno")%> </td>
+                                <td> <center><%=rs.getString("rollno")%></center> </td>
                                 <td> <%=rs.getString("name")%> </td>
                                 
                                 <%if(user.equals("student")){%>
-                                <td> STUDENT </td>
+                                
+                                <%if(Student.getById(rs.getString("rollno")).isHostel()){ %>
+                                <td><center> STUDENT HS</center> </td>
+                                <%}
+                                else{
+                                %>
+                                <td><center> STUDENT DS</center> </td>
+                                <%
+                                }
+                                %>
                                 <%}else{%>
-                                <td><%=rs.getString("desg")%></td>
+                                <td><center><%=rs.getString("desg")%></center></td>
                                 <%}%>
                                 
                                 
-                                <td> <%=rs.getString("mobileno")%> </td>
-                                <td> <%=dept%> </td>
+                                <td><center> <%=rs.getString("mobileno")%></center> </td>
+                                <td><center> <%=dept.toUpperCase() %></center> </td>
                                  <%
                                 if(rs.getString("intime")!=null)
                                 {
                                 %>
-                                <td> <%=rs.getString("intime").substring(0,rs.getString("intime").length()-2) %> </td>
+                                <td><center> <%=rs.getString("intime").substring(0,rs.getString("intime").length()-2) %></center> </td>
                                  <%
                             }
                             else{
@@ -165,7 +189,7 @@ try
                                 if(rs.getString("outtime")!=null)
                                 {
                                 %>
-                                <td> <%=rs.getString("outtime").substring(0,rs.getString("outtime").length()-2) %> </td></tr>
+                                <td><center> <%=rs.getString("outtime").substring(0,rs.getString("outtime").length()-2) %></center> </td></tr>
                             <%
                             }
                             else{
@@ -178,9 +202,9 @@ try
                      
                             <%}
                             %>
-                              </table>
-</center>     
+                
                             <%}
+}
 catch(Exception e)
 {
     e.printStackTrace(); 
@@ -192,7 +216,10 @@ catch(Exception e)
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
-}
+}%>
+                                          </table>
+</center>     
+                            <%
 }
 else
 {
@@ -215,11 +242,11 @@ try
 %>
                             
 <center>
-      <h3>Entry Report from <%=dateonentry%> till <%=enddate%></h3><br>
+    <h3>Entry Report from <%=Find.getFormattedDate(dateonentry)%> till <%=Find.getFormattedDate(enddate)%></h3><br>
     <h4>Category: <%=user.toUpperCase()%></h4>
     <br>    
                             <table class="bordered">
-                                <tr>   
+                                <thead>   <tr>   
                                 <th>S.No</th>
                                 <th>ID</th>
                                 <th>NAME</th>
@@ -229,22 +256,22 @@ try
                                 <th>MEET</th>
                                 <th>REASON</th>
                                 <th>IN TIME</th>
-                                <th>OUT TIME</th></tr>
+                                <th>OUT TIME</th></tr></thead>
                             <%while(rs.next())    
                             {
                             %>
                             <tr>
                                 <td> <%=++i%> </td>
-                                <td> <%=rs.getString("rollno")%> </td>
-                                <td> <%=rs.getString("name")%> </td>
+                                <td> <center><%=rs.getString("rollno")%></center> </td>
+                                <td> <center><%=rs.getString("name")%> </center></td>
                                 
                            
-                                <td><%=Find.category(rs.getString("rollno"))%></td>
+                                <td><center><%=Find.category(rs.getString("rollno"))%></center></td>
                              
                                 
                                 
-                                <td> <%=rs.getString("sex")%> </td>
-                                <td> <%=rs.getString("mobile")%> </td>
+                                <td><center> <%=rs.getString("sex")%> </center></td>
+                                <td><center> <%=rs.getString("mobile")%></center> </td>
                                 <%
                                 String[] meet=rs.getString("meet").split("_");
                                 %>
@@ -280,8 +307,7 @@ try
                       
                             <%}
                             %>
-                              </table>
-</center>    
+                
                             <%}
 catch(Exception e)
 {
@@ -296,7 +322,8 @@ catch(Exception e)
         }
 }
 %>
-
+              </table>
+</center>    
 <%
 }
 
@@ -305,8 +332,6 @@ catch(Exception e)
         </div></div></section>
 
 
-			</div>
-			</div>
 
 
 

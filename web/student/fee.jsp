@@ -227,7 +227,7 @@
                 </thead>
             <% 
                 Integer sum=0;
-                for(String type:Fee.Fee.subCategory){%>
+                for(String type:Fee.Fee.getsubCategory()){%>
             <tr>
                <td><%=Fee.Find.getType(type)%></td>
                <td align="right"><%= f.getByType(type)%></td>

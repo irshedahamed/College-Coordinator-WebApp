@@ -21,7 +21,7 @@ public class dbcon {
         Connection con=null;
         try {  
              Class.forName("com.mysql.jdbc.Driver").newInstance();
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"root","1234");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"webapp","fluffy");
              
         } catch (SQLException ex) {
             Logger.getLogger(dbcon.class.getName()).log(Level.SEVERE, null, ex);
@@ -37,6 +37,6 @@ public class dbcon {
 
     public Connection getConnection() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+     }
     
 }

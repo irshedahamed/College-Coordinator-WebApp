@@ -4,6 +4,7 @@
     Author     : Home
 --%>
 
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="dbconnection.dbcon"%>
@@ -102,6 +103,11 @@
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="updateattendance.jsp">Mark Absentees</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="editattendance.jsp">Edit</a>
 </ul></li>
+
+   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="requests.jsp">Grant OutPass</a>
+  
+</li>
+
     <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="sms.jsp">SMS</a>
 
 
@@ -112,6 +118,11 @@
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SpecialFee.jsp">Individual Fee</a>
 </ul></li>
 
+<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 "><a href="#">Student Update</a>
+<ul class="sub-menu">
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812  "><a href="sectionUpdate.jsp">Section</a>
+                   
+</ul></li>
 
 </ul>						</nav>
 					</div>
@@ -133,13 +144,7 @@
                <select id="dept" name="dept" required>
                 <option  disabled selected>Select</option>
     
-                        <option value="cse">CSE</option>
-                                                    <option value="ece">ECE</option>
-                                                    <option value="mech">MECH</option>
-                                                    <option value="it">IT</option>
-                                                    <option value="civil">CIVIL</option>
-                                                    <option value="eee">EEE</option>
-               
+                   <%=Find.getDeptHTMLContent() %>
             </select>
                     <i></i>                                    </label>
                                                 </label>

@@ -3,6 +3,8 @@
     Created on : Aug 10, 2016, 9:38:34 AM
     Author     : Lenovo
 --%>
+<%@page import="Actor.Student"%>
+<%@page import="com.action.Find"%>
 <%-- 
     Document   : studentpassword
     Created on : 14 May, 2016, 6:56:07 PM
@@ -56,7 +58,7 @@
 		
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
-		        
+</div>
 	
 		
 		<header id="page-header"  class="fixed-header">
@@ -87,20 +89,20 @@
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="deletebatch.jsp">Delete Batch</a>
             </ul>
         </li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="course.jsp">Course</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Academic Year</a>
+            <ul class="sub-menu">
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="InsertYear1.jsp">Insert Academic Year</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="odd.jsp">Update Current</a>
+            </ul>
+        </li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="">Subjects</a>
         <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectAdd.jsp">Subject Add</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Subject View</a>
                         <ul class="sub-menu">
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=cse">CSE</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=ece">ECE</a>
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=eee">EEE</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=mech">MECH</a>
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=civil">CIVIL</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=it">IT</a>
-            </ul></li>
+                 <% for(String dept:Find.Depts){%>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=<%=dept%>"><%=dept.toUpperCase() %></a>
+                    <%}%>     </ul></li>
             </ul></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="feedetails.jsp">Fee Details</a></li>
     </ul>
@@ -198,13 +200,8 @@
                 <label class="select">
                     
                     <select name="dept">
-                      
-                        <option value="cse">CSE</option>
-                                                    <option value="ece">ECE</option>
-                                                    <option value="mech">MECH</option>
-                                                    <option value="it">IT</option>
-                                                    <option value="civil">CIVIL</option>
-                                                    <option value="eee">EEE</option>
+                         <%=Find.getDeptHTMLContent() %>
+                    
                     </select>
            
                 <i></i>
@@ -227,7 +224,7 @@
                     {
                         batch=rs1.getString("batch");
                 %>
-                <option value=<%=batch.substring(2,4)%>><%=batch%></option>
+                <option value="<%=batch%>"><%=batch%></option>
                 <%
                 }
 
@@ -260,40 +257,40 @@
                 %>
                 
                 <br><br><br>
+                
+                <style>
+                    .bodered{
+                        padding: 0px;
+                    }
+                    
+                </style>
                 <link href="../css/tabledesign.css" rel="stylesheet">
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
            
         <%
-            dept=request.getParameter("dept");
             batch=request.getParameter("batch");
-            if(dept.equals("cse"))
-            dept="cs";
-            else if(dept.equals("ece"))
-                dept="ec";
-            else if(dept.equals("eee"))
-                dept="ee";
-            else if(dept.equals("mech"))
-                dept="me";
-            else if(dept.equals("civil"))
-                dept="ce";
-            
-            ResultSet rs = st.executeQuery("select * from student_login_details where rollno like '"+batch+"%"+dept+"%'");
-            
+           
+             ResultSet rs = st.executeQuery("select l.*,p.name from student_login_details l,"+request.getParameter("dept")+".student_personal p where l.rollno=p.rollno and p.batch='"+batch+"'");
+             
             while(rs.next())
             {
                 rollno=rs.getString("rollno");
                 pass=rs.getString("password");
-                %>
+                Student s=Student.getById(rollno);
+        %>
             <center>
             
-                <table class="bordered" style="border: 2px solid;">
+                <table class="bordered" style="border: 2px solid;page-break-inside: avoid;">
                 <tr>
-                  <th><center>URL</center></th>
+                    
+                  <th><center>Name</center></th>
+                  <th style="border: 2px solid;"><center>URL</center></th>
         <th style="border: 2px solid;"><center>User Name</center></th>
 <th style="border: 2px solid;"><center>Password</center></th>
 
         </tr>
                 <tr style="border: 2px solid;">
+                    <td style="border: 2px solid;"><center><%=s.getName()%></center></td>
                     <td style="border: 2px solid;"><center>www.portal.stjosephstechnology.ac.in</center></td>
                     <td style="border: 2px solid;"><center><%=rollno.toUpperCase()%></center></td>
              <td><center><%=pass%></center></td>

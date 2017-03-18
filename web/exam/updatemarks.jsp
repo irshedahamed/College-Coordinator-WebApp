@@ -1,3 +1,5 @@
+<%@page import="General.Batch"%>
+<%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -137,12 +139,8 @@
            
                <select id="dept" name="dept" required>
                 <option  disabled selected>Select</option>
-               <option value="cse">CSE</option>
-               <option value="it">IT</option>
-               <option value="ece">ECE</option>
-               <option value="eee">EEE</option>
-               <option value="mech">MECH</option>
-               <option value="civil">CIVIL</option>
+           
+                   <%=Find.getDeptHTMLContent() %>
                
             </select>
                     <i></i>                                    </label>
@@ -179,23 +177,7 @@
             <select id="batch" name="batch" required>
                 <option disabled selected>Select</option>
                 <%
-                Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select batch from regulations");
-                    String batch=null;
-                    rs.beforeFirst();
-                    while(rs.next())
-                    {
-                        batch=rs.getString("batch");
-                %>
-                <option value=<%=batch%>><%=batch%></option>
-                <%
-                }
-                
-                            if(stmt!=null)
-                            stmt.close();
-                              if(conbatch!=null)
-                                conbatch.close();
+               out.write( Batch.getHTMLContent());
                 %>
             </select>
                     <i></i>

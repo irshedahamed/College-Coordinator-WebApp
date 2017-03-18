@@ -1218,14 +1218,9 @@ $(document).on('change','.lsbatch',function(e){
                       <label class="select">
             <select id="cdept" name="cdept">
        
-                <option  disabled selected>Select</option>
-    
-                        <option value="cse">CSE</option>
-                        <option value="ece">ECE</option>
-                        <option value="mech">MECH</option>
-                        <option value="it">IT</option>
-                        <option value="civil">CIVIL</option>
-                        <option value="eee">EEE</option>
+            
+                       
+                   <%=Find.getDeptHTMLContent() %>
                
            
             

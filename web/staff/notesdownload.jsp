@@ -1,3 +1,4 @@
+<%@page import="Actor.Staff"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
@@ -187,9 +188,20 @@
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
 	</ul></li>
+    <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="displayform.jsp">Forms</a>
 
+</li>
 
-
+<%
+Staff s = new Staff(username);
+if(s.getCouncillorDetails().getBatch()!=null)
+{
+%>
+ <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="councillor/home.jsp">Councillor View</a>
+        <%
+}
+%>
+        
 
 </ul>						</nav>
 					</div>
@@ -258,13 +270,8 @@
             
            <select id="dept" name="dept">
             
-               <option  disabled selected>Select</option>
-               <option value="cse">CSE</option>
-               <option value="it">IT</option>
-               <option value="ece">ECE</option>
-               <option value="eee">EEE</option>
-               <option value="mech">MECH</option>
-               <option value="civil">CIVIL</option>
+              
+                <%=Find.getDeptHTMLContent() %>
                 
                 
                

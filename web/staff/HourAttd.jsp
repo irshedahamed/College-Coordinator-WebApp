@@ -4,6 +4,7 @@
     Author     : Aravind Tyson
 --%>
 
+<%@page import="Actor.Staff"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -233,37 +234,6 @@ document.getElementById("div5").innerHTML = response;
 <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#menu-toggle1" id="menu-toggle1">
-                       Aravind S
-                    </a>
-                </li>
-                <center>
-                    <img src="../images/face.jpg" height="95px">
-                    
-                               
-                           
-                        
-                   
-                </center>
-                <br>
-                <br>
-                
-                <li >
-                
-                    
-                    <a href="#"><b>NAME : Aravind S</b></a>
-                </li>
-                <li>
-                    <a href="#"><b>ROLL NO : 12CS1203</b></a>
-                </li>
-                <li >
-                    <a href="#"><b>COURSE : B.E</b></a>
-                </li>
-                <li >
-                    <a href="#"><b>DEPT : CSE</b></a>
-                </li>
-              <li >
-                    <a href="#"><b>SECTION : A</b></a>
                 </li>
             </ul>
         </div>
@@ -328,9 +298,19 @@ document.getElementById("div5").innerHTML = response;
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
 	</ul></li>
+    <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="displayform.jsp">Forms</a>
 
+</li>
 
-
+<%
+Staff s = new Staff(username);
+if(s.getCouncillorDetails().getBatch()!=null)
+{
+%>
+ <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="councillor/home.jsp">Councillor View</a>
+        <%
+}
+%>
 </ul>						</nav>
 					</div>
 				</div>
