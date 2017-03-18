@@ -50,12 +50,15 @@
         String Acyear = (String) request.getAttribute("Acyear");
         String Batch = (String) request.getAttribute("Batch");
         String Dept = (String) request.getAttribute("Dept");
-               int sno=0;
+        String From = (String) request.getAttribute("From");
+        String To = (String) request.getAttribute("To");
+        
+        int sno=0;
          ArrayList<MUResponse> List = (ArrayList<MUResponse>) MUResponse.fetchby(Acyear);
            for(MUResponse m : List)
          {
-             String s = m.getRefno();
-             TechProcessResponse i = TechProcessResponse.fetchby(s);
+             
+             TechProcessResponse i = TechProcessResponse.fetchby(m.getRefno(),From,To);
              String p = i.getRefno();
               if(p!=null)
              {

@@ -60,6 +60,8 @@ public class PaymentDetails extends HttpServlet {
         String Batch = request.getParameter("Batch");
         String Dept = request.getParameter("dept");
         String Acyear = request.getParameter("Year");
+        String From = request.getParameter("from");
+        String To = request.getParameter("to");
         if(Dept.equals("all"))
         {
             Dept="%";
@@ -69,7 +71,8 @@ public class PaymentDetails extends HttpServlet {
           request.setAttribute("Batch", Batch);
           request.setAttribute("Dept", Dept);
           request.setAttribute("Acyear",Acyear);
-          
+          request.setAttribute("To", To);
+          request.setAttribute("From", From);
           RequestDispatcher rd=request.getRequestDispatcher("account/ibpay.jsp");
           rd.forward(request, response);
       } 
@@ -78,7 +81,8 @@ public class PaymentDetails extends HttpServlet {
           request.setAttribute("Batch", Batch);
           request.setAttribute("Dept", Dept);
           request.setAttribute("Acyear",Acyear);
-          
+          request.setAttribute("To", To);
+          request.setAttribute("From", From);
           RequestDispatcher rd=request.getRequestDispatcher("account/Techprocess.jsp");
           rd.forward(request, response);
       } 

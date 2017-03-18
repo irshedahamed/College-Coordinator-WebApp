@@ -106,11 +106,13 @@
                 <option value="ibank">Indian Bank  </option>
                 <option value="otherbank">Other Banks </option>
              </select>  
-           
+             
                 <i></i>
                     </label>
             </label>
-                 <br><br> 
+                                               
+                            <br><br>
+                  
                <label class="input">
                                                     <div align="left" size="3px"><b>
                                                             Academic Year : </b></div>
@@ -160,6 +162,27 @@
                     </label>
             </label>
             <br><br>
+             <label class="input">
+                                                    <div align="left" size="3px" id="div7"><b>
+                                                            From Date</b></div>
+                <label class="date">
+            
+            <input type="date" id="nfrom" placeholder="dd-mm-yyyy" name="from" />
+            
+             <i></i>
+            <br> <br>
+                </label></label>
+                  
+                 <label class="input">
+                                                    <div align="left" size="3px" id="div7"><b>
+                                                            To Date</b></div>
+                <label class="date">
+            
+            <input type="date" id="nfrom" placeholder="dd-mm-yyyy" name="to" />
+            
+             <i></i>
+            <br> <br>
+                </label></label>
                  <div align="right">
             <input type="submit" id="submit" value="Submit" /></div>
                                         </section>
@@ -173,6 +196,7 @@
 </div></div></section>
 
 </section>
+		
 						<footer id="footer-widgets">
 			<div class="container clearfix">
 								Powered by St.Joseph's
@@ -180,18 +204,18 @@
 		</footer>
 			<!-- #page-container -->
 			</div>
-			</div>
+			
 
 	<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
-<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
-<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
-</ul>			</nav>
+                            			<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
+</ul>
+				
+    			</nav>
 		</div>
 	</footer>
 

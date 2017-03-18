@@ -10,7 +10,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -97,7 +100,7 @@ Connection conn=null;
        else
            return false;
     }
- public static IBResponse fetchby(String mup)
+ public static IBResponse fetchby(String mup,String From,String To) throws ParseException
     {
         IBResponse m = new IBResponse();
       try{  
@@ -107,6 +110,7 @@ Connection conn=null;
         con = new dbcon().getConnection("sjitportal");
         
         st = con.createStatement();
+       
         
         ResultSet rs = st.executeQuery("Select * from ibresponse where mup = '"+mup+"'");
         
@@ -130,9 +134,19 @@ Connection conn=null;
       }catch(Exception e){
     e.printStackTrace();
     }
-    
-       
-      return m;
-    
+      
+      if(m.getTxndate()!=null){
+     String[] t = m.getTxndate().split(" ");
+     
+      Date txndate = new SimpleDateFormat("dd/MM/yyyy").parse(t[0]);
+      Date FromDate = new SimpleDateFormat("dd-MM-yyyy").parse(From);
+      Date ToDate = new SimpleDateFormat("dd-MM-yyyy").parse(To);
+      
+      if(txndate.compareTo(FromDate) >= 0 && txndate.compareTo(ToDate) <= 0)
+      {
+          return m;
+      }
+      }
+      return null;
     }
 }
