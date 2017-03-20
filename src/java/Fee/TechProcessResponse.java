@@ -10,6 +10,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javafx.scene.chart.PieChart;
 
 /**
  *
@@ -190,9 +195,9 @@ public class TechProcessResponse {
        setRqst_token(splitres[10].split("=")[1]);
     
     }
-    public static TechProcessResponse fetchby(String mup,String From,String To)
+    public static List<TechProcessResponse> fetchby(List<MUResponse> mup,String From,String To)
     {
-        TechProcessResponse m = new TechProcessResponse();
+        List<TechProcessResponse> list = new ArrayList<TechProcessResponse>();
       try{  
         Connection con = null;
         Statement st = null;
@@ -200,20 +205,26 @@ public class TechProcessResponse {
         con = new dbcon().getConnection("sjitportal");
         
         st = con.createStatement();
-        
-        ResultSet rs = st.executeQuery("Select * from techprocess where mupno = '"+mup+"' and time >= '"+From+"' and time <= '"+To+"'");
+        for(MUResponse mu:mup){
+           
+        ResultSet rs = st.executeQuery("Select * from techprocess where mupno = '"+mu.getRefno()+"' and status like '0300'");
         
          rs.afterLast();
-         
          if (rs.previous())
         {
-            
+            TechProcessResponse m=new TechProcessResponse();
             m.setRefno(rs.getString("mupno"));
             m.setRollno(rs.getString("clientid"));
             m.setTime(rs.getString("time"));
             m.setAmount(rs.getString("txn_amount"));
+            
+            Date d=new SimpleDateFormat("dd-MM-yyyy").parse((m.getTime().split(" ")[0]));
+            
+            if(d.compareTo(new SimpleDateFormat("yyyy-MM-dd").parse(From))>=0 && d.compareTo(new SimpleDateFormat("yyyy-MM-dd").parse(To))<=0 )
+            list.add(m);
         }
-                     
+         rs.close();
+        }
         if(st!=null)
                 st.close();
             if(con!=null)
@@ -224,7 +235,7 @@ public class TechProcessResponse {
     }
     
        
-      return m;
+      return list;
     
     }
 }
