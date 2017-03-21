@@ -240,7 +240,8 @@ public class MUResponse {
             List<TechProcessResponse> paidlist=TechProcessResponse.fetchby(list, "1990-01-01", "3000-01-01");
             Map<MUResponse,IBResponse> paidmap=IBResponse.fetchby(list,"1990-01-01", "3000-01-01");
             
-            for(MUResponse m:list){
+            for(int i=0;i<list.size();i++){
+                MUResponse m=list.get(i);
             boolean paid=false;
                 for(TechProcessResponse tp:paidlist){
                     if(tp.getRefno().equals(m.getRefno())){
@@ -252,8 +253,10 @@ public class MUResponse {
                 if(paidmap.containsKey(m))
                     paid=true;
                 
-                if(!paid)
+                if(!paid){
                     list.remove(m);
+                    i--;
+                }
             }
          
     return list;
