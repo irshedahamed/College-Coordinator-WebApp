@@ -175,8 +175,10 @@ try
                                  <%
                                 if(rs.getString("intime")!=null)
                                 {
+                                    String format=rs.getString("intime").substring(0,rs.getString("intime").length()-2);
+                                    format=Find.getFormattedDate(format.split(" ")[0])+" "+format.split(" ")[1];
                                 %>
-                                <td><center> <%=rs.getString("intime").substring(0,rs.getString("intime").length()-2) %></center> </td>
+                                <td><center> <%=format %></center> </td>
                                  <%
                             }
                             else{
@@ -188,8 +190,11 @@ try
                                 <%
                                 if(rs.getString("outtime")!=null)
                                 {
+                                      String format=rs.getString("outtime").substring(0,rs.getString("outtime").length()-2);
+                                    format=Find.getFormattedDate(format.split(" ")[0])+" "+format.split(" ")[1];
+                                
                                 %>
-                                <td><center> <%=rs.getString("outtime").substring(0,rs.getString("outtime").length()-2) %></center> </td></tr>
+                                <td><center> <%=format %></center> </td></tr>
                             <%
                             }
                             else{
@@ -280,8 +285,11 @@ try
                                  <%
                                 if(rs.getString("intime")!=null)
                                 {
+                                      String format=rs.getString("intime").substring(0,rs.getString("intime").length()-2);
+                                    format=Find.getFormattedDate(format.split(" ")[0])+" "+format.split(" ")[1];
+                                
                                 %>
-                                <td> <%=rs.getString("intime").substring(0,rs.getString("intime").length()-2) %> </td>
+                                <td> <%=format %> </td>
                                  <%
                             }
                             else{
@@ -293,8 +301,11 @@ try
                                 <%
                                 if(rs.getString("outtime")!=null)
                                 {
+                                      String format=rs.getString("outtime").substring(0,rs.getString("outtime").length()-2);
+                                    format=Find.getFormattedDate(format.split(" ")[0])+" "+format.split(" ")[1];
+                                
                                 %>
-                                <td> <%=rs.getString("outtime").substring(0,rs.getString("outtime").length()-2) %> </td></tr>
+                                <td> <%=format %> </td></tr>
                             <%
                             }
                             else{

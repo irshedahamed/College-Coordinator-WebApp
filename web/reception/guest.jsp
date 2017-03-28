@@ -200,6 +200,7 @@ $(document).ready(function(){
 		// Put event listeners into place
                 var canvas = document.getElementById('canvas');
                $("#canvas").hide();
+               $("#resnap").hide();
 		window.addEventListener("DOMContentLoaded", function() {
 			// Grab elements, create settings, etc.
             
@@ -237,11 +238,18 @@ $(document).ready(function(){
 			}
 
 			// Trigger photo take
+                        $("#resnap").click(function(){
+                                $("#video").show();
+                                $("#canvas").hide();
+                                $("#snap").show();
+                                $(this).hide();
+                            
+                        });
 			document.getElementById('snap').addEventListener('click', function() {
                                 $("#video").hide();
                                 $("#canvas").show();
                                 $("#snap").hide();
-                                
+                                $("#resnap").show();
 				context.drawImage(video, 0, 0, 200, 120);
                                 
                                 //fd.append("canvasImage", blob);
@@ -260,6 +268,8 @@ $(document).ready(function(){
         $(".guest").click(function(){
             $("#old").hide();
               $("#newguest").show();
+              $("#submitform")[0].reset();
+              $("#resnap").click();
         });
         
         var meet,batch="",dept;
@@ -510,6 +520,7 @@ $(document).ready(function(){
              <tr><td rowspan="7">
                      <video id="video" width="200" height="120" autoplay></video><br><br>
                             <button id="snap" onclick="return false;">Snap Photo</button>
+                            <button id="resnap" onclick="return false;">Re Snap</button>
 	<canvas id="canvas" width="200" height="120"></canvas>
                                                               <!--  <img src="../images/face.jpg" height="120px"  /> -->
           
@@ -550,7 +561,7 @@ $(document).ready(function(){
                  </td></tr>
                 
                                      <tr><td>
-         <label>Mail : </label><input type="text" style="background: white" class="check" id="mail" name="mail">
+         <label>Mail : </label><input type="text" style="background: white" class="" id="mail" name="mail">
                  </td></tr>
                                      
                                                 <tr><td>

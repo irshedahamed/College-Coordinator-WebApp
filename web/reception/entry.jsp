@@ -199,7 +199,8 @@
                     <center> 
                           
                            <%
-                           rs10=stmt.executeQuery(sql);
+                               if(!Find.sdept(rollno).equals("first")){
+                                    rs10=stmt.executeQuery(sql);
               
                             if(rs10.next())
                             {
@@ -339,7 +340,8 @@ stmt.close();
 
 if(con!=null)
 con.close();
-                     }else
+                     }
+                    }else
                     {
                         
                         try
@@ -347,8 +349,6 @@ con.close();
 
                          con=new dbcon().getConnection(Find.sdept(rollno));
                          stmt=con.createStatement();
-
-
                     %>
                     <center> 
                            

@@ -47,7 +47,7 @@ public class Find {
      else if(username.contains("mepe")|| username.contains("MEPE"))
         return "mepe";
     else if(username.contains("mesc")|| username.contains("MESC"))
-        return "me sc";
+        return "mesc";
     else if(username.contains("meme")|| username.contains("MEME"))
         return "meme";
     else if(username.contains("meest")|| username.contains("MEEST"))
