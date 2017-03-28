@@ -205,9 +205,11 @@ public class TechProcessResponse {
         con = new dbcon().getConnection("sjitportal");
         
         st = con.createStatement();
+
         for(MUResponse mu:mup){
            
         ResultSet rs = st.executeQuery("Select * from techprocess where mupno = '"+mu.getRefno()+"' and status like '0300'");
+
         
          rs.afterLast();
          if (rs.previous())
