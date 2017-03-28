@@ -116,7 +116,6 @@ Connection conn=null;
        
         for(MUResponse mu:mup){
         ResultSet rs = st.executeQuery("Select * from ibresponse where mup = '"+mu.getRefno()+"' and status='Y'");
-
         
          rs.afterLast();
          
