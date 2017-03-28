@@ -1,10 +1,12 @@
 <%-- 
-    Document   : SubjectView
-    Created on : 16 May, 2016, 6:20:04 PM
-    Author     : Arun
+    Document   : verificationReport
+    Created on : 13 Oct, 2016, 7:43:41 PM
+    Author     : Home
 --%>
 
 <%@page import="com.action.Find"%>
+
+
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -13,8 +15,7 @@
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en-US">
-   
-<% 
+   <% 
    try
     {
     String username = session.getAttribute("username").toString();
@@ -35,6 +36,7 @@
     
     
     %>
+
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
@@ -71,10 +73,9 @@
 						
 
 						
-						
-<nav id="main-nav">
+						<nav id="main-nav">
 							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
-<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Academics</a>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Academics</a>
     <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Batch</a>
             <ul class="sub-menu">
@@ -93,10 +94,9 @@
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectAdd.jsp">Subject Add</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Subject View</a>
                         <ul class="sub-menu">
-                            <% for(String dept:Find.Depts){%>
+                <% for(String dept:Find.Depts){%>
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=<%=dept%>"><%=dept.toUpperCase() %></a>
-                    <%}%>
-                </ul></li>
+                    <%}%>        </ul></li>
             </ul></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="feedetails.jsp">Fee Details</a></li>
     </ul>
@@ -162,7 +162,7 @@
 </li>
 
                                                
-<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Reports</a>
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Reports</a>
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="PasswordReport.jsp">Password</a></li>
 	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="AddressReport.jsp">Address</a>
@@ -182,58 +182,76 @@
 			</div>
 		</header>
 
-<link href="../css/tabledesign.css" rel="stylesheet">
+
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
             <center>
-            <table class="bordered">
-            <tr>
-                <th><center>REGULATION</center></th>
-        <th><center>SEM</center></th>
-<th><center>SUBJECT CODE</center></th>
-<th><center>SUBJECT NAME</center></th>
-<th><center>SUBJECT TYPE</center></th>
-        </tr>
+            <form action="${pageContext.request.contextPath}/admin/BordingptReportDisplay.jsp" class="sky-form" method="post">
+                <header>BOARDING POINT DETAILS</header>
+    <fieldset>					
+					<section>
+            <label class="input">
+                                                    <div align="left" size="3px"><b>
+                                                            Dept: </b></div>
+                <label class="select">
+                    
+                    <select name="dept">
+                      
+            <%=Find.getDeptHTMLContent() %>
+                    </select>
+           
+                <i></i>
+                    </label>
+            </label>
+                 <br><br>
+                 <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    Batch:</b></div>
+                                            <label class="select">
+                                                <select id="batch" name="batch" required>
+                                                    <option disabled selected>select</option>
+                                              <%
+                Connection conbatch = new dbcon().getConnection("sjitportal");
+                    Statement stmt = conbatch.createStatement();
+                    ResultSet rs1=stmt.executeQuery("select batch from regulations");
+                    String batch=null;
+                    rs1.beforeFirst();
+                    while(rs1.next())
+                    {
+                        batch=rs1.getString("batch");
+                %>
+                <option value=<%=batch%>><%=batch%></option>
+                <%
+                }
+
+                            if(stmt!=null)
+                            stmt.close();
+                              if(conbatch!=null)
+                                conbatch.close();
+                %>
+                                                </select>
+                                                <i></i>
+                                            </label></label>
+                                                <br><br>
+                                                
+         
+                
+                 <div align="right">
+            <input type="submit" id="submit" value="Submit" /></div>
+                                        </section>
+    </fieldset>
+                
             
-            <%
-           try{
-            Connection con=new dbcon().getConnection(request.getParameter("dept"));
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from subject_sem_table order by regulation,sem");
-            String subcode,regulation,subname,sem,subtype;
-            while(rs.next())
-            {
-                subcode=rs.getString("subcode");
-                regulation=rs.getString("regulation");
-                subname=rs.getString("subname");
-                sem=rs.getString("sem");
-                subtype=rs.getString("subtype");
-               %>
-             <tr>
-             <td><%=regulation%></td>
-             <td><%=sem%></td>
-             <td><%=subcode%></td>
-             <td><%=subname%></td>
-             <td><%=subtype%></td>
-             </tr>
-             <%
-            }
-            
-                            if(st!=null)
-                            st.close();
-                              if(con!=null)
-                                con.close();
-}catch(Exception ex){
-ex.printStackTrace();
-            }
-            %>
-            </table>
-            </center>
+            </form></center>
+                
+                
+
+
 
 
 
 </div></div></section>
 
-
+</section>
 						<footer id="footer-widgets">
 			<div class="container clearfix">
 								Powered by St.Joseph's
@@ -245,7 +263,7 @@ ex.printStackTrace();
 
 	<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
+			<div class="copy">? All rights reserved, IncredibleBytes, 2014</div>
 			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
 			<nav id="footer-nav">
 				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
@@ -281,7 +299,7 @@ ex.printStackTrace();
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
- <%
+<%
     }
         else
     {
