@@ -146,6 +146,7 @@ h2{
         <th>Name</th>
         <th>Boarding point</th>
   
+        
     </tr>
     </thead>
     <%
