@@ -4,6 +4,8 @@
     Author     : Home
 --%>
 
+<%@page import="General.AcademicYear"%>
+<%@page import="Fee.MUResponse"%>
 <%@page import="Actor.Student"%>
 <%@page import="Downloads.Exam"%>
 <%@page import="Downloads.Department"%>
@@ -218,26 +220,68 @@
  
         
       </table>
-            <table class="bordered">
+            
+            
+            <% 
+                Integer sum=0;
+                boolean paidCurrent=false;
+                %>
+            
+                <table class="bordered" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>S No</th>
+                        <th>Academic Year </th>    
+                        <th>Fee Amount </th>
+                        <th>Click to Print</th>
+                    </tr>
+                </thead>
+            
+             <%
+                 int sno=0;
+                for(MUResponse paid : MUResponse.getPaidMUP(username)){
+                if(paid.getAcyear().equals(AcademicYear.getCurrentYear()))  
+                    paidCurrent=true;
+                %>
+                
+                <td><%=++sno %></td>
+                <td><%=paid.getAcyear() %></td>
+                <td><%=paid.getTotalamt() %></td>
+                <td>Print</td>
+                
+                <%}
+                
+                %>
+                </table>
+           <%
+                    if(!paidCurrent){
+                    
+           %>
+                <table class="bordered">
                 <thead>
                     <tr>
                         <th>Fee Name</th>
                         <th>Fee Amount </th>    
                     </tr>
                 </thead>
-            <% 
-                Integer sum=0;
+            
+                <%
                 for(String type:Fee.Fee.getsubCategory()){%>
             <tr>
                <td><%=Fee.Find.getType(type)%></td>
                <td align="right"><%= f.getByType(type)%></td>
             </tr>
             <%  
-               }   %>
+               }
+              %>
             </table>
             <form method="post" action="../generateMUP">
                 <input type="submit" id="submit" value="Generate  Challan">
             </form>
+            
+            <%
+            }
+            %>
    </div>
            </section>
 
