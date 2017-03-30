@@ -167,10 +167,10 @@
 							<label class="select">
            
                <select id="dept" name="dept" required>
-                <option  disabled selected>Select</option>
-                         <option value="all">ALL</option>
                        
                 <%=Find.getDeptHTMLContent() %>
+                         <option value="all">ALL</option>
+
                 <option value="first">Science & Humanities</option> 
                
             </select>

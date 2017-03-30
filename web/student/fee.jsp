@@ -194,7 +194,6 @@
  		
               		<% 
                         Student s=Student.getById(username);
-                        Fee.Fee f=Fee.Fee.getFeeById(s.getId());
                         %>			
              
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
@@ -227,13 +226,14 @@
                 boolean paidCurrent=false;
                 %>
             
+                <h2> Payment History </h2>
                 <table class="bordered" style="width:100%;">
                 <thead>
                     <tr>
                         <th>S No</th>
                         <th>Academic Year </th>    
                         <th>Fee Amount </th>
-                        <th>Click to Print</th>
+                        <th>Reference Number</th>
                     </tr>
                 </thead>
             
@@ -247,7 +247,7 @@
                 <td><%=++sno %></td>
                 <td><%=paid.getAcyear() %></td>
                 <td><%=paid.getTotalamt() %></td>
-                <td>Print</td>
+                <td><a href="../showReceipt?mup=<%=paid.getRefno()%>&acyear=<%=paid.getAcyear()%>"><%=paid.getRefno()%></a></td>
                 
                 <%}
                 
@@ -266,6 +266,8 @@
                 </thead>
             
                 <%
+                    try{
+                    Fee.Fee f=Fee.Fee.getFeeById(s.getId());
                 for(String type:Fee.Fee.getsubCategory()){%>
             <tr>
                <td><%=Fee.Find.getType(type)%></td>
@@ -273,6 +275,9 @@
             </tr>
             <%  
                }
+        }catch(Exception e){
+        e.printStackTrace();
+        }
               %>
             </table>
             <form method="post" action="../generateMUP">
