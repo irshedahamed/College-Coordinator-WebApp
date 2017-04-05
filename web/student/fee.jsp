@@ -240,7 +240,7 @@
              <%
                  int sno=0;
                 for(MUResponse paid : MUResponse.getPaidMUP(username)){
-                if(paid.getAcyear().equals(AcademicYear.getCurrentYear()))  
+                if(paid.getAcyear().equals(AcademicYear.getCurrentYear().getYear()))  
                     paidCurrent=true;
                 %>
                 
