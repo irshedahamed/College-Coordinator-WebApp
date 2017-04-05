@@ -62,7 +62,9 @@ public class showReceipt extends HttpServlet {
 //        processRequest(request, response);
 
     String mup=request.getParameter("mup");
-    request.getSession().setAttribute("MUResponse",MUResponse.getbyMUP(mup));
+    MUResponse mupno=MUResponse.getbyMUP(mup);
+        request.getSession().setAttribute("MUResponse",mupno);
+       // request.setAttribute("acyear", mupno.getAcyear());
         request.setAttribute("paid", "Y");
         request.getRequestDispatcher("/student/Challan.jsp").forward(request, response);
       

@@ -232,8 +232,8 @@
                     <tr>
                         <th>S No</th>
                         <th>Academic Year </th>    
-                        <th>Fee Amount </th>
                         <th>Reference Number</th>
+                        <th>Fee Amount </th>
                     </tr>
                 </thead>
             
@@ -246,9 +246,9 @@
                 
                 <td><%=++sno %></td>
                 <td><%=paid.getAcyear() %></td>
+                <td><a href="../showReceipt?mup=<%=paid.getRefno()%>&acyear=<%=paid.getAcyear()%>"><%=paid.getRefno()%><br>Click to View</a></td>
                 <td><%=paid.getTotalamt() %></td>
-                <td><a href="../showReceipt?mup=<%=paid.getRefno()%>&acyear=<%=paid.getAcyear()%>"><%=paid.getRefno()%></a></td>
-                
+               
                 <%}
                 
                 %>
