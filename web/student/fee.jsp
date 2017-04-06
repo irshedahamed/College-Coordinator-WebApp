@@ -4,6 +4,8 @@
     Author     : Home
 --%>
 
+<%@page import="General.AcademicYear"%>
+<%@page import="Fee.MUResponse"%>
 <%@page import="Actor.Student"%>
 <%@page import="Downloads.Exam"%>
 <%@page import="Downloads.Department"%>
@@ -192,7 +194,6 @@
  		
               		<% 
                         Student s=Student.getById(username);
-                        Fee.Fee f=Fee.Fee.getFeeById(s.getId());
                         %>			
              
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
@@ -218,26 +219,74 @@
  
         
       </table>
-            <table class="bordered">
+            
+            
+            <% 
+                Integer sum=0;
+                boolean paidCurrent=false;
+                %>
+            
+                <h2> Payment History </h2>
+                <table class="bordered" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>S No</th>
+                        <th>Academic Year </th>    
+                        <th>Reference Number</th>
+                        <th>Fee Amount </th>
+                    </tr>
+                </thead>
+            
+             <%
+                 int sno=0;
+                for(MUResponse paid : MUResponse.getPaidMUP(username)){
+                if(paid.getAcyear().equals(AcademicYear.getCurrentYear().getYear()))  
+                    paidCurrent=true;
+                %>
+                
+                <td><%=++sno %></td>
+                <td><%=paid.getAcyear() %></td>
+                <td><a href="../showReceipt?mup=<%=paid.getRefno()%>&acyear=<%=paid.getAcyear()%>"><%=paid.getRefno()%><br>Click to View</a></td>
+                <td><%=paid.getTotalamt() %></td>
+               
+                <%}
+                
+                %>
+                </table>
+           <%
+                    if(!paidCurrent){
+                    
+           %>
+                <table class="bordered">
                 <thead>
                     <tr>
                         <th>Fee Name</th>
                         <th>Fee Amount </th>    
                     </tr>
                 </thead>
-            <% 
-                Integer sum=0;
+            
+                <%
+                    try{
+                    Fee.Fee f=Fee.Fee.getFeeById(s.getId());
                 for(String type:Fee.Fee.getsubCategory()){%>
             <tr>
                <td><%=Fee.Find.getType(type)%></td>
                <td align="right"><%= f.getByType(type)%></td>
             </tr>
             <%  
-               }   %>
+               }
+        }catch(Exception e){
+        e.printStackTrace();
+        }
+              %>
             </table>
             <form method="post" action="../generateMUP">
                 <input type="submit" id="submit" value="Generate  Challan">
             </form>
+            
+            <%
+            }
+            %>
    </div>
            </section>
 

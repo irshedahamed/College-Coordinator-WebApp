@@ -366,7 +366,7 @@ $(document).ready(function(){
         }
     }
 }
-    $("#mobile").on('keyup',function(){
+    $("#mobile").on('keyup change',function(){
         
         $.post('../JsonGuest',{
             mobile : $(this).val()
