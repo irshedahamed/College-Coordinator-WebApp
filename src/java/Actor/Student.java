@@ -8,6 +8,8 @@ package Actor;
 import com.action.Find;
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -860,7 +862,46 @@ public class General{
     String parentincome;
     String club;
     String boarding;
-
+        public boolean  update(){
+        
+         Connection conn=null;
+       Statement stmt=null;
+       
+       try{
+           conn=new dbcon().getConnection(Find.sdept(id));
+            PreparedStatement pstmt;
+            String sql1="update student_general set dob="+"?"+", caste='"+caste+"', community='"+community+
+                    "', parents_annual_income='"+parentincome+"', religion='"+religion+"', nationality='"+nationality+
+                    "', mother_tongue='"+mothertongue+"', club_member='"+club+"', boardingpt='"+boarding+"' where rollno like '"+id+"'";
+    
+        
+            pstmt=conn.prepareStatement(sql1);
+       if(dob!=null)
+         pstmt.setDate(1,Date.valueOf(dob));
+       else
+           pstmt.setNull(1, java.sql.Types.DATE);
+      
+       pstmt.executeUpdate();
+     
+       
+       }catch(Exception e){
+       e.printStackTrace();
+      return false;
+       }finally{
+           try {
+               if(stmt!=null)
+                   stmt.close();
+               if(conn!=null)
+                   conn.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       
+       }
+           return true;
+       
+        }
+        
         public String getDob() {
             return dob;
         }

@@ -288,6 +288,10 @@
         <servlet-name>showReceipt</servlet-name>
         <servlet-class>Fee.showReceipt</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StudentUpdateChanges</servlet-name>
+        <servlet-class>Actor.StudentUpdateChanges</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -575,6 +579,10 @@
     <servlet-mapping>
         <servlet-name>showReceipt</servlet-name>
         <url-pattern>/showReceipt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentUpdateChanges</servlet-name>
+        <url-pattern>/StudentUpdateChanges</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,4 +1,17 @@
+<%-- 
+    Document   : PasswordReport
+    Created on : Aug 10, 2016, 9:38:34 AM
+    Author     : Lenovo
+--%>
+<%@page import="General.Batch"%>
+<%@page import="Actor.Student"%>
 <%@page import="com.action.Find"%>
+<%-- 
+    Document   : studentpassword
+    Created on : 14 May, 2016, 6:56:07 PM
+    Author     : Arun
+--%>
+
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -7,8 +20,7 @@
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en-US">
-   
-<% 
+   <% 
    try
     {
     String username = session.getAttribute("username").toString();
@@ -24,11 +36,12 @@
         {
             type = rsss.getString("type");
         }
-        if(type.equals("admin")||type.equals("dataentry"))
+        if(type.equals("admin"))
         {
     
     
     %>
+
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
@@ -36,17 +49,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/sky-forms.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="../css/simple-sidebar.css" rel="stylesheet">
-    
 	
 		
 		</head>
 		
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
-		        
+</div>
 	
 		
 		<header id="page-header"  class="fixed-header">
@@ -68,7 +81,7 @@
 						
 
 						<nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="home.jsp">Home</a></li>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
 <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Academics</a>
     <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Batch</a>
@@ -77,11 +90,10 @@
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="deletebatch.jsp">Delete Batch</a>
             </ul>
         </li>
-	
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Academic Year</a>
             <ul class="sub-menu">
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="InsertYear.jsp">Insert Academic Year</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="CurrentUpd.jsp">Update Current</a>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="InsertYear1.jsp">Insert Academic Year</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="odd.jsp">Update Current</a>
             </ul>
         </li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="">Subjects</a>
@@ -89,15 +101,15 @@
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectAdd.jsp">Subject Add</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Subject View</a>
                         <ul class="sub-menu">
-           <% for(String dept:Find.Depts){%>
+                 <% for(String dept:Find.Depts){%>
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=<%=dept%>"><%=dept.toUpperCase() %></a>
-                    <%}%></ul></li>
+                    <%}%>     </ul></li>
             </ul></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="feedetails.jsp">Fee Details</a></li>
     </ul>
 </li>
 
-                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Students</a>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Students</a>
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="studentprofiles.jsp">Profile</a>
 <ul class="sub-menu">
@@ -108,7 +120,6 @@
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="profiledelete.jsp">Delete Profile</a>
         </ul></li>	
 	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="studentpasswords.jsp">Passwords</a>
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="BulkUpdate.jsp">Bulk Update</a>
 	
 </li>
 </ul>
@@ -120,7 +131,6 @@
 <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="staffprofileupdate.jsp">Add Profile</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="staffprofiledelete.jsp">Delete Profile</a>
-                        <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="StaffProfileEdit.jsp">Edit Profile</a>
         </ul></li>	
 
 	
@@ -164,10 +174,12 @@
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="PasswordReport.jsp">Password</a></li>
 	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="AddressReport.jsp">Address</a>
 	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="verificationReport.jsp">Verification</a>
-       	 <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="BoardingptReport.jsp">Boarding Point</a>
+		 <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="BoardingptReport.jsp">Boarding Point</a>
 
+	
+</li>
 </ul>
-</li>   
+    
 </ul>					
  
                                                 
@@ -179,6 +191,51 @@
 
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
+            <center>
+            <form action="${pageContext.request.contextPath}/admin/showUpdateList.jsp" class="sky-form" method="post">
+                <header>STUDENT BULK UPDATE</header>
+    <fieldset>					
+					<section>
+            <label class="input">
+                                                    <div align="left" size="3px"><b>
+                                                            Dept: </b></div>
+                <label class="select">
+                    
+                    <select name="dept">
+                         <%=Find.getDeptHTMLContent() %>
+                    
+                    </select>
+           
+                <i></i>
+                    </label>
+            </label>
+                 <br><br>
+                 <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    Batch:</b></div>
+                                            <label class="select">
+                                                <select id="batch" name="batch" required>
+                                                    <option disabled selected>select</option>
+                                              <%
+                                                  out.write(Batch.getHTMLContent());
+               %>
+                                                </select>
+                                                <i></i>
+                                            </label></label>
+                                                <br><br>
+                 <div align="right">
+            <input type="submit" id="submit" value="Submit" /></div>
+                                        </section>
+    </fieldset>
+                
+            
+            </form></center>
+                
+                
+            
+  
+                <link href="../css/tabledesign.css" rel="stylesheet">
+
 
 
 
