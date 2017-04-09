@@ -245,7 +245,7 @@
                 %>
                 
                 <td><%=++sno %></td>
-                <td><%=paid.getAcyear() %></td>
+                <td><%=Integer.parseInt(paid.getAcyear())+1 %></td>
                 <td><a href="../showReceipt?mup=<%=paid.getRefno()%>&acyear=<%=paid.getAcyear()%>"><%=paid.getRefno()%><br>Click to View</a></td>
                 <td><%=paid.getTotalamt() %></td>
                

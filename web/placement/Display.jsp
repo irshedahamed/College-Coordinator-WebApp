@@ -120,7 +120,7 @@
     </thead>
 <%
     int sno=0;
-    for(Student s:Student.getAll(Find.dept(username), batch, "%")){
+    for(Student s:Student.getAll(request.getParameter("dept"), batch, "%")){
 %>
     <tr>
     <td><%=++sno%></td>
