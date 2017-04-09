@@ -30,10 +30,10 @@
                 <br><br><br>                             
                 <table class="bordered" >
                <thead>
+               <th>Register Number</th>
                <th>Roll number</th>
                <th>Name</th>
-               <th>Current Boarding Point</th>
-               <th>New Boarding Point</th>
+               <th>Boarding Point</th>
                </thead>
                
                <tbody>
@@ -44,13 +44,16 @@
                     {
                        // batch=rs.getString("batch");
                 %>
-                <tr><td><%=s.getId() %></td>
+                <tr>
+                <td><%=s.getRegno() %> </td>
+                    <td><%=s.getId() %></td>
                 <td><%=s.getName() %></td>
-                <td><%=s.getGeneral().getBoarding() %></td>
+                
                 <td>
                     
                     <select id="section" name="update<%=s.getId() %>" required>
                         <option value="<%=s.getGeneral().getBoarding() %>"><%=s.getGeneral().getBoarding() %></option>
+                        <option value="HOSTELER">HOSTELER</option>
                         <%out.write(BoardingPoint.getHTMLContent() ); %>
                
             </select>

@@ -36,7 +36,7 @@
         {
             type = rsss.getString("type");
         }
-        if(type.equals("admin"))
+        if(type.equals("admin") ||type.equals("dataentry"))
         {
     
     
