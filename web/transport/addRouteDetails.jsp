@@ -4,6 +4,8 @@
     Author     : Fluffy
 --%>
 
+<%@page import="Transport.BoardingPoint"%>
+<%@page import="Transport.Route"%>
 <%-- 
     Document   : home
     Created on : 18 Nov, 2016, 5:57:23 PM
@@ -50,13 +52,24 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
         	     <link rel="stylesheet" href="../css/main.css">
      
+                     <link rel="stylesheet" href="../css/sky-forms.css">
 	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+        <script src="../js/jquery.js"></script>
+
+        <script src="../js/select2.js"></script>
+
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
- <script src="../js/jquery.js"></script>
-         
+ 
      
 
-
+<script type="text/javascript">
+$(document).ready(function() {
+  $('select.boarding').select2();
+ // alert();
+});
+</script>
          
      
 	
@@ -119,15 +132,97 @@
 			</div>
 		</header>
 
+<%
+if(request.getParameter("msg")!=null){
+%>
 
+<script>
+    alert("<%=request.getParameter("msg") %>");
+    </script>
+<%}%>
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
           <section class="landing">
                    
-    
-        
+    <center><form action="${pageContext.request.contextPath}/addMapping" class="sky-form" method="post">
+    <header>SELECT ROUTE</header>
+    <fieldset>					
+					<section>
+                                            
+                <label class="input">
+                                            <div align="left" size="3px"><b>ROUTE</b></div>
+                                            <label class="select">
+
+                                                <select id="route" name="route" required>
+                                                    <option >Select</option>
+                                                    <%
+                                                        List<Route> list=Route.getAll();
+                                                   for(Route r:list){
+                                                   %>
+                                                   <option value="<%=r.getId() %>"><%=r.getName() %>(<%=r.getId() %>)</option>
+                                                   <%
+                                                   }
+                                                   %>
+                                                </select>
+                                                <i></i>                                    </label>
+                                        </label>
+
+                                    
+                                        
+                                            <br><br>
             
+        
+                                            <label class="input">
+                                            <div align="left" size="3px"><b>BOARDING POINT</b></div>
+                                            <label class="select">
+                    </label>
+                                        </label>
+
+                                                <select class="boarding"  id="boarding" name="boarding" required>
+                                                    <option >Select</option>
+                                                     <%
+                                                        List<String> blist= BoardingPoint.getAll();
+                                                   for(String s:blist){
+                                                   %>
+                                                   <option value="<%=s %>"><%=s%></option>
+                                                   <%
+                                                   }
+                                                   %>
+                                                </select>
+                                                <i></i>                
+                                    
+                                        
+                                            <br><br>
+            
+                                            
+                                            
+                                            
+                                            
+                                            <label class="input">
+                                            <div align="left" size="3px"><b>PRIORITY</b></div>
+                                            <label class="select">
+
+                                                <select id="priority" name="priority" required>
+                                                    <option >Select</option>
+                                                   <option value="High">High</option>
+                                                   <option value="Medium">Medium</option>
+                                                   <option value="Low">Low</option>
+                                                </select>
+                                                <i></i>                                    </label>
+                                        </label>
+
+                                    
+                                        
+                                            <br><br>
         </section>
+
+                                            <div align="left">
+            <input type="submit" id="submit" value="Submit" /></div>
+            <br>
+    </fieldset>
+                </form></center>
+        
+        
 
 
             

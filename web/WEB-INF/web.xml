@@ -292,6 +292,10 @@
         <servlet-name>StudentUpdateChanges</servlet-name>
         <servlet-class>Actor.StudentUpdateChanges</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addMapping</servlet-name>
+        <servlet-class>addMapping</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -583,6 +587,10 @@
     <servlet-mapping>
         <servlet-name>StudentUpdateChanges</servlet-name>
         <url-pattern>/StudentUpdateChanges</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addMapping</servlet-name>
+        <url-pattern>/addMapping</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
