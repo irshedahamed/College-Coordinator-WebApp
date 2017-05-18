@@ -318,9 +318,10 @@ public class StudentAdd extends HttpServlet {
       update+=stmt.executeUpdate(sql11);
       
       if(update==11)
-          
-                response.getWriter().print("Successfully Added!!");
-        if(stmt!=null)
+      {
+          response.sendRedirect("admin/studentSuccessForm.jsp?rollno="+rollno);
+              //  response.getWriter().print("Successfully Added!!");
+      } if(stmt!=null)
                             stmt.close();
                               if(conn!=null)
                                 conn.close();

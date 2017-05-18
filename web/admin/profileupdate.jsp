@@ -370,8 +370,8 @@
                                             <option value="hostel">Hosteler</option>
                                             
                                         </select></td></tr><tr>
-                                    <td>
-                                        <label>Initial :</label><input type="text" class="check"  style="background: white" id="initial" name="initial">
+                                    <td style="display: none">
+                                        <label>Initial :</label><input type="text" class=""  style="background: white" id="initial" name="initial">
                                     </td>
                                     <td>
                                        
@@ -539,7 +539,7 @@
                                 <label>Marks Obtained:</label><input type="text" class="check" style="background: white" id="10marks" name="10marks">
                                     </td>
                                         <td>
-                                <label>Board of Study:</label><input type="text" class="check" style="background: white" id="10board" name="10board">
+                                <label>Board of Study:</label>
                                 
                                 <select name="10board">
                                     <option value="STATE BOARD">STATE BOARD</option>
