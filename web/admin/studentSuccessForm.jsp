@@ -70,9 +70,9 @@ Student s=Student.getById(rollno);
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
             
             <h3>  Student Details</h3><br>
-Roll No :<%=s.getId() %><br>
-Name :<%=s.getName() %><br>
-Dept :<%=s.getDept() %><br>
+Roll No :<%=s.getId().toUpperCase() %><br>
+Name :<%=s.getName().toUpperCase() %><br>
+Dept :<%=s.getDept().toUpperCase() %><br>
 Address :<%=s.getContact().getDoorno() %>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=s.getContact().getStreet() %>
 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=s.getContact().getArea() %>
@@ -84,13 +84,13 @@ Boarding point :<%=s.getGeneral().getBoarding() %><br>
 E-mail :<%=s.getMailid() %><br>
 Mobile :<%=s.getMobile() %><br>
 <h3>Father's Details</h3><br>
-Name :<%=s.getFatherDetails().getFathername() %><br>
+Name :<%=s.getFatherDetails().getFathername().toUpperCase() %><br>
 Occupation :<%=s.getFatherDetails().getOccupation()%><br>
 Address :<%=s.getFatherDetails().getAddress() %><br>
 E- Mail :<%=s.getFatherDetails().getMail() %><br>
 Mobile :<%=s.getFatherDetails().getMobile() %><br>
 <h3>Mother's Details</h3><br>
-Name :<%=s.getMotherDetails().getMothername() %><br>
+Name :<%=s.getMotherDetails().getMothername().toUpperCase() %><br>
 Occupation :<%=s.getMotherDetails().getOccupation() %><br>
 Address :<%=s.getMotherDetails().getAddress() %><br>
 E- Mail :<%=s.getMotherDetails().getMail() %><br>

@@ -1,17 +1,11 @@
 <%-- 
-    Document   : displayRoute
-    Created on : 23 Apr, 2017, 6:30:50 PM
-    Author     : Fluffy
---%>
-
-<%@page import="Transport.RouteMap"%>
-<%@page import="Transport.Route"%>
-<%-- 
     Document   : home
     Created on : 23 Apr, 2017, 4:09:51 PM
     Author     : Fluffy
 --%>
 
+<%@page import="Transport.BoardingPoint"%>
+<%@page import="Transport.Route"%>
 <%-- 
     Document   : home
     Created on : 18 Nov, 2016, 5:57:23 PM
@@ -57,14 +51,16 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
         	     <link rel="stylesheet" href="../css/main.css">
-                     <link rel="stylesheet" href="../css/sky-forms.css">
-                     <link rel="stylesheet" href="../css/tabledesign.css">
-	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
-	<link href="../css/bootstrap.min.css" rel="stylesheet">
- <script src="../js/jquery.js"></script>
-         
      
+                     <link rel="stylesheet" href="../css/sky-forms.css">
+	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 
+        <script src="../js/jquery.js"></script>
+
+
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+ 
+     
 
          
      
@@ -99,7 +95,8 @@
 						<nav id="main-nav">
 							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
 
-         <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="">Boarding Point</a>
+    
+     <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Boarding Point</a>
     <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="addBoardingpt.jsp">Add</a></li>
 
@@ -107,8 +104,7 @@
 </ul>
 </li>
 
-
-   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Routes</a>
+   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777  "><a href="">Routes</a>
  <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="displayRoute.jsp">Display</a></li>
 	
@@ -134,93 +130,54 @@
 			</div>
 		</header>
 
+<%
+if(request.getParameter("msg")!=null){
+%>
 
+<script>
+    alert("<%=request.getParameter("msg") %>");
+    </script>
+<%}%>
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
           <section class="landing">
                    
-   
-       
-             <center><form action="displayRoute.jsp" class="sky-form" method="post">
-    <header>SELECT ROUTE</header>
+    <center><form action="${pageContext.request.contextPath}/addBoardingPoint" class="sky-form" method="post">
+    <header>ADD BOARDING POINT</header>
     <fieldset>					
 					<section>
                                             
-                <label class="input">
-                                            <div align="left" size="3px"><b>ROUTE</b></div>
+             
+            
+        
+                                            <label class="input">
+                                            <div align="left" size="3px"><b>BOARDING POINT</b></div>
                                             <label class="select">
-
-                                                <select id="route" name="route" required>
-                                                    <option >Select</option>
-                                                    <%
-                                                        List<Route> list=Route.getAll();
-                                                   for(Route r:list){
-                                                   %>
-                                                   <option value="<%=r.getId() %>"><%=r.getName() %>(<%=r.getId() %>)</option>
-                                                   <%
-                                                   }
-                                                   %>
-                                                </select>
-                                                <i></i>                                    </label>
+                    </label>
+                                                 <input class="boarding"  id="boarding" name="boardingpt" required>
+                                                   
+                                                <i></i>    
                                         </label>
+
+                                                       
+                
+            
+                                            
+                                            
+                                            
+                                            
 
                                     
                                         
-                                            <br><br>
-            
-            
-                                        </section>
-            
-                           
-             <div align="left">
+                                             </section>
+
+                                            <div align="left">
             <input type="submit" id="submit" value="Submit" /></div>
             <br>
     </fieldset>
                 </form></center>
         
-                <%
-                
-                String route=request.getParameter("route");
-                if(route!=null){
-                %>
-        <center> 
-            <br><br><br>
-            <table class="bordered">
-    <thead>
-  
-    <tr>
         
-        <th> Sno</th>
-        <th>Boarding Point</th>
-        <th>Route</th>
-        <th>Priority</th>
-        <th>Sequence Number</th>
-  
-    </tr>
-    </thead>
-    
-    <%
-        int i=0 ;
-        
-    for(RouteMap rm:RouteMap.getByid(route)){
-    %>
-            <tr>
-    <td><%=++i %></td>
-    <td><%=rm.getBoardingpt() %></td>
-    <td><%=Route.getByid(list, rm.getRouteid()).getName() %>(<%=rm.getRouteid()%>)</td>
-    <td><%=rm.getPriority() %></td>
-    <td><%=rm.getSeqno()%></td>
-            </tr>
-            <%  }
-            %>
-            
-            </table>
-    
-            <%
-                
-            }
-            %>
-        </section>
 
 
             

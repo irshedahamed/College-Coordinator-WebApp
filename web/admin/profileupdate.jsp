@@ -55,21 +55,65 @@
             if (showvalue === "Manual Entry")
             {
                 document.getElementById("excel").style.display = 'none';
+                document.getElementById("print").style.display = 'none';
                 document.getElementById("manual").style.display = 'block';
             }
             if (showvalue === "Excell Upload")
             {
+                console.log("excel");
                 document.getElementById("manual").style.display = 'none';
+                document.getElementById("print").style.display = 'none';
                 document.getElementById("excel").style.display = 'block';
+            }
+            if(showvalue === "Print Form"){
+                document.getElementById("manual").style.display = 'none';
+                document.getElementById("excel").style.display = 'none';
+                document.getElementById("print").style.display = 'block';
             }
         }
         
                 
                 
         $(document).ready(function(){
-            
+             $(document).on('change keyup','#religion',function(){
+               if($("#religion option:selected").val()==="others"){
+                   $("#religion").after('<input type="text" style="background: white" name="religion">');
+                   $("#religion").remove();
+               }
+            });
+            $(document).on('change keyup','#counormn',function(){
+                
+                $("#adminalot option").remove();
+                console.log($("#counormn option:selected").val());
+                if($("#counormn option:selected").val()==="Counseling"){
+                    $("#adminalot").append(' <option value="OC">OPEN</option>'+
+                                            ' <option value="BC">BC</option>'+
+                                            ' <option value="MBC">MBC</option>'+
+                                            ' <option value="BCM">BCM</option>'+
+                                            ' <option value="SC">SC</option>'+
+                                            ' <option value="SCA">SCA</option>'+
+                                            ' <option value="ST">ST</option>'+
+                                           ' <option value="SPORTS">SPORTS</option>'+
+                                           ' <option value="VOCATIONAL">VOCATIONAL</option>   '+                                       
+                                           ' <option value="EX-SERVICEMAN">EX-SERVICEMAN</option>'+
+                                            '<option value="PHYSICALLY HANDICAPPED">PHYSICALLY HANDICAPPED</option>'+
+                                        '');
+                }
+                else if($("#counormn option:selected").val()==="Management"){
+                    $("#adminalot").append(' <option value="GENERAL">GENERAL</option>'+
+                                           ' <option value="SPORTS">SPORTS</option>'+
+                                           ' <option value="CHRISTIAN MINORITY">CHRISTIAN MINORITY</option>   '+                                       
+                                           ' <option value="NRICGC">NRICGC</option>'+
+                                            ' <option value="FOREIGN">FOREIGN</option>'+
+                                            '<option value="LAPS">LAPS</option>'+
+                                        '');
+                    
+                }
+            });
              $('select.boarding').select2();
             document.getElementById("excel").style.display = 'none';
+             document.getElementById("print").style.display = 'none';
+             document.getElementById("manual").style.display = 'block';
                 $("form#manual").submit(function(){
                     
                     console.log($(this).attr('class'));
@@ -243,8 +287,11 @@
             <select id="pagetype" onchange="pageshow();">
                     <option value="Manual Entry">Manual Entry</option>
                     <option value="Excell Upload">Excel Upload</option>
+                    <option value="Print Form">Print Form</option>
+                    
                 </select>
-                <div id ="manual">
+           
+                <div id="manual">
                     <center> <form id="manual" method="post" action="${pageContext.request.contextPath}/StudentAdd">
                             <center><h3>General Details</h3></center>
                             <table cellspacing="10"><tr><td>
@@ -258,7 +305,14 @@
                                         <label> Nationality :</label><input type="text" class="check" style="background: white" id="nationality" name="nationality">
                                     </td>
                                     <td>
-                                        <label>Religion :</label><input type="text" class="check" style="background: white" id="religion" name="religion">    
+                                        <label>Religion :</label>
+                                        
+                                    <select name="religion" id="religion">
+                                            <option value="">Select</option>
+                                                    <option value="Hindu">Hindu</option>
+                                                    <option value="Muslim">Muslim</option>
+                                                    <option value="Christian">Christian</option>
+                                                    <option value="others">Others</option>
                                     </td>
                                  </tr>
                                 <tr>
@@ -330,7 +384,26 @@
                                             <option value="Female">Female</option>
                                         </select></td>
                                     <td>
-                                        <label>Blood Group :</label><input type="text" class="check"  style="background: white" id="bloodgroup" name="bloodgroup">
+                                        <label>Blood Group :</label>
+                                        
+                                        <select style="background: white"  name="bloodgroup">
+                                            <option value="">Select</option>
+                                            <option value="O +ve">O +ve</option>
+                                            <option value="O -ve">O -ve</option>
+                                            <option value="B +ve">B +ve</option>
+                                            <option value="B -ve">B -ve</option>
+                                            <option value="A +ve">A +ve</option>
+                                            <option value="A -">A -ve</option>
+                                            <option value="B1 +ve">B1 +ve</option>
+                                            <option value="A2B +ve">A2B +ve</option>
+                                            <option value="A2B -ve">A2B -ve</option>
+                                            <option value="A2 +ve">A2 +ve</option>
+                                            <option value="A2 -ve">A2 -ve</option>
+                                            <option value="A1B +ve">A1B +ve</option>
+                                            <option value="A1B -ve">A1B -ve</option>
+                                            <option value="A1 +ve">A1 +ve</option>
+                                            <option value="A1 -ve">A1 -ve</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
@@ -645,23 +718,24 @@
                                     <td>
                                         <label>Date of Admission :</label><input type="date" placeholder="yyyy-mm-dd" style="background: white" id="doa" name="doa">
                                     </td>
+                                    
+                                       <td>
+                                        <label>Counseling or Management :</label><select style="background: white" id="counormn" name="counormn">
+                                            <option value="">Select</option>
+                                            <option value="Counseling">Counseling</option>
+                                            <option value="Management">Management</option></select>
+                                    </td>
+                                    
                                     <td>
                                         <label>Category :</label>
                                     
-                                        <select name="adminalot">
-                                            <option value="GENERAL">GENERAL</option>
-                                            <option value="SPORTS">SPORTS</option>
-                                            <option value="VOCATIONAL">VOCATIONAL</option>                                          
-                                            <option value="EX-SERVICEMAN">EX-SERVICEMAN</option>
-                                            <option value="PHYSICALLY HANDICAPPED">PHYSICALLY HANDICAPPED</option>
+                                        <select id="adminalot" name="adminalot">
+                                            <option value="">Select</option>
                                            
                                         </select>
                                     
                                     </td>
-                                    <td>
-                                        <label>Counseling or Management :</label><select style="background: white" id="counormn" name="counormn"><option value="Counseling">Counseling</option>
-                                            <option value="Management">Management</option></select>
-                                    </td>
+                                 
                                     <td>
                                         <label>Overall Rank :</label><input type="text" class="check"  style="background: white" id="orank" name="orank">
                                     </td>
@@ -685,7 +759,7 @@
                                 <tr>
                                     <td>
                                           <label>Scholarship :</label>
-                                       <select name="scholarship" id="religion">
+                                       <select name="scholarship" id="scholarship">
                                            <option value="NA">NA</option>
                                                     <option value="First Graduate">First Graduate</option>
                                                     <option value="Fee Waiver">Fee Waiver</option>
@@ -808,6 +882,15 @@
                         
                   
                 </div>
+                                         <div id ="print">
+                 <center> <form  method="post" action="studentSuccessForm.jsp">
+                                        
+                                        <label> Roll No :</label><input type="text" class="check" style="background: white" id="rollno" name="rollno">  
+                                        <input type="submit" id="submit" value="Submit">
+                                
+                     </form>
+                 </center>
+            </div>
             <div id="excel">
                 <center>
                    <form action="${pageContext.request.contextPath}/ExcelStudentUpload" class="sky-form batchupdate" method="post" enctype="multipart/form-data">

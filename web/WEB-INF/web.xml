@@ -296,6 +296,10 @@
         <servlet-name>addMapping</servlet-name>
         <servlet-class>addMapping</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addBoardingPoint</servlet-name>
+        <servlet-class>Transport.addBoardingPoint</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -591,6 +595,10 @@
     <servlet-mapping>
         <servlet-name>addMapping</servlet-name>
         <url-pattern>/addMapping</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addBoardingPoint</servlet-name>
+        <url-pattern>/addBoardingPoint</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
