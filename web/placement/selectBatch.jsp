@@ -143,7 +143,10 @@
 
                                     
                                                     <%
-                                                    }
+                                                    }else{%>
+                                                    <input type="hidden" name="dept" value="<%=Find.dept(username)%>">
+<%
+}
                                                     %>
                                         
                                             <br><br>
