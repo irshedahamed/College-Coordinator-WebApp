@@ -885,7 +885,7 @@
                                          <div id ="print">
                  <center> <form  method="post" action="studentSuccessForm.jsp">
                                         
-                                        <label> Roll No :</label><input type="text" class="check" style="background: white" id="rollno" name="rollno">  
+                                        <label> Roll No :</label><input type="text" class="" style="background: white" id="rollno" name="rollno">  
                                         <input type="submit" id="submit" value="Submit">
                                 
                      </form>
