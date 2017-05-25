@@ -178,7 +178,7 @@ h2{
         <h2 style="margin-left: 10px;">SEC: <%=sec%></h2>
         
         <%
-        String sql="select count(*) from student_personal where batch='"+batch+"' and sec='"+sec+"' and model_type='"+modeltype+"'";
+        String sql="select count(*) from student_personal where batch='"+batch+"' and sec='"+sec+"' and model_type like '"+"%"+"'";
         ResultSet strength=st.executeQuery(sql);
         strength.next();
         String tstrength=strength.getString(1);
@@ -223,7 +223,12 @@ h2{
     </tr>
     </thead>
         <%
-            String depts[]=Find.Depts;
+            String[] depts=new String[7];
+            for(int i=0;i<6;i++)
+                depts[i]=Find.Depts[i];
+                depts[6]="first";
+            
+            
             for(int i=0;i<7;i++)
             {
               
@@ -244,7 +249,7 @@ h2{
         String sc=rs.getString("subject_sem_table.subcode");  
         String sn=rs.getString("subject_sem_table.subname");
         String staffname=rs.getString("tittle")+rs.getString("staff_table.staffname").toUpperCase();
-        String sql2="select marks_table.* from marks_table where marks_table.subcode='"+sc+"' and marks_table.rollno  in (select rollno from student_personal where model_type='"+modeltype+"' and batch ='"+batch+"' and sec = '"+sec+"')";     
+        String sql2="select marks_table.* from marks_table where marks_table.subcode='"+sc+"' and marks_table.rollno  in (select rollno from student_personal where model_type like '"+"%"+"' and batch ='"+batch+"' and sec = '"+sec+"')";     
         
         
         rs1=st1.executeQuery(sql2);
