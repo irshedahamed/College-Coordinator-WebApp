@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package API;
 
+import Transport.Route;
+import Transport.RouteMap;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Home
+ * @author Fluffy
  */
-public class TechProcess extends HttpServlet {
+public class addMapping extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +37,10 @@ public class TechProcess extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet TechProcess</title>");            
+            out.println("<title>Servlet addMapping</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet TechProcess at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet addMapping at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -73,26 +74,23 @@ public class TechProcess extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
-       
-      if(!request.getParameter("auth").equals("fluffy")){
-      response.getWriter().print("Authentication Error");
-      return;
-      }
-       
-      Fee.TechProcess tp=new Fee.TechProcess();
-      
-      tp.setUser(request.getParameter("user"));
-      tp.setAmount(request.getParameter("amount"));
-      tp.setCustID(request.getParameter("custid"));
-      tp.setRefno(request.getParameter("refno"));
-      tp.setAPIReturnURL(request.getParameter("returnURL"));
-      tp.setReturnURL("https://" + request.getServerName()+"/receiveTechProcessAPIResponse");
-     
-      request.getSession().setAttribute("TPRequest", tp);
-      request.getSession().setAttribute("TPRequestDummy", "Dummy");
-      
-      response.sendRedirect(tp.getRedirectURL());
+        //processRequest(request, response);
+        
+        String route=request.getParameter("route");
+        String boarding=request.getParameter("boarding");
+        String priority=request.getParameter("priority");
+        
+        RouteMap r=new RouteMap();
+        r.setBoardingpt(boarding);
+        r.setPriority(priority);
+        r.setRouteid(route);
+        
+        if(r.insert())
+            response.sendRedirect("transport/addRouteDetails.jsp?msg=Successfully Added");
+        else
+               response.sendRedirect("transport/addRouteDetails.jsp?msg=Failed");
+         
+        
     }
 
     /**

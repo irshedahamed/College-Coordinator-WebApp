@@ -1,21 +1,11 @@
 <%-- 
-    Document   : verificationReport
-    Created on : 13 Oct, 2016, 7:43:41 PM
-    Author     : Home
---%>
-
-<%@page import="com.action.Find"%>
-<%-- 
-    Document   : AddressReport
-    Created on : Aug 11, 2016, 1:44:32 PM
-    Author     : Lenovo
---%>
-
-<%-- 
     Document   : PasswordReport
     Created on : Aug 10, 2016, 9:38:34 AM
     Author     : Lenovo
 --%>
+<%@page import="General.Batch"%>
+<%@page import="Actor.Student"%>
+<%@page import="com.action.Find"%>
 <%-- 
     Document   : studentpassword
     Created on : 14 May, 2016, 6:56:07 PM
@@ -46,7 +36,7 @@
         {
             type = rsss.getString("type");
         }
-        if(type.equals("admin"))
+        if(type.equals("admin") ||type.equals("dataentry"))
         {
     
     
@@ -69,7 +59,7 @@
 		
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
-		        
+</div>
 	
 		
 		<header id="page-header"  class="fixed-header">
@@ -88,6 +78,8 @@
 						
 
 						
+						
+
 						<nav id="main-nav">
 							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
 <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Academics</a>
@@ -100,8 +92,8 @@
         </li>
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Academic Year</a>
             <ul class="sub-menu">
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="InsertYear.jsp">Insert Academic Year</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="CurrentUpd.jsp">Update Current</a>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="InsertYear1.jsp">Insert Academic Year</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="odd.jsp">Update Current</a>
             </ul>
         </li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="">Subjects</a>
@@ -109,15 +101,15 @@
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectAdd.jsp">Subject Add</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Subject View</a>
                         <ul class="sub-menu">
-                <% for(String dept:Find.Depts){%>
+                 <% for(String dept:Find.Depts){%>
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=<%=dept%>"><%=dept.toUpperCase() %></a>
-                    <%}%>        </ul></li>
+                    <%}%>     </ul></li>
             </ul></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="feedetails.jsp">Fee Details</a></li>
     </ul>
 </li>
 
-                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Students</a>
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Students</a>
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="studentprofiles.jsp">Profile</a>
 <ul class="sub-menu">
@@ -177,7 +169,7 @@
 </li>
 
                                                
-<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Reports</a>
+<li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Reports</a>
 <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="PasswordReport.jsp">Password</a></li>
 	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="AddressReport.jsp">Address</a>
@@ -200,8 +192,8 @@
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
             <center>
-            <form action="${pageContext.request.contextPath}/admin/verificationReportDisplay.jsp" class="sky-form" method="post">
-                <header>STUDENT VERIFICATION</header>
+            <form action="${pageContext.request.contextPath}/admin/showUpdateList.jsp" class="sky-form" method="post">
+                <header>STUDENT BULK UPDATE</header>
     <fieldset>					
 					<section>
             <label class="input">
@@ -210,9 +202,8 @@
                 <label class="select">
                     
                     <select name="dept">
-                       
-            <%=Find.getDeptHTMLContent() %>
-             <option value="all">All</option>
+                         <%=Find.getDeptHTMLContent() %>
+                    
                     </select>
            
                 <i></i>
@@ -226,47 +217,12 @@
                                                 <select id="batch" name="batch" required>
                                                     <option disabled selected>select</option>
                                               <%
-                Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt = conbatch.createStatement();
-                    ResultSet rs1=stmt.executeQuery("select batch from regulations");
-                    String batch=null;
-                    rs1.beforeFirst();
-                    while(rs1.next())
-                    {
-                        batch=rs1.getString("batch");
-                %>
-                <option value=<%=batch%>><%=batch%></option>
-                <%
-                }
-
-                            if(stmt!=null)
-                            stmt.close();
-                              if(conbatch!=null)
-                                conbatch.close();
-                %>
+                                                  out.write(Batch.getHTMLContent());
+               %>
                                                 </select>
                                                 <i></i>
                                             </label></label>
                                                 <br><br>
-                                                
-                                                     <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                             Section </b></div>
-                <label class="select">
-           
-            <select id="section" name="sec" required>
-                <option disabled selected>select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-                <option value="NA">NA</option>
-            </select>
-                    <i></i>
-                    </label>
-            </label>
-            <br> <br>
-                
                  <div align="right">
             <input type="submit" id="submit" value="Submit" /></div>
                                         </section>
@@ -276,7 +232,9 @@
             </form></center>
                 
                 
-
+            
+  
+                <link href="../css/tabledesign.css" rel="stylesheet">
 
 
 
@@ -295,7 +253,7 @@
 
 	<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">? All rights reserved, IncredibleBytes, 2014</div>
+			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
 			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
 			<nav id="footer-nav">
 				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>

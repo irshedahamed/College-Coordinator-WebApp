@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package API;
+package Fee;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,9 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Home
+ * @author Lenovo
  */
-public class TechProcess extends HttpServlet {
+public class showReceipt extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +36,10 @@ public class TechProcess extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet TechProcess</title>");            
+            out.println("<title>Servlet showReceipt</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet TechProcess at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet showReceipt at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -59,7 +59,15 @@ public class TechProcess extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+
+    String mup=request.getParameter("mup");
+    MUResponse mupno=MUResponse.getbyMUP(mup);
+        request.getSession().setAttribute("MUResponse",mupno);
+       // request.setAttribute("acyear", mupno.getAcyear());
+        request.setAttribute("paid", "Y");
+        request.getRequestDispatcher("/student/Challan.jsp").forward(request, response);
+      
     }
 
     /**
@@ -73,26 +81,7 @@ public class TechProcess extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
-       
-      if(!request.getParameter("auth").equals("fluffy")){
-      response.getWriter().print("Authentication Error");
-      return;
-      }
-       
-      Fee.TechProcess tp=new Fee.TechProcess();
-      
-      tp.setUser(request.getParameter("user"));
-      tp.setAmount(request.getParameter("amount"));
-      tp.setCustID(request.getParameter("custid"));
-      tp.setRefno(request.getParameter("refno"));
-      tp.setAPIReturnURL(request.getParameter("returnURL"));
-      tp.setReturnURL("https://" + request.getServerName()+"/receiveTechProcessAPIResponse");
-     
-      request.getSession().setAttribute("TPRequest", tp);
-      request.getSession().setAttribute("TPRequestDummy", "Dummy");
-      
-      response.sendRedirect(tp.getRedirectURL());
+        processRequest(request, response);
     }
 
     /**

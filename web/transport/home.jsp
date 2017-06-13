@@ -1,15 +1,9 @@
 <%-- 
-    Document   : selectDetails
-    Created on : 16 Mar, 2017, 5:21:49 PM
-    Author     : Home
+    Document   : home
+    Created on : 23 Apr, 2017, 4:09:51 PM
+    Author     : Fluffy
 --%>
-<%@page import="com.action.Find"%>
-<%@page import="General.Batch"%>
-<%-- 
-    Document   : personalReport
-    Created on : 27 Dec, 2016, 9:23:01 PM
-    Author     : Home
---%>
+
 <%-- 
     Document   : home
     Created on : 18 Nov, 2016, 5:57:23 PM
@@ -44,7 +38,7 @@
         {
             type = rsss.getString("type");
         }
-        if(type.equals("placement"))
+        if(type.equals("transport"))
         {
     
     
@@ -58,11 +52,28 @@
      
 	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/sky-forms.css" rel="stylesheet">
  <script src="../js/jquery.js"></script>
          
      
 
+
+
+<link rel="stylesheet" href="../css/angular-material.css">
+
+
+
+<link rel="stylesheet" href="../css/angulartab.css">
+<script src="../js/angular.js"> </script>
+<script src="../js/angular-animate.min.js"></script>
+<script src="../js/angular-route.min.js"></script>
+<script src="../js/angular-aria.min.js"></script>
+<script src="../js/angular-message.min.js"></script>
+<script src="../js/svg-assert-cache.js"></script>
+<script src="../js/angular-material.js"></script>
+<script src="../js/angulartab.js"></script>
+         
+     
+	
 		
 		</head>
 		
@@ -90,16 +101,30 @@
 						
 						
 
-							<nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
+						<nav id="main-nav">
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="home.jsp">Home</a></li>
 
-    
+       <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="">Boarding Point</a>
+    <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="addBoardingpt.jsp">Add</a></li>
 
 
-   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="selectBatch.jsp">Student Details</a>
-
+</ul>
 </li>
 
+
+
+   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="">Routes</a>
+    <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="displayRoute.jsp">Display</a></li>
+	
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="addRouteDetails.jsp">Add</a></li>
+	
+
+</ul>
+</li>
+
+    
 
 
 
@@ -121,59 +146,36 @@
           <section class="landing">
                    
        
-             <center><form action="Display.jsp" class="sky-form" method="post" target="_blank">
-    <header>SELECT BATCH</header>
-    <fieldset>					
-					<section>
-                                            
-                                            <%
-                                            
-                                                if(Find.dept(username)==null){
-                                            %>
-                <label class="input">
-                                            <div align="left" size="3px"><b>DEPARTMENT</b></div>
-                                            <label class="select">
-
-                                                <select id="dept" name="dept" required>
-                                                   
-                   <%=Find.getDeptHTMLContent() %>
-                                                </select>
-                                                <i></i>                                    </label>
-                                        </label>
-
-                                    
-                                                    <%
-                                                    }else{%>
-                                                    <input type="hidden" name="dept" value="<%=Find.dept(username)%>">
-<%
-}
-                                                    %>
-                                        
-                                            <br><br>
+               <md-toolbar class="demo-toolbar md-primary _md _md-toolbar-transitions" style="width: 70%">
+                   
+        <div class="md-toolbar-tools">
             
+            <h3 class="ng-binding" style="text-align:center;">Circulars</h3>
+          <span flex="" class="flex"></span>
+        
+        </div>
+      </md-toolbar>
+               <div ng-cloak="" class="tabsdemoDynamicHeight" ng-app="MyApp" style="width:70%"> 
+  <md-content>
+    <md-tabs md-dynamic-height="" md-border-bottom="">
+      <md-tab label="College">
+        <md-content class="md-padding">
+          <h1 class="md-display-2"></h1>
+        
+          <%out.write(Circular.getHTMLContent(College.getAll("circular")));%>
+        </md-content>
+      </md-tab>
+    
+      </md-tab>
+            <md-tab label="Events">
+        <md-content class="md-padding">
+          <h1 class="md-display-2"></h1>
+        <%out.write(Circular.getHTMLContent(College.getAll("event")));%>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
             
-                 <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                            Batch:</b></div>
-                <label class="select">
-            <select id="batch" name="batch" required>
-                <option disabled selected>Select</option>
-                <%
-               out.write( Batch.getHTMLContent());
-                %>
-            </select>
-                    <i></i>
-                </label></label>
-            
-            
-                                        </section>
-            
-                           
-             <div align="left">
-            <input type="submit" id="submit" value="Submit" /></div>
-            <br>
-    </fieldset>
-                </form></center>
         
             
         </section>

@@ -1,9 +1,16 @@
 <%-- 
     Document   : home
+    Created on : 23 Apr, 2017, 4:09:51 PM
+    Author     : Fluffy
+--%>
+
+<%@page import="Transport.BoardingPoint"%>
+<%@page import="Transport.Route"%>
+<%-- 
+    Document   : home
     Created on : 18 Nov, 2016, 5:57:23 PM
     Author     : Home
 --%>
-<%@page import="com.action.Find"%>
 <%@page import="Downloads.Circular"%>
 <%@page import="Downloads.College"%>
 <%@page import="java.util.ArrayList"%>
@@ -33,7 +40,7 @@
         {
             type = rsss.getString("type");
         }
-        if(type.equals("reception"))
+        if(type.equals("transport"))
         {
     
     
@@ -45,13 +52,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
         	     <link rel="stylesheet" href="../css/main.css">
      
+                     <link rel="stylesheet" href="../css/sky-forms.css">
 	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
+
+        <script src="../js/jquery.js"></script>
+
+
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/sky-forms.css" rel="stylesheet">
- <script src="../js/jquery.js"></script>
-         
+ 
      
 
+         
+     
+	
 		
 		</head>
 		
@@ -80,26 +93,28 @@
 						
 
 						<nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="home.jsp">Home</a></li>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
 
     
-
-
-   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="">Add Entry</a>
+     <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Boarding Point</a>
     <ul class="sub-menu">
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="guest.jsp">Guest</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="entry.jsp">Staff & Students</a>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="addBoardingpt.jsp">Add</a></li>
+
+
 </ul>
 </li>
 
+   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777  "><a href="">Routes</a>
+ <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="displayRoute.jsp">Display</a></li>
+	
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="addRouteDetails.jsp">Add</a></li>
+	
 
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#"> Report</a>
-<ul class="sub-menu">
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personalReport.jsp">Personal Report</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="dailyReport.jsp">Daily Report</a>
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="monthlyReport.jsp">Monthly Report</a>
-</ul></li>
+</ul>    
+</li>
 
+    
 
 
 
@@ -113,93 +128,56 @@
 					</div>
 				</div>
 			</div>
-                    
-
-                <script>
-
-                    $(document).ready(function(){
-        $("#choose").on('change keydown',function(){
-
-            if($(this).val()==="guest")
-                $(".dept").hide();
-            else
-                $(".dept").show();
-        });            
-                    });
-
-                </script>
-                    
 		</header>
 
+<%
+if(request.getParameter("msg")!=null){
+%>
 
+<script>
+    alert("<%=request.getParameter("msg") %>");
+    </script>
+<%}%>
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
           <section class="landing">
                    
-       
-             <center><form action="display.jsp" class="sky-form" method="post" target="_blank">
-    <header>DAILY REPORT</header>
+    <center><form action="${pageContext.request.contextPath}/addBoardingPoint" class="sky-form" method="post">
+    <header>ADD BOARDING POINT</header>
     <fieldset>					
 					<section>
                                             
+             
+            
+        
                                             <label class="input">
-                                                    <div align="left" size="3px"><b>USER TYPE</b></div>
-							<label class="select">
-           
-               <select id="choose" name="choose" required>
-                <option  disabled selected>Select</option>
-    
-                        <option value="staff">STAFF</option>
-                                                    <option value="student">STUDENT</option>
-                                                    <option value="guest">GUEST</option>
-               
-            </select>
-                    <i></i>                                    </label>
-                                                </label>
-                                 <div class="dept">
-			
-                                            <br><br>        
-                        			<label class="input">
-                                                    <div align="left" size="3px"><b>DEPARTMENT</b></div>
-							<label class="select">
-           
-               <select id="dept" name="dept" required>
-                        
-                <%=Find.getDeptHTMLContent() %>
-                <option value="first">Science & Humanities</option>
-                         <option value="all">ALL</option>
-   
-               </select>
-                    <i></i>                                    </label>
-                                                </label>
-                                 </div>
+                                            <div align="left" size="3px"><b>BOARDING POINT</b></div>
+                                            <label class="select">
+                    </label>
+                                                 <input class="boarding"  id="boarding" name="boardingpt" required>
+                                                   
+                                                <i></i>    
+                                        </label>
+
+                                                       
+                
+            
+                                            
+                                            
+                                            
+                                            
+
+                                    
                                         
-                                            <br><br>
-            
-            
-            <label class="input">
-                                                    <div align="left" size="3px" id="div7"><b>
-                                                             Date</b></div>
-                <label class="input">
-            
-            <input type="date" id="datepicker" placeholder="yyyy/mm/dd" name="datepicker" />
-            
-             <i></i>
-            <br> <br>
-                </label></label>
-            
-            
-                                        </section>
-            
-                           
-             <div align="left">
+                                             </section>
+
+                                            <div align="left">
             <input type="submit" id="submit" value="Submit" /></div>
             <br>
     </fieldset>
                 </form></center>
         
-            
-        </section>
+        
 
 
             

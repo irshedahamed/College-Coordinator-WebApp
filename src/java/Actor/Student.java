@@ -8,6 +8,8 @@ package Actor;
 import com.action.Find;
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,6 +31,25 @@ public class Student {
     String accomodation;
     String mobile;
     String mailid;
+    String food;
+    String bloodgrp;
+
+    public String getFood() {
+        return food;
+    }
+
+    public void setFood(String food) {
+        this.food = food;
+    }
+
+    public String getBloodgrp() {
+        return bloodgrp;
+    }
+
+    public void setBloodgrp(String bloodgrp) {
+        this.bloodgrp = bloodgrp;
+    }
+    
 
     public String getMailid() {
         return mailid;
@@ -353,6 +374,8 @@ public class Student {
                         s.setMobile(rs.getString("mobileno"));
                         s.setSex(rs.getString("gender"));
                         s.setMailid(rs.getString("mailid"));
+                        s.setFood(rs.getString("food"));
+                        s.setBloodgrp(rs.getString("bloodgrp"));
                         list.add(s);
                     }
     }catch(Exception e){
@@ -397,6 +420,9 @@ public class Student {
                         s.setAccomodation(rs.getString("accomodation"));
                         s.setMobile(rs.getString("mobileno"));
                         s.setMailid(rs.getString("mailid"));
+                        s.setFood(rs.getString("food"));
+                        s.setBloodgrp(rs.getString("bloodgrp"));
+                        
 
                         
                     }
@@ -860,7 +886,46 @@ public class General{
     String parentincome;
     String club;
     String boarding;
-
+        public boolean  update(){
+        
+         Connection conn=null;
+       Statement stmt=null;
+       
+       try{
+           conn=new dbcon().getConnection(Find.sdept(id));
+            PreparedStatement pstmt;
+            String sql1="update student_general set dob="+"?"+", caste='"+caste+"', community='"+community+
+                    "', parents_annual_income='"+parentincome+"', religion='"+religion+"', nationality='"+nationality+
+                    "', mother_tongue='"+mothertongue+"', club_member='"+club+"', boardingpt='"+boarding+"' where rollno like '"+id+"'";
+    
+        
+            pstmt=conn.prepareStatement(sql1);
+       if(dob!=null)
+         pstmt.setDate(1,Date.valueOf(dob));
+       else
+           pstmt.setNull(1, java.sql.Types.DATE);
+      
+       pstmt.executeUpdate();
+     
+       
+       }catch(Exception e){
+       e.printStackTrace();
+      return false;
+       }finally{
+           try {
+               if(stmt!=null)
+                   stmt.close();
+               if(conn!=null)
+                   conn.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       
+       }
+           return true;
+       
+        }
+        
         public String getDob() {
             return dob;
         }

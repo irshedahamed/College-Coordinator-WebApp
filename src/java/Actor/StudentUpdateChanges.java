@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package API;
+package Actor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Home
  */
-public class TechProcess extends HttpServlet {
+public class StudentUpdateChanges extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +36,10 @@ public class TechProcess extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet TechProcess</title>");            
+            out.println("<title>Servlet StudentUpdateChanges</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet TechProcess at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet StudentUpdateChanges at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -75,24 +75,18 @@ public class TechProcess extends HttpServlet {
             throws ServletException, IOException {
        // processRequest(request, response);
        
-      if(!request.getParameter("auth").equals("fluffy")){
-      response.getWriter().print("Authentication Error");
-      return;
-      }
-       
-      Fee.TechProcess tp=new Fee.TechProcess();
-      
-      tp.setUser(request.getParameter("user"));
-      tp.setAmount(request.getParameter("amount"));
-      tp.setCustID(request.getParameter("custid"));
-      tp.setRefno(request.getParameter("refno"));
-      tp.setAPIReturnURL(request.getParameter("returnURL"));
-      tp.setReturnURL("https://" + request.getServerName()+"/receiveTechProcessAPIResponse");
-     
-      request.getSession().setAttribute("TPRequest", tp);
-      request.getSession().setAttribute("TPRequestDummy", "Dummy");
-      
-      response.sendRedirect(tp.getRedirectURL());
+               String dept=request.getParameter("dept");
+                           String batch=request.getParameter("batch");
+                           
+                           
+                    for(Student s:Student.getAll(dept, batch,"%"))
+                    {
+                    String data=request.getParameter("update"+s.getId());
+                    s.getGeneral().setBoarding(data);
+                    s.getGeneral().update();
+                    }
+                    
+                    response.getWriter().write("Updated Successfully!!");
     }
 
     /**
