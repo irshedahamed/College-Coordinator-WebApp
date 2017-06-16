@@ -395,6 +395,52 @@ public class Student {
     return list;
     }
     
+     public static List<Student> getAllHostel(String dept,String batch,String sec){
+        
+               Connection conn=null;
+    Statement stmt=null;
+    List<Student> list=new ArrayList<Student>();
+        try{
+            
+    conn=new dbcon().getConnection(dept);
+    stmt = conn.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from student_personal where batch like '"+batch+"' "
+                            + "and sec like '"+sec+"'and accomodation like 'hostel' order by CONVERT(regno,UNSIGNED)");
+                    
+                    
+                    rs.beforeFirst();
+                    while(rs.next()){
+                        Student s=new Student();
+                        s.setBatch(rs.getString("batch"));
+                        s.setId(rs.getString("rollno"));
+                        s.setDept(Find.sdept(s.getId()));
+                        s.setRegno(rs.getString("regno"));
+                        s.setName(rs.getString("name"));
+                        s.setAccomodation(rs.getString("accomodation"));
+                        s.setSec(rs.getString("sec"));
+                        s.setMobile(rs.getString("mobileno"));
+                        s.setSex(rs.getString("gender"));
+                        s.setMailid(rs.getString("mailid"));
+                        s.setFood(rs.getString("food"));
+                        s.setBloodgrp(rs.getString("bloodgrp"));
+                        list.add(s);
+                    }
+    }catch(Exception e){
+    e.printStackTrace();
+    }finally{
+        try {
+            if(stmt!=null)
+                stmt.close();
+            if(conn!=null)
+                conn.close();
+        } catch (SQLException ex) {
+      ex.printStackTrace();
+        }
+    }
+        
+    
+    return list;
+    }
       public static Student getById(String id){
         
                Connection conn=null;

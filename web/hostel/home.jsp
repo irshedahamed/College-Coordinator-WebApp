@@ -104,9 +104,11 @@
     
 
 
-   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="requests.jsp">Grant OutPass</a>
-  
-</li>
+   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Grant OutPass</a>
+  <ul class="sub-menu">
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="requests.jsp">Single OutPass</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="bulkOutPass.jsp">Bulk OutPass</a>
+  </ul></li>
 
 <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="notreturned.jsp">SMS</a>
 
