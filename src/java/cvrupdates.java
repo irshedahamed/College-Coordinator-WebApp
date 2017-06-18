@@ -5,6 +5,7 @@
  */
 
 import com.action.Base;
+import com.action.Find;
 import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -141,7 +142,7 @@ public class cvrupdates extends HttpServlet {
  Boolean a = file.mkdirs();
                     }
                     if(!item.isFormField()){
-                        name = new File(item.getName()).getName();
+                        name = new File(Find.parseFilename(item.getName() )).getName();
                         
                         item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
                     }

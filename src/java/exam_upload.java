@@ -5,6 +5,7 @@
  */
 
 import com.action.Base;
+import com.action.Find;
 import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -136,7 +137,7 @@ public class exam_upload extends HttpServlet {
                      
                     }
                     if(!item.isFormField()){
-                        name = new File(item.getName()).getName();
+                        name = new File(Find.parseFilename(item.getName() )).getName();
                          UPLOAD_DIRECTORY = Base.path+"/portal/exam/";
     File file = new File(UPLOAD_DIRECTORY);
  Boolean a = file.mkdirs();

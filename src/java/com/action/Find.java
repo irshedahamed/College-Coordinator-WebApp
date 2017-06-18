@@ -125,6 +125,18 @@ public class Find {
      return d.substring(6,8)+"-"+d.substring(4,6)+"-"+d.substring(0,4);
     }
     
+     public static String parseFilename(String name){
+     
+         StringBuilder parsed=new StringBuilder();
+         for(int i=0;i<name.length();i++)
+             if( Character.isLetterOrDigit( name.charAt(i)) || Character.isWhitespace(name.charAt(i)) || name.charAt(i)=='.')
+                    parsed.append(name.charAt(i));
+         else
+                 parsed.append(' ');
+         
+         return parsed.toString();
+     
+     }
     public static String category(String id){
     if(id.contains("AD"))
         return "Admission";

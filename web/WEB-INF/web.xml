@@ -304,6 +304,10 @@
         <servlet-name>processBulkOutPass</servlet-name>
         <servlet-class>processBulkOutPass</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>findNotes</servlet-name>
+        <servlet-class>com.action.findNotes</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -607,6 +611,10 @@
     <servlet-mapping>
         <servlet-name>processBulkOutPass</servlet-name>
         <url-pattern>/processBulkOutPass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>findNotes</servlet-name>
+        <url-pattern>/findNotes</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
