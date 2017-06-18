@@ -10,7 +10,6 @@ import Forms.OutPass;
 import com.action.SMSTemplate;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +17,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Home
+ * @author Irshed
  */
-public class processOutPass extends HttpServlet {
+public class processBulkOutPass extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +39,10 @@ public class processOutPass extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet processOutPass</title>");            
+            out.println("<title>Servlet processBulkOutPass</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet processOutPass at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet processBulkOutPass at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -77,9 +76,14 @@ public class processOutPass extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     //   processRequest(request, response);
-     OutPass p=new OutPass();
-     p.setRollno(request.getParameter("rollno"));
+      //  processRequest(request, response);
+    String[] id = request.getParameterValues("outpass");
+    if(id!=null)
+    {
+        for(int i = 0 ; i < id.length ; i++)
+        {
+                 OutPass p=new OutPass();
+     p.setRollno(id[i]);
      p.setReason(request.getParameter("reason"));
      p.setFrom(request.getParameter("from"));
      p.setTill(request.getParameter("till"));
@@ -92,13 +96,28 @@ public class processOutPass extends HttpServlet {
         General.OutPass op=new General.OutPass(p.getRollno());
      
         if(op.insert(p.getRequestid())){
+            
             if(Student.getById(p.getRollno()).getAccomodation().equalsIgnoreCase("hostel"))
             SMSTemplate.send(Parent.getNumber(p.getRollno()),p.getSMSContent());
+            response.getWriter().write("<b>");
+            response.getWriter().print(i+1);
+            response.getWriter().write(".");
+            response.getWriter().write(Student.getById(id[i]).getName());
+            response.getWriter().write("</b><br>");
+            response.setContentType("text/html;charset=UTF-8");
+         response.getWriter().println("<link href='css/bootstrap.min.css' rel='stylesheet'>");
         }
         }
         
-        if(res)
-            response.sendRedirect("hostel/requests.jsp?msg=done");
+  
+        }response.getWriter().write("<center><h1>Out Pass Generated and valid for 6 hours</h1>");
+        response.getWriter().write("<a href='hostel/bulkOutPass.jsp'><input type='button' id='submit' value='Back' /></a></center>");
+           
+    }
+    
+    
+    
+    
     }
 
     /**

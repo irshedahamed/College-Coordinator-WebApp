@@ -1,8 +1,10 @@
 <%-- 
-    Document   : home
-    Created on : 18 Nov, 2016, 5:57:23 PM
-    Author     : Home
+    Document   : bulkOutPass
+    Created on : 14 Jun, 2017, 10:58:02 PM
+    Author     : Irshed
 --%>
+
+
 <%@page import="com.action.Find"%>
 <%@page import="General.Holidays"%>
 <%@page import="General.Batch"%>
@@ -95,7 +97,7 @@
     
 
 
-   
+  
    <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Grant OutPass</a>
   <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="requests.jsp">Single OutPass</a>
@@ -160,8 +162,8 @@
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
           <section class="landing">
-              <center><form action="${pageContext.request.contextPath}/updateHolidays" class="sky-form" method="post" >
-    <header>HOLIDAY SETUP</header>
+              <center><form action="grantBulkOutPass.jsp" class="sky-form" method="post" >
+    <header>BULK OUTPASS</header>
     <fieldset>					
 					<section>
 						<label class="input">
@@ -169,10 +171,7 @@
 							<label class="select">
            
                <select id="dept" name="dept" class="change" required>
-                <option  disabled selected value="">Select</option>
-    
-                                                   
-                <%=Find.getDeptHTMLContent() %>
+                    <%=Find.getDeptHTMLContent() %>
                
             </select>
                     <i></i>                                    </label>
@@ -192,21 +191,11 @@
                                                 </label>
                                         
                                             <br><br>
-           <label class="input">
-                                                    <div align="left" size="3px"><b>NAME</b></div>
-							<label class="select">
-           
-               <select id="holidayname" class="change" name="name" required>
-                <option  disabled selected value="">Select</option>
-                
-                <%for(String name:Holidays.getAllNames()){%>
-                <option  value="<%=name%>"><%=name%></option>
-                <% }
-                %>
-            </select>
-                    <i></i>                                    </label>
-                                                </label>
-                                        
+          <label class="input"><label class="input">
+                                                         <div align="left" size="3px"><b>
+                                                            Reason: </b></div> 
+                                                    <input type="text" id="preason" name="reason"  />
+                                                    </label> </label>                              
                                             <br><br>
             
                                             <label class="input">
@@ -233,7 +222,7 @@
                                         </section>
             
                            
-             <div align="left">
+             <div align="right">
             <input type="submit" id="submit" value="Submit" /></div>
             <br>
     </fieldset>

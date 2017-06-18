@@ -22,7 +22,9 @@ public class dbcon {
         try {  
              Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-            con = DriverManager.getConnection("jdbc:mysql://182.74.154.218:3306/"+dbname,"akshaya","kalpana");
+
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"root","1234");
+
 
              
         } catch (SQLException ex) {
