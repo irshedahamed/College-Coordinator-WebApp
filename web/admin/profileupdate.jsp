@@ -716,7 +716,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <label>Date of Admission :</label><input type="date" placeholder="yyyy-mm-dd" style="background: white" id="doa" name="doa">
+                                        <label>Date of Admission :</label><input type="date" class="check" placeholder="yyyy-mm-dd" style="background: white" id="doa" name="doa">
                                     </td>
                                     
                                        <td>
