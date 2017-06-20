@@ -149,23 +149,23 @@ if(request.getParameter("msg")!=null){
     <fieldset>					
 					<section>
                                             
-                <label class="input">
-                                            <div align="left" size="3px"><b>ROUTE</b></div>
+               <label class="input">
+                                            <div align="left" size="3px"><b>BOARDING POINT 1</b></div>
                                             <label class="select">
+                    </label>
+                                        </label>
 
-                                                <select id="route" name="route" required>
+                                                <select class="boarding"  id="boardingpt1" name="boardingpt1" required>
                                                     <option >Select</option>
-                                                    <%
-                                                        List<Route> list=Route.getAll();
-                                                   for(Route r:list){
+                                                     <%
+                                                        List<String> blist= BoardingPoint.getAll();
+                                                   for(String s:blist){
                                                    %>
-                                                   <option value="<%=r.getId() %>"><%=r.getName() %>(<%=r.getId() %>)</option>
+                                                   <option value="<%=s %>"><%=s%></option>
                                                    <%
                                                    }
                                                    %>
                                                 </select>
-                                                <i></i>                                    </label>
-                                        </label>
 
                                     
                                         
@@ -173,15 +173,15 @@ if(request.getParameter("msg")!=null){
             
         
                                             <label class="input">
-                                            <div align="left" size="3px"><b>BOARDING POINT</b></div>
+                                            <div align="left" size="3px"><b>BOARDING POINT 2</b></div>
                                             <label class="select">
                     </label>
                                         </label>
 
-                                                <select class="boarding"  id="boarding" name="boarding" required>
+                                                <select class="boarding"  id="boardingpt2" name="boardingpt2" required>
                                                     <option >Select</option>
                                                      <%
-                                                        List<String> blist= BoardingPoint.getAll();
+                                                        //List<String> blist= BoardingPoint.getAll();
                                                    for(String s:blist){
                                                    %>
                                                    <option value="<%=s %>"><%=s%></option>
@@ -198,18 +198,7 @@ if(request.getParameter("msg")!=null){
                                             
                                             
                                             
-                                            <label class="input">
-                                            <div align="left" size="3px"><b>PRIORITY</b></div>
-                                            <label class="select">
-
-                                                <select id="priority" name="priority" required>
-                                                    <option >Select</option>
-                                                   <option value="High">High</option>
-                                                   <option value="Medium">Medium</option>
-                                                   <option value="Low">Low</option>
-                                                </select>
-                                                <i></i>                                    </label>
-                                        </label>
+                                           
 
                                     
                                         
