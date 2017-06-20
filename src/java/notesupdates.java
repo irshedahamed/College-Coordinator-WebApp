@@ -177,6 +177,19 @@ String UPLOAD_DIRECTORY="hello";
                     if(!item.isFormField()){
                         name = new File( Find.parseFilename(item.getName() ) ).getName();
                         
+                        File f=new File(UPLOAD_DIRECTORY + File.separator + name);
+                        if(f.exists()){
+                        name="1_"+name;
+                        f=new File(UPLOAD_DIRECTORY + File.separator + name);
+                        
+                            int i=2;
+                        while(f.exists()){
+                        name=i+name.substring(name.indexOf("_"));
+                        f=new File(UPLOAD_DIRECTORY + File.separator + name);
+                        i++;
+                        }
+                        
+                        }
                         item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
                     }
                     
