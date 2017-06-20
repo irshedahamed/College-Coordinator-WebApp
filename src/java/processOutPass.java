@@ -78,7 +78,7 @@ public class processOutPass extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
      //   processRequest(request, response);
-     OutPass p=new OutPass();
+     final OutPass p=new OutPass();
      p.setRollno(request.getParameter("rollno"));
      p.setReason(request.getParameter("reason"));
      p.setFrom(request.getParameter("from"));
@@ -89,12 +89,17 @@ public class processOutPass extends HttpServlet {
         
       //  System.err.println(res);
         if(p.getStatus().equals("Accepted")&&res){
-        General.OutPass op=new General.OutPass(p.getRollno());
-     
+        final General.OutPass op = new General.OutPass(p.getRollno());
+    new Thread(new Runnable(){
+         
+         @Override
+         public void run(){
         if(op.insert(p.getRequestid())){
             if(Student.getById(p.getRollno()).getAccomodation().equalsIgnoreCase("hostel"))
             SMSTemplate.send(Parent.getNumber(p.getRollno()),p.getSMSContent());
         }
+        }
+     }).start();
         }
         
         if(res)
