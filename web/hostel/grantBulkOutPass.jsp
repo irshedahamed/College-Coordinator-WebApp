@@ -125,7 +125,7 @@
                                 <th>OUT PASS</th></tr></thead>
                                 <% 
                                     List<Student> newlist = new ArrayList<Student>();
-                                List<Student> list = Student.getAllHostel(dept, batch, "%");
+                                List<Student> list = Student.getAll(dept, batch, "%");
                                 for(Student s : list)
                                 {
                                      boolean flag=Hostel.AuthenticateAccess(username, s);
