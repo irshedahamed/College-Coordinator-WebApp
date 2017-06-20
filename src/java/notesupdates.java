@@ -255,8 +255,9 @@ String UPLOAD_DIRECTORY="hello";
                                   }
                                    
                                   
-            statement1.executeUpdate("insert into notes values("+null+",'" + ayear + "','" + newsem + "','" + subcode + "','" + notes + "','" + name + "','" + UPLOAD_DIRECTORY + "','"+descp+"')");
-                                  
+         statement1.executeUpdate("insert into notes values("+null+",'" + ayear + "','" + sem + "','" + subcode + "','" + notes + "','" + name + "','" + UPLOAD_DIRECTORY + "','"+descp+"','"
+                   +subCategory+"','"+by + "',now())");
+             
                                   
                                   }
                                   
