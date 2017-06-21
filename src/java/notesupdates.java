@@ -191,6 +191,7 @@ String UPLOAD_DIRECTORY="hello";
                         
                         }
                         item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
+                    
                     }
                     
                     
@@ -208,7 +209,8 @@ String UPLOAD_DIRECTORY="hello";
         }
     
         
-        
+        if(descp.equals(""))
+            descp=name;
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection connection1 = new dbcon().getConnection(dept);
