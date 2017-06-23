@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package com.action;
 
-import Actor.Parent;
-import Actor.Student;
-import Forms.OutPass;
-import com.action.SMSTemplate;
+import Downloads.Notes;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Home
  */
-public class processOutPass extends HttpServlet {
+public class findNotes extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +38,10 @@ public class processOutPass extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet processOutPass</title>");            
+            out.println("<title>Servlet findNotes</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet processOutPass at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet findNotes at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -77,33 +75,35 @@ public class processOutPass extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     //   processRequest(request, response);
-     final OutPass p=new OutPass();
-     p.setRollno(request.getParameter("rollno"));
-     p.setReason(request.getParameter("reason"));
-     p.setFrom(request.getParameter("from"));
-     p.setTill(request.getParameter("till"));
-     p.setStatus(request.getParameter("status"));    
-        boolean res=p.insert();
-        //System.err.println(p.getStatus().equals("Accepted"));
-        
-      //  System.err.println(res);
-        if(p.getStatus().equals("Accepted")&&res){
-        final General.OutPass op = new General.OutPass(p.getRollno());
-    new Thread(new Runnable(){
-         
-         @Override
-         public void run(){
-        if(op.insert(p.getRequestid())){
-            if(Student.getById(p.getRollno()).getAccomodation().equalsIgnoreCase("hostel"))
-            SMSTemplate.send(Parent.getNumber(p.getRollno()),p.getSMSContent());
-        }
-        }
-     }).start();
-        }
-        
-        if(res)
-            response.sendRedirect("hostel/requests.jsp?msg=done");
+       // processRequest(request, response);
+       
+       Notes n=new Notes();
+       String dept=request.getParameter("dept");
+       String subtype=request.getParameter("subtype");
+       n.setSem(request.getParameter("sem"));
+       n.setAcademicyr(request.getParameter("acyear"));
+       n.setSubcode(request.getParameter("subcode"));
+       n.setType(request.getParameter("type"));
+       
+       String result="";
+       for(Notes note:Notes.getAll(dept, n)){
+           System.err.println(note.getDesc());
+           if(note.getType().equals("class_notes")){
+               if(note.getSubCategory()!=null)
+                if(note.getSubCategory().equals(subtype)){
+                        result+=note.getDesc();
+                        break;
+                }
+       }else{
+                  result+=note.getDesc();
+                     
+                }
+       }
+       if(result.equals(""))
+           response.getWriter().write("Not Found");
+       else
+           response.getWriter().write(result);
+      
     }
 
     /**

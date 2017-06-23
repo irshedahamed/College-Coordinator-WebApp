@@ -124,7 +124,7 @@ if(user.equals("student")||user.equals("staff"))
     Statement stmt=null;
 try
 {
-                        String[] depts=new String[15];
+                        String[] depts=new String[25];
                     if(deptReq.equals("all"))
                         depts=Find.Depts;
                     else

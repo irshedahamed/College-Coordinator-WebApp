@@ -1,14 +1,13 @@
 <%-- 
-    Document   : notReturnedReport
-    Created on : Feb 20, 2017, 10:56:24 AM
-    Author     : Lenovo
+    Document   : bulkOutPass
+    Created on : 14 Jun, 2017, 10:58:02 PM
+    Author     : Irshed
 --%>
-<%-- 
-    Document   : home
-    Created on : 18 Nov, 2016, 5:57:23 PM
-    Author     : Home
---%>
+
+
 <%@page import="com.action.Find"%>
+<%@page import="General.Holidays"%>
+<%@page import="General.Batch"%>
 <%@page import="Downloads.Circular"%>
 <%@page import="Downloads.College"%>
 <%@page import="java.util.ArrayList"%>
@@ -52,14 +51,17 @@
      
 	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/sky-forms.css" rel="stylesheet">
  <script src="../js/jquery.js"></script>
          
      
 
 
-         
+
+<link rel="stylesheet" href="../css/angular-material.css">
+      
      
+<link rel="stylesheet" href="../css/sky-forms.css">
+      
 	
 		
 		</head>
@@ -90,13 +92,13 @@
 
 						<nav id="main-nav">
                                                     
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="home.jsp">Home</a></li>
 
     
 
 
   
-   <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Grant OutPass</a>
+   <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Grant OutPass</a>
   <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="requests.jsp">Single OutPass</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="bulkOutPass.jsp">Bulk OutPass</a>
@@ -107,13 +109,12 @@
 
 </li>
 
-
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="Setup.jsp">Holiday Setup</a>
+<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 "><a href="Setup.jsp">Holiday Setup</a>
 
 
 </li>
 
-<li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768   current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#"> Report</a>
+<li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#"> Report</a>
 <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personalReport.jsp">Personal Report</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="dailyReport.jsp">Daily Report</a>
@@ -129,61 +130,104 @@
 					</div>
 				</div>
 			</div>
+                    
+                    <script>
+                        $(document).ready(function(){
+                            
+                         console.log();   
+                            $(".change").on('change keydown',function(){
+                              var batch=$("#batch").val();
+                              var dept=$("#dept").val();
+                              var holiday=$("#holidayname").val();
+                                    if(batch!== null && dept!==null&&holiday!== null ){
+                                        $.post('../HolidayData',{
+                                            batch : batch,
+                                            dept : dept,
+                                            name : holiday
+                                        },function(response){
+                                            
+                                           // console.log(response);
+                                            $("#from").val(response.from);
+                                            $("#till").val(response.till);
+                                        });
+                                          
+                                      }
+                            });
+                        });
+                        
+                    </script>
 		</header>
 
 
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
           <section class="landing">
-                   
-        <center><form action="notReturnedDisplay.jsp" class="sky-form" method="post" >
-    <header>YET TO REPORT</header>
+              <center><form action="grantBulkOutPass.jsp" class="sky-form" method="post" >
+    <header>BULK OUTPASS</header>
     <fieldset>					
-				    <div class="dept">
-			
-                                            <br><br>        
-                        			<label class="input">
+					<section>
+						<label class="input">
                                                     <div align="left" size="3px"><b>DEPARTMENT</b></div>
 							<label class="select">
            
-               <select id="dept" name="dept" required>
+               <select id="dept" name="dept" class="change" required>
+                    <%=Find.getDeptHTMLContent() %>
                
-                        
-                <%=Find.getDeptHTMLContent() %>
-                               <option value="all">ALL</option>
-               
-               
-               </select>
+            </select>
                     <i></i>                                    </label>
                                                 </label>
-                                 </div>
                                         
                                             <br><br>
-						
-                 
-    
-        
+            <label class="input">
+                                                    <div align="left" size="3px"><b>BATCH</b></div>
+							<label class="select">
+           
+               <select id="batch" class="change" name="batch" required>
+                <option  disabled selected value="">Select</option>
+  
+                <%=Batch.getHTMLContent() %>
+            </select>
+                    <i></i>                                    </label>
+                                                </label>
+                                        
+                                            <br><br>
+          <label class="input"><label class="input">
+                                                         <div align="left" size="3px"><b>
+                                                            Reason: </b></div> 
+                                                    <input type="text" id="preason" name="reason"  />
+                                                    </label> </label>                              
+                                            <br><br>
+            
                                             <label class="input">
                                                     <div align="left" size="3px" id="div7"><b>
-                                                             DATE</b></div>
+                                                             FROM</b></div>
                 <label class="input">
             
-            <input type="date" id="from"   name="date" />
+            <input type="date" id="from"   name="from" />
             
              <i></i>
             <br> <br>
                 </label></label>
             
-                                          
+                                             <label class="input">
+                                                    <div align="left" size="3px" id="div7"><b>
+                                                             TILL</b></div>
+                <label class="input">
+            
+            <input type="date" id="till"   name="till" />
+            
+             <i></i>
+            <br> <br>
+                </label></label>
+                                        </section>
             
                            
-             <div align="left">
+             <div align="right">
             <input type="submit" id="submit" value="Submit" /></div>
             <br>
     </fieldset>
                 </form></center>     
-            
-        
+              
             
         </section>
 

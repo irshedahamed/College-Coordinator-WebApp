@@ -1,13 +1,18 @@
 <%-- 
+    Document   : iddisplay
+    Created on : 23 May, 2017, 11:43:17 AM
+    Author     : Home
+--%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="Actor.Student"%>
+<%-- 
     Document   : verificationReportDisplay
     Created on : 13 Oct, 2016, 7:48:15 PM
     Author     : Home
 --%>
 
 
-<%@page import="java.util.List"%>
-<%@page import="Actor.Student.General"%>
-<%@page import="Actor.Student"%>
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -122,66 +127,92 @@ h2{
     </head>
     
     <body>
+         
         <%
-            String dept = request.getParameter("dept");
-              
-          
+            String deptReq = request.getParameter("dept");
+            String[] depts=new String[25];
+               if(deptReq.equals("all"))
+                        depts=Find.Depts;
+                    else
+                        depts[0]=new String(deptReq);
+           String sec = request.getParameter("sec");
                String batch=request.getParameter("batch");
-        
+      
         %>
-         <center><h2>St. Joseph's Institute of Technology, Chennai-119</h2></center>
-      <center><h2>Department Of <%=dept.toUpperCase()%></h2></center>
-
-      <center>
-             <h2>Batch :<%=batch%> </h2>
-           </center>
+        
+     
    
-        <center>  <table class="bordered">
+        <form action="${pageContext.request.contextPath}/attinchargeedit" method="post">
+      <center>  <table class="bordered">
     <thead>
   
     <tr>
         
-        <th> Sno</th>
-        <th name="cc">Roll No</th>
+        <th>Roll No</th>
         <th>Name</th>
-        <th>Boarding point</th>
+        <th>Course</th>
+        <th>Boarding</th>
+        <th>BG</th>
+        <th>DOB</th>
+        <th>Father's Phone</th>
+        <th>Address 1</th>
+        <th>Address 2</th>
+        <th>District</th>
+        <th>Pin</th>
   
-        
     </tr>
     </thead>
-    <%
+        <%
+        for(String dept:depts){
         
-        int sno=0;
-        
-        List<Student> list =  Student.getAll(dept, batch, "%");
-        
-        for(Student s : list)
+        for(Student s:Student.getAll(dept, batch, sec))
         {
+            
         
-        String rollno = s.getId();
-        
-        String name=s.getName();
-               
-        String Boarding = s.getGeneral().getBoarding();
-        
-         %>
-       
+        %>
         
         <tr>
-            <td><%=++sno%></td>
-            <td><%=rollno.toUpperCase() %></td>
-             
-            <td><%=name.toUpperCase() %></td>
-
-           <td><%=Boarding %></td>
+            <td><%=s.getId().toUpperCase() %></td>
+            <td><%=s.getName().toUpperCase() %></td>
+            <% if(Find.sdept(s.getId()).equals("it")){%>
+            <td>B.tech-<%=Find.sdept(s.getId()) %></td>
+            <%}else{%>
+            <td>B.E-<%=Find.sdept(s.getId()) %></td>
+            <%}%>
+            
+            <td><%=s.getGeneral().getBoarding() %></td>
+            <td> <%=s.getBloodgrp()%> </td>
+            <td> <%= Find.getFormattedDate(s.getGeneral().getDob()).replace("-",".")  %> </td>
+            
+           <td> <%=s.getFatherDetails().getMobile() %></td>
+           
+            <td><%=s.getContact().getDoorno() %></td>         
+           <td><%=s.getContact().getStreet() %></td>
+                    
+           <td><%=s.getContact().getArea() %></td>
+          
+                    
+           <td>Pin-<%=s.getContact().getPincode() %></td>
         </tr>      
             
-        <%
-            }
-            %>
+ 
         
+        <% 
+}
+
+}
+
+
+        
+    
+           
+
+%>
+   
+    
         
 </table></center>
-       
+
+        </form>
     </body>
 </html>

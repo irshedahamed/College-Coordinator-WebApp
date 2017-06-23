@@ -20,10 +20,13 @@ import java.util.List;
  */
 public class Notes extends Downloadable{
     
-    String academicyr;
-    String sem;
-    String subcode;
-    String type;
+    private String academicyr;
+    private String sem;
+    private String subcode;
+    private String type;
+    private String by;
+    private String time;
+    private String subCategory;
 
     public String getAcademicyr() {
         return academicyr;
@@ -79,6 +82,9 @@ public class Notes extends Downloadable{
                      note.setSem(rs.getString("sem"));
                      note.setSubcode(rs.getString("subcode"));
                      note.setType(rs.getString("notes_type"));
+                     note.setBy(rs.getString("by"));
+                     note.setTime(rs.getString("time"));
+                     note.setSubCategory(rs.getString("subCategory"));
                        list.add(note);
                     }
     }catch(Exception e){
@@ -94,5 +100,29 @@ public class Notes extends Downloadable{
         }
     }
     return list;
+    }
+
+    public String getBy() {
+        return by;
+    }
+
+    public void setBy(String by) {
+        this.by = by;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
     }
 }

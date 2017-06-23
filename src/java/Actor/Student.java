@@ -31,6 +31,25 @@ public class Student {
     String accomodation;
     String mobile;
     String mailid;
+    String food;
+    String bloodgrp;
+
+    public String getFood() {
+        return food;
+    }
+
+    public void setFood(String food) {
+        this.food = food;
+    }
+
+    public String getBloodgrp() {
+        return bloodgrp;
+    }
+
+    public void setBloodgrp(String bloodgrp) {
+        this.bloodgrp = bloodgrp;
+    }
+    
 
     public String getMailid() {
         return mailid;
@@ -355,6 +374,8 @@ public class Student {
                         s.setMobile(rs.getString("mobileno"));
                         s.setSex(rs.getString("gender"));
                         s.setMailid(rs.getString("mailid"));
+                        s.setFood(rs.getString("food"));
+                        s.setBloodgrp(rs.getString("bloodgrp"));
                         list.add(s);
                     }
     }catch(Exception e){
@@ -374,6 +395,7 @@ public class Student {
     return list;
     }
     
+
       public static Student getById(String id){
         
                Connection conn=null;
@@ -399,6 +421,9 @@ public class Student {
                         s.setAccomodation(rs.getString("accomodation"));
                         s.setMobile(rs.getString("mobileno"));
                         s.setMailid(rs.getString("mailid"));
+                        s.setFood(rs.getString("food"));
+                        s.setBloodgrp(rs.getString("bloodgrp"));
+                        
 
                         
                     }

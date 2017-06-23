@@ -1,14 +1,16 @@
 <%-- 
-    Document   : notReturnedReport
-    Created on : Feb 20, 2017, 10:56:24 AM
-    Author     : Lenovo
+    Document   : home
+    Created on : 23 Apr, 2017, 4:09:51 PM
+    Author     : Fluffy
 --%>
+
+<%@page import="Transport.BoardingPoint"%>
+<%@page import="Transport.Route"%>
 <%-- 
     Document   : home
     Created on : 18 Nov, 2016, 5:57:23 PM
     Author     : Home
 --%>
-<%@page import="com.action.Find"%>
 <%@page import="Downloads.Circular"%>
 <%@page import="Downloads.College"%>
 <%@page import="java.util.ArrayList"%>
@@ -38,7 +40,7 @@
         {
             type = rsss.getString("type");
         }
-        if(type.equals("hostel"))
+        if(type.equals("transport"))
         {
     
     
@@ -50,13 +52,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
         	     <link rel="stylesheet" href="../css/main.css">
      
+                     <link rel="stylesheet" href="../css/sky-forms.css">
 	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
-	<link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/sky-forms.css" rel="stylesheet">
- <script src="../js/jquery.js"></script>
-         
-     
 
+        <script src="../js/jquery.js"></script>
+
+
+	<link href="../css/bootstrap.min.css" rel="stylesheet">
+ 
+     
 
          
      
@@ -89,103 +93,91 @@
 						
 
 						<nav id="main-nav">
-                                                    
 							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
+
+    
+     <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Boarding Point</a>
+    <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="addBoardingpt.jsp">Add</a></li>
+
+
+</ul>
+</li>
+
+   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777  "><a href="">Routes</a>
+ <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="displayRoute.jsp">Display</a></li>
+	
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="addRouteDetails.jsp">Add</a></li>
+	
+
+</ul>    
+</li>
 
     
 
 
-  
-   <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Grant OutPass</a>
-  <ul class="sub-menu">
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="requests.jsp">Single OutPass</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="bulkOutPass.jsp">Bulk OutPass</a>
-  </ul></li>
-
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="notreturned.jsp">SMS</a>
 
 
-</li>
-
-
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="Setup.jsp">Holiday Setup</a>
-
-
-</li>
-
-<li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768   current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#"> Report</a>
-<ul class="sub-menu">
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personalReport.jsp">Personal Report</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="dailyReport.jsp">Daily Report</a>
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="monthlyReport.jsp">Monthly Report</a>
-      <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="notReturnedReport.jsp">Not Returned Report</a>
-
-</ul></li>
+   
 
 
 
-</ul>						
-                                                </nav>
+
+</ul>						</nav>
 					</div>
 				</div>
 			</div>
 		</header>
 
+<%
+if(request.getParameter("msg")!=null){
+%>
 
+<script>
+    alert("<%=request.getParameter("msg") %>");
+    </script>
+<%}%>
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
           <section class="landing">
                    
-        <center><form action="notReturnedDisplay.jsp" class="sky-form" method="post" >
-    <header>YET TO REPORT</header>
+    <center><form action="${pageContext.request.contextPath}/addBoardingPoint" class="sky-form" method="post">
+    <header>ADD BOARDING POINT</header>
     <fieldset>					
-				    <div class="dept">
-			
-                                            <br><br>        
-                        			<label class="input">
-                                                    <div align="left" size="3px"><b>DEPARTMENT</b></div>
-							<label class="select">
-           
-               <select id="dept" name="dept" required>
-               
-                        
-                <%=Find.getDeptHTMLContent() %>
-                               <option value="all">ALL</option>
-               
-               
-               </select>
-                    <i></i>                                    </label>
-                                                </label>
-                                 </div>
-                                        
-                                            <br><br>
-						
-                 
-    
+					<section>
+                                            
+             
+            
         
                                             <label class="input">
-                                                    <div align="left" size="3px" id="div7"><b>
-                                                             DATE</b></div>
-                <label class="input">
+                                            <div align="left" size="3px"><b>BOARDING POINT</b></div>
+                                            <label class="select">
+                    </label>
+                                                 <input class="boarding"  id="boarding" name="boardingpt" required>
+                                                   
+                                                <i></i>    
+                                        </label>
+
+                                                       
+                
             
-            <input type="date" id="from"   name="date" />
-            
-             <i></i>
-            <br> <br>
-                </label></label>
-            
-                                          
-            
-                           
-             <div align="left">
+                                            
+                                            
+                                            
+                                            
+
+                                    
+                                        
+                                             </section>
+
+                                            <div align="left">
             <input type="submit" id="submit" value="Submit" /></div>
             <br>
     </fieldset>
-                </form></center>     
-            
+                </form></center>
         
-            
-        </section>
+        
 
 
             

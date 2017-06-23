@@ -25,10 +25,14 @@ import java.util.List;
 public class BoardingPoint {
     
     
-    private static List<String> Boardingpts=new ArrayList<String>();
     
-    static{
-      Connection conn=null;
+    
+
+    
+    public static List<String> getAll(){
+        
+         List<String> Boardingpts=new ArrayList<String>();
+           Connection conn=null;
     Statement stmt=null;
    
         try{
@@ -56,12 +60,6 @@ public class BoardingPoint {
       ex.printStackTrace();
         }
     }
-        
-    
-    
-    }
-    
-    public static List<String> getAll(){
         return Boardingpts;
     } 
     
@@ -72,6 +70,38 @@ public class BoardingPoint {
     }
     return res;
    
+    }
+    
+    public static boolean add(String boardingpt){
+     Connection conn=null;
+       Statement stmt=null;
+       int update=0;
+       try{
+           conn=new dbcon().getConnection("sjitportal");
+           stmt=conn.createStatement();
+           String sql="insert into boardingpts values(null,'"+boardingpt+"')";
+            update+=stmt.executeUpdate(sql);
+       
+     
+       
+       }catch(Exception e){
+       e.printStackTrace();
+       }finally{
+           try {
+               if(stmt!=null)
+                   stmt.close();
+               if(conn!=null)
+                   conn.close();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+       
+       }
+       if(update==1)
+           return true;
+       else
+           return false;
+    
     }
     
 }

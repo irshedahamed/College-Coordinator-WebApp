@@ -210,8 +210,9 @@
                 <label class="select">
                     
                     <select name="dept">
-                      
+                       
             <%=Find.getDeptHTMLContent() %>
+             <option value="all">All</option>
                     </select>
            
                 <i></i>
@@ -259,6 +260,7 @@
                 <option value="B">B</option>
                 <option value="C">C</option>
                 <option value="D">D</option>
+                <option value="NA">NA</option>
             </select>
                     <i></i>
                     </label>

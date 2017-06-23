@@ -296,6 +296,22 @@
         <servlet-name>addMapping</servlet-name>
         <servlet-class>addMapping</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addBoardingPoint</servlet-name>
+        <servlet-class>Transport.addBoardingPoint</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processBulkOutPass</servlet-name>
+        <servlet-class>processBulkOutPass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>findNotes</servlet-name>
+        <servlet-class>com.action.findNotes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Authenticator</servlet-name>
+        <servlet-class>API.Authenticator</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -591,6 +607,22 @@
     <servlet-mapping>
         <servlet-name>addMapping</servlet-name>
         <url-pattern>/addMapping</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addBoardingPoint</servlet-name>
+        <url-pattern>/addBoardingPoint</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processBulkOutPass</servlet-name>
+        <url-pattern>/processBulkOutPass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>findNotes</servlet-name>
+        <url-pattern>/findNotes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Authenticator</servlet-name>
+        <url-pattern>/Authenticator</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
