@@ -4,7 +4,6 @@
     Author     : Arun
 --%>
 
-<%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -72,6 +71,7 @@
 
 						
 						
+                                            
 <nav id="main-nav">
 							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
 <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Academics</a>
@@ -82,21 +82,20 @@
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="deletebatch.jsp">Delete Batch</a>
             </ul>
         </li>
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Academic Year</a>
-            <ul class="sub-menu">
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="InsertYear.jsp">Insert Academic Year</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="CurrentUpd.jsp">Update Current</a>
-            </ul>
-        </li>
+	
+	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="course.jsp">Course</a></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="">Subjects</a>
         <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectAdd.jsp">Subject Add</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">Subject View</a>
                         <ul class="sub-menu">
-                            <% for(String dept:Find.Depts){%>
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=<%=dept%>"><%=dept.toUpperCase() %></a>
-                    <%}%>
-                </ul></li>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=cse">CSE</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=ece">ECE</a>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=eee">EEE</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=mech">MECH</a>
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=civil">CIVIL</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SubjectView.jsp?dept=it">IT</a>
+            </ul></li>
             </ul></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="feedetails.jsp">Fee Details</a></li>
     </ul>
@@ -136,7 +135,7 @@
     <ul class="sub-menu">
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="generalsms.jsp">General</a></li>
 	
-	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="absentieessms.jsp">Absentiees</a></li>
+	<li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="absentieessms.jsp">Absentees</a></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="marksms.jsp">Mark</a></li>
         <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="staffsms.jsp">Staff</a></li>
 
@@ -167,8 +166,7 @@
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="PasswordReport.jsp">Password</a></li>
 	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="AddressReport.jsp">Address</a>
 	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="verificationReport.jsp">Verification</a>
-		 <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="BoardingptReport.jsp">Boarding Point</a>
-
+	
 	
 </li>
 </ul>
@@ -182,7 +180,8 @@
 			</div>
 		</header>
 
-<link href="../css/tabledesign.css" rel="stylesheet">
+    <form action="deletesubject.jsp" method="post">
+    <link href="../css/tabledesign.css" rel="stylesheet">
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
             <center>
             <table class="bordered">
@@ -192,11 +191,14 @@
 <th><center>SUBJECT CODE</center></th>
 <th><center>SUBJECT NAME</center></th>
 <th><center>SUBJECT TYPE</center></th>
-        </tr>
+<th><center>Delete</center></th>
+</tr> 
             
             <%
            try{
-            Connection con=new dbcon().getConnection(request.getParameter("dept"));
+               String dept = request.getParameter("dept");
+               
+            Connection con=new dbcon().getConnection(dept);
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("select * from subject_sem_table order by regulation,sem");
             String subcode,regulation,subname,sem,subtype;
@@ -208,30 +210,36 @@
                 sem=rs.getString("sem");
                 subtype=rs.getString("subtype");
                %>
-             <tr>
+             
+            <input type="hidden" value="<%= dept %>" name="dept">
+             
+            <tr>
              <td><%=regulation%></td>
              <td><%=sem%></td>
              <td><%=subcode%></td>
              <td><%=subname%></td>
              <td><%=subtype%></td>
+             <td><center>
+
+                 <input type="checkbox" name="check" value="<%= rs.getString("subcode")+" " %><%= rs.getString("regulation") %>"></center>
+             </td>
              </tr>
-             <%
-            }
-            
-                            if(st!=null)
+             
+             
+            <%  }              if(st!=null)
                             st.close();
                               if(con!=null)
                                 con.close();
-}catch(Exception ex){
+}
+catch(Exception ex){
 ex.printStackTrace();
             }
             %>
-            </table>
-            </center>
-
-
-
-</div></div></section>
+           
+            <input type="submit" id="submit" value="Delete"> </table>    
+</center>
+        </div></div></section></form>
+            
 
 
 						<footer id="footer-widgets">
