@@ -21,6 +21,10 @@
         <servlet-class>com.action.LabJsonServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SectionUpdate</servlet-name>
+        <servlet-class>SectionUpdate</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>subjectallocupdate</servlet-name>
         <servlet-class>subjectallocupdate</servlet-class>
     </servlet>
@@ -623,6 +627,10 @@
     <servlet-mapping>
         <servlet-name>Authenticator</servlet-name>
         <url-pattern>/Authenticator</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SectionUpdate</servlet-name>
+        <url-pattern>/SectionUpdate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
