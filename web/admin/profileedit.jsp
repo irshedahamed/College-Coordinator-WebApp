@@ -1,4 +1,5 @@
 
+<%@page import="Transport.BoardingPoint"%>
 <%--
     Document   : profileedit
     Created on : Oct 24, 2016, 10:00:27 AM
@@ -47,10 +48,10 @@
     <!-- Custom CSS -->
     <link href="../css/simple-sidebar.css" rel="stylesheet">
     <link href="../css/sky-forms.css" rel="stylesheet">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 
         <script type="text/javascript" src="../js/jquery.js"></script>
-
+        <script src="../js/select2.js"></script>
  <script>
         function pageshow()
         {
@@ -70,6 +71,7 @@
         }
 
         $(document).ready(function(){
+            $('select.boarding').select2();
              $(document).on('change keyup','#religion',function(){
                if($("#religion option:selected").val()==="others"){
                    $("#religion").after('<input type="text" style="background: white" name="religion">');
@@ -247,6 +249,7 @@
         <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="PasswordReport.jsp">Password</a></li>
         <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="AddressReport.jsp">Address</a>
         <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="verificationReport.jsp">Verification</a>
+            	 <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="BoardingptReport.jsp">Boarding Point</a>
 
 
 </li>
@@ -362,8 +365,20 @@
                                         <label>Club Member :</label><input type="text" style="background: white" id="clubmember" name="clubmember" value="<%=rs.getString("club_member")%>">
                                     </td>
                                     <td>
-                                        <label>Boarding Point :</label><input type="text" style="background: white" id="boardingpt" name="boardingpt" value="<%=rs.getString("boardingpt")%>">
-                                    </td>
+                                        <label>Boarding Point :</label>
+                                        
+                                        
+                                 <select class="boarding"  id="boarding" name="boardingpt"  >
+                                     <option value="<%=rs.getString("boardingpt")%>"><%=rs.getString("boardingpt")%></option>
+                                                     <%
+                                                        List<String> blist= BoardingPoint.getAll();
+                                                   for(String s:blist){
+                                                   %>
+                                                   <option value="<%=s %>"><%=s%></option>
+                                                   <%
+                                                   }
+                                                   %>
+                                                </select>  </td>
                                 </tr></table>
                             <input type="hidden" name="formtype" value="general">
                             <input type="hidden" name="rollno" value="<%=rs.getString("rollno")%>">
@@ -882,7 +897,25 @@
                                             <option value="Female">Female</option>
                                         </select></td>
                                     <td>
-                                        <label>Blood Group :</label><input type="text"  style="background: white" id="bloodgroup" name="bloodgroup" value="<%=rs10.getString("bloodgrp")%>">
+                                        <label>Blood Group :</label>
+                                    <select style="background: white"  name="bloodgroup">
+                                            <option value="<%=rs10.getString("bloodgrp")%>"><%=rs10.getString("bloodgrp")%></option>
+                                            <option value="O +ve">O +ve</option>
+                                            <option value="O -ve">O -ve</option>
+                                            <option value="B +ve">B +ve</option>
+                                            <option value="B -ve">B -ve</option>
+                                            <option value="A +ve">A +ve</option>
+                                            <option value="A -">A -ve</option>
+                                            <option value="B1 +ve">B1 +ve</option>
+                                            <option value="A2B +ve">A2B +ve</option>
+                                            <option value="A2B -ve">A2B -ve</option>
+                                            <option value="A2 +ve">A2 +ve</option>
+                                            <option value="A2 -ve">A2 -ve</option>
+                                            <option value="A1B +ve">A1B +ve</option>
+                                            <option value="A1B -ve">A1B -ve</option>
+                                            <option value="A1 +ve">A1 +ve</option>
+                                            <option value="A1 -ve">A1 -ve</option>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>

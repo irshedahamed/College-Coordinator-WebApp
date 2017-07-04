@@ -38,49 +38,52 @@ public class Find {
     
     static public String sdept(String username){
     
-    if(username.contains("meps")|| username.contains("MEPS"))
+        username=username.toUpperCase();
+    if(username.contains("MECS"))
+        return "mecs";    
+   else if(username.contains("MEPS"))
         return "meps";
-     else if(username.contains("mees")|| username.contains("MEES"))
-        return "mees";
-    else if(username.contains("meped")|| username.contains("MEPD"))
-        return "meped";
-     else if(username.contains("mepe")|| username.contains("MEPE"))
-        return "mepe";
-    else if(username.contains("mesc")|| username.contains("MESC"))
-        return "me sc";
-    else if(username.contains("meme")|| username.contains("MEME"))
-        return "meme";
-    else if(username.contains("meest")|| username.contains("MEEST"))
+    else if( username.contains("MEEST"))
         return "meest";
-    else if(username.contains("meap")|| username.contains("MEAP"))
+     else if( username.contains("MEES"))
+        return "mees";
+    else if( username.contains("MEPD"))
+        return "meped";
+     else if( username.contains("MEPE"))
+        return "mepe";
+    else if( username.contains("MESC"))
+        return "mesc";
+    else if( username.contains("MEME"))
+        return "meme";
+    else if( username.contains("MEAP"))
         return "meap";
-    else if(username.contains("mebt")|| username.contains("MEBT"))
+    else if( username.contains("MEBT"))
         return "mebiotech";
-    else if(username.contains("meci")|| username.contains("MECI"))
+    else if( username.contains("MECI"))
         return "meci";
-    else if(username.contains("mba")|| username.contains("MBA"))
+    else if( username.contains("MBA"))
         return "mba";
-       else if(username.contains("mca")|| username.contains("MCA"))
+    else if(username.contains("MCA"))
         return "mca";
-    else if(username.contains("cs") || username.contains("CS"))
+    else if(username.contains("CS"))
         return "cse";
-    else if(username.contains("it")|| username.contains("IT"))
+    else if(username.contains("IT"))
         return "it";
-    else if(username.contains("me")|| username.contains("ME"))
+    else if(username.contains("ME"))
         return "mech";
-    else if(username.contains("ec")|| username.contains("EC"))
+    else if(username.contains("EC"))
         return "ece";
-    else if(username.contains("ee")|| username.contains("EE"))
+    else if(username.contains("EE"))
         return "eee";
-    else if(username.contains("cv")|| username.contains("CV") ||username.contains("ci")|| username.contains("CI")||username.contains("ce")|| username.contains("CE"))
+    else if(username.contains("CV")|| username.contains("CI")|| username.contains("CE"))
         return "civil";
-    else if(username.contains("ch")|| username.contains("CH"))
+    else if( username.contains("CH"))
         return "chemical";
-    else if(username.contains("ic")|| username.contains("IC"))
+    else if( username.contains("IC"))
         return "ic";
-    else if(username.contains("ei")|| username.contains("EI"))
+    else if( username.contains("EI"))
         return "ei";
-     else if(username.contains("bt")|| username.contains("BT"))
+     else if(username.contains("BT"))
         return "biotech";
     
  return "first";
@@ -122,6 +125,18 @@ public class Find {
      return d.substring(6,8)+"-"+d.substring(4,6)+"-"+d.substring(0,4);
     }
     
+     public static String parseFilename(String name){
+     
+         StringBuilder parsed=new StringBuilder();
+         for(int i=0;i<name.length();i++)
+             if( Character.isLetterOrDigit( name.charAt(i)) || Character.isWhitespace(name.charAt(i)) || name.charAt(i)=='.')
+                    parsed.append(name.charAt(i));
+         else
+                 parsed.append(' ');
+         
+         return parsed.toString();
+     
+     }
     public static String category(String id){
     if(id.contains("AD"))
         return "Admission";

@@ -182,7 +182,8 @@
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="PasswordReport.jsp">Password</a></li>
 	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="AddressReport.jsp">Address</a>
 	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="verificationReport.jsp">Verification</a>
-	
+		 <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="BoardingptReport.jsp">Boarding Point</a>
+
 	
 </li>
 </ul>
@@ -209,8 +210,9 @@
                 <label class="select">
                     
                     <select name="dept">
-                      
+                       
             <%=Find.getDeptHTMLContent() %>
+             <option value="all">All</option>
                     </select>
            
                 <i></i>
@@ -258,6 +260,7 @@
                 <option value="B">B</option>
                 <option value="C">C</option>
                 <option value="D">D</option>
+                <option value="NA">NA</option>
             </select>
                     <i></i>
                     </label>

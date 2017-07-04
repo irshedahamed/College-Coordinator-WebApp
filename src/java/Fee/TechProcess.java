@@ -141,7 +141,7 @@ public class TechProcess {
         reqBean.setCustID(CustID);
         reqBean.setKey(encKey.getBytes());
         reqBean.setIv(IV.getBytes());
-        reqBean.setTxnDate(com.action.Find.getFormattedDate());
+        //reqBean.setTxnDate(com.action.Find.getFormattedDate());
         reqBean.setStrShoppingCartDetails(user+"_"+amount+"_0.0");
         URL=reqBean.getTransactionToken();
         

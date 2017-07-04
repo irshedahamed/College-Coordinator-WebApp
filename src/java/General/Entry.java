@@ -170,7 +170,7 @@ public class Entry {
            stmt2=conn.createStatement();
            String sql="select opf.rollno,opf.`from`,opf.till,op.expiry,opf.sno,e.outtime from outpass op,outpassform opf,entry e where opf.till='"+date+"'- INTERVAL 24 HOUR and opf.status='Accepted' and op.id=CONCAT(opf.prefix,opf.sno) and e.rollno=opf.rollno and e.outtime>op.expiry and e.outtime<=op.expiry+interval 6 hour;";
            ResultSet rs=stmt.executeQuery(sql);
-           if(rs.next()){
+           while(rs.next()){
              String sql1="select * from entry where intime>'"+rs.getString("outtime")+"' and intime<'"+rs.getString("till")+"' + INTERVAL 33 HOUR and rollno ='"+rs.getString("rollno")+"'";
              ResultSet rs1=stmt2.executeQuery(sql1);
              if(!rs1.next()){

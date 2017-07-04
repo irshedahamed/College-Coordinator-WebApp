@@ -248,8 +248,8 @@
         <servlet-name>PaymentDetails</servlet-name>
         <servlet-class>PaymentDetails</servlet-class>
     </servlet>
-<servlet>
-    <servlet-name>receiveIBResponse</servlet-name>
+    <servlet>
+        <servlet-name>receiveIBResponse</servlet-name>
         <servlet-class>Fee.receiveIBResponse</servlet-class>
     </servlet>
     <servlet>
@@ -271,7 +271,6 @@
     <servlet>
         <servlet-name>CouncillorAttEdit</servlet-name>
         <servlet-class>CouncillorAttEdit</servlet-class>
-
     </servlet>
     <servlet>
         <servlet-name>StaffProfileEdit</servlet-name>
@@ -284,7 +283,35 @@
     <servlet>
         <servlet-name>SendPasswordSMS</servlet-name>
         <servlet-class>SendPasswordSMS</servlet-class>
-</servlet>
+    </servlet>
+    <servlet>
+        <servlet-name>showReceipt</servlet-name>
+        <servlet-class>Fee.showReceipt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StudentUpdateChanges</servlet-name>
+        <servlet-class>Actor.StudentUpdateChanges</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addMapping</servlet-name>
+        <servlet-class>addMapping</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addBoardingPoint</servlet-name>
+        <servlet-class>Transport.addBoardingPoint</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>processBulkOutPass</servlet-name>
+        <servlet-class>processBulkOutPass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>findNotes</servlet-name>
+        <servlet-class>com.action.findNotes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Authenticator</servlet-name>
+        <servlet-class>API.Authenticator</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -516,7 +543,6 @@
     <servlet-mapping>
         <servlet-name>testRequest</servlet-name>
         <url-pattern>/testRequest</url-pattern>
-
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>InsertYear1</servlet-name>
@@ -533,7 +559,7 @@
     <servlet-mapping>
         <servlet-name>PaymentDetails</servlet-name>
         <url-pattern>/PaymentDetails</url-pattern>
-   </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>receiveIBResponse</servlet-name>
         <url-pattern>/receiveIBResponse</url-pattern>
@@ -551,19 +577,17 @@
         <url-pattern>/receiveTechProcessAPIResponse</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>councillorattupdate</servlet-name>
         <url-pattern>/councillorattupdate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CouncillorAttEdit</servlet-name>
         <url-pattern>/CouncillorAttEdit</url-pattern>
-
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StaffProfileEdit</servlet-name>
         <url-pattern>/StaffProfileEdit</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Authenticate</servlet-name>
         <url-pattern>/Authenticate</url-pattern>
@@ -571,7 +595,35 @@
     <servlet-mapping>
         <servlet-name>SendPasswordSMS</servlet-name>
         <url-pattern>/SendPasswordSMS</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showReceipt</servlet-name>
+        <url-pattern>/showReceipt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentUpdateChanges</servlet-name>
+        <url-pattern>/StudentUpdateChanges</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addMapping</servlet-name>
+        <url-pattern>/addMapping</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addBoardingPoint</servlet-name>
+        <url-pattern>/addBoardingPoint</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>processBulkOutPass</servlet-name>
+        <url-pattern>/processBulkOutPass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>findNotes</servlet-name>
+        <url-pattern>/findNotes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Authenticator</servlet-name>
+        <url-pattern>/Authenticator</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -119,14 +120,19 @@ h2{
     </head>
     
     <body>
+         <center> <img src="../images/logo2.png" height="165px" width="700px" /></center>
         <%
-            String dept = request.getParameter("dept");
-              
+            String deptReq = request.getParameter("dept");
+            String[] depts=new String[25];
+               if(deptReq.equals("all"))
+                        depts=Find.Depts;
+                    else
+                        depts[0]=new String(deptReq);
            String sec = request.getParameter("sec");
                String batch=request.getParameter("batch");
-        
+        for(String dept:depts){
         %>
-         <center><h2>St. Joseph's Institute of Technology, Chennai-119</h2></center>
+        
       <center><h2>Department Of <%=dept.toUpperCase()%></h2></center>
 
       <center>
@@ -242,13 +248,16 @@ e.printStackTrace();
                             if(con!=null)
                                 con.close();
 }       
+
 %>
    
     
         
 </table></center>
 <input type="hidden" name="dept" value="<%=dept%>">
-    
+    <%
+    }
+    %>
         </form>
     </body>
 </html>

@@ -118,9 +118,14 @@ public class Authenticate extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         
-        Authenticate me=new Authenticate();
-        me.setUsername(request.getParameter("uname"));
-        me.setPassword(request.getParameter("pass"));
+        Authenticate a=new Authenticate();
+        a.setUsername(request.getParameter("user"));
+        a.setPassword(request.getParameter("pass"));
+     
+     if(a.isAuthenticated())
+         response.getWriter().print(a.getType());
+     else
+         response.getWriter().print("Authentication Error!!!");
     }
 
     /**
@@ -147,6 +152,7 @@ public class Authenticate extends HttpServlet {
            if(rs.next()){
                type="student";
                photo="${pageContext.request.contextPath}/StudentPhotos/Batch"+Student.getById(Username).getBatch()+"/"+Username.toUpperCase()+".JPG";
+               flag=true;
            }else{
            rs.close();
            sql="select * from staff_login_details where staffid like '"+Username+"' and password like '"+Password+"'";
@@ -154,12 +160,13 @@ public class Authenticate extends HttpServlet {
            if(rs.next()){
                type="staff";
                photo="${pageContext.request.contextPath}/StaffPhotos/"+Username.toUpperCase()+".JPG";
+               flag=true;
            }else{
-           sql="select * from other_login_details where staffid like '"+Username+"' and password like '"+Password+"'";
+           sql="select * from other_login_details where id like '"+Username+"' and password like '"+Password+"'";
            rs=stmt.executeQuery(sql);
            if(rs.next()){
                type=rs.getString("type");
-               
+               flag=true;
            }
            }
            }

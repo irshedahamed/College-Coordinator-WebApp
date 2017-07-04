@@ -132,8 +132,12 @@ return data;
            
             
              <%
-                 Fee.Fee f=Fee.Fee.getFeeById(s.getId());
-                 String bankcharge="<br>Bank Charges";
+                 Fee.Fee f=null;
+                 if(request.getParameter("acyear")!=null)
+                     f=Fee.Fee.getFeeById(s.getId(),request.getParameter("acyear"));
+                 else
+                     f=Fee.Fee.getFeeById(s.getId());
+                             String bankcharge="<br>Bank Charges";
                  String bankamount="<br>"+bcharge;
                  
                      Float bankchr=Float.valueOf(bcharge);
