@@ -349,6 +349,9 @@ document.getElementById("test").innerHTML = response;
                 <option value="model1">Model 1</option>
                 <option value="model2">Model 2</option>
                 <option value="model3">Model 3</option>
+                <option value="unit1">Unit 1</option>
+                <option value="unit2">Unit 2</option>
+                <option value="unit3">Unit 3</option>
                
             </select>
                     <i></i>
