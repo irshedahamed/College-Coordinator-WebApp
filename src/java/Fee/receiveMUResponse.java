@@ -79,7 +79,7 @@ public class receiveMUResponse extends HttpServlet {
        MUResponse mu=new MUResponse();
        if(request.getSession().getAttribute("username")!=null)
        mu.setRollno(request.getSession().getAttribute("username").toString());
-       mu.setAcyear(AcademicYear.getCurrentYear().getYear());
+       mu.setAcyear(AcademicYear.getFeeYear().getYear());
        mu.setBankchrge(request.getParameter("bankChrge"));
        mu.setHandleID(request.getParameter("HandleID"));
        mu.setMerchantrefno(request.getParameter("MerchantRefNo"));

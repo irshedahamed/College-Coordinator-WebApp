@@ -1,3 +1,5 @@
+<%@page import="General.AcademicYear"%>
+<%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
@@ -141,109 +143,54 @@
 		
 
 
-<section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-            <center>
-<form action="displaynotes.jsp" class="sky-form" method="post">
-    <header>NOTES DOWNLOAD</header>
-    <fieldset>					
-					<section>
-						
-            <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                            Academic Year:</b></div>
-                <label class="select">
-            <select id="ayear" name="ayear">
-               <option>Select</option>
-               <option value="13">2013-2014</option>
-               <option value="14">2014-2015</option>
-               <option value="15">2015-2016</option>
-               <option value="16">2016-2017</option>
-               <option value="17">2017-2018</option>
-               <option value="18">2018-2019</option>
-               <option value="19">2019-2020</option>
-               <option value="20">2020-2021</option>
-               <option value="21">2021-2022</option>
-               <option value="22">2023-2024</option>
-            
-            </select>
-                    <i></i>
-                </label>
-            </label>
-            <br> <br>
-         
-            
-                <%
-    try {
-      
-  String departmentname=Find.dept(username);
-             
-    
-		  %>   
-    
-                
-             <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                            Department: </b></div>
-                <label class="select">
-            
-           <select id="dept" name="dept">
-            
-               <option value=<%=departmentname%>><%= departmentname %></option>
-                
-                
-               
-            </select>
-                <i></i>
-                    </label>
-            </label>
-    <br><br>
-     <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                            Batch: </b></div>
-                <label class="select">
-            
-           <select id="batch" name="batch">
-            <%
-                Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select batch from regulations");
-                    String batch=null;
-                    rs.beforeFirst();
-                    while(rs.next())
-                    {
-                        batch=rs.getString("batch");
-                %>
-                <option value=<%=batch%>><%=batch%></option>
-                <%
-                }
 
-                            if(stmt!=null)
-                            stmt.close();
-                              if(conbatch!=null)
-                                conbatch.close();
-                %>
-                
-                
-                <%
-    }
-    catch(Exception e)
-    {
-        e.printStackTrace();
-    }
-    
-    %>
-               
-            </select>
-                    <i></i>
-            <br> <br>
-                </label></label>
-    
+<section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
+                        <center>
+                            <form action="${pageContext.request.contextPath}/dept/notesReportDisplay.jsp"  enctype="multipart/form-data" class="sky-form" method="get">
+                                
+                                <header>NOTES UPLOAD</header>
+                                <fieldset>					
+                                    <section>
     <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                             Semester: </b></div>
-                <label class="select">
-           
-            <select id="sem" name="sem" >
+                                            <div align="left" size="3px"><b>DEPARTMENT</b></div>
+                                            <label class="select">
+
+                                                <select id="dept" name="dept" required>
+                                                   
+                   <%=Find.getDeptHTMLContent() %>
+
+                                                </select>
+                                                <i></i>                                    </label>
+                                        </label>                                    <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    Academic Year:</b></div>
+                                            <label class="select">
+                                                <select id="ayear" name="ayear">
+                                                    
+                                                    <%=AcademicYear.getHTMLContent() %>
+
+                                                </select>
+                                                <i></i>
+                                            </label>
+                                        </label>
+                                        <br> <br>
+                                         
+                                        <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    batch</b></div>
+                                         <label class="select">
+                                        <select id="batch" name="batch">
+                                            
+                                             <%= Batch.getHTMLContent() %>
+                                        </select>
+                                        <i></i>
+                                         </label></label>
+                                        <br><br>
+                 <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    Semester</b></div>
+                                            <label class="select">
+                                                <select id="sem" name="sem" >
                 <option value="00">select</option>
                 <option value="01">1</option>
                 <option value="02">2</option>
@@ -254,53 +201,27 @@
                 <option value="07">7</option>
                 <option value="08">8</option>
             </select>
-                    <i></i>
-                    </label>
-            </label>
-                   
-            <br><br>
-    <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                             Subject Name:</b></div>
-                <label class="select">
-           
-            <select id="subject" name="subject">
-                <option>select</option>
-            </select>
-                    <i></i>
-                    </label>
-            </label>
-            
-            <br><br>
-    <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                           Notes Type:  </b></div>
-                <label class="select">
-           <select id="notes" name="notes" >
-                <option value="0">select</option>
-                <option value="class_notes">Class Notes</option>
-                <option value="question_bank">Question Bank</option>
-                <option value="prev_univ_quest">Previous University Questions</option>
-                <option value="model_keys">Model Keys</option>
-                <option value="Unit_Keys">Unit</option>
-                <option value="Cycle_Test">Cycle test Questions</option>
-                <option value="Syllabus">Syllabus</option>
-                <option value="Prev_univ_ans">Previous University Answers</option>
-                <option value="Assignment_ques">Assignment Questions</option>
-            </select>
-            
-                    <i></i>
-                    </label>
-            </label>
-                   
-                    </section>       
-             <div align="left">
+                                                <i></i>
+                                            </label></label>
+                                                <br><br>
+                 <div align="right">
             <input type="submit" id="submit" value="Submit" /></div>
-            <br>
+                                        </section>
     </fieldset>
-        </form></center>
+                
+            
+            </form></center>
+                
+                
+            
+  
+                <link href="../css/tabledesign.css" rel="stylesheet">
+
+
+
 
 </div></div></section>
+
 </section>
 
 						<footer id="footer-widgets">
