@@ -210,7 +210,7 @@ public class AcademicYear {
     public static String getHTMLContent(){
     String res="";
         for(AcademicYear b:getAll()){
-            if(b.getCurrent().equals("n"))
+            if(b.getCurrent().equals("n") ||b.getCurrent().equals("fee"))
             res+="<option value='"+b.getYear()+"'>"+b.getYearString()+"</option>";
             else
             res="<option value='"+b.getYear()+"'>"+b.getYearString()+"</option>"+res;

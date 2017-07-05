@@ -91,7 +91,7 @@
         subtype=$("#subnotes option:selected").val();
         sem=$("#sem option:selected").val();
         
-        if(selected==="class_notes")
+        if(selected==="class_notes" || selected==="model_keys" || selected==="Unit_Keys" || selected==="Assignment_ques" || selected==="Cycle_Test")
           $("#subCategory").show();
       else
       { 
@@ -117,7 +117,7 @@
       
     });
     
-    $(document).on('change', '[id^="dept"]', function() {
+    $(document).on('change click', '[id^="dept"]', function() {
    var sem = $("select#sem").val();
         var dept = $("select#dept").val();
         var batch = $("select#batch").val();
@@ -143,7 +143,7 @@
     
     
     });
-     $(document).on('change', '[id^="batch"]', function() {
+     $(document).on('change click', '[id^="batch"]', function() {
    var sem = $("select#sem").val();
         var dept = $("select#dept").val();
         var batch = $("select#batch").val();
@@ -423,7 +423,7 @@ if(s.getCouncillorDetails().getBatch()!=null)
                                                     <option value="question_bank">Question Bank</option>
                                                     <option value="prev_univ_quest">Previous University Questions</option>
                                                     <option value="model_keys">Model Keys</option>
-                                                    <option value="Unit_Keys">Unit_Keys</option>
+                                                    <option value="Unit_Keys">Unit Test </option>
                                                     <option value="Cycle_Test">Cycle test Questions</option>
                                                     <option value="Syllabus">Syllabus</option>
                                                     <option value="Prev_univ_ans">Previous University Answers</option>
@@ -442,11 +442,11 @@ if(s.getCouncillorDetails().getBatch()!=null)
                                             <label class="select">
                                                 <select id="subnotes" name="subCategory" >
                                                     <option value="0">select</option>
-                                                    <option value="1">Unit 1</option>
-                                                    <option value="2">Unit 2</option>
-                                                    <option value="3">Unit 3</option>
-                                                    <option value="4">Unit 4</option>
-                                                    <option value="5">Unit 5</option>
+                                                    <option value="1"> 1</option>
+                                                    <option value="2"> 2</option>
+                                                    <option value="3"> 3</option>
+                                                    <option value="4"> 4</option>
+                                                    <option value="5"> 5</option>
                                                     </select>
 
                                                 <i></i>
