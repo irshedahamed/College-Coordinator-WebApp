@@ -316,6 +316,10 @@
         <servlet-name>Authenticator</servlet-name>
         <servlet-class>API.Authenticator</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TimingServlet</servlet-name>
+        <servlet-class>Transport.TimingServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -631,6 +635,10 @@
     <servlet-mapping>
         <servlet-name>SectionUpdate</servlet-name>
         <url-pattern>/SectionUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TimingServlet</servlet-name>
+        <url-pattern>/TimingServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
