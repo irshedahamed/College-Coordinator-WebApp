@@ -45,38 +45,8 @@
 
         <!-- Custom CSS -->
         <link href="../css/simple-sidebar.css" rel="stylesheet">
-        <script src="../js/jquery.js"></script>
 
 
-        <script>
-            $(document).ready(function () {
-
-                $(".click").click(function () {
-
-                    var id = $(this).closest('tr').children('td#roll').text();
-                    var reason = $("#reason").val();
-                    var from = $("#from").val();
-                    var till = $("#till").val();
-                    var status = $("#status").val();
-                    var button = $(this).closest('tr').children().children('#submit');
-
-                    $.post("../processOutPass",
-                            {rollno: id,
-                                reason: reason,
-                                from: from,
-                                till: till,
-                                status: status
-
-                            },
-                            function (data) {
-                                button.val('Generated');
-                            }
-                    );
-
-
-                });
-            });
-        </script>
 
     <center>
         <img src="../images/logo2.png" height="165px" width="700px" />	</center>
@@ -130,13 +100,13 @@
             <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
 
                         <section class="landing">
-                            <form class="skyform" action="${pageContext.request.contextPath}/processOutPass" method="post">
+                            <form class="skyform" action="${pageContext.request.contextPath}/processBulkOutPass" method="post">
                                 <fieldset>
                                     <table class="bordered">
-                                        <input type="hidden" id="status" value="Accepted"> 
-                                        <input type="hidden" id="from" value="<%=from%>"> 
-                                        <input type="hidden" id="till" value="<%=till%>"> 
-                                        <input type="hidden" id="reason" value="<%=reason%>"> 
+                                        <input type="hidden" name="status" value="Accepted"> 
+                                        <input type="hidden" name="from" value="<%=from%>"> 
+                                        <input type="hidden" name="till" value="<%=till%>"> 
+                                        <input type="hidden" name="reason" value="<%=reason%>"> 
 
                                         <thead>
                                             <tr>   
@@ -165,7 +135,7 @@
 
                                         <tr>
                                             <td><%= ++i%></td>
-                                            <td id="roll"><%= stu.getId()%></td>
+                                            <td><%= stu.getId()%></td>
                                             <td>
                                                 <img src="../../StudentPhotos/Batch<%=stu.getBatch()%>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                                 <br><%= stu.getName()%>
@@ -187,8 +157,8 @@
 
                                             </td>
                                             <td>
-                                                <input  class="click" type="button" id="submit" value="Generate Outpass" />
-
+                                                <input class="check" type="checkbox" name="outpass"  value="<%=stu.getId()%>"/>
+                                                <label>Generate Outpass</label>
                                             </td>
 
                                         </tr>
@@ -201,6 +171,7 @@
                                     </table><br><br>
 
 
+                                    <input align="center"  type="submit" id="submit" value="Accepted" />
 
                                     <br><br><br>
                                 </fieldset> 
@@ -226,14 +197,14 @@
 
             <!-- Menu Toggle Script -->
             <script>
-            $("#menu-toggle").click(function (e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
-            $("#menu-toggle1").click(function (e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
+                $("#menu-toggle").click(function (e) {
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                });
+                $("#menu-toggle1").click(function (e) {
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                });
             </script>
 
 

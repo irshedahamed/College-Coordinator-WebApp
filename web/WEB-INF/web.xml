@@ -318,7 +318,7 @@
     </servlet>
     <servlet>
         <servlet-name>TimingServlet</servlet-name>
-        <servlet-class>TimingServlet</servlet-class>
+        <servlet-class>Transport.TimingServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
