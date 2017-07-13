@@ -33,7 +33,8 @@ public class Student {
     String mailid;
     String food;
     String bloodgrp;
-
+    String course;
+    
     public String getFood() {
         return food;
     }
@@ -74,6 +75,12 @@ public class Student {
 
     public void setAccomodation(String accomodation) {
         this.accomodation = accomodation;
+    }
+    public String getCourse() {
+        return course;
+    }
+     public void setCourse(String course) {
+        this.course = course;
     }
 
     
@@ -327,7 +334,7 @@ public class Student {
                         a.setOrank(rs.getString("overallrank"));
                         a.setGname(rs.getString("gamename"));
                         a.setDoa(rs.getString("doa"));
-                        
+                        a.setMoi(rs.getString("MOI"));
 
                         
                     }
@@ -376,6 +383,7 @@ public class Student {
                         s.setMailid(rs.getString("mailid"));
                         s.setFood(rs.getString("food"));
                         s.setBloodgrp(rs.getString("bloodgrp"));
+                        
                         list.add(s);
                     }
     }catch(Exception e){
@@ -423,7 +431,7 @@ public class Student {
                         s.setMailid(rs.getString("mailid"));
                         s.setFood(rs.getString("food"));
                         s.setBloodgrp(rs.getString("bloodgrp"));
-                        
+                        s.setCourse(rs.getString("course"));
 
                         
                     }

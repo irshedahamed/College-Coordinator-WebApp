@@ -1,3 +1,4 @@
+<%@page import="Actor.Student"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
@@ -167,25 +168,17 @@ document.getElementById("test").innerHTML = response;
                 
                 
                 <%
-        Connection conection = new dbcon().getConnection(Find.sdept(username));
-    Statement st1 = conection.createStatement();
+       
     String batch="",name="",rollno="",course="",sec="";
    
-    ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
-    if(rs1.next())
-    {
-        name= rs1.getString("name");
-        rollno = rs1.getString("rollno");
-        course = rs1.getString("course");
-        sec = rs1.getString("sec");
-        batch= rs1.getString("batch");
+    Student s1=Student.getById(username);
+        name=s1.getById(username).getName();
+        rollno =s1.getById(username).getId();
+        course = s1.getById(username).getCourse();
+        sec =  s1.getById(username).getSec();
+        batch=  s1.getById(username).getBatch();
         
-    }
-      if(st1!=null)
-                            st1.close();
-                              if(conection!=null)
-                                conection.close();
-        
+    
         
         
         %>

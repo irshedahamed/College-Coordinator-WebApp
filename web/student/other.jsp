@@ -1,8 +1,11 @@
+<%@page import="Actor.Student"%>
+<%@page import="Actor.Student.Admission"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
 
 <%@page import="java.sql.*"%>
+<%@page import="java.sql.Connection"%>
 <html lang="en-US">
     <% 
    try
@@ -17,7 +20,6 @@
     if(rsss.isBeforeFirst())
     {
         
-    
     
     %>
 
@@ -36,24 +38,14 @@
 		</head>
 		
                 <%
-        Connection conection = new dbcon().getConnection(Find.sdept(username));
-    Statement st1 = conection.createStatement();
-    String batch="",name="",rollno="",course="",sec="";
-   
-    ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
-    if(rs1.next())
-    {
-        name= rs1.getString("name");
-        rollno = rs1.getString("rollno");
-        course = rs1.getString("course");
-        sec = rs1.getString("sec");
-        batch= rs1.getString("batch");
-        
-    }
-      if(st1!=null)
-                            st1.close();
-                              if(conection!=null)
-                                conection.close();
+       String batch="",name="",rollno="",course="",sec="";
+     
+    Student s2=Student.getById(username);
+        name= s2.getById(username).getName();
+        rollno = s2.getById(username).getId();
+        course = s2.getById(username).getCourse();
+        sec = s2.getById(username).getSec();
+        batch= s2.getById(username).getBatch();
         
         
         
@@ -171,27 +163,24 @@
 <div class="dm3-tabs-testimonials" data-autoscroll="5"><div class="dm3-tabs">
 <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>ADMISSION DETAILS</b></font><br><br>
  <% 
-              String departmentname= session.getAttribute("deptname").toString();
-              Connection connection = new dbcon().getConnection(departmentname);
-              Statement statement = connection.createStatement();
-         ResultSet rs5= statement.executeQuery("select * from student_admission_details where rollno="+"'"+username+"'");
+             // String departmentname= session.getAttribute("deptname").toString();
+             
+        Student a1=Student.getById(username);
               String  doa="", admall="", govt_mang="",ovrallrank="",cmtyrank="",sprtsad="", moi="", gamename="";
-              try
-              {
+              
 
-              while(rs5.next())
-              {
-                  rollno=rs5.getString("rollno");
+              
+                  rollno=a1.getId();
                  
-                  doa=rs5.getString("doa");
-                  admall=rs5.getString("adminallotment");
-				  govt_mang=rs5.getString("govt_mang");
+                  doa=a1.getAdmissionDetails().getDoa();
+                  admall=a1.getAdmissionDetails().getAllotment();
+				  govt_mang=a1.getAdmissionDetails().getGovt_mang();
 				 
-				  ovrallrank=rs5.getString("overallrank");
-				  cmtyrank=rs5.getString("community_rank");
-				  sprtsad=rs5.getString("sports_admin");
-				  moi=rs5.getString("MOI");
-				  gamename=rs5.getString("gamename");
+				  ovrallrank=a1.getAdmissionDetails().getOrank();
+				  cmtyrank=a1.getAdmissionDetails().getCrank();
+				  sprtsad=a1.getAdmissionDetails().getSport();
+				  moi=a1.getAdmissionDetails().getMoi();
+				  gamename=a1.getAdmissionDetails().getGname();
 				                    
 									
 		  %>   
@@ -233,9 +222,7 @@
                       <TD><font size="2px"><%= moi %></font></TD>
              </TR>
 						 
-           <%
-               }
-           %>
+           
        </TABLE>
 </center>
 </div>
@@ -243,23 +230,22 @@
 
 <div class="dm3-tab"><div class="dm3-tab-inner"><center> <font size="5px"><b>GENERAL DETAILS</b></font><br><br><br>
 		   <%
-         ResultSet rs11= statement.executeQuery("select * from student_general where rollno='"+username+"'");
-              String dob="", caste="", community="", religion="",nationality="",mothertongue="",memberof="";
-			  int annualincome=0;
 
-              while(rs11.next())
-              {
-                                rollno=rs11.getString("rollno");
+                       String dob="", caste="", community="", religion="",nationality="",mothertongue="",memberof="",annualincome="";
+			  
+
+                                rollno=a1.getId();
                                
-                                dob=rs11.getString("dob");
-                                caste=rs11.getString("caste");
-                                community=rs11.getString("community");
-                                annualincome=rs11.getInt("parents_annual_income");
-                                religion=rs11.getString("religion");
-                                nationality=rs11.getString("nationality");
-                                mothertongue=rs11.getString("mother_tongue");
-                                memberof=rs11.getString("club_member");
-		  %>   
+                                dob=a1.getGeneral().getDob();
+                                caste=a1.getGeneral().getCaste();
+                                community=a1.getGeneral().getCommunity();
+                                annualincome=a1.getGeneral().getParentincome();
+                                religion=a1.getGeneral().getReligion();
+                                nationality=a1.getGeneral().getNationality();
+                                mothertongue=a1.getGeneral().getMothertongue();
+                                memberof=a1.getGeneral().getClub();
+
+%>   
          <TABLE WIDTH=30% align ="center" border="1">
              <TR class="defaultText odd-row">
                       <TD><font size="3px"><b>Date of Birth</b></font></TD>
@@ -294,29 +280,28 @@
                       <TD><font size="3px"><%= memberof %></font></TD>
              </TR>
 		   
-           <%
-               }
-           %>
+           
        </TABLE><br></center></div></div>
 <div class="dm3-tab"><div class="dm3-tab-inner"><center> <font size="5px"><b>OTHERS DETAILS</b></font><br><br><br>
 		   <%
-         ResultSet rs4= statement.executeQuery("select * from student_other_details where rollno="+"'"+username+"'");
+
+                       //ResultSet rs4= statement.executeQuery("select * from student_other_details where rollno="+"'"+username+"'");
               String tfoi="", instname="", prev_addr="", group="", yearadm="", yearrelif="",coursecomp="",boardofstudy="" ;
               String medium="",reason="";
-              while(rs4.next())
-              {
-                  rollno=rs4.getString("rollno");
+             
+                  rollno=a1.getId();
                
-                  tfoi=rs4.getString("transfer_from_other_inst");
-                  instname=rs4.getString("instname");
-				  prev_addr=rs4.getString("prev_addr");
-				  group=rs4.getString("group");
-				  yearadm=rs4.getString("yearadm");
-				  yearrelif=rs4.getString("yearrelif");
-				  coursecomp=rs4.getString("course_completed_in_time");
-				  boardofstudy=rs4.getString("boardofstudy");
-				  medium=rs4.getString("medium");
-				  reason=rs4.getString("reason_for_discontinuation");
+                  tfoi=a1.getOtherDetails().getTransferfrom();
+                  instname=a1.getOtherDetails().getInstname();
+				  prev_addr=a1.getOtherDetails().getPrevaddress();
+				  group=a1.getOtherDetails().getGroup();
+				  yearadm=a1.getOtherDetails().getYearofadmission();
+				  yearrelif=a1.getOtherDetails().getYearrelif();
+				  coursecomp=a1.getOtherDetails().getCourse_completed_in_time();
+				  boardofstudy=a1.getOtherDetails().getBoard();
+				  medium=a1.getOtherDetails().getMedium();
+				  reason=a1.getOtherDetails().getReasonfordiscontinue();
+   
 				                   
 		  %>   
                   
@@ -363,13 +348,11 @@
                       <TD><font size="2px"><%= reason %></font></TD>
              </TR>
 			 
-           <%
-               }
-           %>
+           
          </TABLE><br></center></div></div>
        <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>ACADEMIC DETAILS</b></font><br><br><br>
 	   <%
-         ResultSet rs13= statement.executeQuery("select * from student_academic_details where rollno="+"'"+username+"'");
+         //ResultSet rs13= statement.executeQuery("select * from student_academic_details where rollno="+"'"+username+"'");
              
 			   String tenscl;
         String tenmark;
@@ -388,24 +371,22 @@
         String dipyop;
 
 
-              while(rs13.next())
-              {
-                  rollno=rs13.getString("rollno");
-                  tenscl=rs13.getString("tenscl");
-                  tenmark=rs13.getString("tenmrks");
-                  tenboard=rs13.getString("tenboard");
-                  tenmed=rs13.getString("tenmed");
-                  tenyop=rs13.getString("tenyop");
-                  twlscl=rs13.getString("twlscl");
-                  twlmark=rs13.getString("twlmrks");
-                  twlboard=rs13.getString("twlboard");
-                  twlmed=rs13.getString("twlmed");
-                  twlyop=rs13.getString("twlyop");
-                  dipcol=rs13.getString("dipcoll");
-                  dipmark=rs13.getString("dipmrks");
-                  dipboard=rs13.getString("dipboard");
-                  dipmed=rs13.getString("dipmed");
-                  dipyop=rs13.getString("dipyop");
+                  rollno=a1.getId();
+                  tenscl=a1.getAcademic().getTenthschool();
+                  tenmark=a1.getAcademic().getTenthmark();
+                  tenboard=a1.getAcademic().getTenthboard();
+                  tenmed=a1.getAcademic().getTenthmedium();
+                  tenyop=a1.getAcademic().getTenthyearofpass();
+                  twlscl=a1.getAcademic().getTwelfthschool();
+                  twlmark=a1.getAcademic().getTwelfthmark();
+                  twlboard=a1.getAcademic().getTwelfthboard();
+                  twlmed=a1.getAcademic().getTwelfthmedium();
+                  twlyop=a1.getAcademic().getTwelfthyearofpass();
+                  dipcol=a1.getAcademic().getDiplomaclg();
+                  dipmark=a1.getAcademic().getDiplomamark();
+                  dipboard=a1.getAcademic().getDiplomaboard();
+                  dipmed=a1.getAcademic().getDiplomamedium();
+                  dipyop=a1.getAcademic().getDiplomayearofpass();
                   
 		  %>   
 		  
@@ -494,23 +475,21 @@
                       <TD><font size="2px"><%= dipyop %></font></TD>
              </TR>
              
-           <%
-               }
-           %>
+           
        </TABLE></center></div></div>
 
        <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>PASSPORT DETAILS</b></font><br><br><br>
                     <%
-         ResultSet rs8= statement.executeQuery("select * from student_passport_details where rollno="+"'"+username+"'");
-              String  forgn="",passno="", doexp="" ;
+         //ResultSet rs8= statement.executeQuery("select * from student_passport_details where rollno="+"'"+username+"'");
 
-              while(rs8.next())
-              {
-                  rollno=rs8.getString("rollno");
+         String  forgn="",passno="", doexp="" ;
+
+             
+                  rollno=a1.getId();
                  
-                  doexp=rs8.getString("doe");
-                  forgn=rs8.getString("forgn");
-				  passno=rs8.getString("passno");
+                  doexp=a1.getPassport().getDoe();
+                  forgn=a1.getPassport().getForgn();
+				  passno=a1.getPassport().getPassno();
 				  									
 		  %>   
                   <br>
@@ -529,22 +508,19 @@
                       <TD><font size="2px"><%= doexp %></font></TD>
              </TR>
 			  
-           <%
-               }
-           %>
+           
        </TABLE></center></div></div>
        <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>VISA DETAILS</b></font><br><br><br>
                    <%
-         ResultSet rs6= statement.executeQuery("select * from student_visa_details where rollno="+"'"+username+"'");
+         //ResultSet rs6= statement.executeQuery("select * from student_visa_details where rollno="+"'"+username+"'");
               String visano="",typeofvisa="", doe="" ;
 
-              while(rs6.next())
-              {
-                  rollno=rs6.getString("rollno");
+              
+                  rollno=a1.getId();
                   
-                  doe=rs6.getString("doe");
-                  visano=rs6.getString("visano");
-				  typeofvisa=rs6.getString("typeofvisa");
+                  doe=a1.getVisa().getDoe();
+                  visano=a1.getVisa().getVisano();
+				  typeofvisa=a1.getVisa().getType();
 				  									
 		  %> <br>
                   <center><br>		  
@@ -562,18 +538,7 @@
                       <TD><font size="2px"><%= doe %></font></TD>
              </TR>
 			  
-           <%
-               }
-              }catch(Exception e)
-              {
-                  System.out.println(e);
-              }finally{
-
-  if(statement!=null)
-                            statement.close();
-                              if(connection!=null)
-                                connection.close();}
-           %>
+           
        </TABLE></center><br></div></div>
 </div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">4</a></li><li><a href="#">5</a><li><a href="#">6</a></li></ul></div>
 </div></div></section>
