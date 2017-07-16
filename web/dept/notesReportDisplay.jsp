@@ -132,7 +132,10 @@ h2{
     <body>
     
     <center> <img src="../images/logo2.png" height="165px" width="700px" /></center>
+
     <center><h2>Department of <%=request.getParameter("dept").toUpperCase() %></h2></center>
+
+
        <center>
            <center><h1>Notes Upload Report</h1></center>
            <h2>Batch : <%=request.getParameter("batch")%>
@@ -166,6 +169,7 @@ h2{
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
               
                
                Sem:<%=request.getParameter("sem")%><br>
@@ -193,10 +197,12 @@ h2{
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -209,14 +215,19 @@ h2{
                
            <table class="bordered">
                
-            <th>Notes
+         
+
+               
+             
+            <th>Subcode</th>
+
             
                 
                 <%
            String semester = request.getParameter("sem");
                     String ayear=request.getParameter("ayear");
                     String batch=request.getParameter("batch");
-                    String dept = request.getParameter("dept");
+                    String dept = Find.dept(username);
                     //batch.substring(, endIndex)
                     Connection con = new dbcon().getConnection("sjitportal");
                     
@@ -229,6 +240,7 @@ h2{
                     ResultSet rs5;
                     ResultSet rs6;
                     ResultSet rs7;
+
                     List<String> list = new ArrayList<String>();
                      Statement st2 = con.createStatement();
                     rs2=st2.executeQuery("select regulation from regulations where batch='"+batch+"'");
@@ -243,14 +255,17 @@ h2{
                        Statement st = con.createStatement();
                     Statement st1 = con.createStatement();
                      Statement st3 = con.createStatement();
+
                      Statement st4 = con.createStatement();
                      Statement st5 = con.createStatement();
                      Statement st6 = con.createStatement();
                      Statement st7 = con.createStatement();
+
                         
                     rs=st.executeQuery("select * from subject_sem_table where sem='"+semester+"' and (ayear like '%elective%"+ayear+"%'or ayear like 'all') and regulation='"+regulation+"' and subtype='theory'");    
                         while(rs.next())
                         {
+
                             String subc=new String();
                             subc=rs.getString("subcode");
                         %>
@@ -382,10 +397,13 @@ h2{
                             }else{
                             %>
                             
+
+
                             <td></td>
                             <%
                             }
                             }
+
                                 }                  
                         for(o=0;o<list4.size();o++){
                             String g[]=new String[20];
@@ -413,6 +431,8 @@ h2{
                                 }                  
                         
            
+
+
 con.close();
                     %>
               

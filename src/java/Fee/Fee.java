@@ -69,7 +69,7 @@ public class Fee {
     
     public static Fee getFeeById(String id){
     
-    return getFeeById(id,AcademicYear.getCurrentYear().getYear() );
+    return getFeeById(id,AcademicYear.getFeeYear().getYear() );
     }
     
     public static Fee getFeeById(String id,String acyear){

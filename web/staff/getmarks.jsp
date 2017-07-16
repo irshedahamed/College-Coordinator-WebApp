@@ -151,6 +151,8 @@
                   <select style=" background: transparent;font-size: 14px;height: 29px;padding: 5px;width:150px;" id="max" >
                         <%if(exam.contains("model")){%>
                         <option selected>100</option>
+                        <%}else if(exam.contains("unit")){%>
+                        <option selected>48</option>
                         <%}else{%>
                         <option selected>30</option>
                         <option >60</option>

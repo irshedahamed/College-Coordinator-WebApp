@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Fee;
 
-import General.AcademicYear;
+import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Statement;
+import java.sql.Connection;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Home
  */
-public class updateSpecialFee extends HttpServlet {
+public class deleteSubject extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +38,10 @@ public class updateSpecialFee extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet updateSpecialFee</title>");            
+            out.println("<title>Servlet deleteSubject</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet updateSpecialFee at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet deleteSubject at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -74,20 +75,37 @@ public class updateSpecialFee extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      //  processRequest(request, response);
-      
-      SpecialFee s=new SpecialFee();
-      s.setAcademicyr(AcademicYear.getFeeYear().getYear());
-      s.setRollno(request.getParameter("id"));
-      s.setTution(request.getParameter("tution"));
-      s.setPlacement(request.getParameter("placement"));
-      s.setTransport(request.getParameter("transport"));
-      s.setHostel(request.getParameter("hostel"));
-      
-      if(s.insert())
-          response.getWriter().write("success");
-      else
-          response.getWriter().write("failed");
+       // processRequest(request, response);
+       
+       String Array[] = request.getParameterValues("check");
+String subcode="";
+String reg = "";
+String hh="";
+try{
+    Connection con= new dbcon().getConnection(request.getParameter("dept"));
+    Statement st = con.createStatement();
+if (Array != null) {
+for (int i = 0; i < Array.length; i++) {
+ String sep[]= Array[i].split("\\s") ; 
+ subcode=sep[0];
+ reg=sep[1];  
+
+String sqlDelete = "delete  from subject_sem_table where subcode = '" +subcode+" ' and regulation = '" +reg+" ' ";
+System.err.println(sqlDelete);
+st.executeUpdate(sqlDelete);
+}
+st.close();
+con.close();
+
+response.getWriter().println("deleted successfully");
+
+} else {
+response.getWriter().println (" You have not select anything to delete");
+}}
+catch(Exception ex){
+    
+        ex.printStackTrace();
+        }
     }
 
     /**
