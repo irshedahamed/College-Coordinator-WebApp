@@ -4,9 +4,11 @@
     Author     : Divya Sri
 --%>
 
+<%@page import="Actor.Student"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
+<%@page import="java.sql.Connection"%>
 <%@page import="java.sql.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en-US">
@@ -167,23 +169,24 @@ document.getElementById("displaycontent").innerHTML = response;
                       String username = session.getAttribute("username").toString();
    
         Connection conection = new dbcon().getConnection(Find.sdept(username));
-    Statement st1 = conection.createStatement();
+    //Statement st1 = conection.createStatement();
     String batch="",name="",rollno="",course="",sec="";
    
-    ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
-    if(rs1.next())
-    {
-        name= rs1.getString("name");
-        rollno = rs1.getString("rollno");
-        course = rs1.getString("course");
-        sec = rs1.getString("sec");
-        batch= rs1.getString("batch");
+    //ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
+    //if(rs1.next())
+    //{
+        Student s1=Student.getById(username);
+        name= s1.getName();
+        rollno = s1.getId();
+        course = s1.getCourse();
+        sec = s1.getSec();
+        batch= s1.getBatch();
         
-    }
-      if(st1!=null)
-                            st1.close();
-                              if(conection!=null)
-                                conection.close();
+    //}
+      //if(st1!=null)
+                           // st1.close();
+                             // if(conection!=null)
+                               // conection.close();
         
         
         
@@ -308,6 +311,11 @@ document.getElementById("displaycontent").innerHTML = response;
                                                     <div align="left" size="3px"><b>
                                                             Semester:</b></div>
                 <label class="select">
+                    <input type="hidden" id="index" value="<%=name%>"/>
+                    <input type="hidden" id="index" value="<%=course%>"/>
+                    <input type="hidden" id="index" value="<%=rollno%>"/>
+                    <input type="hidden" id="index" value="<%=sec%>"/>
+                    <input type="hidden" id="index" value="<%=batch%>"/>
             <select id="sem" name="sem" onchange="disp();">
                 <option value="null" selected disabled>Select</option>
                 <option value="01">1</option>

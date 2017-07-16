@@ -122,7 +122,9 @@
     <ul class="sub-menu">
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notes.jsp">View Notes</a></li>
-	</ul></li>
+                <li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesReport.jsp">Notes Report</a>
+            </li>
+    </ul></li>
 <li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="cireveupdates.jsp">Department Uploads</a>
     </li>
 
@@ -171,12 +173,7 @@
             </label>
             <br> <br>
          
-            <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                             Course Name: </b></div>
-                <label class="select">
-           
-            <select id="course" name="course">
+            
                 <%
     try {
       
@@ -185,14 +182,6 @@
     
 		  %>   
     
-               
-                <option value="be">B.E</option>
-               
-            </select>
-                    <i></i>
-                    </label>
-            </label>
-            <br> <br>
                 
              <label class="input">
                                                     <div align="left" size="3px"><b>
@@ -295,7 +284,7 @@
                 <option value="question_bank">Question Bank</option>
                 <option value="prev_univ_quest">Previous University Questions</option>
                 <option value="model_keys">Model Keys</option>
-                <option value="Unit_Keys">Unit_Keys</option>
+                <option value="Unit_Keys">Unit</option>
                 <option value="Cycle_Test">Cycle test Questions</option>
                 <option value="Syllabus">Syllabus</option>
                 <option value="Prev_univ_ans">Previous University Answers</option>

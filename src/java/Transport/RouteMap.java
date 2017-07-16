@@ -19,19 +19,28 @@ import java.util.List;
  */
 public class RouteMap {
     
-    private String boardingpt;
-    private String routeid;
-    private String priority;
-    private Integer seqno;
+    private String boardingpt1;
+    private String boardingpt2;
+   // private String routeid;
+    //private String priority;
+    //private Integer seqno;
+    
 
-    public String getBoardingpt() {
-        return boardingpt;
+    public String getBoardingpt1() {
+        return boardingpt1;
     }
 
-    public void setBoardingpt(String boardingpt) {
-        this.boardingpt = boardingpt;
+    public void setBoardingpt1(String boardingpt1) {
+        this.boardingpt1 = boardingpt1;
+    }
+    public String getBoardingpt2() {
+        return boardingpt2;
     }
 
+    public void setBoardingpt2(String boardingpt2) {
+        this.boardingpt2 = boardingpt2;
+    }
+/*
     public String getRouteid() {
         return routeid;
     }
@@ -55,9 +64,9 @@ public class RouteMap {
     public void setSeqno(Integer seqno) {
         this.seqno = seqno;
     }
+    */
     
-    
-       public static List<RouteMap> getByid(String id){
+        public static List<RouteMap> getByBoardingpt1(String bp1){
     
          Connection conn=null;
     Statement stmt=null;
@@ -66,16 +75,18 @@ public class RouteMap {
             
     conn=new dbcon().getConnection("sjitportal");
     stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from routemap where routeid='"+id+"' order by seqno");
+                    ResultSet rs=stmt.executeQuery("select * from routemap where boardingpoint1 like '"+bp1+"'");
                     
                     
                     rs.beforeFirst();
                     while(rs.next()){
                        RouteMap rm =new RouteMap();
-                       rm.setBoardingpt(rs.getString("boardingpt"));
+                       rm.setBoardingpt1(rs.getString("boardingpoint1"));
+                       rm.setBoardingpt2(rs.getString("boardingpoint2"));
+                      /*rm.setBoardingpt(rs.getString("boardingpt"));
                        rm.setRouteid(rs.getString("routeid"));
                        rm.setPriority(rs.getString("priority"));
-                       rm.setSeqno(rs.getInt("seqno"));
+                       rm.setSeqno(rs.getInt("seqno"));*/
                        list.add(rm);
                     }
     }catch(Exception e){
@@ -103,7 +114,7 @@ public class RouteMap {
        try{
            conn=new dbcon().getConnection("sjitportal");
            stmt=conn.createStatement();
-           String sql="insert into routemap values('"+boardingpt+"','"+routeid+"','"+priority+"',"+seqno+")";
+           String sql="insert into routemap values('"+boardingpt1+"','"+boardingpt2+"')";
             update+=stmt.executeUpdate(sql);
        
      
@@ -125,6 +136,45 @@ public class RouteMap {
            return true;
        else
            return false;
+    }
+           
+           public static List<RouteMap> getAll(){
+    
+         Connection conn=null;
+    Statement stmt=null;
+   List<RouteMap> list=new ArrayList<RouteMap>();
+        try{
+            
+    conn=new dbcon().getConnection("sjitportal");
+    stmt = conn.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from boardingpts order by name");
+                    
+                    
+                    rs.beforeFirst();
+                    while(rs.next()){
+                        //System.out.println(rs.getString("name"));
+                       RouteMap rm =new RouteMap();
+                       rm.setBoardingpt1(rs.getString("name"));
+                       //rm.setBoardingpt2(rs.getString("boardingpoint2"));
+                       list.add(rm);
+                       
+                    }
+    }catch(Exception e){
+    e.printStackTrace();
+    }finally{
+        try {
+            if(stmt!=null)
+                stmt.close();
+            if(conn!=null)
+                conn.close();
+        } catch (SQLException ex) {
+      ex.printStackTrace();
+        }
+    }
+        
+    
+    
+ return list;
     }
 
 }

@@ -153,10 +153,10 @@
                                                 <select id="route" name="route" required>
                                                     <option >Select</option>
                                                     <%
-                                                        List<Route> list=Route.getAll();
-                                                   for(Route r:list){
+                                                        List<RouteMap> list=RouteMap.getAll();
+                                                   for(RouteMap r:list){
                                                    %>
-                                                   <option value="<%=r.getId() %>"><%=r.getName() %>(<%=r.getId() %>)</option>
+                                                   <option value="<%=r.getBoardingpt1() %>"><%=r.getBoardingpt1() %></option>
                                                    <%
                                                    }
                                                    %>
@@ -180,8 +180,9 @@
         
                 <%
                 
-                String route=request.getParameter("route");
-                if(route!=null){
+                String bp1=request.getParameter("route");
+                //System.out.println(bp1);
+                if(bp1!=null){
                 %>
         <center> 
             <br><br><br>
@@ -190,26 +191,26 @@
   
     <tr>
         
-        <th> Sno</th>
-        <th>Boarding Point</th>
-        <th>Route</th>
+        <th> S.No </th>
+        <th>Boarding Point 1</th>
+          <th>Boarding Point 2</th>
+        <!--<th>Route</th>
         <th>Priority</th>
-        <th>Sequence Number</th>
+        <th>Sequence Number</th> -->
   
     </tr>
     </thead>
     
     <%
         int i=0 ;
-        
-    for(RouteMap rm:RouteMap.getByid(route)){
+        //System.out.println(bp1);
+    for(RouteMap rm:RouteMap.getByBoardingpt1(bp1)){
     %>
             <tr>
     <td><%=++i %></td>
-    <td><%=rm.getBoardingpt() %></td>
-    <td><%=Route.getByid(list, rm.getRouteid()).getName() %>(<%=rm.getRouteid()%>)</td>
-    <td><%=rm.getPriority() %></td>
-    <td><%=rm.getSeqno()%></td>
+    <td><%=rm.getBoardingpt1() %></td>
+     <td><%=rm.getBoardingpt2() %></td>
+   
             </tr>
             <%  }
             %>

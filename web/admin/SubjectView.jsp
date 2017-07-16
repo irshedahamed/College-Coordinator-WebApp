@@ -180,7 +180,7 @@
 			</div>
 		</header>
 
-    <form action="deletesubject.jsp" method="post">
+    <form action="${pageContext.request.contextPath}/deleteSubject" method="post">
     <link href="../css/tabledesign.css" rel="stylesheet">
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
             <center>
@@ -236,7 +236,8 @@ ex.printStackTrace();
             }
             %>
            
-            <input type="submit" id="submit" value="Delete"> </table>    
+          </table>    
+               <input type="submit" id="submit" value="Delete">
 </center>
         </div></div></section></form>
             

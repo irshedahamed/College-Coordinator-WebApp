@@ -76,7 +76,7 @@ public class setFee extends HttpServlet {
             throws ServletException, IOException {
        // processRequest(request, response);
        BasicFee bf=new BasicFee();
-       bf.setAcyear(AcademicYear.getCurrentYear().getYear());
+       bf.setAcyear(AcademicYear.getFeeYear().getYear());
        bf.setBatch(request.getParameter("batch"));
        bf.setHostel(request.getParameter("hostel"));
        bf.setPlacement(request.getParameter("placement"));
