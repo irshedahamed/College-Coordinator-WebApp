@@ -146,7 +146,7 @@
                 <div class="tabs__content">
                     <div class="tabs__content-item active">
                         <center><div style="color:#333333; margin-top: -75px;font-family: inherit;font-size:2.5em;">College Circular<br><br></div></center>
-                        <div style="width:100%;height:300px;line-height:3em;overflow-y:scroll;padding:5px; solid #149dd2;">
+                        <div style="width:100%;height:300px;line-height:3em;overflow-y:scroll;padding:5px; solid : #149dd2;">
 <div align="left">
         <%
     Connection conbatch = new dbcon().getConnection("sjitportal");
