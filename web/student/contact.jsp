@@ -1,8 +1,15 @@
+<%@page import="Actor.Student"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
 
 <%@page import="java.sql.*"%>
+<%@page import="java.sql.Connection"%>.
+
+
+
+
+
 <html lang="en-US">
     <% 
    try
@@ -39,24 +46,18 @@
                 	
                 
                 <%
-        Connection conection = new dbcon().getConnection(Find.sdept(username));
-    Statement st1 = conection.createStatement();
-    String batch="",name="",rollno="",course="",sec="";
-   
-    ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
-    if(rs1.next())
-    {
-        name= rs1.getString("name");
-        rollno = rs1.getString("rollno");
-        course = rs1.getString("course");
-        sec = rs1.getString("sec");
-        batch= rs1.getString("batch");
         
-    }
-      if(st1!=null)
-                            st1.close();
-                              if(conection!=null)
-                                conection.close();
+    String batch="",name="",rollno="",course="",sec="";
+   Student s1=Student.getById(username);
+    //ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
+    
+        name= s1.getName();
+        rollno = s1.getId();
+        course = s1.getCourse();
+        sec = s1.getSec();
+        batch= s1.getBatch();
+        
+    
         
         
         
@@ -176,32 +177,29 @@
 <%
     
 	       String departmentname= session.getAttribute("deptname").toString();
-             Connection connection = new dbcon().getConnection(departmentname);
-              Statement statement = connection.createStatement();
-              ResultSet rs= statement.executeQuery("select * from student_personal where rollno="+"'"+username+"'");
+             //Connection connection = new dbcon().getConnection(departmentname);
+              //statement statement = connection.createStatement();
+              Student s=Student.getById(username);
               String accomodation=null;
-              while(rs.next())
-              {
-                   accomodation=rs.getString("accomodation");
-              }
+              
+                   accomodation=s.getAccomodation();
+              
 	    if(accomodation.equalsIgnoreCase("Dayscholar"))
 		  {
-         ResultSet rs10= statement.executeQuery("select * from student_contact_details where rollno="+"'"+username+"'");
+         //ResultSet rs10= statement.executeQuery("select * from student_contact_details where rollno="+"'"+username+"'");
               String  doorno="",streetno="",area="",city="",district="",country="",state="",pin="" ;
 
-              while(rs10.next())
-              {
-                  rollno=rs10.getString("rollno");
+                  rollno=s.getId();
                   
-                  doorno=rs10.getString("Doorno");
-                  streetno=rs10.getString("street");
-				  area=rs10.getString("area");
-				  city=rs10.getString("city");
-				  district=rs10.getString("district");
-				  country=rs10.getString("country");
-				  state=rs10.getString("state");
-				  pin=rs10.getString("pincode");
-			}	  				
+                  doorno=s.getContact().getDoorno();
+                  streetno=s.getContact().getStreet();
+				  area=s.getContact().getArea();
+				  city=s.getContact().getCity();
+				  district=s.getContact().getDistrict();
+				  country=s.getContact().getCountry();
+				  state=s.getContact().getState();
+				  pin=s.getContact().getPincode();
+				  				
 		  %> 
        <div class="dm3-tab"><div class="dm3-tab-inner"><Br>		  
          <TABLE WIDTH=30% align ="center" border="1">
@@ -242,25 +240,22 @@
 			   else
                { 
            
-		   ResultSet rs10= statement.executeQuery("select * from student_contact_details where rollno="+"'"+username+"'");
+		   //ResultSet rs10= statement.executeQuery("select * from student_contact_details where rollno="+"'"+username+"'");
               String  doorno="",streetno="",area="",city="",district="",country="",state="",pin="" ;
 
-              while(rs10.next())
-              {
-                  rollno=rs10.getString("rollno");
+              
+              
+                  rollno=s.getId();
                   
-                  doorno=rs10.getString("doorno");
-                  streetno=rs10.getString("street");
-				  area=rs10.getString("area");
-				  city=rs10.getString("city");
-				  district=rs10.getString("district");
-				  country=rs10.getString("country");
-				  state=rs10.getString("state");
-				  pin=rs10.getString("pincode");
-			}  if(statement!=null)
-                            statement.close();
-                              if(connection!=null)
-                                connection.close();	  				
+                  doorno=s.getContact().getDoorno();
+                  streetno=s.getContact().getStreet();
+				  area=s.getContact().getArea();
+				  city=s.getContact().getCity();
+				  district=s.getContact().getDistrict();
+				  country=s.getContact().getCountry();
+				  state=s.getContact().getState();
+				  pin=s.getContact().getPincode();
+			 	  				
 		  %> 
           <div class="dm3-tab"><div class="dm3-tab-inner">
                    

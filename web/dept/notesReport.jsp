@@ -2,8 +2,9 @@
 <%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
-<!DOCTYPE html>
 <%@page import="java.sql.*"%>
+
+<!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en-US">
  <% 
@@ -124,6 +125,7 @@
     <ul class="sub-menu">
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notes.jsp">View Notes</a></li>
+                <li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesReport.jsp">Notes Report</a></li>
 	</ul></li>
 <li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="cireveupdates.jsp">Department Uploads</a>
     </li>
@@ -223,6 +225,7 @@
 			<!-- #page-container -->
 			</div>
 			</div>
+
 
 	<footer id="page-footer">
 		<div class="container clearfix">

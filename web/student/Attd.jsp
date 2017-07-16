@@ -9,6 +9,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.dbcon"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
