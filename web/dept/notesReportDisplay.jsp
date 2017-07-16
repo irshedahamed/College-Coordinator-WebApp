@@ -133,11 +133,11 @@ h2{
     
     <center> <img src="../images/logo2.png" height="165px" width="700px" /></center>
 
-    <center><h2>Department of <%=request.getParameter("dept").toUpperCase() %></h2></center>
+    <center><h1>Department of <%=request.getParameter("dept").toUpperCase() %></h1></center>
 
 
        <center>
-           <center><h1>Notes Upload Report</h1></center>
+           <center><h2 style="font-size: 24px;">Notes Upload Report</h2></center>
            <h2>Batch : <%=request.getParameter("batch")%>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -269,7 +269,7 @@ h2{
                             String subc=new String();
                             subc=rs.getString("subcode");
                         %>
-                        <td><%=subc%></td></th>
+                        <th><%=subc%></th>
                             
                             <%
                                 }
@@ -304,19 +304,20 @@ h2{
             list4.add("syallabus");
             list4.add("prev_univ_quest");
             list4.add("prev_univ_ans");
-            list5.add("Class notes");
-            list5.add("Class notes");
-            list5.add("Class notes");
-            list5.add("Class notes");
-            list5.add("Class notes");
-            list6.add("Cycle test");
-            list6.add("Cycle test");
-            list6.add("Cycle test");
-            list7.add("Unit test");
-            list7.add("Unit test");
-            list7.add("Unit test");
-            list7.add("Unit test");
-            list7.add("Unit test");
+
+            list5.add("Class Notes 1");
+            list5.add("Class Notes 2");
+            list5.add("Class Notes 3");
+            list5.add("Class Notes 4");
+            list5.add("Class Notes 5");
+            list6.add("Cycle Test 1");
+            list6.add("Cycle Test 2");
+            list6.add("Cycle Test 3");
+            list7.add("Unit Test 1");
+            list7.add("Unit Test 2");
+            list7.add("Unit Test 3");
+            list7.add("Unit Test 4");
+            list7.add("Unit Test 5");
             list8.add("Syallabus");
             list8.add("Prev univ question");
             list8.add("Prev univ answers");

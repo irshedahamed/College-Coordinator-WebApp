@@ -66,11 +66,11 @@
     String batch="",name="",rollno="",course="",sec="";
    Student s1=Student.getById(username);
     
-        name=s1.getById(username).getName();
-        rollno =s1.getById(username).getId();
-        course =s1.getById(username).getCourse();
-        sec = s1.getById(username).getSec();
-        batch=s1.getById(username).getBatch();
+        name=s1.getName();
+        rollno =s1.getId();
+        course =s1.getCourse();
+        sec = s1.getSec();
+        batch=s1.getBatch();
         session.setAttribute("name1", name);
         session.setAttribute("rollno1", rollno);
         session.setAttribute("course1", course);

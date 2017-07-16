@@ -148,7 +148,7 @@
 
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                         <center>
-                            <form action="${pageContext.request.contextPath}/dept/notesReportDisplay.jsp"  enctype="multipart/form-data" class="sky-form" method="get">
+                            <form action="${pageContext.request.contextPath}/dept/notesReportDisplay.jsp"  enctype="multipart/form-data" class="sky-form" method="post">
                                 
                                 <header>NOTES UPLOAD</header>
                                 <fieldset>					
