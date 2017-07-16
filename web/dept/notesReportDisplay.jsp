@@ -227,7 +227,7 @@ h2{
            String semester = request.getParameter("sem");
                     String ayear=request.getParameter("ayear");
                     String batch=request.getParameter("batch");
-                    String dept = Find.dept(username);
+                    String dept = request.getParameter("dept");;
                     //batch.substring(, endIndex)
                     Connection con = new dbcon().getConnection("sjitportal");
                     

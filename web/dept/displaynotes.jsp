@@ -105,11 +105,8 @@
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="marks.jsp">View Marks</a></li>
                 
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="BonusQuery.jsp">Bonus Remove</a></li>
-                <li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="#">Notes Report</a>
-             <ul class="sub-menu">
-                        <% for(String dept:Find.Depts){%>
-                <li id="menu-item-767" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="notesReport.jsp?dept=<%=dept%>"><%=dept.toUpperCase() %></a>
-                <%}%>     </ul></li>
+                <li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesReport.jsp">Notes Report</a>
+            </li>
 </ul></li>
 
 
