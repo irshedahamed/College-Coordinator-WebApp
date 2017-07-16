@@ -221,8 +221,6 @@
        
        session.setAttribute("Councillor",s.getCouncillorDetails());
        
-        Councillor c=(Councillor)session.getAttribute("councillor");
-      
        %> 
        
                       </tbody>

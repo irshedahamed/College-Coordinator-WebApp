@@ -108,8 +108,8 @@ public class SectionUpdate extends HttpServlet {
                            
                         
                     }
-                    response.sendRedirect("attendanceincharge/sectionResult.jsp?count="+count);
-    //    response.getWriter().println("Successfully updated " +count+ " records");
+                   // response.sendRedirect("attendanceincharge/sectionResult.jsp?count="+count);
+       response.getWriter().println("Successfully updated " +count+ " records");
         }
         catch(Exception e){
         e.printStackTrace();    

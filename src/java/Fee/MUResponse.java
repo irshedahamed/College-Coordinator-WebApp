@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -180,7 +181,7 @@ public class MUResponse {
             m.setHandleID(rs.getString("handleid"));
             m.setUtilitycode(rs.getString("utilitycode"));
             m.setMsg(rs.getString("msg"));
-            
+            m.setAcyear(rs.getString("acyear"));
             List.add(m);
          }
                      
@@ -197,5 +198,110 @@ public class MUResponse {
       return List;
     
     }
+    
+    public static List<MUResponse> getPaidMUP(String rollno){
+    
+        List<MUResponse> list=new ArrayList<MUResponse>();
+        try{  
+        Connection con = null;
+        Statement st = null;
+        
+        con = new dbcon().getConnection("sjitportal");
+        
+        st = con.createStatement();
+        
+        ResultSet rs = st.executeQuery("Select * from bank_mup where rollno = '"+rollno+"'");
+        
+         rs.beforeFirst();
+         
+         while (rs.next())
+        {
+            MUResponse m = new MUResponse();
+            m.setRefno(rs.getString("mup"));
+            m.setRollno(rs.getString("rollno"));
+            m.setTotalamt(rs.getString("totalamt"));
+            m.setBankchrge(rs.getString("bankchrg"));
+            m.setHandleID(rs.getString("handleid"));
+            m.setUtilitycode(rs.getString("utilitycode"));
+            m.setMsg(rs.getString("msg"));
+            m.setAcyear(rs.getString("acyear"));
+            list.add(m);
+         }
+                     
+        if(st!=null)
+                st.close();
+            if(con!=null)
+                con.close();
+           
+      }catch(Exception e){
+    e.printStackTrace();
+    }
+        
+            List<TechProcessResponse> paidlist=TechProcessResponse.fetchby(list, "1990-01-01", "3000-01-01");
+            Map<MUResponse,IBResponse> paidmap=IBResponse.fetchby(list,"1990-01-01", "3000-01-01");
+            
+            for(int i=0;i<list.size();i++){
+                MUResponse m=list.get(i);
+            boolean paid=false;
+                for(TechProcessResponse tp:paidlist){
+                    if(tp.getRefno().equals(m.getRefno())){
+                        paid=true;
+                        break;
+                    }
+                }
+                
+                if(paidmap.containsKey(m))
+                    paid=true;
+                
+                if(!paid){
+                    list.remove(m);
+                    i--;
+                }
+            }
+         
+    return list;
+    }
 
+    public static MUResponse getbyMUP(String mup)
+    {
+               MUResponse m=null;
+     
+      try{  
+        Connection con = null;
+        Statement st = null;
+        
+        con = new dbcon().getConnection("sjitportal");
+        
+        st = con.createStatement();
+        
+        ResultSet rs = st.executeQuery("Select * from bank_mup where mup = '"+mup+"'");
+        
+         rs.beforeFirst();
+         
+         while (rs.next())
+        {
+            m = new MUResponse();
+            m.setRefno(rs.getString("mup"));
+            m.setRollno(rs.getString("rollno"));
+            m.setTotalamt(rs.getString("totalamt"));
+            m.setBankchrge(rs.getString("bankchrg"));
+            m.setHandleID(rs.getString("handleid"));
+            m.setUtilitycode(rs.getString("utilitycode"));
+            m.setMsg(rs.getString("msg"));
+            m.setAcyear(rs.getString("acyear"));
+         }
+                     
+        if(st!=null)
+                st.close();
+            if(con!=null)
+                con.close();
+           
+      }catch(Exception e){
+    e.printStackTrace();
+    }
+    
+       
+      return m;
+    
+    }
 }

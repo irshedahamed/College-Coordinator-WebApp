@@ -5,6 +5,7 @@
  */
 
 import com.action.Base;
+import com.action.Find;
 import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -136,7 +137,21 @@ public class exam_upload extends HttpServlet {
                      
                     }
                     if(!item.isFormField()){
-                        name = new File(item.getName()).getName();
+                        name = new File(Find.parseFilename(item.getName() )).getName();
+                        
+                        File f=new File(UPLOAD_DIRECTORY + File.separator + name);
+                        if(f.exists()){
+                        name="1_"+name;
+                        f=new File(UPLOAD_DIRECTORY + File.separator + name);
+                        
+                            int i=2;
+                        while(f.exists()){
+                        name=i+name.substring(name.indexOf("_"));
+                        f=new File(UPLOAD_DIRECTORY + File.separator + name);
+                        i++;
+                        }
+                        
+                        }
                          UPLOAD_DIRECTORY = Base.path+"/portal/exam/";
     File file = new File(UPLOAD_DIRECTORY);
  Boolean a = file.mkdirs();

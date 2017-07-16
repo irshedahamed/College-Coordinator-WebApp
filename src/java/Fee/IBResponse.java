@@ -14,6 +14,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -100,9 +103,9 @@ Connection conn=null;
        else
            return false;
     }
- public static IBResponse fetchby(String mup,String From,String To) throws ParseException
+ public static Map<MUResponse,IBResponse> fetchby(List<MUResponse> mup,String From,String To) 
     {
-        IBResponse m = new IBResponse();
+        Map<MUResponse,IBResponse> map = new HashMap<MUResponse, IBResponse>();
       try{  
         Connection con = null;
         Statement st = null;
@@ -111,20 +114,37 @@ Connection conn=null;
         
         st = con.createStatement();
        
-        
-        ResultSet rs = st.executeQuery("Select * from ibresponse where mup = '"+mup+"'");
+        for(MUResponse mu:mup){
+        ResultSet rs = st.executeQuery("Select * from ibresponse where mup = '"+mu.getRefno()+"' and status='Y'");
         
          rs.afterLast();
          
          if (rs.previous())
         {
-            
-            m.setMup(rs.getString("mup"));
-            m.setRollno(rs.getString("rollno"));
-            m.setStatus(rs.getString("status"));
-            m.setJournalno(rs.getString("journalno"));
-            m.setTxndate(rs.getString("txndate"));
+          
+            IBResponse i=new IBResponse();
+            i.setMup(rs.getString("mup"));
+            i.setRollno(rs.getString("rollno"));
+            i.setStatus(rs.getString("status"));
+            i.setJournalno(rs.getString("journalno"));
+            i.setTxndate(rs.getString("txndate"));
+           
+     
+     String[] t = i.getTxndate().split(" ");
+     
+      Date txndate = new SimpleDateFormat("dd/MM/yyyy").parse(t[0]);
+      Date FromDate = new SimpleDateFormat("yyyy-MM-dd").parse(From);
+      Date ToDate = new SimpleDateFormat("yyyy-MM-dd").parse(To);
+      
+      if(txndate.compareTo(FromDate) >= 0 && txndate.compareTo(ToDate) <= 0)
+      {
+    
+      map.put(mu, i);
+      }
+      
          }
+         rs.close();
+        }
                      
         if(st!=null)
                 st.close();
@@ -135,18 +155,6 @@ Connection conn=null;
     e.printStackTrace();
     }
       
-      if(m.getTxndate()!=null){
-     String[] t = m.getTxndate().split(" ");
-     
-      Date txndate = new SimpleDateFormat("dd/MM/yyyy").parse(t[0]);
-      Date FromDate = new SimpleDateFormat("dd-MM-yyyy").parse(From);
-      Date ToDate = new SimpleDateFormat("dd-MM-yyyy").parse(To);
-      
-      if(txndate.compareTo(FromDate) >= 0 && txndate.compareTo(ToDate) <= 0)
-      {
-          return m;
-      }
-      }
-      return null;
+      return map;
     }
 }

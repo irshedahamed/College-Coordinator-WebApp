@@ -1,3 +1,4 @@
+<%@page import="Transport.BoardingPoint"%>
 <%@page import="com.action.Find"%>
 <%@page import="General.Batch"%>
 <%@page import="java.sql.ResultSet"%>
@@ -37,14 +38,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
-
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="../css/simple-sidebar.css" rel="stylesheet">
     <link href="../css/sky-forms.css" rel="stylesheet">
   
 
         <script type="text/javascript" src="../js/jquery.js"></script>
-		
+	 <script src="../js/select2.js"></script>	
  <script>
         function pageshow()
         {
@@ -54,21 +55,72 @@
             if (showvalue === "Manual Entry")
             {
                 document.getElementById("excel").style.display = 'none';
+                document.getElementById("print").style.display = 'none';
                 document.getElementById("manual").style.display = 'block';
             }
             if (showvalue === "Excell Upload")
             {
+                console.log("excel");
                 document.getElementById("manual").style.display = 'none';
+                document.getElementById("print").style.display = 'none';
                 document.getElementById("excel").style.display = 'block';
+            }
+            if(showvalue === "Print Form"){
+                document.getElementById("manual").style.display = 'none';
+                document.getElementById("excel").style.display = 'none';
+                document.getElementById("print").style.display = 'block';
             }
         }
         
+                
+                
         $(document).ready(function(){
-                $("form").submit(function(){
+             $(document).on('change keyup','#religion',function(){
+               if($("#religion option:selected").val()==="others"){
+                   $("#religion").after('<input type="text" style="background: white" name="religion">');
+                   $("#religion").remove();
+               }
+            });
+            $(document).on('change keyup','#counormn',function(){
+                
+                $("#adminalot option").remove();
+                console.log($("#counormn option:selected").val());
+                if($("#counormn option:selected").val()==="Counseling"){
+                    $("#adminalot").append(' <option value="OC">OPEN</option>'+
+                                            ' <option value="BC">BC</option>'+
+                                            ' <option value="MBC">MBC</option>'+
+                                            ' <option value="BCM">BCM</option>'+
+                                            ' <option value="SC">SC</option>'+
+                                            ' <option value="SCA">SCA</option>'+
+                                            ' <option value="ST">ST</option>'+
+                                           ' <option value="SPORTS">SPORTS</option>'+
+                                           ' <option value="VOCATIONAL">VOCATIONAL</option>   '+                                       
+                                           ' <option value="EX-SERVICEMAN">EX-SERVICEMAN</option>'+
+                                            '<option value="PHYSICALLY HANDICAPPED">PHYSICALLY HANDICAPPED</option>'+
+                                        '');
+                }
+                else if($("#counormn option:selected").val()==="Management"){
+                    $("#adminalot").append(' <option value="GENERAL">GENERAL</option>'+
+                                           ' <option value="SPORTS">SPORTS</option>'+
+                                           ' <option value="CHRISTIAN MINORITY">CHRISTIAN MINORITY</option>   '+                                       
+                                           ' <option value="NRICGC">NRICGC</option>'+
+                                            ' <option value="FOREIGN">FOREIGN</option>'+
+                                            '<option value="LAPS">LAPS</option>'+
+                                        '');
+                    
+                }
+            });
+             $('select.boarding').select2();
+            document.getElementById("excel").style.display = 'none';
+             document.getElementById("print").style.display = 'none';
+             document.getElementById("manual").style.display = 'block';
+                $("form#manual").submit(function(){
+                    
                     console.log($(this).attr('class'));
-                    if($(this).attr('class').includes("batchupdate"))
+                    if($(this).attr('class')!== undefined)
                         return true;
-        flag=0;
+                
+                flag=0;
                     $(".check").each(function(index){
                         if($(this).val()=== '')
                         {
@@ -208,7 +260,8 @@
 	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="PasswordReport.jsp">Password</a></li>
 	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="AddressReport.jsp">Address</a>
 	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="verificationReport.jsp">Verification</a>
-	
+		 <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="BoardingptReport.jsp">Boarding Point</a>
+
 	
 </li>
 </ul>
@@ -234,26 +287,39 @@
             <select id="pagetype" onchange="pageshow();">
                     <option value="Manual Entry">Manual Entry</option>
                     <option value="Excell Upload">Excel Upload</option>
+                    <option value="Print Form">Print Form</option>
+                    
                 </select>
-                <div id ="manual">
+           
+                <div id="manual">
                     <center> <form id="manual" method="post" action="${pageContext.request.contextPath}/StudentAdd">
                             <center><h3>General Details</h3></center>
                             <table cellspacing="10"><tr><td>
                                         
                                         <label> Roll No :</label><input type="text" class="check" style="background: white" id="rollno" name="rollno"></td>
                                 
-                                    <td>
-                                        
-                                        <label class="select"> Department :</label><select style="background: white" id="dept" name="dept">
-
-                                             
-                                            <%=Find.getDeptHTMLContent()  %>
-                                <td>
+                                   <td> 
                                     <label> Date of Birth :</label><input type="date" placeholder="yyyy-mm-dd" style="background: white" id="dob" name="dob"></td>
-                                <td><label>Caste :</label><input type="text" class="check" style="background: white" id="caste" name="caste">
-                                </td></tr>
+                                
+                                   <td>
+                                        <label> Nationality :</label><input type="text" class="check" style="background: white" id="nationality" name="nationality">
+                                    </td>
+                                    <td>
+                                        <label>Religion :</label>
+                                        
+                                    <select name="religion" id="religion">
+                                            <option value="">Select</option>
+                                                    <option value="Hindu">Hindu</option>
+                                                    <option value="Muslim">Muslim</option>
+                                                    <option value="Christian">Christian</option>
+                                                    <option value="others">Others</option>
+                                    </td>
+                                 </tr>
                                 <tr>
+                                       
                                     
+                                <td><label>Caste :</label><input type="text" class="check" style="background: white" id="caste" name="caste">
+                                </td>
                                 <td><label>Community :</label>
                                     
                                     
@@ -268,217 +334,147 @@
                                 </select>
                                 </td>
                                     
+                                 <td>
+                                        <label> Mother Tongue :</label> <input type="text" class="check" style="background: white" id="mothertongue" name="mothertongue">
+                                    </td>
                                 
-                                <td>
+                                      <td>
                                         <label>Parents Annual Income :</label><input type="text" class="check" style="background: white" id="pincome" name="pincome">
                                     </td>
                                     
-                                    <td>
-                                        <label>Religion :</label><input type="text" class="check" style="background: white" id="religion" name="religion">    
-                                    </td>
                                         
-                                    <td>
-                                        <label> Nationality :</label><input type="text" class="check" style="background: white" id="nationality" name="nationality">
-                                    </td>
+                                 
                                         
                                 </tr>
                                 <tr>
                                     
-                                    
+                                  
+                                   
                                     <td>
-                                        <label> Mother Tongue :</label> <input type="text" class="check" style="background: white" id="mothertongue" name="mothertongue">
+                                        <label>Club Member (NCC/NSS/SPORTS etc.) :</label><input type="text" class="check" style="background: white" id="clubmember" name="clubmember">
                                     </td>
                                     <td>
-                                        <label>Club Member :</label><input type="text" class="check" style="background: white" id="clubmember" name="clubmember">
-                                    </td>
-                                    <td>
-                                        <label>Boarding Point :</label><input type="text" class="check" style="background: white" id="boardingpt" name="boardingpt">
+                                        <label>Boarding Point :</label>  <select class="boarding"  id="boarding" name="boarding"  >
+                                                    <option >Select</option>
+                                                     <%
+                                                        List<String> blist= BoardingPoint.getAll();
+                                                   for(String s:blist){
+                                                   %>
+                                                   <option value="<%=s %>"><%=s%></option>
+                                                   <%
+                                                   }
+                                                   %>
+                                                </select>
                                     </td>
                                 </tr></table>
-                            <br><center><h3>Academic Details</h3></center>
-                           
-                            <table><br><center><h5>10th Details</h5></center>
-                                
+                            <br><br>
+                            <center><h3>Personal Details</h3></center>
+                            <table>
                                 <tr>
-                                    <td>
-                                <label>Name of School :</label><input type="text" class="check" style="background: white" id="10school" name="10school">
+                                     <td>
+                                        <label>Reg. No.:</label><input type="text" class="check"  style="background: white" id="regno" name="regno">
                                     </td>
                                     <td>
-                                <label>Marks Obtained:</label><input type="text" class="check" style="background: white" id="10marks" name="10marks">
+                                        <label>Name :</label><input type="text" class="check"  style="background: white" id="stuname" name="stuname">
                                     </td>
-                                        <td>
-                                <label>Board of Study:</label><input type="text" class="check" style="background: white" id="10board" name="10board">
-                                
-                                <select name="10board">
-                                    <option value="STATE BOARD">STATE BOARD</option>
-                                    <option value="CBSE">CBSE</option>
-                                    <option value="MATRICULATION">MATRICULATION</option>
-                                    <option value="ANGLO INDIAN">ANGLO INDIAN</option>
-                                    <option value="OTHERS">OTHERS</option>
-                                    <option value="NA">NA</option>
-                                    
-                                </select>
-                                
-                                    </td>
-                                </tr>
-                                <tr>
-                                        <td>
-                                <label>Medium of Instruction :</label>
-                                 <select name="10med">
-                                    <option value="English">ENGLISH</option>
-                                    <option value="Tamil">Tamil</option>
-                                    <option value="Others">OTHERS</option>
-                                    <option value="NA">NA</option>
-                                    
-                                </select>
-                                        </td>
-                                    <td>
-                                <label>Year of Passing :</label><input type="text" class="check" style="background: white" id="10yop" name="10yop">
-                                    </td></tr></table>
-                     
-                            <table><br><center><h5>12th Details</h5></center>
-                                <tr>
-                                    <td>
-                                <label>Name of School :</label><input type="text" class="check" style="background: white" id="12school" name="12school">
-                                    </td>
-                                    <td>
-                                <label>Marks Obtained:</label><input type="text" class="check" style="background: white" id="12marks" name="12marks">
-                                    </td>
-                                        <td>
-                                <label>Board of Study:</label>  
-                                <select name="12board">
-                                    <option value="STATE BOARD">STATE BOARD</option>
-                                    <option value="CBSE">CBSE</option>
-                                    <option value="MATRICULATION">MATRICULATION</option>
-                                    <option value="ANGLO INDIAN">ANGLO INDIAN</option>
-                                    <option value="OTHERS">OTHERS</option>
-                                    <option value="NA">NA</option>
-                                    
-                                </select>
-                                    </td>
-                                </tr>
-                                <tr>
-                                        <td>
-                                <label>Medium of Instruction :</label>
-                                <select name="12med">
-                                    <option value="English">ENGLISH</option>
-                                    <option value="Tamil">Tamil</option>
-                                    <option value="Others">OTHERS</option>
-                                    <option value="NA">NA</option>
-                                    
-                                </select>
-                                    </td>
-                                        <td>
-                                <label>Year of Passing :</label><input type="text" class="check" style="background: white" id="12yop" name="12yop">
-                                        </td></tr></table>
-                            <table><br><center><h5>Diploma Details</h5></center>
-                                <tr>
-                                    <td>
-                                <label>Name of College:</label><input type="text" class="check" style="background: white" id="dipcoll" name="dipcoll">
-                                    </td>
-                                    <td>
-                                <label>Marks Obtained:</label><input type="text" class="check" style="background: white" id="dipmark" name="dipmark">
-                                    </td>
-                                    <td>
-                                <label>Board of Study :</label>
-                                  <select name="dipboard">
-                                    <option value="DOTE">DOTE</option>
-                                    <option value="OTHERS">OTHERS</option>
-                                    <option value="NA">NA</option>
-                                    
-                                </select>
-                                    </td></tr>
-                                <tr>
-                                    <td>
-                                <label> Medium of Instruction :</label>
-                                <select name="dipmed">
-                                    <option value="English">ENGLISH</option>
-                                    <option value="Tamil">Tamil</option>
-                                    <option value="Others">OTHERS</option>
-                                    <option value="NA">NA</option>
-                                    
-                                </select>
-                                    </td>
-                                    <td>
-                                <label> Year of Passing :</label><input type="text" class="check" style="background: white" id="dipyop" name="dipyop">
-                                    </td>
-                                </tr>
-                                
                                    
+                                    <td>
+                                        <label>Gender :</label><select name="gender">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select></td>
+                                    <td>
+                                        <label>Blood Group :</label>
+                                        
+                                        <select style="background: white"  name="bloodgroup">
+                                            <option value="">Select</option>
+                                            <option value="O +ve">O +ve</option>
+                                            <option value="O -ve">O -ve</option>
+                                            <option value="B +ve">B +ve</option>
+                                            <option value="B -ve">B -ve</option>
+                                            <option value="A +ve">A +ve</option>
+                                            <option value="A -">A -ve</option>
+                                            <option value="B1 +ve">B1 +ve</option>
+                                            <option value="A2B +ve">A2B +ve</option>
+                                            <option value="A2B -ve">A2B -ve</option>
+                                            <option value="A2 +ve">A2 +ve</option>
+                                            <option value="A2 -ve">A2 -ve</option>
+                                            <option value="A1B +ve">A1B +ve</option>
+                                            <option value="A1B -ve">A1B -ve</option>
+                                            <option value="A1 +ve">A1 +ve</option>
+                                            <option value="A1 -ve">A1 -ve</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Batch :</label>
+                                        <select name="batch">
+                                            <option value="">Select</option>
+                                             <%= Batch.getHTMLContent() %>
+                                        </select>
+                                    </td>
+                                     <td>
+                                        <label>Course :</label><select name="course">
+                                            <option value="be">B.E</option>
+                                            <option value="btech">B.Tech</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <label>Section :</label><input type="text" class="check"  style="background: white" id="sec" name="sec">
+                                    </td>
+                                    <td>
+                                        <label>Mobile no. :</label><input type="text" class="check"  style="background: white" id="stumobile" name="stumobile">
+                                    </td></tr><tr>
+                                    <td>
+                                        <label>Mail id :</label><input type="text" class="check"  style="background: white" id="stumail" name="stumail">
+                                    </td>
+                                
+                                    <td>
+                                        <label>Food :</label><select name="food">
+                                            <option value="v">Veg</option>
+                                            <option value="nv">Non Veg</option>
+                                            
+                                        </select></td>
+                                    
+                                    <td>
+                                        <label>Accommodation :</label><select name="acc">
+                                            <option value="day">Day Scholar</option>
+                                            <option value="hostel">Hosteler</option>
+                                            
+                                        </select></td></tr><tr>
+                                    <td style="display: none">
+                                        <label>Initial :</label><input type="text" class=""  style="background: white" id="initial" name="initial">
+                                    </td>
+                                    <td>
+                                       
+
+                                        <label style="display: none">Model Type :</label><select name="modeltype" style="display: none">
+                                            <option value="gen">General</option>
+                                            <option value="spl">Special</option>
+                                            
+                                        </select></td>
+                                </tr>
+                                <tr>
+                                    
+                                </tr>
+                                    
                             </table>
                             
-                            <br><center><h3>Admission Details</h3></center>
+                                <br><center><h3>Contact Details</h3></center>
                             <table>
                                 <tr>
                                     <td>
-                                        <label>Date of Admission :</label><input type="date" placeholder="yyyy-mm-dd" style="background: white" id="doa" name="doa">
+                                        <label>Door/Flat No/Apartement Name (Max 30 chars):</label><input type="text" class="check" maxlength="30"  style="background: white" id="doorno" name="doorno">
                                     </td>
                                     <td>
-                                        <label>Category :</label>
-                                    
-                                        <select name="adminalot">
-                                            <option value="GENERAL">GENERAL</option>
-                                            <option value="SPORTS">SPORTS</option>
-                                            <option value="VOCATIONAL">VOCATIONAL</option>                                          
-                                            <option value="EX-SERVICEMAN">EX-SERVICEMAN</option>
-                                            <option value="PHYSICALLY HANDICAPPED">PHYSICALLY HANDICAPPED</option>
-                                           
-                                        </select>
-                                    
+                                        <label>Street (Max 30 chars):</label><input type="text" class="check" maxlength="30"  style="background: white" id="street" name="street">
                                     </td>
                                     <td>
-                                        <label>Counseling or Management :</label><select style="background: white" id="counormn" name="counormn"><option value="Counseling">Counseling</option>
-                                            <option value="Management">Management</option></select>
+                                        <label>Area (Max 30 chars):</label><input type="text" class="check" maxlength="30"   style="background: white" id="area" name="area">
                                     </td>
                                     <td>
-                                        <label>Overall Rank :</label><input type="text" class="check"  style="background: white" id="orank" name="orank">
-                                    </td>
-                                    
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>Community Rank :</label><input type="text" class="check"  style="background: white" id="crank" name="crank">
-                                    </td>
-                                    <td>
-                                        <label>Sports Admission :</label><select style="background: white" id="sadmission" name="sadmission"><option value="Yes">Yes</option>
-                                            <option value="No">No</option></select>
-                                    </td>
-                                    <td>
-                                        <label>Game Name :</label><input type="text" class="check"  style="background: white" id="gname" name="gname">
-                                    </td>
-                                    <td>
-                                        <label>Medium of Instruction :</label><input type="text" class="check"  style="background: white" id="moi" name="moi">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                          <label>Scholarship :</label>
-                                       <select name="scholarship" id="religion">
-                                           <option value="NA">NA</option>
-                                                    <option value="First Graduate">First Graduate</option>
-                                                    <option value="Fee Waiver">Fee Waiver</option>
-                                                    <option value="SC/ST Scholarship">SC/ST Scholarship</option>
-                                                    
-                                                    
-                                        </select>
-                               
-                                    </td>
-                                </tr>
-                            </table>
-                            <br><center><h3>Contact Details</h3></center>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <label>Door No :</label><input type="text" class="check"  style="background: white" id="doorno" name="doorno">
-                                    </td>
-                                    <td>
-                                        <label>Street :</label><input type="text" class="check"  style="background: white" id="street" name="street">
-                                    </td>
-                                    <td>
-                                        <label>Area :</label><input type="text" class="check"  style="background: white" id="area" name="area">
-                                    </td>
-                                    <td>
-                                        <label>City :</label><input type="text" class="check"  style="background: white" id="city" name="city">
+                                        <label>City (Max 30 chars):</label><input type="text" class="check" maxlength="30"  style="background: white" id="city" name="city">
                                     </td>
                                     
                                 </tr>
@@ -603,6 +599,179 @@
                                 
                                     
                             </table>
+                            
+                            <br><center><h3>Academic Details</h3></center>
+                           
+                            <table><br><center><h5>10th Details</h5></center>
+                                
+                                <tr>
+                                    <td>
+                                <label>Name of School :</label><input type="text" class="check" style="background: white" id="10school" name="10school">
+                                    </td>
+                                    <td>
+                                <label>Marks Obtained:</label><input type="text" class="check" style="background: white" id="10marks" name="10marks">
+                                    </td>
+                                        <td>
+                                <label>Board of Study:</label>
+                                
+                                <select name="10board">
+                                    <option value="STATE BOARD">STATE BOARD</option>
+                                    <option value="CBSE">CBSE</option>
+                                    <option value="MATRICULATION">MATRICULATION</option>
+                                    <option value="ANGLO INDIAN">ANGLO INDIAN</option>
+                                    <option value="OTHERS">OTHERS</option>
+                                    <option value="NA">NA</option>
+                                    
+                                </select>
+                                
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                <label>Medium of Instruction :</label>
+                                 <select name="10med">
+                                    <option value="English">ENGLISH</option>
+                                    <option value="Tamil">Tamil</option>
+                                    <option value="Others">OTHERS</option>
+                                    <option value="NA">NA</option>
+                                    
+                                </select>
+                                        </td>
+                                    <td>
+                                <label>Year of Passing :</label><input type="text" class="check" style="background: white" id="10yop" name="10yop">
+                                    </td></tr></table>
+                     
+                            <table><br><center><h5>12th Details</h5></center>
+                                <tr>
+                                    <td>
+                                <label>Name of School :</label><input type="text" class="check" style="background: white" id="12school" name="12school">
+                                    </td>
+                                    <td>
+                                <label>Marks Obtained:</label><input type="text" class="check" style="background: white" id="12marks" name="12marks">
+                                    </td>
+                                        <td>
+                                <label>Board of Study:</label>  
+                                <select name="12board">
+                                    <option value="STATE BOARD">STATE BOARD</option>
+                                    <option value="CBSE">CBSE</option>
+                                    <option value="MATRICULATION">MATRICULATION</option>
+                                    <option value="ANGLO INDIAN">ANGLO INDIAN</option>
+                                    <option value="OTHERS">OTHERS</option>
+                                    <option value="NA">NA</option>
+                                    
+                                </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                <label>Medium of Instruction :</label>
+                                <select name="12med">
+                                    <option value="English">ENGLISH</option>
+                                    <option value="Tamil">Tamil</option>
+                                    <option value="Others">OTHERS</option>
+                                    <option value="NA">NA</option>
+                                    
+                                </select>
+                                    </td>
+                                        <td>
+                                <label>Year of Passing :</label><input type="text" class="check" style="background: white" id="12yop" name="12yop">
+                                        </td></tr></table>
+                            <table><br><center><h5>Diploma Details</h5></center>
+                                <tr>
+                                    <td>
+                                <label>Name of College:</label><input type="text" class="check" style="background: white" id="dipcoll" name="dipcoll">
+                                    </td>
+                                    <td>
+                                <label>Marks Obtained:</label><input type="text" class="check" style="background: white" id="dipmark" name="dipmark">
+                                    </td>
+                                    <td>
+                                <label>Board of Study :</label>
+                                  <select name="dipboard">
+                                    <option value="DOTE">DOTE</option>
+                                    <option value="OTHERS">OTHERS</option>
+                                    <option value="NA">NA</option>
+                                    
+                                </select>
+                                    </td></tr>
+                                <tr>
+                                    <td>
+                                <label> Medium of Instruction :</label>
+                                <select name="dipmed">
+                                    <option value="English">ENGLISH</option>
+                                    <option value="Tamil">Tamil</option>
+                                    <option value="Others">OTHERS</option>
+                                    <option value="NA">NA</option>
+                                    
+                                </select>
+                                    </td>
+                                    <td>
+                                <label> Year of Passing :</label><input type="text" class="check" style="background: white" id="dipyop" name="dipyop">
+                                    </td>
+                                </tr>
+                                
+                                   
+                            </table>
+                            
+                            <br><center><h3>Admission Details</h3></center>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label>Date of Admission :</label><input type="date" class="check" placeholder="yyyy-mm-dd" style="background: white" id="doa" name="doa">
+                                    </td>
+                                    
+                                       <td>
+                                        <label>Counseling or Management :</label><select style="background: white" id="counormn" name="counormn">
+                                            <option value="">Select</option>
+                                            <option value="Counseling">Counseling</option>
+                                            <option value="Management">Management</option></select>
+                                    </td>
+                                    
+                                    <td>
+                                        <label>Category :</label>
+                                    
+                                        <select id="adminalot" name="adminalot">
+                                            <option value="">Select</option>
+                                           
+                                        </select>
+                                    
+                                    </td>
+                                 
+                                    <td>
+                                        <label>Overall Rank :</label><input type="text" class="check"  style="background: white" id="orank" name="orank">
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Community Rank :</label><input type="text" class="check"  style="background: white" id="crank" name="crank">
+                                    </td>
+                                    <td>
+                                        <label>Sports Admission :</label><select style="background: white" id="sadmission" name="sadmission"><option value="Yes">Yes</option>
+                                            <option value="No">No</option></select>
+                                    </td>
+                                    <td>
+                                        <label>Game Name :</label><input type="text" class="check"  style="background: white" id="gname" name="gname">
+                                    </td>
+                                    <td>
+                                        <label>Medium of Instruction :</label><input type="text" class="check"  style="background: white" id="moi" name="moi">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                          <label>Scholarship :</label>
+                                       <select name="scholarship" id="scholarship">
+                                           <option value="NA">NA</option>
+                                                    <option value="First Graduate">First Graduate</option>
+                                                    <option value="Fee Waiver">Fee Waiver</option>
+                                                    <option value="SC/ST Scholarship">SC/ST Scholarship</option>
+                                                    
+                                                    
+                                        </select>
+                               
+                                    </td>
+                                </tr>
+                            </table>
+                        
                             <br><br>
                              
                             
@@ -610,16 +779,26 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <label>Transfer From :</label><input type="text" class="check"  style="background: white" id="odtf" name="odtf">
+                                        <label>Previous Course :</label>
+                                        
+                                         <select style="background: white" id="odtf" name="odtf">
+                                           <option value="">Select</option>
+                                                    <option value="12">Twelfth</option>
+                                                    <option value="Diploma">Diploma</option>
+                                                    <option value="UG">UG</option>
+                                                    <option value="PG">PG</option>
+                                                    
+                                                    
+                                        </select>
                                     </td>
                                     <td>
-                                        <label>Institution Name:</label><input type="text" class="check"  style="background: white" id="odin" name="odin">
+                                        <label>Previous Institution Name:</label><input type="text" class="check"  style="background: white" id="odin" name="odin">
                                     </td>
                                     <td>
                                         <label>Previous Institution Address:</label><input type="text" class="check"  style="background: white" id="odprevinst" name="odprevinst">
                                     </td>
                                     <td>
-                                        <label>Group :</label><input type="text" class="check"  style="background: white" id="odgrp" name="odgrp">
+                                        <label>Group/Department :</label><input type="text" class="check"  style="background: white" id="odgrp" name="odgrp">
                                     </td>
                                 </tr><tr>
                                     <td> 
@@ -632,7 +811,7 @@
                                         <label>Course Completed in Time(Y/N) :</label><input type="text" class="check"  style="background: white" id="odct" name="odct">
                                     </td>
                                     <td>
-                                        <label>Board of Study:</label><input type="text" class="check"  style="background: white" id="odboard" name="odboard">
+                                        <label>Board/University :</label><input type="text" class="check"  style="background: white" id="odboard" name="odboard">
                                     </td>
                                     
                                 </tr>
@@ -694,80 +873,7 @@
                             </table>
                             <br><br>
                             
-                            <center><h3>Personal Details</h3></center>
-                            <table>
-                                <tr>
-                                     <td>
-                                        <label>Reg. No.:</label><input type="text" class="check"  style="background: white" id="regno" name="regno">
-                                    </td>
-                                    <td>
-                                        <label>Name :</label><input type="text" class="check"  style="background: white" id="stuname" name="stuname">
-                                    </td>
-                                   
-                                    <td>
-                                        <label>Gender :</label><select name="gender">
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                        </select></td>
-                                    <td>
-                                        <label>Blood Group :</label><input type="text" class="check"  style="background: white" id="bloodgroup" name="bloodgroup">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <label>Batch :</label>
-                                        <select name="batch">
-                                            <option value="">Select</option>
-                                             <%= Batch.getHTMLContent() %>
-                                        </select>
-                                    </td>
-                                     <td>
-                                        <label>Course :</label><select name="course">
-                                            <option value="be">B.E</option>
-                                            <option value="btech">B.Tech</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <label>Section :</label><input type="text" class="check"  style="background: white" id="sec" name="sec">
-                                    </td>
-                                    <td>
-                                        <label>Mobile no. :</label><input type="text" class="check"  style="background: white" id="stumobile" name="stumobile">
-                                    </td></tr><tr>
-                                    <td>
-                                        <label>Mail id :</label><input type="text" class="check"  style="background: white" id="stumail" name="stumail">
-                                    </td>
-                                
-                                    <td>
-                                        <label>Food :</label><select name="food">
-                                            <option value="v">Veg</option>
-                                            <option value="nv">Non Veg</option>
-                                            
-                                        </select></td>
-                                    
-                                    <td>
-                                        <label>Accommodation :</label><select name="acc">
-                                            <option value="day">Day Scholar</option>
-                                            <option value="hostel">Hosteler</option>
-                                            
-                                        </select></td></tr><tr>
-                                    <td>
-                                        <label>Initial :</label><input type="text" class="check"  style="background: white" id="initial" name="initial">
-                                    </td>
-                                    <td>
-                                       
-
-                                        <label>Model Type :</label><select name="modeltype">
-                                            <option value="gen">General</option>
-                                            <option value="spl">Special</option>
-                                            
-                                        </select></td>
-                                </tr>
-                                <tr>
-                                    
-                                </tr>
-                                    
-                            </table>
-                            <br><br> 
+                             
                  <div align="centre">
             <input type="submit" id="submit" value="Submit" /></div>
             <br><br>
@@ -776,6 +882,15 @@
                         
                   
                 </div>
+                                         <div id ="print">
+                 <center> <form  method="post" action="studentSuccessForm.jsp">
+                                        
+                                        <label> Roll No :</label><input type="text" class="" style="background: white" id="rollno" name="rollno">  
+                                        <input type="submit" id="submit" value="Submit">
+                                
+                     </form>
+                 </center>
+            </div>
             <div id="excel">
                 <center>
                    <form action="${pageContext.request.contextPath}/ExcelStudentUpload" class="sky-form batchupdate" method="post" enctype="multipart/form-data">

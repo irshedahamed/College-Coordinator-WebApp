@@ -485,6 +485,9 @@ if(s.getCouncillorDetails().getBatch()!=null)
                 <option value="cycle1">Cycle 1</option>
                 <option value="cycle2">Cycle 2</option>
                 <option value="cycle3">Cycle 3</option>
+                <option value="unit1">Unit 1</option>
+                <option value="unit2">Unit 2</option>
+                <option value="unit3">Unit 3</option>
             </select>
                     <i></i>
                 </label></label>

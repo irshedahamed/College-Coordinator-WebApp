@@ -47,7 +47,7 @@
                         var patt = /^[0-9]+$/;
                         var result = patt.test($(this).val());
    
-                        var result1=($(this).val()==='A'||$(this).val()==='N');
+                        var result1=($(this).val()==='A'||$(this).val()==='N'||$(this).val()==='null');
                         if($(this).val()=== ''||(result===false && result1===false))
                         {
                             $(this).focus();
@@ -154,9 +154,6 @@
          rollno=rs.getString("rollno");
          name = rs.getString("name");
          String regno=rs.getString("regno");
-         String sql3 ="select * from marks_table where rollno='"+rollno+"' and sem='"+sem+"' order by subcode";
-         Statement st1 = con.createStatement();
-         ResultSet rs1 = st1.executeQuery(sql3);
          
        
         %>
@@ -166,13 +163,16 @@
         <td><%=regno%></td>
         <td><%=name%></td>
         <%
-        for(int i=0;i<count&&rs1.next();i++)
-        {
+        for(int i=0;i<count;i++)
+        {   
+             String sql3 ="select * from marks_table where rollno='"+rollno+"' and sem='"+sem+"' and subcode like '"+subcodes[i]+"'";
+         Statement st1 = con.createStatement();
+         ResultSet rs1 = st1.executeQuery(sql3);
+        if(rs1.next()){
             String a1=rollno+"_"+i;
             String value = rs1.getString(exam);
              subcode=rs1.getString("subcode");
-        if(subcodes[i].equals(subcode))
-{
+        
 %>
         
         <td><input type="text" size="3" class="marks" maxlength="3" name="<%=a1%>" id="<%=a1%>" value="<%=value%>"></td>
@@ -181,13 +181,16 @@
            }
 else
 {
-rs1.previous();
+
        %>
 <td><input type="text" size="3"  disabled="disabled"></td>
 
         
         <%
             }
+
+            rs1.close();
+            st1.close();
        }
      }
      rs.close();

@@ -128,11 +128,13 @@ public class staffmarkupdate extends HttpServlet {
                         rs2.next();
                         String m = rs2.getString(exam);
                         if(m!=null)
+                        if(!m.equals("null"))    
                         {
                             response.getWriter().println("<center><h1>ALREADY UPDATED<h1></center>");
                           flag=1;  
                             break;
                         }
+                        
                         String sql5="update marks_table set "+exam+"='"+mark+"' where rollno='"+rollno+"' and subcode='"+subcode+"'";
                         st2.executeUpdate(sql5);
                     }

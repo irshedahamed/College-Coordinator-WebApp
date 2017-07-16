@@ -69,7 +69,12 @@ public class Fee {
     
     public static Fee getFeeById(String id){
     
-    String cyear=AcademicYear.getCurrentYear().getYear();
+    return getFeeById(id,AcademicYear.getFeeYear().getYear() );
+    }
+    
+    public static Fee getFeeById(String id,String acyear){
+    
+    String cyear=acyear;
     Student s=Student.getById(id);
     List<BasicFee> fee=BasicFee.getByBatch(s.getBatch());
     SpecialFee sfee=SpecialFee.getFee(id, cyear);
