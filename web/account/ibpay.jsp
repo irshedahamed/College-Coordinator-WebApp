@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="java.util.Map"%>
 <%@page import="Actor.Student"%>
 <%@page import="Fee.IBResponse"%>
 <%@page import="Fee.MUResponse"%>
@@ -55,11 +56,10 @@
         
        int sno=0;        
          ArrayList<MUResponse> List = (ArrayList<MUResponse>) MUResponse.fetchby(Acyear);
-           for(MUResponse m : List)
-         {
-             IBResponse i = IBResponse.fetchby(m.getRefno(),From,To);
-             if(i!=null)
-             {
+           for(Map.Entry<MUResponse,IBResponse> entry : IBResponse.fetchby(List, From, To).entrySet())
+         {   
+             MUResponse m=entry.getKey();
+             IBResponse i=entry.getValue();
              Student stu = Student.getById(m.getRollno());
              if(Batch.equals(stu.getBatch()) && ((Dept.equals(stu.getDept()) || Dept.equals("%")) ))
              {
@@ -76,7 +76,7 @@
         
     </tr>
     <%
-        }
+        
 
     }
 

@@ -1,3 +1,4 @@
+<%@page import="General.AcademicYear"%>
 <%@page import="Actor.Staff"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
@@ -67,7 +68,56 @@
     
     });
     
-    $(document).on('change', '[id^="dept"]', function() {
+    function check(dept,acyear,sem,subcode,type,subtype){
+    $.post('${pageContext.request.contextPath}/findNotes',{
+        dept: dept,
+        acyear: acyear,
+        subcode:subcode,
+        type:type,
+        sem:sem,
+        subtype:subtype
+    },function(response){
+        console.log(response);
+        if(response!=="Not Found")
+            alert("Notes seems to be already uploaded for this category \n Description:  "+response);
+    });
+    }
+    $(document).on('change', '#notes', function() {
+        selected=$("#notes option:selected").val();
+        dept=$("#dept option:selected").val();
+        acyear=$("#ayear option:selected").val();
+        subcode=$("#subject option:selected").val().split("-")[0];
+        type=$("#notes option:selected").val();
+        subtype=$("#subnotes option:selected").val();
+        sem=$("#sem option:selected").val();
+        
+        if(selected==="class_notes" || selected==="model_keys" || selected==="Unit_Keys" || selected==="Assignment_ques" || selected==="Cycle_Test")
+          $("#subCategory").show();
+      else
+      { 
+          $("#subCategory").hide();
+         // console.log(dept+acyear+sem+subcode+type+subtype);
+          check(dept,acyear,sem,subcode,type,subtype);
+      }
+    });
+    
+     $(document).on('change', '#subnotes', function() {
+        selected=$("#notes option:selected").val();
+        dept=$("#dept option:selected").val();
+        acyear=$("#ayear option:selected").val();
+        subcode=$("#subject option:selected").val().split("-")[0];
+        type=$("#notes option:selected").val();
+        subtype=$("#subnotes option:selected").val();
+        sem=$("#sem option:selected").val();
+        
+      
+          
+        //  console.log(dept+acyear+sem+subcode+type+subtype);
+          check(dept,acyear,sem,subcode,type,subtype);
+      
+    });
+    
+    $(document).on('change click', '[id^="dept"]', function() {
    var sem = $("select#sem").val();
         var dept = $("select#dept").val();
         var batch = $("select#batch").val();
@@ -93,7 +143,7 @@
     
     
     });
-     $(document).on('change', '[id^="batch"]', function() {
+     $(document).on('change click', '[id^="batch"]', function() {
    var sem = $("select#sem").val();
         var dept = $("select#dept").val();
         var batch = $("select#batch").val();
@@ -274,17 +324,8 @@ if(s.getCouncillorDetails().getBatch()!=null)
                                                     Academic Year:</b></div>
                                             <label class="select">
                                                 <select id="ayear" name="ayear">
-                                                    <option>Select</option>
-                                                    <option value="13">2013-2014</option>
-                                                    <option value="14">2014-2015</option>
-                                                    <option value="15">2015-2016</option>
-                                                    <option value="16">2016-2017</option>
-                                                    <option value="17">2017-2018</option>
-                                                    <option value="18">2018-2019</option>
-                                                    <option value="19">2019-2020</option>
-                                                    <option value="20">2020-2021</option>
-                                                    <option value="21">2021-2022</option>
-                                                    <option value="22">2023-2024</option>
+                                                    
+                                                    <%=AcademicYear.getHTMLContent() %>
 
                                                 </select>
                                                 <i></i>
@@ -292,22 +333,6 @@ if(s.getCouncillorDetails().getBatch()!=null)
                                         </label>
                                         <br> <br>
 
-                                        <label class="input">
-                                            <div align="left" size="3px"><b>
-                                                    Course Name: </b></div>
-                                            <label class="select">
-
-                                                <select id="course" name="course">
-
-                                                    <option value="BE">BE</option>
-                                                    <option value="BTECH">BTECH</option>
-                                                    <option vslue="ME">ME</option>
-
-                                                </select>
-                                                <i></i>
-                                            </label>
-                                        </label>
-                                        <br> <br>
 
                                         <label class="input">
                                             <div align="left" size="3px"><b>
@@ -398,7 +423,7 @@ if(s.getCouncillorDetails().getBatch()!=null)
                                                     <option value="question_bank">Question Bank</option>
                                                     <option value="prev_univ_quest">Previous University Questions</option>
                                                     <option value="model_keys">Model Keys</option>
-                                                    <option value="Unit_Keys">Unit_Keys</option>
+                                                    <option value="Unit_Keys">Unit Test </option>
                                                     <option value="Cycle_Test">Cycle test Questions</option>
                                                     <option value="Syllabus">Syllabus</option>
                                                     <option value="Prev_univ_ans">Previous University Answers</option>
@@ -411,6 +436,25 @@ if(s.getCouncillorDetails().getBatch()!=null)
                                         
                                         <br><br>
                                         
+                                        <label class="input" id="subCategory" style="display: none;" >
+                                            <div align="left" size="3px"><b>
+                                                    Sub Type:  </b></div>
+                                            <label class="select">
+                                                <select id="subnotes" name="subCategory" >
+                                                    <option value="0">select</option>
+                                                    <option value="1"> 1</option>
+                                                    <option value="2"> 2</option>
+                                                    <option value="3"> 3</option>
+                                                    <option value="4"> 4</option>
+                                                    <option value="5"> 5</option>
+                                                    </select>
+
+                                                <i></i>
+                                            </label>
+                                              <br><br>
+                                        </label>
+                                        
+                                      
                                         
                                         <label class="input">
                                             <div align="left" size="3px"><b>

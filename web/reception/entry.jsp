@@ -199,11 +199,13 @@
                     <center> 
                           
                            <%
-                           rs10=stmt.executeQuery(sql);
+			   	boolean found=false;
+                               if(!Find.sdept(rollno).equals("first")){
+                                    rs10=stmt.executeQuery(sql);
               
                             if(rs10.next())
                             {
-                                
+                                found=true;
                                 String   batch=rs10.getString("batch");
                             %>
                             <center> 
@@ -339,7 +341,8 @@ stmt.close();
 
 if(con!=null)
 con.close();
-                     }else
+                     }
+                    }if(!found)
                     {
                         
                         try
@@ -347,8 +350,6 @@ con.close();
 
                          con=new dbcon().getConnection(Find.sdept(rollno));
                          stmt=con.createStatement();
-
-
                     %>
                     <center> 
                            

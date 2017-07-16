@@ -4,9 +4,11 @@
     Author     : Aravind Tyson
 --%>
 
+<%@page import="Actor.Student"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.dbcon"%>
+<%@page import="java.sql.Connection"%>
 <% 
    try
     {
@@ -43,20 +45,18 @@
                     //int i=Integer.parseInt(request.getParameter("val"));
                     
                     
-               ResultSet rs= statement.executeQuery("select batch from student_personal where rollno like '"+username+"'");
-                   
+              Student s1=Student.getById(username);
               String batch;
                     
                     
-              while(rs.next())
-              {
-                  batch=rs.getString("batch");
+              
+                  batch=s1.getById(username).getBatch();
                   
                   
               
               %>
               <option value="<%=batch%>"><%=batch%></option>
-              <% } %>
+              
             </select>
                     <i></i>
                 </label></label>
@@ -117,20 +117,18 @@
                     String batch=request.getParameter("index2");
                     String sem=request.getParameter("index3");
                     
-               ResultSet rs1= statement.executeQuery("select sec from student_personal where rollno like '"+username+"'");
-                   
+               Student s2=Student.getById(username);
               String section;
                     
                     
-              while(rs1.next())
-              {
-                  section=rs1.getString("sec");
+              
+                  section=s2.getById(username).getSec();
                   
                   
               
               %>
               <option value="<%=section%>"><%=section%></option>
-              <% } %>
+              
             </select>
                     <i></i>
                 </label></label>

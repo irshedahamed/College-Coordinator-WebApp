@@ -172,6 +172,7 @@
     </ul>
     
 </li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="viewmarkbonus.jsp"</a>View Marks</li>
 <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="../home.jsp">Staff View</a>
 
 </ul>						</nav>
@@ -199,16 +200,27 @@
                         <input type="submit" id="submit" value="Submit" />
                     <br><br></div></form>
                     <%
+                         Councillor c=(Councillor)session.getAttribute("Councillor");
                         String rollno=request.getParameter("search");
                         Connection con1=null;
+                         boolean mystudent=false;
                         Statement stmt=null;
                         ResultSet rs=null;
                         String sql="select * from student_general where rollno like '"+rollno+"'";
-                    if(request.getParameter("search")!=null)
+                       if(request.getParameter("search")!=null){
+                        Student stu=Student.getById(rollno);
+                       
+                        if(stu!=null){
+                        if(Find.sdept(stu.getId()).equals(c.getDept()) && stu.getSec().equals(c.getSec()) &&c.getBatch().equals(stu.getBatch()))
+                            mystudent=true;
+                        }
+                       }
+                        if(request.getParameter("search")!=null&&mystudent)
                     {
+                       
                         try
                         {
-
+                                
                          con1=new dbcon().getConnection(Find.sdept(rollno));
                          stmt=con1.createStatement();
 

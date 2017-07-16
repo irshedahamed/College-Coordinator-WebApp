@@ -150,7 +150,9 @@
     <ul class="sub-menu">
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notes.jsp">View Notes</a></li>
-	</ul></li>
+                    <li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesReport.jsp">Notes Report</a>
+            </li>
+    </ul></li>
 <li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="cireveupdates.jsp">Department Uploads</a>
     </li>
 
@@ -208,7 +210,7 @@
                     
                     <div class="tabs__content-item">
                           <center><div style="color:#333333; margin-top: -75px;font-family: inherit;font-size:2.5em;">Department Circular<br><br></div></center>
-        <div style="width:100%;height:300px;line-height:3em;overflow-y:scroll;padding:5px; solid #149dd2;">
+        <div style="width:100%;height:300px;line-height:3em;overflow-y:scroll;padding:5px; solid:#149dd2;">
                     
 <div align="left">
 <% 

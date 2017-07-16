@@ -59,7 +59,7 @@
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
  <script src="../js/jquery.js"></script>
          
-     
+
 
 
 
@@ -102,9 +102,12 @@
     
 
 
-   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="requests.jsp">Grant OutPass</a>
-  
-</li>
+   
+   <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Grant OutPass</a>
+  <ul class="sub-menu">
+                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="requests.jsp">Single OutPass</a>
+                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="bulkOutPass.jsp">Bulk OutPass</a>
+  </ul></li>
 <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="notreturned.jsp">SMS</a>
 
 
@@ -117,7 +120,7 @@
 </li>
 
 
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#"> Report</a>
+<li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#"> Report</a>
 <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personalReport.jsp">Personal Report</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="dailyReport.jsp">Daily Report</a>
@@ -134,6 +137,7 @@
 			</div>
                     
         <script type="text/javascript" src="../js/toggleSelect.js"></script>
+      
 
                          <script>
                         $(document).ready(function(){
@@ -169,6 +173,7 @@
                         });
                         
                     </script>
+                   
                     <script>
                         $(document).ready(function(){
                             $("#display").hide();
@@ -526,7 +531,16 @@
 
     <!-- Menu Toggle Script -->
     
-
+    
+ <script>
+     <%  
+        String msg = request.getParameter("msg");
+        if(msg!=null)
+        {
+     %>
+         alert("OutPass Is Generated And Valid For 6 Hours");
+      <% } %>
+     </script>
 
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 <%

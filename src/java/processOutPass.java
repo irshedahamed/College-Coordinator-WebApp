@@ -10,6 +10,7 @@ import Forms.OutPass;
 import com.action.SMSTemplate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -77,7 +78,7 @@ public class processOutPass extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
      //   processRequest(request, response);
-     OutPass p=new OutPass();
+     final OutPass p=new OutPass();
      p.setRollno(request.getParameter("rollno"));
      p.setReason(request.getParameter("reason"));
      p.setFrom(request.getParameter("from"));
@@ -88,17 +89,21 @@ public class processOutPass extends HttpServlet {
         
       //  System.err.println(res);
         if(p.getStatus().equals("Accepted")&&res){
-        General.OutPass op=new General.OutPass(p.getRollno());
-     
+        final General.OutPass op = new General.OutPass(p.getRollno());
+    new Thread(new Runnable(){
+         
+         @Override
+         public void run(){
         if(op.insert(p.getRequestid())){
-           response.getWriter().write("Out Pass Generated and valid for 6 hours");
             if(Student.getById(p.getRollno()).getAccomodation().equalsIgnoreCase("hostel"))
             SMSTemplate.send(Parent.getNumber(p.getRollno()),p.getSMSContent());
         }
         }
+     }).start();
+        }
         
         if(res)
-            response.getWriter().write("Updated Successfully");
+            response.sendRedirect("hostel/requests.jsp?msg=done");
     }
 
     /**

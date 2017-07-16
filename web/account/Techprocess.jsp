@@ -55,15 +55,14 @@
         
         int sno=0;
          ArrayList<MUResponse> List = (ArrayList<MUResponse>) MUResponse.fetchby(Acyear);
-           for(MUResponse m : List)
+           for(TechProcessResponse i : TechProcessResponse.fetchby(List,From,To))
          {
              
-             TechProcessResponse i = TechProcessResponse.fetchby(m.getRefno(),From,To);
              String p = i.getRefno();
               if(p!=null)
              {
                  
-             String r = m.getRollno();
+             String r = i.getRollno();
                           
              Student stu = Student.getById(r);
              if(Batch.equals(stu.getBatch()) && (Dept.equals(stu.getDept()) || Dept.equals("%") ))
@@ -72,7 +71,7 @@
             
     <tr>
         <td><%= ++sno %></td>
-        <td> <%= m.getRollno() %> </td>
+        <td> <%= i.getRollno() %> </td>
         <td><%= stu.getRegno() %></td>
         <td><%= i.getRefno() %></td>
         <td><%= stu.getName() %></td>

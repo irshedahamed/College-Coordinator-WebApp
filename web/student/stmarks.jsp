@@ -1,4 +1,5 @@
-      <%-- 
+      <%@page import="Actor.Student"%>
+<%-- 
     Document   : getmarks
     Created on : 26 May, 2015, 2:39:34 PM
     Author     : aravind
@@ -37,10 +38,11 @@
         
        
         Connection con = new dbcon().getConnection(dept);
-   Statement st1= con.createStatement();
-   ResultSet rs1 = st1.executeQuery("select batch from student_personal where rollno='"+rollno1+"'");
-   rs1.next();
-   String batch=rs1.getString("batch");
+   //Statement st1= con.createStatement();
+   //ResultSet rs1 = st1.executeQuery("select batch from student_personal where rollno='"+rollno1+"'");
+   //rs1.next();
+   Student s1=Student.getById(username);
+   String batch=s1.getBatch();
         String sem = request.getParameter("sem");
         String exam = request.getParameter("exam");
        
@@ -126,8 +128,7 @@
     <%
             if(st!=null)
                             st.close();
-              if(st1!=null)
-                            st1.close();
+             
                               if(con1!=null)
                                 con1.close();
                               if(con!=null)

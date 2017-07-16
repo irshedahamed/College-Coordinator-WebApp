@@ -1,3 +1,4 @@
+<%@page import="Actor.Student"%>
 <%@page import="Downloads.Exam"%>
 <%@page import="Downloads.Department"%>
 <%@page import="Downloads.Circular"%>
@@ -46,7 +47,20 @@
          
      
 
+<script> 
 
+$(function(){
+    
+var mobile = (/iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));  
+    if (mobile) { 
+        window.location="https://play.google.com/store/apps/details?id=com.sjitportal.home.portal&hl=en";
+     
+    }
+    
+});
+ 
+
+</script> 
 
 <link rel="stylesheet" href="../css/angular-material.css">
 
@@ -66,28 +80,19 @@
 		
                 
                 <%
-        Connection conection = new dbcon().getConnection(Find.sdept(username));
-    Statement st1 = conection.createStatement();
+        
     String batch="",name="",rollno="",course="",sec="";
-   
-    ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
-    if(rs1.next())
-    {
-        name= rs1.getString("name");
-        rollno = rs1.getString("rollno");
-        course = rs1.getString("course");
-        sec = rs1.getString("sec");
-        batch= rs1.getString("batch");
+   Student s=Student.getById(username);
+    
+        name=s.getById(username).getName();
+        rollno =s.getById(username).getId();
+        course = s.getById(username).getCourse();
+        sec = s.getById(username).getSec();
+        batch= s.getById(username).getBatch();
         session.setAttribute("name1", name);
         session.setAttribute("rollno1", rollno);
         session.setAttribute("course1", course);
         session.setAttribute("sec1",sec );
-        
-    }
-      if(st1!=null)
-                            st1.close();
-                              if(conection!=null)
-                                conection.close();
         
         
         

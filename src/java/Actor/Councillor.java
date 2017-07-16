@@ -6,6 +6,7 @@
 package Actor;
 
 import Downloads.Circular;
+import General.AcademicYear;
 import com.action.Find;
 import dbconnection.dbcon;
 import java.sql.Connection;
@@ -64,32 +65,9 @@ public class Councillor {
     String academicyr;
     String semister;
     public Councillor(){
-         Connection conn=null;
-    Statement stmt=null;
-        try{
-            
-    conn=new dbcon().getConnection("sjitportal");
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from academicyr where current not like 'n'");
-                    
-                    rs.beforeFirst();
-                    if(rs.next()){
-              academicyr=rs.getString("year");
-        semister=rs.getString("current");
-                    }
-    }catch(Exception e){
-    e.printStackTrace();
-    }finally{
-        try {
-            if(stmt!=null)
-                stmt.close();
-            if(conn!=null)
-                conn.close();
-        } catch (SQLException ex) {
-      ex.printStackTrace();
-        }
-    }
-        
+              academicyr=AcademicYear.getCurrentYear().getYear() ;
+        semister=AcademicYear.getCurrentYear().getCurrent();
+ 
     
     }
     public void getCouncillor(String id){

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import Actor.Student;
+import com.action.Find;
 import com.action.GeneratePassword;
 import dbconnection.dbcon;
 import java.io.IOException;
@@ -86,111 +88,115 @@ public class StudentAdd extends HttpServlet {
       int update;
       
       String rollno=request.getParameter("rollno");
-      
+      if(Student.getById(rollno)!=null){
+      response.getWriter().print("Student already exist.Contact admin if it is a new entry.!!");
+      return;
+      }
+          
       String dob=request.getParameter("dob");
-      String caste=request.getParameter("caste");
-      String community=request.getParameter("community");
-      String pincome=request.getParameter("pincome");
-      String religion=request.getParameter("religion");
-      String nationality=request.getParameter("nationality");
-      String mothertounge=request.getParameter("mothertongue");
-      String clubmember=request.getParameter("clubmember");
-      String boardingpt=request.getParameter("boardingpt");  
+      String caste=request.getParameter("caste").replace("'","''");
+      String community=request.getParameter("community").replace("'","''");
+      String pincome=request.getParameter("pincome").replace("'","''");
+      String religion=request.getParameter("religion").replace("'","''");
+      String nationality=request.getParameter("nationality").replace("'","''");
+      String mothertounge=request.getParameter("mothertongue").replace("'","''");
+      String clubmember=request.getParameter("clubmember").replace("'","''");
+      String boardingpt=request.getParameter("boarding").replace("'","''");  
       
-      String school10=request.getParameter("10school");
-      String marks10=request.getParameter("10marks");
-      String board10=request.getParameter("10board");
-      String med10=request.getParameter("10med");
-      String yop10=request.getParameter("10yop");
-      String school12=request.getParameter("12school");
-      String marks12=request.getParameter("12marks");
-      String board12=request.getParameter("12board");
-      String med12=request.getParameter("12med");
-      String yop12=request.getParameter("12yop");
-      String dipcoll=request.getParameter("dipcoll");
-      String dipmark=request.getParameter("dipmark");
-      String dipboard=request.getParameter("dipboard");
-      String dipmed=request.getParameter("dipmed");
-      String dipyop=request.getParameter("dipyop");
+      String school10=request.getParameter("10school").replace("'","''");
+      String marks10=request.getParameter("10marks").replace("'","''");
+      String board10=request.getParameter("10board").replace("'","''");
+      String med10=request.getParameter("10med").replace("'","''");
+      String yop10=request.getParameter("10yop").replace("'","''");
+      String school12=request.getParameter("12school").replace("'","''");
+      String marks12=request.getParameter("12marks").replace("'","''");
+      String board12=request.getParameter("12board").replace("'","''");
+      String med12=request.getParameter("12med").replace("'","''");
+      String yop12=request.getParameter("12yop").replace("'","''");
+      String dipcoll=request.getParameter("dipcoll").replace("'","''");
+      String dipmark=request.getParameter("dipmark").replace("'","''");
+      String dipboard=request.getParameter("dipboard").replace("'","''");
+      String dipmed=request.getParameter("dipmed").replace("'","''");
+      String dipyop=request.getParameter("dipyop").replace("'","''");
             
-      String doa=request.getParameter("doa");
-      String adminalot=request.getParameter("adminalot");
-      String counormn=request.getParameter("counormn");
-      String orank=request.getParameter("orank");
-      String crank=request.getParameter("crank");
-      String sadmission=request.getParameter("sadmission");
-      String gname=request.getParameter("gname");
-      String moi=request.getParameter("moi");
-      String scholarship=request.getParameter("scholarship");
+      String doa=request.getParameter("doa").replace("'","''");
+      String adminalot=request.getParameter("adminalot").replace("'","''");
+      String counormn=request.getParameter("counormn").replace("'","''");
+      String orank=request.getParameter("orank").replace("'","''");
+      String crank=request.getParameter("crank").replace("'","''");
+      String sadmission=request.getParameter("sadmission").replace("'","''");
+      String gname=request.getParameter("gname").replace("'","''");
+      String moi=request.getParameter("moi").replace("'","''");
+      String scholarship=request.getParameter("scholarship").replace("'","''");
       
-      String doorno=request.getParameter("doorno");
-      String street=request.getParameter("street");
-      String area=request.getParameter("area");
-      String city=request.getParameter("city");
-      String district=request.getParameter("district");
-      String state=request.getParameter("state");
-      String country=request.getParameter("country");
-      String pincode=request.getParameter("pincode");
+      String doorno=request.getParameter("doorno").replace("'","''");
+      String street=request.getParameter("street").replace("'","''");
+      String area=request.getParameter("area").replace("'","''");
+      String city=request.getParameter("city").replace("'","''");
+      String district=request.getParameter("district").replace("'","''");
+      String state=request.getParameter("state").replace("'","''");
+      String country=request.getParameter("country").replace("'","''");
+      String pincode=request.getParameter("pincode").replace("'","''");
       
-      String fathername=request.getParameter("fathername");
-      String qualification=request.getParameter("qualification");
-      String occupation=request.getParameter("occupation");
-      String designation=request.getParameter("designation");
-      String address=request.getParameter("address");
-      String landline=request.getParameter("landline");
-      String mobile=request.getParameter("mobile");
-      String mail=request.getParameter("mail");
+      String fathername=request.getParameter("fathername").replace("'","''");
+      String qualification=request.getParameter("qualification").replace("'","''");
+      String occupation=request.getParameter("occupation").replace("'","''");
+      String designation=request.getParameter("designation").replace("'","''");
+      String address=request.getParameter("address").replace("'","''");
+      String landline=request.getParameter("landline").replace("'","''");
+      String mobile=request.getParameter("mobile").replace("'","''");
+      String mail=request.getParameter("mail").replace("'","''");
       
-      String mothername=request.getParameter("mothername");
-      String mqualification=request.getParameter("mqualification");
-      String moccupation=request.getParameter("moccupation");
-      String mdesignation=request.getParameter("mdesignation");
-      String maddress=request.getParameter("maddress");
-      String mlandline=request.getParameter("mlandline");
-      String mmobile=request.getParameter("mmobile");
-      String mmail=request.getParameter("mmail");
+      String mothername=request.getParameter("mothername").replace("'","''");
+      String mqualification=request.getParameter("mqualification").replace("'","''");
+      String moccupation=request.getParameter("moccupation").replace("'","''");
+      String mdesignation=request.getParameter("mdesignation").replace("'","''");
+      String maddress=request.getParameter("maddress").replace("'","''");
+      String mlandline=request.getParameter("mlandline").replace("'","''");
+      String mmobile=request.getParameter("mmobile").replace("'","''");
+      String mmail=request.getParameter("mmail").replace("'","''");
       
-      String localname=request.getParameter("lgname");
-      String lgphno=request.getParameter("lgphno");
-      String lgdoorno=request.getParameter("lgdoorno");
-      String lgstreet=request.getParameter("lgstreet");
-      String lgarea=request.getParameter("lgarea");
-      String lgcity=request.getParameter("lgcity");
-      String lgpincode=request.getParameter("pincode");
+      String localname=request.getParameter("lgname").replace("'","''");
+      String lgphno=request.getParameter("lgphno").replace("'","''");
+      String lgdoorno=request.getParameter("lgdoorno").replace("'","''");
+      String lgstreet=request.getParameter("lgstreet").replace("'","''");
+      String lgarea=request.getParameter("lgarea").replace("'","''");
+      String lgcity=request.getParameter("lgcity").replace("'","''");
+      String lgpincode=request.getParameter("pincode").replace("'","''");
       
-      String odtf=request.getParameter("odtf");
-      String odin=request.getParameter("odin");
-      String odprevinst=request.getParameter("odprevinst");
-      String odgrp=request.getParameter("odgrp");
-      String odyoa=request.getParameter("odyoa");
-      String odyor=request.getParameter("odyor");
-      String odct=request.getParameter("odct");
-      String odboard=request.getParameter("odboard");
-      String odmoi=request.getParameter("odmoi");
-      String odreason=request.getParameter("odrfd");
+      String odtf=request.getParameter("odtf").replace("'","''");
+      String odin=request.getParameter("odin").replace("'","''");
+      String odprevinst=request.getParameter("odprevinst").replace("'","''");
+      String odgrp=request.getParameter("odgrp").replace("'","''");
+      String odyoa=request.getParameter("odyoa").replace("'","''");
+      String odyor=request.getParameter("odyor").replace("'","''");
+      String odct=request.getParameter("odct").replace("'","''");
+      String odboard=request.getParameter("odboard").replace("'","''");
+      String odmoi=request.getParameter("odmoi").replace("'","''");
+      String odreason=request.getParameter("odrfd").replace("'","''");
       
-      String pddoe=request.getParameter("pddoe");
-      String pdfs=request.getParameter("pdfs");
-      String pdpn=request.getParameter("pdpn");
+      String pddoe=request.getParameter("pddoe").replace("'","''");
+      String pdfs=request.getParameter("pdfs").replace("'","''");
+      String pdpn=request.getParameter("pdpn").replace("'","''");
       
-      String vddoe=request.getParameter("vddoe");
-      String vdtype=request.getParameter("vdtype");
-      String vdvn=request.getParameter("vdvn");
+      String vddoe=request.getParameter("vddoe").replace("'","''");
+      String vdtype=request.getParameter("vdtype").replace("'","''");
+      String vdvn=request.getParameter("vdvn").replace("'","''");
       
-      String regno=request.getParameter("regno");
-      String stuname=request.getParameter("stuname");
-      String gender=request.getParameter("gender");
-      String bloodgroup=request.getParameter("bloodgroup");
-      String batch=request.getParameter("batch");
-      String course=request.getParameter("course");
-      String dept=request.getParameter("dept");
-      String sec=request.getParameter("sec");
-      String stumobile=request.getParameter("stumobile");
-      String stumail=request.getParameter("stumail");
-      String food=request.getParameter("food");
-      String acc=request.getParameter("acc");
-      String initial=request.getParameter("initial");
-      String modeltype=request.getParameter("modeltype");
+      String regno=request.getParameter("regno").replace("'","''");
+      String stuname=request.getParameter("stuname").replace("'","''");
+      String gender=request.getParameter("gender").replace("'","''");
+      String bloodgroup=request.getParameter("bloodgroup").replace("'","''");
+      String batch=request.getParameter("batch").replace("'","''");
+      String course=request.getParameter("course").replace("'","''");
+      String dept=Find.sdept(rollno).replace("'","''");
+      String sec=request.getParameter("sec").replace("'","''");
+      String stumobile=request.getParameter("stumobile").replace("'","''");
+      String stumail=request.getParameter("stumail").replace("'","''");
+      String food=request.getParameter("food").replace("'","''");
+      String acc=request.getParameter("acc").replace("'","''");
+      String initial=request.getParameter("initial").replace("'","''");
+      String modeltype=request.getParameter("modeltype").replace("'","''");
     
       
        Statement stmt;
@@ -312,9 +318,10 @@ public class StudentAdd extends HttpServlet {
       update+=stmt.executeUpdate(sql11);
       
       if(update==11)
-          
-                response.getWriter().print("Successfully Added!!");
-        if(stmt!=null)
+      {
+          response.sendRedirect("admin/studentSuccessForm.jsp?rollno="+rollno);
+              //  response.getWriter().print("Successfully Added!!");
+      } if(stmt!=null)
                             stmt.close();
                               if(conn!=null)
                                 conn.close();

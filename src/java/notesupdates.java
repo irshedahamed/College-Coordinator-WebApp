@@ -111,13 +111,12 @@ public class notesupdates extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String ayear ="";
-        String course ="";
         String dept = "";
         String batch = "";
         String sem = "";
         String subject = "";
         String subcode = "";
-       
+        String subCategory="0";
         String notes = "";
         String descp="";
 String name="";
@@ -134,11 +133,11 @@ String UPLOAD_DIRECTORY="hello";
             if (item.getFieldName().equals("ayear")) {
                 ayear = item.getString();
                 // Do something with the value
-            }
-             if (item.getFieldName().equals("course")) {
-                course = item.getString();
+            }if (item.getFieldName().equals("subCategory")) {
+                subCategory = item.getString();
                 // Do something with the value
             }
+            
               if (item.getFieldName().equals("dept")) {
                 dept = item.getString();
                 // Do something with the value
@@ -176,9 +175,23 @@ String UPLOAD_DIRECTORY="hello";
         }
                     }
                     if(!item.isFormField()){
-                        name = new File(item.getName()).getName();
+                        name = new File( Find.parseFilename(item.getName() ) ).getName();
                         
+                        File f=new File(UPLOAD_DIRECTORY + File.separator + name);
+                        if(f.exists()){
+                        name="1_"+name;
+                        f=new File(UPLOAD_DIRECTORY + File.separator + name);
+                        
+                            int i=2;
+                        while(f.exists()){
+                        name=i+name.substring(name.indexOf("_"));
+                        f=new File(UPLOAD_DIRECTORY + File.separator + name);
+                        i++;
+                        }
+                        
+                        }
                         item.write( new File(UPLOAD_DIRECTORY + File.separator + name));
+                    
                     }
                     
                     
@@ -196,13 +209,15 @@ String UPLOAD_DIRECTORY="hello";
         }
     
         
-        
+        if(descp.equals(""))
+            descp=name;
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection connection1 = new dbcon().getConnection(dept);
             Statement statement1 = connection1.createStatement();
-
-            statement1.executeUpdate("insert into notes values("+null+",'" + ayear + "','" + sem + "','" + subcode + "','" + notes + "','" + name + "','" + UPLOAD_DIRECTORY + "','"+descp+"')");
+            String by=request.getSession().getAttribute("username").toString();
+            statement1.executeUpdate("insert into notes values("+null+",'" + ayear + "','" + sem + "','" + subcode + "','" + notes + "','" + name + "','" + UPLOAD_DIRECTORY + "','"+descp+"','"
+                   +subCategory+"','"+by + "',now())");
              if(statement1!=null)
                             statement1.close();
                               if(connection1!=null)
@@ -242,8 +257,9 @@ String UPLOAD_DIRECTORY="hello";
                                   }
                                    
                                   
-            statement1.executeUpdate("insert into notes values("+null+",'" + ayear + "','" + newsem + "','" + subcode + "','" + notes + "','" + name + "','" + UPLOAD_DIRECTORY + "','"+descp+"')");
-                                  
+         statement1.executeUpdate("insert into notes values("+null+",'" + ayear + "','" + sem + "','" + subcode + "','" + notes + "','" + name + "','" + UPLOAD_DIRECTORY + "','"+descp+"','"
+                   +subCategory+"','"+by + "',now())");
+             
                                   
                                   }
                                   
