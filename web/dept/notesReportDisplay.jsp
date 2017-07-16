@@ -132,7 +132,10 @@ h2{
     <body>
     
     <center> <img src="../images/logo2.png" height="165px" width="700px" /></center>
-        
+
+    <center><h2>Department of <%=request.getParameter("dept").toUpperCase() %></h2></center>
+
+
        <center>
            <center><h1>Notes Upload Report</h1></center>
            <h2>Batch : <%=request.getParameter("batch")%>
@@ -166,22 +169,65 @@ h2{
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+              
                
-               Dept : <%=request.getParameter("dept").toUpperCase() %></h2>  
+               Sem:<%=request.getParameter("sem")%><br>
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               Acadamic Year:<%=request.getParameter("ayear")%></h2>
+               
            <table class="bordered">
-            
+               
+         
+
+               
+             
             <th>Subcode</th>
+
             
                 
                 <%
            String semester = request.getParameter("sem");
                     String ayear=request.getParameter("ayear");
                     String batch=request.getParameter("batch");
-                    String dept = request.getParameter("dept");
+                    String dept = Find.dept(username);
                     //batch.substring(, endIndex)
                     Connection con = new dbcon().getConnection("sjitportal");
                     
@@ -191,6 +237,10 @@ h2{
                     ResultSet rs2;
                     ResultSet rs3;
                     ResultSet rs4;
+                    ResultSet rs5;
+                    ResultSet rs6;
+                    ResultSet rs7;
+
                     List<String> list = new ArrayList<String>();
                      Statement st2 = con.createStatement();
                     rs2=st2.executeQuery("select regulation from regulations where batch='"+batch+"'");
@@ -205,118 +255,184 @@ h2{
                        Statement st = con.createStatement();
                     Statement st1 = con.createStatement();
                      Statement st3 = con.createStatement();
-                     Statement st4 = con.createStatement();   
+
+                     Statement st4 = con.createStatement();
+                     Statement st5 = con.createStatement();
+                     Statement st6 = con.createStatement();
+                     Statement st7 = con.createStatement();
+
                         
                     rs=st.executeQuery("select * from subject_sem_table where sem='"+semester+"' and (ayear like '%elective%"+ayear+"%'or ayear like 'all') and regulation='"+regulation+"' and subtype='theory'");    
                         while(rs.next())
                         {
-                            String subc=rs.getString("subcode");
-                            list.add(subc);
-                        }
+
+                            String subc=new String();
+                            subc=rs.getString("subcode");
+                        %>
+                        <td><%=subc%></td></th>
+                            
+                            <%
+                                }
+                                
+                        
                         List<String> list1 = new ArrayList<String>();
+                        List<String> list2 = new ArrayList<String>();
+                        List<String> list3 = new ArrayList<String>();
+                        List<String> list4 = new ArrayList<String>();
+                        List<String> list5 = new ArrayList<String>();
+                        List<String> list6 = new ArrayList<String>();
+                        List<String> list7 = new ArrayList<String>();
+                        List<String> list8 = new ArrayList<String>();
+                        List<String> list9 = new ArrayList<String>();
+                        
                             
                         {
             
-            list1.add("question_bank");
-            list1.add("prev_univ_quest");
-            list1.add("prev_univ_ans");
-            
-            
+            list1.add("class_notes");
+            list1.add("class_notes");
+            list1.add("class_notes");
+            list1.add("class_notes");
+            list1.add("class_notes");
+            list2.add("cycle_test");
+            list2.add("cycle_test");
+            list2.add("cycle_test");
+            list3.add("unit_keys");
+            list3.add("unit_keys");
+            list3.add("unit_keys");
+            list3.add("unit_keys");
+            list3.add("unit_keys");
+            list4.add("syallabus");
+            list4.add("prev_univ_quest");
+            list4.add("prev_univ_ans");
+            list5.add("Class notes");
+            list5.add("Class notes");
+            list5.add("Class notes");
+            list5.add("Class notes");
+            list5.add("Class notes");
+            list6.add("Cycle test");
+            list6.add("Cycle test");
+            list6.add("Cycle test");
+            list7.add("Unit test");
+            list7.add("Unit test");
+            list7.add("Unit test");
+            list7.add("Unit test");
+            list7.add("Unit test");
+            list8.add("Syallabus");
+            list8.add("Prev univ question");
+            list8.add("Prev univ answers");
                         }
+                    int i,j,k,l,m,n,o,p;
                         
-                        %>
-            <th>Class Notes 1</td>
-            <th>Class Notes 2</td>
-            <th>Class Notes 3</td>
-            <th>Class Notes 4</td>
-            <th>Class Notes 5</td>
-            <th>Cycle Test 1</th>
-            <th>Cycle Test 2</th>
-            <th>Cycle Test 3</th>
-            <th>Question bank</th>
-            <th>Previous year Questions</th>
-            <th>Previous year Answers</th>
-            
-            <%
-                int i,j,k,l;
-                for(i=0;i!=list.size();i++)
-                {
-                    String subc=list.get(i);
-                    %>
-                    <tr>
-                        <td><%=subc%></td>
-                    <%
-                        
-                        String classnotes = new String();
-                        classnotes="class_notes";
-                        for(j=0;j<5;j++){
-                            
-                            rs1=st1.executeQuery("select * from notes where subcode='"+subc+"' and sem='"+semester+"' and acadamic_yr='"+ayear+"' and notes_type='"+classnotes+"' and subCategory='"+(j+1)+"'");
-                        
-                            if(rs1.next()){
-                            String t= rs1.getString("time");
-                        %>
-                        
-                        <td><%=rs1.getString("by") %><br><%=t%></td>
-                        
-                        
-                        
-                        
-                        
-                                <%
-                        }else{
-                        %>
-                        <td></td>
-                        <%
-}
-                        
-                        }
-                        String cycleques = new String();
-                        cycleques="cycle_test_que";
-                        for(k=0;k<3;k++){
-                        
-                            rs3=st3.executeQuery("select * from notes where subcode='"+subc+"' and sem='"+semester+"' and acadamic_yr='"+ayear+"' and notes_type='"+cycleques+"' and subCategory='"+(k+1)+"'");
-                            if(rs3.next()){
-                            String t1=rs3.getString("time");
+                            rs1=st1.executeQuery("select * from subject_sem_table where sem='"+semester+"' and (ayear like '%elective%"+ayear+"%'or ayear like 'all') and regulation='"+regulation+"' and subtype='theory'");    
+                        while(rs1.next())
+                        {
+                        String subc1=rs1.getString("subcode");
+                            list9.add(subc1);
+                            }
+                            for(i=0;i<list1.size();i++){
+                            String a[]=new String[20];
+                            a[i]=list1.get(i);
                             %>
-                            <td><%=rs3.getString("by") %><br><%=t1%></td>
+                            <tr>
+                                <td><%=list5.get(i)%></td>
+                            <%
+                            for(j=0;j<list9.size();j++){
+                            String b[]=new String[35];
+                            b[j]=list9.get(j);
+                            rs3=st3.executeQuery("select * from notes where subcode='"+b[j]+"' and sem='"+semester+"' and acadamic_yr='"+ayear+"' and notes_type='"+a[i]+"' and subCategory='"+(i+1)+"'");
+                            if(rs3.next()){
+                            %>
+                                                            
+                            <td><%=rs3.getString("by") %><br><%=rs3.getString("time")%></td>    
                             <%
                             }else{
                             %>
+                            
                             <td></td>
                             <%
                             }
                             }
-                    for(l=0;l<list1.size();l++)
-                    {
-                        String s[]=new String[15];
-                        s[l]=list1.get(l);
+                                }                  
                         
-                        rs4=st4.executeQuery("select * from notes where subcode='"+subc+"' and sem='"+semester+"' and acadamic_yr='"+ayear+"' and notes_type='"+s[l]+"'");
-                        if(rs4.next())
-                        {
-                           
-                            String time=rs4.getString("time");
-                            
-                           
-                                  
-                                                             %>
-                           <td><%=rs4.getString("by") %><br><%=time%></td>
-                    
+                        for(k=0;k<list2.size();k++){
+                            String c[]=new String[20];
+                            c[k]=list2.get(k);
+                            %>
+                            <tr>
+                                <td><%=list6.get(k)%></td>
                             <%
-                                 
-                                           }else{
-                                           %>
-                                           <td></td>
-                                           <%
-                            }}
-                    %>                       
-                    </tr>
-                         
+                            for(l=0;l<list9.size();l++){
+                            String d[]=new String[35];
+                            d[l]=list9.get(l);
+                            rs4=st4.executeQuery("select * from notes where subcode='"+d[l]+"' and sem='"+semester+"' and acadamic_yr='"+ayear+"' and notes_type='"+c[k]+"' and subCategory='"+(k+1)+"'");
+                            if(rs4.next()){
+                            %>
+                                                            
+                            <td><%=rs4.getString("by") %><br><%=rs4.getString("time")%></td>    
+                            <%
+                            }else{
+                            %>
+                            
+                            <td></td>
+                            <%
+                            }
+                            }
+                                }                  
+                        for(m=0;m<list3.size();m++){
+                            String e[]=new String[20];
+                            e[m]=list3.get(m);
+                            %>
+                            <tr>
+                                <td><%=list7.get(m)%></td>
+                            <%
+                            for(n=0;n<list9.size();n++){
+                            String f[]=new String[35];
+                            f[n]=list9.get(n);
+                            rs5=st5.executeQuery("select * from notes where subcode='"+f[n]+"' and sem='"+semester+"' and acadamic_yr='"+ayear+"' and notes_type='"+e[m]+"' and subCategory='"+(m+1)+"'");
+                            if(rs5.next()){
+                            %>
+                                                            
+                            <td><%=rs5.getString("by") %><br><%=rs5.getString("time")%></td>    
+                            <%
+                            }else{
+                            %>
+                            
+
+
+                            <td></td>
+                            <%
+                            }
+                            }
+
+                                }                  
+                        for(o=0;o<list4.size();o++){
+                            String g[]=new String[20];
+                            g[o]=list4.get(o);
+                            %>
+                            <tr>
+                                <td><%=list8.get(o)%></td>
+                            <%
+                            for(p=0;p<list9.size();p++){
+                            String h[]=new String[35];
+                            h[p]=list9.get(p);
+                            rs6=st6.executeQuery("select * from notes where subcode='"+h[p]+"' and sem='"+semester+"' and acadamic_yr='"+ayear+"' and notes_type='"+g[o]+"' and subCategory='"+(o+1)+"'");
+                            if(rs6.next()){
+                            %>
+                                                            
+                            <td><%=rs6.getString("by") %><br><%=rs6.getString("time")%></td>    
+                            <%
+                            }else{
+                            %>
+                            
+                            <td></td>
+                            <%
+                            }
+                            }
+                                }                  
                         
-                        <%
-                    
-}
+           
+
+
 con.close();
                     %>
               

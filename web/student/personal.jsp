@@ -1,7 +1,8 @@
+<%@page import="Actor.Student"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
-
+<%@page import="java.sql.Connection"%>
 <%@page import="java.sql.*"%>
 <html lang="en-US">
     <% 
@@ -37,25 +38,25 @@
 	
                 
                               <%
-        Connection conection = new dbcon().getConnection(Find.sdept(username));
-    Statement st1 = conection.createStatement();
+ //       Connection conection = new dbcon().getConnection(Find.sdept(username));
+   // Statement st1 = conection.createStatement();
     String batch="",name="",rollno="",course="",sec="";
-   
-    ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
-    if(rs1.next())
-    {
-        name= rs1.getString("name");
-        rollno = rs1.getString("rollno");
-        course = rs1.getString("course");
-        sec = rs1.getString("sec");
-        batch= rs1.getString("batch");
+   Student s1=Student.getById(username);
+    //ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
+    //if(rs1.next())
+    //{
+        name= s1.getName();
+        rollno = s1.getId();
+        course = s1.getCourse();
+        sec = s1.getSec();
+        batch= s1.getBatch();
         
-    }
-      if(st1!=null)
-                            st1.close();
-                              if(conection!=null)
-                                conection.close();
-        
+    //}
+      //if(st1!=null)
+        //                    st1.close();
+          //                    if(conection!=null)
+          //                      conection.close();
+       
         
         
         %>
@@ -173,28 +174,28 @@
     try {
       
   String departmentname= session.getAttribute("deptname").toString();
-             Connection connection = new dbcon().getConnection(departmentname);
-              Statement statement = connection.createStatement();
-              ResultSet rs= statement.executeQuery("select * from student_personal where rollno='"+username+"'");
+             //Connection connection = new dbcon().getConnection(departmentname);
+              //Statement statement = connection.createStatement();
+              //ResultSet rs= statement.executeQuery("select * from student_personal where rollno='"+username+"'");
               String  regno="", initial="",dept="",gender="",food="",mobileno="", mailid="",bldgrp="",accomodation="";
  
-              while(rs.next())
-              {
-                  rollno=rs.getString("rollno");
-                  regno=rs.getString("regno");
-		  name=rs.getString("name");
+              //while(rs.next())
+              //{
+                  rollno=s1.getId();
+                  regno=s1.getRegno();
+		  name=s1.getName();
 		  
-                  course=rs.getString("course");              
-                  sec=rs.getString("sec");
-                  dept=rs.getString("dept");
-                  gender=rs.getString("gender"); 
-                  food=rs.getString("food");
-                  mobileno=rs.getString("mobileno");
-                  mailid=rs.getString("mailid");
-                  bldgrp=rs.getString("bloodgrp");
-                  batch=rs.getString("batch");
-		accomodation=rs.getString("accomodation");
-              }
+                  course=s1.getCourse();              
+                  sec=s1.getSec();
+                  dept=s1.getDept();
+                  gender=s1.getSex(); 
+                  food=s1.getFood();
+                  mobileno=s1.getMobile();
+                  mailid=s1.getMailid();
+                  bldgrp=s1.getBloodgrp();
+                  batch=s1.getBatch();
+		accomodation=s1.getAccomodation();
+              //}
 		  %>   
                   <center> <br>
          <TABLE WIDTH=30% align ="center" border="1">
@@ -265,24 +266,24 @@
 
        <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>FATHER DETAILS</b></font><br><br><br>
 	   <%
-              ResultSet rs11= statement.executeQuery("select * from student_father_details where rollno='"+username+"'");
+              //ResultSet rs11= statement.executeQuery("select * from student_father_details where rollno='"+username+"'");
               String fname="", fqual="",foccu="",faddress="",fdesig="",fmail="",fland="",fmobile="";
 
-              while(rs11.next())
-              {
-                                 rollno=rs11.getString("rollno");
+              //while(rs11.next())
+              //{
+                                 rollno=s1.getId();
                             
-                                 fname=rs11.getString("fathers_name");
-                                 fland=rs11.getString("landline");
-                                 fmobile=rs11.getString("mobile");              
-                                 faddress=rs11.getString("address");
-				 fqual=rs11.getString("qualification");
-				 foccu=rs11.getString("occupation");
-				 fdesig=rs11.getString("designation");
-				 fmail=rs11.getString("mailid");
+                                 fname=s1.getFatherDetails().getFathername();
+                                 fland=s1.getFatherDetails().getLandline();
+                                 fmobile=s1.getFatherDetails().getMobile();              
+                                 faddress=s1.getFatherDetails().getAddress();
+				 fqual=s1.getFatherDetails().getQualification();
+				 foccu=s1.getFatherDetails().getOccupation();
+				 fdesig=s1.getFatherDetails().getDesig();
+				 fmail=s1.getFatherDetails().getMail();
 				 
 				 			
-			}
+		//	}
                   
 		  %>   
          <TABLE WIDTH=30% align ="center" border="1">
@@ -322,24 +323,24 @@
          </TABLE></center></div></div>
            <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>MOTHER DETAILS</b></font><br><br><br>
                     <%
-              ResultSet rs12= statement.executeQuery("select * from student_mother_details where rollno='"+username+"'");
+              //ResultSet rs12= statement.executeQuery("select * from student_mother_details where rollno='"+username+"'");
               String mname="", mqual="",moccu="",maddress="",mdesig="",mmail="",mland="",mmobile="";
-
-              while(rs12.next())
-              {
-                                 rollno=rs12.getString("rollno");
+              
+              //while(rs12.next())
+              //{
+                                 rollno=s1.getId();
                                  
-                                 mname=rs12.getString("mothers_name");
-                                 mland=rs12.getString("landline");
-                                 mmobile=rs12.getString("mobileno");              
-                                 maddress=rs12.getString("address");
-				 mqual=rs12.getString("qualification");
-				 moccu=rs12.getString("occupation");
-				 mdesig=rs12.getString("designation");
-				 mmail=rs12.getString("mailid");
+                                 mname=s1.getMotherDetails().getMothername();
+                                 mland=s1.getMotherDetails().getLandline();
+                                 mmobile=s1.getMotherDetails().getMobile();              
+                                 maddress=s1.getMotherDetails().getAddress();
+				 mqual=s1.getMotherDetails().getQualification();
+				 moccu=s1.getMotherDetails().getOccupation();
+				 mdesig=s1.getMotherDetails().getDesig();
+				 mmail=s1.getMotherDetails().getMail();
 				
 				 			
-			}
+		//	}
     
                   
 		  %>   
@@ -383,20 +384,20 @@
 
        <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>LOCAL GUARDIAN DETAILS</b></font><br><br><br>
 	   <%
-              rs11= statement.executeQuery("select * from student_local_guardian where rollno='"+username+"'");
+              //rs11= statement.executeQuery("select * from student_local_guardian where rollno='"+username+"'");
               String lname="",lphno="",ldoorno="",lstreet="",larea="",lcity="",lpincode="";
-              while(rs11.next())
-              {
-                                 lname=rs11.getString("name");
-                                 lphno=rs11.getString("phno");
-                                 ldoorno=rs11.getString("Doorno");              
-                                 lstreet=rs11.getString("streetname");
-				 larea=rs11.getString("area");
-				 lcity=rs11.getString("city");
-				 lpincode=rs11.getString("pincode");
+              //while(rs11.next())
+              //{
+                                 lname=s1.getLocalGuardian().getName();
+                                 lphno=s1.getLocalGuardian().getPhonenum();
+                                 ldoorno=s1.getLocalGuardian().getDoorno();              
+                                 lstreet=s1.getLocalGuardian().getStreet();
+				 larea=s1.getLocalGuardian().getArea();
+				 lcity=s1.getLocalGuardian().getCity();
+				 lpincode=s1.getLocalGuardian().getPincode();
 				 
 				 			
-			}
+		//	}
                   
 		  %>   
          <TABLE WIDTH=30% align ="center" border="1">
@@ -433,10 +434,7 @@
 
 </div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li><li><a href="#">4</a></li></ul></div>
 </div></div></section>
-             <%  if(statement!=null)
-                            statement.close();
-                              if(connection!=null)
-                                connection.close();
+             <% 
                                          }catch(Exception e)
             {
                 System.out.println(e);
