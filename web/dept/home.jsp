@@ -210,7 +210,7 @@
                     
                     <div class="tabs__content-item">
                           <center><div style="color:#333333; margin-top: -75px;font-family: inherit;font-size:2.5em;">Department Circular<br><br></div></center>
-        <div style="width:100%;height:300px;line-height:3em;overflow-y:scroll;padding:5px; solid #149dd2;">
+        <div style="width:100%;height:300px;line-height:3em;overflow-y:scroll;padding:5px; solid:#149dd2;">
                     
 <div align="left">
 <% 
