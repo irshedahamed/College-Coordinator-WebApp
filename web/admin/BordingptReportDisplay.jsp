@@ -145,7 +145,9 @@ h2{
         <th name="cc">Roll No</th>
         <th>Name</th>
         <th>Boarding point</th>
-  
+        <th>Father's Name<br>
+            (Mobile number)</th>
+            
         
     </tr>
     </thead>
@@ -161,7 +163,8 @@ h2{
         String rollno = s.getId();
         
         String name=s.getName();
-               
+        String father=s.getFatherDetails().getFathername();
+        String mobile=s.getFatherDetails().getMobile();
         String Boarding = s.getGeneral().getBoarding();
         
          %>
@@ -174,6 +177,8 @@ h2{
             <td><%=name.toUpperCase() %></td>
 
            <td><%=Boarding %></td>
+           <td><%=father%><br><%=mobile%></td>
+           
         </tr>      
             
         <%

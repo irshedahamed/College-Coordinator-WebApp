@@ -48,6 +48,37 @@
 
 
 
+        <script>
+            $(document).ready(function () {
+
+                $(".click").click(function () {
+
+                    var id = $(this).closest('tr').children('td#roll').text();
+                    var reason = $("#reason").val();
+                    var from = $("#from").val();
+                    var till = $("#till").val();
+                    var status = $("#status").val();
+                    var button = $(this).closest('tr').children().children('#submit');
+
+                    $.post("../processOutPass",
+                            {rollno: id,
+                                reason: reason,
+                                from: from,
+                                till: till,
+                                status: status
+
+                            },
+                            function (data) {
+                                button.val('Generated');
+                                button.prop("disabled",true);
+                            }
+                    );
+
+
+                });
+            });
+        </script>
+
     <center>
         <img src="../images/logo2.png" height="165px" width="700px" />	</center>
 </head>

@@ -1,8 +1,11 @@
+
+<%@page import="Actor.Student"%>
 <%@page import="General.AcademicYear"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
 <%@page import="java.sql.*"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en-US">
     <% 
@@ -70,26 +73,17 @@
 		</head>
 		
                 <%
-        Connection conection = new dbcon().getConnection(Find.sdept(username));
-    Statement st1 = conection.createStatement();
+        
     String batch="",name="",rollno="",course="",sec="";
    
-    ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
-    if(rs1.next())
-    {
-        name= rs1.getString("name");
-        rollno = rs1.getString("rollno");
-        course = rs1.getString("course");
-        sec = rs1.getString("sec");
-        batch= rs1.getString("batch");
+    Student s2=Student.getById(username);
+        name= s2.getById(username).getName();
+        rollno = s2.getById(username).getId();
+        course = s2.getById(username).getCourse();
+        sec = s2.getById(username).getSec();
+        batch= s2.getById(username).getBatch();
         
-    }
-      if(st1!=null)
-                            st1.close();
-                              if(conection!=null)
-                                conection.close();
-        
-        
+    
         
         %>
         
@@ -192,16 +186,14 @@
     try {
       
   String departmentname=Find.sdept(username);
-             Connection connection = new dbcon().getConnection(departmentname);
-              Statement statement = connection.createStatement();
-              ResultSet rs= statement.executeQuery("select batch from student_personal where rollno='"+username+"'");
+             
+             Student s1=Student.getById(username);
               batch="";
-              while(rs.next())
-              {
+              
                   
-                  batch = rs.getString("batch");
+                  batch = s1.getById(username).getBatch();
                   
-              }
+              
               
     
 		  %>   
@@ -241,10 +233,7 @@
                 <option value="<%= batch %>"><%= batch %></option>
                 
                 <%
-                      if(statement!=null)
-                            statement.close();
-                              if(connection!=null)
-                                connection.close();
+                      
     }
     catch(Exception e)
     {
