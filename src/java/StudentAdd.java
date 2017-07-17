@@ -156,13 +156,24 @@ public class StudentAdd extends HttpServlet {
       String mmobile=request.getParameter("mmobile").replace("'","''");
       String mmail=request.getParameter("mmail").replace("'","''");
       
-      String localname=request.getParameter("lgname").replace("'","''");
+      String lgname=request.getParameter("lgname").replace("'","''");
       String lgphno=request.getParameter("lgphno").replace("'","''");
       String lgdoorno=request.getParameter("lgdoorno").replace("'","''");
       String lgstreet=request.getParameter("lgstreet").replace("'","''");
       String lgarea=request.getParameter("lgarea").replace("'","''");
       String lgcity=request.getParameter("lgcity").replace("'","''");
-      String lgpincode=request.getParameter("pincode").replace("'","''");
+      String lgpincode=request.getParameter("lgpincode").replace("'","''");
+      
+      String lgname2=request.getParameter("lgname2").replace("'","''");
+      String lgphno2=request.getParameter("lgphno2").replace("'","''");
+      String lgdoorno2=request.getParameter("lgdoorno2").replace("'","''");
+      String lgstreet2=request.getParameter("lgstreet2").replace("'","''");
+      String lgarea2=request.getParameter("lgarea2").replace("'","''");
+      String lgcity2=request.getParameter("lgcity2").replace("'","''");
+      String lgpincode2=request.getParameter("lgpincode2").replace("'","''");
+      
+      
+      
       
       String odtf=request.getParameter("odtf").replace("'","''");
       String odin=request.getParameter("odin").replace("'","''");
@@ -255,10 +266,11 @@ public class StudentAdd extends HttpServlet {
               +"','"+moccupation+"','"+mdesignation+"','"+maddress+"','"+mlandline+"','"+mmobile+"','"+mmail
               +"')";
       
-      String sql7="insert into student_local_guardian values('"+rollno+"','"+localname+"','"+lgphno+"','"+lgdoorno
+      String sql7="insert into student_local_guardian values('"+rollno+"','"+lgname+"','"+lgphno+"','"+lgdoorno
               +"','"+lgstreet+"','"+lgarea+"','"
               +lgcity+"','"+lgpincode
               +"')";
+      
       
       String sql8="insert into student_other_details values('"+rollno+"','"+odtf+"','"+odin+"','"+odprevinst
               +"','"+odgrp+"','"+odyoa+"','"+odyor+"','"+odct+"','"+odboard+"','"+odmoi+"','"+odreason
@@ -274,6 +286,13 @@ public class StudentAdd extends HttpServlet {
               +"','"+batch+"','"+course+"','"+dept+"','"+sec+"','"+stumobile+"','"+stumail+"','"+food
               +"','"+acc+"','"+initial+"','"+modeltype
               +"')";
+      
+      String sql12="insert into student_local_guardian2 values('"+rollno+"','"+lgname2+"','"+lgphno2+"','"+lgdoorno2
+              +"','"+lgstreet2+"','"+lgarea2+"','"
+              +lgcity2+"','"+lgpincode2
+              +"')";
+         
+      String sql13="insert into student_time_update values('"+rollno+"',now())";      
       
       update=0;
       PreparedStatement pstmt;
@@ -299,6 +318,10 @@ public class StudentAdd extends HttpServlet {
       update+=stmt.executeUpdate(sql6);
       update+=stmt.executeUpdate(sql7);
       update+=stmt.executeUpdate(sql8);
+      
+      update+=stmt.executeUpdate(sql12);
+      update+=stmt.executeUpdate(sql13);
+      
       
       pstmt=conn.prepareStatement(sql9);
                     if(pddoe!=null && pddoe!="")
@@ -353,6 +376,10 @@ public class StudentAdd extends HttpServlet {
                 sql="delete from student_visa_details where rollno='"+rollno+"'";
                 del.executeUpdate(sql);
                 sql="delete from student_personal where rollno='"+rollno+"'";
+                del.executeUpdate(sql);
+                sql="delete from student_local_guardian2 where rollno='"+rollno+"'";
+                del.executeUpdate(sql);
+                sql="delete from student_time_update where rollno='"+rollno+"'";
                 del.executeUpdate(sql);
                 
                 response.getWriter().print("Some Error Occured!!");

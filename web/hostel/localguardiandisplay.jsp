@@ -1,9 +1,9 @@
 <%-- 
-    Document   : home
-    Created on : 18 Nov, 2016, 5:57:23 PM
-    Author     : Home
+    Document   : localguardiandisplay
+    Created on : 22 Jun, 2017, 6:04:45 PM
+    Author     : Praveen
 --%>
-<%@page import="com.action.Find"%>
+
 <%@page import="Downloads.Circular"%>
 <%@page import="Downloads.College"%>
 <%@page import="java.util.ArrayList"%>
@@ -40,16 +40,36 @@
     %>
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-<head>
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
         	     <link rel="stylesheet" href="../css/main.css">
      
 	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../css/sky-forms.css" rel="stylesheet">
  <script src="../js/jquery.js"></script>
-              
+         
+     
+
+
+
+<link rel="stylesheet" href="../css/angular-material.css">
+
+<link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
+
+
+<link rel="stylesheet" href="../css/angulartab.css">
+
+<script src="../js/angular.js"> </script>
+<script src="../js/angular-animate.min.js"></script>
+<script src="../js/angular-route.min.js"></script>
+<script src="../js/angular-aria.min.js"></script>
+<script src="../js/angular-message.min.js"></script>
+<script src="../js/svg-assert-cache.js"></script>
+<script src="../js/angular-material.js"></script>
+<script src="../js/angulartab.js"></script>
+         
+     
 	
 		
 		</head>
@@ -80,25 +100,17 @@
 
 						<nav id="main-nav">
                                                     
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="home.jsp">Home</a></li>
+
+    
 
 <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="RoomNoChange.jsp">ROOM CHANGE</a>
   
 
 <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="HostelProfile.jsp">HostelStudentDetails</a>
-   
-    
 
-
+   <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="requests.jsp">Grant OutPass</a>
   
-   <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Grant OutPass</a>
-  <ul class="sub-menu">
-                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="requests.jsp">Single OutPass</a>
-                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="bulkOutPass.jsp">Bulk OutPass</a>
-  </ul></li>
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="notreturned.jsp">SMS</a>
-
-
 </li>
 
 
@@ -107,13 +119,11 @@
             <ul class="sub-menu">
          
  <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="local_guradian2.jsp">Add Detais</a>
+
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="localguardiandisplay.jsp">View Details</a>
-            </ul>
-
-
-</li>
-
-
+            </ul>            
+</li>            
+            
 <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#"> Report</a>
 <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personalReport.jsp">Personal Report</a>
@@ -122,6 +132,10 @@
       <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="notReturnedReport.jsp">Not Returned Report</a>
 
 </ul></li>
+            </ul>
+        </li>
+
+
 
 
 </ul>						
@@ -130,68 +144,69 @@
 				</div>
 			</div>
 		</header>
+   
+
+<section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
+    <center>
+<link href="../css/tabledesign.css" rel="stylesheet">
+
+<center><h1>LOCAL GUARDIAN2 DETAILS</h1></center>
+<table class="bordered">            
+
+   
+            <tr>
+<th><center>ROLL NO</center></th>
+<th><center>NAME</center></th>
+<th><center>PHONE NO</center></th>
+<th><center>DOOR NO</center></th>
+<th><center>STREET</center></th>
+<th><center>AREA</center></th>
+<th><center>CITY</center></th>
+<th><center>PINCODE</center></th>
+<th><center>EDIT</center></th>
+</tr>
+    
+            <%
+              Connection con = new dbcon().getConnection("sjitportal");
+                Statement st = con.createStatement();
+               String sql = "select * from localguardian";
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next())
+            {
+                String rollno=rs.getString("rollno");
+                String name=rs.getString("name");
+                String phoneno=rs.getString("phoneno");
+                String doorno=rs.getString("doorno");
+                String street=rs.getString("street");
+                String area=rs.getString("area");
+                String city=rs.getString("city");
+                String pincode=rs.getString("pincode");
 
 
-<center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-                <br><br><br><br>
-          <section class="landing">
-                   
-            <center><form action="display.jsp" class="sky-form" method="post" target="_blank">
-    <header>DAILY REPORT</header>
-    <fieldset>					
-					<section>
-                                            
-                                 <div class="dept">
-			
-                                            <br><br>        
-                        			<label class="input">
-                                                    <div align="left" size="3px"><b>DEPARTMENT</b></div>
-							<label class="select">
-           
-               <select id="dept" name="dept" required>
-                <option  disabled selected>Select</option>
-                         <option value="all">ALL</option>
-                        
-                <%=Find.getDeptHTMLContent() %>
-                <option value="first">Science & Humanities</option>
-            </select>
-                    <i></i>                                    </label>
-                                                </label>
-                                 </div>
-                                        
-                                            <br><br>
-            
-            
-            <label class="input">
-                                                    <div align="left" size="3px" id="div7"><b>
-                                                             Date</b></div>
-                <label class="input">
-            
-            <input type="date" id="datepicker" placeholder="yyyy/mm/dd" name="datepicker" />
-            
-             <i></i>
-            <br> <br>
-                </label></label>
-            
-            
-                                        </section>
-            
-                           
-             <div align="left">
-            <input type="submit" id="submit" value="Submit" /></div>
-            <br>
-    </fieldset>
-                </form></center>
-        
-            
-        </section>
+%>
+                 
+                 
+                <tr>
+             <td><%=rollno%></td>
+             <td><%=name%></td>
+             <td><%=phoneno%></td>
+             <td><%=doorno%></td>
+             <td><%=street%></td>
+             <td><%=area%></td>
+             <td><%=city%></td>
+             <td><%=pincode%></td>
+            <td><input type="button" name="Edit" value="Edit" style="background-color:green;font-weight:bold;color:white;" onClick="javascript:window.location='upd.jsp'" ></td>
 
 
+                </tr>
+             
+             <% } %>
             
+            </table>
+            </center>
 
-</div></div>
-
-<br><br></section></center>		
+</section>
+     		
 
 
 						<footer id="footer-widgets">
@@ -201,7 +216,7 @@
 		</footer>
 			<!-- #page-container -->
 			</div>
-			</div>
+			
 
 	<footer id="page-footer">
 		<div class="container clearfix">
@@ -254,4 +269,4 @@ catch(Exception e)
     
     %>
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-</html>
+</html>        
