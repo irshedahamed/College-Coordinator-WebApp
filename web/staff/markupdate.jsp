@@ -376,7 +376,7 @@ if(s.getCouncillorDetails().getBatch()!=null)
 <div class="dm3-tabs-testimonials" data-autoscroll=""><div class="dm3-tabs">
 <div class="dm3-tab"><div class="dm3-tab-inner">
         <center>    
-        <form action="getmarks.jsp" class="sky-form" method="post" target="_blank">
+        <form action="SetMark.jsp" class="sky-form" method="post" target="_blank">
     <header>Marks Update</header>
     <fieldset>					
 					<section>
