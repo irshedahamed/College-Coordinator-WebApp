@@ -150,10 +150,29 @@ table {
         int count=0;
         %>
         <body>
+            <center> <img src="../images/logo2.png" height="165px" width="700px" /></center>
         <div id="yourTableIdName1">
-        <center><h1><u><%=dept.toUpperCase()%> <%=sec%></u></h1></center>
-        <center><h1><u>BATCH:</u> <%=batch%>      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                      <u> SEM:</u> <%=sem%></h1></center>
-        <center><h1>MARKS REPORT</h1></center>
+        <center><h1>DEPARTMENT OF <%=dept.toUpperCase()%> </h1></center>
+        <center><h2>MARKS REPORT - <%=exam.toUpperCase() %></h2></center>
+        <h2 style="margin-left: 175px;">BATCH: <%=batch%>      
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 SEM: <%=sem%></h2>
+        <h2 style="margin-left: 175px;">SEC: <%=sec%></h2>
+        
         </div>
         <center>
         <form action="${pageContext.request.contextPath}/markupdate" method="post">
