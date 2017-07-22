@@ -89,6 +89,8 @@ public class markupdate extends HttpServlet {
             String sec = session.getAttribute("sec").toString();
             String dept = session.getAttribute("dept").toString();
             String exam = session.getAttribute("exam").toString();
+            String ayear = session.getAttribute("ayear").toString();
+            
             Connection  con = new dbcon().getConnection(dept);
             String subcode = null,rollno,mark;
             int count=0;
@@ -101,6 +103,7 @@ public class markupdate extends HttpServlet {
             
             
             String sql1 = "select * from subject_sem_table where regulation='"+regulation+"' and sem='"+sem+"' and subtype='theory' order by subcode" ;
+            // String sql1 = "select * from subject_sem_table where regulation='"+regulation+"' and sem='"+sem+"' and (ayear like '%elective%"+ayear+"%' or ayear like 'all')  and subtype='theory' order by subcode" ;
              //String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
                   String sql2= "select *,CONVERT(regno,UNSIGNED INT) as sno from student_personal where batch='"+batch+"' and sec='"+sec+"' order by sno,name";
   
