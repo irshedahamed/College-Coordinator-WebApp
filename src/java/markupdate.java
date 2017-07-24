@@ -102,8 +102,8 @@ public class markupdate extends HttpServlet {
             st4 = con.createStatement();
             
             
-            String sql1 = "select * from subject_sem_table where regulation='"+regulation+"' and sem='"+sem+"' and subtype='theory' order by subcode" ;
-            // String sql1 = "select * from subject_sem_table where regulation='"+regulation+"' and sem='"+sem+"' and (ayear like '%elective%"+ayear+"%' or ayear like 'all')  and subtype='theory' order by subcode" ;
+           // String sql1 = "select * from subject_sem_table where regulation='"+regulation+"' and sem='"+sem+"' and subtype='theory' order by subcode" ;
+             String sql1 = "select * from subject_sem_table where regulation='"+regulation+"' and sem='"+sem+"' and (ayear like '%elective%"+ayear+"%' or ayear like 'all')  and subtype='theory' order by subcode" ;
              //String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
                   String sql2= "select *,CONVERT(regno,UNSIGNED INT) as sno from student_personal where batch='"+batch+"' and sec='"+sec+"' order by sno,name";
   
