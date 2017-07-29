@@ -52,7 +52,7 @@
          <td>
             <center>  
                 <select name="<%=s.getId() %>">
-                    <option value="">Select</option>
+                    <option value="<%=s.getModel_type() %>"><%=s.getModel_type() %></option>
                     <option value="0">Arrears</option>
                     <option value="8+">8+</option>
                     <option value="7.5+">7.5+</option>
