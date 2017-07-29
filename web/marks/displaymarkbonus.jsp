@@ -276,13 +276,15 @@ h2{
          Statement st2 = con.createStatement();
         ResultSet rs2 = st2.executeQuery(sql6);
       
-         int m=0,c=0;
+         int m=0,c=0,u=0;
         if(rs2.next())
         {
         
              int total=0;
         String markc= rs2.getString("cycle"+exam);
         String markm=rs2.getString("model"+exam);
+        String marku=rs2.getString("unit"+exam);
+        
         int ABminus=0;
         boolean noexam=false;
         
@@ -291,7 +293,22 @@ h2{
             noexam=true;
             }
         
-        if(markm!=null)
+        if(markm==null)
+            markm="0";
+        else if(markm.equals("null"))
+            markm="0";
+      
+        if(markc==null)
+            markc="0";
+        else if(markc.equals("null"))
+            markc="0";
+      
+        if(marku==null)
+            marku="0";
+        else if(marku.equals("null"))
+            marku="0";
+      
+        
         if(markm.equals("A"))
         {
             if(bonus!=0)
@@ -300,21 +317,31 @@ h2{
         else
          m = Integer.parseInt(markm);
         
-        if(markc==null)
-            c=0;
-        else{
+        
         if(markc.equals("A"))
         c=0;
         else
         c = Integer.parseInt(markc);
-        }
+        
+        if(marku.equals("A"))
+        u=0;
+        else
+        u = Integer.parseInt(marku);
+        
+        
         if(noexam)
             total=m;
         else
-        total = (int)(((m+c)/1.3)+0.5); 
-                total+=bonus-ABminus;
+        {
+           float t=(float)m+ ( (float)c /2 )+ ( ((float)u / 48)*15 );
+            
+                t/=1.3;
+                t=(int)(t+0.5);//Rounding
                 
-          if(bonus!=0)
+                total=(int)t+bonus-ABminus;
+        }       
+          //bonus logic
+        if(bonus!=0)
          if(total>=97)
             total=100;
          else if(total==96)
