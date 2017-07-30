@@ -29,7 +29,7 @@ public class MarkSMS {
     try{
     conn=new dbcon().getConnection(Find.sdept(rollno));
     stmt=conn.createStatement();
-    ResultSet rs=stmt.executeQuery("SELECT model"+exam+",cycle"+exam+",subcode,CONVERT(model"+exam+",unsigned int)+CONVERT(cycle"+exam+",unsigned int) as combined FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
+    ResultSet rs=stmt.executeQuery("SELECT model"+exam+",cycle"+exam+",unit"+exam+",subcode FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
     int i=0;    
     while(rs.next())
         {
@@ -44,8 +44,52 @@ public class MarkSMS {
                      a="0";
                  mark=Integer.parseInt(a);
              }
-             else
-            mark=(int) ((rs.getInt("combined")/1.3)+0.5);
+             else{
+                 String markm,markc,marku;
+                 markm=rs.getString("model"+exam);
+                 markc=rs.getString("cycle"+exam);
+                 marku=rs.getString("unit"+exam);
+                 int m,c,u;
+                 if(markm==null) 
+            markm="0";
+        else if(markm.equals("null"))
+            markm="0";
+      
+        if(markc==null) 
+            markc="0";
+        else if(markc.equals("null"))
+            markc="0";
+      
+        if(marku==null) 
+            marku="0";
+        else if(marku.equals("null"))
+            marku="0";
+      
+        
+        if(markm.equals("A"))
+        {
+            m=0;
+        }
+        else
+         m = Integer.parseInt(markm);
+        
+        
+        if(markc.equals("A"))
+        c=0;
+        else
+        c = Integer.parseInt(markc);
+        
+        if(marku.equals("A"))
+        u=0;
+        else
+        u = Integer.parseInt(marku);
+              float t=(float)m+ ( (float)c /2 )+ ( ((float)u / 48)*15 );
+            
+                t/=1.3;
+                t=(int)(t+0.5);//Rounding
+                mark=(int)t;
+             }
+            mark=(int) (mark/1.3);
             
              if((rs.getString("cycle"+exam).equals("A")||(rs.getString("cycle"+exam).equals("N")))&&rs.getString("model"+exam).equals("A"))
                 marks+=subcode+":"+"A"+", ";
