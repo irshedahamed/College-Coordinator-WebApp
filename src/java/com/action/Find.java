@@ -199,6 +199,22 @@ public class Find {
     return temp;
     }
     
+    public static int calculateBonus(int mark,String category){
+    
+    if(category.equals("8+")&&mark>=70)
+        return 1;
+    if(category.equals("7.5+")&&mark>=65)
+        return 1;
+    if(category.equals("6.5+")&&mark>=60)
+        return 1;
+    if(category.equals("5+")&&mark>=50)
+        return 1;
+    if(category.equals("0")&&mark>=45)
+        return 1;
+    
+        
+    return 0;
+    }
     
     
     

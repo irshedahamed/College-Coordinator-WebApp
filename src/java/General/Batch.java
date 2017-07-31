@@ -124,7 +124,11 @@ public class Batch {
     public static String getHTMLContent(){
     String res="";
         for(Batch b:getAll()){
-            res+="<option value='"+b.getBatch()+"'>"+b.getBatch()+"</option>";
+            if(b.getStatus().equals("Alumni") || b.getStatus().equals("New"))
+            res+="<option value='"+b.getBatch()+"'>"+b.getBatch() + "("+ b.getStatus() +")" +"</option>";
+            else
+            res="<option value='"+b.getBatch()+"'>"+b.getBatch() + "("+ b.getStatus() +" Year)" +"</option>"+res;
+                
     }
     return res;
     }

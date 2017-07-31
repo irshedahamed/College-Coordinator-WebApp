@@ -6,6 +6,8 @@
 
 
 
+<%@page import="Actor.Student"%>
+<%@page import="com.action.Find"%>
 <%@page import="java.io.File"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -253,7 +255,7 @@ h2{
         ResultSet rs3 = st3.executeQuery(sql7);
         if(rs3.next())
             bonus=0;
-     
+        
          %>
          <tr>
            
@@ -338,17 +340,15 @@ h2{
                 t/=1.3;
                 t=(int)(t+0.5);//Rounding
                 
-                total=(int)t+bonus-ABminus;
+                total=(int)t;
         }       
           //bonus logic
-        if(bonus!=0)
-         if(total>=97)
-            total=100;
-         else if(total==96)
-            total=98;
-         else if(total==95)
-            total=96;
-         
+        if(bonus!=0){
+        
+          
+        
+            total+=Find.calculateBonus(total, Student.getById(rollno).getModel_type()  );
+        }     
         
         %>
       
