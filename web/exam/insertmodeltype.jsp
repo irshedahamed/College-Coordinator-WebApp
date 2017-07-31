@@ -54,13 +54,10 @@
                 <select name="<%=s.getId() %>">
                     <option value="<%=s.getModel_type() %>"><%=s.getModel_type() %></option>
                     <option value="0">Arrears</option>
-                    <option value="8+">8+</option>
-                    <option value="7.5+">7.5+</option>
-                    <option value="7+">7+</option>
-                    <option value="6.5+">6.5+</option>
-                    <option value="6+">6+</option>
-                    <option value="5.5+">5.5+</option>
-                    <option value="5+">5+</option>
+                    <option value="8+">8.0-10</option>
+                    <option value="7.5+">7.5-7.99</option>
+                    <option value="6.5+">6.5-7.49</option>
+                    <option value="5+">5.0-6.49</option>
                     
                     
                 </select>
