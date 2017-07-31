@@ -313,8 +313,7 @@ h2{
         
         if(markm.equals("A"))
         {
-            if(bonus!=0)
-            ABminus=bonus;
+       bonus=0;
         }
         else
          m = Integer.parseInt(markm);
@@ -346,8 +345,8 @@ h2{
         if(bonus!=0){
         
           
-        
-            total+=Find.calculateBonus(total, Student.getById(rollno).getModel_type()  );
+        if(Find.calculateBonus(total, Student.getById(rollno).getModel_type()  )==1)
+            total=100;
         }     
         
         %>
