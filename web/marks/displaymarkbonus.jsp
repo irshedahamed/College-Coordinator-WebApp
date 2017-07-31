@@ -254,7 +254,7 @@ h2{
           String sql7="select * from bonuscut where rollno='"+rollno+"' and assessment <='"+exam+"'";
         ResultSet rs3 = st3.executeQuery(sql7);
         if(rs3.next())
-            bonus=0;
+        {bonus=0;bonusreq=0;}
         
          %>
          <tr>
@@ -272,7 +272,7 @@ h2{
         
         while(rs1.next())
         {
-           
+           bonus=bonusreq;
         subcode = rs1.getString("subcode");
         String sql6 = "select * from marks_table where rollno='"+rollno+"' and subcode='"+subcode+"'";
          Statement st2 = con.createStatement();
@@ -342,7 +342,7 @@ h2{
                 total=(int)t;
         }       
           //bonus logic
-        if(bonus!=0){
+         if(bonus!=0){
         
           
         if(Find.calculateBonus(total, Student.getById(rollno).getModel_type()  )==1)

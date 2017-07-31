@@ -23,7 +23,7 @@ public class dbcon {
              Class.forName("com.mysql.jdbc.Driver").newInstance();
 
 
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"webapp","fluffy");
+            con = DriverManager.getConnection("jdbc:mysql://sjit.com:3306/"+dbname,"akshaya","fluffy");
 
 
              
