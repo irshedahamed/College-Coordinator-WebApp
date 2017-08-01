@@ -216,7 +216,69 @@ public class Find {
     return 0;
     }
     
+    public static int calculateTotal(String markm,String markc,String marku){
     
+        int m,c,u;
+        boolean cycle=false,unit=false,model=false;
+            if(markm==null)
+            markm="0";
+        else if(markm.equals("null"))
+            markm="0";
+      
+        if(markc==null)
+            markc="0";
+        else if(markc.equals("null"))
+            markc="0";
+      
+        if(marku==null)
+            marku="0";
+        else if(marku.equals("null"))
+            marku="0";
+      
+        
+        m=0;
+        if(markm.equals("A"))
+       m=0;
+        else if(markm.equals("N"))
+            model=true;
+        else
+         m = Integer.parseInt(markm);
+        
+        c=0;
+        if(markc.equals("A"))
+        c=0;
+        else if(markc.equals("N"))
+            cycle=true;
+        c = Integer.parseInt(markc);
+        
+        u=0;
+        if(marku.equals("A"))
+        u=0;
+        else if(marku.equals("A"))
+        unit=true;
+        else
+        u = Integer.parseInt(marku);
+        
+        
+           float t=0.0F;
+           if(cycle && unit)
+               t=m;
+           else if(unit){
+               t=(float)m+ (float)c ;
+            
+                t/=1.3;
+                t=(int)(t+0.5);//Rounding
+           
+           }else{
+           t=(float)m+ ( (float)c /2 )+ ( ((float)u / 48)*15 );
+            
+                t/=1.3;
+                t=(int)(t+0.5);//Rounding
+           }
+        
+               
+    return (int)t;
+    }
     
     
     }
