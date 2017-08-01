@@ -267,16 +267,16 @@ h2{
             
             if(ct==null)
             {ut="0";et="0";ct="0";}
-            else if(ct.equals(null))
+            else if(ct.equals("null"))
             {ut="0";et="0";ct="0";}
             
             if(ut==null)
             {ut="0";}
-            else if(ut.equals(null))
+            else if(ut.equals("null"))
             {ut="0";}
             
             boolean noexam=false;
-               if(ct!=null)
+               
             if(ct.equals("N")){
             noexam=true;
             }
