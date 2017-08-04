@@ -249,6 +249,7 @@ public class Find {
         c=0;
         else if(markc.equals("N"))
             cycle=true;
+        else
         c = Integer.parseInt(markc);
         
         u=0;

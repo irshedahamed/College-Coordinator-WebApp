@@ -136,7 +136,7 @@
         int count =0;
         
            String sql="";
-        sql="select * from student_personal where  batch='"+batch+"'";
+        sql="select * from student_personal where  batch='"+batch+"' and sec like '_'";
         ResultSet rs1=st1.executeQuery(sql);
         while(rs1.next())
         {    
