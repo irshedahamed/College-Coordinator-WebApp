@@ -42,7 +42,7 @@ public class MarkSMS {
             
              if(rs.getString("model"+exam)!=null && rs.getString("model"+exam).equals("A"))
                 marks+=subcode+":"+"A"+", ";
-            1 else
+             else
             marks+=subcode+":"+mark+", ";
         }
         if(rs!=null)
