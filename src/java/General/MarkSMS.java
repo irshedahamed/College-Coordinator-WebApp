@@ -40,9 +40,9 @@ public class MarkSMS {
              
             mark=Find.calculateTotal(rs.getString("model"+exam), rs.getString("cycle"+exam), rs.getString("unit"+exam));
             
-           //  if(rs.getString("model"+exam)!=null && rs.getString("model"+exam).equals("A"))
-            //    marks+=subcode+":"+"A"+", ";
-            // else
+             if(rs.getString("model"+exam)!=null && rs.getString("model"+exam).equals("A"))
+                marks+=subcode+":"+"A"+", ";
+            1 else
             marks+=subcode+":"+mark+", ";
         }
         if(rs!=null)
