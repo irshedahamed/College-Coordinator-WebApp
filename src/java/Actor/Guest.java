@@ -139,12 +139,10 @@ public class Guest {
                         this.id+="001";
                     else{
                         id=previd.substring(previd.length()-3, previd.length());
-                        id=String.valueOf(Integer.valueOf(id)+1);
-                      
-                        while(id.length()<3)
+                      while(id.length()<3)
                         id+="0"+id;
-                        
                         this.id=this.id+id;
+                        id=String.valueOf(Integer.valueOf(id)+1);
                     }
                     
                     stmt.execute("insert into guest values('"+this.id+"','"+name+"','"+city+"','"+mobile+"','"+mail+"','"+address+"','"+reason

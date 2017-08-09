@@ -15,7 +15,6 @@
         %>
         <script>
             alert("<%=request.getParameter("msg")%>");
-            
         </script>
     <%
         

@@ -7,9 +7,9 @@
 <%@page import="com.action.Find"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashSet"%>
-<%@page import="java.util.HashSet"%>
 <%@page import="java.io.File"%>
 <%@page import="java.sql.*"%>
+<%@page import="java.util.HashSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -119,12 +119,7 @@ h2{
         var pass=total-fail;
         var per=((total-fail)/total)*100;
         //console.log(per);
-       $("#overallpass").html("<h2 style='margin-top:5px;margin-bottom:10px;'>OVER ALL PASS:"+pass+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n\
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n\
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n\
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n\
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n\
-                                            % of Pass :"+Math.round(per*100)/100+"</h2>");
+       $("#overallpass").html("<h2 style='margin-top:5px;margin-bottom:10px;'>OVER ALL PASS:"+pass+"<br>% of Pass :"+Math.round(per*100)/100+"</h2>");
         var anchor=$("#exportword")[0].getAttribute("href");
         anchor=anchor+"&pass="+pass+"&passper="+Math.round(per*100)/100;
         $("#exportword")[0].setAttribute("href",anchor);
@@ -168,15 +163,17 @@ h2{
         Statement st=con.createStatement();
         Statement st1=con.createStatement();
         %>
-      <center><h2>St. Joseph's Institute of Technology, Chennai-119</h2></center>
-      <center><h2>Department of <%=dept.toUpperCase()%></h2></center>
-      <center><h2>Model Examination-<%=exam%></h2></center>
-    
-            <h2 style="margin-left: 10px;">BRANCH: <%=dept.toUpperCase()%></h2>
-      <h2 style="margin-left: 10px;">BATCH: <%=batch%></h2>
-        <h2 style="margin-left: 10px;">SEM: <%=sem%></h2>
-        <h2 style="margin-left: 10px;">SEC: <%=sec%></h2>
-        
+      <center><h1>St. Joseph's Institute of Technology, Chennai-119</h1></center>
+      <center><h1>Department of <%=dept.toUpperCase()%></h1></center>
+      <center><h2>Model Examination-<%=exam%>      Result Analysis</h2></center>
+         <!--   <h2 style="margin-left: 10px;">BRANCH: <%=dept.toUpperCase()%></h2>-->
+      <table border="0px">
+          <tr><td width="50%" style="padding-left: 30px">
+              <h2>BATCH: <%=batch%></h2>
+              <h2>SEM: <%=sem%></h2>
+              <h2>SEC: <%=sec%></h2>
+              </td>
+      <td width="50%" style=" text-align: right;">
         <%
         String sql="select count(*) from student_personal where batch='"+batch+"' and sec='"+sec+"' and model_type like '"+"%"+"'";
         ResultSet strength=st.executeQuery(sql);
@@ -184,22 +181,21 @@ h2{
         String tstrength=strength.getString(1);
         %>
         
-        <h2 style="margin-left: 10px;">TOTAL STRENGTH: <%=tstrength%></h2>
+        <h2>TOTAL STRENGTH: <%=tstrength%></h2>
         <div id="load_values"></div>
-        <div id="overallpass" style="margin-left: 10px;">
-            <%
-            if(a1!=null)    
+        <div id="overallpass">.m                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+          <% if(a1!=null)    
             if(a1.equals("yes"))
             {
-                out.write("<h2 style='margin-top:5px;'>OVER ALL PASS:"+request.getParameter("pass")+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
-                                           " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
-                                            "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
-                                            "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+
-                                            "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"% of Pass :"+request.getParameter("passper")+"</h2>");
+                out.write("<h2>OVER ALL PASS:"+request.getParameter("pass")+"% of Pass :"+request.getParameter("passper")+"</h2>");
             }
             %>
         </div>
-      <input type="hidden" id="tstrength" value="<%=tstrength%>"> 
+
+      </td ></tr>
+      </table><br/>
+      <br/>
+      
     
        
                 <table class="bordered" border="3" style="margin-left: 10px;margin-top: -10px;">
@@ -207,7 +203,7 @@ h2{
                     <col width="300">
                     <col width="300">
                     
-                    
+      <br/>              
     <thead>
 
     <tr>
@@ -372,8 +368,14 @@ h2{
             <h3>H.O.D</h3>
             
         </div>
-        
-        <center><a id="exportword" href ="reportgenerationpage.jsp?word=yes&dept=<%=dept%>&section=<%=sec%>&batch=<%=batch%>&sem=<%=sem%>&examtype=<%=exam%>&modeltype=<%=modeltype%>" >Export to word</a>
+        <center>
+            
+            <div id="export">
+              
+            </div>
+            <script>
+             document.getElementById("export").innerHTML="<a href='reportgenerationpage.jsp?word=yes&dept=<%=dept%>&section=<%=sec%>&batch=<%=batch%>&sem=<%=sem%>&examtype=<%=exam%>&modeltype=<%=modeltype%>' id='exportword'>Export to word</a>";
+            </script>
         </center>
 
     </body>
