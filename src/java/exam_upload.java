@@ -138,7 +138,7 @@ public class exam_upload extends HttpServlet {
                     }
                     if(!item.isFormField()){
                         name = new File(Find.parseFilename(item.getName() )).getName();
-                        
+                        UPLOAD_DIRECTORY = Base.path+"/portal/exam/";
                         File f=new File(UPLOAD_DIRECTORY + File.separator + name);
                         if(f.exists()){
                         name="1_"+name;
@@ -152,7 +152,7 @@ public class exam_upload extends HttpServlet {
                         }
                         
                         }
-                         UPLOAD_DIRECTORY = Base.path+"/portal/exam/";
+                         
     File file = new File(UPLOAD_DIRECTORY);
  Boolean a = file.mkdirs();
                         
