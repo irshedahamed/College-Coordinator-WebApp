@@ -208,7 +208,7 @@ public class Authenticate extends HttpServlet {
                type="staff";
                pwd=rs.getString("password");
            }else{
-           sql="select * from other_login_details where staffid like '"+Username+"' ";
+           sql="select * from other_login_details where id like '"+Username+"' ";
            rs=stmt.executeQuery(sql);
            if(rs.next()){
                     type=rs.getString("type");

@@ -62,6 +62,8 @@ public class LoginServlet extends HttpServlet {
        
                 String regno=request.getParameter("uname");
 		String dob=request.getParameter("pass");
+                System.err.println(dob+regno);
+                System.out.println(dob+regno);
                 String s3="student";
 		response.setContentType("text/html");
                 Boolean flag=false;
@@ -153,6 +155,9 @@ public class LoginServlet extends HttpServlet {
                       response.sendRedirect("placement/home.jsp?user="+s1);
                   else if(s3.equals("transport"))
                       response.sendRedirect("transport/home.jsp?user="+s1);
+                  else if(s3.equals("principal"))
+                      response.sendRedirect("principal/home.jsp?user="+s1);
+                  
                   else
                   {
                       
