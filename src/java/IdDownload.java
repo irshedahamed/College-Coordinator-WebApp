@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 import Actor.Student;
 import com.action.Base;
@@ -14,8 +10,10 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -86,7 +84,9 @@ public class IdDownload extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        ServletContext con=getServletContext();
+       String s1= con.getRealPath("/store/");
+        System.out.println(s1);
          String fromD = request.getParameter("from");
           SimpleDateFormat fromDate = new SimpleDateFormat("dd-mm-yyyy");
           Date from = new Date();
@@ -103,12 +103,13 @@ public class IdDownload extends HttpServlet {
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
-        String[] depts=new String[25];
-            depts = Find.Depts;
+        String[] department=new String[25];
+            department = Find.Depts;
                String batch=request.getParameter("batch");
                  PrintWriter out = response.getWriter();
                  String fName = "Id_Data.xls";
-                 String filepath = "/home/fedexfan/Documents/"+fName;  
+//                 String filepath = "/home/fedexfan/tomcat/files/"; 
+String filepath = s1;  
 HSSFWorkbook hwb=new HSSFWorkbook();
 HSSFSheet sheet =  hwb.createSheet("new sheet");
 HSSFRow rowhead=   sheet.createRow((short)0);
@@ -125,51 +126,66 @@ rowhead.createCell((short) 9).setCellValue("District");
 rowhead.createCell((short) 10).setCellValue("Pin");
 String sec = "%";
  int j = 1;
-             
-for(String dept:depts){
-          for(Student s : Student.getAll(dept,batch,sec)){
-              String dD = s.getAdmissionDetails().getDoa();
-          SimpleDateFormat daDate = new SimpleDateFormat("dd-mm-yyyy");
-          Date dao = new Date();
-        if(dD!=null){
-          try {
-            dao = daDate.parse(dD);
-        } catch (ParseException ex) {
-            ex.printStackTrace();
-        }
-        
-        if((from.compareTo(dao)>=0)&&to.compareTo(dao)<=0){
-              String d;
-String e = Find.sdept(s.getId());
-if(Find.sdept(s.getId()).equals("it")){
-   d = "BTech - "+e; 
+for(String dept:department){
+             for (Student s : Student.getAll(dept,batch,sec)) {
+                
+                 String dD = s.getAdmissionDetails().getDoa();
+                 SimpleDateFormat daDate = new SimpleDateFormat("dd-mm-yyyy");
+                 Date dao = new Date();
+                 if(dD!=null){
+                     try {
+                         dao = daDate.parse(dD);
+                     } catch (ParseException ex) {
+                         ex.printStackTrace();
+                     }
+                     
+                     if((from.compareTo(dao)>=0)&&to.compareTo(dao)<=0){
+                         String d;
+                         String e = Find.sdept(s.getId());
+                         if(Find.sdept(s.getId()).equals("it")){
+                             d = "BTech - "+e;
+                         }
+                         else {
+                             d = "B.E "+e;
+                         }
+                         HSSFRow row = sheet.createRow((short)j);
+                         row.createCell((short) 0).setCellValue(s.getId().toUpperCase());
+                         row.createCell((short) 1).setCellValue(s.getName());
+                         row.createCell((short) 2).setCellValue(d);
+                         row.createCell((short) 3).setCellValue(s.getGeneral().getBoarding());
+                         row.createCell((short) 4).setCellValue(s.getBloodgrp());
+                         row.createCell((short) 5).setCellValue(Find.getFormattedDate(s.getGeneral().getDob()).replace("-","."));
+                         row.createCell((short) 6).setCellValue(s.getFatherDetails().getMobile());
+                         row.createCell((short) 7).setCellValue(s.getContact().getDoorno()+","+s.getContact().getStreet());
+                         row.createCell((short) 8).setCellValue(s.getContact().getArea());
+                         row.createCell((short) 9).setCellValue(s.getContact().getDistrict());
+                         row.createCell((short) 10).setCellValue(s.getContact().getPincode());
+                         j++;       }}
+             }
 }
-else {
-    d = "B.E "+e;
-}
-HSSFRow row = sheet.createRow((short) (j));
-row.createCell((short) 0).setCellValue(s.getId().toUpperCase());
-row.createCell((short) 1).setCellValue(s.getName());
-row.createCell((short) 2).setCellValue(d);
-row.createCell((short) 3).setCellValue(s.getGeneral().getBoarding());
-row.createCell((short) 4).setCellValue(s.getBloodgrp());
-row.createCell((short) 5).setCellValue(Find.getFormattedDate(s.getGeneral().getDob()).replace("-","."));
-row.createCell((short) 6).setCellValue(s.getFatherDetails().getMobile());
-row.createCell((short) 7).setCellValue(s.getContact().getDoorno()+","+s.getContact().getStreet());
-row.createCell((short) 8).setCellValue(s.getContact().getArea());
-row.createCell((short) 9).setCellValue(s.getContact().getDistrict());
-row.createCell((short) 10).setCellValue(s.getContact().getPincode());
-   j++;       }}}}
-FileOutputStream fileOut =  new FileOutputStream("/home/fedexfan/Documents/Id_Data.xls");
+FileOutputStream fileOut =  new FileOutputStream(filepath+fName);
 hwb.write(fileOut);
 fileOut.close(); 
-System.out.println("Your excel file has been generated!");
+response.setContentType("APPLICATION/OCTET-STREAM");   
+    response.setHeader("Content-Disposition","attachment; filename=\"" + fName + "\"");   
+      
+    FileInputStream fileInputStream = new FileInputStream(filepath + fName);  
+                
+    int i;   
+    while ((i=fileInputStream.read()) != -1) {  
+    out.write(i);   
+    }   
+    fileInputStream.close();   
+    out.close();   
+   
+    
+out.println("Your excel file has been generated!");
         //processRequest(request, response);
     }
 
     /**
      * Returns a short description of the servlet.
-     *
+     *ee
      * @return a String containing servlet description
      */
     @Override
@@ -178,3 +194,5 @@ System.out.println("Your excel file has been generated!");
     }// </editor-fold>
 
 }
+
+  

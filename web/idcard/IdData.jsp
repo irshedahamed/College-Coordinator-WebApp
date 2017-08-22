@@ -170,7 +170,7 @@ h2{
             <label> To : <input type="date" name="to" placeholder="dd-mm-yyyy">
             </label>
                         <br><br>
-                        <input type="submit" id="submit" value="Submit"/>
+                        <input type="submit" id="submit" value="Download"/>
                         <br><br></form></div>
              </table></center>
     </body>
