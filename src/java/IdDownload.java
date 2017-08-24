@@ -84,10 +84,10 @@ public class IdDownload extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ServletContext con=getServletContext();
-       String s1= con.getRealPath("/store/");
-        System.out.println(s1);
-         String fromD = request.getParameter("from");
+       // ServletContext con=getServletContext();
+      // String s1= con.getRealPath("/store/");
+     String s1 = Base.path;
+       String fromD = request.getParameter("from");
           SimpleDateFormat fromDate = new SimpleDateFormat("dd-mm-yyyy");
           Date from = new Date();
         try {
@@ -107,7 +107,7 @@ public class IdDownload extends HttpServlet {
             department = Find.Depts;
                String batch=request.getParameter("batch");
                  PrintWriter out = response.getWriter();
-                 String fName = "Id_Data.xls";
+                 String fName = "/Id_Data.xls";
 //                 String filepath = "/home/fedexfan/tomcat/files/"; 
 String filepath = s1;  
 HSSFWorkbook hwb=new HSSFWorkbook();
@@ -146,7 +146,7 @@ for(String dept:department){
                              d = "BTech - "+e;
                          }
                          else {
-                             d = "B.E "+e;
+                             d = "B.E - "+e;
                          }
                          HSSFRow row = sheet.createRow((short)j);
                          row.createCell((short) 0).setCellValue(s.getId().toUpperCase());
