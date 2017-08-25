@@ -7,6 +7,7 @@ package General;
 
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -127,5 +128,22 @@ public class Batch {
             res+="<option value='"+b.getBatch()+"'>"+b.getBatch()+"</option>";
     }
     return res;
+    }
+    public static String getRegulation(String batch){
+        String regulation = null;
+        try {
+            Connection con = new dbcon().getConnection("sjitportal");
+            PreparedStatement st = null;
+            String sql = "select * from regulations where batch=?";
+            st = con.prepareStatement(sql);
+            st.setString(1 , batch);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                regulation = rs.getString("regulation");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return regulation;
     }
 }

@@ -651,6 +651,8 @@
     <servlet-mapping>
         <servlet-name>UpdateMarks</servlet-name>
         <url-pattern>/UpdateMarks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>      
         <servlet-name>deleteSubject</servlet-name>
         <url-pattern>/deleteSubject</url-pattern>
     </servlet-mapping>

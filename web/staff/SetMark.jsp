@@ -3,6 +3,7 @@
     Created on : 16 Jul, 2017, 12:19:59 PM
     Author     : Irshed
 --%>
+<%@page import="Mark.Mark"%>
 <%@page import="java.util.List"%>
 <%@page import="Actor.Student"%>
 <%@page import="java.sql.ResultSet"%>
@@ -31,7 +32,9 @@
         %>
         <script type="text/javascript">
             $(document).ready(function () {
-
+                var patt = /^[0-9]+$/;
+                var result;
+                var result1;
                 var maxmark = $("#max").val();
                 $(".outof").html("/" + $("#max").val());
                 $("#max").on('change', function () {
@@ -50,29 +53,112 @@
                         $("#words" + id).html(words);
                 });
                 $(".click").click(function () {
+                    var but = $(this);
                     var id = $(this).closest('tr').children('td#roll').text();
-                    var mark = $(this).closest('tr').children().children('.marks').val();
-                    var subcode = $("#code").text();
-                    var type = $("#type").val();
-                    var dept = $("#dept").val();
-                    $.post("../UpdateMarks",
+                    var mark = $(this).closest('tr').children().children('.marks');
+                    var flag1 = 0;
+                    result = patt.test(mark.val());
+                    result1 = (mark.val() === 'A' || mark.val() === 'N');
+                    if (mark.val() === '' || (result === false && result1 === false))
+                    {
+                        mark.focus();
+                        mark.css({"border-color": "rgb(193, 82, 82)",
+                            "box-shadow": " 0 0 10px #f00"});
+                        flag1 = 1;
+                    } else {
+                        mark.css({"border-color": "", "box-shadow": ""});
+
+                        if (parseInt(mark.val()) > maxmark)
+                        {
+
+                            mark.focus();
+                            mark.css({"border-color": "rgb(193, 82, 82)",
+                                "box-shadow": " 0 0 10px #f00"});
+                            flag1 = 1;
+                        }
+                    }
+                    if (flag1 === 0) {
+                        if (parseInt(maxmark) === 60) {
+                            if (mark.val() !== 'A') {
+                                mark.val(Math.round((parseInt(mark.val()) / 2)));
+                            }
+                        }
+                        var subcode = $("#code").text();
+                        var type = $("#type").val();
+                        var dept = $("#dept").val();
+                        $.post("../UpdateMarks",
+                                {
+                                    dept: dept,
+                                    exam: type,
+                                    subject: subcode,
+                                    mark: mark.val(),
+                                    rollno: id}
+                        , function (data) {
+                            but.val(data);
+                            but.css("background-color", "#149dd2");
+                            but.css("color", "white");
+                            but.prop("disabled", true);
+                        });
+                    }
+                });
+                $(".UpdateAll").click(function () {
+                    var sbut = $(this);
+                    $(".click").each(function () {
+                        var but = $(this);
+                        var id = $(this).closest('tr').children('td#roll').text();
+                        var mark = $(this).closest('tr').children().children('.marks');
+                        var flag2 = 0;
+                        result = patt.test(mark.val());
+                        result1 = (mark.val() === 'A' || mark.val() === 'N');
+                        if (mark.val() === '' || (result === false && result1 === false))
+                        {
+                            mark.focus();
+                            mark.css({"border-color": "rgb(193, 82, 82)",
+                                "box-shadow": " 0 0 10px #f00"});
+                            flag2 = 1;
+                        } else {
+                            mark.css({"border-color": "", "box-shadow": ""});
+
+                            if (parseInt(mark.val()) > maxmark)
                             {
-                                dept: dept,
-                                exam: type,
-                                subject: subcode,
-                                mark: mark,
-                                rollno: id}
-                    , function (data) {
-                        alert(data);
+
+                                mark.focus();
+                                mark.css({"border-color": "rgb(193, 82, 82)",
+                                    "box-shadow": " 0 0 10px #f00"});
+                                flag2 = 1;
+                            }
+                        }
+                        if (flag2 !== 1) {
+                            if (parseInt(maxmark) === 60) {
+                                if (mark.val() !== 'A') {
+                                    mark.val(Math.round((parseInt(mark.val()) / 2)));
+                                }
+                            }
+                            var subcode = $("#code").text();
+                            var type = $("#type").val();
+                            var dept = $("#dept").val();
+                            $.post("../UpdateMarks",
+                                    {
+                                        dept: dept,
+                                        exam: type,
+                                        subject: subcode,
+                                        mark: mark.val(),
+                                        rollno: id}
+                            , function (data) {
+                                but.val(data);
+                                but.css("background-color", "#149dd2");
+                                but.css("color", "white");
+                                but.prop("disabled", true);
+                            });
+                            sbut.prop("disabled", true); 
+                        }
                     });
                 });
                 $("#marks").submit(function () {
                     flag = 0;
                     $(".marks").each(function (index, value) {
-                        var patt = /^[0-9]+$/;
-                        var result = patt.test($(this).val());
-
-                        var result1 = ($(this).val() === 'A' || $(this).val() === 'N');
+                        result = patt.test($(this).val());
+                        result1 = ($(this).val() === 'A' || $(this).val() === 'N');
                         if ($(this).val() === '' || (result === false && result1 === false))
                         {
                             $(this).focus();
@@ -98,7 +184,7 @@
                     {
                         if (parseInt(maxmark) === 60)
                         {
-                               $(".marks").each(function (index, value) {
+                            $(".marks").each(function (index, value) {
                                 if ($(this).val() !== 'A') {
                                     $(this).val(Math.round((parseInt($(this).val()) / 2)));
                                 }
@@ -106,13 +192,10 @@
                         }
                     }
                 });
-
             });
-
         </script>
     <center style="background-color: #f5f5f5;">
         <img src="../images/logo2.png" height="165px" width="700px" />	</center>
-
 </head>
 
 <body class="home page page-id-115 page-template-default has-toolbar">
@@ -133,7 +216,7 @@
     <section class="section-content section-bg" style="background-color:white;"><div class="container clearfix"><div class="entry-content">
 
                 <section class="landing">
-                    <form action="${pageContext.request.contextPath}/UpdateMarks"  id="marks" method="post">  
+                    <form action=""  id="marks" method="post">  
                         <fieldset>
                             <div align="right" style="margin-right: 150px;">
                                 <br>
@@ -169,8 +252,10 @@
                                     </thead>
                                     <%
                                         List<Student> list = Student.getAll(dept, batch, sec);
-
                                         int i = 0;
+                                        Mark m = new Mark();
+                                        m.setSubcode(subcode);
+                                        m.setType(exam);
                                         for (Student stu : list) {
                                     %>
 
@@ -182,9 +267,15 @@
                                         <%
                                             String a1 = stu.getId() + "_" + i;
                                             i++;
+                                            m.setRollno(stu.getId());
                                         %>
 
-                                        <td width="150px"><input type="text" class="marks" size="3" maxlength="3" id="<%=a1%>"><span class="outof"></span></td>
+                                        <td width="150px">
+                                            <% if (!Mark.isMarkAvailable(dept, m)) {%>
+                                            <input type="text" style="background-color: white; " class="marks" size="3" maxlength="3" id="<%=a1%>">
+                                            <% } else {%>
+                                            <input type="text" style="background-color: white; " class="marks" size="3" maxlength="3" id="<%=a1%>" value="<%=Mark.getUserMark(dept, m).getMark()%>">
+                                            <% }%><span class="outof"></span></td>
                                         <td id="words<%=a1%>"></td>
                                         <td style="padding: 10px;"><input type="button" class="click" id="submit"  value="Update" /></td>
                                     </tr> <% }%>        
@@ -192,58 +283,10 @@
                             </center>
                             <br>
                             <center>
-                                <input type="submit" id="submit" value="Update All" ></center>
+                                <input type="button" class="UpdateAll" id="submit" value="Update All" ></center>
                         </fieldset> 
                     </form>  
                 </section></div></div></section>
     <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script>
 </body>   
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

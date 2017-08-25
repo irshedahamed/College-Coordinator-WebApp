@@ -5,11 +5,23 @@
  */
 package Subjects;
 
+import com.sun.org.apache.xpath.internal.axes.SubContextList;
+import dbconnection.dbcon;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Irshed
  */
 public class Subjects {
+
     private String subcode;
     private String regulation;
     private String subname;
@@ -64,6 +76,24 @@ public class Subjects {
     public void setAyear(String ayear) {
         this.ayear = ayear;
     }
-    
-    
+
+    public static List<String> getTherorySubCode(String dept, Subjects s) {
+        List<String> subcode = new ArrayList<String>();
+        try {
+            Connection con = null;
+            con = new dbcon().getConnection(dept);
+            String sql1 = "select * from subject_sem_table where regulation=? and sem=? and (ayear like '%elective%=?%' or ayear like 'all')  and subtype='theory' order by subcode";
+            PreparedStatement st = con.prepareStatement(sql1);
+            st.setString(1, s.getRegulation());
+            st.setString(2, s.getSem());
+            st.setString(3, s.getAyear());
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                subcode.add(rs.getString("sucode"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Subjects.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return subcode;
+    }
 }

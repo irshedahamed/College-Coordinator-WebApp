@@ -8,8 +8,8 @@ package Mark;
 import dbconnection.dbcon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -56,21 +56,35 @@ public class Mark {
         this.mark = mark;
     }
 
-    public String insertMarks(String dept, Mark m) throws SQLException {
+    public String insertOrUpdateMarks(String dept, Mark m) throws SQLException {
         Connection con = new dbcon().getConnection(dept);
-        PreparedStatement st = null;
-        try {
-            String sql = "insert into mark values(?,?,?,?)";
-            st = con.prepareStatement(sql);
-            st.setString(1, m.getRollno());
-            st.setString(2, m.getSubcode());
-            st.setString(3, m.getType());
-            st.setString(4, m.getMark());
-            st.executeUpdate();
-            return "Updated";
+        PreparedStatement st1 = null, st = null, st2 = null;
+        try {            
+            if (!Mark.isMarkAvailable(dept, m)) {
+                String sql = "insert into marks values(?,?,?,?)";
+                st = con.prepareStatement(sql);
+                st.setString(1, m.getRollno());
+                st.setString(2, m.getSubcode());
+                st.setString(3, m.getType());
+                st.setString(4, m.getMark());
+                st.executeUpdate();
+                return "Updated";
+            } else {
+                String sql2 = "update marks set mark=? where rollno=? and subcode=? and type=?";
+                st2 = con.prepareStatement(sql2);
+                st2.setString(1, m.getMark());
+                st2.setString(2, m.getRollno());
+                st2.setString(3, m.getSubcode());
+                st2.setString(4, m.getType());
+                int i = st2.executeUpdate();
+                if (i == 1) {
+                    return "Updated";
+                } else {
+                    return "Not Updated";
+                }
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Mark.class.getName()).log(Level.SEVERE, null, ex);
-            return "Not Updated";
         } finally {
             if (con != null) {
                 con.close();
@@ -78,7 +92,51 @@ public class Mark {
             if (st != null) {
                 st.close();
             }
-
+            if (st1 != null) {
+                st1.close();
+            }
+            if (st2 != null) {
+                st2.close();
+            }
         }
+        return "Not Updated";
+    }
+
+    public static Mark getUserMark(String dept, Mark m) {
+        try {
+            Connection con = new dbcon().getConnection(dept);
+            PreparedStatement st1 = null;
+            String sql1 = "select * from marks where rollno=? and subcode=? and type=? ";
+            st1 = con.prepareStatement(sql1);
+            st1.setString(1, m.getRollno());
+            st1.setString(2, m.getSubcode());
+            st1.setString(3, m.getType());
+            ResultSet rs = st1.executeQuery();
+            if (rs.next()) {
+                m.setMark(rs.getString("mark"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Mark.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return m;
+    }
+    
+        public static boolean isMarkAvailable(String dept, Mark m) {
+        try {
+            Connection con = new dbcon().getConnection(dept);
+            PreparedStatement st1 = null;
+            String sql1 = "select * from marks where rollno=? and subcode=? and type=? ";
+            st1 = con.prepareStatement(sql1);
+            st1.setString(1, m.getRollno());
+            st1.setString(2, m.getSubcode());
+            st1.setString(3, m.getType());
+            ResultSet rs = st1.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Mark.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 }
