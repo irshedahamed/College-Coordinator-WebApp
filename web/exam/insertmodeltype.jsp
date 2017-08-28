@@ -1,4 +1,5 @@
 
+<%@page import="Actor.Student"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="dbconnection.dbcon"%>
@@ -19,48 +20,55 @@
         <center>
         <table class="bordered">
             <thead>
-                <th>SELECT IF SM </th>
                 <th>REG NO</th>
                 <th>NAME</th>
+                <th>SELECT CGPA Range </th>
+                
         </thead>
         <%
         String dept = request.getParameter("dept");
         String batch = request.getParameter("batch");
         String sec = request.getParameter("section");
-        Connection con = new dbcon().getConnection(dept);
-   
-        String sem = request.getParameter("sem");
+        
+        
         
         session.setAttribute("dept",dept);
+         session.setAttribute("batch",batch);
+         session.setAttribute("sec", sec);
        
         int i =0;   
         String[] regno = new String[100];
         String[] name = new String[100];
       
         
-        Statement st= con.createStatement();
-        String sql="select * from student_personal where batch='"+batch+"' and sec='"+sec+"'";
-        ResultSet rs= st.executeQuery(sql);
-        while(rs.next())
+        for(Student s:Student.getAll(dept, batch, sec))
         {
-            regno[i]= rs.getString("regno");
-            name[i] = rs.getString("name");
+            regno[i]= s.getRegno();
+            name[i] = s.getName();
         %>
        
             <tr>
-                <td>
-            <center>   <input type="checkbox" name="id" value="<%= regno[i] %>"> </center>
-                </td><td><%= regno[i] %> </td><td> <%= name[i] %></td>
-        </tr>
+               <td><%= regno[i] %> </td><td> <%= name[i] %></td>
+         <td>
+            <center>  
+                <select name="<%=s.getId() %>">
+                    <option value="<%=s.getModel_type() %>"><%=s.getModel_type() %></option>
+                    <option value="0">Arrears</option>
+                    <option value="8+">8.0-10</option>
+                    <option value="7.5+">7.5-7.99</option>
+                    <option value="6.5+">6.5-7.49</option>
+                    <option value="5+">5.0-6.49</option>
+                    
+                    
+                </select>
+            </center>
+                </td>
+            </tr>
         
         <%
         i++;
         }
 
-                            if(st!=null)
-                            st.close();
-                              if(con!=null)
-                                con.close();
       %>      
         </table>
         </center>

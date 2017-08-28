@@ -4,6 +4,7 @@
     Author     : Divya Sri
 --%>
 
+<%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Connection"%>
@@ -136,26 +137,7 @@
                                                     Batch:</b></div>
                                             <label class="select">
                                                 <select id="batch" name="batch" required>
-                                                    <option disabled selected>select</option>
-                                              <%
-                Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select batch from regulations");
-                    String batch=null;
-                    rs.beforeFirst();
-                    while(rs.next())
-                    {
-                        batch=rs.getString("batch");
-                %>
-                <option value=<%=batch%>><%=batch%></option>
-                <%
-                }
-
-                            if(stmt!=null)
-                            stmt.close();
-                              if(conbatch!=null)
-                                conbatch.close();
-                %>
+                                                   <%=Batch.getHTMLContent() %>
                                                 </select>
                                                 <i></i>
                                             </label></label>
@@ -175,27 +157,7 @@
                                                 <i></i>
                                             </label>
                                         </label>
-                                        <br> <br>
-
-                                        <label class="input">
-                                            <div align="left" size="3px"><b>
-                                                    SEM </b></div>
-                                            <label class="select">
-
-                                                <select id="sem" name="sem" required>
-                                                    <option disabled selected>select</option>
-                                                    <option value="01">1</option>
-                                                    <option value="02">2</option>
-                                                    <option value="03">3</option>
-                                                    <option value="04">4</option>
-                                                    <option value="05">5</option>
-                                                    <option value="06">6</option>
-                                                    <option value="07">7</option>
-                                                    <option value="08">8</option>
-                                                </select>
-                                                <i></i>
-                                                <br> <br>
-                                            </label></label>
+                                       
 
                                         
                                     </section>

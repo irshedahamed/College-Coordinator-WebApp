@@ -156,6 +156,25 @@ public class Find {
     return null;
     }
 
+    public static String getDeptFullForm(String dept){
+    
+    if(dept.equals("cse"))
+            return "Computer Science and Engineering";
+    else if(dept.equals("ece"))
+            return "Electronics and Communication Engineering";
+    else if(dept.equals("eee"))
+            return "Electrical and Electronics Engineering";
+    else if(dept.equals("mech"))
+            return "Mechanical Engineering";
+    else if(dept.equals("civil"))
+            return "Civil Engineering";
+    else if(dept.equals("it"))
+            return "Information Technology";
+    
+    
+    return null;
+    
+    }
     public static String getDeptHTMLContent(){
     
          String HTML="<option disabled selected>SELECT</option>";

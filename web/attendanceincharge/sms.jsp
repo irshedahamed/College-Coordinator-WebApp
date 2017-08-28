@@ -3,6 +3,7 @@
     Created on : Jul 20, 2016, 3:12:59 PM
     Author     : Lenovo
 --%>
+<%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
