@@ -97,7 +97,7 @@
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
 
 
-<center>  <form action="../marks/displaymarkreport.jsp" class="sky-form" method="get" target="_blank">
+<center>  <form action="../marks/displaymarkbonus.jsp" class="sky-form" method="post" target="_blank">
     <header>Marks Sheet</header>
     <fieldset>					
 					<section>
@@ -200,9 +200,25 @@
             
             <select id="exam" name="exam" required>
                 <option disabled selected>select</option>
-                <option value="model1">Assessment 1</option>
-                <option value="model2">Assessment 2</option>
-                <option value="model3">Assessment 3</option>
+                <option value="1">Assessment 1</option>
+                <option value="2">Assessment 2</option>
+                <option value="3">Assessment 3</option>
+               
+            </select>
+                    <i></i>
+            <br> <br>
+                </label></label>
+            
+         <label class="input">
+                                                    <div align="left" size="3px"><b>
+                                                             Bonus</b></div>
+                <label class="select">
+            
+            <select id="bonus" name="bonus" required>
+                <option disabled selected>select</option>
+         <option value="50">With Bonus</option>
+                <option value="0">Without Bonus</option>
+                
                
             </select>
                     <i></i>

@@ -4,6 +4,7 @@
     Author     : Lenovo
 --%>
 
+<%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>

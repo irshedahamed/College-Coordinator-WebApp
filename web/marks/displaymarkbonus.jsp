@@ -6,6 +6,8 @@
 
 
 
+<%@page import="Actor.Student"%>
+<%@page import="com.action.Find"%>
 <%@page import="java.io.File"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -252,8 +254,8 @@ h2{
           String sql7="select * from bonuscut where rollno='"+rollno+"' and assessment <='"+exam+"'";
         ResultSet rs3 = st3.executeQuery(sql7);
         if(rs3.next())
-            bonus=0;
-     
+        {bonus=0;}
+        System.out.println(rollno +" "+bonus);
          %>
          <tr>
            
@@ -270,58 +272,29 @@ h2{
         
         while(rs1.next())
         {
-           
+          
         subcode = rs1.getString("subcode");
         String sql6 = "select * from marks_table where rollno='"+rollno+"' and subcode='"+subcode+"'";
          Statement st2 = con.createStatement();
         ResultSet rs2 = st2.executeQuery(sql6);
       
-         int m=0,c=0;
+         int m=0,c=0,u=0;
         if(rs2.next())
         {
         
              int total=0;
         String markc= rs2.getString("cycle"+exam);
         String markm=rs2.getString("model"+exam);
-        int ABminus=0;
-        boolean noexam=false;
+        String marku=rs2.getString("unit"+exam);
+        total= Find.calculateTotal(markm, markc, marku);
         
-        if(markc!=null)
-            if(markc.equals("N")){
-            noexam=true;
-            }
+          //bonus logic
+         if(bonus!=0){
         
-        if(markm!=null)
-        if(markm.equals("A"))
-        {
-            if(bonus!=0)
-            ABminus=bonus;
-        }
-        else
-         m = Integer.parseInt(markm);
-        
-        if(markc==null)
-            c=0;
-        else{
-        if(markc.equals("A"))
-        c=0;
-        else
-        c = Integer.parseInt(markc);
-        }
-        if(noexam)
-            total=m;
-        else
-        total = (int)(((m+c)/1.3)+0.5); 
-                total+=bonus-ABminus;
-                
-          if(bonus!=0)
-         if(total>=97)
+          
+        if(Find.calculateBonus(total, Student.getById(rollno).getModel_type()  )==1)
             total=100;
-         else if(total==96)
-            total=98;
-         else if(total==95)
-            total=96;
-         
+        }     
         
         %>
       

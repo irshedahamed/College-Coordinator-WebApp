@@ -253,40 +253,54 @@ h2{
         
         
         rs1=st1.executeQuery(sql2);
-        int p=0,f=0,a=0,max=0,et1,ct1;
+        int p=0,f=0,a=0,max=0,et1,ct1,ut1;
         float pp,total=0,classavg=0,combined;
         while(rs1.next())
         {
             String et=rs1.getString("marks_table.model"+exam);
             String ct=rs1.getString("marks_table.cycle"+exam);
-               
+            String ut=rs1.getString("marks_table.unit"+exam);   
             if(et==null)
-            {et="0";ct="0";}
+            {ut="0";et="0";ct="0";}
+            else if(et.equals("null"))
+            {ut="0";et="0";ct="0";}
+            
             if(ct==null)
-            {et="0";ct="0";}
-                
+            {ut="0";et="0";ct="0";}
+            else if(ct.equals("null"))
+            {ut="0";et="0";ct="0";}
+            
+            if(ut==null)
+            {ut="0";}
+            else if(ut.equals("null"))
+            {ut="0";}
+            
             boolean noexam=false;
-               if(ct!=null)
+               
             if(ct.equals("N")){
             noexam=true;
             }
             
-             if(et.equals("A") && ct.equals("A"))
+             if(et.equals("A") && ct.equals("A") && ut.equals("A"))
                 a++;
              else 
             {
                  if(et.equals("A"))
                      et="0";
-                 else if(ct.equals("A"))
+                  if(ct.equals("A"))
                      ct="0";
+                if(ut.equals("A"))
+                     ut="0";
             
                 p++;
                 et1=Integer.parseInt(et);
                 ct1=Integer.parseInt(ct);
+                ut1=Integer.parseInt(ut);
+                
                 if(noexam){
                     combined=(int)et1;
                 }else{
-                combined=(float)et1+(float)ct1;
+                combined=(float)et1+ ( (float)ct1 /2 )+ ( ((float)ut1 / 48)*15 );
                 combined/=1.3;
                 combined=(int)(combined+0.5);//Rounding
                 }
