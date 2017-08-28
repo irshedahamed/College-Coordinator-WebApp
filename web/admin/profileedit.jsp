@@ -740,7 +740,61 @@
             <input type="submit" id="submit" value="Submit" /></div>
             <br><br>
                         </form></center>
-                            <%
+                           
+ <%
+                            }
+                               Statement stmt11=null;
+                               stmt6=con.createStatement();
+                            sql="select * from student_local_guardian2 where rollno like '"+rollno+"'";
+                            ResultSet rs11=stmt11.executeQuery(sql);
+                            if(rs11.next())
+{
+                            %>
+                        <center> <form method="post" name="localGuardian2" action="${pageContext.request.contextPath}/updateStudent">
+                            <center><h3>Local Guardian2 Details</h3></center>
+                                                        <table>
+                                <tr>
+                                    <td>
+                                        <label>Name :</label><input type="text"  style="background: white" id="lgname2" name="lgname2" value="<%=rs11.getString("name")%>">
+                                    </td>
+                                    <td>
+                                        <label>Phone no :</label><input type="text"  style="background: white" id="lgphno2" name="lgphno2" value="<%=rs11.getString("phno")%>">
+                                    </td>
+                                    <td>
+                                        <label>Door no :</label><input type="text"  style="background: white" id="lgdoorno2" name="lgdoorno2" value="<%=rs11.getString("Doorno")%>">
+                                    </td>
+                                    <td>
+                                        <label>Street :</label><input type="text"  style="background: white" id="lgstreet2" name="lgstreet2" value="<%=rs11.getString("streetname")%>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Area :</label><input type="text"  style="background: white" id="lgarea2" name="lgarea2" value="<%=rs11.getString("area")%>">
+                                    </td>
+
+                                    <td>
+                                        <label>City :</label><input type="text"  style="background: white" id="lgcity2" name="lgcity2" value="<%=rs11.getString("city")%>">
+                                    </td>
+                                    <td>
+                                        <label>Pin Code :</label><input type="text"  style="background: white" id="lgpincode2" name="lgpincode2" value="<%=rs11.getString("pincode")%>">
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+                            <br><br>
+ <input type="hidden" name="formtype" value="local">
+ <input type="hidden" name="rollno" value="<%=rs6.getString("rollno")%>">
+   <div align="right">
+            <input type="submit" id="submit" value="Submit" /></div>
+            <br><br>
+                        </form></center>
+
+
+
+
+ <%
                             }
                                Statement stmt7=null;
                                stmt7=con.createStatement();

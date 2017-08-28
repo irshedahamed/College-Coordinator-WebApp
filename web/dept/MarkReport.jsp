@@ -67,8 +67,8 @@
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="marks.jsp">View Marks</a></li>
                 
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="BonusQuery.jsp">Bonus Remove</a></li>
-
-		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="MarkReport.jsp">Marks Report</a></li>	
+	<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="MarkReport.jsp">Marks Report</a></li>
+	
 </ul></li>
 
 
@@ -82,9 +82,7 @@
 <li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="cireveupdates.jsp">Department Uploads</a>
     </li>
 
-
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="marksreport.jsp">Mark Sheet</a>
-
 </li>
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="studentanalysis.jsp">Student Analysis</a>
 
@@ -99,8 +97,8 @@
 <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
 
 
-<center>  <form action="../marks/displaymarkbonus.jsp" class="sky-form" method="post" target="_blank">
-    <header>Marks Sheet</header>
+<center>  <form action="MarksUploadcheckDisplay.jsp" class="sky-form" method="post" target="_blank">
+    <header>Marks Upload Check</header>
     <fieldset>					
 					<section>
 						
@@ -135,45 +133,11 @@
             </select>
                     <i></i>
                 </label></label>
-            <br> <br>
-             <label class="input">
-                                            <div align="left" size="3px"><b>
-                                                    Academic Year:</b></div>
-                                            <label class="select">
-                                                <select id="ayear" name="ayear">
-                                                    <option>Select</option>
-                                                    <option value="13">2013-2014</option>
-                                                    <option value="14">2014-2015</option>
-                                                    <option value="15">2015-2016</option>
-                                                    <option value="16">2016-2017</option>
-                                                    <option value="17">2017-2018</option>
-                                                    <option value="18">2018-2019</option>
-                                                    <option value="19">2019-2020</option>
-                                                    <option value="20">2020-2021</option>
-                                                    <option value="21">2021-2022</option>
-                                                    <option value="22">2023-2024</option>
-
-                                                </select>
                                                 <i></i>
                                             </label>
                                         </label>
                                         <br> <br>
-            <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                             Section </b></div>
-                <label class="select">
            
-            <select id="section" name="section" required>
-                <option disabled selected>select</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-            </select>
-                    <i></i>
-                    </label>
-            </label>
-            <br> <br>
                 
              <label class="input">
                                                     <div align="left" size="3px"><b>
@@ -194,39 +158,22 @@
                     <i></i>
             <br> <br>
                 </label></label>
-            
-            <label class="input">
+<label class="input">
                                                     <div align="left" size="3px"><b>
                                                              EXAM</b></div>
                 <label class="select">
             
             <select id="exam" name="exam" required>
                 <option disabled selected>select</option>
-                <option value="1">Assessment 1</option>
-                <option value="2">Assessment 2</option>
-                <option value="3">Assessment 3</option>
+                <option value="m1">Assessment 1</option>
+                <option value="m2">Assessment 2</option>
+                <option value="m3">Assessment 3</option>
                
             </select>
                     <i></i>
             <br> <br>
                 </label></label>
-            
-         <label class="input">
-                                                    <div align="left" size="3px"><b>
-                                                             Bonus</b></div>
-                <label class="select">
-            
-            <select id="bonus" name="bonus" required>
-                <option disabled selected>select</option>
-         <option value="50">With Bonus</option>
-                <option value="0">Without Bonus</option>
-                
-               
-            </select>
-                    <i></i>
-            <br> <br>
-                </label></label>
-                                        </section>
+                        
             
                            
              <div align="left">
@@ -236,8 +183,7 @@
                 </form></center>
 </div></div></section>
 
-</section>
-						<footer id="footer-widgets">
+					<footer id="footer-widgets">
 			<div class="container clearfix">
 								Powered by St.Joseph's
 							</div>
