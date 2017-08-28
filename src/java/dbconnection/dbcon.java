@@ -25,6 +25,7 @@ public class dbcon {
 
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"root","tiger");
 
+//jdbc:mysql://182.74.154.218/"+dbname,"akshaya","fluffy");
 
              
         } catch (SQLException ex) {
