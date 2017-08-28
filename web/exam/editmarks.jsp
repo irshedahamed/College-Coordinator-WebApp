@@ -93,6 +93,7 @@
         }
         session.setAttribute("regulation",regulation);
         session.setAttribute("sem",sem);
+        session.setAttribute("ayear", ayear);
         session.setAttribute("batch",batch);
         session.setAttribute("sec", sec);
         session.setAttribute("dept",dept);

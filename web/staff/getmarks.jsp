@@ -109,6 +109,16 @@
                             }
                         });
                     }
+                    if(parseInt(maxmark)===41)
+                    {
+                        console.log(41);
+                        $(".marks").each(function(index,value){
+                            
+                            if($(this).val()!=='A'){
+                                $(this).val( Math.round((parseInt( $(this).val())* (48/41) )) );
+                            }
+                        });
+                    }
                 }
                 });
                 
@@ -153,6 +163,7 @@
                         <option selected>100</option>
                         <%}else if(exam.contains("unit")){%>
                         <option selected>48</option>
+                        <option >41</option>
                         <%}else{%>
                         <option selected>30</option>
                         <option >60</option>
