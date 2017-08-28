@@ -1,9 +1,14 @@
 <%-- 
-    Document   : getmarks
-    Created on : 26 May, 2015, 2:39:34 PM
-    Author     : aravind
+    Document   : EditMark
+    Created on : 25 Aug, 2017, 8:14:32 PM
+    Author     : Irshed
 --%>
-
+<%@page import="Actor.Student"%>
+<%@page import="Mark.Mark"%>
+<%@page import="Subjects.Subjects"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="General.Batch"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="dbconnection.dbcon"%>
@@ -15,7 +20,6 @@
         try {
             String username = session.getAttribute("username").toString();
             String password = session.getAttribute("password").toString();
-
             Connection connn = new dbcon().getConnection("login");
             Statement sttt = connn.createStatement();
             String type = "";
@@ -25,24 +29,19 @@
                     type = rsss.getString("type");
                 }
                 if (type.equals("exam")) {
-
-
     %>
     <head>
         <link href="../css/tabledesign.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Edit Mark</title>
         <script type = "text/javascript"  src = "${pageContext.request.contextPath}/js/jquery.js"></script>
-
         <script type="text/javascript">
             $(document).ready(function () {
                 $("#marks").submit(function () {
                     flag = 0;
                     $(".marks").each(function (index) {
-
                         var patt = /^[0-9]+$/;
                         var result = patt.test($(this).val());
-
                         var result1 = ($(this).val() === 'A' || $(this).val() === 'N' || $(this).val() === 'null');
                         if ($(this).val() === '' || (result === false && result1 === false))
                         {
@@ -54,47 +53,30 @@
                             $(this).css({"border-color": "",
                                 "box-shadow": ""});
                         }
-
-                        //  console.log(index + ": " + $( this ).val());
                     });
                     if (flag === 1)
                         return false;
                 });
-
             });
-
         </script>
     </head>
-    <%      
-        String dept = request.getParameter("dept");
+    <%        String dept = request.getParameter("dept");
         String batch = request.getParameter("batch");
         String sec = request.getParameter("section");
-        Connection con = new dbcon().getConnection("sjitportal");
         String sem = request.getParameter("sem");
         String exam = request.getParameter("exam");
         String ayear = request.getParameter("ayear");
-        String regulation = null;
-        String subcode, rollno, name;
-        Statement st = con.createStatement();
-        String sql = "select * from regulations where batch='" + batch + "'";
-        ResultSet rs = st.executeQuery(sql);
-        while (rs.next()) {
-            regulation = rs.getString("regulation");
-        }
+        String regulation = Batch.getRegulation(batch);
         session.setAttribute("regulation", regulation);
         session.setAttribute("sem", sem);
         session.setAttribute("batch", batch);
         session.setAttribute("sec", sec);
         session.setAttribute("dept", dept);
         session.setAttribute("exam", exam);
-        rs.close();
-        st.close();
-        con.close();
-        int count = 0;
     %>
     <body>
     <center><h1>Mark Update for <%=dept.toUpperCase()%> Department <%=batch%> batch  <%=sem%>th semester <%=sec%> section</h1></center>
-    <form action="${pageContext.request.contextPath}/markupdate" id="marks" method="post">
+    <form action="${pageContext.request.contextPath}/ExamUpdate" id="marks" method="post">
         <center>
             <table class="bordered">
                 <thead>
@@ -103,67 +85,51 @@
                         <th>Register No</th>
                         <th>Name</th>
                             <%
-                                con = new dbcon().getConnection(dept);
-                                st = con.createStatement();
-                                String sql1 = "select * from subject_sem_table where regulation='" + regulation + "' and sem='" + sem + "' and (ayear like '%elective%" + ayear + "%' or ayear like 'all')  and subtype='theory' order by subcode";
-                                rs = st.executeQuery(sql1);
-                                String[] subcodes = new String[8];
-                                while (rs.next()) {
-                                    subcode = rs.getString("subcode");
-                                    subcodes[count] = subcode;
-                                    count++;
+                                Subjects s = new Subjects();
+                                s.setAyear(ayear);
+                                s.setRegulation(regulation);
+                                s.setSem(sem);
+                                List<String> Subcodelist = Subjects.getTherorySubCode(dept, s);
+                                for (String subcode : Subcodelist) {
                             %>
                         <th><%=subcode%></th>
-                            <% }
-                                rs.close();
-                            %>
+                            <% }%>
                     </tr>
                 </thead>
                 <%
-                    //String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
-                    String sql2 = "select *,CONVERT(regno,UNSIGNED INT) as sno from student_personal where batch='" + batch + "' and sec='" + sec + "' order by sno,name";
-                    rs = st.executeQuery(sql2);
-                    while (rs.next()) {
-                        rollno = rs.getString("rollno");
-                        name = rs.getString("name");
-                        String regno = rs.getString("regno");
+                    List<Student> list = Student.getAll(dept, batch, sec);
+                    for (Student stu : list) {
                 %>
                 <tr>
-                    <td><%=rollno%></td> 
-                    <td><%=regno%></td>
-                    <td><%=name%></td>
+                    <td><%=stu.getId()%></td> 
+                    <td><%=stu.getRegno()%></td>
+                    <td><%=stu.getName()%></td>
                     <%
-                        for (int i = 0; i < count; i++) {
-                            String sql3 = "select * from marks_table where rollno='" + rollno + "' and sem='" + sem + "' and subcode like '" + subcodes[i] + "'";
-                            Statement st1 = con.createStatement();
-                            ResultSet rs1 = st1.executeQuery(sql3);
-                            if (rs1.next()) {
-                                String a1 = rollno + "_" + i;
-                                String value = rs1.getString(exam);
-                                subcode = rs1.getString("subcode");
+                        int i = 0;
+                        for (String sub : Subcodelist) {
+                            Mark m = new Mark();
+                            m.setRollno(stu.getId());
+                            m.setSubcode(sub);
+                            m.setType(exam);
+                            if (Mark.isMarkAvailable(dept, m)) {
+                                m = Mark.getUserMark(dept, m);
+                                String a1 = stu.getId() + "_" + i;
                     %>
-                    <td><input type="text" size="3" class="marks" maxlength="3" name="<%=a1%>" id="<%=a1%>" value="<%=value%>"></td>
+                    <td><input type="text" size="3" class="marks" maxlength="3" name="<%=a1%>" id="<%=a1%>" value="<%=m.getMark()%>"></td>
                         <%
                         } else {
                         %>
                     <td><input type="text" size="3"  disabled="disabled"></td>
                         <%                    }
-                                    rs1.close();
-                                    st1.close();
+                                    i++;
                                 }
-                            }
-                            rs.close();
-                            if (st != null) {
-                                st.close();
-                            }
-                            if (con != null) {
-                                con.close();
                             }
                         %>
                 </tr>        
             </table>
+                <br><br>    
+            <input id="submit" type="submit" value="submit">
         </center>
-        <input type="submit" value="submit">
     </form>
 </body>
 <%

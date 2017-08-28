@@ -59,7 +59,7 @@ public class Mark {
     public String insertOrUpdateMarks(String dept, Mark m) throws SQLException {
         Connection con = new dbcon().getConnection(dept);
         PreparedStatement st1 = null, st = null, st2 = null;
-        try {            
+        try {
             if (!Mark.isMarkAvailable(dept, m)) {
                 String sql = "insert into marks values(?,?,?,?)";
                 st = con.prepareStatement(sql);
@@ -102,10 +102,10 @@ public class Mark {
         return "Not Updated";
     }
 
-    public static Mark getUserMark(String dept, Mark m) {
+    public static Mark getUserMark(String dept, Mark m) throws SQLException {
+        Connection con = new dbcon().getConnection(dept);
+        PreparedStatement st1 = null;
         try {
-            Connection con = new dbcon().getConnection(dept);
-            PreparedStatement st1 = null;
             String sql1 = "select * from marks where rollno=? and subcode=? and type=? ";
             st1 = con.prepareStatement(sql1);
             st1.setString(1, m.getRollno());
@@ -117,14 +117,21 @@ public class Mark {
             }
         } catch (SQLException ex) {
             Logger.getLogger(Mark.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (st1 != null) {
+                st1.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
         return m;
     }
-    
-        public static boolean isMarkAvailable(String dept, Mark m) {
+
+    public static boolean isMarkAvailable(String dept, Mark m) throws SQLException {
+        Connection con = new dbcon().getConnection(dept);
+        PreparedStatement st1 = null;
         try {
-            Connection con = new dbcon().getConnection(dept);
-            PreparedStatement st1 = null;
             String sql1 = "select * from marks where rollno=? and subcode=? and type=? ";
             st1 = con.prepareStatement(sql1);
             st1.setString(1, m.getRollno());
@@ -136,6 +143,13 @@ public class Mark {
             }
         } catch (SQLException ex) {
             Logger.getLogger(Mark.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (st1 != null) {
+                st1.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
         return false;
     }

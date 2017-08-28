@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import Actor.Student;
+import Subjects.Subjects;
 import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,6 +13,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -43,7 +46,7 @@ public class markupdate extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet markupdate</title>");            
+            out.println("<title>Servlet markupdate</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet markupdate at " + request.getContextPath() + "</h1>");
@@ -89,82 +92,81 @@ public class markupdate extends HttpServlet {
             String sec = session.getAttribute("sec").toString();
             String dept = session.getAttribute("dept").toString();
             String exam = session.getAttribute("exam").toString();
-            Connection  con = new dbcon().getConnection(dept);
-            String subcode = null,rollno,mark;
-            int count=0;
-            Statement st1=null,st2=null,st3=null,st4=null;
-            ResultSet rs1=null,rs2=null,rs3=null,rs4=null;
+            Connection con = new dbcon().getConnection(dept);
+            String subcode, rollno, mark;
+            int count = 0;
+            Statement st1 = null, st2 = null, st3 = null, st4 = null;
+            ResultSet rs1 = null, rs2 = null, rs3 = null, rs4 = null;
             st1 = con.createStatement();
             st2 = con.createStatement();
             st3 = con.createStatement();
             st4 = con.createStatement();
-            
-            
-            String sql1 = "select * from subject_sem_table where regulation='"+regulation+"' and sem='"+sem+"' and subtype='theory' order by subcode" ;
-             //String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
-                  String sql2= "select *,CONVERT(regno,UNSIGNED INT) as sno from student_personal where batch='"+batch+"' and sec='"+sec+"' order by sno,name";
-  
-            rs1=st1.executeQuery(sql1);
-            
-           
-            while(rs1.next())
-            {
-               
-                subcode=rs1.getString("subcode");
-                 //response.getWriter().println(subcode);
-                rs2=st2.executeQuery(sql2);
-                while(rs2.next())
-                {
-                    rollno=rs2.getString("rollno");
-                    String a1=rollno+"_"+count;
-                   //  response.getWriter().println(a1);
-                    mark = request.getParameter(a1);
-                    if(mark==null)
-                        continue;
-                    String sql3 = "select * from marks_table where rollno='"+rollno+"' and subcode='"+subcode+"'";
-                    
-                    rs3 = st3.executeQuery(sql3);
-                    if(!rs3.isBeforeFirst())
-                    {
-                        String sql4="insert into marks_table(rollno,sem,subcode,"+exam+") values('"+rollno+"','"+sem+"','"+subcode+"','"+mark+"')";
-                        st4.executeUpdate(sql4);
+
+            String sql1 = "select * from subject_sem_table where regulation='" + regulation + "' and sem='" + sem + "' and subtype='theory' order by subcode";
+         //   String sql2 = "select * from student_personal where batch='" + batch + "' and sec='" + sec + "' order by rollno";
+            String sql2 = "select *,CONVERT(regno,UNSIGNED INT) as sno from student_personal where batch='" + batch + "' and sec='" + sec + "' order by sno,name";
+            rs1 = st1.executeQuery(sql1);
+
+            while (rs1.next()) {
+                subcode = rs1.getString("subcode");
+                response.getWriter().println(subcode);
+                rs2 = st2.executeQuery(sql2);
+                while (rs2.next()) {
+                        rollno = rs2.getString("rollno");
+                        String a1 = rollno + "_" + count;
+                        response.getWriter().println(a1);
+                        mark = request.getParameter(a1);
+                        if (mark == null) {
+                            continue;
+                        }
+                        String sql3 = "select * from marks_table where rollno='" + rollno + "' and subcode='" + subcode + "'";
+
+                        rs3 = st3.executeQuery(sql3);
+                        if (!rs3.isBeforeFirst()) {
+                            String sql4 = "insert into marks_table(rollno,sem,subcode," + exam + ") values('" + rollno + "','" + sem + "','" + subcode + "','" + mark + "')";
+                            st4.executeUpdate(sql4);
+                        } else {
+                            String sql5 = "update marks_table set " + exam + "='" + mark + "' where rollno='" + rollno + "' and subcode='" + subcode + "'";
+                            st4.executeUpdate(sql5);
+                        }
+
+                        rs3.close();
+
                     }
-                    else
-                    {
-                        String sql5="update marks_table set "+exam+"='"+mark+"' where rollno='"+rollno+"' and subcode='"+subcode+"'";
-                        st4.executeUpdate(sql5);
-                    }
-                    
-                    rs3.close();
-                    
+                    count++;
                 }
-                count++;
-            }
-            response.getWriter().println("<center><h1>UPDATED SUCCESSFULLY</h1></center>");
-              if(st1!=null)
-                            st1.close();
-                if(st2!=null)
-                            st2.close();
-                              if(st3!=null)
-                                st3.close();
-                                if(st4!=null)
-                            st4.close();
-                              if(con!=null)
-                                con.close();
-        } catch (Exception ex) {
+                response.getWriter().println("<center><h1>UPDATED SUCCESSFULLY</h1></center>");
+                if (st1 != null) {
+                    st1.close();
+                }
+                if (st2 != null) {
+                    st2.close();
+                }
+                if (st3 != null) {
+                    st3.close();
+                }
+                if (st4 != null) {
+                    st4.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            }catch (Exception ex) {
             response.getWriter().print(ex);
         }
-       
-    }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+        } 
+        /**
+         * Returns a short description of the servlet.
+         *
+         * @return a String containing servlet description
+         */
+        @Override
+        public String getServletInfo
+
+        
+            () {
         return "Short description";
-    }// </editor-fold>
+        }// </editor-fold>
 
-}
+    }

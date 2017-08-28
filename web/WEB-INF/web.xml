@@ -328,6 +328,10 @@
         <servlet-name>deleteSubject</servlet-name>
         <servlet-class>deleteSubject</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ExamUpdate</servlet-name>
+        <servlet-class>Mark.ExamUpdate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -652,9 +656,13 @@
         <servlet-name>UpdateMarks</servlet-name>
         <url-pattern>/UpdateMarks</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>      
+    <servlet-mapping>
         <servlet-name>deleteSubject</servlet-name>
         <url-pattern>/deleteSubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExamUpdate</servlet-name>
+        <url-pattern>/ExamUpdate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

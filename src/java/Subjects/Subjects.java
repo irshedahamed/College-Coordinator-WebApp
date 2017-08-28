@@ -77,22 +77,30 @@ public class Subjects {
         this.ayear = ayear;
     }
 
-    public static List<String> getTherorySubCode(String dept, Subjects s) {
+    public static List<String> getTherorySubCode(String dept, Subjects s) throws SQLException {
         List<String> subcode = new ArrayList<String>();
+        PreparedStatement st = null;
+        Connection con = null;
         try {
-            Connection con = null;
             con = new dbcon().getConnection(dept);
             String sql1 = "select * from subject_sem_table where regulation=? and sem=? and (ayear like '%elective%=?%' or ayear like 'all')  and subtype='theory' order by subcode";
-            PreparedStatement st = con.prepareStatement(sql1);
+            st = con.prepareStatement(sql1);
             st.setString(1, s.getRegulation());
             st.setString(2, s.getSem());
-            st.setString(3, s.getAyear());
+           // st.setString(3, s.getAyear());
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
-                subcode.add(rs.getString("sucode"));
+                subcode.add(rs.getString("subcode"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Subjects.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+            if (con != null) {
+                con.close();
+            }
         }
         return subcode;
     }
