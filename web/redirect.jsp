@@ -6,9 +6,9 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%
-response.setStatus(301);
-String url=request.getParameter("url");
+    response.setStatus(301);
+    String url = request.getParameter("url");
 //System.out.println(url);
-response.setHeader( "Location", url);
-response.setHeader( "Connection", "close" );
+    response.setHeader("Location", url);
+    response.setHeader("Connection", "close");
 %>

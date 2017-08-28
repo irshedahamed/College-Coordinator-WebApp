@@ -12,7 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -122,6 +124,7 @@ public class Batch {
 
         return batch;
     }
+
     
     
     public static String getHTMLContent(){
@@ -159,5 +162,16 @@ public class Batch {
             }
         }
         return regulation;
+
     }
+
+    public static String getRegulationHTMLContent() {
+        String res = "";
+        for (Batch b : getAll()) {
+            res += "<option value='" + b.getRegulation() + "'>" + b.getRegulation() + "</option>";
+
+        }
+        return res;
+   }
+
 }

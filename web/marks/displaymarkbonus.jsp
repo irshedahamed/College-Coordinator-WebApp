@@ -1,4 +1,4 @@
-<%-- 
+<%--  
     Document   : displaymarkbonus
     Created on : 6 Sep, 2016, 8:55:29 PM
     Author     : Home
@@ -16,109 +16,109 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    
+
     <head>
         <style rel="stylesheet">
             /*
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
-*/
-/* 
-    Created on : 26 May, 2015, 3:36:50 PM
-    Author     : aravind
-*/
+            */
+            /* 
+                Created on : 26 May, 2015, 3:36:50 PM
+                Author     : aravind
+            */
 
 
 
-table {
-    *border-collapse: collapse; /* IE7 and lower */
-    border-spacing: 0;
-      
-    overflow-x : auto; 
-}
+            table {
+                *border-collapse: collapse; /* IE7 and lower */
+                border-spacing: 0;
+
+                overflow-x : auto; 
+            }
 
 
-.bordered {
-    border: solid #ccc 1px;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    -webkit-box-shadow: 0 1px 1px #ccc; 
-    -moz-box-shadow: 0 1px 1px #ccc; 
-    box-shadow: 0 1px 1px #ccc;         
-}
+            .bordered {
+                border: solid #ccc 1px;
+                -moz-border-radius: 6px;
+                -webkit-border-radius: 6px;
+                border-radius: 6px;
+                -webkit-box-shadow: 0 1px 1px #ccc; 
+                -moz-box-shadow: 0 1px 1px #ccc; 
+                box-shadow: 0 1px 1px #ccc;         
+            }
 
-.bordered tr:hover {
-    background: #fbf8e9;
-    -o-transition: all 0.1s ease-in-out;
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    -ms-transition: all 0.1s ease-in-out;
-    transition: all 0.1s ease-in-out;     
-}    
-    
-.bordered td, .bordered th {
-    border-left: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    padding: 4px;
-    text-align: left;    
-}
+            .bordered tr:hover {
+                background: #fbf8e9;
+                -o-transition: all 0.1s ease-in-out;
+                -webkit-transition: all 0.1s ease-in-out;
+                -moz-transition: all 0.1s ease-in-out;
+                -ms-transition: all 0.1s ease-in-out;
+                transition: all 0.1s ease-in-out;     
+            }    
 
-.bordered th {
-    background-color: #dce9f9;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
-    background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
-    background-image:    -moz-linear-gradient(top, #ebf3fc, #dce9f9);
-    background-image:     -ms-linear-gradient(top, #ebf3fc, #dce9f9);
-    background-image:      -o-linear-gradient(top, #ebf3fc, #dce9f9);
-    background-image:         linear-gradient(top, #ebf3fc, #dce9f9);
-    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
-    -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
-    box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
-    border-top: none;
-    text-shadow: 0 1px 0 rgba(255,255,255,.5); 
-}
+            .bordered td, .bordered th {
+                border-left: 1px solid #ccc;
+                border-top: 1px solid #ccc;
+                padding: 4px;
+                text-align: left;    
+            }
 
-.bordered td:first-child, .bordered th:first-child {
-    border-left: none;
-}
+            .bordered th {
+                background-color: #dce9f9;
+                background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
+                background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
+                background-image:    -moz-linear-gradient(top, #ebf3fc, #dce9f9);
+                background-image:     -ms-linear-gradient(top, #ebf3fc, #dce9f9);
+                background-image:      -o-linear-gradient(top, #ebf3fc, #dce9f9);
+                background-image:         linear-gradient(top, #ebf3fc, #dce9f9);
+                -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset; 
+                -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;  
+                box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+                border-top: none;
+                text-shadow: 0 1px 0 rgba(255,255,255,.5); 
+            }
 
-.bordered th:first-child {
-    -moz-border-radius: 6px 0 0 0;
-    -webkit-border-radius: 6px 0 0 0;
-    border-radius: 6px 0 0 0;
-}
+            .bordered td:first-child, .bordered th:first-child {
+                border-left: none;
+            }
 
-.bordered th:last-child {
-    -moz-border-radius: 0 6px 0 0;
-    -webkit-border-radius: 0 6px 0 0;
-    border-radius: 0 6px 0 0;
-}
+            .bordered th:first-child {
+                -moz-border-radius: 6px 0 0 0;
+                -webkit-border-radius: 6px 0 0 0;
+                border-radius: 6px 0 0 0;
+            }
 
-.bordered th:only-child{
-    -moz-border-radius: 6px 6px 0 0;
-    -webkit-border-radius: 6px 6px 0 0;
-    border-radius: 6px 6px 0 0;
-}
+            .bordered th:last-child {
+                -moz-border-radius: 0 6px 0 0;
+                -webkit-border-radius: 0 6px 0 0;
+                border-radius: 0 6px 0 0;
+            }
 
-.bordered tr:last-child td:first-child {
-    -moz-border-radius: 0 0 0 6px;
-    -webkit-border-radius: 0 0 0 6px;
-    border-radius: 0 0 0 6px;
-}
+            .bordered th:only-child{
+                -moz-border-radius: 6px 6px 0 0;
+                -webkit-border-radius: 6px 6px 0 0;
+                border-radius: 6px 6px 0 0;
+            }
 
-.bordered tr:last-child td:last-child {
-    -moz-border-radius: 0 0 6px 0;
-    -webkit-border-radius: 0 0 6px 0;
-    border-radius: 0 0 6px 0;
-}
+            .bordered tr:last-child td:first-child {
+                -moz-border-radius: 0 0 0 6px;
+                -webkit-border-radius: 0 0 0 6px;
+                border-radius: 0 0 0 6px;
+            }
 
-h2{
-    font-size: 18px;
-    margin: 0px;
-    padding: 0px;
-}
+            .bordered tr:last-child td:last-child {
+                -moz-border-radius: 0 0 6px 0;
+                -webkit-border-radius: 0 0 6px 0;
+                border-radius: 0 0 6px 0;
+            }
+
+            h2{
+                font-size: 18px;
+                margin: 0px;
+                padding: 0px;
+            }
             thead {display: table-header-group;}
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -126,77 +126,72 @@ h2{
     </head>
     <%
         String dept = request.getParameter("dept");
-        if(dept==null)
-        {
-            dept= session.getAttribute("dept").toString();
+        if (dept == null) {
+            dept = session.getAttribute("dept").toString();
         }
         String batch = request.getParameter("batch");
         String sec = request.getParameter("section");
         Connection con = new dbcon().getConnection("sjitportal");
-   
+
         String sem = request.getParameter("sem");
         String exam = request.getParameter("exam");
-        String ayear=request.getParameter("ayear");
-       
-        
-        String regulation=null;
-        String subcode,rollno,name;
-        
-        Statement st= con.createStatement();
-        String sql="select * from regulations where batch='"+batch+"'";
-        ResultSet rs= st.executeQuery(sql);
-        while(rs.next())
-        {
-            regulation=rs.getString("regulation");
+        String ayear = request.getParameter("ayear");
+
+        String regulation = null;
+        String subcode, rollno, name;
+
+        Statement st = con.createStatement();
+        String sql = "select * from regulations where batch='" + batch + "'";
+        ResultSet rs = st.executeQuery(sql);
+        while (rs.next()) {
+            regulation = rs.getString("regulation");
         }
-        session.setAttribute("regulation",regulation);
-        session.setAttribute("sem",sem);
-        session.setAttribute("batch",batch);
+        session.setAttribute("regulation", regulation);
+        session.setAttribute("sem", sem);
+        session.setAttribute("batch", batch);
         session.setAttribute("sec", sec);
-        session.setAttribute("dept",dept);
+        session.setAttribute("dept", dept);
         session.setAttribute("exam", exam);
         rs.close();
         st.close();
         con.close();
-        int count=0;
-        %>
-        <body>
-            <%
+        int count = 0;
+    %>
+    <body>
+        <%
             String a1 = request.getParameter("word");
-           
-            if(a1!=null)
-            {
-            if(a1.equals("yes"))
-            {
-                String formName = "";
-                        formName = "MarkStudent.doc";
-                        File filepath = new File(formName);
-                         response.setContentType("application/vnd.ms-word");
-                        response.setHeader("Content-Disposition", "inline; filename=" + filepath);
+
+            if (a1 != null) {
+                if (a1.equals("yes")) {
+                    String formName = "";
+                    formName = "MarkStudent.doc";
+                    File filepath = new File(formName);
+                    response.setContentType("application/vnd.ms-word");
+                    response.setHeader("Content-Disposition", "inline; filename=" + filepath);
+                }
             }
-            }
-            %>
+        %>
         <div id="yourTableIdName1">
             <center><h2>St. Joseph's Institute of Technology, Chennai-119</h2></center>
-      <center><h2>Model -<%=exam%> Marks Report</h2>
-    
-       <h2 style="margin-left: 0px;">Batch: <%=batch%>      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           
-           &nbsp;
-                Branch Name: <%=dept.toUpperCase()%> </h2>
-       
-        <h2 style="margin-left: 0px;">Semester No: <%=sem%>
-           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        
-                Category: MODEL-<%=exam%>
-                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        
-                Section: <%=sec%></h2>
-        
-      </center>
+            <center><h2>Model -<%=exam%> Marks Report</h2>
+
+                <h2 style="margin-left: 0px;">Batch: <%=batch%>      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    &nbsp;
+                    Branch Name: <%=dept.toUpperCase()%> </h2>
+
+                <h2 style="margin-left: 0px;">Semester No: <%=sem%>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    Category: MODEL-<%=exam%>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    Section: <%=sec%></h2>
+
+            </center>
         </div>
-                <br>
-        <center>
+        <br>
+    <center>
         <form action="${pageContext.request.contextPath}/markupdate" method="post">
         <table class="bordered">
     <thead>
@@ -301,41 +296,24 @@ h2{
     
        <td><%=total%></td>
 
-       <%
-        }
-        else
-        {
-            %>
-            <td>   </td>
-            
-            <%
-        }
-        
-        rs2.close();
+            if (st != null) {
+                st.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+
+                    %>
 
 
-       }
-        rs1.close();
-%><%
-     }
-     rs.close();
+                </tr>        
 
-                            if(st!=null)
-                            st.close();
-                              if(con!=null)
-                                con.close();
-     
-     %>
-     
-     
-    </tr>        
-    
-        
-</table>
+
+            </table>
         </form>
-        </center>
-     <br>
-     <center><a id="exportword" href ="displaymarkbonus.jsp?word=yes&dept=<%=dept%>&section=<%=sec%>&batch=<%=batch%>&sem=<%=sem%>&exam=<%=exam%>&ayear=<%=ayear%>&bonus=<%=bonusreq%>" >Export to word</a>
-        </center>
-    </body>
+    </center>
+    <br>
+    <center><a id="exportword" href ="displaymarkbonus.jsp?word=yes&dept=<%=dept%>&section=<%=sec%>&batch=<%=batch%>&sem=<%=sem%>&exam=<%=exam%>&ayear=<%=ayear%>&bonus=<%=bonusreq%>" >Export to word</a>
+    </center>
+</body>
 </html>
