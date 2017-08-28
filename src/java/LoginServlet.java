@@ -155,10 +155,12 @@ public class LoginServlet extends HttpServlet {
                       response.sendRedirect("placement/home.jsp?user="+s1);
                   else if(s3.equals("transport"))
                       response.sendRedirect("transport/home.jsp?user="+s1);
+
                   else if(s3.equals("principal"))
                       response.sendRedirect("principal/home.jsp?user="+s1);
-                  
-                  else
+                  else if(s3.equals("idcard"))
+                      response.sendRedirect("idcard/idcard.jsp?user="+s1);
+                else
                   {
                       
                       response.sendRedirect("index.jsp?user="+s1);

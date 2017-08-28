@@ -325,12 +325,18 @@
         <servlet-class>deleteSubject</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>checkAlumni</servlet-name>
         <servlet-class>API.checkAlumni</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Switcher</servlet-name>
         <servlet-class>Dao.Login.Switcher</servlet-class>
+ </servlet>
+    <servlet>
+        <servlet-name>IdDownload</servlet-name>
+        <servlet-class>IdDownload</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -663,6 +669,11 @@
     <servlet-mapping>
         <servlet-name>Switcher</servlet-name>
         <url-pattern>/Switcher</url-pattern>
+ </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IdDownload</servlet-name>
+        <url-pattern>/IdDownload</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

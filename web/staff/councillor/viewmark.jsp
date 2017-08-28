@@ -1,3 +1,9 @@
+<%-- 
+    Document   : viewmark
+    Created on : 28 Aug, 2017, 8:58:30 AM
+    Author     : fedexfan
+--%>
+
 <%@page import="Actor.Councillor"%>
 <%@page import="Actor.Student"%>
 <%@page import="Actor.Staff"%>
@@ -40,7 +46,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		     <link rel="stylesheet" href="../../css/main.css">
       <link href="../../css/sky-forms.css" rel="stylesheet">
-        <link type="text/css" media="all" href="../../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
+        <link type="text/css" media="all" href="../../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Marks</title>
 	
     <!-- Custom CSS -->
     <link href="../../css/simple-sidebar.css" rel="stylesheet">
@@ -67,6 +73,7 @@
 <script src="../../js/angulartab.js"></script>
 		</head>
 			
+
 <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
 <div id="sidebar-wrapper">
@@ -191,41 +198,84 @@
 
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
-               
-                   <form action="DailyReportDisplay.jsp" class="sky-form">
-                       
-                       <header>DAILY REPORT</header>
-                      
-                       <fieldset>
-                       <label class="input">
-                    
-          <div align="left" size="3px"><b>
-                                                    Date:</b></div>
-                      <label class="input">                             
-            <input type="date" id="datepicker" placeholder="yyyy/mm/dd" name="datepicker" />
+                <%
+                
+                Councillor c=(Councillor) session.getAttribute("Councillor");
+                
+                %>
+<form action="../../marks/displaymark.jsp" class="sky-form" method="post" target="_blank">
+    <header>View Marks</header>
+    <fieldset>			
+                                                          <input  type="hidden" id="dept" name="dept" value="<%=c.getDept() %>" required>
+                
+         
+					<section>
+                                            <input id="ayear" name="ayear" type="hidden" value="<%=c.getAcademicyr() %>"  >
             
-             <i></i>
+                                            <input id="batch" type="hidden" value="<%=c.getBatch() %>" name="batch" required  >
+                                            <input id="section" type="hidden" value="<%=c.getSec() %>" name="section" required>
+            
+                <label class="input">
+                                                    <div align="left" size="3px"><b>
+                                                             SEM </b></div>
+                <label class="select">
+            
+            <select id="sem" name="sem" required>
+                <option disabled selected>select</option>
+                <option value="01">1</option>
+                <option value="02">2</option>
+                <option value="03">3</option>
+                <option value="04">4</option>
+                <option value="05">5</option>
+                <option value="06">6</option>
+                <option value="07">7</option>
+                <option value="08">8</option>
+            </select>
+                    <i></i>
             <br> <br>
-                           </label>  </label>
-                       
-                       
-                       
-                       
-                       
-            <input type="submit" id="submit" value="Submit">
-              </fieldset>
-                     
-                   </form>      
-                  
-        </section>
-
+                </label></label>
             
+            <label class="input">
+                                                    <div align="left" size="3px"><b>
+                                                             EXAM</b></div>
+                <label class="select">
+            
+            <select id="exam" name="exam" required>
+                <option disabled selected>select</option>
+                <option value="1">Model 1</option>
+                <option value="2">Model 2</option>
+                <option value="3">Model 3</option>
+                <option value="model1">Model 1</option>
+                <option value="model2">Model 2</option>
+                <option value="model3">Model 3</option>
+                <option value="unit1">Unit 1</option>
+                <option value="unit2">Unit 2</option>
+                <option value="unit3">Unit 3</option>
+            </select>
+                    <i></i>
+            <br> <br>
+                </label></label>   
+            </select>
+                    <i></i>
+            <br> <br>
+                </label></label>
+           
+                                        
+                                        
+                                        </section>
+            
+                           
+             <div align="left">
+            <input type="submit" id="submit" value="Submit" /></div>
+            <br>
+    </fieldset>
+                </form></center>
 
-</div></div>
+</section>
 
-<br><br></section></center>		
-
-        <footer id="footer-widgets">
+</section>
+		               
+<footer id="footer-widgets">
 			<div class="container clearfix">
 								Powered by St.Joseph's
 							</div>
