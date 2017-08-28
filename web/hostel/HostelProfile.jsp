@@ -1,11 +1,8 @@
 <%-- 
-    Document   : home
-    Created on : 18 Nov, 2016, 5:57:23 PM
-    Author     : Home
+    Document   : HostelDisplay
+    Created on : 14 Jul, 2017, 12:44:08 AM
+    Author     : pk
 --%>
-<%@page import="com.action.Find"%>
-<%@page import="Downloads.Circular"%>
-<%@page import="Downloads.College"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
@@ -14,10 +11,11 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Connection"%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en-US">
-    
-<% 
+<html>
+    <% 
    try
     {
     String username = session.getAttribute("username").toString();
@@ -40,8 +38,9 @@
     %>
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-<head>
-	<meta charset="UTF-8">
+
+    <head>
+    	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
         	     <link rel="stylesheet" href="../css/main.css">
      
@@ -49,12 +48,14 @@
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/sky-forms.css" rel="stylesheet">
  <script src="../js/jquery.js"></script>
-              
-	
-		
-		</head>
-		
-<body class="home page page-id-115 page-template-default has-toolbar">
+         
+  
+        
+        
+        
+        <title>Hostel Details</title>
+    </head>
+    <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
 
 		        
@@ -82,15 +83,15 @@
                                                     
 							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
 
+    
+
+
+
 <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="RoomNoChange.jsp">ROOM CHANGE</a>
   
 
 <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="HostelProfile.jsp">HostelStudentDetails</a>
-   
-    
 
-
-  
    <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Grant OutPass</a>
   <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="requests.jsp">Single OutPass</a>
@@ -108,11 +109,9 @@
          
  <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="local_guradian2.jsp">Add Detais</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="localguardiandisplay.jsp">View Details</a>
+
             </ul>
-
-
 </li>
-
 
 <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#"> Report</a>
 <ul class="sub-menu">
@@ -135,39 +134,25 @@
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
           <section class="landing">
-                   
-            <center><form action="display.jsp" class="sky-form" method="post" target="_blank">
-    <header>DAILY REPORT</header>
+
+    
+    
+    <body>
+              <center><form action="HostelStudentDisplay.jsp" class="sky-form" method="post" target="_blank">
+    <header>HOSTEL STUDENT DETAILS </header>
     <fieldset>					
 					<section>
-                                            
-                                 <div class="dept">
-			
-                                            <br><br>        
-                        			<label class="input">
-                                                    <div align="left" size="3px"><b>DEPARTMENT</b></div>
-							<label class="select">
-           
-               <select id="dept" name="dept" required>
-                <option  disabled selected>Select</option>
-                         <option value="all">ALL</option>
-                        
-                <%=Find.getDeptHTMLContent() %>
-                <option value="first">Science & Humanities</option>
-            </select>
-                    <i></i>                                    </label>
-                                                </label>
-                                 </div>
+
                                         
                                             <br><br>
             
             
             <label class="input">
                                                     <div align="left" size="3px" id="div7"><b>
-                                                             Date</b></div>
+                                                             Roll No</b></div>
                 <label class="input">
             
-            <input type="date" id="datepicker" placeholder="yyyy/mm/dd" name="datepicker" />
+            <input type="text"  placeholder="Student Rollno" name="rollno" />
             
              <i></i>
             <br> <br>
@@ -183,8 +168,7 @@
     </fieldset>
                 </form></center>
         
-            
-        </section>
+       </section>
 
 
             
@@ -254,4 +238,6 @@ catch(Exception e)
     
     %>
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
+
+    </body>
 </html>

@@ -326,6 +326,7 @@
     </servlet>
     <servlet>
 
+
         <servlet-name>checkAlumni</servlet-name>
         <servlet-class>API.checkAlumni</servlet-class>
     </servlet>
@@ -336,6 +337,19 @@
     <servlet>
         <servlet-name>IdDownload</servlet-name>
         <servlet-class>IdDownload</servlet-class>
+
+</servlet>
+    <servlet>
+        <servlet-name>Room_Change</servlet-name>
+        <servlet-class>Room_Change</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Local_Guard</servlet-name>
+        <servlet-class>Local_Guard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>local_guardian</servlet-name>
+        <servlet-class>local_guardian</servlet-class>
 
     </servlet>
     <servlet-mapping>
@@ -663,6 +677,7 @@
         <url-pattern>/deleteSubject</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>checkAlumni</servlet-name>
         <url-pattern>/checkAlumni</url-pattern>
     </servlet-mapping>
@@ -673,6 +688,18 @@
     <servlet-mapping>
         <servlet-name>IdDownload</servlet-name>
         <url-pattern>/IdDownload</url-pattern>
+</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Room_Change</servlet-name>
+        <url-pattern>/Room_Change</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Local_Guard</servlet-name>
+        <url-pattern>/Local_Guard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>local_guardian</servlet-name>
+        <url-pattern>/local_guardian</url-pattern>
 
     </servlet-mapping>
     <session-config>

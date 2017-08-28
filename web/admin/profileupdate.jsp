@@ -601,6 +601,44 @@
                                 
                                     
                             </table>
+         
+                            
+                                               <center><h3>Local Guardian2 Details</h3></center>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label>Name :</label><input type="text" class="check"  style="background: white" id="lgname2" name="lgname2">
+                                    </td>
+                                    <td>
+                                        <label>Phone no :</label><input type="text" class="check"  style="background: white" id="lgphno2" name="lgphno2">
+                                    </td>
+                                    <td>
+                                        <label>Door no :</label><input type="text" class="check"  style="background: white" id="lgdoorno2" name="lgdoorno2">
+                                    </td>
+                                    <td>
+                                        <label>Street :</label><input type="text" class="check"  style="background: white" id="lgstreet2" name="lgstreet2">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Area :</label><input type="text" class="check"  style="background: white" id="lgarea2" name="lgarea2">
+                                    </td>
+                                    
+                                    <td>
+                                        <label>City :</label><input type="text" class="check"  style="background: white" id="lgcity2" name="lgcity2">
+                                    </td>
+                                    <td>
+                                        <label>Pin Code :</label><input type="text" class="check"  style="background: white" id="lgpincode2" name="lgpincode2">
+                                    </td>
+                                    
+                                </tr>
+                                
+                                    
+                            </table>
+         
+                            
+                            
+                            
                             
                             <br><center><h3>Academic Details</h3></center>
                            

@@ -1,22 +1,25 @@
 <%-- 
-    Document   : home
-    Created on : 18 Nov, 2016, 5:57:23 PM
-    Author     : Home
+    Document   : RoomnoChange
+    Created on : 13 Jul, 2017, 1:21:28 AM
+    Author     : PK
 --%>
+ 
+<%@page import="General.Hostel"%>
+<%@page import="Actor.Student"%>
 <%@page import="com.action.Find"%>
-<%@page import="Downloads.Circular"%>
-<%@page import="Downloads.College"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.List"%>
-<%@page import="com.action.Base"%>
+<%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
 <%@page import="dbconnection.dbcon"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="java.util.List"%>
+
+<%@page import="java.sql.ResultSet"%>
+<%@page import="General.AcademicYear"%>
+<%@page import="General.Batch"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en-US">
-    
 <% 
    try
     {
@@ -38,10 +41,10 @@
     
     
     %>
-<!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-<head>
-	<meta charset="UTF-8">
+
+
+ <head>
+    	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
         	     <link rel="stylesheet" href="../css/main.css">
      
@@ -49,12 +52,14 @@
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/sky-forms.css" rel="stylesheet">
  <script src="../js/jquery.js"></script>
-              
-	
-		
-		</head>
-		
-<body class="home page page-id-115 page-template-default has-toolbar">
+         
+  
+        
+        
+        
+        <title>Room No Change</title>
+    </head>
+    <body class="home page page-id-115 page-template-default has-toolbar">
 <div id="wrapper" class="toggled">
 
 		        
@@ -82,15 +87,15 @@
                                                     
 							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="home.jsp">Home</a></li>
 
+    
+
+
+ 
 <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="RoomNoChange.jsp">ROOM CHANGE</a>
   
 
 <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="HostelProfile.jsp">HostelStudentDetails</a>
-   
-    
 
-
-  
    <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#">Grant OutPass</a>
   <ul class="sub-menu">
                 <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="requests.jsp">Single OutPass</a>
@@ -108,11 +113,9 @@
          
  <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="local_guradian2.jsp">Add Detais</a>
                     <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="localguardiandisplay.jsp">View Details</a>
+
             </ul>
-
-
 </li>
-
 
 <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768  current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#"> Report</a>
 <ul class="sub-menu">
@@ -135,61 +138,59 @@
 <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                 <br><br><br><br>
           <section class="landing">
-                   
-            <center><form action="display.jsp" class="sky-form" method="post" target="_blank">
-    <header>DAILY REPORT</header>
-    <fieldset>					
-					<section>
-                                            
-                                 <div class="dept">
-			
-                                            <br><br>        
-                        			<label class="input">
-                                                    <div align="left" size="3px"><b>DEPARTMENT</b></div>
-							<label class="select">
-           
-               <select id="dept" name="dept" required>
-                <option  disabled selected>Select</option>
-                         <option value="all">ALL</option>
-                        
-                <%=Find.getDeptHTMLContent() %>
-                <option value="first">Science & Humanities</option>
-            </select>
-                    <i></i>                                    </label>
-                                                </label>
-                                 </div>
-                                        
-                                            <br><br>
-            
-            
-            <label class="input">
-                                                    <div align="left" size="3px" id="div7"><b>
-                                                             Date</b></div>
-                <label class="input">
-            
-            <input type="date" id="datepicker" placeholder="yyyy/mm/dd" name="datepicker" />
-            
-             <i></i>
-            <br> <br>
-                </label></label>
-            
-            
-                                        </section>
-            
-                           
-             <div align="left">
-            <input type="submit" id="submit" value="Submit" /></div>
-            <br>
-    </fieldset>
-                </form></center>
-        
-            
-        </section>
 
+               <center> <form action="${pageContext.request.contextPath}/Room_Change" method="post">
+            <center><h1>ROOM CHANGE</h1></center>
+             
+             <fieldset>
+            <br><br><table cellspacing="10"><tr><td>
+                
+                <tr><td>
+                        <label>ACADEMIC YEAR :</label>
+                        <select name="academics">
+                                    <option value="">Select</option>
+                            
+                            <%= AcademicYear.getHTMLContent()  %>
+                    </select>
+                    </td></tr>
+                <tr><td>
+                                        <label>BATCH :</label>
+                                        <select name="batch">
+                                            <option value="">Select</option>
+                                             <%= Batch.getHTMLContent() %>
+                                        </select>
 
+                    </td></tr>
+               
+                <tr>   <td>
+                        <label>DEPARTMENT :</label>
+                    
+                    <select name="dept">
+                          <%=Find.getDeptHTMLContent() %>
+                    
+                    </select>
+                    </td> </tr>
+                <tr><td>
+                        <label>ROLL NO :</label><input type="text" value="" placeholder="enter rollno" name="rollno"/>    
             
-
-</div></div>
+                </td></tr>
+            
+               <tr><td>
+                        <label>NAME :</label><input type="text" value="" placeholder="enter your name" name="name"/>    
+            
+                </td></tr>
+            
+             <tr><td>
+                        <label>ROOM NO:</label><input type="text" value="" placeholder="enter your Room No" name="roomno"/>    
+            
+                </td></tr>
+            
+            </table>
+            
+            <center> <input type="submit" value="submit change"></center>
+            </fieldset>
+        </form>
+       </div></div>
 
 <br><br></section></center>		
 
@@ -254,4 +255,6 @@ catch(Exception e)
     
     %>
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
+
+    </body>
 </html>

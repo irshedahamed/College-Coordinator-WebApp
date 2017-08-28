@@ -1222,7 +1222,7 @@ $(document).on('change','.lsbatch',function(e){
        
             
                        
-                   <%=Find.getDeptHTMLContent() %>
+                       <%=Find.getDeptHTMLContent() %>
                
            
             
