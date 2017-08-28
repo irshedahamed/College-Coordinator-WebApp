@@ -663,17 +663,17 @@
         <url-pattern>/deleteSubject</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>checkAlumni</servlet-name>
         <url-pattern>/checkAlumni</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Switcher</servlet-name>
         <url-pattern>/Switcher</url-pattern>
-=======
+ </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>IdDownload</servlet-name>
         <url-pattern>/IdDownload</url-pattern>
->>>>>>> 747c2e2459974091f430bd7d7ec284b56ad19a64
+
     </servlet-mapping>
     <session-config>
         <session-timeout>
