@@ -10,20 +10,20 @@
 
     <head>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
-        
+
     </head>
     <body>
-        <%String msg=request.getParameter("msg"); %>
-       <h1 align='center'><%=msg%>  </h1>
+        <%String msg = request.getParameter("msg");%>
+        <h1 align='center'><%=msg%>  </h1>
     <center>
-           <div align="center">
-               <a href="SubjectSelection.jsp"><input type='submit' value='Back'></a>
-           </div>
-                   </div>
-           </div>
-               
-           
-        </center>
-         </section>
-    </body>
+        <div align="center">
+            <a href="SubjectSelection.jsp"><input type='submit' value='Back'></a>
+        </div>
+    </div>
+</div>
+
+
+</center>
+</section>
+</body>
 </html>

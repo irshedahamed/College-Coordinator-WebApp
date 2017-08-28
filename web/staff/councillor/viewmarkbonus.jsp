@@ -37,7 +37,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../css/main.css">
-
+        <link href="../../css/sky-forms.css" rel="stylesheet">
         <link type="text/css" media="all" href="../../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
 
         <!-- Custom CSS -->
@@ -50,7 +50,7 @@
         <link rel="stylesheet" href="../../css/angular-material.css">
 
         <link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
-        <link href="../../css/tabledesign.css" rel="stylesheet">
+
 
         <link rel="stylesheet" href="../../css/angulartab.css">
 
@@ -64,6 +64,7 @@
 
         <script src="../../js/angulartab.js"></script>
     </head>
+
 
     <body class="home page page-id-115 page-template-default has-toolbar">
         <div id="wrapper" class="toggled">
@@ -146,10 +147,8 @@
 
 
 
-
-
                             <nav id="main-nav">
-                                <ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="home.jsp">Home</a></li>
+                                <ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="home.jsp">Home</a></li>
 
                                     <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="StudentDisplay.jsp">Student Details</a>
 
@@ -161,7 +160,7 @@
 
                                         </ul>
                                     </li>
-                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Attendance Report</a>
+                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Attendance Report</a>
                                         <ul class="sub-menu">
                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="DailyReport.jsp">Daily Report</a></li>
                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SemReport.jsp">Semester Report</a></li>
@@ -172,8 +171,9 @@
                                     </li>
                                     <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="viewmarkbonus.jsp"</a>View Marks</li>
                                     <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="../home.jsp">Staff View</a>
-
                                 </ul>						</nav>
+
+
                         </div>
                     </div>
                 </div>
@@ -182,115 +182,150 @@
 
             <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                             <br><br><br><br>
-                            <section class="landing">
-                                <%int i = 1;%>
-                                <table class="bordered">
-                                    <thead>
-                                    <th>S.No</th>
-                                    <th>Roll no</th>
-                                    <th>Register number</th>
-                                    <th>Name</th>
-                                    </thead>
-                                    <tbody>    
-                                        <tr>
+                            <%
+                                Councillor c = (Councillor) session.getAttribute("Councillor");
 
-                                            <%
-                                                Staff s = new Staff(username);
+                            %>
+                            <form action="../../marks/displaymarkbonus.jsp" class="sky-form" method="post" target="_blank">
+                                <header>View Marks</header>
+                                <fieldset>			
+                                    <input  type="hidden" id="dept" name="dept" value="<%=c.getDept()%>" required>
 
-                                                for (Student stu : Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(), s.getCouncillorDetails().getSec())) {
-                                            %>
-                                            <td>
-                                                <%=i%>
-                                                <%i++;%>
-                                            </td>
-                                            <td>
-                                                <%= stu.getId()%>
-                                            </td>
-                                            <td>
-                                                <%= stu.getRegno()%>
-                                            </td>
-                                            <td>
-                                                <%= stu.getName()%>
-                                            </td>
-                                        </tr>
-                                        <%
 
-                                                //   out.println(stu.getName());
-                                            }
+                                    <section>
+                                        <input id="ayear" name="ayear" type="hidden" value="<%=c.getAcademicyr()%>"  >
 
-                                            session.setAttribute("Councillor", s.getCouncillorDetails());
+                                        <input id="batch" type="hidden" value="<%=c.getBatch()%>" name="batch" required  >
+                                        <input id="section" type="hidden" value="<%=c.getSec()%>" name="section" required>
 
-                                        %> 
+                                        <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    SEM </b></div>
+                                            <label class="select">
 
-                                    </tbody>
-                                </table>
+                                                <select id="sem" name="sem" required>
+                                                    <option disabled selected>select</option>
+                                                    <option value="01">1</option>
+                                                    <option value="02">2</option>
+                                                    <option value="03">3</option>
+                                                    <option value="04">4</option>
+                                                    <option value="05">5</option>
+                                                    <option value="06">6</option>
+                                                    <option value="07">7</option>
+                                                    <option value="08">8</option>
+                                                </select>
+                                                <i></i>
+                                                <br> <br>
+                                            </label></label>
+
+                                        <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    EXAM</b></div>
+                                            <label class="select">
+
+                                                <select id="exam" name="exam" required>
+                                                    <option disabled selected>select</option>
+                                                    <option value="1">Model 1</option>
+                                                    <option value="2">Model 2</option>
+                                                    <option value="3">Model 3</option>
+
+                                                </select>
+                                                <i></i>
+                                                <br> <br>
+                                            </label></label>
+
+                                        <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    Bonus</b></div>
+                                            <label class="select">
+
+                                                <select id="bonus" name="bonus" required>
+                                                    <option disabled selected>select</option>
+                                                    <option value="50">With Bonus</option>
+                                                    <option value="0">Without Bonus</option>
+
+
+                                                </select>
+                                                <i></i>
+                                                <br> <br>
+                                            </label></label>
+
+
+
+                                    </section>
+
+
+                                    <div align="left">
+                                        <input type="submit" id="submit" value="Submit" /></div>
+                                    <br>
+                                </fieldset>
+                            </form></center>
+
                             </section>
 
+                            </section>
 
+                            <footer id="footer-widgets">
+                                <div class="container clearfix">
+                                    Powered by St.Joseph's
+                                </div>
+                            </footer>
+                            <!-- #page-container -->
+                        </div>
+                    </div>
 
-                        </div></div>
+                    <footer id="page-footer">
+                        <div class="container clearfix">
+                            <div class="copy"></div>
+                            <!--<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>-->
+                            <nav id="footer-nav">
+                                <ul id="menu-footer-menu" class="menu">
+                                    <li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="../credits.html">Credits</a></li>
+                                    <li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-770"><a href="../index.jsp">Logout</a></li>
 
-                    <br><br></section></center>		
-
-            <footer id="footer-widgets">
-                <div class="container clearfix">
-                    Powered by St.Joseph's
-                </div>
-            </footer>
-            <!-- #page-container -->
-        </div>
-    </div>
-
-    <footer id="page-footer">
-        <div class="container clearfix">
-            <div class="copy"></div>
-            <!--<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>-->
-            <nav id="footer-nav">
-                <ul id="menu-footer-menu" class="menu">
-                    <li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="../credits.html">Credits</a></li>
-                    <li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-770"><a href="../index.jsp">Logout</a></li>
-
-                </ul>			</nav>
-        </div>
-    </footer>
+                                </ul>			</nav>
+                        </div>
+                    </footer>
 
 
 
 
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+                    <!-- Bootstrap Core JavaScript -->
+                    <script src="../js/bootstrap.min.js"></script>
 
-    <!-- Menu Toggle Script -->
-    <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-        $("#menu-toggle1").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-    </script>
-
-
-    <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
-
-<!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%        } else {
-            response.sendRedirect("../../index.jsp");
-        }
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../../index.jsp");
-    }
+                    <!-- Menu Toggle Script -->
+                    <script>
+                        $("#menu-toggle").click(function (e) {
+                            e.preventDefault();
+                            $("#wrapper").toggleClass("toggled");
+                        });
+                        $("#menu-toggle1").click(function (e) {
+                            e.preventDefault();
+                            $("#wrapper").toggleClass("toggled");
+                        });
+                    </script>
 
 
-%>
-</html>
+                    <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
+
+                    <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
+                    <%
+
+                            } else {
+                                response.sendRedirect("../../index.jsp");
+                            }
+                            if (sttt != null) {
+                                sttt.close();
+                            }
+                            if (connn != null) {
+                                connn.close();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            response.sendRedirect("../../index.jsp");
+                        }
+
+
+                    %>
+                    </html>

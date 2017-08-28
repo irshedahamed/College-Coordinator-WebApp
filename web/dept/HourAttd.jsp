@@ -4,6 +4,7 @@
     Author     : Aravind Tyson Edited By Arun
 --%>
 
+<%@page import="com.action.Find"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -291,7 +292,12 @@ document.getElementById("div5").innerHTML = response;
     <ul class="sub-menu">
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
-	</ul></li>
+                <li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="#">Notes Report</a>
+             <ul class="sub-menu">
+                        <% for(String dept:Find.Depts){%>
+                <li id="menu-item-767" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="notesReport.jsp?dept=<%=dept%>"><%=dept.toUpperCase() %></a>
+                <%}%>     </ul></li>
+    </ul></li>
 
 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">General Circular</a>
     <ul class="sub-menu">

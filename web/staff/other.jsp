@@ -4,22 +4,19 @@
 
 <%@page import="java.sql.*"%>
 <html lang="en-US">
-    <% 
-   try
-    {
-    String username = session.getAttribute("username").toString();
-    String password = session.getAttribute("password").toString();
-    String regno;
-    
-    Connection connn = new dbcon().getConnection("login");
-    Statement sttt = connn.createStatement();
-    String type1 ="";
-    ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='"+username+"' and password='"+password+"'");
-    if(rsss.isBeforeFirst())
-    {
-        
-    
-    
+    <%
+        try {
+            String username = session.getAttribute("username").toString();
+            String password = session.getAttribute("password").toString();
+            String regno;
+
+            Connection connn = new dbcon().getConnection("login");
+            Statement sttt = connn.createStatement();
+            String type1 = "";
+            ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='" + username + "' and password='" + password + "'");
+            if (rsss.isBeforeFirst()) {
+
+
     %>
 
     <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
@@ -72,54 +69,52 @@
 
 
                             <nav id="main-nav">
-							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
-<li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Profile</a>
-    <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personal.jsp">Personal Details</a></li>
-	
-
-        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="other.jsp">Other Details</a></li>
-    </ul>
-</li>
-
-                                                            <li id="menu-item-764" class="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Attendance</a>
-<ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="HourAttd.jsp">Update Attendance</a></li>
-	
-	<li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="SubjectWise.jsp">View Attendance</a>
-	
-</li>
-</ul>
-</li>
-
-<li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="">Marks</a>
-<ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="markupdate.jsp">Update Marks</a></li>
-	
-
-        <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="marksview.jsp">View Marks</a></li>
-    </ul>
-</li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Notes</a>
-    <ul class="sub-menu">
-		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
-		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
-	</ul></li>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
-<li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
+                                <ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
+                                    <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Profile</a>
+                                        <ul class="sub-menu">
+                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="personal.jsp">Personal Details</a></li>
 
 
-<%
-Staff s = new Staff(username);
-if(s.getCouncillorDetails().getBatch()!=null)
-{
-%>
- <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="councillor/home.jsp">Councillor View</a>
-        <%
-}
-%>
+                                            <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="other.jsp">Other Details</a></li>
+                                        </ul>
+                                    </li>
 
-</ul>						</nav>
+                                    <li id="menu-item-764" class="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Attendance</a>
+                                        <ul class="sub-menu">
+                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="HourAttd.jsp">Update Attendance</a></li>
+
+                                            <li id="menu-item-765" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-765"><a href="SubjectWise.jsp">View Attendance</a>
+
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="">Marks</a>
+                                        <ul class="sub-menu">
+                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="markupdate.jsp">Update Marks</a></li>
+
+
+                                            <li id="menu-item-765" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="marksview.jsp">View Marks</a></li>
+                                        </ul>
+                                    </li>
+                                    <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="#">Notes</a>
+                                        <ul class="sub-menu">
+                                            <li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
+                                            <li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesdownload.jsp">View Notes</a></li>
+                                        </ul></li>
+                                    <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
+                                    <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
+
+
+                                        <%    Staff s = new Staff(username);
+                                            if (s.getCouncillorDetails().getBatch() != null) {
+                                        %>
+                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="councillor/home.jsp">Councillor View</a>
+                                        <%
+                                            }
+                                        %>
+
+                                </ul>						</nav>
                         </div>
                     </div>
                 </div>
@@ -212,7 +207,7 @@ if(s.getCouncillorDetails().getBatch()!=null)
                                                         <TD><b>Place</b></TD>
                                                         <TD><%= place%></TD>
                                                     </TR>
-                                                    
+
                                                 </center>
 
 
@@ -245,7 +240,7 @@ if(s.getCouncillorDetails().getBatch()!=null)
                                                     <%
                                                         }
                                                     %></TABLE></center></div></div>
-                               
+
                             </div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li></ul></div>
                     </div></div></section>
 
@@ -299,18 +294,13 @@ if(s.getCouncillorDetails().getBatch()!=null)
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
 <%
-    
-    }
-    else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-    }
-catch(Exception e)
-    {
+        } else {
+            response.sendRedirect("../index.jsp");
+        }
+    } catch (Exception e) {
         e.printStackTrace();
         response.sendRedirect("../index.jsp");
     }
-    
-    %>
+
+%>
 </html>
