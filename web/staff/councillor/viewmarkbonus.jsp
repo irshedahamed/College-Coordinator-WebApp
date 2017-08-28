@@ -40,7 +40,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		     <link rel="stylesheet" href="../../css/main.css">
       <link href="../../css/sky-forms.css" rel="stylesheet">
-        <link type="text/css" media="all" href="../../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
+        <link type="text/css" media="all" href="../../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Consolidated Marks</title>
 	
     <!-- Custom CSS -->
     <link href="../../css/simple-sidebar.css" rel="stylesheet">
@@ -171,7 +171,15 @@
 
     </ul>
 </li>
-<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="viewmarkbonus.jsp"</a>View Marks</li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">View Marks</a>
+    <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmarkbonus.jsp">Consolidated Report</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmark.jsp">View Marks</a></li>
+
+	
+
+    </ul>
+</li>
 <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="../home.jsp">Staff View</a>
 </ul>						</nav>
 
