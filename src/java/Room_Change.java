@@ -94,6 +94,7 @@ public class Room_Change extends HttpServlet {
       //Class.forName("com.mysql.jdbc.Driver").newInstance();
       java.sql.Connection con = new dbcon().getConnection("sjitportal");
         Statement st = con.createStatement();
+        //TO_DO insert or Update
         String data = "insert into room_change values('"+academicyear+"','"+batch+"','"+dept+"','"+rollno+"','"+name+"','"+roomno+"')";
            st.executeUpdate(data);
             //response.sendRedirect("admin/batch.jsp");

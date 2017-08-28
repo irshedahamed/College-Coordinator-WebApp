@@ -33,7 +33,7 @@ public class Student {
     String mailid;
     String food;
     String bloodgrp;
-
+    String roomno;
     String course;
     String model_type;
 
@@ -54,7 +54,7 @@ public class Student {
     }
     
 
-    String roomno;
+    
 
     public String getFood() {
         return food;
@@ -363,7 +363,7 @@ public void setRoomno(String roomno){
                         a.setOrank(rs.getString("overallrank"));
                         a.setGname(rs.getString("gamename"));
                         a.setDoa(rs.getString("doa"));
-                        
+                        a.setMoi(rs.getString("MOI"));
 
                         
                     }
