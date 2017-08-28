@@ -268,7 +268,7 @@ public class Find {
                t=(float)m+ (float)c ;
             
                 t/=1.3;
-                t=(int)(t+0.5);//Rounding
+                t=(int)(t+0.99);//Rounding
            
            }else{
            t=(float)m+ ( (float)c /2 )+ ( ((float)u / 48)*15 );

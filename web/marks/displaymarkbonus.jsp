@@ -254,8 +254,8 @@ h2{
           String sql7="select * from bonuscut where rollno='"+rollno+"' and assessment <='"+exam+"'";
         ResultSet rs3 = st3.executeQuery(sql7);
         if(rs3.next())
-        {bonus=0;bonusreq=0;}
-        
+        {bonus=0;}
+        System.out.println(rollno +" "+bonus);
          %>
          <tr>
            
@@ -272,7 +272,7 @@ h2{
         
         while(rs1.next())
         {
-           bonus=bonusreq;
+          
         subcode = rs1.getString("subcode");
         String sql6 = "select * from marks_table where rollno='"+rollno+"' and subcode='"+subcode+"'";
          Statement st2 = con.createStatement();
@@ -286,61 +286,8 @@ h2{
         String markc= rs2.getString("cycle"+exam);
         String markm=rs2.getString("model"+exam);
         String marku=rs2.getString("unit"+exam);
+        total= Find.calculateTotal(markm, markc, marku);
         
-        int ABminus=0;
-        boolean noexam=false;
-        
-        if(markc!=null)
-            if(markc.equals("N")){
-            noexam=true;
-            }
-        
-        if(markm==null)
-            markm="0";
-        else if(markm.equals("null"))
-            markm="0";
-      
-        if(markc==null)
-            markc="0";
-        else if(markc.equals("null"))
-            markc="0";
-      
-        if(marku==null)
-            marku="0";
-        else if(marku.equals("null"))
-            marku="0";
-      
-        
-        if(markm.equals("A"))
-        {
-       bonus=0;
-        }
-        else
-         m = Integer.parseInt(markm);
-        
-        
-        if(markc.equals("A"))
-        c=0;
-        else
-        c = Integer.parseInt(markc);
-        
-        if(marku.equals("A"))
-        u=0;
-        else
-        u = Integer.parseInt(marku);
-        
-        
-        if(noexam)
-            total=m;
-        else
-        {
-           float t=(float)m+ ( (float)c /2 )+ ( ((float)u / 48)*15 );
-            
-                t/=1.3;
-                t=(int)(t+0.5);//Rounding
-                
-                total=(int)t;
-        }       
           //bonus logic
          if(bonus!=0){
         

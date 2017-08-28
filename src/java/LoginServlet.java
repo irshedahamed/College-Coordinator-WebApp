@@ -62,8 +62,8 @@ public class LoginServlet extends HttpServlet {
        
                 String regno=request.getParameter("uname");
 		String dob=request.getParameter("pass");
-                System.err.println(dob+regno);
-                System.out.println(dob+regno);
+               // System.err.println(dob+regno);
+               // System.out.println(dob+regno);
                 String s3="student";
 		response.setContentType("text/html");
                 Boolean flag=false;
