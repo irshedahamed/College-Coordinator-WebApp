@@ -128,7 +128,7 @@ h2{
             thead {display: table-header-group;}
         </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Id Data entry</title>
+        <title>Id Data</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Id Card Entry</title>
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -187,17 +187,15 @@ h2{
 
 	<footer id="page-footer">
 		<div class="container clearfix">
-			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<div class="copy"></div>
+			<!--<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>-->
 			<nav id="footer-nav">
-				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
-<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
-<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
-</ul>			</nav>
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-770"><a href="../index.jsp">Logout</a></li>
+
+                                </ul>			</nav>
 		</div>
 	</footer>
-
 
 
 

@@ -54,10 +54,9 @@
                                     <img src="../images/sjit.png"  height="70px"></a>
                             </div>
                             <nav id="main-nav">
-                                <ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778" >
-                                        <a href="home.jsp">Home</a></li>
+                                <ul id="menu-main-menu" class="menu">
                                     <li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778">
-                                        <a href="IdData.jsp">Data</a></li> </ul>      
+                                        <a href="IdData.jsp">Id Data</a></li> </ul>      
                             </nav>
                         </div>
                     </div>
@@ -82,17 +81,16 @@
 </div>
 
 <footer id="page-footer">
-    <div class="container clearfix">
-        <div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-        <button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
-        <nav id="footer-nav">
-            <ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-                <li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
-                <li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
-                <li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
-            </ul>			</nav>
-    </div>
-</footer>
+		<div class="container clearfix">
+			<div class="copy"></div>
+			<!--<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>-->
+			<nav id="footer-nav">
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-770"><a href="../index.jsp">Logout</a></li>
+
+                                </ul>			</nav>
+		</div>
+	</footer>
 
 
 
