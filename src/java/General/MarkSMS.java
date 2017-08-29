@@ -29,7 +29,7 @@ public class MarkSMS {
     try{
     conn=new dbcon().getConnection(Find.sdept(rollno));
     stmt=conn.createStatement();
-    ResultSet rs=stmt.executeQuery("SELECT model"+exam+",cycle"+exam+",subcode,CONVERT(model"+exam+",unsigned int)+CONVERT(cycle"+exam+",unsigned int) as combined FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
+    ResultSet rs=stmt.executeQuery("SELECT model"+exam+",cycle"+exam+",unit"+exam+",subcode FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
     int i=0;    
     while(rs.next())
         {
@@ -37,17 +37,10 @@ public class MarkSMS {
             int mark;
             String subcode=rs.getString("subcode").toUpperCase();
             subcode="Sub"+i+"("+subcode+")";
-             if(rs.getString("cycle"+exam).equals("N"))
-             {
-                 String a=rs.getString("model"+exam);
-                 if(a.equals("A"))
-                     a="0";
-                 mark=Integer.parseInt(a);
-             }
-             else
-            mark=(int) ((rs.getInt("combined")/1.3)+0.5);
+             
+            mark=Find.calculateTotal(rs.getString("model"+exam), rs.getString("cycle"+exam), rs.getString("unit"+exam));
             
-             if((rs.getString("cycle"+exam).equals("A")||(rs.getString("cycle"+exam).equals("N")))&&rs.getString("model"+exam).equals("A"))
+             if(rs.getString("model"+exam)!=null && rs.getString("model"+exam).equals("A"))
                 marks+=subcode+":"+"A"+", ";
              else
             marks+=subcode+":"+mark+", ";

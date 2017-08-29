@@ -156,6 +156,25 @@ public class Find {
     return null;
     }
 
+    public static String getDeptFullForm(String dept){
+    
+    if(dept.equals("cse"))
+            return "Computer Science and Engineering";
+    else if(dept.equals("ece"))
+            return "Electronics and Communication Engineering";
+    else if(dept.equals("eee"))
+            return "Electrical and Electronics Engineering";
+    else if(dept.equals("mech"))
+            return "Mechanical Engineering";
+    else if(dept.equals("civil"))
+            return "Civil Engineering";
+    else if(dept.equals("it"))
+            return "Information Technology";
+    
+    
+    return null;
+    
+    }
     public static String getDeptHTMLContent(){
     
          String HTML="<option disabled selected>SELECT</option>";
@@ -180,8 +199,87 @@ public class Find {
     return temp;
     }
     
+    public static int calculateBonus(int mark,String category){
     
+    if(category.equals("8+")&&mark>=70)
+        return 1;
+    if(category.equals("7.5+")&&mark>=65)
+        return 1;
+    if(category.equals("6.5+")&&mark>=60)
+        return 1;
+    if(category.equals("5+")&&mark>=50)
+        return 1;
+    if(category.equals("0")&&mark>=45)
+        return 1;
     
+        
+    return 0;
+    }
+    
+    public static int calculateTotal(String markm,String markc,String marku){
+    
+        int m,c,u;
+        boolean cycle=false,unit=false,model=false;
+            if(markm==null)
+            markm="0";
+        else if(markm.equals("null"))
+            markm="0";
+      
+        if(markc==null)
+            markc="0";
+        else if(markc.equals("null"))
+            markc="0";
+      
+        if(marku==null)
+            marku="0";
+        else if(marku.equals("null"))
+            marku="0";
+      
+        
+        m=0;
+        if(markm.equals("A"))
+       m=0;
+        else if(markm.equals("N"))
+            model=true;
+        else
+         m = Integer.parseInt(markm);
+        
+        c=0;
+        if(markc.equals("A"))
+        c=0;
+        else if(markc.equals("N"))
+            cycle=true;
+        else
+        c = Integer.parseInt(markc);
+        
+        u=0;
+        if(marku.equals("A"))
+        u=0;
+        else if(marku.equals("A"))
+        unit=true;
+        else
+        u = Integer.parseInt(marku);
+        
+        
+           float t=0.0F;
+           if(cycle && unit)
+               t=m;
+           else if(unit){
+               t=(float)m+ (float)c ;
+            
+                t/=1.3;
+                t=(int)(t+0.99);//Rounding
+           
+           }else{
+           t=(float)m+ ( (float)c /2 )+ ( ((float)u / 48)*15 );
+            
+                t/=1.3;
+                t=(int)(t+0.5);//Rounding
+           }
+        
+               
+    return (int)t;
+    }
     
     
     }

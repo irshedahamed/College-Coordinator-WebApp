@@ -1,3 +1,4 @@
+<%@page import="General.Batch"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>

@@ -5,10 +5,6 @@
         <servlet-class>LoginServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>markupdate</servlet-name>
-        <servlet-class>markupdate</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ElectiveUpdate</servlet-name>
         <servlet-class>ElectiveUpdate</servlet-class>
     </servlet>
@@ -332,13 +328,17 @@
         <servlet-name>ExamUpdate</servlet-name>
         <servlet-class>Mark.ExamUpdate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>checkAlumni</servlet-name>
+        <servlet-class>API.checkAlumni</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Switcher</servlet-name>
+        <servlet-class>Dao.Login.Switcher</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>markupdate</servlet-name>
-        <url-pattern>/markupdate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>JsonServlet</servlet-name>
@@ -663,6 +663,14 @@
     <servlet-mapping>
         <servlet-name>ExamUpdate</servlet-name>
         <url-pattern>/ExamUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkAlumni</servlet-name>
+        <url-pattern>/checkAlumni</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Switcher</servlet-name>
+        <url-pattern>/Switcher</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

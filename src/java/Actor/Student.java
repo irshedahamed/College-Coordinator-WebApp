@@ -34,6 +34,15 @@ public class Student {
     String food;
     String bloodgrp;
     String course;
+    String model_type;
+
+    public String getModel_type() {
+        return model_type;
+    }
+
+    public void setModel_type(String model_type) {
+        this.model_type = model_type;
+    }
     
     public String getFood() {
         return food;
@@ -383,6 +392,8 @@ public class Student {
                         s.setMailid(rs.getString("mailid"));
                         s.setFood(rs.getString("food"));
                         s.setBloodgrp(rs.getString("bloodgrp"));
+                        s.setCourse(rs.getString("course"));
+                        s.setModel_type(rs.getString("model_type"));
                         
                         list.add(s);
                     }
@@ -432,6 +443,7 @@ public class Student {
                         s.setFood(rs.getString("food"));
                         s.setBloodgrp(rs.getString("bloodgrp"));
                         s.setCourse(rs.getString("course"));
+                        s.setModel_type(rs.getString("model_type"));
 
                         
                     }

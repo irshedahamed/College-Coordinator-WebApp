@@ -69,20 +69,14 @@ public class Result {
     try{
     conn=new dbcon().getConnection(Find.sdept(rollno));
     stmt=conn.createStatement();
-    ResultSet rs=stmt.executeQuery("SELECT model"+exam+",cycle"+exam+",(CONVERT(model"+exam+",unsigned int)+CONVERT(cycle"+exam+",unsigned int)) as combined FROM marks_table where rollno='"+rollno+"' and sem like '"+sem+"'");
+    ResultSet rs=stmt.executeQuery("SELECT model"+exam+",cycle"+exam+",unit" +exam+" FROM marks_table where rollno like '"+rollno+"' and sem like '"+sem+"'");
         while(rs.next())
         {
-            if(!rs.getString("model"+exam).equals("A"))
-            if(rs.getString("cycle"+exam).equals("N")){
-            if(Integer.parseInt(rs.getString("model"+exam))<45)
+           
+           int a=Find.calculateTotal(rs.getString("model"+exam), rs.getString("cycle"+exam), rs.getString("unit"+exam));
+           if(a<45)
             fail++;
-            }
-            else{
-        int a=rs.getInt("combined");
-        if(!(rs.getString("model"+exam).equals("A")&&  rs.getString("cyle"+exam).equals("A")))
-        if(a<58)
-            fail++;
-            }
+            
         }
     }catch(Exception e){e.printStackTrace();}finally{
         try {

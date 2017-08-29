@@ -403,6 +403,8 @@
                                             <option value="A1B -ve">A1B -ve</option>
                                             <option value="A1 +ve">A1 +ve</option>
                                             <option value="A1 -ve">A1 -ve</option>
+                                            <option value="AB -ve">AB -ve</option>
+                                            <option value="AB +ve">AB +ve</option>
                                         </select>
                                     </td>
                                 </tr>
