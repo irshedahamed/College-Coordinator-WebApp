@@ -1,3 +1,8 @@
+<%@page import="General.Batch"%>
+<%@page import="java.util.List"%>
+<%@page import="Mark.Mark"%>
+<%@page import="Subjects.Subjects"%>
+<%@page import="Actor.Student"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -6,148 +11,132 @@
 <%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html lang="en">
-    <% 
-   try
-    {
-    String username = session.getAttribute("username").toString();
-    String password = session.getAttribute("password").toString();
-    
-    Connection connn = new dbcon().getConnection("login");
-    Statement sttt = connn.createStatement();
-    String type1 ="";
-    ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='"+username+"' and password='"+password+"'");
-    if(rsss.isBeforeFirst())
-    {
-        while(rsss.next())
-        {
-            type1 = rsss.getString("type");
-        }
-        if(type1.equals("first"))
-        {
-    
-    
-    %>
+    <%
+        try {
+            String username = session.getAttribute("username").toString();
+            String password = session.getAttribute("password").toString();
 
+            Connection connn = new dbcon().getConnection("login");
+            Statement sttt = connn.createStatement();
+            String type1 = "";
+            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
+            if (rsss.isBeforeFirst()) {
+                while (rsss.next()) {
+                    type1 = rsss.getString("type");
+                }
+                if (type1.equals("first")) {
+
+
+    %>
     <head>
         <title>Bootstrap Case</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
         <link href="../css/tabledesign.css" rel="stylesheet">
-
     </head>
     <body>
-
-        
-
-           
-                <%
-                    String rollno = request.getParameter("rollno");
-                    String batch="";
-                    String sem = request.getParameter("sem");
-                    
-                    Connection con = new dbcon().getConnection(Find.sdept(rollno));
-                    Statement st1 = con.createStatement();
-                    String name="";
-                    ResultSet rs1= st1.executeQuery("select name from student_personal where rollno='"+rollno+"'");
-                    String subname="",subcode="",cycle1="",cycle2="",cycle3="",model1="",model2="",model3="";
-                   if(rs1.next())
-                   {
-                       name=rs1.getString("name");
-                              
-                   }
-                       
-                   
-                    
-
-                %>
-                
-                
-    <center><h3>SEM <%=sem%></h3></center> 
-                    
-                    <center><table class="bordered"><tr>
-                                <th>SUBCODE</th>
-                                <th>SUBJECT NAME</th>
-                                <th>CYCLE 1</th>
-                                <th>MODEL 1</th>
-                                <th>CYCLE 2</th>
-                                <th>MODEL 2</th>
-                                <th>CYCLE 3</th>
-                                <th>MODEL 3</th>
-                            </tr>
-                            <%
-                    try
-                    {
-                    PreparedStatement st = con.prepareStatement("select marks_table.*,subject_sem_table.subname from marks_table,subject_sem_table where marks_table.subcode=subject_sem_table.subcode and marks_table.sem=? and rollno=?");
-                    st.setString(2, rollno);
-                    st.setString(1, sem);
-                   
-                    ResultSet rs= st.executeQuery();
-                    while(rs.next())
-                    {
-                        subcode=rs.getString("subcode");
-                        subname=rs.getString("subname");
-                        cycle1=rs.getString("cycle1");
-                        cycle2=rs.getString("cycle2");
-                        cycle3=rs.getString("cycle3");
-                        model1=rs.getString("model1");
-                        model2=rs.getString("model2");
-                        model3=rs.getString("model3");
-                    
-                    
-                    %>
-                            <tr>
-                                <td><%=subcode%></td>
-                                <td><%=subname%></td>
-                                <td><%=cycle1%></td>
-                                <td><%=model1%></td>
-                                <td><%=cycle2%></td>
-                                <td><%=model2%></td>
-                                <td><%=cycle3%></td>
-                                <td><%=model3%></td>
-                            </tr>
-                        <%
+        <%            String rollno = request.getParameter("rollno");
+            String sem = request.getParameter("sem");
+            String subname = null, cycle1 = null, cycle2 = null, cycle3 = null, model1 = null, model2 = null, model3 = null, unit1 = null, unit2 = null, unit3 = null;
+        %>
+    <center><h3>SEM <%=sem%></h3></center>
+    <center><h3>NAME : <%=Student.getById(rollno).getName()%></h3></center>
+    <center><table class="bordered"><tr>
+                <th>Subcode</th>
+                <th>Subject Name</th>
+                <th>Unit 1</th>
+                <th>Cycle 1</th>
+                <th>Model 1</th>
+                <th>Unit 2</th>
+                <th>Cycle 2</th>
+                <th>Model 2</th>
+                <th>Unit 3</th>
+                <th>Cycle 3</th>
+                <th>Model 3</th>
+            </tr>
+            <%
+                try {
+                    String dept = Find.sdept(rollno);
+                    Subjects s = new Subjects();
+                    Mark m = new Mark();
+                    s.setSem(sem);
+                    s.setRegulation(Batch.getRegulation(Student.getById(rollno).getBatch()));
+                    List<String> list = Subjects.getTherorySubCode(dept, s);
+                    for (String subcode : list) {
+                        subname = Subjects.getBySubcode(dept, subcode).getSubname();
+                        m.setRollno(rollno);
+                        m.setSubcode(subcode);
+                        List<Mark> li = Mark.getExamMark(dept, m);
+                        for (Mark mi : li) {
+                            if (mi.getType().equals("model1")) {
+                                model1 = mi.getMark();
+                            } else if (mi.getType().equals("unit1")) {
+                                unit1 = mi.getMark();
+                            } else if (mi.getType().equals("cycle1")) {
+                                cycle1 = mi.getMark();
+                            } else if (mi.getType().equals("model2")) {
+                                model2 = mi.getMark();
+                            } else if (mi.getType().equals("unit2")) {
+                                unit2 = mi.getMark();
+                            } else if (mi.getType().equals("cycle2")) {
+                                cycle2 = mi.getMark();
+                            } else if (mi.getType().equals("model3")) {
+                                model3 = mi.getMark();
+                            } else if (mi.getType().equals("unit3")) {
+                                unit3 = mi.getMark();
+                            } else if (mi.getType().equals("cycle3")) {
+                                cycle3 = mi.getMark();
+                            }
+                        }
+            %>
+            <tr>
+                <td><%=subcode%></td>
+                <td><%=subname%></td>
+                <td><%=unit1%></td>
+                <td><%=cycle1%></td>
+                <td><%=model1%></td>
+                <td><%=unit2%></td>
+                <td><%=cycle2%></td>
+                <td><%=model2%></td>
+                <td><%=unit3%></td>
+                <td><%=cycle3%></td>
+                <td><%=model3%></td>
+            </tr>
+            <%
+                        cycle1 = null;
+                        cycle2 = null;
+                        cycle3 = null;
+                        model1 = null;
+                        model2 = null;
+                        model3 = null;
+                        unit1 = null;
+                        unit2 = null;
+                        unit3 = null;
                     }
-                    }catch(Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-                        
-                        %>
-                      
-                        
-                        </table></center>
-                
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
+            %>
+        </table></center>
+</body>
+<%            } else {
+                response.sendRedirect("../index.jsp");
+            }
+        } else {
+            response.sendRedirect("../index.jsp");
+        }
 
-    </body>
-     <%
-         
-                            if(st1!=null)
-                            st1.close();
-                              if(con!=null)
-                                con.close();
-    }
-        else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-    }
-    else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-
-                            if(sttt!=null)
-                            sttt.close();
-                              if(connn!=null)
-                                connn.close();
-    }
-catch(Exception e)
-    {
+        if (sttt != null) {
+            sttt.close();
+        }
+        if (connn != null) {
+            connn.close();
+        }
+    } catch (Exception e) {
         e.printStackTrace();
         response.sendRedirect("../index.jsp");
     }
-    
-    %>
+
+%>
 </html>

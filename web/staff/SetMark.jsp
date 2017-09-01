@@ -103,6 +103,9 @@
                 });
                 $(".UpdateAll").click(function () {
                     var sbut = $(this);
+                    sbut.css("background-color", "#149dd2");
+                    sbut.css("color", "white");
+                    sbut.prop("disabled", true);
                     $(".click").each(function () {
                         var but = $(this);
                         var id = $(this).closest('tr').children('td#roll').text();
@@ -150,7 +153,7 @@
                                 but.css("color", "white");
                                 but.prop("disabled", true);
                             });
-                            sbut.prop("disabled", true); 
+                            sbut.val("Processed");
                         }
                     });
                 });

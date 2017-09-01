@@ -87,7 +87,7 @@ public class Subjects {
             st = con.prepareStatement(sql1);
             st.setString(1, s.getRegulation());
             st.setString(2, s.getSem());
-           // st.setString(3, s.getAyear());
+            // st.setString(3, s.getAyear());
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 subcode.add(rs.getString("subcode"));
@@ -103,5 +103,36 @@ public class Subjects {
             }
         }
         return subcode;
+    }
+
+    public static Subjects getBySubcode(String dept, String subcode) throws SQLException {
+        PreparedStatement st = null;
+        Connection con = null;
+        Subjects s = new Subjects();
+        try {
+            con = new dbcon().getConnection(dept);
+            String sql = "select * from subject_sem_table where subcode=?";
+            st = con.prepareStatement(sql);
+            st.setString(1, subcode);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                s.setSubcode(subcode);
+                s.setSem(rs.getString("sem"));
+                s.setAyear(rs.getString("ayear"));
+                s.setRegulation(rs.getString("regulation"));
+                s.setSubname(rs.getString("subname"));
+                s.setSubtype(rs.getString("subtype"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Subjects.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            if (st != null) {
+                st.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return s;
     }
 }

@@ -1,4 +1,5 @@
-      <%@page import="Actor.Student"%>
+      <%@page import="Mark.Mark"%>
+<%@page import="Actor.Student"%>
 <%-- 
     Document   : getmarks
     Created on : 26 May, 2015, 2:39:34 PM
@@ -91,27 +92,19 @@
            
         subcode = rs.getString("subcode");
         subname = rs.getString("subname");
-      Statement st2=con.createStatement();
-      ResultSet rs3 = st2.executeQuery("select * from marks_table where subcode='"+subcode+"' and rollno='"+rollno1+"'");
-      while(rs3.next())
-      {
-          String mark= rs3.getString(exam);
-          
-      
-        
-        
-        
-        
+        Mark m = new Mark();
+                    m.setSubcode(subcode);
+                    m.setType(exam);
+                    m.setRollno(rollno1);
         %>
         <tr>
         <td><%=subcode%>-<%=subname%></td>
-        <td><%=mark%></td>
+        <td><%= Mark.getUserMark(dept, m).getMark() %></td>
         </tr>
             
       
         
-        <% }
-      rs3.close();
+        <% 
         }
         rs.close();
         %>

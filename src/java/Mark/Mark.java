@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -152,5 +154,36 @@ public class Mark {
             }
         }
         return false;
+    }
+
+    public static List<Mark> getExamMark(String dept, Mark m) throws SQLException {
+        List<Mark> list = new ArrayList<Mark>();
+        Connection con = new dbcon().getConnection(dept);
+        PreparedStatement st1 = null;
+        try {
+            String sql1 = "select * from marks where rollno=? and subcode=? ";
+            st1 = con.prepareStatement(sql1);
+            st1.setString(1, m.getRollno());
+            st1.setString(2, m.getSubcode());
+            ResultSet rs = st1.executeQuery();
+            while(rs.next()) {
+                Mark mi = new Mark();
+                mi.setRollno(m.getRollno());
+                m.setSubcode(m.getSubcode());
+                mi.setType(rs.getString("type"));
+                mi.setMark(rs.getString("mark"));
+                list.add(mi);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Mark.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (st1 != null) {
+                st1.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return list;
     }
 }
