@@ -159,4 +159,11 @@ public class Batch {
         }
         return regulation;
     }
+    public static String getRegulationHTMLContent() {
+        String res = "";
+        for (Batch b : getAll()) {
+            res += "<option value='" + b.getRegulation() + "'>" + b.getRegulation() + "</option>";
+        }
+        return res;
+   }
 }

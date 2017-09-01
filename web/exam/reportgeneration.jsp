@@ -4,6 +4,7 @@
     Author     : Aravind Tyson
 --%>
 
+<%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.dbcon"%>
@@ -343,25 +344,7 @@ document.getElementById("div5").innerHTML = response;
                 <label class="select">
             <select id="batch" name="batch">
                 <option disabled selected>Select</option>
-                <%
-                Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select batch from regulations");
-                    String batch=null;
-                    rs.beforeFirst();
-                    while(rs.next())
-                    {
-                        batch=rs.getString("batch");
-                %>
-                <option value=<%=batch%>><%=batch%></option>
-                <%
-                }
-
-                            if(stmt!=null)
-                            stmt.close();
-                              if(conbatch!=null)
-                                conbatch.close();
-                %>
+         <%= Batch.getHTMLContent() %>
             </select>
                     <i></i>
                 </label></label>

@@ -70,7 +70,7 @@
                             },
                             function (data) {
                                 button.val('Generated');
-                                button.prop("disabled",true);
+                                button.prop("disabled", true);
                             }
                     );
 

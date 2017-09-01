@@ -1,4 +1,4 @@
-<%-- 
+<%--  
     Document   : displaymarkbonus
     Created on : 6 Sep, 2016, 8:55:29 PM
     Author     : Home
@@ -187,6 +187,7 @@ and open the template in the editor.
             <table class="bordered">
                 <thead>
 
+<<<<<<< HEAD
                     <tr>
 
                         <th name="cc">Roll No</th>
@@ -301,7 +302,6 @@ and open the template in the editor.
                         }
 
                     %>
-
 
                 </tr>        
 

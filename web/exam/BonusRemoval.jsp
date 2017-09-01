@@ -280,28 +280,22 @@ $("#menu-toggle1").click(function (e) {
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-    }
-        else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-    }
-    else
-    {
-        response.sendRedirect("../index.jsp");
-    }
+<%            } else {
+                response.sendRedirect("../index.jsp");
+            }
+        } else {
+            response.sendRedirect("../index.jsp");
+        }
 
-                            if(sttt!=null)
-                            sttt.close();
-                              if(connn!=null)
-                                connn.close();
-    }
-catch(Exception e)
-    {
+        if (sttt != null) {
+            sttt.close();
+        }
+        if (connn != null) {
+            connn.close();
+        }
+    } catch (Exception e) {
         e.printStackTrace();
         response.sendRedirect("../index.jsp");
     }
-    
 %>
 </html>
