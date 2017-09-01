@@ -187,7 +187,6 @@ and open the template in the editor.
             <table class="bordered">
                 <thead>
 
-<<<<<<< HEAD
                     <tr>
 
                         <th name="cc">Roll No</th>
