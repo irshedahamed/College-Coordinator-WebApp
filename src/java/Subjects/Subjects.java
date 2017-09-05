@@ -83,11 +83,11 @@ public class Subjects {
         Connection con = null;
         try {
             con = new dbcon().getConnection(dept);
-            String sql1 = "select * from subject_sem_table where regulation=? and sem=? and (ayear like '%elective%=?%' or ayear like 'all')  and subtype='theory' order by subcode";
+            String sql1 = "select * from subject_sem_table where regulation=? and sem=? and (ayear like ? or ayear like 'all')  and subtype='theory' order by subcode";
             st = con.prepareStatement(sql1);
             st.setString(1, s.getRegulation());
             st.setString(2, s.getSem());
-            // st.setString(3, s.getAyear());
+             st.setString(3, "%elective%"+s.getAyear()+"%");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 subcode.add(rs.getString("subcode"));
