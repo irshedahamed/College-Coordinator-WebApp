@@ -168,6 +168,37 @@
                 document.getElementById("div5").innerHTML = response;
             }
         </script>
+        <script>
+            $(document).ready(function () {
+                invisible();
+                function invisible(){
+                $("#model1").hide();
+                $("#model2").hide();
+                $("#model3").hide();
+                $("#cycle1").hide();
+                $("#cycle2").hide();
+                $("#cycle3").hide();
+                $("#unit1").hide();
+                $("#unit2").hide();
+                $("#unit3").hide();}
+                var dept, batch, sem, i;
+                $(document).on('change', "#dept", function () {
+                    dept = $(this).val();
+                });
+                $(document).on('change', "#batch", function () {
+                    batch = $(this).val();
+                });
+                $(document).on('change', "#sem", function () {
+                    sem = $(this).val();
+                    $.post("../DateCheck", {"dept": dept, "batch": batch, "sem": sem}, function (list)
+                    {
+                        for (i = 0; i < list.length ; i++) {
+                            $("#" + list[i] + "").show();
+                        }
+                    });
+                });
+            });
+        </script>
     </head>
     <body class="home page page-id-115 page-template-default has-toolbar">
         <div id="wrapper" class="toggled">
@@ -369,15 +400,15 @@
                                                                         Exam</b></div>
                                                                 <select id="exam" name="exam" required >
                                                                     <option disabled selected>select</option>
-                                                                    <option value="model1">Model 1</option>
-                                                                    <option value="model2">Model 2</option>
-                                                                    <option value="model3">Model 3</option>
-                                                                    <option value="cycle1">Cycle 1</option>
-                                                                    <option value="cycle2">Cycle 2</option>
-                                                                    <option value="cycle3">Cycle 3</option>
-                                                                    <option value="unit1">Unit 1</option>
-                                                                    <option value="unit2">Unit 2</option>
-                                                                    <option value="unit3">Unit 3</option>
+                                                                    <option id="model1" value="model1">Model 1</option>
+                                                                    <option id="model2" value="model2">Model 2</option>
+                                                                    <option id="model3" value="model3">Model 3</option>
+                                                                    <option id="cycle1" value="cycle1">Cycle 1</option>
+                                                                    <option id="cycle2" value="cycle2">Cycle 2</option>
+                                                                    <option id="cycle3" value="cycle3">Cycle 3</option>
+                                                                    <option id="unit1" value="unit1">Unit 1</option>
+                                                                    <option id="unit2" value="unit2">Unit 2</option>
+                                                                    <option id="unit3" value="unit3">Unit 3</option>
                                                                 </select>
                                                                 <i></i>
                                                             </label></label>

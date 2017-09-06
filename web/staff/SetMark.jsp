@@ -153,7 +153,7 @@
                                 but.css("color", "white");
                                 but.prop("disabled", true);
                             });
-                            sbut.val("Processed");
+                            sbut.val("Processing..");
                         }
                     });
                 });
