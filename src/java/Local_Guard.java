@@ -99,7 +99,7 @@ public class Local_Guard extends HttpServlet {
       //Class.forName("com.mysql.jdbc.Driver").newInstance();
       Connection con = new dbcon().getConnection("sjitportal");
         Statement st = con.createStatement();
-           st.executeUpdate("insert into localguardian values('"+rollno+"','"+name+"','"+phoneno+"','"+doorno+"','"+street+"','"+area+"','"+city+"','"+pincode+"')");
+           st.executeUpdate("insert into localguardian2 values('"+rollno+"','"+name+"','"+phoneno+"','"+doorno+"','"+street+"','"+area+"','"+city+"','"+pincode+"')");
             //response.sendRedirect("admin/batch.jsp");
             response.getWriter().write("Successfully updated!");
             

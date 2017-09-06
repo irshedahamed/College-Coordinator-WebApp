@@ -169,7 +169,7 @@
             <%
               Connection con = new dbcon().getConnection("sjitportal");
                 Statement st = con.createStatement();
-               String sql = "select * from localguardian";
+               String sql = "select * from localguardian2";
             ResultSet rs = st.executeQuery(sql);
             while(rs.next())
             {

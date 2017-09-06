@@ -206,24 +206,39 @@ h2{
                     {
                         
                         subjname=rssub.getString("subname");
-    %>      
+    %>    
+        
     <%               
           Statement s5=con.createStatement();
             ResultSet rsss= s5.executeQuery("select * from subject_allocation where batch='"+batch+"' and sem='"+sem+"' and subcode='"+subcode+"' and sec='"+sec+"'");
                    
-              String staffname = new String();
-                    
+              String staffid = new String();
+              String staffname = new String();      
                     
               if(rsss.next())
               {
-                  staffname=rsss.getString("staffname");
+                  staffid=rsss.getString("staffid");
+                  if(staffid==null||staffid.equals("null"))
+                  staffid="nil";
+                  else{
+                      Statement s6=con.createStatement();
+            ResultSet rsss1= s6.executeQuery("select * from staff_table where staffid='"+staffid+"' ");
+                   
+              
+                    
+                    
+              if(rsss1.next())
+              {
+                      staffname=rsss.getString("staffname");
                   if(staffname==null||staffname.equals("null"))
                   staffname="nil";
+              }
+                  }
               }
    
         %>
             
-        <th><%=subjname%>(<%=subcode%>)<br<%=staffname%></th>
+        <th><%=subjname%>(<%=subcode%>)<br><%=staffname%></th>
        
         <% 
 rsss.close();        

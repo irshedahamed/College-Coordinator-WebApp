@@ -146,7 +146,7 @@
   
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766 "><a href="MarkReport.jsp">Marks Report</a></li>
 	</ul>	
-</ul></li>
+</li>
 
 
 
@@ -201,7 +201,7 @@
                         path1=rst.getString("path");
                         com1=name1+" - "+description1;
                         %>
-    <a href="${pageContext.request.contextPath}/formsdownload?ind1=<%=name1 %>&path=<%=path1 %>&type1=circular" ><%=com1%></a>
+    <a href="${pageContext.request.contextPath}/formsdownload?ind1=<%=name1%>&path=<%=path1%>&type1=circular" ><%=com1%></a>
     
               <br>
               <%
@@ -234,7 +234,7 @@ String deptname = Find.sdept(username);
             
             
             while(rs.next())
-            {
+            {//
                 String file = rs.getString("name");
                 String desc = rs.getString("desc");
                 String type = rs.getString("type");
