@@ -42,17 +42,64 @@
         session.setAttribute("exam", exam);
     %>
     <body>
-        <div id="yourTableIdName1">
-            <center><h1><u><%=dept.toUpperCase()%> <%=sec%></u></h1></center>
-            <center><h1><u>BATCH:</u> <%=batch%>      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                      <u> SEM:</u> <%=sem%></h1></center>
-            <center><h1>MARKS REPORT</h1></center>
-        </div>
+    <center> <img src="../images/logo2.png" height="165px" width="700px" /></center>
+    <div id="yourTableIdName1">
+        <center><h2 style="font-size: 22px;">DEPARTMENT OF <%=Find.getDeptFullForm(dept).toUpperCase()%> </h2></center>
+        <center><h3>MARKS REPORT - <%=exam.toUpperCase()%> EXAM</h3></center>
+        <center><h3 style="">BATCH: <%=batch%>      
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Academic Year: 20<%=ayear%>-20<%=(Integer.valueOf(ayear) + 1)%></h3>
+            <% for (Batch b : Batch.getAll()) {
+                    if (b.getBatch().equals(batch)) {
+            %>
+        <h3 style="">Year/Sec: <%=b.getStatus()%>-<%=dept.toUpperCase()%>-<%=sec%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Max Marks:
+            <% if (exam.contains("unit")) {%>
+            48
+            <% } else if (exam.contains("cycle")) {%>
+            30
+            <%
+            } else if (exam.contains("model")) {
+            %>
+            100
+            <%
+                }
+            %>
+        </h3>
+        <%
+                }
+            }
+        %>
+    </center> 
+    </div>
     <center>
-        <form>
+        <form action="${pageContext.request.contextPath}/markupdate" method="post">
             <table class="bordered">
                 <thead>
+
                     <tr>
-                        <th name="cc">Roll No</th>
+                        <th>S.No</th>
+                        <th name="cc">Register No</th>
                         <th>Name</th>
                             <%
                                 Subjects s = new Subjects();
@@ -66,14 +113,17 @@
                             <%
                                 }
                             %>
+                        <th>Signature</th>
                     </tr>
                 </thead>
                 <%
+                    int i = 0;
                     List<Student> list = Student.getAll(dept, batch, sec);
                     for (Student stu : list) {
                 %>
                 <tr>
-                    <td><%=stu.getId()%></td>        
+                    <td><%= i+1 %></td>
+                    <td><%=stu.getRegno()%></td>        
                     <td><%=stu.getName()%></td>
                     <%
                         for (String subcode : Subcodelist) {
@@ -84,9 +134,12 @@
                     %>
                     <td><%=Mark.getUserMark(dept, m).getMark()%></td>
                     <%
-                            }
-                        }
+                        } i++;
+                    %><td></td>
+                    <%                        
+                    }
                     %>
+
                 </tr>        
             </table>
         </form>

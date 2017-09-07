@@ -115,147 +115,150 @@
                 </ul>
             </div>
 
-            <%}
-                if (stmtd != null) {
-                    stmtd.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            %>
+	<%}
+        if(stmtd!=null)
+            stmtd.close();
+        if(con!=null)
+            con.close();
+        %>
+		
+		<header id="page-header"  class="fixed-header">
+		
+			<div id="page-header-inner">
 
-            <header id="page-header"  class="fixed-header">
+				<div id="header-container">
+					<div class="container clearfix">
+						<div id="main-logo">
+							<a href="#">
+								<img src="../../images/sjit.png"  height="70px"></a>
+						</div>
+                                            <ul id="auth-nav">
+							<li>
+								<div class="auth-nav-register">
+									<a class="button" href="#menu-toggle" id="menu-toggle">My Details</a>
+								</div>
+							</li>
+						</ul>
 
-                <div id="page-header-inner">
+						
+						
 
-                    <div id="header-container">
-                        <div class="container clearfix">
-                            <div id="main-logo">
-                                <a href="#">
-                                    <img src="../../images/sjit.png"  height="70px"></a>
-                            </div>
-                            <ul id="auth-nav">
-                                <li>
-                                    <div class="auth-nav-register">
-                                        <a class="button" href="#menu-toggle" id="menu-toggle">My Details</a>
-                                    </div>
-                                </li>
-                            </ul>
+						
+						
 
+						<nav id="main-nav">
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="home.jsp">Home</a></li>
 
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="StudentDisplay.jsp">Student Details</a>
+                                                            
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Update Attendance</a>
+    <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="attendance.jsp">Mark Absentees</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="editattendance.jsp">Edit</a></li>
+	
 
+    </ul>
+</li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Attendance Report</a>
+    <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="DailyReport.jsp">Daily Report</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SemReport.jsp">Semester Report</a></li>
 
+	
 
+    </ul>
+</li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">View Marks</a>
+    <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmarkbonus.jsp">Consolidated Report</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmark.jsp">View Marks</a></li>
 
+	
 
-                            <nav id="main-nav">
-                                <ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="home.jsp">Home</a></li>
+    </ul>
+</li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="../home.jsp">Staff View</a>
 
-                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="StudentDisplay.jsp">Student Details</a>
-
-                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Update Attendance</a>
-                                        <ul class="sub-menu">
-                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="attendance.jsp">Mark Absentees</a></li>
-                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="editattendance.jsp">Edit</a></li>
-
-
-                                        </ul>
-                                    </li>
-                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Attendance Report</a>
-                                        <ul class="sub-menu">
-                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="DailyReport.jsp">Daily Report</a></li>
-                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SemReport.jsp">Semester Report</a></li>
-
-
-
-                                        </ul>
-                                    </li>
-                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="viewmarkbonus.jsp"</a>View Marks</li>
-                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="../home.jsp">Staff View</a>
-
-                                </ul>						</nav>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-
-            <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-                            <br><br><br><br>
-                            <section class="landing">
-                                <%int i = 1;%>
-                                <table class="bordered">
-                                    <thead>
-                                    <th>S.No</th>
-                                    <th>Roll no</th>
-                                    <th>Register number</th>
-                                    <th>Name</th>
-                                    </thead>
-                                    <tbody>    
-                                        <tr>
-
-                                            <%
-                                                Staff s = new Staff(username);
-
-                                                for (Student stu : Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(), s.getCouncillorDetails().getSec())) {
-                                            %>
-                                            <td>
-                                                <%=i%>
-                                                <%i++;%>
-                                            </td>
-                                            <td>
-                                                <%= stu.getId()%>
-                                            </td>
-                                            <td>
-                                                <%= stu.getRegno()%>
-                                            </td>
-                                            <td>
-                                                <%= stu.getName()%>
-                                            </td>
-                                        </tr>
-                                        <%
-
-                                                //   out.println(stu.getName());
-                                            }
-
-                                            session.setAttribute("Councillor", s.getCouncillorDetails());
-
-                                        %> 
-
-                                    </tbody>
-                                </table>
-                            </section>
+</ul>						</nav>
+					</div>
+				</div>
+			</div>
+		</header>
 
 
+<center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
+                <br><br><br><br>
+               <section class="landing">
+                   <%int i=1;%>
+                  <table class="bordered">
+                      <thead>
+                          <th>S.No</th>
+                          <th>Roll no</th>
+                          <th>Register number</th>
+                          <th>Name</th>
+                      </thead>
+                      <tbody>    
+                      <tr>
+                          
+       <%
+       Staff s=new Staff(username);
+       
+       for(Student stu:Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(),s.getCouncillorDetails().getSec())){
+       %>
+       <td>
+                              <%=i%>
+                              <%i++;%>
+                          </td>
+                          <td>
+                              <%= stu.getId() %>
+                          </td>
+                          <td>
+                              <%= stu.getRegno() %>
+                          </td>
+                          <td>
+                              <%= stu.getName() %>
+                          </td>
+                          </tr>
+                          <%
+       
+   //   out.println(stu.getName());
+       }
+       
+       session.setAttribute("Councillor",s.getCouncillorDetails());
+       
+       %> 
+       
+                      </tbody>
+                  </table>
+        </section>
 
-                        </div></div>
+            
 
-                    <br><br></section></center>		
+</div></div>
 
-            <footer id="footer-widgets">
-                <div class="container clearfix">
-                    Powered by St.Joseph's
-                </div>
-            </footer>
-            <!-- #page-container -->
-        </div>
-    </div>
+<br><br></section></center>		
 
-    <footer id="page-footer">
-        <div class="container clearfix">
-            <div class="copy"></div>
-            <!--<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>-->
-            <nav id="footer-nav">
-                <ul id="menu-footer-menu" class="menu">
-                    <li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="../credits.html">Credits</a></li>
-                    <li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-770"><a href="../index.jsp">Logout</a></li>
+        <footer id="footer-widgets">
+			<div class="container clearfix">
+								Powered by St.Joseph's
+							</div>
+		</footer>
+			<!-- #page-container -->
+			</div>
+			</div>
 
-                </ul>			</nav>
-        </div>
-    </footer>
+	<footer id="page-footer">
+		<div class="container clearfix">
+			<div class="copy"></div>
+			<!--<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>-->
+			<nav id="footer-nav">
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="../credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-770"><a href="../index.jsp">Logout</a></li>
 
-
-
+                                </ul>			</nav>
+		</div>
+	</footer>
 
 
     <!-- Bootstrap Core JavaScript -->

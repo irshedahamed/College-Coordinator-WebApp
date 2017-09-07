@@ -115,129 +115,135 @@
                 </ul>
             </div>
 
-            <%}
-                if (stmtd != null) {
-                    stmtd.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            %>
+            
+		        
+	<%}
+        if(stmtd!=null)
+            stmtd.close();
+        if(con!=null)
+            con.close();
+        %>
+		
+		<header id="page-header"  class="fixed-header">
+		
+			<div id="page-header-inner">
 
-            <header id="page-header"  class="fixed-header">
+				<div id="header-container">
+					<div class="container clearfix">
+						<div id="main-logo">
+							<a href="#">
+								<img src="../../images/sjit.png"  height="70px"></a>
+						</div>
+                                            <ul id="auth-nav">
+							<li>
+								<div class="auth-nav-register">
+									<a class="button" href="#menu-toggle" id="menu-toggle">My Details</a>
+								</div>
+							</li>
+						</ul>
 
-                <div id="page-header-inner">
+						
+						
 
-                    <div id="header-container">
-                        <div class="container clearfix">
-                            <div id="main-logo">
-                                <a href="#">
-                                    <img src="../../images/sjit.png"  height="70px"></a>
-                            </div>
-                            <ul id="auth-nav">
-                                <li>
-                                    <div class="auth-nav-register">
-                                        <a class="button" href="#menu-toggle" id="menu-toggle">My Details</a>
-                                    </div>
-                                </li>
-                            </ul>
+						
+						<nav id="main-nav">
+							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="home.jsp">Home</a></li>
 
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="StudentDisplay.jsp">Student Details</a>
+                                                            
+                                                            <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Update Attendance</a>
+    <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="attendance.jsp">Mark Absentees</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="editattendance.jsp">Edit</a></li>
+	
 
+    </ul>
+</li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Attendance Report</a>
+    <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="DailyReport.jsp">Daily Report</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SemReport.jsp">Semester Report</a></li>
+	
+        
 
+    </ul>
+</li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">View Marks</a>
+    <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmarkbonus.jsp">Consolidated Report</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmark.jsp">View Marks</a></li>
 
+	
 
-                            <nav id="main-nav">
-                                <ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="home.jsp">Home</a></li>
+    </ul>
+</li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="../home.jsp">Staff View</a>
+</ul>						</nav>
 
-                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="StudentDisplay.jsp">Student Details</a>
-
-                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">Update Attendance</a>
-                                        <ul class="sub-menu">
-                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="attendance.jsp">Mark Absentees</a></li>
-                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="editattendance.jsp">Edit</a></li>
-
-
-                                        </ul>
-                                    </li>
-                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="">Attendance Report</a>
-                                        <ul class="sub-menu">
-                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="DailyReport.jsp">Daily Report</a></li>
-                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SemReport.jsp">Semester Report</a></li>
-
-
-
-                                        </ul>
-                                    </li>
-                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="viewmarkbonus.jsp"</a>View Marks</li>
-                                    <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="../home.jsp">Staff View</a>
-                                </ul>						</nav>
-
-
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-
-            <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-                            <br><br><br><br>
-
-                            <form action="DailyReportDisplay.jsp" class="sky-form">
-
-                                <header>DAILY REPORT</header>
-
-                                <fieldset>
-                                    <label class="input">
-
-                                        <div align="left" size="3px"><b>
-                                                Date:</b></div>
-                                        <label class="input">                             
-                                            <input type="date" id="datepicker" placeholder="yyyy/mm/dd" name="datepicker" />
-
-                                            <i></i>
-                                            <br> <br>
-                                        </label>  </label>
+						
+					</div>
+				</div>
+			</div>
+		</header>
 
 
+<center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
+                <br><br><br><br>
+               
+                   <form action="DailyReportDisplay.jsp" class="sky-form">
+                       
+                       <header>DAILY REPORT</header>
+                      
+                       <fieldset>
+                       <label class="input">
+                    
+          <div align="left" size="3px"><b>
+                                                    Date:</b></div>
+                      <label class="input">                             
+            <input type="date" id="datepicker" placeholder="yyyy/mm/dd" name="datepicker" />
+            
+             <i></i>
+            <br> <br>
+                           </label>  </label>
+                       
+                       
+                       
+                       
+                       
+            <input type="submit" id="submit" value="Submit">
+              </fieldset>
+                     
+                   </form>      
+                  
+        </section>
 
+            
 
+</div></div>
 
-                                    <input type="submit" id="submit" value="Submit">
-                                </fieldset>
+<br><br></section></center>		
 
-                            </form>      
+        <footer id="footer-widgets">
+			<div class="container clearfix">
+								Powered by St.Joseph's
+							</div>
+		</footer>
+			<!-- #page-container -->
+			</div>
+			</div>
 
-                            </section>
+	<footer id="page-footer">
+		<div class="container clearfix">
+			<div class="copy"></div>
+			<!--<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>-->
+			<nav id="footer-nav">
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="../credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-770"><a href="../index.jsp">Logout</a></li>
 
-
-
-                        </div></div>
-
-                    <br><br></section></center>		
-
-            <footer id="footer-widgets">
-                <div class="container clearfix">
-                    Powered by St.Joseph's
-                </div>
-            </footer>
-            <!-- #page-container -->
-        </div>
-    </div>
-
-    <footer id="page-footer">
-        <div class="container clearfix">
-            <div class="copy"></div>
-            <!--<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>-->
-            <nav id="footer-nav">
-                <ul id="menu-footer-menu" class="menu">
-                    <li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="../credits.html">Credits</a></li>
-                    <li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-770"><a href="../index.jsp">Logout</a></li>
-
-                </ul>			</nav>
-        </div>
-    </footer>
-
-
+                                </ul>			</nav>
+		</div>
+	</footer>
 
 
 

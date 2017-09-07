@@ -26,7 +26,6 @@ public class dbcon {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"root","1234");
 
 
-             
         } catch (SQLException ex) {
             Logger.getLogger(dbcon.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

@@ -364,278 +364,6 @@
                                             </td>
                                         </tr></table>
                                     <br><br>
-                                    <center><h3>Personal Details</h3></center>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label>Reg. No.:</label><input type="text" class="check"  style="background: white" id="regno" name="regno">
-                                            </td>
-                                            <td>
-                                                <label>Name :</label><input type="text" class="check"  style="background: white" id="stuname" name="stuname">
-                                            </td>
-
-                                            <td>
-                                                <label>Gender :</label><select name="gender">
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                </select></td>
-                                            <td>
-                                                <label>Blood Group :</label>
-
-                                                <select style="background: white"  name="bloodgroup">
-                                                    <option value="">Select</option>
-                                                    <option value="O +ve">O +ve</option>
-                                                    <option value="O -ve">O -ve</option>
-                                                    <option value="B +ve">B +ve</option>
-                                                    <option value="B -ve">B -ve</option>
-                                                    <option value="A +ve">A +ve</option>
-                                                    <option value="A -">A -ve</option>
-                                                    <option value="B1 +ve">B1 +ve</option>
-                                                    <option value="A2B +ve">A2B +ve</option>
-                                                    <option value="A2B -ve">A2B -ve</option>
-                                                    <option value="A2 +ve">A2 +ve</option>
-                                                    <option value="A2 -ve">A2 -ve</option>
-                                                    <option value="A1B +ve">A1B +ve</option>
-                                                    <option value="A1B -ve">A1B -ve</option>
-                                                    <option value="A1 +ve">A1 +ve</option>
-                                                    <option value="A1 -ve">A1 -ve</option>
-                                                </select>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label>Batch :</label>
-                                                <select name="batch">
-                                                    <option value="">Select</option>
-                                                    <%= Batch.getHTMLContent()%>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <label>Course :</label><select name="course">
-                                                    <option value="be">B.E</option>
-                                                    <option value="btech">B.Tech</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <label>Section :</label><input type="text" class="check"  style="background: white" id="sec" name="sec">
-                                            </td>
-                                            <td>
-                                                <label>Mobile no. :</label><input type="text" class="check"  style="background: white" id="stumobile" name="stumobile">
-                                            </td></tr><tr>
-                                            <td>
-                                                <label>Mail id :</label><input type="text" class="check"  style="background: white" id="stumail" name="stumail">
-                                            </td>
-
-                                            <td>
-                                                <label>Food :</label><select name="food">
-                                                    <option value="v">Veg</option>
-                                                    <option value="nv">Non Veg</option>
-
-                                                </select></td>
-
-                                            <td>
-                                                <label>Accommodation :</label><select name="acc">
-                                                    <option value="day">Day Scholar</option>
-                                                    <option value="hostel">Hosteler</option>
-
-                                                </select></td></tr><tr>
-                                            <td style="display: none">
-                                                <label>Initial :</label><input type="text" class=""  style="background: white" id="initial" name="initial">
-                                            </td>
-                                            <td>
-
-
-                                                <label style="display: none">Model Type :</label><select name="modeltype" style="display: none">
-                                                    <option value="gen">General</option>
-                                                    <option value="spl">Special</option>
-
-                                                </select></td>
-                                        </tr>
-                                        <tr>
-
-                                        </tr>
-
-                                    </table>
-
-                                    <br><center><h3>Contact Details</h3></center>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label>Door/Flat No/Apartement Name (Max 30 chars):</label><input type="text" class="check" maxlength="30"  style="background: white" id="doorno" name="doorno">
-                                            </td>
-                                            <td>
-                                                <label>Street (Max 30 chars):</label><input type="text" class="check" maxlength="30"  style="background: white" id="street" name="street">
-                                            </td>
-                                            <td>
-                                                <label>Area (Max 30 chars):</label><input type="text" class="check" maxlength="30"   style="background: white" id="area" name="area">
-                                            </td>
-                                            <td>
-                                                <label>City (Max 30 chars):</label><input type="text" class="check" maxlength="30"  style="background: white" id="city" name="city">
-                                            </td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label>District :</label><input type="text" class="check"  style="background: white" id="district" name="district">
-                                            </td>
-                                            <td>
-                                                <label>State :</label><input type="text" class="check"  style="background: white" id="state" name="state">
-                                            </td>
-                                            <td>
-                                                <label>Country :</label><input type="text" class="check"  style="background: white" id="country" name="country">
-                                            </td>
-                                            <td>
-                                                <label>Pincode :</label><input type="text" class="check"  style="background: white" id="pincode" name="pincode">
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <center><h3>Father Details</h3></center>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label>Father Name :</label><input type="text" class="check"  style="background: white" id="fathername" name="fathername">
-                                            </td>
-                                            <td>
-                                                <label>Qualification :</label><input type="text" class="check"  style="background: white" id="qualification" name="qualification">
-                                            </td>
-                                            <td>
-                                                <label>Occupation :</label><input type="text" class="check"  style="background: white" id="occupation" name="occupation">
-                                            </td>
-                                            <td>
-                                                <label>Designation :</label><input type="text" class="check"  style="background: white" id="designation" name="designation">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label>Address :</label><input type="text" class="check"  style="background: white" id="address" name="address">
-                                            </td>
-                                            <td>
-                                                <label>Landline :</label><input type="text" class="check"  style="background: white" id="landline" name="landline">
-                                            </td>
-                                            <td>
-                                                <label>Mobile :</label><input type="text" class="check"  style="background: white" id="mobile" name="mobile">
-                                            </td>
-                                            <td>
-                                                <label>Mail id :</label><input type="text" class="check"  style="background: white" id="mail" name="mail">
-                                            </td>
-                                        </tr>
-                                        <tr>
-
-                                        </tr>
-
-                                    </table>
-                                    <br><br> 
-
-                                    <center><h3>Mother Details</h3></center>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label>Mother Name :</label><input type="text" class="check"  style="background: white" id="mothername" name="mothername">
-                                            </td>
-                                            <td>
-                                                <label>Qualification :</label><input type="text" class="check"  style="background: white" id="qualification" name="mqualification">
-                                            </td>
-                                            <td>
-                                                <label>Occupation :</label><input type="text" class="check"  style="background: white" id="occupation" name="moccupation">
-                                            </td>
-                                            <td>
-                                                <label>Designation :</label><input type="text" class="check"  style="background: white" id="designation" name="mdesignation">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label>Address :</label><input type="text" class="check"  style="background: white" id="address" name="maddress">
-                                            </td>
-                                            <td>
-                                                <label>Landline :</label><input type="text" class="check"  style="background: white" id="landline" name="mlandline">
-                                            </td>
-                                            <td>
-                                                <label>Mobile :</label><input type="text" class="check"  style="background: white" id="mobile" name="mmobile">
-                                            </td>
-                                            <td>
-                                                <label>Mail id :</label><input type="text" class="check"  style="background: white" id="mail" name="mmail">
-                                            </td>
-                                        </tr>
-                                        <tr>
-
-                                        </tr>
-
-                                    </table>
-                                    <br><br> 
-
-                                    <center><h3>Local Guardian Details</h3></center>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label>Name :</label><input type="text" class="check"  style="background: white" id="lgname" name="lgname">
-                                            </td>
-                                            <td>
-                                                <label>Phone no :</label><input type="text" class="check"  style="background: white" id="lgphno" name="lgphno">
-                                            </td>
-                                            <td>
-                                                <label>Door no :</label><input type="text" class="check"  style="background: white" id="lgdoorno" name="lgdoorno">
-                                            </td>
-                                            <td>
-                                                <label>Street :</label><input type="text" class="check"  style="background: white" id="lgstreet" name="lgstreet">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label>Area :</label><input type="text" class="check"  style="background: white" id="lgarea" name="lgarea">
-                                            </td>
-
-                                            <td>
-                                                <label>City :</label><input type="text" class="check"  style="background: white" id="lgcity" name="lgcity">
-                                            </td>
-                                            <td>
-                                                <label>Pin Code :</label><input type="text" class="check"  style="background: white" id="lgpincode" name="lgpincode">
-                                            </td>
-
-                                        </tr>
-
-
-                                    </table>
-
-                                    <br><center><h3>Academic Details</h3></center>
-
-                                    <table><br><center><h5>10th Details</h5></center>
-
-                                        <tr>
-                                            <td>
-                                                <label>Name of School :</label><input type="text" class="check" style="background: white" id="10school" name="10school">
-                                            </td>
-                                            <td>
-                                                <label>Marks Obtained:</label><input type="text" class="check" style="background: white" id="10marks" name="10marks">
-                                            </td>
-                                            <td>
-                                                <label>Board of Study:</label>
-
-                                                <select name="10board">
-                                                    <option value="STATE BOARD">STATE BOARD</option>
-                                                    <option value="CBSE">CBSE</option>
-                                                    <option value="MATRICULATION">MATRICULATION</option>
-                                                    <option value="ANGLO INDIAN">ANGLO INDIAN</option>
-                                                    <option value="OTHERS">OTHERS</option>
-                                                    <option value="NA">NA</option>
-
-                                                </select>
-
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label>Medium of Instruction :</label>
-                                                <select name="10med">
-                                                    <option value="English">ENGLISH</option>
-                                                    <option value="Tamil">Tamil</option>
-                                                    <option value="Others">OTHERS</option>
-                                                    <option value="NA">NA</option>
-
-                                                </select>
-
-                                    </td>
-                                </tr></table>
-                            <br><br>
                             <center><h3>Personal Details</h3></center>
                             <table>
                                 <tr>
@@ -869,6 +597,44 @@
                                 
                                     
                             </table>
+         
+                            
+                                               <center><h3>Local Guardian2 Details</h3></center>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <label>Name :</label><input type="text" class="check"  style="background: white" id="lgname2" name="lgname2">
+                                    </td>
+                                    <td>
+                                        <label>Phone no :</label><input type="text" class="check"  style="background: white" id="lgphno2" name="lgphno2">
+                                    </td>
+                                    <td>
+                                        <label>Door no :</label><input type="text" class="check"  style="background: white" id="lgdoorno2" name="lgdoorno2">
+                                    </td>
+                                    <td>
+                                        <label>Street :</label><input type="text" class="check"  style="background: white" id="lgstreet2" name="lgstreet2">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Area :</label><input type="text" class="check"  style="background: white" id="lgarea2" name="lgarea2">
+                                    </td>
+                                    
+                                    <td>
+                                        <label>City :</label><input type="text" class="check"  style="background: white" id="lgcity2" name="lgcity2">
+                                    </td>
+                                    <td>
+                                        <label>Pin Code :</label><input type="text" class="check"  style="background: white" id="lgpincode2" name="lgpincode2">
+                                    </td>
+                                    
+                                </tr>
+                                
+                                    
+                            </table>
+         
+                            
+                            
+                            
                             
                             <br><center><h3>Academic Details</h3></center>
                            

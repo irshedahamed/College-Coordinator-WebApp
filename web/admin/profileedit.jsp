@@ -637,104 +637,159 @@
                                     if (rs5.next()) {
                                 %>
                             <center> <form method="post" name="mother" action="${pageContext.request.contextPath}/updateStudent">
-                                    <center><h3>Mother Details</h3></center>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label>Mother Name :</label><input type="text"  style="background: white" id="mothername" name="mothername" value="<%=rs5.getString("mothers_name")%>">
-                                            </td>
-                                            <td>
-                                                <label>Qualification :</label><input type="text"  style="background: white" id="qualification" name="mqualification" value="<%=rs5.getString("qualification")%>">
-                                            </td>
-                                            <td>
-                                                <label>Occupation :</label><input type="text"  style="background: white" id="occupation" name="moccupation" value="<%=rs5.getString("occupation")%>">
-                                            </td>
-                                            <td>
-                                                <label>Designation :</label><input type="text"  style="background: white" id="designation" name="mdesignation" value="<%=rs5.getString("designation")%>">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label>Address :</label><input type="text"  style="background: white" id="address" name="maddress" value="<%=rs5.getString("address")%>">
-                                            </td>
-                                            <td>
-                                                <label>Land Line :</label><input type="text"  style="background: white" id="landline" name="mlandline" value="<%=rs5.getString("landline")%>">
-                                            </td>
-                                            <td>
-                                                <label>Mobile :</label><input type="text"  style="background: white" id="mobile" name="mmobile"value="<%=rs5.getString("mobileno")%>">
-                                            </td>
-                                            <td>
-                                                <label>Mail id :</label><input type="text"  style="background: white" id="mail" name="mmail" value="<%=rs5.getString("mailid")%>">
-                                            </td>
-                                        </tr>
-                                        <tr>
+                            <center><h3>Mother Details</h3></center>
+                                                        <table>
+                                <tr>
+                                    <td>
+                                        <label>Mother Name :</label><input type="text"  style="background: white" id="mothername" name="mothername" value="<%=rs5.getString("mothers_name")%>">
+                                    </td>
+                                    <td>
+                                        <label>Qualification :</label><input type="text"  style="background: white" id="qualification" name="mqualification" value="<%=rs5.getString("qualification")%>">
+                                    </td>
+                                    <td>
+                                        <label>Occupation :</label><input type="text"  style="background: white" id="occupation" name="moccupation" value="<%=rs5.getString("occupation")%>">
+                                    </td>
+                                    <td>
+                                        <label>Designation :</label><input type="text"  style="background: white" id="designation" name="mdesignation" value="<%=rs5.getString("designation")%>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Address :</label><input type="text"  style="background: white" id="address" name="maddress" value="<%=rs5.getString("address")%>">
+                                    </td>
+                                    <td>
+                                        <label>Land Line :</label><input type="text"  style="background: white" id="landline" name="mlandline" value="<%=rs5.getString("landline")%>">
+                                    </td>
+                                    <td>
+                                        <label>Mobile :</label><input type="text"  style="background: white" id="mobile" name="mmobile"value="<%=rs5.getString("mobileno")%>">
+                                    </td>
+                                    <td>
+                                        <label>Mail id :</label><input type="text"  style="background: white" id="mail" name="mmail" value="<%=rs5.getString("mailid")%>">
+                                    </td>
+                                </tr>
+                                <tr>
 
-                                        </tr>
+                                </tr>
 
-                                    </table>
-                                    <br><br>
-                                    <input type="hidden" name="formtype" value="mother">
-                                    <input type="hidden" name="rollno" value="<%=rs5.getString("rollno")%>">
-                                    <div align="right">
-                                        <input type="submit" id="submit" value="Submit" /></div>
-                                    <br><br>
-                                </form></center>
-                                <%
-                                    }
-                                    Statement stmt6 = null;
-                                    stmt6 = con.createStatement();
-                                    sql = "select * from student_local_guardian where rollno like '" + rollno + "'";
-                                    ResultSet rs6 = stmt6.executeQuery(sql);
-                                    if (rs6.next()) {
-                                %>
-                            <center> <form method="post" name="localGuardian" action="${pageContext.request.contextPath}/updateStudent">
-                                    <center><h3>Local Guardian Details</h3></center>
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                <label>Name :</label><input type="text"  style="background: white" id="lgname" name="lgname" value="<%=rs6.getString("name")%>">
-                                            </td>
-                                            <td>
-                                                <label>Phone no :</label><input type="text"  style="background: white" id="lgphno" name="lgphno" value="<%=rs6.getString("phno")%>">
-                                            </td>
-                                            <td>
-                                                <label>Door no :</label><input type="text"  style="background: white" id="lgdoorno" name="lgdoorno" value="<%=rs6.getString("Doorno")%>">
-                                            </td>
-                                            <td>
-                                                <label>Street :</label><input type="text"  style="background: white" id="lgstreet" name="lgstreet" value="<%=rs6.getString("streetname")%>">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label>Area :</label><input type="text"  style="background: white" id="lgarea" name="lgarea" value="<%=rs6.getString("area")%>">
-                                            </td>
+                            </table>
+                            <br><br>
+<input type="hidden" name="formtype" value="mother">
+<input type="hidden" name="rollno" value="<%=rs5.getString("rollno")%>">
+                            <div align="right">
+            <input type="submit" id="submit" value="Submit" /></div>
+            <br><br>
+                        </form></center>
+                            <%
+                            }
+                               Statement stmt6=null;
+                               stmt6=con.createStatement();
+                            sql="select * from student_local_guardian where rollno like '"+rollno+"'";
+                            ResultSet rs6=stmt6.executeQuery(sql);
+                            if(rs6.next())
+{
+                            %>
+                        <center> <form method="post" name="localGuardian" action="${pageContext.request.contextPath}/updateStudent">
+                            <center><h3>Local Guardian Details</h3></center>
+                                                        <table>
+                                <tr>
+                                    <td>
+                                        <label>Name :</label><input type="text"  style="background: white" id="lgname" name="lgname" value="<%=rs6.getString("name")%>">
+                                    </td>
+                                    <td>
+                                        <label>Phone no :</label><input type="text"  style="background: white" id="lgphno" name="lgphno" value="<%=rs6.getString("phno")%>">
+                                    </td>
+                                    <td>
+                                        <label>Door no :</label><input type="text"  style="background: white" id="lgdoorno" name="lgdoorno" value="<%=rs6.getString("Doorno")%>">
+                                    </td>
+                                    <td>
+                                        <label>Street :</label><input type="text"  style="background: white" id="lgstreet" name="lgstreet" value="<%=rs6.getString("streetname")%>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Area :</label><input type="text"  style="background: white" id="lgarea" name="lgarea" value="<%=rs6.getString("area")%>">
+                                    </td>
 
-                                            <td>
-                                                <label>City :</label><input type="text"  style="background: white" id="lgcity" name="lgcity" value="<%=rs6.getString("city")%>">
-                                            </td>
-                                            <td>
-                                                <label>Pin Code :</label><input type="text"  style="background: white" id="lgpincode" name="lgpincode" value="<%=rs6.getString("pincode")%>">
-                                            </td>
+                                    <td>
+                                        <label>City :</label><input type="text"  style="background: white" id="lgcity" name="lgcity" value="<%=rs6.getString("city")%>">
+                                    </td>
+                                    <td>
+                                        <label>Pin Code :</label><input type="text"  style="background: white" id="lgpincode" name="lgpincode" value="<%=rs6.getString("pincode")%>">
+                                    </td>
 
-                                        </tr>
+                                </tr>
 
 
-                                    </table>
-                                    <br><br>
-                                    <input type="hidden" name="formtype" value="local">
-                                    <input type="hidden" name="rollno" value="<%=rs6.getString("rollno")%>">
-                                    <div align="right">
-                                        <input type="submit" id="submit" value="Submit" /></div>
-                                    <br><br>
-                                </form></center>
-                                <%
-                                    }
-                                    Statement stmt7 = null;
-                                    stmt7 = con.createStatement();
-                                    sql = "select * from student_other_details where rollno like '" + rollno + "'";
-                                    ResultSet rs7 = stmt7.executeQuery(sql);
-                                    if (rs7.next()) {
-                                %>
+                            </table>
+                            <br><br>
+ <input type="hidden" name="formtype" value="local">
+ <input type="hidden" name="rollno" value="<%=rs6.getString("rollno")%>">
+   <div align="right">
+            <input type="submit" id="submit" value="Submit" /></div>
+            <br><br>
+                        </form></center>                 
+ <%
+                            }
+                               Statement stmt11=null;
+                               stmt6=con.createStatement();
+                            sql="select * from student_local_guardian2 where rollno like '"+rollno+"'";
+                            ResultSet rs11=stmt11.executeQuery(sql);
+                            if(rs11.next())
+{
+                            %>
+                        <center> <form method="post" name="localGuardian2" action="${pageContext.request.contextPath}/updateStudent">
+                            <center><h3>Local Guardian2 Details</h3></center>
+                                                        <table>
+                                <tr>
+                                    <td>
+                                        <label>Name :</label><input type="text"  style="background: white" id="lgname2" name="lgname2" value="<%=rs11.getString("name")%>">
+                                    </td>
+                                    <td>
+                                        <label>Phone no :</label><input type="text"  style="background: white" id="lgphno2" name="lgphno2" value="<%=rs11.getString("phno")%>">
+                                    </td>
+                                    <td>
+                                        <label>Door no :</label><input type="text"  style="background: white" id="lgdoorno2" name="lgdoorno2" value="<%=rs11.getString("Doorno")%>">
+                                    </td>
+                                    <td>
+                                        <label>Street :</label><input type="text"  style="background: white" id="lgstreet2" name="lgstreet2" value="<%=rs11.getString("streetname")%>">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>Area :</label><input type="text"  style="background: white" id="lgarea2" name="lgarea2" value="<%=rs11.getString("area")%>">
+                                    </td>
+
+                                    <td>
+                                        <label>City :</label><input type="text"  style="background: white" id="lgcity2" name="lgcity2" value="<%=rs11.getString("city")%>">
+                                    </td>
+                                    <td>
+                                        <label>Pin Code :</label><input type="text"  style="background: white" id="lgpincode2" name="lgpincode2" value="<%=rs11.getString("pincode")%>">
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+                            <br><br>
+ <input type="hidden" name="formtype" value="local">
+ <input type="hidden" name="rollno" value="<%=rs6.getString("rollno")%>">
+   <div align="right">
+            <input type="submit" id="submit" value="Submit" /></div>
+            <br><br>
+                        </form></center>
+
+
+
+
+ <%
+                            }
+                               Statement stmt7=null;
+                               stmt7=con.createStatement();
+                            sql="select * from student_other_details where rollno like '"+rollno+"'";
+                            ResultSet rs7=stmt7.executeQuery(sql);
+                            if(rs7.next())
+{
+                            %>
                             <center> <form method="post" name="other" action="${pageContext.request.contextPath}/updateStudent">
                                     <center><h3>Other Details</h3></center>
                                     <table>

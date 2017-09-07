@@ -50,30 +50,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../css/main.css">
-
         <link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <script src="../js/jquery.js"></script>
-
-
-
-
-
         <link rel="stylesheet" href="../css/angular-material.css">
-
-
         <link rel="stylesheet" href="../css/sky-forms.css">
-
         <script src="../js/outpasscheck.js"></script>
-
     </head>
 
     <body class="home page page-id-115 page-template-default has-toolbar">
         <div id="wrapper" class="toggled">
-
-
-
-
             <header id="page-header"  class="fixed-header">
 
                 <div id="page-header-inner">
@@ -97,6 +83,11 @@
 
 
 
+                                    <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="RoomNoChange.jsp">ROOM CHANGE</a>
+
+
+                                    <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="HostelProfile.jsp">HostelStudentDetails</a>
+
 
 
                                     <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Grant OutPass</a>
@@ -111,6 +102,12 @@
 
 
                                     <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="Setup.jsp">Holiday Setup</a>
+                                    <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="#">LOCAL GUARDIAN2</a>
+                                        <ul class="sub-menu">
+
+                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="local_guradian2.jsp">Add Detais</a>
+                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="localguardiandisplay.jsp">View Details</a>
+                                        </ul>
 
 
                                     </li>
@@ -139,72 +136,62 @@
                     $(document).ready(function () {
 
                     <%                             Student stu = new Student();
-                    if (request.getParameter("rollno") != null) {
-                        stu = Student.getById(request.getParameter("rollno"));
-                    }
+                        if (request.getParameter("rollno") != null) {
+                            stu = Student.getById(request.getParameter("rollno"));
+                        }
 
-                    if (stu.getId() != null) {
+                        if (stu.getId() != null) {
                     %>
-                        $(".change").on('change keydown', function () {
+                    $(".change").on('change keydown', function () {
 
-                            var batch = '<%=stu.getBatch()%>';
+                    var batch = '<%=stu.getBatch()%>';
                             var dept = '<%=stu.getDept()%>';
                             var holiday = $(this).val();
-
                             if (batch !== null && dept !== null && holiday !== null) {
-                                $.post('../HolidayData', {
-                                    batch: batch,
-                                    dept: dept,
-                                    name: holiday
-                                }, function (response) {
+                    $.post('../HolidayData', {
+                    batch: batch,
+                            dept: dept,
+                            name: holiday
+                    }, function (response) {
 
-                                    // console.log(response);
-                                    $("#nfrom").val(response.from);
-                                    $("#ntill").val(response.till);
-                                });
-
-                            }
-                        });
-                    <%}%>
+                    // console.log(response);
+                    $("#nfrom").val(response.from);
+                            $("#ntill").val(response.till);
                     });
-
+                    });
+                    <% } %>
+                    });
                 </script>
 
                 <script>
-                    $(document).ready(function () {
-                        $("#display").hide();
-                        $(".pending").on('click', function () {
-                            $(this).parents("#pendingrequest").css('float', 'left');
+                            $(document).ready(function () {
+                    $("#display").hide();
+                            $(".pending").on('click', function () {
+                    $(this).parents("#pendingrequest").css('float', 'left');
                             $("#display").show();
                             var rollno = $(this).children().val();
                             //console.log(rollno);
                             $.post('../pendingDetails', {
-                                rollno: rollno.split('-')[0]
+                            rollno: rollno.split('-')[0]
                             }, function (response) {
-                                $("#pname").val(rollno.split('-')[1]);
-                                $("#preason").val(response.reason);
-                                $("#pfrom").val(response.from);
-                                $("#prollno").val(response.rollno);
-                                $("#ptill").val(response.till);
+                            $("#pname").val(rollno.split('-')[1]);
+                                    $("#preason").val(response.reason);
+                                    $("#pfrom").val(response.from);
+                                    $("#prollno").val(response.rollno);
+                                    $("#ptill").val(response.till);
                             });
-                        });
-
-
-                        $(".button").click(function () {
-
-
-                            $("[name='status']").val($(this).val());
-                            $("[disabled]").removeAttr('disabled');
-                        });
-
-
-                        $(document).on('change keyup', '#nreason', function () {
-
-                            toggle("nreason", "reason");
-                        });
-
                     });
+                            $(".button").click(function () {
 
+
+                    $("[name='status']").val($(this).val());
+                            $("[disabled]").removeAttr('disabled');
+                    });
+                            $(document).on('change keyup', '#nreason', function () {
+
+                    toggle("nreason", "reason");
+                    });
+                    });
                 </script>
             </header>
 
@@ -531,7 +518,7 @@
         <%         String msg = request.getParameter("msg");
             if (msg != null) {
         %>
-                        alert("OutPass Is Generated And Valid For 6 Hours");
+                            alert("OutPass Is Generated And Valid For 6 Hours");
         <% } %>
     </script>
 
