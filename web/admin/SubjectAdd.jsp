@@ -299,6 +299,92 @@
                                         </label>
 
                                         <br><br>
+                                        <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    Abbreviations: </b></div>
+                                            <label class="input">
+
+                                                <input type="text" name="abbreviation" maxlength="10">
+                                                
+                                                <i></i>
+                                            </label>
+                                        </label>
+
+                                        
+                                        <br><br>
+                                        <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    L: </b></div>
+                                            <label class="input">
+
+                                                <input type="text" name="l" maxlength="2">
+                                                
+                                                <i></i>
+                                            </label>
+                                        </label>
+                                        
+                                        
+                                        <br><br>
+                                        <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    P: </b></div>
+                                            <label class="input">
+
+                                                <input type="text" name="p" maxlength="2">
+                                                
+                                                <i></i>
+                                            </label>
+                                        </label>
+                                        
+                                        
+                                        <br><br>
+                                        <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    T: </b></div>
+                                            <label class="input">
+
+                                                <input type="text" name="t" maxlength="2">
+                                                
+                                                <i></i>
+                                            </label>
+                                        </label>
+                                        
+                                        
+                                        <br><br>
+                                        <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    C: </b></div>
+                                            <label class="input">
+
+                                                <input type="text" name="c" maxlength="2">
+                                                
+                                                <i></i>
+                                            </label>
+                                        </label>
+                                       
+                                         <br><br>
+                                        <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    Category: </b></div>
+                                            <label class="select">
+
+                                                <select id="subtype" name="category" >
+                                                    <option value="BS">BS</option>
+                                                    <option value="HS">HS</option>
+                                                    <option value="ES">ES</option>
+                                                    <option value="PC">PC</option>
+                                                    <option value="PE">PE</option>
+                                                    <option value="OE">OE</option>
+                                                    <option value="EEC">EEC</option>
+
+
+                                                </select>
+                                                <i></i>
+                                            </label>
+                                        </label>
+
+                                         
+                                        <br><br>
                                         <div align="right">
                                             <input type="submit" id="submit" value="Submit" /></div>
                                     </section>

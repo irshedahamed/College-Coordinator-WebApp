@@ -87,6 +87,15 @@ public class SubjectAdd extends HttpServlet {
        String subname=request.getParameter("subname");
        String type=request.getParameter("subtype");
        String sem=request.getParameter("sem");
+       
+       String abbr=request.getParameter("abbreviation");
+       String l=request.getParameter("l");
+       String t=request.getParameter("t");
+       String p=request.getParameter("p");
+       String c=request.getParameter("c");
+       String category=request.getParameter("category");
+       
+       
        String ayear;
        if(type.equals("etheory"))
        {ayear="elective";type=type.substring(1);}
