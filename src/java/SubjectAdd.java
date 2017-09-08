@@ -110,7 +110,7 @@ public class SubjectAdd extends HttpServlet {
             ResultSet rs=stmt.executeQuery("select subcode from subject_table where subcode like '"+subcode+"'");
              if(!rs.next())
             stmt.execute("insert into subject_table values('"+regulation+"','"+subcode+"','"+subname+"','"+
-                    type+"')");
+                    type+"','"+abbr+"','"+p+"','"+t+"','"+l+"','"+c+"','"+category+"')");
         
             if(stmt!=null)
                 stmt.close();
