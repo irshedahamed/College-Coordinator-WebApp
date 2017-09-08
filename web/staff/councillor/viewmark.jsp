@@ -242,9 +242,9 @@
             
             <select id="exam" name="exam" required>
                 <option disabled selected>select</option>
-                <option value="1">Model 1</option>
-                <option value="2">Model 2</option>
-                <option value="3">Model 3</option>
+                <option value="cycle1">Cycle 1</option>
+                <option value="cycle2">Cycle 2</option>
+                <option value="cycle3">Cycle 3</option>
                 <option value="model1">Model 1</option>
                 <option value="model2">Model 2</option>
                 <option value="model3">Model 3</option>
