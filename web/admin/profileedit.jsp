@@ -731,7 +731,7 @@
  <%
                             }
                                Statement stmt11=null;
-                               stmt6=con.createStatement();
+                               stmt11=con.createStatement();
                             sql="select * from student_local_guardian2 where rollno like '"+rollno+"'";
                             ResultSet rs11=stmt11.executeQuery(sql);
                             if(rs11.next())
@@ -772,7 +772,7 @@
                             </table>
                             <br><br>
  <input type="hidden" name="formtype" value="local">
- <input type="hidden" name="rollno" value="<%=rs6.getString("rollno")%>">
+ <input type="hidden" name="rollno" value="<%=rs11.getString("rollno")%>">
    <div align="right">
             <input type="submit" id="submit" value="Submit" /></div>
             <br><br>

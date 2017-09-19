@@ -170,17 +170,6 @@
         </script>
         <script>
             $(document).ready(function () {
-                invisible();
-                function invisible(){
-                $("#model1").hide();
-                $("#model2").hide();
-                $("#model3").hide();
-                $("#cycle1").hide();
-                $("#cycle2").hide();
-                $("#cycle3").hide();
-                $("#unit1").hide();
-                $("#unit2").hide();
-                $("#unit3").hide();}
                 var dept, batch, sem, i;
                 $(document).on('change', "#dept", function () {
                     dept = $(this).val();
@@ -192,8 +181,21 @@
                     sem = $(this).val();
                     $.post("../DateCheck", {"dept": dept, "batch": batch, "sem": sem}, function (list)
                     {
-                        for (i = 0; i < list.length ; i++) {
-                            $("#" + list[i] + "").show();
+                        for (i = 0; i < list.length; i++) {
+                            var x = list[i];
+                            if (x[0] === 'z') {
+                                x = x.substring(1);
+                            }
+                            function uppercase(str)
+                            {
+                                var array1 = str.split(' ');
+                                var newarray1 = [];
+                                for (var x = 0; x < array1.length; x++) {
+                                    newarray1.push(array1[x].charAt(0).toUpperCase() + array1[x].slice(1));
+                                }
+                                return newarray1.join(' ');
+                            }
+                            $("#exam").append(' <option value=' + list[i] + '>' + uppercase(x) + '</option>');
                         }
                     });
                 });
@@ -399,16 +401,7 @@
                                                                 <div align="left" size="3px"><b>
                                                                         Exam</b></div>
                                                                 <select id="exam" name="exam" required >
-                                                                    <option disabled selected>select</option>
-                                                                    <option id="model1" value="model1">Model 1</option>
-                                                                    <option id="model2" value="model2">Model 2</option>
-                                                                    <option id="model3" value="model3">Model 3</option>
-                                                                    <option id="cycle1" value="cycle1">Cycle 1</option>
-                                                                    <option id="cycle2" value="cycle2">Cycle 2</option>
-                                                                    <option id="cycle3" value="cycle3">Cycle 3</option>
-                                                                    <option id="unit1" value="unit1">Unit 1</option>
-                                                                    <option id="unit2" value="unit2">Unit 2</option>
-                                                                    <option id="unit3" value="unit3">Unit 3</option>
+                                                                    <option value="">Select</option>
                                                                 </select>
                                                                 <i></i>
                                                             </label></label>
