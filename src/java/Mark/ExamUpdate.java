@@ -36,9 +36,11 @@ public class ExamUpdate extends HttpServlet {
             String sec = session.getAttribute("sec").toString();
             String dept = session.getAttribute("dept").toString();
             String exam = session.getAttribute("exam").toString();
+            String ayear = session.getAttribute("ayear").toString();
             String mark;
             int count = 0;
             Subjects s = new Subjects();
+            s.setAyear(ayear);
             s.setRegulation(regulation);
             s.setSem(sem);
             List<String> Subcodelist = Subjects.getTherorySubCode(dept, s);

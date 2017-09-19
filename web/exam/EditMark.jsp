@@ -66,9 +66,11 @@
         String sem = request.getParameter("sem");
         String exam = request.getParameter("exam");
         String ayear = request.getParameter("ayear");
+        
         String regulation = Batch.getRegulation(batch);
         session.setAttribute("regulation", regulation);
         session.setAttribute("sem", sem);
+        session.setAttribute("ayear", ayear);
         session.setAttribute("batch", batch);
         session.setAttribute("sec", sec);
         session.setAttribute("dept", dept);
