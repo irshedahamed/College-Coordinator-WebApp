@@ -252,7 +252,7 @@ and open the template in the editor.
                             m.setRollno(rollno);
                             m.setSubcode(subcode);
                             List<Mark> li = Mark.getExamMark(dept, m);
-                            String markc = "null", markm = "null", marku = "null";
+                            String markc = "null", markm = "null", marku = "null",zmark=null;
                             if (li.size() != 0) {
                                 int total = 0;
                                 for (Mark mi : li) {
@@ -262,6 +262,9 @@ and open the template in the editor.
                                         marku = mi.getMark();
                                     } else if (mi.getType().equals("cycle" + exam)) {
                                         markc = mi.getMark();
+                                    }
+                                    else if (mi.getType().equals("zremodel" + exam)) {
+                                        zmark = mi.getMark();
                                     }
                                 }
                                 total = Find.calculateTotal(markm, markc, marku);
@@ -273,6 +276,24 @@ and open the template in the editor.
                                         total = 100;
                                     }
                                 }
+                                
+                                if(zmark!=null){
+                                
+                                if (bonus != 0) {
+                                    
+                                    if(!zmark.equals("A"))
+                                    if (Find.calculateBonus(Integer.valueOf(zmark), Student.getById(rollno).getModel_type()) == 1) {
+                                        total = 100;
+                                    }
+                                if(total<Integer.valueOf(zmark))
+                                    total=Integer.valueOf(zmark);
+                                
+                                }
+                                
+                                
+                                
+                                }
+                                
 
                     %>
 
