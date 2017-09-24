@@ -329,18 +329,17 @@
         <servlet-class>Mark.ExamUpdate</servlet-class>
     </servlet>
     <servlet>
-<servlet-name>checkAlumni</servlet-name>
+        <servlet-name>checkAlumni</servlet-name>
         <servlet-class>API.checkAlumni</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Switcher</servlet-name>
         <servlet-class>Dao.Login.Switcher</servlet-class>
- </servlet>
+    </servlet>
     <servlet>
         <servlet-name>IdDownload</servlet-name>
         <servlet-class>IdDownload</servlet-class>
-
-</servlet>
+    </servlet>
     <servlet>
         <servlet-name>Room_Change</servlet-name>
         <servlet-class>Room_Change</servlet-class>
@@ -352,11 +351,14 @@
     <servlet>
         <servlet-name>local_guardian</servlet-name>
         <servlet-class>local_guardian</servlet-class>
-
     </servlet>
     <servlet>
         <servlet-name>DateCheck</servlet-name>
         <servlet-class>Mark.DateCheck</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LabMarkUpdate</servlet-name>
+        <servlet-class>Mark.LabMarkUpdate</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -687,17 +689,17 @@
         <url-pattern>/ExamUpdate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
- <servlet-name>checkAlumni</servlet-name>
+        <servlet-name>checkAlumni</servlet-name>
         <url-pattern>/checkAlumni</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Switcher</servlet-name>
         <url-pattern>/Switcher</url-pattern>
- </servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>IdDownload</servlet-name>
         <url-pattern>/IdDownload</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Room_Change</servlet-name>
         <url-pattern>/Room_Change</url-pattern>
@@ -709,11 +711,14 @@
     <servlet-mapping>
         <servlet-name>local_guardian</servlet-name>
         <url-pattern>/local_guardian</url-pattern>
-
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DateCheck</servlet-name>
         <url-pattern>/DateCheck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LabMarkUpdate</servlet-name>
+        <url-pattern>/LabMarkUpdate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
