@@ -116,7 +116,10 @@ public class Mark {
             ResultSet rs = st1.executeQuery();
             if (rs.next()) {
                 m.setMark(rs.getString("mark"));
+            }else{
+                m.setMark(null);
             }
+                
         } catch (SQLException ex) {
             Logger.getLogger(Mark.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
