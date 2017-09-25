@@ -292,10 +292,10 @@ and open the template in the editor.
                                         } else if (Find.calculateBonus(Integer.valueOf(zmark), Student.getById(rollno).getModel_type()) == 1) {
                                         total = 100;
                                     }
-                                            }
+                                            
                                 if(total<Integer.valueOf(zmark))
                                     total=Integer.valueOf(zmark);
-                                
+                                    }
                                 }
                                 
                                 
