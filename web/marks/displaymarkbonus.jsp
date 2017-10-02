@@ -252,7 +252,7 @@ and open the template in the editor.
                             m.setRollno(rollno);
                             m.setSubcode(subcode);
                             List<Mark> li = Mark.getExamMark(dept, m);
-                            String markc = "null", markm = "null", marku = "null",zmark=null;
+                            String markc = null, markm = null, marku = null,zmark=null;
                             if (li.size() != 0) {
                                 int total = 0;
                                 for (Mark mi : li) {
