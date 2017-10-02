@@ -296,7 +296,11 @@ and open the template in the editor.
                                 if(total<Integer.valueOf(zmark))
                                     total=Integer.valueOf(zmark);
                                     }
-                                }
+                                }else{
+					if(!zmark.equals("A"))
+						if(total<Integer.valueOf(zmark))							total=Integer.valueOf(zmark);
+
+					}
                                 
                                 
                                 
