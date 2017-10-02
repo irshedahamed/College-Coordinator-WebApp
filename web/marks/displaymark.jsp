@@ -106,7 +106,11 @@
                                 s.setAyear(ayear);
                                 s.setRegulation(regulation);
                                 s.setSem(sem);
-                                List<String> Subcodelist = Subjects.getTherorySubCode(dept, s);
+                                List<String> Subcodelist;
+                                                        if(exam.contains("lab"))
+                                Subcodelist= Subjects.getLabSubCode(dept, s);
+                                else
+                                Subcodelist= Subjects.getTherorySubCode(dept, s);
                                 for (String subcode : Subcodelist) {
                             %>
                         <th><%=subcode%></th>

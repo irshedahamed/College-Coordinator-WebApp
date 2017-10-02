@@ -252,7 +252,7 @@
                <option value="zremodel1">Remodel 1</option>
                 <option value="zremodel2">Remodel 2</option>
                 <option value="zremodel3">Remodel 3</option>
-                
+                <option value="labmodel">Labmodel</option>    
             </select>
                     <i></i>
             <br> <br>

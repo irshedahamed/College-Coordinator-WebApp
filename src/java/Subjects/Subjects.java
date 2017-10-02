@@ -104,6 +104,34 @@ public class Subjects {
         return subcode;
     }
 
+    public static List<String> getLabSubCode(String dept, Subjects s) throws SQLException {
+        List<String> subcode = new ArrayList<String>();
+        PreparedStatement st = null;
+        Connection con = null;
+        try {
+            con = new dbcon().getConnection(dept);
+            String sql1 = "select * from subject_sem_table where regulation=? and sem=? and (ayear like ? or ayear like 'all')  and subtype='lab' order by subcode";
+            st = con.prepareStatement(sql1);
+            st.setString(1, s.getRegulation());
+            st.setString(2, s.getSem());
+             st.setString(3, "%elective%"+s.getAyear()+"%");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                subcode.add(rs.getString("subcode"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Subjects.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (st != null) {
+                st.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return subcode;
+    }
+    
     public static Subjects getBySubcode(String dept, String subcode) throws SQLException {
         PreparedStatement st = null;
         Connection con = null;
