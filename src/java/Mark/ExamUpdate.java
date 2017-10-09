@@ -6,6 +6,7 @@
 package Mark;
 
 import Actor.Student;
+import General.Batch;
 import Subjects.Subjects;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -30,27 +31,38 @@ public class ExamUpdate extends HttpServlet {
      response.setContentType("text/html;charset=UTF-8");
         try {
             HttpSession session = request.getSession();
-            String regulation = session.getAttribute("regulation").toString();
-            String sem = session.getAttribute("sem").toString();
-            String batch = session.getAttribute("batch").toString();
-            String sec = session.getAttribute("sec").toString();
-            String dept = session.getAttribute("dept").toString();
-            String exam = session.getAttribute("exam").toString();
-            String ayear = session.getAttribute("ayear").toString();
+            String dept = request.getParameter("dept");
+        String batch = request.getParameter("batch");
+        String sec = request.getParameter("section");
+        String sem = request.getParameter("sem");
+        String exam = request.getParameter("exam");
+        String ayear = request.getParameter("ayear");
+        
+        String regulation = Batch.getRegulation(batch);
+        
             String mark;
             int count = 0;
             Subjects s = new Subjects();
             s.setAyear(ayear);
             s.setRegulation(regulation);
             s.setSem(sem);
-            List<String> Subcodelist = Subjects.getTherorySubCode(dept, s);
-            for (String subcode : Subcodelist) {
+            List<String> Subcodelist;
+                                    if(exam.contains("lab"))
+                                Subcodelist= Subjects.getLabSubCode(dept, s);
+                                else
+                                Subcodelist= Subjects.getTherorySubCode(dept, s);
+        for (String subcode : Subcodelist) {
                 List<Student> list = Student.getAll(dept, batch, sec);
                 for (Student stu : list) {
                     String a1 = stu.getId() + "_" + count;
                     mark = request.getParameter(a1);
+                    System.out.println(a1+" "+mark);
                     if (mark == null) {
                         continue;
+                    }else if(mark.equals("null")){
+                    continue;
+                    }else if(mark.equals("")){
+                    continue;
                     }
                     Mark m = new Mark();
                     m.setRollno(stu.getId());

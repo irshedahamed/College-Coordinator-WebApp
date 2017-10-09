@@ -252,7 +252,7 @@ and open the template in the editor.
                             m.setRollno(rollno);
                             m.setSubcode(subcode);
                             List<Mark> li = Mark.getExamMark(dept, m);
-                            String markc = "null", markm = "null", marku = "null",zmark=null;
+                            String markc = null, markm = null, marku = null,zmark=null;
                             if (li.size() != 0) {
                                 int total = 0;
                                 for (Mark mi : li) {
@@ -281,14 +281,26 @@ and open the template in the editor.
                                 
                                 if (bonus != 0) {
                                     
-                                    if(!zmark.equals("A"))
-                                    if (Find.calculateBonus(Integer.valueOf(zmark), Student.getById(rollno).getModel_type()) == 1) {
+                                    if(!zmark.equals("A")){
+                                        
+                                        if(markm.equals("A")){
+                                        markm=zmark;
+                                        if (Find.calculateBonus(Find.calculateTotal(markm, markc, marku), Student.getById(rollno).getModel_type()) == 1) {
+                                        total = 100;
+                                        }
+                                        
+                                        } else if (Find.calculateBonus(Integer.valueOf(zmark), Student.getById(rollno).getModel_type()) == 1) {
                                         total = 100;
                                     }
+                                            
                                 if(total<Integer.valueOf(zmark))
                                     total=Integer.valueOf(zmark);
-                                
-                                }
+                                    }
+                                }else{
+					if(!zmark.equals("A"))
+						if(total<Integer.valueOf(zmark))							total=Integer.valueOf(zmark);
+
+					}
                                 
                                 
                                 

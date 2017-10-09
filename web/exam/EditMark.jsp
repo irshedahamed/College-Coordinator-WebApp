@@ -3,6 +3,7 @@
     Created on : 25 Aug, 2017, 8:14:32 PM
     Author     : Irshed
 --%>
+<%@page import="java.util.Enumeration"%>
 <%@page import="Actor.Student"%>
 <%@page import="Mark.Mark"%>
 <%@page import="Subjects.Subjects"%>
@@ -42,8 +43,8 @@
                     $(".marks").each(function (index) {
                         var patt = /^[0-9]+$/;
                         var result = patt.test($(this).val());
-                        var result1 = ($(this).val() === 'A' || $(this).val() === 'N' || $(this).val() === 'null');
-                        if ($(this).val() === '' || (result === false && result1 === false))
+                        var result1 = ($(this).val() === 'A' || $(this).val() === 'N' || $(this).val() === 'null'||($(this).val() === '' && $(this).attr('placeholder') ==="NULL"));
+                        if ( ($(this).val() === '' && $(this).attr('placeholder') !=="NULL" ) || (result === false && result1 === false))
                         {
                             $(this).focus();
                             $(this).css({"border-color": "#9ecaed",
@@ -60,7 +61,8 @@
             });
         </script>
     </head>
-    <%        String dept = request.getParameter("dept");
+    <%        
+        String dept = request.getParameter("dept");
         String batch = request.getParameter("batch");
         String sec = request.getParameter("section");
         String sem = request.getParameter("sem");
@@ -79,6 +81,14 @@
     <body>
     <center><h1>Mark Update for <%=dept.toUpperCase()%> Department <%=batch%> batch  <%=sem%>th semester <%=sec%> section</h1></center>
     <form action="${pageContext.request.contextPath}/ExamUpdate" id="marks" method="post">
+        <%
+            Enumeration<String> names=request.getParameterNames();
+        while( names.hasMoreElements()){
+            String name=names.nextElement();%>
+       <input type="hidden" name="<%=name%>" value="<%=request.getParameter(name)%>">
+        <%}
+
+        %>
         <center>
             <table class="bordered">
                 <thead>
@@ -91,7 +101,12 @@
                                 s.setAyear(ayear);
                                 s.setRegulation(regulation);
                                 s.setSem(sem);
-                                List<String> Subcodelist = Subjects.getTherorySubCode(dept, s);
+                                List<String> Subcodelist ;
+                                if(exam.contains("lab"))
+                                Subcodelist= Subjects.getLabSubCode(dept, s);
+                                else
+                                Subcodelist= Subjects.getTherorySubCode(dept, s);
+                                
                                 for (String subcode : Subcodelist) {
                             %>
                         <th><%=subcode%></th>
@@ -113,15 +128,16 @@
                             m.setRollno(stu.getId());
                             m.setSubcode(sub);
                             m.setType(exam);
+                            
+                                String a1 = stu.getId() + "_" + i;
                             if (Mark.isMarkAvailable(dept, m)) {
                                 m = Mark.getUserMark(dept, m);
-                                String a1 = stu.getId() + "_" + i;
                     %>
                     <td><input type="text" size="3" class="marks" maxlength="3" name="<%=a1%>" id="<%=a1%>" value="<%=m.getMark()%>"></td>
                         <%
                         } else {
                         %>
-                    <td><input type="text" size="3"  disabled="disabled"></td>
+                    <td><input type="text" size="4" class="marks" name="<%=a1%>" id="<%=a1%>" placeholder="NULL" ></td>
                         <%                    }
                                     i++;
                                 }

@@ -221,17 +221,17 @@ public class Find {
         int m,c,u;
         boolean cycle=false,unit=false,model=false;
             if(markm==null)
-            markm="0";
+            {markm="0";model=true;}
         else if(markm.equals("null"))
             markm="0";
       
         if(markc==null)
-            markc="0";
+        {markc="0";cycle=true;}
         else if(markc.equals("null"))
             markc="0";
       
         if(marku==null)
-            marku="0";
+        { marku="0";unit=true;}
         else if(marku.equals("null"))
             marku="0";
       
@@ -274,7 +274,7 @@ public class Find {
            t=(float)m+ ( (float)c /2 )+ ( ((float)u / 48)*15 );
             
                 t/=1.3;
-                t=(int)(t+0.5);//Rounding
+                t=(int)(t+0.99);//Rounding
            }
         
                
