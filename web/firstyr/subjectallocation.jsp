@@ -1017,6 +1017,21 @@
                                             </label>
                                         </label>
                                         <br><br>
+                                        
+                <label class="input">
+                                                    <div align="left" size="3px"><b>
+                                                             Sem </b></div>
+                <label class="select">
+           
+      
+                    <select id="sem" name="semister" >
+                <option value="#">select</option>
+                <option value="Odd">Odd</option>
+                 <option value="Even">Even</option>
+            </select>
+                    <i></i>
+                    </label>
+            </label><br><br>
                                         <label class="input">
                                             <div align="left" size="3px"><b>
                                                     Enter the Number of Subjects: </b></div>
