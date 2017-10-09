@@ -272,9 +272,8 @@ and open the template in the editor.
                                 //bonus logic
                                 if (bonus != 0) {
 
-                                    if (Find.calculateBonus(total, Student.getById(rollno).getModel_type()) == 1) {
-                                        total = 100;
-                                    }
+                                        total += Find.calculateBonus(total, Student.getById(rollno).getModel_type()) ;
+                                    
                                 }
                                 
                                 if(zmark!=null){
@@ -285,20 +284,17 @@ and open the template in the editor.
                                         
                                         if(markm.equals("A")){
                                         markm=zmark;
-                                        if (Find.calculateBonus(Find.calculateTotal(markm, markc, marku), Student.getById(rollno).getModel_type()) == 1) {
-                                        total = 100;
-                                        }
+                                        total += Find.calculateBonus(Find.calculateTotal(markm, markc, marku), Student.getById(rollno).getModel_type());
                                         
-                                        } else if (Find.calculateBonus(Integer.valueOf(zmark), Student.getById(rollno).getModel_type()) == 1) {
-                                        total = 100;
+                                        
+                                        } else  {
+                                        total += Find.calculateBonus(Integer.valueOf(zmark), Student.getById(rollno).getModel_type()) ;
                                     }
-                                            
-                                if(total<Integer.valueOf(zmark))
-                                    total=Integer.valueOf(zmark);
                                     }
                                 }else{
 					if(!zmark.equals("A"))
-						if(total<Integer.valueOf(zmark))							total=Integer.valueOf(zmark);
+						if(total<Integer.valueOf(zmark))	
+                                                    total=Integer.valueOf(zmark);
 
 					}
                                 
