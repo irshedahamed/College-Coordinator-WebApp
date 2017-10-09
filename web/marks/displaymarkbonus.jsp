@@ -301,7 +301,8 @@ and open the template in the editor.
                                 
                                 
                                 }
-                                
+                                if(total>100)
+                                total=100;
 
                     %>
 
