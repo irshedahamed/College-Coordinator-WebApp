@@ -284,10 +284,14 @@ and open the template in the editor.
                                         
                                         if(markm.equals("A")){
                                         markm=zmark;
+                                        if(total<Find.calculateTotal(markm, markc, marku))
+                                            total=Find.calculateTotal(markm, markc, marku);
                                         total += Find.calculateBonus(Find.calculateTotal(markm, markc, marku), Student.getById(rollno).getModel_type());
                                         
                                         
                                         } else  {
+                                            if(total<Integer.valueOf(zmark))
+                                                total=Integer.valueOf(zmark);
                                         total += Find.calculateBonus(Integer.valueOf(zmark), Student.getById(rollno).getModel_type()) ;
                                     }
                                     }
