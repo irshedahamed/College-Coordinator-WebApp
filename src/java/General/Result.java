@@ -76,7 +76,7 @@ public class Result {
             m.setRollno(rollno);
             m.setSubcode(p);
             List<Mark> li = Mark.getExamMark(Find.sdept(rollno), m);
-            String markc = "null", markm = "null", marku = "null";
+            String markc = null, markm = null, marku = null;
             for (Mark mi : li) {
                 if (mi.getType().equals("model" + exam)) {
                     markm = mi.getMark();
