@@ -272,6 +272,12 @@ public class Find {
                 t/=1.3;
                 t=(int)(t+0.99);//Rounding
            
+           }else if(cycle){
+               t=(float)m+ ( ((float)u / 48)*15 ) ;
+            
+                t/=1.15;
+                t=(int)(t+0.99);//Rounding
+           
            }else{
            t=(float)m+ ( (float)c /2 )+ ( ((float)u / 48)*15 );
             
