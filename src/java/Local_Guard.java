@@ -83,7 +83,7 @@ public class Local_Guard extends HttpServlet {
         
              try
         {
-            System.out.println("hii");
+           
             
        String rollno=request.getParameter("rollno");
       
