@@ -1,5 +1,6 @@
 package com.action;
 
+import General.AcademicYear;
 import java.util.Date;
 
 /*
@@ -197,6 +198,20 @@ public class Find {
     else
         temp+=2;
     return temp;
+    }
+    
+    public static String getAcyear(String batch,String sem){
+    
+        int s;
+        if(Integer.valueOf(sem)%2==0)
+               s= getSem(batch,AcademicYear.getCurrentYear().getYear(),"Even");
+        else
+            s= getSem(batch,AcademicYear.getCurrentYear().getYear(),"Odd");
+      
+        
+    int year=Integer.valueOf(AcademicYear.getCurrentYear().getYear()) -( (s-(Integer.valueOf(sem)))/2);
+     
+    return  String.valueOf(year); 
     }
     
     public static int calculateBonus(int mark,String category){

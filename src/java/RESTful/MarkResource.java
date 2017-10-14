@@ -5,9 +5,14 @@
  */
 package RESTful;
 
+import Actor.Student;
+import General.Batch;
 import Mark.Mark;
+import Subjects.Subjects;
 import com.action.Find;
 import java.sql.SQLException;
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -43,28 +48,28 @@ public class MarkResource {
      * @return an instance of java.lang.String
      */
     @GET
-    @Path("{auth}/{rollno}")
+    @Path("{auth}/{rollno}/{sem}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Mark> getJson(@PathParam("auth")String auth,@PathParam("rollno")String rollno) throws SQLException {
+    public List<Mark> getJson(@PathParam("auth")String auth,@PathParam("rollno")String rollno,@PathParam("sem")String sem) throws SQLException {
         //TODO return proper representation object
-        Mark m=new Mark();
-        
-        System.out.println(auth);
-        System.out.println(context.getAbsolutePath().toString());
-        
-        System.out.println(context.getPath());
-        
-        System.out.println(context.getQueryParameters().size());
-        for(String s:context.getQueryParameters().keySet()){
-        
-            System.out.println(s);
-            System.out.println(context.getQueryParameters().getFirst(s));
-        
-        
-        }
-        m.setRollno(rollno);
-        m.setSubcode("cs2352");
-        return Mark.getExamMark(Find.sdept(rollno), m);
+       Subjects s = new Subjects();
+        s.setSem(sem);
+        List<Mark> mlist=new ArrayList<Mark>();
+        Student stu=Student.getById(rollno);
+        s.setAyear(Find.getAcyear(stu.getBatch(), sem));
+        s.setRegulation(Batch.getRegulation(stu.getBatch()));
+        List<String> list = Subjects.getTherorySubCode(stu.getDept(), s);
+        for(String subcode:list){
+                    Mark m = new Mark();
+                    m.setSubcode(subcode);
+                    m.setType(context.getQueryParameters().getFirst("exam"));
+                    m.setRollno(rollno);
+                    m.fetchMark();
+           
+                    mlist.add(m);
+
+                }
+        return mlist;
     }
 
     /**

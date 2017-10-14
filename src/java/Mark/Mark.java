@@ -5,6 +5,7 @@
  */
 package Mark;
 
+import com.action.Find;
 import dbconnection.dbcon;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -104,8 +105,15 @@ public class Mark {
         return "Not Updated";
     }
 
+    public  void fetchMark(){
+        try {
+            this.setMark(getUserMark("", this ).getMark());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
     public static Mark getUserMark(String dept, Mark m) throws SQLException {
-        Connection con = new dbcon().getConnection(dept);
+        Connection con = new dbcon().getConnection(Find.sdept(m.getRollno()));
         PreparedStatement st1 = null;
         try {
             String sql1 = "select * from marks where rollno=? and subcode=? and type=? ";
