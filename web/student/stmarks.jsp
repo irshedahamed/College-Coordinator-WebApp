@@ -1,3 +1,8 @@
+<%@page import="General.AcademicYear"%>
+<%@page import="com.action.Find"%>
+<%@page import="java.util.List"%>
+<%@page import="General.Batch"%>
+<%@page import="Subjects.Subjects"%>
 <%@page import="Mark.Mark"%>
 <%@page import="Actor.Student"%>
 <%-- 
@@ -34,7 +39,7 @@
 
         dept = session.getAttribute("deptname").toString();
 
-        Connection con = new dbcon().getConnection(dept);
+        
         //Statement st1= con.createStatement();
         //ResultSet rs1 = st1.executeQuery("select batch from student_personal where rollno='"+rollno1+"'");
         //rs1.next();
@@ -44,14 +49,8 @@
         String exam = request.getParameter("exam");
 
         String regulation = null;
-        String subcode, rollno, name;
-        Connection con1 = new dbcon().getConnection("sjitportal");
-        Statement st = con1.createStatement();
-        String sql = "select * from regulations where batch='" + batch + "'";
-        ResultSet rs = st.executeQuery(sql);
-        while (rs.next()) {
-            regulation = rs.getString("regulation");
-        }
+        String  rollno, name;
+       
         session.setAttribute("regulation", regulation);
         session.setAttribute("sem", sem);
         session.setAttribute("batch", batch);
@@ -72,22 +71,19 @@
                 </tr>
             </thead>
 
-            <%            st = con.createStatement();
-
-                String sql1 = "select * from subject_sem_table where regulation='" + regulation + "' and sem='" + sem + "' and subtype='theory' order by subcode";
-                rs = st.executeQuery(sql1);
-
-                while (rs.next()) {
-
-                    subcode = rs.getString("subcode");
-                    subname = rs.getString("subname");
+            <%          Subjects s = new Subjects();
+        s.setSem(sem);
+        s.setAyear(Find.getAcyear(batch, sem));
+        s.setRegulation(Batch.getRegulation(Student.getById(username).getBatch()));
+        List<String> list = Subjects.getTherorySubCode(Find.sdept(username), s);
+        for(String subcode:list){
                     Mark m = new Mark();
                     m.setSubcode(subcode);
                     m.setType(exam);
                     m.setRollno(rollno1);
             %>
             <tr>
-                <td><%=subcode%>-<%=subname%></td>
+                <td><%=subcode%>-<%=Subjects.getBySubcode(Find.sdept(username), subcode).getSubname() %></td>
                 <td><%= Mark.getUserMark(dept, m).getMark()%></td>
             </tr>
 
@@ -95,7 +91,7 @@
 
             <%
                 }
-                rs.close();
+                
             %>
 
 
@@ -108,15 +104,8 @@
 
     </body>
     <%
-                if (st != null) {
-                    st.close();
-                }
-                if (con1 != null) {
-                    con1.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
+               
+                
             } else {
                 response.sendRedirect("../index.jsp");
             }

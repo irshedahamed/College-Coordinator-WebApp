@@ -1,5 +1,6 @@
 package com.action;
 
+import General.AcademicYear;
 import java.util.Date;
 
 /*
@@ -199,18 +200,34 @@ public class Find {
     return temp;
     }
     
+    public static String getAcyear(String batch,String sem){
+    
+        int s;
+        if(Integer.valueOf(sem)%2==0)
+               s= getSem(batch,AcademicYear.getCurrentYear().getYear(),"Even");
+        else
+            s= getSem(batch,AcademicYear.getCurrentYear().getYear(),"Odd");
+      
+        
+    int year=Integer.valueOf(AcademicYear.getCurrentYear().getYear()) -( (s-(Integer.valueOf(sem)))/2);
+     
+    return  String.valueOf(year); 
+    }
+    
     public static int calculateBonus(int mark,String category){
     
+    if(category.equals("gen")&&mark>=45)
+        return 50;
     if(category.equals("8+")&&mark>=70)
-        return 1;
+        return 30;
     if(category.equals("7.5+")&&mark>=65)
-        return 1;
+        return 35;
     if(category.equals("6.5+")&&mark>=60)
-        return 1;
+        return 40;
     if(category.equals("5+")&&mark>=50)
-        return 1;
+        return 50;
     if(category.equals("0")&&mark>=45)
-        return 1;
+        return 55;
     
         
     return 0;
@@ -268,6 +285,12 @@ public class Find {
                t=(float)m+ (float)c ;
             
                 t/=1.3;
+                t=(int)(t+0.99);//Rounding
+           
+           }else if(cycle){
+               t=(float)m+ ( ((float)u / 48)*15 ) ;
+            
+                t/=1.15;
                 t=(int)(t+0.99);//Rounding
            
            }else{

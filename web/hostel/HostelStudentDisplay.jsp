@@ -71,10 +71,10 @@
             Student s = Student.getById(rollno);
             java.sql.Connection con = new dbcon().getConnection("sjitportal");
             Statement st = con.createStatement();
-            String data = "select roomno from room_change where rollno='" + rollno + "'";
-            ResultSet rs = st.executeQuery(data);
-            while (rs.next()) {
-                String roomno = rs.getString("roomno");
+          //  String data = "select roomno from room_change where rollno='" + rollno + "'";
+            //ResultSet rs = st.executeQuery(data);
+            if (true) {
+                //String roomno = rs.getString("roomno");
 
                 java.sql.Connection conn = new dbcon().getConnection("sjitportal?zeroDateTimeBehavior=convertToNull");
                 Statement stt = conn.createStatement();
@@ -193,7 +193,7 @@
                         <table class="bordered">
                             <thead><tr>   
                                     <th>S.No</th>
-                                    <th>ROOM NO</th>
+                                   
                                     <th>IN TIME</th>
                                     <th>OUT TIME</th></tr></thead>        
                     <%
@@ -201,7 +201,7 @@
                     %>
 
                             <td> <%=++i%> </td>
-                            <td> <%=roomno%></td>
+                            
                             <%
                                 if (rss.getString("intime") != null) {
                                     String format = rss.getString("intime").substring(0, rss.getString("intime").length() - 2);
