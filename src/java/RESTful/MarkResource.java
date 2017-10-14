@@ -62,11 +62,9 @@ public class MarkResource {
         for(String subcode:list){
                     Mark m = new Mark();
                     m.setSubcode(subcode);
-                    m.setType(context.getQueryParameters().getFirst("exam"));
                     m.setRollno(rollno);
-                    m.fetchMark();
-           
-                    mlist.add(m);
+                    
+                    mlist.addAll(Mark.getExamMark("", m));
 
                 }
         return mlist;
