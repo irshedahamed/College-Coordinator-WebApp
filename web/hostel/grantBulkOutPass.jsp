@@ -45,7 +45,7 @@
 
         <!-- Custom CSS -->
         <link href="../css/simple-sidebar.css" rel="stylesheet">
-
+        <script src="../js/jquery.js"></script>
 
 
         <script>
@@ -134,10 +134,10 @@
                             <form class="skyform" action="${pageContext.request.contextPath}/processBulkOutPass" method="post">
                                 <fieldset>
                                     <table class="bordered">
-                                        <input type="hidden" name="status" value="Accepted"> 
-                                        <input type="hidden" name="from" value="<%=from%>"> 
-                                        <input type="hidden" name="till" value="<%=till%>"> 
-                                        <input type="hidden" name="reason" value="<%=reason%>"> 
+                                        <input type="hidden" id="status" value="Accepted"> 
+                                        <input type="hidden" id="from" value="<%=from%>"> 
+                                        <input type="hidden" id="till" value="<%=till%>"> 
+                                        <input type="hidden" id="reason" value="<%=reason%>"> 
 
                                         <thead>
                                             <tr>   
@@ -166,7 +166,7 @@
 
                                         <tr>
                                             <td><%= ++i%></td>
-                                            <td><%= stu.getId()%></td>
+                                            <td id="roll"><%= stu.getId()%></td>
                                             <td>
                                                 <img src="../../StudentPhotos/Batch<%=stu.getBatch()%>/<%=stu.getId().toUpperCase()%>.JPG" height="95px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
                                                 <br><%= stu.getName()%>
@@ -188,8 +188,8 @@
 
                                             </td>
                                             <td>
-                                                <input class="check" type="checkbox" name="outpass"  value="<%=stu.getId()%>"/>
-                                                <label>Generate Outpass</label>
+                                                <input  class="click" type="button" id="submit" value="Generate Outpass" />
+
                                             </td>
 
                                         </tr>
@@ -202,7 +202,6 @@
                                     </table><br><br>
 
 
-                                    <input align="center"  type="submit" id="submit" value="Accepted" />
 
                                     <br><br><br>
                                 </fieldset> 
