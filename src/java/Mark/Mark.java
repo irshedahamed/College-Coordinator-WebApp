@@ -169,7 +169,7 @@ public class Mark {
 
     public static List<Mark> getExamMark(String dept, Mark m) throws SQLException {
         List<Mark> list = new ArrayList<Mark>();
-        Connection con = new dbcon().getConnection(dept);
+        Connection con = new dbcon().getConnection(Find.sdept(m.getRollno()));
         PreparedStatement st1 = null;
         try {
             String sql1 = "select * from marks where rollno=? and subcode=? ";
@@ -180,7 +180,7 @@ public class Mark {
             while(rs.next()) {
                 Mark mi = new Mark();
                 mi.setRollno(m.getRollno());
-                m.setSubcode(m.getSubcode());
+                mi.setSubcode(rs.getString("subcode"));
                 mi.setType(rs.getString("type"));
                 mi.setMark(rs.getString("mark"));
                 list.add(mi);
