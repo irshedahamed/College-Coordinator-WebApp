@@ -1132,7 +1132,7 @@ $(document).on('change','.lsbatch',function(e){
                                      <br>            <input type="checkbox" name="otherinc" value="National Social Service Scheme">National Social Service Scheme
                                      <br>            <input type="checkbox" name="otherinc" value="Electrical System">Electrical System, UPS Incharge
                                      <br>            <input type="checkbox" name="otherinc" value="Library">Library
-                                     <br>            <input type="checkbox" name="otherinc" value="Sports">Sports
+                                       <br>            <input type="checkbox" name="otherinc" value="Sports">Sports
                                      <br>            <input type="checkbox" name="otherinc" value="Reverse Osmosis">Reverse Osmosis
                                      <br>            <input type="checkbox" name="otherinc" value="Plumbing">Plumbing
                                      <br>            <input type="checkbox" name="otherinc" value="Purchase Committee">Purchase Committee
@@ -1222,7 +1222,7 @@ $(document).on('change','.lsbatch',function(e){
        
             
                        
-                   <%=Find.getDeptHTMLContent() %>
+                       <%=Find.getDeptHTMLContent() %>
                
            
             

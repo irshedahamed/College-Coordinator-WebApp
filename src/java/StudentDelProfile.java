@@ -108,6 +108,8 @@ public class StudentDelProfile extends HttpServlet {
                 del.executeUpdate(sql);
                 sql="delete from student_local_guardian where rollno='"+rollno+"'";
                 del.executeUpdate(sql);
+                sql="delete from student_local_guardian2 where rollno='"+rollno+"'";
+                del.executeUpdate(sql);
                 sql="delete from student_other_details where rollno='"+rollno+"'";
                 del.executeUpdate(sql);
                 sql="delete from student_passport_details where rollno='"+rollno+"'";

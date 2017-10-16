@@ -1,5 +1,6 @@
 package com.action;
 
+import General.AcademicYear;
 import java.util.Date;
 
 /*
@@ -199,8 +200,109 @@ public class Find {
     return temp;
     }
     
+    public static String getAcyear(String batch,String sem){
     
+        int s;
+        if(Integer.valueOf(sem)%2==0)
+               s= getSem(batch,AcademicYear.getCurrentYear().getYear(),"Even");
+        else
+            s= getSem(batch,AcademicYear.getCurrentYear().getYear(),"Odd");
+      
+        
+    int year=Integer.valueOf(AcademicYear.getCurrentYear().getYear()) -( (s-(Integer.valueOf(sem)))/2);
+     
+    return  String.valueOf(year); 
+    }
     
+    public static int calculateBonus(int mark,String category){
+    
+    if(category.equals("gen")&&mark>=45)
+        return 50;
+    if(category.equals("8+")&&mark>=70)
+        return 30;
+    if(category.equals("7.5+")&&mark>=65)
+        return 35;
+    if(category.equals("6.5+")&&mark>=60)
+        return 40;
+    if(category.equals("5+")&&mark>=50)
+        return 50;
+    if(category.equals("0")&&mark>=45)
+        return 55;
+    
+        
+    return 0;
+    }
+    
+    public static int calculateTotal(String markm,String markc,String marku){
+    
+        int m,c,u;
+        boolean cycle=false,unit=false,model=false;
+            if(markm==null)
+            {markm="0";model=true;}
+        else if(markm.equals("null"))
+            markm="0";
+      
+        if(markc==null)
+        {markc="0";cycle=true;}
+        else if(markc.equals("null"))
+            markc="0";
+      
+        if(marku==null)
+        { marku="0";unit=true;}
+        else if(marku.equals("null"))
+            marku="0";
+      
+        
+        m=0;
+        if(markm.equals("A"))
+       m=0;
+        else if(markm.equals("N"))
+            model=true;
+        else
+         m = Integer.parseInt(markm);
+        
+        c=0;
+        if(markc.equals("A"))
+        c=0;
+        else if(markc.equals("N"))
+            cycle=true;
+        else
+        c = Integer.parseInt(markc);
+        
+        u=0;
+        if(marku.equals("A"))
+        u=0;
+        else if(marku.equals("A"))
+        unit=true;
+        else
+        u = Integer.parseInt(marku);
+        
+        
+           float t=0.0F;
+           if(cycle && unit)
+               t=m;
+           else if(unit){
+               t=(float)m+ (float)c ;
+            
+                t/=1.3;
+                t=(int)(t+0.99);//Rounding
+           
+           }else if(cycle){
+               t=(float)m+ ( ((float)u / 48)*15 ) ;
+            
+                t/=1.15;
+                t=(int)(t+0.99);//Rounding
+           
+           }else{
+           t=(float)m+ ( (float)c /2 )+ ( ((float)u / 48)*15 );
+            
+                t/=1.3;
+                t=(int)(t+0.99);//Rounding
+           }
+        
+               
+    return (int)t;
+    }
     
     
     }

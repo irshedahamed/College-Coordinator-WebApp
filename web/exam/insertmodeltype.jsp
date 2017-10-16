@@ -16,7 +16,7 @@
     <body>
     
     <form action ="${pageContext.request.contextPath}/updatemodeltype" method="post">
-        <center><h1>SELECT THE CHECKBOXES IF SPECIAL MODEL</h1></center>
+        <center><h1>SELECT MODEL CATEGORY</h1></center>
         <center>
         <table class="bordered">
             <thead>
