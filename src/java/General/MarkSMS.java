@@ -27,7 +27,9 @@ public class MarkSMS {
         int i = 0;
         Subjects s = new Subjects();
         s.setSem(sem);
-        s.setRegulation(Batch.getRegulation(Student.getById(rollno).getBatch()));
+        String batch=Student.getById(rollno).getBatch();
+        s.setAyear(Find.getAcyear(batch, sem));
+        s.setRegulation(Batch.getRegulation(batch));
         List<String> list = Subjects.getTherorySubCode(Find.sdept(rollno), s);
         for (String p : list) {
             Mark m = new Mark();
