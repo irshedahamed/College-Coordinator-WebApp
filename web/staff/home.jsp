@@ -217,7 +217,7 @@
                 <div class="panel-body">
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="tab1primary"><%out.write(Circular.getHTMLContent(College.getAll("circular")));%></div>
-                        <div class="tab-pane fade" id="tab2primary"><%out.write(Circular.getHTMLContent(Department.getAll(Find.sdept(rollno), "%")));%></div>
+                        <div class="tab-pane fade" id="tab2primary"><%out.write(Circular.getHTMLContent(Department.getAll(Find.sdept(username), "%")));%></div>
                         <div class="tab-pane fade" id="tab3primary"><%out.write(Circular.getHTMLContent(Exam.getAll()));%></div>
                         <div class="tab-pane fade" id="tab4primary"><%out.write(Circular.getHTMLContent(College.getAll("event")));%></div>
                        
