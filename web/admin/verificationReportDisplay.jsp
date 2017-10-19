@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="Actor.Student"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.dbcon"%>
@@ -123,11 +125,12 @@ and open the template in the editor.
     <center> <img src="../images/logo2.png" height="165px" width="700px" /></center>
         <%
             String deptReq = request.getParameter("dept");
-            String[] depts = new String[25];
+            ArrayList<String> depts = new ArrayList<String>();
             if (deptReq.equals("all")) {
-                depts = Find.Depts;
+                for(String str:Find.Depts)
+                depts.add(str);
             } else {
-                depts[0] = new String(deptReq);
+                depts.add(deptReq);
             }
             String sec = request.getParameter("sec");
             String batch = request.getParameter("batch");
@@ -155,64 +158,28 @@ and open the template in the editor.
                     <tr>
 
                         <th> Sno</th>
-                        <th name="cc">Roll No</th>
-                        <th>Register No</th>
+                        <th name="cc">Roll No<br>Register No</th>
                         <th>Name</th>
                         <th>Father Name<br>Mobile<br>(E-Mail)</th>
                         <th>Mother Name<br>Mobile<br>(E-Mail)</th>
+                        <th>Address</th>
                         <th>Signature</th>
 
                     </tr>
                 </thead>
                 <%
-
-                    Connection con = null;
-                    Statement st = null;
-                    Statement st1 = null;
-                    Statement st2 = null;
-
-                    try {
-
-                        con = new dbcon().getConnection(dept);
-
-                        st1 = con.createStatement();
-                        st2 = con.createStatement();
-
-                        int count = 0;
-
-                        int sno = 1;
-
-                        String sql = "select *,CONVERT(regno,UNSIGNED INT) as sno from student_personal where batch='" + batch + "' and sec='" + sec + "' order by sno,name";
-                        ResultSet rs1 = st1.executeQuery(sql);
-                        while (rs1.next()) {
-
-                            String rollno = rs1.getString("rollno");
-                            String name = rs1.getString("name");
-                            String regno = rs1.getString("regno");
-
-                            ResultSet rs2;
-                            String mommail = "", dadmail = "", fname = "", fmobile = "", mname = "", mmobile = "";
-                            rs2 = st2.executeQuery("select f.fathers_name,f.mobile,m.mothers_name,m.mobileno,f.mailid as dadmail,m.mailid as mommail from student_father_details f,student_mother_details m where f.rollno='" + rollno + "' and m.rollno='" + rollno + "'");
-                            if (rs2.next()) {
-                                fname = rs2.getString("fathers_name");
-                                fmobile = rs2.getString("mobile");
-                                mname = rs2.getString("mothers_name");
-                                mmobile = rs2.getString("mobileno");
-                                mommail = rs2.getString("mommail");
-                                dadmail = rs2.getString("dadmail");
-                            }
-
+                    int sno=1;
+                    for(Student s:Student.getAll(dept, batch, sec)){
                 %>
 
                 <tr>
                     <td><%=sno++%></td>
-                    <td><%=rollno.toUpperCase()%></td>
-                    <td><%=regno%></td>
+                    <td><%=s.getId().toUpperCase()%><br><%=s.getRegno() %></td>
+                    <td><%=s.getName().toUpperCase()%></td>
 
-                    <td><%=name.toUpperCase()%></td>
-
-                    <td><%=fname.toUpperCase()%><br><%=fmobile%><br>(<%=dadmail%>)</td>
-                    <td><%=mname.toUpperCase()%><br><%=mmobile%><br>(<%=mommail%>)</td>         
+                    <td><%=s.getFatherDetails().getFathername().toUpperCase()%><br><%=s.getFatherDetails().getMobile() %><br>(<%=s.getFatherDetails().getMail() %>)</td>
+                    <td><%=s.getMotherDetails().getMothername().toUpperCase()%><br><%=s.getMotherDetails().getMobile() %><br>(<%=s.getMotherDetails().getMail() %>)</td>         
+                    <td><%=s.getContact().getDoorno()+s.getContact().getStreet()%><br><%=s.getContact().getArea() %><br><%=s.getContact().getCity()+" "+s.getContact().getPincode()  %></td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 </tr>      
 
@@ -222,19 +189,7 @@ and open the template in the editor.
 
                         }
 
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        if (st2 != null) {
-                            st2.close();
-                        }
-                        if (st1 != null) {
-                            st1.close();
-                        }
-
-                        if (con != null) {
-                            con.close();
-                        }
+                    
                     }
 
                 %>
@@ -242,10 +197,7 @@ and open the template in the editor.
 
 
             </table></center>
-        <input type="hidden" name="dept" value="<%=dept%>">
-        <%
-            }
-        %>
+        
     </form>
 </body>
 </html>
