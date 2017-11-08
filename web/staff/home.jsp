@@ -41,24 +41,13 @@
         <link href="../css/simple-sidebar.css" rel="stylesheet">
 
         <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/bootstraptab.css" rel="stylesheet">
+        
         <script src="../js/jquery.js"></script>
+        <script src="../js/bootstrap.min.js"></script>    
 
 
-        <link rel="stylesheet" href="../css/angular-material.css">
-
-
-
-        <link rel="stylesheet" href="../css/angulartab.css">
-
-        <script src="../js/angular.js"></script>
-        <script src="../js/angular-animate.min.js"></script>
-        <script src="../js/angular-route.min.js"></script>
-        <script src="../js/angular-aria.min.js"></script>
-        <script src="../js/angular-message.min.js"></script>
-        <script src="../js/svg-assert-cache.js"></script>
-        <script src="../js/angular-material.js"></script>
-
-        <script src="../js/angulartab.js"></script>
+       
     </head>
 
     <body class="home page page-id-115 page-template-default has-toolbar">
@@ -208,52 +197,38 @@
                             <section class="landing">
 
 
-                                <md-toolbar class="demo-toolbar md-primary _md _md-toolbar-transitions" style="width: 70%">
+    <div class="page-header">
+        <h1>Circulars</h1>
+    </div>
+    <div class="row">
+      
+        <div  class="col-md-1"></div>
+        <div  class="col-md-10">
+            <div class="panel with-nav-tabs panel-primary">
+                <div class="panel-heading">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1primary" data-toggle="tab">COLLEGE</a></li>
+                            <li><a href="#tab2primary" data-toggle="tab">DEPARTMENT</a></li>
+                            <li><a href="#tab3primary" data-toggle="tab">EXAM</a></li>
+                            <li><a href="#tab4primary" data-toggle="tab">EVENTS</a></li>
+                            
+                        </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="tab1primary"><%out.write(Circular.getHTMLContent(College.getAll("circular")));%></div>
+                        <div class="tab-pane fade" id="tab2primary"><%out.write(Circular.getHTMLContent(Department.getAll(Find.sdept(username), "%")));%></div>
+                        <div class="tab-pane fade" id="tab3primary"><%out.write(Circular.getHTMLContent(Exam.getAll()));%></div>
+                        <div class="tab-pane fade" id="tab4primary"><%out.write(Circular.getHTMLContent(College.getAll("event")));%></div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+	</div>
 
-                                    <div class="md-toolbar-tools">
-
-                                        <h3 class="ng-binding" style="text-align:center;">Circulars</h3>
-                                        <span flex="" class="flex"></span>
-
-                                    </div>
-                                </md-toolbar>
-                                <div ng-cloak="" class="tabsdemoDynamicHeight" ng-app="MyApp" style="width:70%"> 
-                                    <md-content>
-                                        <md-tabs md-dynamic-height="" md-border-bottom="">
-                                            <md-tab label="College">
-                                                <md-content class="md-padding">
-                                                    <h1 class="md-display-2"></h1>
-
-                                                    <%out.write(Circular.getHTMLContent(College.getAll("circular")));%>
-                                                </md-content>
-                                            </md-tab>
-                                            <md-tab label="Department">
-                                                <md-content class="md-padding">
-                                                    <h1 class="md-display-2"></h1>
-                                                    <%out.write(Circular.getHTMLContent(Department.getAll(Find.sdept(username), "%")));%>
-
-                                                </md-content>
-                                            </md-tab>
-                                            <md-tab label="Exam">
-                                                <md-content class="md-padding">
-                                                    <h1 class="md-display-2"></h1>
-
-                                                    <%out.write(Circular.getHTMLContent(Exam.getAll()));%>
-
-                                                </md-content>
-                                            </md-tab>
-                                            <md-tab label="Events">
-                                                <md-content class="md-padding">
-                                                    <h1 class="md-display-2"></h1>
-                                                    <%out.write(Circular.getHTMLContent(College.getAll("event")));%>
-                                                </md-content>
-                                            </md-tab>
-                                        </md-tabs>
-                                    </md-content>
-
-
-
-                            </section>
+                                </section>
 
 
 
