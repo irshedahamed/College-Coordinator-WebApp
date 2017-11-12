@@ -28,6 +28,7 @@ public class Authenticate extends HttpServlet {
     private String Password;
     private String type;
     private String photo;
+    
 
     public String getUsername() {
         return Username;
@@ -234,5 +235,10 @@ public class Authenticate extends HttpServlet {
        }
     return pwd;
     
+    }
+    
+    public static boolean validateAPI(String API){
+    
+    return true;
     }
 }
