@@ -160,9 +160,9 @@ public class Mark {
             if (st1 != null) {
                 st1.close();
             }
-            if (con != null) {
-                con.close();
-            }
+//            if (con != null) {
+//                con.close();
+//            }
         }
         return false;
     }

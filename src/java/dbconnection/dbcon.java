@@ -40,7 +40,7 @@ public class dbcon {
           try { 
             if(conn==null || conn.isClosed()){
                  Class.forName("com.mysql.jdbc.Driver").newInstance();
-                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"root","1234");
+                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"webapp","fluffy");
                  connectionPool.put(dbname+clg, conn);
         }
         
