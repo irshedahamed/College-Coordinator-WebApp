@@ -62,7 +62,7 @@ public class AcademicYear {
               if(st!=null)
                             st.close();
                               if(con!=null)
-                                con.close();
+                                ;//con.close();
         if(i==1)
         {return true;}
         else
@@ -84,7 +84,7 @@ public class AcademicYear {
             if(st!=null)
                             st.close();
                               if(con!=null)
-                                con.close();
+                                ;//con.close();
       if(i==1)
        return true;
       else
@@ -119,7 +119,7 @@ public class AcademicYear {
                 if(stmt!=null)
                     stmt.close();
                 if(conbatch!=null)
-                    conbatch.close();
+                    ;//conbatch.close();
             } catch (SQLException ex) {
                 Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -159,7 +159,7 @@ public class AcademicYear {
                 if(stmt!=null)
                     stmt.close();
                 if(conbatch!=null)
-                    conbatch.close();
+                    ;//conbatch.close();
             } catch (SQLException ex) {
                 Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -198,7 +198,7 @@ public class AcademicYear {
                 if(stmt!=null)
                     stmt.close();
                 if(conbatch!=null)
-                    conbatch.close();
+                    ;//conbatch.close();
             } catch (SQLException ex) {
                 Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
             }

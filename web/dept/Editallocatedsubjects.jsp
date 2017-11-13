@@ -304,14 +304,14 @@
                     st.close();
                 }
                 if (con != null) {
-                    con.close();
+                    ;//con.close();
                 }
 
                 if (st1 != null) {
                     st1.close();
                 }
                 if (con != null) {
-                    con.close();
+                    ;//con.close();
                 }
             %>
         </table>
@@ -375,14 +375,14 @@
                         st.close();
                     }
                     if (con != null) {
-                        con.close();
+                        ;//con.close();
                     }
 
                     if (st1 != null) {
                         st1.close();
                     }
                     if (con1 != null) {
-                        con1.close();
+                        ;//con1.close();
                     }
 
                 %>
@@ -418,7 +418,7 @@
                 wstmt.close();
             }
             if (con != null) {
-                con.close();
+                ;//con.close();
             }
 
             if (!work.equals("")) {
@@ -465,7 +465,7 @@
             sttt.close();
         }
         if (connn != null) {
-            connn.close();
+            ;//connn.close();
         }
     } catch (Exception e) {
         e.printStackTrace();

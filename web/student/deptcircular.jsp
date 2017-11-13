@@ -360,7 +360,7 @@ String deptname = Find.sdept(username);
   if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

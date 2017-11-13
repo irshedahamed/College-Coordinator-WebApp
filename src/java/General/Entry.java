@@ -100,7 +100,7 @@ public class Entry {
                if(stmt!=null)
                    stmt.close();
                if(conn!=null)
-                   conn.close();
+                   ;//conn.close();
            } catch (SQLException ex) {
                ex.printStackTrace();
            }
@@ -144,7 +144,7 @@ public class Entry {
                if(stmt!=null)
                    stmt.close();
                if(conn!=null)
-                   conn.close();
+                   ;//conn.close();
            } catch (SQLException ex) {
                ex.printStackTrace();
            }
@@ -188,7 +188,7 @@ public class Entry {
                if(stmt2!=null)
                    stmt2.close();
                if(conn!=null)
-                   conn.close();
+                   ;//conn.close();
            } catch (SQLException ex) {
                ex.printStackTrace();
            }

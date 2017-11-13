@@ -123,7 +123,7 @@ public class RemoveBonus extends HttpServlet {
                         stmt1.close();
                 
                     if(conn!=null)
-                        conn.close();
+                        ;//conn.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(RemoveBonus.class.getName()).log(Level.SEVERE, null, ex);
                 }

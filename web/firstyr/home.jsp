@@ -158,7 +158,7 @@ $(window).load(function(){$(".tabs").tabtab({animateHeight:!1,fixedHeight:!1}),$
               }  if(stmt!=null)
                             stmt.close();
                               if(conbatch!=null)
-                                conbatch.close();
+                                ;//conbatch.close();
               %>
     </div></div>
                     </div>
@@ -229,7 +229,7 @@ $(window).load(function(){$(".tabs").tabtab({animateHeight:!1,fixedHeight:!1}),$
               }  if(stmt!=null)
                             stmt.close();
                               if(conbatch!=null)
-                                conbatch.close();
+                                ;//conbatch.close();
               %>
 
 </div>
@@ -310,7 +310,7 @@ $(window).load(function(){$(".tabs").tabtab({animateHeight:!1,fixedHeight:!1}),$
                             if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

@@ -225,7 +225,7 @@
                                                 st.close();
                                             }
                                             if (con != null) {
-                                                con.close();
+                                                ;//con.close();
                                             }
                                         } catch (Exception ex) {
                                             ex.printStackTrace();
@@ -298,7 +298,7 @@
             sttt.close();
         }
         if (connn != null) {
-            connn.close();
+            ;//connn.close();
         }
     } catch (Exception e) {
         e.printStackTrace();

@@ -112,7 +112,7 @@
                                                             stmt.close();
                                                         }
                                                         if (conbatch != null) {
-                                                            conbatch.close();
+                                                            ;//conbatch.close();
                                                         }
                                                     %>
                                                 </div>
@@ -183,7 +183,7 @@
             sttt.close();
         }
         if (connn != null) {
-            connn.close();
+            ;//connn.close();
         }
     } catch (Exception e) {
         e.printStackTrace();

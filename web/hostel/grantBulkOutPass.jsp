@@ -256,7 +256,7 @@
                         sttt.close();
                     }
                     if (connn != null) {
-                        connn.close();
+                        ;//connn.close();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

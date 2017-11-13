@@ -218,7 +218,7 @@
                                             stmt.close();
                                         }
                                         if (con != null) {
-                                            con.close();
+                                            ;//con.close();
                                         }
                                     %>
                                 </table>
@@ -288,7 +288,7 @@
             sttt.close();
         }
         if (connn != null) {
-            connn.close();
+            ;//connn.close();
         }
     } catch (Exception e) {
         e.printStackTrace();

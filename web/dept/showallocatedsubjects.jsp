@@ -526,12 +526,12 @@ h2{
                             if(st!=null)
                             sttt.close();
                               if(con!=null)
-                                con.close();
+                                ;//con.close();
                              
                             if(st1!=null)
                             st1.close();
                               if(con1!=null)
-                                con1.close();
+                                ;//con1.close();
             %>
             </table>
     </center>
@@ -665,7 +665,7 @@ h2{
                             if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

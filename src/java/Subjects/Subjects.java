@@ -98,7 +98,7 @@ public class Subjects {
                 st.close();
             }
             if (con != null) {
-                con.close();
+                ;//con.close();
             }
         }
         return subcode;
@@ -126,7 +126,7 @@ public class Subjects {
                 st.close();
             }
             if (con != null) {
-                con.close();
+                ;//con.close();
             }
         }
         return subcode;
@@ -157,7 +157,7 @@ public class Subjects {
                 st.close();
             }
             if (con != null) {
-                con.close();
+                ;//con.close();
             }
         }
         return s;

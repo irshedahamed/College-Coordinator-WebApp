@@ -43,7 +43,7 @@ public class Department {
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }

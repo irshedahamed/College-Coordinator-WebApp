@@ -75,7 +75,7 @@ public class Batch {
                     stmt.close();
                 }
                 if (conbatch != null) {
-                    conbatch.close();
+                    ;//conbatch.close();
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,7 +113,7 @@ public class Batch {
                     stmt.close();
                 }
                 if (conbatch != null) {
-                    conbatch.close();
+                    ;//conbatch.close();
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
@@ -154,7 +154,7 @@ public class Batch {
                 st.close();
             }
             if (con != null) {
-                con.close();
+                ;//con.close();
             }
         }
         return regulation;

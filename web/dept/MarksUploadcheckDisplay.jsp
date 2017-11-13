@@ -160,7 +160,7 @@ h2{
         session.setAttribute("exam", exam1);
         rs.close();
         st.close();
-        con.close();
+        ;//con.close();
         int count=0;
         %>
         <body>
@@ -322,7 +322,7 @@ rs.close();
                             if(st!=null)
                             st.close();
                               if(con!=null)
-                                con.close();
+                                ;//con.close();
 
      %>
         </form>

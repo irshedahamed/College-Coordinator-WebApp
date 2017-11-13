@@ -196,7 +196,7 @@ $("#menu-toggle1").click(function (e) {
             sttt.close();
         }
         if (connn != null) {
-            connn.close();
+            ;//connn.close();
         }
     } else {
             response.sendRedirect("../index.jsp");

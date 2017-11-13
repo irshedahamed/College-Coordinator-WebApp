@@ -125,7 +125,7 @@ if(stmt1!=null)
     stmt1.close();
 
 if(con!=null)
-    con.close();
+    ;//con.close();
 }
         catch(Exception e)
         {
