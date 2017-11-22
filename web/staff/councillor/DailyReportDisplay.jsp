@@ -121,7 +121,7 @@
                     stmtd.close();
                 }
                 if (con != null) {
-                    con.close();
+                    ;//con.close();
                 }
             %>
 
@@ -331,7 +331,7 @@
                                             }
 
                                             if (conn != null) {
-                                                conn.close();
+                                                ;//conn.close();
                                             }
                                         }
                                     %>
@@ -403,7 +403,7 @@ $("#menu-toggle1").click(function (e) {
             sttt.close();
         }
         if (connn != null) {
-            connn.close();
+            ;//connn.close();
         }
     } catch (Exception e) {
         e.printStackTrace();

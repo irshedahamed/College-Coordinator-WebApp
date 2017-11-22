@@ -244,7 +244,7 @@
             session.setAttribute("exam", exam);
             rs.close();
             st.close();
-            con.close();
+            ;//con.close();
             int count = 0;
         %>
     <body>
@@ -375,7 +375,7 @@
                                     st.close();
                                 }
                                 if (con != null) {
-                                    con.close();
+                                    ;//con.close();
                                 }
                             %>
                     </tr>

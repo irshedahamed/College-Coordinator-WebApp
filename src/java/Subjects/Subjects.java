@@ -98,7 +98,7 @@ public class Subjects {
                 st.close();
             }
             if (con != null) {
-                con.close();
+                ;//con.close();
             }
         }
         return subcode;
@@ -125,7 +125,7 @@ public static List<String> getLabSubCode(String dept, Subjects s) throws SQLExce
                 st.close();
             }
             if (con != null) {
-                con.close();
+                ;//con.close();
             }
         }
         return subcode;
@@ -157,7 +157,7 @@ public static List<String> getLabSubCode(String dept, Subjects s) throws SQLExce
                 st.close();
             }
             if (con != null) {
-                con.close();
+                ;//con.close();
             }
         }
         return s;

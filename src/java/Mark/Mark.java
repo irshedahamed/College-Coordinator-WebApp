@@ -90,7 +90,7 @@ public class Mark {
             Logger.getLogger(Mark.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (con != null) {
-                con.close();
+                ;//con.close();
             }
             if (st != null) {
                 st.close();
@@ -135,7 +135,7 @@ public class Mark {
                 st1.close();
             }
             if (con != null) {
-                con.close();
+                ;//con.close();
             }
         }
         return m;
@@ -161,7 +161,7 @@ public class Mark {
                 st1.close();
             }
             if (con != null) {
-                con.close();
+                ;//con.close();
             }
         }
         return false;
@@ -192,7 +192,7 @@ public class Mark {
                 st1.close();
             }
             if (con != null) {
-                con.close();
+                ;//con.close();
             }
         }
         return list;

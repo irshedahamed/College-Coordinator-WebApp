@@ -221,7 +221,7 @@ and open the template in the editor.
                             st1.close();
                         }
                         if (con != null) {
-                            con.close();
+                            ;//con.close();
                         }
 
                     %>
@@ -252,7 +252,7 @@ and open the template in the editor.
             sttt.close();
         }
         if (connn != null) {
-            connn.close();
+            ;//connn.close();
         }
     } catch (Exception e) {
         e.printStackTrace();

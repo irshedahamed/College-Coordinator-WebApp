@@ -3,6 +3,7 @@
 import Actor.Student;
 import com.action.Base;
 import com.action.Find;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -107,7 +108,7 @@ public class IdDownload extends HttpServlet {
             department = Find.Depts;
                String batch=request.getParameter("batch");
                  PrintWriter out = response.getWriter();
-                 String fName = "Id_Data.xls";
+                 String fName = File.pathSeparator+"Id_Data.xls";
 //                 String filepath = "/home/fedexfan/tomcat/files/"; 
 String filepath = s1;  
 HSSFWorkbook hwb=new HSSFWorkbook();
@@ -161,11 +162,13 @@ for(String dept:department){
                          j++;       }}
              }
 }
+new File(Base.path).mkdirs();
+
 FileOutputStream fileOut =  new FileOutputStream(filepath+fName);
 hwb.write(fileOut);
 fileOut.close(); 
 response.setContentType("APPLICATION/OCTET-STREAM");   
-    response.setHeader("Content-Disposition","attachment; filename=\"" + fName + "\"");   
+    response.setHeader("Content-Disposition","attachment; filename=\"" + "Data.xls" + "\"");   
       
     FileInputStream fileInputStream = new FileInputStream(filepath + fName);  
                 

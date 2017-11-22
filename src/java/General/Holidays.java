@@ -93,7 +93,7 @@ public class Holidays {
                if(stmt!=null)
                    stmt.close();
                if(conn!=null)
-                   conn.close();
+                   ;//conn.close();
            } catch (SQLException ex) {
                ex.printStackTrace();
            }
@@ -135,7 +135,7 @@ public class Holidays {
                 if(stmt!=null)
                     stmt.close();
                 if(conbatch!=null)
-                    conbatch.close();
+                    ;//conbatch.close();
             } catch (SQLException ex) {
                 Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -173,7 +173,7 @@ public class Holidays {
                 if(stmt!=null)
                     stmt.close();
                 if(conbatch!=null)
-                    conbatch.close();
+                    ;//conbatch.close();
             } catch (SQLException ex) {
                 Logger.getLogger(Batch.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -478,7 +478,7 @@ public class ExcelStudentUpload extends HttpServlet {
       if(stmt!=null)
                             stmt.close();
                               if(conn!=null)
-                                conn.close();
+                                ;//conn.close();
                                 if(stmt1!=null)
                             stmt1.close();
                               if(conn1!=null)
@@ -516,11 +516,11 @@ public class ExcelStudentUpload extends HttpServlet {
                         if(del!=null)
                             del.close();
                         if(con1!=null)
-                            con1.close();
+                            ;//con1.close();
                         if(stmt!=null)
                             stmt.close();
                               if(conn!=null)
-                                conn.close();
+                                ;//conn.close();
                                 if(stmt1!=null)
                             stmt1.close();
                               if(conn1!=null)

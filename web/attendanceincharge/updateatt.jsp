@@ -139,7 +139,7 @@
                             st.close();
                         }
                         if (con != null) {
-                            con.close();
+                            ;//con.close();
                         }
                     %>
 

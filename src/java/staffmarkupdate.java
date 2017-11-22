@@ -148,7 +148,7 @@ public class staffmarkupdate extends HttpServlet {
                             st2.close();
                              
                               if(con!=null)
-                                con.close();
+                                ;//con.close();
             }
         
         catch(Exception e){

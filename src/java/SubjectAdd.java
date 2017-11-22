@@ -115,7 +115,7 @@ public class SubjectAdd extends HttpServlet {
             if(stmt!=null)
                 stmt.close();
         if(conn!=null)
-            conn.close();
+            ;//conn.close();
             
              conn=new dbcon().getConnection(dept);
              stmt=conn.createStatement();
@@ -125,7 +125,7 @@ public class SubjectAdd extends HttpServlet {
             if(stmt!=null)
                 stmt.close();
         if(conn!=null)
-            conn.close();
+            ;//conn.close();
         
         } catch (Exception ex) {
         ex.printStackTrace();

@@ -127,7 +127,7 @@
         if(stmtd!=null)
             stmtd.close();
         if(con!=null)
-            con.close();
+            ;//con.close();
         %>
 		
 		<header id="page-header"  class="fixed-header">
@@ -402,7 +402,7 @@ if(s.getCouncillorDetails().getBatch()!=null)
   if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

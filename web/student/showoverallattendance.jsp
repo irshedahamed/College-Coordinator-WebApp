@@ -53,10 +53,10 @@
                     st1.close();
                 }
                 if (con1 != null) {
-                    con1.close();
+                    ;//con1.close();
                 }
                 if (con != null) {
-                    con.close();
+                    ;//con.close();
                 }
             %>
         </table>

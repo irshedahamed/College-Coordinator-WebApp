@@ -159,7 +159,7 @@ public class LoginServlet extends HttpServlet {
                   else if(s3.equals("principal"))
                       response.sendRedirect("principal/home.jsp?user="+s1);
                   else if(s3.equals("idcard"))
-                      response.sendRedirect("idcard/idcard.jsp?user="+s1);
+                      response.sendRedirect("idcard/home.jsp?user="+s1);
                 else
                   {
                       
@@ -189,7 +189,7 @@ public class LoginServlet extends HttpServlet {
             }  
             
 		//close connection
-            con.close();
+            ;//con.close();
                     }
                     else
                     {
@@ -205,7 +205,7 @@ public class LoginServlet extends HttpServlet {
                         if(statement!=null)
                             statement.close();
                         if(con!=null)
-                            con.close();
+                            ;//con.close();
                     } catch (SQLException ex) {
                         Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }

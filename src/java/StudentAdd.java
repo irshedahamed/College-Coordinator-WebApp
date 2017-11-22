@@ -220,7 +220,7 @@ public class StudentAdd extends HttpServlet {
        sql="insert into student_login_details values('"+rollno+"','"+GeneratePassword.next()+"')";
       stmt.execute(sql);
       stmt.close();
-      conn.close();
+      ;//conn.close();
       conn=new dbcon().getConnection(dept);   
       stmt=conn.createStatement();
   if(dob.equals("")){
@@ -347,7 +347,7 @@ public class StudentAdd extends HttpServlet {
       } if(stmt!=null)
                             stmt.close();
                               if(conn!=null)
-                                conn.close();
+                                ;//conn.close();
       
       }catch(Exception e){
           try {
@@ -387,7 +387,7 @@ public class StudentAdd extends HttpServlet {
                 if(del!=null)
                             del.close();
                               if(con1!=null)
-                                con1.close();
+                                ;//con1.close();
               
               
           } catch (Exception ex) {

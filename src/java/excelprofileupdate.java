@@ -233,7 +233,7 @@ rows.next();
                               if(conn1!=null)
                                 conn1.close();
                               if(con!=null)
-                                con.close();
+                                ;//con.close();
                      }catch(Exception e)
                      {
                                 response.getWriter().println("exceptionthrown");

@@ -280,7 +280,7 @@
                 sttt.close();
             }
             if (connn != null) {
-                connn.close();
+                ;//connn.close();
             } else {
                 response.sendRedirect("../index.jsp");
             }
