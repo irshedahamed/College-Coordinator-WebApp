@@ -139,7 +139,11 @@ public class Authenticate extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
+    /**
+     * Verifies the username and password is authenticated and sets the authentication type of the user
+     * 
+     * @return  true if user exists
+     */
     public boolean isAuthenticated(){
     
         boolean flag=false;

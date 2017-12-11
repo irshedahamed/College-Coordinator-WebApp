@@ -1,3 +1,4 @@
+<%@page import="General.AcademicYear"%>
 <%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
@@ -135,6 +136,20 @@
                                                 <i></i>
                                             </label></label>
                                         <br> <br>
+                                                                <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    Academic Year:</b></div>
+                                            <label class="select">
+                                                <select id="ayear" name="ayear">
+                                                    <option>Select</option>
+                                                    <%= AcademicYear.getHTMLContent()%>
+
+                                                </select>  
+                                                <i></i>
+                                            </label>
+                                        </label>
+                                        <br> <br>
+                
                                         <label class="input">
                                             <div align="left" size="3px"><b>
                                                     Section </b></div>
