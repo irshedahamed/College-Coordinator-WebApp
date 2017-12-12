@@ -118,7 +118,7 @@ public class CouncillorAttEdit extends HttpServlet {
                 if(stmt!=null)
                     stmt.close();
                 if(conn!=null)
-                    conn.close();
+                    ;//conn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(attinchargeedit.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -133,7 +133,7 @@ public class CouncillorAttEdit extends HttpServlet {
                 if(stmt!=null)
                     stmt.close();
                 if(conn!=null)
-                    conn.close();
+                    ;//conn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(attinchargeedit.class.getName()).log(Level.SEVERE, null, ex);
             }

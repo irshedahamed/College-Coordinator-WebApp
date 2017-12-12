@@ -1,3 +1,4 @@
+<%@page import="General.Batch"%>
 <%@page import="General.AcademicYear"%>
 <%@page import="Actor.Staff"%>
 <%@page import="com.action.Find"%>
@@ -126,7 +127,7 @@
         if(stmtd!=null)
             stmtd.close();
         if(con!=null)
-            con.close();
+            ;//con.close();
         %>
 		
 		<header id="page-header"  class="fixed-header">
@@ -262,24 +263,8 @@ if(s.getCouncillorDetails().getBatch()!=null)
                 <label class="select">
             
            <select id="batch" name="batch">
-            <%
-                Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select batch from regulations");
-                    String batch=null;
-                    rs.beforeFirst();
-                    while(rs.next())
-                    {
-                        batch=rs.getString("batch");
-                %>
-                <option value=<%=batch%>><%=batch%></option>
-                <%
-                }
-                  if(stmt!=null)
-                            stmt.close();
-                              if(conbatch!=null)
-                                conbatch.close();
-                %></select>
+            <%= Batch.getHTMLContent()%>
+               </select>
                 
                 <%
     }
@@ -417,7 +402,7 @@ if(s.getCouncillorDetails().getBatch()!=null)
   if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

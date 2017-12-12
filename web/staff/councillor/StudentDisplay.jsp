@@ -123,7 +123,7 @@
         if(stmtd!=null)
             stmtd.close();
         if(con!=null)
-            con.close();
+            ;//con.close();
         %>
 		
 		<header id="page-header"  class="fixed-header">
@@ -172,7 +172,15 @@
     </ul>
     
 </li>
-<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="viewmarkbonus.jsp"</a>View Marks</li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">View Marks</a>
+    <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmarkbonus.jsp">Consolidated Report</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmark.jsp">View Marks</a></li>
+
+	
+
+    </ul>
+</li>
 <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="../home.jsp">Staff View</a>
 
 </ul>						</nav>
@@ -890,7 +898,7 @@ stmt9.close();
 if(stmt10!=null)
 stmt10.close();
 if(con!=null)
-con.close();
+;//con.close();
 }
                      catch(Exception e)
                         {
@@ -901,7 +909,7 @@ finally
 try
 {
 if(con1!=null)
-con1.close();
+;//con1.close();
 if(stmt!=null)
 stmt.close();
 }
@@ -977,7 +985,7 @@ e.printStackTrace();
                     if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

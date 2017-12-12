@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <filter>
+        <filter-name>ImageFilter</filter-name>
+        <filter-class>Filter.ImageFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ImageFilter</filter-name>
+        <url-pattern>/StudentPhotos/*</url-pattern>
+        <url-pattern>/StaffPhotos/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>LoginServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>markupdate</servlet-name>
-        <servlet-class>markupdate</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ElectiveUpdate</servlet-name>
@@ -318,19 +323,51 @@
     </servlet>
     <servlet>
         <servlet-name>TimingServlet</servlet-name>
-        <servlet-class>TimingServlet</servlet-class>
+        <servlet-class>Transport.TimingServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateMarks</servlet-name>
+        <servlet-class>Mark.UpdateMarks</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>deleteSubject</servlet-name>
         <servlet-class>deleteSubject</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ExamUpdate</servlet-name>
+        <servlet-class>Mark.ExamUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>checkAlumni</servlet-name>
+        <servlet-class>API.checkAlumni</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Switcher</servlet-name>
+        <servlet-class>Dao.Login.Switcher</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IdDownload</servlet-name>
+        <servlet-class>IdDownload</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Room_Change</servlet-name>
+        <servlet-class>Room_Change</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Local_Guard</servlet-name>
+        <servlet-class>Local_Guard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>local_guardian</servlet-name>
+        <servlet-class>local_guardian</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DateCheck</servlet-name>
+        <servlet-class>Mark.DateCheck</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>markupdate</servlet-name>
-        <url-pattern>/markupdate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>JsonServlet</servlet-name>
@@ -645,8 +682,44 @@
         <url-pattern>/TimingServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>UpdateMarks</servlet-name>
+        <url-pattern>/UpdateMarks</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>deleteSubject</servlet-name>
         <url-pattern>/deleteSubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ExamUpdate</servlet-name>
+        <url-pattern>/ExamUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkAlumni</servlet-name>
+        <url-pattern>/checkAlumni</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Switcher</servlet-name>
+        <url-pattern>/Switcher</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IdDownload</servlet-name>
+        <url-pattern>/IdDownload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Room_Change</servlet-name>
+        <url-pattern>/Room_Change</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Local_Guard</servlet-name>
+        <url-pattern>/Local_Guard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>local_guardian</servlet-name>
+        <url-pattern>/local_guardian</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DateCheck</servlet-name>
+        <url-pattern>/DateCheck</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

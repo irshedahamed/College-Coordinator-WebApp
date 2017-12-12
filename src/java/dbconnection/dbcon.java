@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,31 +18,37 @@ import java.util.logging.Logger;
  * @author aravind
  */
 public class dbcon {
+    
+     static final Map<String,Connection> connectionPool;
+     String clg="";
+     static{
+         connectionPool=new HashMap<String, Connection>();
+     }
     public Connection getConnection(String dbname)
     {
-        Connection con=null;
-        try {  
-             Class.forName("com.mysql.jdbc.Driver").newInstance();
-
-
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"webapp","fluffy");
-
-
-             
-        } catch (SQLException ex) {
-            Logger.getLogger(dbcon.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(dbcon.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(dbcon.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(dbcon.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    return con;
+        
+    return getConnection(dbname,clg);
     }
 
     public Connection getConnection() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
      }
     
+    private static Connection getConnection(String dbname,String clg){
+        
+        Connection conn=connectionPool.get(dbname+clg);
+          try { 
+            if(conn==null || conn.isClosed()){
+                 Class.forName("com.mysql.jdbc.Driver").newInstance();
+                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"webapp","fluffy");
+                 connectionPool.put(dbname+clg, conn);
+        }
+        
+        } catch (Exception ex) {
+            Logger.getLogger(dbcon.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        
+        return conn;
+    }
 }

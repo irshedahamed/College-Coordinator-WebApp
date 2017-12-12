@@ -1,3 +1,5 @@
+<%@page import="General.AcademicYear"%>
+<%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.ResultSet"%>
@@ -112,29 +114,27 @@
                 <label class="select">
             <select id="batch" name="batch" required>
                 <option disabled selected>Select</option>
-                     <%
-                Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select batch from regulations");
-                    String batch=null;
-                    rs.beforeFirst();
-                    if(rs.last())
-                    {
-                        batch=rs.getString("batch");
-                %>
-                <option value=<%=batch%>><%=batch%></option>
-                <%
-                }
-
-                            if(stmt!=null)
-                            stmt.close();
-                              if(conbatch!=null)
-                                conbatch.close();
-                %>
+                     <%=Batch.getHTMLContent()%>
+               
             </select>
                     <i></i>
                 </label></label>
             <br> <br>
+                                    <label class="input">
+                                            <div align="left" size="3px"><b>
+                                                    Academic Year:</b></div>
+                                            <label class="select">
+                                                <select id="ayear" name="ayear">
+                                                    <option>Select</option>
+                                                    <%= AcademicYear.getHTMLContent()%>
+
+                                                </select>  
+                                                <i></i>
+                                            </label>
+                                        </label>
+                                        <br> <br>
+                
+                                        
             <label class="input">
                                                     <div align="left" size="3px"><b>
                                                              Section </b></div>

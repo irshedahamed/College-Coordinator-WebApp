@@ -108,6 +108,8 @@ public class StudentDelProfile extends HttpServlet {
                 del.executeUpdate(sql);
                 sql="delete from student_local_guardian where rollno='"+rollno+"'";
                 del.executeUpdate(sql);
+                sql="delete from student_local_guardian2 where rollno='"+rollno+"'";
+                del.executeUpdate(sql);
                 sql="delete from student_other_details where rollno='"+rollno+"'";
                 del.executeUpdate(sql);
                 sql="delete from student_passport_details where rollno='"+rollno+"'";
@@ -130,11 +132,11 @@ public class StudentDelProfile extends HttpServlet {
             if(del!=null)
                 del.close();
             if(con!=null)
-                con.close();
+                ;//con.close();
             if(stmt1!=null)
                 stmt1.close();
             if(con1!=null)
-                con1.close();
+                ;//con1.close();
             
                 }catch(Exception e){
                 e.printStackTrace();

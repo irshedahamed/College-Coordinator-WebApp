@@ -87,6 +87,15 @@ public class SubjectAdd extends HttpServlet {
        String subname=request.getParameter("subname");
        String type=request.getParameter("subtype");
        String sem=request.getParameter("sem");
+       
+       String abbr=request.getParameter("abbreviation");
+       String l=request.getParameter("l");
+       String t=request.getParameter("t");
+       String p=request.getParameter("p");
+       String c=request.getParameter("c");
+       String category=request.getParameter("category");
+       
+       
        String ayear;
        if(type.equals("etheory"))
        {ayear="elective";type=type.substring(1);}
@@ -101,12 +110,12 @@ public class SubjectAdd extends HttpServlet {
             ResultSet rs=stmt.executeQuery("select subcode from subject_table where subcode like '"+subcode+"'");
              if(!rs.next())
             stmt.execute("insert into subject_table values('"+regulation+"','"+subcode+"','"+subname+"','"+
-                    type+"')");
+                    type+"','"+abbr+"','"+p+"','"+t+"','"+l+"','"+c+"','"+category+"')");
         
             if(stmt!=null)
                 stmt.close();
         if(conn!=null)
-            conn.close();
+            ;//conn.close();
             
              conn=new dbcon().getConnection(dept);
              stmt=conn.createStatement();
@@ -116,7 +125,7 @@ public class SubjectAdd extends HttpServlet {
             if(stmt!=null)
                 stmt.close();
         if(conn!=null)
-            conn.close();
+            ;//conn.close();
         
         } catch (Exception ex) {
         ex.printStackTrace();

@@ -28,6 +28,7 @@ public class Authenticate extends HttpServlet {
     private String Password;
     private String type;
     private String photo;
+    
 
     public String getUsername() {
         return Username;
@@ -138,7 +139,11 @@ public class Authenticate extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    
+    /**
+     * Verifies the username and password is authenticated and sets the authentication type of the user
+     * 
+     * @return  true if user exists
+     */
     public boolean isAuthenticated(){
     
         boolean flag=false;
@@ -179,7 +184,7 @@ public class Authenticate extends HttpServlet {
                if(stmt!=null)
                    stmt.close();
                if(conn!=null)
-                   conn.close();
+                   ;//conn.close();
            } catch (SQLException ex) {
                ex.printStackTrace();
            }
@@ -208,7 +213,7 @@ public class Authenticate extends HttpServlet {
                type="staff";
                pwd=rs.getString("password");
            }else{
-           sql="select * from other_login_details where staffid like '"+Username+"' ";
+           sql="select * from other_login_details where id like '"+Username+"' ";
            rs=stmt.executeQuery(sql);
            if(rs.next()){
                     type=rs.getString("type");
@@ -226,7 +231,7 @@ public class Authenticate extends HttpServlet {
                if(stmt!=null)
                    stmt.close();
                if(conn!=null)
-                   conn.close();
+                   ;//conn.close();
            } catch (SQLException ex) {
                ex.printStackTrace();
            }
@@ -234,5 +239,10 @@ public class Authenticate extends HttpServlet {
        }
     return pwd;
     
+    }
+    
+    public static boolean validateAPI(String API){
+    
+    return true;
     }
 }

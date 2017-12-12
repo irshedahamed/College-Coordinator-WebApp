@@ -20,100 +20,99 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    
-    <body>
-        
-        <form action="${pageContext.request.contextPath}/attinchargeedit" method="post">
-        <table class="bordered">
-    <thead>
-        <%
-            String date=request.getParameter("datepicker");
-            
-        %>
 
-    <tr>
-        <th name="cc">Roll No</th>
-        <th>Name</th>
-        <th><%=date%>(Tick if Present)</th>
-    </tr>
-    </thead>
-        <%
-        
-        Connection con=null;
-        Statement st=null;
-        Statement st1=null;
-        
-        String dept = request.getParameter("dept");
-	try{
-            
-        String batch=request.getParameter("batch");
-        String sem = request.getParameter("sem");
-       
-        
-         con = new dbcon().getConnection(dept);
-         st=con.createStatement();
-         st1=con.createStatement();
-        int count =0;
-        String sql="select * from overallattendence where date='"+date+"'";
-        ResultSet rs=st.executeQuery(sql);
-        
-        while(rs.next())
-        {
-           
-        String rollno=rs.getString("rollno");
-        String date1=String.valueOf(rs.getDate("date"));
-        
-        sql="select name from student_personal where rollno='"+rollno+"' and batch='"+batch+"' order by name";
-        ResultSet rs1=st1.executeQuery(sql);
-        if(rs1.next())
-        {    
-            
-            
-        String name=rs1.getString("name");
-        
-        %>
-        
-        <tr>
-            <td><%=rollno %></td>
-            <td><%=name %></td>
-           <td>
-                        
-               <input type="checkbox" name="val<%=count%>" value="<%=rollno%>">
-                            
-                            
-                        
-                        </td>
-                    
-        </tr>      
-            
- 
-        
-        <% 
-count++; 
-}
-}
-        
-        session.setAttribute("count",count);
-        session.setAttribute("date",date);
-        
-}catch(Exception e){
-e.printStackTrace();
-}finally{
-                            if(st!=null)
+    <body>
+
+        <form action="${pageContext.request.contextPath}/attinchargeedit" method="post">
+            <table class="bordered">
+                <thead>
+                    <%
+                        String date = request.getParameter("datepicker");
+
+                    %>
+
+                    <tr>
+                        <th name="cc">Roll No</th>
+                        <th>Name</th>
+                        <th><%=date%>(Tick if Present)</th>
+                    </tr>
+                </thead>
+                <%
+
+                    Connection con = null;
+                    Statement st = null;
+                    Statement st1 = null;
+
+                    String dept = request.getParameter("dept");
+                    try {
+
+                        String batch = request.getParameter("batch");
+                        String sem = request.getParameter("sem");
+
+                        con = new dbcon().getConnection(dept);
+                        st = con.createStatement();
+                        st1 = con.createStatement();
+                        int count = 0;
+                        String sql = "select * from overallattendence where date='" + date + "'";
+                        ResultSet rs = st.executeQuery(sql);
+
+                        while (rs.next()) {
+
+                            String rollno = rs.getString("rollno");
+                            String date1 = String.valueOf(rs.getDate("date"));
+
+                            sql = "select name from student_personal where rollno='" + rollno + "' and batch='" + batch + "' order by name";
+                            ResultSet rs1 = st1.executeQuery(sql);
+                            if (rs1.next()) {
+
+                                String name = rs1.getString("name");
+
+                %>
+
+                <tr>
+                    <td><%=rollno%></td>
+                    <td><%=name%></td>
+                    <td>
+
+                        <input type="checkbox" name="val<%=count%>" value="<%=rollno%>">
+
+
+
+                    </td>
+
+                </tr>      
+
+
+
+                <%
+                                count++;
+                            }
+                        }
+
+                        session.setAttribute("count", count);
+                        session.setAttribute("date", date);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (st != null) {
                             st.close();
-                            if(st1!=null)
+                        }
+                        if (st1 != null) {
                             st1.close();
-        
-                            if(con!=null)
-                                con.close();
-}       
-%>
-   
-    
-        
-</table>
-<input type="hidden" name="dept" value="<%=dept%>">
-    <input type="submit" value="submit">
+                        }
+
+                        if (con != null) {
+                            ;//con.close();
+                        }
+                    }
+                %>
+
+
+
+            </table>
+            <input type="hidden" name="dept" value="<%=dept%>">
+            <input type="submit" value="submit">
         </form>
     </body>
 </html>

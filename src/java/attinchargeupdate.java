@@ -109,7 +109,7 @@ public class attinchargeupdate extends HttpServlet {
                 if(st1!=null)
                     st1.close();
                               if(con!=null)
-                                con.close();
+                                ;//con.close();
         }catch(Exception e)
         {
             e.printStackTrace();

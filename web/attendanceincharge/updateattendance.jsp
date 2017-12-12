@@ -80,16 +80,16 @@
                     }
                 }
                 $(".button1").click(function () {
-                    if(flag==1)
+                    if (flag == 1)
                     {
-                        $.post("../TimingServlet",{"date": date, "batch": batch, "dept": dept , "sem" : sem , "time" : time },function(response){});
+                        $.post("../TimingServlet", {"date": date, "batch": batch, "dept": dept, "sem": sem, "time": time}, function (response) {});
                     }
                     if (($(this).val()) == "No Absentees") {
                         window.location.replace("updateattendance.jsp?msg=ok");
-                    } 
-                        
-                      //  $("#myform").submit();
-                                    });
+                    }
+
+                    //  $("#myform").submit();
+                });
             });
         </script>
 
@@ -195,8 +195,8 @@
                                             <label class="select">
                                                 <select id="batch" name="batch" required>
                                                     <option  selected>Select</option>
-                                                      <option value="<%=Batch.getByYrIncharge(username).getBatch()%>" ><%=Batch.getByYrIncharge(username).getBatch()%></option>
-                                                
+                                                    <option value="<%=Batch.getByYrIncharge(username).getBatch()%>" ><%=Batch.getByYrIncharge(username).getBatch()%></option>
+
                                                 </select>
                                                 <i></i>
                                             </label></label>
@@ -313,15 +313,14 @@
                 <script src="../js/bootstrap.min.js"></script>
 
                 <!-- Menu Toggle Script -->
-<script>
-     <%  
-        String msg = request.getParameter("msg");
-        if(msg!=null)
-        {
-     %>
-         alert("No Absentees Marked Continue With Next Department");
-      <% } %>
-     </script>
+                <script>
+                    <%
+                        String msg = request.getParameter("msg");
+                        if (msg != null) {
+                    %>
+            alert("No Absentees Marked Continue With Next Department");
+                    <% } %>
+                </script>
 
 
                 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
@@ -337,7 +336,7 @@
                             sttt.close();
                         }
                         if (connn != null) {
-                            connn.close();
+                            ;//connn.close();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

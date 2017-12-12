@@ -190,7 +190,7 @@
                             if(stmt!=null)
                             stmt.close();
                               if(conbatch!=null)
-                                conbatch.close();
+                                ;//conbatch.close();
                 %>
             </select>
                     <i></i>
@@ -249,7 +249,10 @@
                 <option value="unit1">Unit 1</option>
                 <option value="unit2">Unit 2</option>
                 <option value="unit3">Unit 3</option>
-               
+               <option value="zremodel1">Remodel 1</option>
+                <option value="zremodel2">Remodel 2</option>
+                <option value="zremodel3">Remodel 3</option>
+                <option value="labmodel">Labmodel</option>    
             </select>
                     <i></i>
             <br> <br>
@@ -317,7 +320,7 @@
                             if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

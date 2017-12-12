@@ -92,7 +92,7 @@ Connection conn=null;
                if(stmt!=null)
                    stmt.close();
                if(conn!=null)
-                   conn.close();
+                   ;//conn.close();
            } catch (SQLException ex) {
                ex.printStackTrace();
            }
@@ -149,7 +149,7 @@ Connection conn=null;
         if(st!=null)
                 st.close();
             if(con!=null)
-                con.close();
+                ;//con.close();
            
       }catch(Exception e){
     e.printStackTrace();

@@ -125,7 +125,7 @@ public class StaffProfileEdit extends HttpServlet {
        try
        {
        if(con!=null)
-           con.close();
+           ;//con.close();
        if(stmt!=null)
            stmt.close();
        }

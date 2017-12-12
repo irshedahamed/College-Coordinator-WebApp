@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : dropdowns
     Created on : Feb 13, 2015, 6:41:57 AM
@@ -132,7 +133,7 @@
                             if(stmt1!=null)
                             stmt1.close();
                               if(conbatch!=null)
-                                conbatch.close();
+                                ;//conbatch.close();
               }
               out.print("</table>");
              

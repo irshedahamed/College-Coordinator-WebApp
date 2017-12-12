@@ -18,27 +18,23 @@
 <%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html lang="en-US">
-    
-<% 
-   try
-    {
-    String username = session.getAttribute("username").toString();
-    String password = session.getAttribute("password").toString();
-    
-    Connection connn = new dbcon().getConnection("login");
-    Statement sttt = connn.createStatement();
-    String type ="";
-    ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='"+username+"' and password='"+password+"'");
-    if(rsss.isBeforeFirst())
-    {
-        while(rsss.next())
-        {
-            type = rsss.getString("type");
-        }
-        if(type.equals("hostel"))
-        {
-    
-    
+
+    <%
+        try {
+            String username = session.getAttribute("username").toString();
+            String password = session.getAttribute("password").toString();
+
+            Connection connn = new dbcon().getConnection("login");
+            Statement sttt = connn.createStatement();
+            String type = "";
+            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
+            if (rsss.isBeforeFirst()) {
+                while (rsss.next()) {
+                    type = rsss.getString("type");
+                }
+                if (type.equals("hostel")) {
+
+
     %>
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -92,6 +88,10 @@
                                                     
 							<ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page "><a href="home.jsp">Home</a></li>
 
+ 
+
+<li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="HostelProfile.jsp">HostelStudentDetails</a>
+   
     
 
 
@@ -109,8 +109,6 @@
 
 <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="Setup.jsp">Holiday Setup</a>
 
-
-</li>
 
 <li id="menu-item-777" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="#"> Report</a>
 <ul class="sub-menu">
@@ -152,125 +150,126 @@
                                       }
                             });
                         });
-                        
-                    </script>
-		</header>
+                    });
+
+                </script>
+            </header>
 
 
-<center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-                <br><br><br><br>
-          <section class="landing">
-              <center><form action="${pageContext.request.contextPath}/updateHolidays" class="sky-form" method="post" >
-    <header>HOLIDAY SETUP</header>
-    <fieldset>					
-					<section>
-						<label class="input">
+            <center><section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
+                            <br><br><br><br>
+                            <section class="landing">
+                                <center><form action="${pageContext.request.contextPath}/updateHolidays" class="sky-form" method="post" >
+                                        <header>HOLIDAY SETUP</header>
+                                        <fieldset>					
+                                            <section>
+                                                <label class="input">
                                                     <div align="left" size="3px"><b>DEPARTMENT</b></div>
-							<label class="select">
-           
-               <select id="dept" name="dept" class="change" required>
-                <option  disabled selected value="">Select</option>
-    
-                                                   
-                <%=Find.getDeptHTMLContent() %>
-               
-            </select>
-                    <i></i>                                    </label>
+                                                    <label class="select">
+
+                                                        <select id="dept" name="dept" class="change" required>
+                                                            <option  disabled selected value="">Select</option>
+
+
+                                                            <%=Find.getDeptHTMLContent()%>
+
+                                                        </select>
+                                                        <i></i>                                    </label>
                                                 </label>
-                                        
-                                            <br><br>
-            <label class="input">
+
+                                                <br><br>
+                                                <label class="input">
                                                     <div align="left" size="3px"><b>BATCH</b></div>
-							<label class="select">
-           
-               <select id="batch" class="change" name="batch" required>
-                <option  disabled selected value="">Select</option>
-  
-                <%=Batch.getHTMLContent() %>
-            </select>
-                    <i></i>                                    </label>
+                                                    <label class="select">
+
+                                                        <select id="batch" class="change" name="batch" required>
+                                                            <option  disabled selected value="">Select</option>
+
+                                                            <%=Batch.getHTMLContent()%>
+                                                        </select>
+                                                        <i></i>                                    </label>
                                                 </label>
-                                        
-                                            <br><br>
-           <label class="input">
+
+                                                <br><br>
+                                                <label class="input">
                                                     <div align="left" size="3px"><b>NAME</b></div>
-							<label class="select">
-           
-               <select id="holidayname" class="change" name="name" required>
-                <option  disabled selected value="">Select</option>
-                
-                <%for(String name:Holidays.getAllNames()){%>
-                <option  value="<%=name%>"><%=name%></option>
-                <% }
-                %>
-            </select>
-                    <i></i>                                    </label>
+                                                    <label class="select">
+
+                                                        <select id="holidayname" class="change" name="name" required>
+                                                            <option  disabled selected value="">Select</option>
+
+                                                            <%for (String name : Holidays.getAllNames()) {%>
+                                                            <option  value="<%=name%>"><%=name%></option>
+                                                            <% }
+                                                            %>
+                                                        </select>
+                                                        <i></i>                                    </label>
                                                 </label>
-                                        
-                                            <br><br>
-            
-                                            <label class="input">
+
+                                                <br><br>
+
+                                                <label class="input">
                                                     <div align="left" size="3px" id="div7"><b>
-                                                             FROM</b></div>
-                <label class="input">
-            
-            <input type="date" id="from"   name="from" />
-            
-             <i></i>
-            <br> <br>
-                </label></label>
-            
-                                             <label class="input">
+                                                            FROM</b></div>
+                                                    <label class="input">
+
+                                                        <input type="date" id="from"   name="from" />
+
+                                                        <i></i>
+                                                        <br> <br>
+                                                    </label></label>
+
+                                                <label class="input">
                                                     <div align="left" size="3px" id="div7"><b>
-                                                             TILL</b></div>
-                <label class="input">
-            
-            <input type="date" id="till"   name="till" />
-            
-             <i></i>
-            <br> <br>
-                </label></label>
-                                        </section>
-            
-                           
-             <div align="left">
-            <input type="submit" id="submit" value="Submit" /></div>
-            <br>
-    </fieldset>
-                </form></center>     
-              
-            
-        </section>
+                                                            TILL</b></div>
+                                                    <label class="input">
+
+                                                        <input type="date" id="till"   name="till" />
+
+                                                        <i></i>
+                                                        <br> <br>
+                                                    </label></label>
+                                            </section>
 
 
-            
+                                            <div align="left">
+                                                <input type="submit" id="submit" value="Submit" /></div>
+                                            <br>
+                                        </fieldset>
+                                    </form></center>     
 
-</div></div>
 
-<br><br></section></center>		
+                            </section>
 
 
-						<footer id="footer-widgets">
-			<div class="container clearfix">
-								Powered by St.Joseph's
-							</div>
-		</footer>
-			<!-- #page-container -->
-			</div>
-			</div>
 
-	<footer id="page-footer">
-		<div class="container clearfix">
-			<div class="copy"></div>
-			<nav id="footer-nav">
-                            			<ul id="menu-footer-menu" class="menu">
-<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
-<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
-</ul>
-				
-    			</nav>
-		</div>
-	</footer>
+
+                        </div></div>
+
+                    <br><br></section></center>		
+
+
+            <footer id="footer-widgets">
+                <div class="container clearfix">
+                    Powered by St.Joseph's
+                </div>
+            </footer>
+            <!-- #page-container -->
+        </div>
+    </div>
+
+    <footer id="page-footer">
+        <div class="container clearfix">
+            <div class="copy"></div>
+            <nav id="footer-nav">
+                <ul id="menu-footer-menu" class="menu">
+                    <li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="../Credits.html">Credits</a></li>
+                    <li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="../index.jsp">Logout</a></li>
+                </ul>
+
+            </nav>
+        </div>
+    </footer>
 
 
 
@@ -281,33 +280,29 @@
     <script src="../js/bootstrap.min.js"></script>
 
     <!-- Menu Toggle Script -->
-    
 
 
-<script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
-<%
-    }
-        else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-    }
 
-                            if(sttt!=null)
-                            sttt.close();
-                              if(connn!=null)
-                                connn.close();
-    else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-    }
-catch(Exception e)
-    {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-    
+    <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
+    <%
+                } else {
+                    response.sendRedirect("../index.jsp");
+                }
+            }
+
+            if (sttt != null) {
+                sttt.close();
+            }
+            if (connn != null) {
+                ;//connn.close();
+            } else {
+                response.sendRedirect("../index.jsp");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("../index.jsp");
+        }
+
     %>
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
 </html>
