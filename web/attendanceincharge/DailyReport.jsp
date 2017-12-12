@@ -157,7 +157,7 @@
                         }
 
                         if (con != null) {
-                            con.close();
+                            ;//con.close();
                         }
                     }
                 %>

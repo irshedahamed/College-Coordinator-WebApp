@@ -328,7 +328,7 @@
                     st.close();
                 }
                 if (con != null) {
-                    con.close();
+                    ;//con.close();
                 }
             } catch (Exception e) {
                 e.printStackTrace();

@@ -95,7 +95,7 @@ System.err.println(sqlDelete);
 st.executeUpdate(sqlDelete);
 }
 st.close();
-con.close();
+;//con.close();
 
 response.getWriter().println("deleted successfully");
 

@@ -22,7 +22,7 @@
         {
             type1 = rsss.getString("type");
         }
-        if(type1.equals("dept"))
+        if(type1.equals("first"))
         {
     
     
@@ -161,7 +161,9 @@
 
                                                 </select>
                                                 <i></i>                                    </label>
-                                        </label>                                    <label class="input">
+                                        </label>
+                   <br>
+                   <label class="input">
                                             <div align="left" size="3px"><b>
                                                     Academic Year:</b></div>
                                             <label class="select">
@@ -173,11 +175,11 @@
                                                 <i></i>
                                             </label>
                                         </label>
-                                        <br> <br>
+                                        <br> 
                                          
                                         <label class="input">
                                             <div align="left" size="3px"><b>
-                                                    batch</b></div>
+                                                    Batch</b></div>
                                          <label class="select">
                                         <select id="batch" name="batch">
                                             
@@ -286,7 +288,7 @@
                             if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

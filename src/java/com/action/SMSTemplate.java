@@ -56,7 +56,7 @@ public static String sendwithID(String number,String message,String id){
                  if(stmt!=null)
                      stmt.close();
                  if(conn!=null)
-                     conn.close();
+                     ;//conn.close();
              } catch (Exception ex) {
              ex.printStackTrace();
              }

@@ -1052,14 +1052,14 @@
                                             stmt10.close();
                                         }
                                         if (con != null) {
-                                            con.close();
+                                            ;//con.close();
                                         }
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     } finally {
                                         try {
                                             if (con != null) {
-                                                con.close();
+                                                ;//con.close();
                                             }
                                             if (stmt != null) {
                                                 stmt.close();
@@ -1133,7 +1133,7 @@
             sttt.close();
         }
         if (connn != null) {
-            connn.close();
+            ;//connn.close();
         }
     } catch (Exception e) {
         e.printStackTrace();

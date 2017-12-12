@@ -156,7 +156,7 @@
                                     stmt.close();
                                 }
                                 if (conn != null) {
-                                    conn.close();
+                                    ;//conn.close();
                                 }
                             } catch (SQLException ex) {
                                 ex.printStackTrace();
@@ -207,7 +207,7 @@
             sttt.close();
         }
         if (connn != null) {
-            connn.close();
+            ;//connn.close();
         }
     } catch (Exception e) {
         e.printStackTrace();

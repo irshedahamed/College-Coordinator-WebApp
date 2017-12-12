@@ -151,7 +151,7 @@
                             if(stmt!=null)
                             stmt.close();
                               if(conbatch!=null)
-                                conbatch.close();
+                                ;//conbatch.close();
                 %>
                                                 </select>
                                                 <i></i>

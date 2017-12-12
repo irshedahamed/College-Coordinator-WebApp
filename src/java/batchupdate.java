@@ -89,7 +89,7 @@ public class batchupdate extends HttpServlet {
               if(st!=null)
                             st.close();
                               if(con!=null)
-                                con.close();
+                                ;//con.close();
         }catch(Exception e)
         {
             e.printStackTrace();

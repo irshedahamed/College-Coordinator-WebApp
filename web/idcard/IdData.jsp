@@ -145,17 +145,28 @@ h2{
 		        
 	
 		
-		<header id="page-header"  class="fixed-header">
-		
-			<div id="page-header-inner">
+		 <header id="page-header"  class="fixed-header">
 
-				<div id="header-container">
-					<div class="container clearfix">
-						<div id="main-logo">
-							<a href="#">
-								<img src="../images/sjit.png"  height="70px"></a>
-						</div>
-                                            </header>
+                <div id="page-header-inner">
+
+                    <div id="header-container">
+                        <div class="container clearfix">
+                            <div id="main-logo">
+                                <a href="#">
+                                    <img src="../images/sjit.png"  height="70px"></a>
+                            </div>
+                            <nav id="main-nav">
+                                <ul id="menu-main-menu" class="menu">
+                                     <li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page ">
+                                        <a href="home.jsp">Home</a></li> 
+    
+                                    <li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778">
+                                        <a href="IdData.jsp">Id Data</a></li> </ul>      
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
         <center><section>
                 <br><br><br><br>
                <section>

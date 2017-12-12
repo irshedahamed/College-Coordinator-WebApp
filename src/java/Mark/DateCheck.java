@@ -110,7 +110,7 @@ public class DateCheck extends HttpServlet {
         } finally {
             try {
                 if (con != null) {
-                    con.close();
+                    ;//con.close();
                 }
                 if (st != null) {
                     st.close();

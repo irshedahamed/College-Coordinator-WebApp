@@ -331,7 +331,7 @@ and open the template in the editor.
                             st.close();
                         }
                         if (con != null) {
-                            con.close();
+                            ;//con.close();
                         }
 
                     %>

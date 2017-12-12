@@ -374,7 +374,7 @@ public void setRoomno(String roomno){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -425,7 +425,7 @@ public void setRoomno(String roomno){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -475,7 +475,7 @@ public void setRoomno(String roomno){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1026,7 +1026,7 @@ public class General{
                if(stmt!=null)
                    stmt.close();
                if(conn!=null)
-                   conn.close();
+                   ;//conn.close();
            } catch (SQLException ex) {
                ex.printStackTrace();
            }
@@ -1309,7 +1309,7 @@ public class Visa{
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1356,7 +1356,7 @@ public class Visa{
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1401,7 +1401,7 @@ private  FatherDetails fetchFatherDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1446,7 +1446,7 @@ private  MotherDetails fetchMotherDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1492,7 +1492,7 @@ private  General fetchGeneralDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1536,7 +1536,7 @@ private  LocalGuardian fetchLocalGuardianDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1580,7 +1580,7 @@ private  LocalGuardian2 fetchLocalGuardian2Details(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1626,7 +1626,7 @@ private  OtherDetails fetchOtherDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1665,7 +1665,7 @@ private  Passport fetchPassportDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1703,7 +1703,7 @@ private Visa fetchVisaDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }

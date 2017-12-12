@@ -133,7 +133,7 @@
                             if(stmt1!=null)
                             stmt1.close();
                               if(conbatch!=null)
-                                conbatch.close();
+                                ;//conbatch.close();
               }
               out.print("</table>");
              

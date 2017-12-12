@@ -166,7 +166,7 @@
                                                             stmt.close();
                                                         }
                                                         if (conbatch != null) {
-                                                            conbatch.close();
+                                                            ;//conbatch.close();
                                                         }
                                                     %>
                                                 </div></div>
@@ -202,7 +202,7 @@
                                                             stmt.close();
                                                         }
                                                         if (conbatch != null) {
-                                                            conbatch.close();
+                                                            ;//conbatch.close();
                                                         }
                                                     %>
                                                 </div>
@@ -272,7 +272,7 @@
                 sttt.close();
             }
             if (connn != null) {
-                connn.close();
+                ;//connn.close();
             } else {
                 response.sendRedirect("../index.jsp");
             }

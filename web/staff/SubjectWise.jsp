@@ -282,7 +282,7 @@
                     stmtd.close();
                 }
                 if (con != null) {
-                    con.close();
+                    ;//con.close();
                 }
             %>
 
@@ -560,7 +560,7 @@
             sttt.close();
         }
         if (connn != null) {
-            connn.close();
+            ;//connn.close();
         }
     }catch (Exception e) {
         e.printStackTrace();

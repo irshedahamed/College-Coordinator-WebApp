@@ -122,11 +122,11 @@ public class StaffDelProfile extends HttpServlet {
             if(stmt!=null)
                 stmt.close();
             if(con!=null)
-                con.close();
+                ;//con.close();
             if(stmt1!=null)
                 stmt1.close();
             if(con1!=null)
-                con1.close();
+                ;//con1.close();
             
                 }catch(Exception e){
                 e.printStackTrace();

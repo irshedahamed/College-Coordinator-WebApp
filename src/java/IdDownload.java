@@ -3,6 +3,7 @@
 import Actor.Student;
 import com.action.Base;
 import com.action.Find;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -88,7 +89,7 @@ public class IdDownload extends HttpServlet {
       // String s1= con.getRealPath("/store/");
      String s1 = Base.path;
        String fromD = request.getParameter("from");
-          SimpleDateFormat fromDate = new SimpleDateFormat("dd-mm-yyyy");
+          SimpleDateFormat fromDate = new SimpleDateFormat("yyyy-MM-dd");
           Date from = new Date();
         try {
             from = fromDate.parse(fromD);
@@ -96,18 +97,18 @@ public class IdDownload extends HttpServlet {
            ex.printStackTrace();
         }
         String toD = request.getParameter("to");
-          SimpleDateFormat toDate = new SimpleDateFormat("dd-mm-yyyy");
+          SimpleDateFormat toDate = new SimpleDateFormat("yyyy-MM-dd");
           Date to = new Date();
         try {
             to = fromDate.parse(toD);
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
-        String[] department=new String[25];
+        String[] department;
             department = Find.Depts;
                String batch=request.getParameter("batch");
                  PrintWriter out = response.getWriter();
-                 String fName = "/Id_Data.xls";
+                 String fName = File.pathSeparator+"Id_Data.xls";
 //                 String filepath = "/home/fedexfan/tomcat/files/"; 
 String filepath = s1;  
 HSSFWorkbook hwb=new HSSFWorkbook();
@@ -126,11 +127,10 @@ rowhead.createCell((short) 9).setCellValue("District");
 rowhead.createCell((short) 10).setCellValue("Pin");
 String sec = "%";
  int j = 1;
-for(String dept:department){
+for(String dept:department){ 
              for (Student s : Student.getAll(dept,batch,sec)) {
-                
                  String dD = s.getAdmissionDetails().getDoa();
-                 SimpleDateFormat daDate = new SimpleDateFormat("dd-mm-yyyy");
+                 SimpleDateFormat daDate = new SimpleDateFormat("yyyy-MM-dd");
                  Date dao = new Date();
                  if(dD!=null){
                      try {
@@ -138,16 +138,15 @@ for(String dept:department){
                      } catch (ParseException ex) {
                          ex.printStackTrace();
                      }
-                     
-                     if((from.compareTo(dao)>=0)&&to.compareTo(dao)<=0){
+                     if((from.compareTo(dao)<=0)&&to.compareTo(dao)>=0){
                          String d;
                          String e = Find.sdept(s.getId());
                          if(Find.sdept(s.getId()).equals("it")){
                              d = "BTech - "+e;
-                         }
+                          }  
                          else {
-                             d = "B.E - "+e;
-                         }
+                             d = "B.E - "+e;  
+                         } 
                          HSSFRow row = sheet.createRow((short)j);
                          row.createCell((short) 0).setCellValue(s.getId().toUpperCase());
                          row.createCell((short) 1).setCellValue(s.getName());
@@ -163,11 +162,13 @@ for(String dept:department){
                          j++;       }}
              }
 }
+new File(Base.path).mkdirs();
+
 FileOutputStream fileOut =  new FileOutputStream(filepath+fName);
 hwb.write(fileOut);
 fileOut.close(); 
 response.setContentType("APPLICATION/OCTET-STREAM");   
-    response.setHeader("Content-Disposition","attachment; filename=\"" + fName + "\"");   
+    response.setHeader("Content-Disposition","attachment; filename=\"" + "Data.xls" + "\"");   
       
     FileInputStream fileInputStream = new FileInputStream(filepath + fName);  
                 
@@ -179,7 +180,7 @@ response.setContentType("APPLICATION/OCTET-STREAM");
     out.close();   
    
     
-out.println("Your excel file has been generated!");
+//out.println("Your excel file has been generated!");
         //processRequest(request, response);
     }
 

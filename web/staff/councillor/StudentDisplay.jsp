@@ -123,7 +123,7 @@
         if(stmtd!=null)
             stmtd.close();
         if(con!=null)
-            con.close();
+            ;//con.close();
         %>
 		
 		<header id="page-header"  class="fixed-header">
@@ -898,7 +898,7 @@ stmt9.close();
 if(stmt10!=null)
 stmt10.close();
 if(con!=null)
-con.close();
+;//con.close();
 }
                      catch(Exception e)
                         {
@@ -909,7 +909,7 @@ finally
 try
 {
 if(con1!=null)
-con1.close();
+;//con1.close();
 if(stmt!=null)
 stmt.close();
 }
@@ -985,7 +985,7 @@ e.printStackTrace();
                     if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

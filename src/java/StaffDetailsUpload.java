@@ -455,7 +455,7 @@ eaddr[Integer.parseInt(item.getFieldName().substring(5))]=item.getString();
             if(stmt!=null)
                 stmt.close();
             if(con!=null)
-                con.close();
+                ;//con.close();
             if(stmt1!=null)
                 stmt1.close();
             if(conlogin!=null)

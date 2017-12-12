@@ -112,13 +112,13 @@
                                                             sttt.close();
                                                         }
                                                         if (connn != null) {
-                                                            connn.close();
+                                                            ;//connn.close();
                                                         }
                                                         if (stmt != null) {
                                                             stmt.close();
                                                         }
                                                         if (conbatch != null) {
-                                                            conbatch.close();
+                                                            ;//conbatch.close();
                                                         }
                                                     %>
                                                 </div>
