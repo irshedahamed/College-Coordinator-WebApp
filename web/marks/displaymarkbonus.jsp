@@ -221,13 +221,11 @@ and open the template in the editor.
 
                     int bonus = bonusreq;
                     // String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
-                    String sql2 = "select *,CONVERT(regno,UNSIGNED INT) as sno from student_personal where batch='" + batch + "' and sec='" + sec + "' order by sno,name";
-                    Statement st = con.createStatement();
-                    ResultSet rs = st.executeQuery(sql2);
-                    while (rs.next()) {
-                        rollno = rs.getString("rollno");
-                        name = rs.getString("name");
-                        String regno = rs.getString("regno");
+                    
+                    for (Student stu:Student.getAll(dept, batch, sec)) {
+                        rollno = stu.getId();
+                        name = stu.getName();
+                        String regno = stu.getRegno();
                         Statement st3 = con.createStatement();
                         bonus = bonusreq;
                         String forSqlexam=null;
@@ -261,11 +259,15 @@ and open the template in the editor.
                              boolean show=false;
                             if(exam.equals("labmodel")){
                             m.setType(exam);
-                                System.out.print(Mark.getUserMark(dept, m).getMark());
-                                if(Mark.getUserMark(dept, m).getMark()!=null)
+                            String mark=Mark.getUserMark(dept, m).getMark();    
+                            if(mark!=null)
                                 {
-                                total=Integer.parseInt(Mark.getUserMark(dept, m).getMark());
-                                show=true;
+                                    if(!mark.equals("A"))
+                                total=Integer.parseInt(mark);
+                                else
+                                        total=0;
+                                    
+                                    show=true;
                                 }
                                 if (bonus != 0) {
 
@@ -351,11 +353,6 @@ and open the template in the editor.
 
                         }
                     %><%
-                        }
-                        rs.close();
-
-                        if (st != null) {
-                            st.close();
                         }
                         if (con != null) {
                             ;//con.close();
