@@ -139,7 +139,7 @@ and open the template in the editor.
         String exam = request.getParameter("exam");
         String ayear = request.getParameter("ayear");
         String regulation = Batch.getRegulation(batch);
-        String subcode, rollno, name;
+        String  rollno, name;
         session.setAttribute("regulation", regulation);
         session.setAttribute("sem", sem);
         session.setAttribute("batch", batch);
@@ -196,13 +196,17 @@ and open the template in the editor.
                             <%
                                 int bonusreq = Integer.parseInt(request.getParameter("bonus"));
 
-                                Subjects s = new Subjects();
+    Subjects s = new Subjects();
                                 s.setAyear(ayear);
                                 s.setRegulation(regulation);
                                 s.setSem(sem);
-                                List<String> Subcodelist = Subjects.getTherorySubCode(dept, s);
+                                List<String> Subcodelist;
+                                                        if(exam.contains("lab"))
+                                Subcodelist= Subjects.getLabSubCode(dept, s);
+                                else
+                                Subcodelist= Subjects.getTherorySubCode(dept, s);
                                 for (String subco : Subcodelist) {
-                            %>
+                                                        %>
                         <th><%=subco%></th>
                             <%
                                 }
@@ -226,7 +230,12 @@ and open the template in the editor.
                         String regno = rs.getString("regno");
                         Statement st3 = con.createStatement();
                         bonus = bonusreq;
-                        String sql7 = "select * from bonuscut where rollno='" + rollno + "' and assessment <='" + exam + "'";
+                        String forSqlexam=null;
+                        if(exam.equals("labmodel"))
+                            forSqlexam="3";
+                        else
+                            forSqlexam=exam;
+                        String sql7 = "select * from bonuscut where rollno='" + rollno + "' and assessment <='" + forSqlexam + "'";
                         ResultSet rs3 = st3.executeQuery(sql7);
                         if (rs3.next()) {
                             bonus = 0;
@@ -241,20 +250,35 @@ and open the template in the editor.
 
                     <%
 
-                        String sql5 = "select * from subject_sem_table where regulation='" + regulation + "' and sem='" + sem + "' and (ayear like '%elective%" + ayear + "%' or ayear like 'all')  and subtype='theory' order by subcode";
-                        Statement st1 = con.createStatement();
-                        ResultSet rs1 = st1.executeQuery(sql5);
+                        for(String subcode:Subcodelist){
 
-                        while (rs1.next()) {
-
-                            subcode = rs1.getString("subcode");
+                            //subcode = rs1.getString("subcode");
                             Mark m = new Mark();
                             m.setRollno(rollno);
                             m.setSubcode(subcode);
+                            
+                             int total = 0;
+                             boolean show=false;
+                            if(exam.equals("labmodel")){
+                            m.setType(exam);
+                                System.out.print(Mark.getUserMark(dept, m).getMark());
+                                if(Mark.getUserMark(dept, m).getMark()!=null)
+                                {
+                                total=Integer.parseInt(Mark.getUserMark(dept, m).getMark());
+                                show=true;
+                                }
+                                if (bonus != 0) {
+
+                                        total+=10;
+                                        total*=5;
+                                    
+                                }
+                          }else{
                             List<Mark> li = Mark.getExamMark(dept, m);
+                            
                             String markc = null, markm = null, marku = null,zmark=null;
                             if (li.size() != 0) {
-                                int total = 0;
+                                show=true;
                                 for (Mark mi : li) {
                                     if (mi.getType().equals("model" + exam)) {
                                         markm = mi.getMark();
@@ -305,6 +329,9 @@ and open the template in the editor.
                                 
                                 
                                 }
+                            }
+                            }
+                            if(show){
                                 if(total>100)
                                 total=100;
 
@@ -322,7 +349,6 @@ and open the template in the editor.
                             }
 
                         }
-                        rs1.close();
                     %><%
                         }
                         rs.close();
