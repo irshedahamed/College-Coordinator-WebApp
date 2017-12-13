@@ -270,9 +270,10 @@ and open the template in the editor.
                                 if (bonus != 0) {
 
                                         total+=10;
-                                        total*=5;
                                     
                                 }
+                                    total*=5;
+                                    
                           }else{
                             List<Mark> li = Mark.getExamMark(dept, m);
                             
