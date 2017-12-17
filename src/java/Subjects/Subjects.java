@@ -103,8 +103,7 @@ public class Subjects {
         }
         return subcode;
     }
-
-    public static List<String> getLabSubCode(String dept, Subjects s) throws SQLException {
+public static List<String> getLabSubCode(String dept, Subjects s) throws SQLException {
         List<String> subcode = new ArrayList<String>();
         PreparedStatement st = null;
         Connection con = null;
@@ -131,7 +130,8 @@ public class Subjects {
         }
         return subcode;
     }
-    
+
+       
     public static Subjects getBySubcode(String dept, String subcode) throws SQLException {
         PreparedStatement st = null;
         Connection con = null;
