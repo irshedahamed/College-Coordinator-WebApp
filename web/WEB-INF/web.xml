@@ -365,6 +365,10 @@
         <servlet-name>DateCheck</servlet-name>
         <servlet-class>Mark.DateCheck</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LabMarkUpdate</servlet-name>
+        <servlet-class>Mark.LabMarkUpdate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -720,6 +724,10 @@
     <servlet-mapping>
         <servlet-name>DateCheck</servlet-name>
         <url-pattern>/DateCheck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LabMarkUpdate</servlet-name>
+        <url-pattern>/LabMarkUpdate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
