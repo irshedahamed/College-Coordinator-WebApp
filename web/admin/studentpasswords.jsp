@@ -4,6 +4,7 @@
     Author     : Arun
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
@@ -222,7 +223,7 @@
                         <%
 
                             Connection con = new dbcon().getConnection("login");
-                            Statement st = con.createStatement();
+                        //    Statement st = con.createStatement();
                             String rollno, pass, dept, batch;
                             if (request.getParameter("dept") != null) {
                         %>
@@ -243,8 +244,11 @@
                                             </tr>
                                             <%
                                                 batch = request.getParameter("batch");
-
-                                                ResultSet rs = st.executeQuery("select l.*,p.name from student_login_details l," + request.getParameter("dept") + ".student_personal p where l.rollno=p.rollno and p.batch='" + batch + "'");
+                                                dept=request.getParameter("dept");
+                                                 PreparedStatement st=con.prepareStatement("select l.*,p.name from student_login_details l,"+dept+".student_personal p where l.rollno=p.rollno and p.batch=?");
+                                               //st.setString(1, dept);
+                                               st.setString(1, batch);
+                                                ResultSet rs = st.executeQuery();
 
                                                 while (rs.next()) {
                                                     rollno = rs.getString("rollno");
@@ -260,9 +264,9 @@
                                                     }
                                                 }
 
-                                                if (st != null) {
-                                                    st.close();
-                                                }
+                                            //    if (st != null) {
+                                              //      st.close();
+                                               // }
                                                 if (con != null) {
                                                     ;//con.close();
                                                 }

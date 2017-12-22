@@ -4,6 +4,7 @@
     Author     : Arun
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>
@@ -194,8 +195,9 @@
                                             String dept = request.getParameter("dept");
 
                                             Connection con = new dbcon().getConnection(dept);
-                                            Statement st = con.createStatement();
-                                            ResultSet rs = st.executeQuery("select * from subject_sem_table order by regulation,sem");
+                                            //Statement st = con.createStatement();
+                                            PreparedStatement st=con.prepareStatement("select * from subject_sem_table order by regulation,sem");
+                                            ResultSet rs = st.executeQuery();
                                             String subcode, regulation, subname, sem, subtype;
                                             while (rs.next()) {
                                                 subcode = rs.getString("subcode");

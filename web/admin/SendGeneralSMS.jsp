@@ -123,24 +123,26 @@
                                     </tr>
                                 </thead>
                                 <%            Connection con = null;
-                                    Statement st = null;
-                                    Statement st1 = null;
+                                    //Statement st = null;
+                                    PreparedStatement st1 = null;
 
                                     String message = request.getParameter("message");
 
                                     try {
 
                                         con = new dbcon().getConnection(dept);
-                                        st = con.createStatement();
-                                        st1 = con.createStatement();
-
+                                        //st = con.createStatement();
+                                        
                                         String sql = "";
                                         if (batch.equals("staff")) {
                                             sql = "select staffid as rollno,name as name,mobile1 from staff_general";
+                                            st1=con.prepareStatement(sql);
                                         } else {
-                                            sql = "select * from student_personal where  batch='" + batch + "' order by CONVERT(regno,UNSIGNED)";
+                                            sql = "select * from student_personal where  batch=? order by CONVERT(regno,UNSIGNED)";
+                                            st1=con.prepareStatement(sql);
+                                            st1.setString(1, batch);
                                         }
-                                        ResultSet rs1 = st1.executeQuery(sql);
+                                        ResultSet rs1 = st1.executeQuery();
                                         while (rs1.next()) {
                                             String rollno = rs1.getString("rollno");
                                             String regno = null;
@@ -196,9 +198,9 @@
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     } finally {
-                                        if (st != null) {
-                                            st.close();
-                                        }
+                                        //if (st != null) {
+                                          //  st.close();
+                                        //}
                                         if (st1 != null) {
                                             st1.close();
                                         }

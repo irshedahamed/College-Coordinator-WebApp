@@ -1,3 +1,4 @@
+
 <%@page import="Actor.Staff"%>
 <%@page import="Downloads.Department"%>
 <%@page import="Downloads.Exam"%>
@@ -13,23 +14,6 @@
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en-US">
-    <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type = rsss.getString("type");
-                }
-                if (type.equals("admin")) {
-
-
-    %>
     <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
     <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
@@ -213,10 +197,11 @@
                             <%
                                 if (request.getParameter("search") != null) {
                                     String id = request.getParameter("search");
-                                    Connection connection = new dbcon().getConnection(Find.sdept(id));
-                                    Statement statement = connection.createStatement();
-                                    ResultSet rs11 = statement.executeQuery("select * from staff_general where staffid='" + id + "'");
-                                    if (rs11.next()) {
+                                    Staff s1=Staff.getByid(id);
+                                    //Connection connection = new dbcon().getConnection(Find.sdept(id));
+                                   // Statement statement = connection.createStatement();
+                                   // ResultSet rs11 = statement.executeQuery("select * from staff_general where staffid='" + id + "'");
+                                  //   if (rs11.next()) {
                             %>
 
                     <img style="position:absolute;left: 1000px;top:250px;" src="../../StaffPhotos/<%=id.toUpperCase()%>.JPG" height="120px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
@@ -230,85 +215,89 @@
                                 <tr>
                                     <td>
 
-                                        <label> Staff ID :</label> <input type="text" style="background: white" id="rollno"  value="<%=rs11.getString("staffid")%>" disabled >
-                                        <input type="hidden" name="rollno" value="<%=rs11.getString("staffid")%>">
+                                        <label> Staff ID :</label> <input type="text" style="background: white" id="rollno"  value="<%=s1.getId()%>" disabled >
+                                        <input type="hidden" name="rollno" value="<%=s1.getId()%>">
                                     </td>
 
                                     <td>
+                                        <% 
+                                            String[] name = s1.getName().split(".");
+                                        
+                                        %>
 
-                                        <label>Title :</label> <input type="text" style="background: white" name="title"  value="<%=rs11.getString("tittle")%>" >
+                                        <label>Title :</label> <input type="text" style="background: white" name="title"  value="<%=name[0]%>" >
                                     </td>
                                     <td>
-                                        <label> Name :</label><input type="text" style="background: white" id="name" name="name" value="<%=rs11.getString("name")%>">
+                                        <label> Name :</label><input type="text" style="background: white" id="name" name="name" value="<%=name[1]%>">
                                     </td>
-                                    <td><label>Designation :</label><input type="text" style="background: white" id="desg" name="desg" value="<%=rs11.getString("desg")%>">
+                                    <td><label>Designation :</label><input type="text" style="background: white" id="desg" name="desg" value="<%=s1.getDesg()%>">
                                     </td>
 
                                 </tr>
                                 <tr>
                                 <br>
                                 <td>
-                                    <label>Date of Joining :</label><input type="date" style="background: white" id="doj" name="doj" value="<%=rs11.getString("doj")%>">
+                                    <label>Date of Joining :</label><input type="date" style="background: white" id="doj" name="doj" value="<%=s1.getDoj()%>">
                                 </td>
 
                                 <td>
-                                    <label>Gender :</label><input type="text" style="background: white" id="gender" name="gender" value="<%=rs11.getString("gender")%>">
+                                    <label>Gender :</label><input type="text" style="background: white" id="gender" name="gender" value="<%=s1.getSex()%>">
                                 </td>
 
 
                                 <td>
-                                    <label>Address 1 :</label><input type="text" style="background: white" id="add1" name="add1" value="<%=rs11.getString("add1")%>">
+                                    <label>Address 1 :</label><input type="text" style="background: white" id="add1" name="add1" value="<%=s1.getAdd1()%>">
                                 </td>
                                 <td>
-                                    <label>Address 2 :</label><input type="text" style="background: white" id="add2" name="add2" value="<%=rs11.getString("add2")%>">
+                                    <label>Address 2 :</label><input type="text" style="background: white" id="add2" name="add2" value="<%=s1.getAdd2()%>">
                                 </td>
                                 </tr>
                                 <tr>
 
 
                                     <td>
-                                        <label> City :</label> <input type="text" style="background: white" id="city" name="city" value="<%=rs11.getString("city")%>">
+                                        <label> City :</label> <input type="text" style="background: white" id="city" name="city" value="<%=s1.getCity()%>">
                                     </td>
                                     <td>
-                                        <label>State :</label><input type="text" style="background: white" id="state" name="state" value="<%=rs11.getString("state")%>">
+                                        <label>State :</label><input type="text" style="background: white" id="state" name="state" value="<%=s1.getState()%>">
                                     </td>
                                     <td>
-                                        <label>Pin Code :</label><input type="text" style="background: white" id="pincode" name="pincode" value="<%=rs11.getString("pincode")%>">
+                                        <label>Pin Code :</label><input type="text" style="background: white" id="pincode" name="pincode" value="<%=s1.getPincode()%>">
                                     </td>
 
                                     <td>
-                                        <label>Permanent Address 1 :</label><input type="text" style="background: white" id="padd1" name="padd1" value="<%=rs11.getString("padd1")%>">
+                                        <label>Permanent Address 1 :</label><input type="text" style="background: white" id="padd1" name="padd1" value="<%=s1.getPadd1()%>">
                                     </td>
 
                                 </tr>
 
                                 <tr>
                                     <td>
-                                        <label>Permanent Address 2 :</label><input type="text" style="background: white" id="padd2" name="padd2" value="<%=rs11.getString("padd2")%>">
+                                        <label>Permanent Address 2 :</label><input type="text" style="background: white" id="padd2" name="padd2" value="<%=s1.getPadd2()%>">
                                     </td>
 
                                     <td>
-                                        <label>Permanent City :</label><input type="text" style="background: white" id="pcity" name="pcity" value="<%=rs11.getString("pcity")%>">
+                                        <label>Permanent City :</label><input type="text" style="background: white" id="pcity" name="pcity" value="<%=s1.getPcity()%>">
                                     </td>
                                     <td>
-                                        <label>Permanent State :</label><input type="text" style="background: white" id="pstate" name="pstate" value="<%=rs11.getString("pstate")%>">
+                                        <label>Permanent State :</label><input type="text" style="background: white" id="pstate" name="pstate" value="<%=s1.getPstate()%>">
                                     </td>
                                     <td>
-                                        <label>Permanent Pin Code :</label><input type="text" style="background: white" id="ppincode" name="ppincode" value="<%=rs11.getString("ppincode")%>">
+                                        <label>Permanent Pin Code :</label><input type="text" style="background: white" id="ppincode" name="ppincode" value="<%=s1.getPpincode()%>">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <label>Contact Number 1 :</label><input type="text" style="background: white" id="mobile1" name="mobile1" value="<%=rs11.getString("mobile1")%>">
+                                        <label>Contact Number 1 :</label><input type="text" style="background: white" id="mobile1" name="mobile1" value="<%=s1.getMobile1()%>">
                                     </td>
                                     <td>
-                                        <label>Contact Number 2 :</label><input type="text" style="background: white" id="mobile2" name="mobile2" value="<%=rs11.getString("mobile2")%>">
+                                        <label>Contact Number 2 :</label><input type="text" style="background: white" id="mobile2" name="mobile2" value="<%=s1.getMobile2()%>">
                                     </td> 
                                     <td>
-                                        <label>E-mail ID :</label><input type="text" style="background: white" id="email" name="email" value="<%=rs11.getString("email")%>">
+                                        <label>E-mail ID :</label><input type="text" style="background: white" id="email" name="email" value="<%=s1.getEmail()%>">
                                     </td>
                                     <td>
-                                        <label>Land line Number :</label><input type="text" style="background: white" id="ll" name="ll" value="<%=rs11.getString("ll")%>">
+                                        <label>Land line Number :</label><input type="text" style="background: white" id="ll" name="ll" value="<%=s1.getLl()%>">
                                     </td>
                                 </tr>
                             </table>
@@ -319,16 +308,7 @@
                                 <input type="submit" id="submit" value="Submit" /></div>
                             <br><br>
                         </form></center>
-                        <%}
-                                if (statement != null) {
-                                    statement.close();
-                                }
-                                if (connection != null) {
-                                    connection.close();
-                                }
-                            }
-                        %>
-
+                    
 
                 </div></div>
 
@@ -379,24 +359,5 @@ $("#wrapper").toggleClass("toggled");
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
 
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
-%>
 </html>
