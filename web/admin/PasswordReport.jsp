@@ -3,6 +3,7 @@
     Created on : Aug 10, 2016, 9:38:34 AM
     Author     : Lenovo
 --%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="General.Batch"%>
 <%@page import="Actor.Student"%>
 <%@page import="com.action.Find"%>
@@ -230,7 +231,7 @@
                     <%
 
                         Connection con = new dbcon().getConnection("login");
-                        Statement st = con.createStatement();
+                        //Statement st = con.createStatement();
                         String batch;
                         String rollno, pass, dept;
                         if (request.getParameter("dept") != null) {
@@ -248,9 +249,12 @@
                     <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
 
                                 <%
+                                    dept=request.getParameter("dept");
                                     batch = request.getParameter("batch");
-
-                                    ResultSet rs = st.executeQuery("select l.*,p.name from student_login_details l," + request.getParameter("dept") + ".student_personal p where l.rollno=p.rollno and p.batch='" + batch + "'");
+                                    PreparedStatement st=con.prepareStatement("select l.*,p.name from student_login_details l,?.student_personal p where l.rollno=p.rollno and p.batch=?");
+                                  st.setString(1, dept);
+                                    st.setString(2, batch);
+                                    ResultSet rs = st.executeQuery();
 
                                     while (rs.next()) {
                                         rollno = rs.getString("rollno");
@@ -282,9 +286,7 @@
                                         }
                                     }
 
-                                    if (st != null) {
-                                        st.close();
-                                    }
+                                    
                                     if (con != null) {
                                         ;//con.close();
                                     }

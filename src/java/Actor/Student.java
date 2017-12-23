@@ -36,7 +36,7 @@ public class Student {
     String roomno;
     String course;
     String model_type;
-
+    String initial;
     public String getModel_type() {
         return model_type;
     }
@@ -53,7 +53,13 @@ public class Student {
         this.model_type = model_type;
     }
     
+public String getInitial() {
+        return initial;
+    }
 
+    public void setInitial(String initial) {
+        this.initial = initial;
+    }
     
 
     public String getFood() {
@@ -465,7 +471,7 @@ public void setRoomno(String roomno){
                         s.setBloodgrp(rs.getString("bloodgrp"));
                         s.setCourse(rs.getString("course"));
                         s.setModel_type(rs.getString("model_type"));
-
+                        s.setInitial(rs.getString("initial"));
                         
                     }
     }catch(Exception e){

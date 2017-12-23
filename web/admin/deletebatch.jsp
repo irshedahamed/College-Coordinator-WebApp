@@ -1,3 +1,4 @@
+<%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
@@ -181,19 +182,21 @@
                                         <th>Regulation</th>
 
                                     </tr>
-                                    <% Connection con = new dbconnection.dbcon().getConnection("sjitportal");
-                                        Statement st = con.createStatement();
-                                        ResultSet rs = st.executeQuery("select * from regulations");
-                                        while (rs.next()) {
-                                            String batch = rs.getString("batch");
-                                            String reg = rs.getString("regulation");
+                                    <% //Connection con = new dbconnection.dbcon().getConnection("sjitportal");
+                                        //Statement st = con.createStatement();
+                                       //  ResultSet rs = st.executeQuery("select * from regulations");
+                                        List<Batch> list = Batch.getAll();
+                                        for(Batch b : list){
+                                          
+                                        String batch = b.getBatch();
+                                            String reg = b.getRegulation();
 
 
                                     %>
                                     <tr>
                                         <td> 
                                             <select name="status_<%=batch%>">
-                                                <option value="<%=rs.getString("status")%>"><%=rs.getString("status")%></option>
+                                                <option value="<%=b.getStatus() %>"><%=b.getStatus()%></option>
                                                 <option value="I">First Year</option>
                                                 <option value="II">Second Year</option>
                                                 <option value="III">Third Year</option>
@@ -215,12 +218,12 @@
 
                                         }
 
-                                        if (st != null) {
-                                            st.close();
-                                        }
-                                        if (con != null) {
-                                            ;//con.close();
-                                        }
+                                        //if (st != null) {
+                                          //  st.close();
+                                        //}
+                                       // if (con != null) {
+                                         //   ;//con.close();
+                                       // }
 
                                     %>
 
