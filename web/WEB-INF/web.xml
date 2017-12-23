@@ -6,8 +6,7 @@
     </filter>
     <filter-mapping>
         <filter-name>ImageFilter</filter-name>
-        <url-pattern>/StudentPhotos/*</url-pattern>
-        <url-pattern>/StaffPhotos/*</url-pattern>
+        <url-pattern>/LocalGuardian25/*</url-pattern>      
     </filter-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>

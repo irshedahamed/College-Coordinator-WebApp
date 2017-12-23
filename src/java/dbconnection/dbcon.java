@@ -36,12 +36,12 @@ public class dbcon {
     
     private static Connection getConnection(String dbname,String clg){
         
-        Connection conn=connectionPool.get(dbname+clg);
+        Connection conn=connectionPool.get(clg+dbname);
           try { 
             if(conn==null || conn.isClosed()){
                  Class.forName("com.mysql.jdbc.Driver").newInstance();
-                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"webapp","fluffy");
-                 connectionPool.put(dbname+clg, conn);
+                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"root","1234");
+                 connectionPool.put(clg+dbname, conn);
         }
         
         } catch (Exception ex) {
