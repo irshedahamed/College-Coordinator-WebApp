@@ -1,3 +1,4 @@
+<%@page import="Actor.Student"%>
 <%@page import="com.action.Base"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
@@ -61,30 +62,21 @@
                 
                 
                 <%
-        Connection conection = new dbcon().getConnection(Find.sdept(username));
-    Statement st1 = conection.createStatement();
+       
     String name="",rollno="",course="",sec="";
    
-    ResultSet rs1 = st1.executeQuery("select * from student_personal where rollno='"+username+"'");
-    if(rs1.next())
-    {
-        name= rs1.getString("name");
-        rollno = rs1.getString("rollno");
-        course = rs1.getString("course");
-        sec = rs1.getString("sec");
+    Student s=Student.getById(username);
+        name= s.getById(username).getName();
+        rollno =s.getById(username).getId();
+        course = s.getById(username).getCourse();
+        sec =s.getById(username).getSec();
         session.setAttribute("name1", name);
         session.setAttribute("rollno1", rollno);
         session.setAttribute("course1", course);
         session.setAttribute("sec1",sec );
         
-    }
-                    if(st1!=null)
-                            st1.close();
-                              if(conection!=null)
-                                conection.close();
-        
-        
-        
+    
+                   
         %>
                 
                 <li >
@@ -368,7 +360,7 @@ String deptname = Find.sdept(username);
   if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

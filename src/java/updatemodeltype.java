@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import Actor.Student;
 import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -66,41 +67,7 @@ public class updatemodeltype extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         try {
-             response.setContentType("");
-            HttpSession session = request.getSession();
-            String[] regno = new String[80];
-            
-            
-            regno = request.getParameterValues("id");
-            String dept = session.getAttribute("dept").toString();
-            Connection  con = new dbcon().getConnection(dept);
-  
          
-            Statement st1=null;
-            ResultSet rs1=null;
-            st1 = con.createStatement();
-            
-            
-            for(int i =0;i<=regno.length;i++)
-            {
-                            
-            String sql1 = "update student_personal set model_type ='spl' where regno = '"+regno[i]+"'" ;
-             
-            st1.executeUpdate(sql1);
-            
-           
-           
-            }
-            response.getWriter().printf("<center><h1>UPDATE</h1></center>");
-             if(st1!=null)
-                            st1.close();
-                              if(con!=null)
-                                con.close();
-        } catch (Exception ex) {
-            response.getWriter().print(ex);
-            ex.printStackTrace();
-        }
     }
 
     /**
@@ -119,31 +86,30 @@ public class updatemodeltype extends HttpServlet {
             HttpSession session = request.getSession();
             PrintWriter out=response.getWriter();
             
-            String[] regno = request.getParameterValues("id");
-            
             
             String dept = session.getAttribute("dept").toString();
+            String batch=session.getAttribute("batch").toString();
+            String sec=session.getAttribute("sec").toString();
+            
+            
             Connection  con = new dbcon().getConnection(dept);
   
          
             Statement st1=null;
-            ResultSet rs1=null;
             st1 = con.createStatement();
           
-            out.println("Hello");
-            for(int i =0;i<regno.length;i++)
+            for(Student s:Student.getAll(dept, batch, sec))
             {
                             
-                String sql = "update student_personal set model_type='gen'";
-                String sql1 = "update student_personal set model_type ='spl' where regno = '"+regno[i]+"'" ;
+                
+                String sql1 = "update student_personal set model_type ='"+request.getParameter(s.getId())+"' where rollno = '"+s.getId()+"'" ;
              
-            st1.executeUpdate(sql);
             st1.executeUpdate(sql1);
             
            
            
             }
-            response.getWriter().printf("updated");
+            response.getWriter().printf("updated Successfully!!");
             
         } catch (Exception ex) {
             response.getWriter().print(ex);

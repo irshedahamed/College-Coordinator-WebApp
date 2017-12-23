@@ -43,7 +43,7 @@ public class JsonServlet extends HttpServlet {
                     }
                     rs.close();
                     st.close();
-                    con.close();
+                    ;//con.close();
                     List<String> list = new ArrayList<String>();
                     String json = null;
                     
@@ -68,7 +68,7 @@ public class JsonServlet extends HttpServlet {
                      if(st!=null)
                             st.close();
                               if(con!=null)
-                                con.close();
+                                ;//con.close();
                 }catch(Exception ex)
         {
           

@@ -77,7 +77,7 @@ public class updateSpecialFee extends HttpServlet {
       //  processRequest(request, response);
       
       SpecialFee s=new SpecialFee();
-      s.setAcademicyr(AcademicYear.getCurrentYear().getYear());
+      s.setAcademicyr(AcademicYear.getFeeYear().getYear());
       s.setRollno(request.getParameter("id"));
       s.setTution(request.getParameter("tution"));
       s.setPlacement(request.getParameter("placement"));

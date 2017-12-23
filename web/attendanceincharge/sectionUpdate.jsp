@@ -1,3 +1,4 @@
+<%@page import="General.Batch"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -147,24 +148,8 @@
                                                             Batch:</b></div>
                 <label class="select">
             <select id="batch" name="batch" required>
-                <%
-                Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select batch from yearincharge where id='"+username+"'");
-                    String batch=null;
-                    rs.beforeFirst();
-                    while(rs.next())
-                    {
-                        batch=rs.getString("batch");
-                %>
-                <option value=<%=batch%>><%=batch%></option>
-                <%
-                }
-                            if(stmt!=null)
-                            stmt.close();
-                              if(conbatch!=null)
-                                conbatch.close();
-                %>
+                <option value="<%=Batch.getByYrIncharge(username).getBatch()%>" ><%=Batch.getByYrIncharge(username).getBatch()%></option>
+                                                
             </select>
                     <i></i>
                 </label></label>

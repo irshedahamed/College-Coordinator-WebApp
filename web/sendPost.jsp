@@ -7,16 +7,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <HTML>
-<script LANGUAGE="JavaScript">
-function sendPost()
-{	
-	
-	document.sendpost.submit();
-}
-</script>
-<body onload="sendPost();" >
+    <script LANGUAGE="JavaScript">
+        function sendPost()
+        {
 
-    <form method="post" name="sendpost" action="<%=request.getParameter("RUrl") %> ">
+            document.sendpost.submit();
+        }
+    </script>
+    <body onload="sendPost();" >
 
-</form>
-</body></HTML>
+        <form method="post" name="sendpost" action="<%=request.getParameter("RUrl")%> ">
+
+        </form>
+    </body></HTML>

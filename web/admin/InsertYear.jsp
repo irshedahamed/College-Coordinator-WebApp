@@ -199,7 +199,7 @@
                  <br><br>
                  <label class="input">
                                                     <div align="left" size="3px"><b>
-                                                           Year : </b></div>
+                                                           Year : </b></div>    
                 <label class="input">
                     
                     <input type="text" id="regulation" name="Year">
@@ -283,7 +283,7 @@
                             if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

@@ -128,7 +128,7 @@ public class regupdate extends HttpServlet {
                                 if(st4!=null)
                             st4.close();
                               if(con!=null)
-                                con.close();
+                                ;//con.close();
         } catch (Exception ex) {
             response.getWriter().print(ex);
         }

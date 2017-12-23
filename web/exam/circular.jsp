@@ -154,7 +154,7 @@
                             if(stmt!=null)
                             stmt.close();
                               if(conbatch!=null)
-                                conbatch.close();
+                                ;//conbatch.close();
               %>
 </div>
 </center>
@@ -237,7 +237,7 @@
                             if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

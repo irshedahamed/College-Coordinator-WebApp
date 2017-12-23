@@ -194,7 +194,7 @@
                             if(st2!=null)
                                 st2.close();
                               if(con!=null)
-                                con.close();}
+                                ;//con.close();}
         }
        /* Connection con = new dbcon().getConnection(dept);
         Statement st=con.createStatement();

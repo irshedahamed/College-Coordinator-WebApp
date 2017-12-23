@@ -4,6 +4,7 @@
     Author     : Home
 --%>
 
+<%@page import="General.Batch"%>
 <%@page import="com.action.Base"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
@@ -169,24 +170,8 @@
                                                             Batch:</b></div>
                 <label class="select">
             <select id="batch" name="batch" required>
-                 <%
-                Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select batch from regulations");
-                    String batch=null;
-                    rs.beforeFirst();
-                    if(rs.last())
-                    {
-                        batch=rs.getString("batch");
-                %>
-                <option value=<%=batch%>><%=batch%></option>
-                <%
-                }
-                            if(stmt!=null)
-                            stmt.close();
-                              if(conbatch!=null)
-                                conbatch.close();
-                %>
+                 <%=Batch.getHTMLContent()%>
+                
             </select>
                     <i></i>
                 </label></label>
@@ -273,7 +258,7 @@
                             if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

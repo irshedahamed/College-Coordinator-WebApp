@@ -26,8 +26,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
 <title>St.Joseph's Institute of Technology Portal</title>
-<meta name="description" content="St.Josephs Student Portal">
-<meta name="keywords" content="St.Josephs Student Portal Technology">
+<meta name="description" content="St.Josephs Education Portal">
+<meta name="keywords" content="St.Josephs Student Portal Technology,SJIT,St.Josephs">
 
 <!-- Mobile viewport -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">

@@ -82,7 +82,7 @@ public class processBulkOutPass extends HttpServlet {
     {
         for(int i = 0 ; i < id.length ; i++)
         {
-                 OutPass p=new OutPass();
+            final     OutPass p=new OutPass();
      p.setRollno(id[i]);
      p.setReason(request.getParameter("reason"));
      p.setFrom(request.getParameter("from"));
@@ -93,12 +93,26 @@ public class processBulkOutPass extends HttpServlet {
         
       //  System.err.println(res);
         if(p.getStatus().equals("Accepted")&&res){
-        General.OutPass op=new General.OutPass(p.getRollno());
+       final General.OutPass op=new General.OutPass(p.getRollno());
      
         if(op.insert(p.getRequestid())){
             
+            if(Student.getById(p.getRollno()).getAccomodation().equalsIgnoreCase("hostel")){
+            
+            new Thread(new Runnable(){
+         
+         @Override
+         public void run(){
+        if(op.insert(p.getRequestid())){
             if(Student.getById(p.getRollno()).getAccomodation().equalsIgnoreCase("hostel"))
             SMSTemplate.send(Parent.getNumber(p.getRollno()),p.getSMSContent());
+        }
+        }
+     }).start();
+            }
+            
+            
+            
             response.getWriter().write("<b>");
             response.getWriter().print(i+1);
             response.getWriter().write(".");

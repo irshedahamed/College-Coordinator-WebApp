@@ -33,6 +33,34 @@ public class Student {
     String mailid;
     String food;
     String bloodgrp;
+    String roomno;
+    String course;
+    String model_type;
+    String initial;
+    public String getModel_type() {
+        return model_type;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    public void setModel_type(String model_type) {
+        this.model_type = model_type;
+    }
+    
+public String getInitial() {
+        return initial;
+    }
+
+    public void setInitial(String initial) {
+        this.initial = initial;
+    }
+    
 
     public String getFood() {
         return food;
@@ -169,6 +197,8 @@ public class Student {
     private FatherDetails fatherDetails;
     private MotherDetails motherDetails;
     private LocalGuardian localGuardian;
+    private LocalGuardian2 localGuardian2;
+    
     private OtherDetails otherDetails;
     private Contact contact;
     private Passport passport;
@@ -197,6 +227,12 @@ public class Student {
         if(localGuardian==null)
             localGuardian=fetchLocalGuardianDetails();
         return localGuardian;
+    }
+ 
+    public LocalGuardian2 getLocalGuardian2() {
+        if(localGuardian2==null)
+            localGuardian2=fetchLocalGuardian2Details();
+        return localGuardian2;
     }
 
     public OtherDetails getOtherDetails() {
@@ -262,7 +298,13 @@ public class Student {
     public void setName(String name) {
         this.name = name;
     }
-
+public String getRoomno(){
+    return roomno;
+}
+public void setRoomno(String roomno){
+    this.roomno=roomno;
+}
+    
     public String getDept() {
         return dept;
     }
@@ -327,7 +369,7 @@ public class Student {
                         a.setOrank(rs.getString("overallrank"));
                         a.setGname(rs.getString("gamename"));
                         a.setDoa(rs.getString("doa"));
-                        
+                        a.setMoi(rs.getString("MOI"));
 
                         
                     }
@@ -338,7 +380,7 @@ public class Student {
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -376,6 +418,10 @@ public class Student {
                         s.setMailid(rs.getString("mailid"));
                         s.setFood(rs.getString("food"));
                         s.setBloodgrp(rs.getString("bloodgrp"));
+                        s.setCourse(rs.getString("course"));
+                        s.setModel_type(rs.getString("model_type"));
+                        
+
                         list.add(s);
                     }
     }catch(Exception e){
@@ -385,7 +431,7 @@ public class Student {
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -423,8 +469,9 @@ public class Student {
                         s.setMailid(rs.getString("mailid"));
                         s.setFood(rs.getString("food"));
                         s.setBloodgrp(rs.getString("bloodgrp"));
-                        
-
+                        s.setCourse(rs.getString("course"));
+                        s.setModel_type(rs.getString("model_type"));
+                        s.setInitial(rs.getString("initial"));
                         
                     }
     }catch(Exception e){
@@ -434,7 +481,7 @@ public class Student {
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -877,6 +924,74 @@ public class LocalGuardian{
     
     
 }
+
+public class LocalGuardian2{
+    String doorno;
+    String name;
+    String street;
+    String area;
+    String city;
+    String pincode;
+    String phonenum;
+
+        public String getDoorno() {
+            return doorno;
+        }
+
+        public void setDoorno(String doorno) {
+            this.doorno = doorno;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getStreet() {
+            return street;
+        }
+
+        public void setStreet(String street) {
+            this.street = street;
+        }
+
+        public String getArea() {
+            return area;
+        }
+
+        public void setArea(String area) {
+            this.area = area;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+        public String getPincode() {
+            return pincode;
+        }
+
+        public void setPincode(String pincode) {
+            this.pincode = pincode;
+        }
+
+        public String getPhonenum() {
+            return phonenum;
+        }
+
+        public void setPhonenum(String phonenum) {
+            this.phonenum = phonenum;
+        }
+    
+    
+}
 public class General{
     String dob;
     String caste;
@@ -917,7 +1032,7 @@ public class General{
                if(stmt!=null)
                    stmt.close();
                if(conn!=null)
-                   conn.close();
+                   ;//conn.close();
            } catch (SQLException ex) {
                ex.printStackTrace();
            }
@@ -1200,7 +1315,7 @@ public class Visa{
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1247,7 +1362,7 @@ public class Visa{
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1292,7 +1407,7 @@ private  FatherDetails fetchFatherDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1337,7 +1452,7 @@ private  MotherDetails fetchMotherDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1383,7 +1498,7 @@ private  General fetchGeneralDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1427,7 +1542,51 @@ private  LocalGuardian fetchLocalGuardianDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
+        } catch (SQLException ex) {
+      ex.printStackTrace();
+        }
+    }
+       
+        
+    return c;
+    }
+
+private  LocalGuardian2 fetchLocalGuardian2Details(){
+    
+    
+         
+               Connection conn=null;
+    Statement stmt=null;
+   LocalGuardian2 c=null;
+    
+        try{
+            
+    conn=new dbcon().getConnection(Find.sdept(id));
+    stmt = conn.createStatement();
+                    ResultSet rs=stmt.executeQuery("select * from student_local_guardian2 where rollno like '"+id+"'");
+                    
+                    
+                    rs.beforeFirst();
+                    if(rs.next()){
+                        c=new LocalGuardian2();
+                       c.setArea(rs.getString("area"));
+                       c.setCity(rs.getString("city"));
+                       c.setDoorno(rs.getString("Doorno"));
+                       c.setName(rs.getString("name"));
+                       c.setPhonenum(rs.getString("phno"));
+                       c.setPincode(rs.getString("pincode"));
+                       c.setStreet(rs.getString("streetname"));
+                        
+                    }
+    }catch(Exception e){
+    e.printStackTrace();
+    }finally{
+        try {
+            if(stmt!=null)
+                stmt.close();
+            if(conn!=null)
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1473,7 +1632,7 @@ private  OtherDetails fetchOtherDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1512,7 +1671,7 @@ private  Passport fetchPassportDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }
@@ -1550,7 +1709,7 @@ private Visa fetchVisaDetails(){
             if(stmt!=null)
                 stmt.close();
             if(conn!=null)
-                conn.close();
+                ;//conn.close();
         } catch (SQLException ex) {
       ex.printStackTrace();
         }

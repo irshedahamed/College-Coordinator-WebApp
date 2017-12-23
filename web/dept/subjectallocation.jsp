@@ -982,6 +982,8 @@ $(document).on('change','.lsbatch',function(e){
     <ul class="sub-menu">
 		<li id="menu-item-766" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-766"><a href="notesupload.jsp">Upload Notes</a></li>
 		<li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notes.jsp">View Notes</a></li>
+                 <li id="menu-item-767" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-767"><a href="notesReport.jsp">Notes Report</a>
+            </li>
 	</ul></li>
 <li id="menu-item-769" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="cireveupdates.jsp">Department Uploads</a>
     </li>
@@ -1130,7 +1132,7 @@ $(document).on('change','.lsbatch',function(e){
                                      <br>            <input type="checkbox" name="otherinc" value="National Social Service Scheme">National Social Service Scheme
                                      <br>            <input type="checkbox" name="otherinc" value="Electrical System">Electrical System, UPS Incharge
                                      <br>            <input type="checkbox" name="otherinc" value="Library">Library
-                                     <br>            <input type="checkbox" name="otherinc" value="Sports">Sports
+                                       <br>            <input type="checkbox" name="otherinc" value="Sports">Sports
                                      <br>            <input type="checkbox" name="otherinc" value="Reverse Osmosis">Reverse Osmosis
                                      <br>            <input type="checkbox" name="otherinc" value="Plumbing">Plumbing
                                      <br>            <input type="checkbox" name="otherinc" value="Purchase Committee">Purchase Committee
@@ -1220,7 +1222,7 @@ $(document).on('change','.lsbatch',function(e){
        
             
                        
-                   <%=Find.getDeptHTMLContent() %>
+                       <%=Find.getDeptHTMLContent() %>
                
            
             
@@ -1250,7 +1252,7 @@ $(document).on('change','.lsbatch',function(e){
                             if(stmt!=null)
                             stmt.close();
                               if(conbatch!=null)
-                                conbatch.close();
+                                ;//conbatch.close();
                 %>
                 
                 
@@ -1361,7 +1363,7 @@ $(document).on('change','.lsbatch',function(e){
                             if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

@@ -16,114 +16,112 @@
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en-US">
-  <% 
-   try
-    {
-    String username = session.getAttribute("username").toString();
-    String password = session.getAttribute("password").toString();
-    
-    Connection connn = new dbcon().getConnection("login");
-    Statement sttt = connn.createStatement();
-    String type1 ="";
-    ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='"+username+"' and password='"+password+"'");
-    if(rsss.isBeforeFirst())
-    {
-        
-    session.setAttribute("deptname", Find.sdept(username));
-    
-    %>
-<!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+    <%
+        try {
+            String username = session.getAttribute("username").toString();
+            String password = session.getAttribute("password").toString();
 
-	<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-		     <link rel="stylesheet" href="../../css/main.css">
-      <link href="../../css/sky-forms.css" rel="stylesheet">
+            Connection connn = new dbcon().getConnection("login");
+            Statement sttt = connn.createStatement();
+            String type1 = "";
+            ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='" + username + "' and password='" + password + "'");
+            if (rsss.isBeforeFirst()) {
+
+                session.setAttribute("deptname", Find.sdept(username));
+
+    %>
+    <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
+    <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../../css/main.css">
+        <link href="../../css/sky-forms.css" rel="stylesheet">
         <link type="text/css" media="all" href="../../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
-	
-    <!-- Custom CSS -->
-    <link href="../../css/simple-sidebar.css" rel="stylesheet">
-	    
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
-	 <script src="../../js/jquery.js"></script>
-         
-      
-<link rel="stylesheet" href="../../css/angular-material.css">
 
-<link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
+        <!-- Custom CSS -->
+        <link href="../../css/simple-sidebar.css" rel="stylesheet">
+
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <script src="../../js/jquery.js"></script>
 
 
-<link rel="stylesheet" href="../../css/angulartab.css">
+        <link rel="stylesheet" href="../../css/angular-material.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"> </script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
-<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
-<script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.js"></script>
+        <link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
 
-<script src="../../js/angulartab.js"></script>
-		</head>
-			
-<body class="home page page-id-115 page-template-default has-toolbar">
-<div id="wrapper" class="toggled">
-<div id="sidebar-wrapper">
-    
-    <% 
-    Connection con=new dbcon().getConnection(Find.sdept(username));
-    Statement stmtd=con.createStatement();
-    ResultSet rsd=stmtd.executeQuery("select * from staff_general where staffid='"+username+"'");
-    if(rsd.next())
-    {
-    %>
-    <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="#menu-toggle1" id="menu-toggle1">
-                       
-                    </a>
-                </li>
-                <center>
-                    <img src="../../images/face.jpg" height="95px">
-                    
-                               
-                           
-                        
-                   
-                </center>
-                <br>
-                <br>
-                
-                <li>
-                
+
+        <link rel="stylesheet" href="../../css/angulartab.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+        <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+        <script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.1/angular-material.js"></script>
+
+        <script src="../../js/angulartab.js"></script>
+    </head>
+
+    <body class="home page page-id-115 page-template-default has-toolbar">
+        <div id="wrapper" class="toggled">
+            <div id="sidebar-wrapper">
+
+                <%        Connection con = new dbcon().getConnection(Find.sdept(username));
+                    Statement stmtd = con.createStatement();
+                    ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
+                    if (rsd.next()) {
+                %>
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                        <a href="#menu-toggle1" id="menu-toggle1">
+
+                        </a>
+                    </li>
                     <center>
-                    <a href="#"><b><%=rsd.getString("tittle")+rsd.getString("name")%></b></a>
+                        <img src="../../images/face.jpg" height="95px">
+
+
+
+
+
+                    </center>
+                    <br>
+                    <br>
+
+                    <li>
+
+                    <center>
+                        <a href="#"><b><%=rsd.getString("tittle") + rsd.getString("name")%></b></a>
                     </center>
                     </li>
-                <li>
+                    <li>
                     <center>
-                    <a href="#"><b><%=username%></b></a>
+                        <a href="#"><b><%=username%></b></a>
                     </center>
                     </li>
-                <li >
-                <center>
-                    <a href="#"><b><%=rsd.getString("desg")%></b></a>
-                </center>
-                </li>
-                <li >
-                <center>
-                    <a href="#"><b><%=Find.sdept(username).toUpperCase()%></b></a>
-                </center>
-                </li>
-            </ul>
-        </div>
+                    <li >
+                    <center>
+                        <a href="#"><b><%=rsd.getString("desg")%></b></a>
+                    </center>
+                    </li>
+                    <li >
+                    <center>
+                        <a href="#"><b><%=Find.sdept(username).toUpperCase()%></b></a>
+                    </center>
+                    </li>
+                </ul>
+            </div>
+
+            
 		        
 	<%}
         if(stmtd!=null)
             stmtd.close();
         if(con!=null)
-            con.close();
+            ;//con.close();
         %>
 		
 		<header id="page-header"  class="fixed-header">
@@ -170,7 +168,15 @@
 
     </ul>
 </li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">View Marks</a>
+    <ul class="sub-menu">
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmarkbonus.jsp">Consolidated Report</a></li>
+	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmark.jsp">View Marks</a></li>
 
+	
+
+    </ul>
+</li>
 <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="../home.jsp">Staff View</a>
 </ul>						</nav>
 
@@ -241,45 +247,40 @@
 
 
 
-
-
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
-     $("#menu-toggle1").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
+        $("#menu-toggle1").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
     </script>
 
 
-<script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
+    <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
 <%
-          
-    }
-    else
-    {
-        response.sendRedirect("../../index.jsp");
-    }
-                    if(sttt!=null)
-                            sttt.close();
-                              if(connn!=null)
-                                connn.close();
-    }
-catch(Exception e)
-    {
+        } else {
+            response.sendRedirect("../../index.jsp");
+        }
+        if (sttt != null) {
+            sttt.close();
+        }
+        if (connn != null) {
+            ;//connn.close();
+        }
+    } catch (Exception e) {
         e.printStackTrace();
         response.sendRedirect("../../index.jsp");
     }
-    
-          
-          %>
+
+
+%>
 </html>

@@ -76,14 +76,16 @@ public class addMapping extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         
-        String route=request.getParameter("route");
-        String boarding=request.getParameter("boarding");
-        String priority=request.getParameter("priority");
+       // String route=request.getParameter("route");
+        String boardingpt1=request.getParameter("boardingpt1");
+        String boardingpt2=request.getParameter("boardingpt2");
+        //String priority=request.getParameter("priority");
         
         RouteMap r=new RouteMap();
-        r.setBoardingpt(boarding);
-        r.setPriority(priority);
-        r.setRouteid(route);
+        r.setBoardingpt1(boardingpt1);
+         r.setBoardingpt2(boardingpt2);
+     //   r.setPriority(priority);
+       // r.setRouteid(route);
         
         if(r.insert())
             response.sendRedirect("transport/addRouteDetails.jsp?msg=Successfully Added");

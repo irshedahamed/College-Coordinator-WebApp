@@ -331,12 +331,12 @@ table.bordered1 {
                             if(st!=null)
                             st.close();
                               if(con!=null)
-                                con.close();
+                                ;//con.close();
 
                             if(st1!=null)
                             st1.close();
                               if(con!=null)
-                                con.close();
+                                ;//con.close();
                 %>
                 </table>
                 <%
@@ -406,12 +406,12 @@ table.bordered1 {
                             if(st!=null)
                             st.close();
                               if(con!=null)
-                                con.close();
+                                ;//con.close();
 
                             if(st1!=null)
                             st1.close();
                               if(con1!=null)
-                                con1.close();
+                                ;//con1.close();
             
             %>
             
@@ -446,7 +446,7 @@ table.bordered1 {
                      if(wstmt!=null)
                          wstmt.close();
                          if(con!=null)
-                            con.close();
+                            ;//con.close();
                          
             if(!work.equals(""))
             {
@@ -493,7 +493,7 @@ table.bordered1 {
                             if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

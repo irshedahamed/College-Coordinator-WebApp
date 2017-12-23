@@ -1,3 +1,5 @@
+<%@page import="General.AcademicYear"%>
+<%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -23,7 +25,7 @@
         }
         if(type.equals("exam"))
         {
-    
+            
     
     %>
 
@@ -148,17 +150,7 @@
                                             <label class="select">
                                                 <select id="ayear" name="ayear">
                                                     <option>Select</option>
-                                                    <option value="13">2013-2014</option>
-                                                    <option value="14">2014-2015</option>
-                                                    <option value="15">2015-2016</option>
-                                                    <option value="16">2016-2017</option>
-                                                    <option value="17">2017-2018</option>
-                                                    <option value="18">2018-2019</option>
-                                                    <option value="19">2019-2020</option>
-                                                    <option value="20">2020-2021</option>
-                                                    <option value="21">2021-2022</option>
-                                                    <option value="22">2023-2024</option>
-
+                                                    <%= AcademicYear.getHTMLContent() %>
                                                 </select>
                                                 <i></i>
                                             </label>
@@ -171,25 +163,7 @@
                 <label class="select">
             <select id="batch" name="batch" required>
                 <option disabled selected>Select   </option>
-                <%
-                Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select batch from regulations");
-                    String batch=null;
-                    rs.beforeFirst();
-                    while(rs.next())
-                    {
-                        batch=rs.getString("batch");
-                %>
-                <option value=<%=batch%>><%=batch%></option>
-                <%
-                }
-
-                            if(stmt!=null)
-                            stmt.close();
-                              if(conbatch!=null)
-                                conbatch.close();
-                %>
+               <%= Batch.getHTMLContent() %>
             </select>
                     <i></i>
                 </label></label>
@@ -241,7 +215,7 @@
          <option value="1">Model 1</option>
                 <option value="2">Model 2</option>
                 <option value="3">Model 3</option>
-               
+                <option value="labmodel">Labmodel</option>    
             </select>
                     <i></i>
             <br> <br>
@@ -329,7 +303,7 @@
                             if(sttt!=null)
                             sttt.close();
                               if(connn!=null)
-                                connn.close();
+                                ;//connn.close();
     }
 catch(Exception e)
     {

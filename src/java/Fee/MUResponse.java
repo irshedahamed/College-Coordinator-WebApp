@@ -145,7 +145,7 @@ public class MUResponse {
                if(stmt!=null)
                    stmt.close();
                if(conn!=null)
-                   conn.close();
+                   ;//conn.close();
            } catch (SQLException ex) {
                ex.printStackTrace();
            }
@@ -188,7 +188,7 @@ public class MUResponse {
         if(st!=null)
                 st.close();
             if(con!=null)
-                con.close();
+                ;//con.close();
            
       }catch(Exception e){
     e.printStackTrace();
@@ -231,7 +231,7 @@ public class MUResponse {
         if(st!=null)
                 st.close();
             if(con!=null)
-                con.close();
+                ;//con.close();
            
       }catch(Exception e){
     e.printStackTrace();
@@ -294,7 +294,7 @@ public class MUResponse {
         if(st!=null)
                 st.close();
             if(con!=null)
-                con.close();
+                ;//con.close();
            
       }catch(Exception e){
     e.printStackTrace();

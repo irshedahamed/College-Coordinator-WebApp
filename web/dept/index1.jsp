@@ -38,8 +38,6 @@
               {
                   batch=rs.getString("batch");
                   
-                  
-              
               %>
               <option value="<%=batch%>"><%=batch%></option>
               <% } %>
@@ -102,7 +100,7 @@
                 <option disabled selected>select</option>
                <%
                     //int i=Integer.parseInt(request.getParameter("val"));
-                    String batch=request.getParameter("index2");
+                    String batch = request.getParameter("index2");
                     String sem=request.getParameter("index3");
                     
                ResultSet rs1= statement.executeQuery("select distinct(sec) from subject_allocation where  batch='"+batch+"' and sem='"+sem+"'");
@@ -114,8 +112,6 @@
               {
                   section=rs1.getString("sec");
                   
-                  
-              
               %>
               <option value="<%=section%>"><%=section%></option>
               <% } %>
