@@ -4,6 +4,7 @@
     Author     : Lenovo
 --%>
 
+<%@page import="Actor.Student"%>
 <%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%-- 
@@ -246,35 +247,27 @@
                         <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
 
                                     <%
-                                        con = new dbcon().getConnection(dept);
-                                        st = con.createStatement();
-
-                                        ResultSet rs = st.executeQuery("select rollno,name from student_personal where batch like '" + batch + "'");
-                                        int i = -1;
-                                        while (rs.next()) {
-                                            i++;
-                                            rollno = rs.getString("rollno");
-                                            String name = rs.getString("name");
-                                            String pincode = "", mobile = "", father = "", door = "", street = "", area = "", city = "", district = "", state = "", country = "";
-                                            String sql = "select * from student_contact_details where rollno like '" + rs.getString("rollno") + "'";
-                                            Statement stmt1 = con.createStatement();
-                                            ResultSet rscon = stmt1.executeQuery(sql);
-                                            if (rscon.next()) {
-                                                door = rscon.getString("Doorno");
-                                                street = rscon.getString("street");
-                                                pincode = rscon.getString("pincode");
-                                                area = rscon.getString("area");
-                                                city = rscon.getString("city");
-                                                district = rscon.getString("district");
-                                                state = rscon.getString("state");
-                                                country = rscon.getString("country");
-                                                sql = "select fathers_name,mobile from student_father_details where rollno like '" + rs.getString("rollno") + "'";
-                                                Statement stmt2 = con.createStatement();
-                                                ResultSet rs2 = stmt2.executeQuery(sql);
-                                                if (rs2.next()) {
-                                                    father = rs2.getString("fathers_name");
-                                                    mobile = rs2.getString("mobile");
-                                    %>
+                                      con=new dbcon().getConnection(dept);
+             st = con.createStatement();
+            List<Student> list =  Student.getAll(dept, batch, "%");
+            int i=-1;
+            for(Student s : list)
+            {
+                i++;
+                rollno=s.getId();
+                String name=s.getName();
+                String pincode="",mobile="",father="",door="",street="",area="",city="",district="",state="",country="";
+                    door=s.getContact().getDoorno();
+                    street=s.getContact().getStreet();
+                    pincode=s.getContact().getPincode();
+                    area=s.getContact().getArea();
+                    city=s.getContact().getCity();
+                    district=s.getContact().getDistrict();
+                    state=s.getContact().getState();
+                    country=s.getContact().getCountry();
+                    father=s.getFatherDetails().getFathername();
+                    mobile=s.getFatherDetails().getMobile();
+            %>
                                     <center>
                                         <%if (i % 2 == 0) {%>
                                         <div style="height: 300px;width: 500px;position:absolute;">
@@ -324,15 +317,14 @@
                                     <%
                                                     }
                                                 }
-                                            }
-                                        }
+                                          
 
-                                        if (st != null) {
-                                            st.close();
+                                        if ( st != null) {
+                                             st.close();
                                         }
-                                        if (con != null) {
-                                            ;//con.close();
-                                        }
+                                       // if (con != null) {
+                                         //   ;//con.close();
+                                        //}
                                     %>
 
                                     <br><br><br><br><br><br><br><br>
@@ -399,13 +391,14 @@
             response.sendRedirect("../index.jsp");
         }
 
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
+       // if (sttt != null) {
+         //   sttt.close();
+        //}
+        //if (connn != null) {
+          //  ;//connn.close();
+        //}
+    }
+catch (Exception e) {
         e.printStackTrace();
         response.sendRedirect("../index.jsp");
     }

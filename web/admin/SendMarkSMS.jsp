@@ -3,6 +3,8 @@
     Created on : 19 Oct, 2016, 8:11:20 PM
     Author     : Home
 --%>
+<%@page import="Actor.Student"%>
+<%@page import="java.util.List"%>
 <%@page import="Actor.Parent"%>
 <%-- 
     Document   : SendSMS
@@ -124,7 +126,7 @@
         
         Connection con=null;
         Statement st=null;
-        Statement st1=null;
+        //Statement st1=null;
         
         
         
@@ -135,17 +137,21 @@
         
          con = new dbcon().getConnection(dept);
          st=con.createStatement();
-         st1=con.createStatement();
+         //st1=con.createStatement();
         int count =0;
         
            String sql="";
-        sql="select * from student_personal where  batch='"+batch+"' and sec like '_'";
-        ResultSet rs1=st1.executeQuery(sql);
-        while(rs1.next())
-        {    
-            String rollno=rs1.getString("rollno");
-            String regno=rs1.getString("regno");
-            String name=rs1.getString("name");
+        //sql="select * from student_personal where  batch=? and sec like '_'";
+       // PreparedStatement st1=con.prepareStatement(sql);
+       // st1.setString(1, batch);
+       // ResultSet rs1=st1.executeQuery();
+       // while(rs1.next())
+       List<Student> blist=Student.getAll(dept, batch, "%");
+       for(Student s : blist)
+       {    
+            String rollno=s.getId();
+            String regno=s.getRegno();
+            String name=s.getName();
             String message=General.MarkSMS.getContent(rollno, sem, exam);
             String phone=Parent.getNumber(rollno);
                         
@@ -184,8 +190,8 @@ e.printStackTrace();
 }finally{
                             if(st!=null)
                             st.close();
-                            if(st1!=null)
-                            st1.close();
+                            //if(st1!=null)
+                           // st1.close();
         
                             if(con!=null)
                                 ;//con.close();

@@ -6,6 +6,7 @@
 
 
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
@@ -215,7 +216,7 @@
                         <%
 
                             Connection con = new dbcon().getConnection("login");
-                            Statement st = con.createStatement();
+                            //Statement st = con.createStatement();
                             String staffid, pass, dept;
                             if (request.getParameter("dept") != null) {
                         %>
@@ -234,7 +235,10 @@
 
                                             </tr>
                                             <%
-                                                ResultSet rs = st.executeQuery("select l.*,g.name,g.tittle from staff_login_details l," + request.getParameter("dept") + ".staff_general g where g.staffid=l.staffid ");
+                                                dept=request.getParameter("dept");
+                                                PreparedStatement st=con.prepareStatement("select l.*,g.name,g.tittle from staff_login_details l,"+dept+".staff_general g where g.staffid=l.staffid ");
+                                               //22 st.setString(1, dept);
+                                                ResultSet rs = st.executeQuery();
 
                                                 while (rs.next()) {
                                                     staffid = rs.getString("staffid");
@@ -250,12 +254,12 @@
                                                     }
                                                 }
 
-                                                if (st != null) {
-                                                    st.close();
-                                                }
-                                                if (con != null) {
-                                                    ;//con.close();
-                                                }
+                                            //    if (st != null) {
+                                              //      st.close();
+                                               // }
+                                              //  if (con != null) {
+                                                //    ;//con.close();
+                                              //  }
                                             %>
                                         </table>
                                     </center>
