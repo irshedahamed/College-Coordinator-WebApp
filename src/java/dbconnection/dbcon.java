@@ -29,6 +29,12 @@ public class dbcon {
         
     return getConnection(dbname,clg);
     }
+  //  public dbcon(){
+        
+    //}
+    public dbcon(String clg){
+        this.clg = clg;
+    }
 
     public Connection getConnection() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -36,12 +42,12 @@ public class dbcon {
     
     private static Connection getConnection(String dbname,String clg){
         
-        Connection conn=connectionPool.get(dbname+clg);
+        Connection conn=connectionPool.get(clg+dbname);
           try { 
             if(conn==null || conn.isClosed()){
                  Class.forName("com.mysql.jdbc.Driver").newInstance();
-                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"webapp","fluffy");
-                 connectionPool.put(dbname+clg, conn);
+                 conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"root","0911");
+                 connectionPool.put(clg+dbname, conn);
         }
         
         } catch (Exception ex) {

@@ -332,10 +332,11 @@ eaddr[Integer.parseInt(item.getFieldName().substring(5))]=item.getString();
               
                 
                 //response.getWriter().println("All Data Received Successfully");
-              
-                con=new dbcon().getConnection(dept);
+               String clg = (String)request.getSession().getAttribute("clg");
+     
+                con=new dbcon(clg).getConnection(dept);
                 stmt=con.createStatement();
-                conlogin=new dbcon().getConnection("login");
+                conlogin=new dbcon(clg).getConnection("login");
                 stmt1=conlogin.createStatement();
                 try{
                     String name=fname+" "+mname+" "+lname;

@@ -78,8 +78,8 @@ public class StudentUpdateChanges extends HttpServlet {
                String dept=request.getParameter("dept");
                            String batch=request.getParameter("batch");
                            
-                           
-                    for(Student s:Student.getAll(dept, batch,"%"))
+                           String clg = (String)request.getSession().getAttribute("clg");
+                    for(Student s:Student.getAll(dept, batch,"%",clg))
                     {
                     String data=request.getParameter("update"+s.getId());
                     s.getGeneral().setBoarding(data);

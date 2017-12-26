@@ -27,8 +27,14 @@ public class Subjects {
     private String sem;
     private String subtype;
     private String ayear;
-
-    public String getSubcode() {
+private String clg;
+//public Subjects(){
+    
+//}
+public Subjects(String clg){
+    this.clg=clg;
+}
+public String getSubcode() {
         return subcode;
     }
 
@@ -76,12 +82,12 @@ public class Subjects {
         this.ayear = ayear;
     }
 
-    public static List<String> getTherorySubCode(String dept, Subjects s) throws SQLException {
+    public static List<String> getTherorySubCode(String dept, Subjects s,String clg) throws SQLException {
         List<String> subcode = new ArrayList<String>();
         PreparedStatement st = null;
         Connection con = null;
         try {
-            con = new dbcon().getConnection(dept);
+            con = new dbcon(clg).getConnection(dept);
             String sql1 = "select * from subject_sem_table where regulation=? and sem=? and (ayear like ? or ayear like 'all')  and subtype='theory' order by subcode";
             st = con.prepareStatement(sql1);
             st.setString(1, s.getRegulation());
@@ -103,12 +109,12 @@ public class Subjects {
         }
         return subcode;
     }
-public static List<String> getLabSubCode(String dept, Subjects s) throws SQLException {
+public static List<String> getLabSubCode(String dept, Subjects s,String clg) throws SQLException {
         List<String> subcode = new ArrayList<String>();
         PreparedStatement st = null;
         Connection con = null;
         try {
-            con = new dbcon().getConnection(dept);
+            con = new dbcon(clg).getConnection(dept);
             String sql1 = "select * from subject_sem_table where regulation=? and sem=? and (ayear like ? or ayear like 'all')  and subtype='lab' order by subcode";
             st = con.prepareStatement(sql1);
             st.setString(1, s.getRegulation());
@@ -132,12 +138,12 @@ public static List<String> getLabSubCode(String dept, Subjects s) throws SQLExce
     }
 
        
-    public static Subjects getBySubcode(String dept, String subcode) throws SQLException {
+    public static Subjects getBySubcode(String dept, String subcode,String clg) throws SQLException {
         PreparedStatement st = null;
         Connection con = null;
-        Subjects s = new Subjects();
+        Subjects s = new Subjects(clg);
         try {
-            con = new dbcon().getConnection(dept);
+            con = new dbcon(clg).getConnection(dept);
             String sql = "select * from subject_sem_table where subcode=?";
             st = con.prepareStatement(sql);
             st.setString(1, subcode);

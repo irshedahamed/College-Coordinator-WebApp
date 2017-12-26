@@ -24,7 +24,13 @@ public class AcademicYear {
     private String year;
     private String current;
     private String yearString;
-
+private String clg;
+//public AcademicYear(){
+    
+//}
+public AcademicYear(String clg){
+    this.clg=clg;
+}
     public String getYearString() {
         return yearString;
     }
@@ -55,7 +61,7 @@ public class AcademicYear {
         Connection con = null;
             Statement st = null;
             
-            con = new dbcon().getConnection("sjitportal");
+            con = new dbcon(clg).getConnection("portal");
             st = con.createStatement();
            int i =   st.executeUpdate("insert into academicyr values('"+Year+"','"+YearString+"','n')");
             
@@ -74,7 +80,7 @@ public class AcademicYear {
         Connection con = null;
             Statement st = null;
             
-            con = new dbcon().getConnection("sjitportal");
+            con = new dbcon(clg).getConnection("portal");
             st = con.createStatement();
             
                   st.executeUpdate("update academicyr set current = 'n'");   
@@ -91,20 +97,20 @@ public class AcademicYear {
         return false;
       
     }
-    public static List<AcademicYear> getAll(){
+    public static List<AcademicYear> getAll(String clg){
     
         List<AcademicYear> list=new ArrayList<AcademicYear>();
         Connection conbatch=null;
         Statement stmt=null;
         try{
-         conbatch = new dbcon().getConnection("sjitportal");
+         conbatch = new dbcon(clg).getConnection("portal");
                      stmt = conbatch.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from academicyr");
                     
                     rs.afterLast();
                     while(rs.previous())
                     {
-                   AcademicYear a=new AcademicYear();
+                   AcademicYear a=new AcademicYear(clg);
                    a.setCurrent(rs.getString("current"));
                    a.setYear(rs.getString("year"));
                    a.setYearString(rs.getString("yearString"));
@@ -130,14 +136,14 @@ public class AcademicYear {
     
     
     
-    public static AcademicYear getCurrentYear(){
+    public static AcademicYear getCurrentYear(String clg){
     
         
-                   AcademicYear a=new AcademicYear();
+                   AcademicYear a=new AcademicYear(clg);
         Connection conbatch=null;
         Statement stmt=null;
         try{
-         conbatch = new dbcon().getConnection("sjitportal");
+         conbatch = new dbcon(clg).getConnection("portal");
                      stmt = conbatch.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from academicyr where current not like 'n'");
                     
@@ -168,14 +174,14 @@ public class AcademicYear {
         return a;
     }
     
-    public static AcademicYear getFeeYear(){
+    public static AcademicYear getFeeYear(String clg){
     
         
                    AcademicYear a=null;
         Connection conbatch=null;
         Statement stmt=null;
         try{
-         conbatch = new dbcon().getConnection("sjitportal");
+         conbatch = new dbcon(clg).getConnection("portal");
                      stmt = conbatch.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from academicyr where current not like 'n'");
                     
@@ -183,7 +189,7 @@ public class AcademicYear {
                     while(rs.previous())
                     {
                    if(a==null || rs.getString("current").equals("fee"))
-                   a=new AcademicYear();
+                   a=new AcademicYear(clg);
                    a.setCurrent(rs.getString("current"));
                    a.setYear(rs.getString("year"));
                    a.setYearString(rs.getString("yearString"));
@@ -207,9 +213,9 @@ public class AcademicYear {
         return a;
     }
     
-    public static String getHTMLContent(){
+    public static String getHTMLContent(String clg){
     String res="";
-        for(AcademicYear b:getAll()){
+        for(AcademicYear b:getAll(clg)){
             if(b.getCurrent().equals("n") ||b.getCurrent().equals("fee"))
             res+="<option value='"+b.getYear()+"'>"+b.getYearString()+"</option>";
             else

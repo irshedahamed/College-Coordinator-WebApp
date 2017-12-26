@@ -88,7 +88,9 @@ public class StudentAdd extends HttpServlet {
       int update;
       
       String rollno=request.getParameter("rollno");
-      if(Student.getById(rollno)!=null){
+       String clg = (String)request.getSession().getAttribute("clg");
+     
+      if(Student.getById(rollno,clg)!=null){
       response.getWriter().print("Student already exist.Contact admin if it is a new entry.!!");
       return;
       }
@@ -213,7 +215,7 @@ public class StudentAdd extends HttpServlet {
        Statement stmt;
       try{
       Class.forName("com.mysql.jdbc.Driver").newInstance();
-      Connection conn=new dbcon().getConnection("login");   
+      Connection conn=new dbcon(clg).getConnection("login");   
       stmt=conn.createStatement();
       String sql="delete from student_login_details  where rollno='"+rollno+"'";
       stmt.execute(sql);
@@ -221,7 +223,7 @@ public class StudentAdd extends HttpServlet {
       stmt.execute(sql);
       stmt.close();
       ;//conn.close();
-      conn=new dbcon().getConnection(dept);   
+      conn=new dbcon(clg).getConnection(dept);   
       stmt=conn.createStatement();
   if(dob.equals("")){
           
@@ -353,7 +355,7 @@ public class StudentAdd extends HttpServlet {
           try {
               e.printStackTrace();
               e.printStackTrace(response.getWriter());
-                Connection con1=new dbcon().getConnection(dept);
+                Connection con1=new dbcon(clg).getConnection(dept);
                 Statement del=con1.createStatement();
                 String sql="delete from student_general where rollno='"+rollno+"'";
                 del.executeUpdate(sql);

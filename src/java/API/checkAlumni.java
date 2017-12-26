@@ -79,7 +79,9 @@ public class checkAlumni extends HttpServlet {
        
        String rollno=request.getParameter("rollno");
        String dob=request.getParameter("dob");
-       Student s=Student.getById(rollno);
+        String clg = (String)request.getSession().getAttribute("clg");
+      
+       Student s=Student.getById(rollno,clg);
        
        if(s!=null && s.getGeneral().getDob().equals(dob))
              response.getWriter().print(s.getName());

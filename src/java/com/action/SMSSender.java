@@ -86,7 +86,10 @@ public class SMSSender extends HttpServlet {
        Connection conn=null;
        Statement stmt=null;
        String number="";
-       number=Parent.getNumber(rollno);
+                            
+                           String clg = (String)request.getSession().getAttribute("clg");
+ 
+       number=Parent.getNumber(rollno,clg);
                         String message="";
                         
                         if(reason.equals("AB"))
@@ -99,9 +102,8 @@ public class SMSSender extends HttpServlet {
                             message="Your ward "+name.toUpperCase()+"("+rollno.toUpperCase()+") has taken leave on "+date+", Please wait for further information";
                         else if(reason.equals("OD"))
                             message="Your ward "+name.toUpperCase()+"("+rollno.toUpperCase()+") has taken OD on "+date;
-                            
-                        
-                        if(!SMSTemplate.send(number, message).equals(""))
+      
+                        if(!SMSTemplate.send(number, message,clg).equals(""))
                         json = new Gson().toJson("Sent");
                         else
                         json = new Gson().toJson("Error: "+number+message);    

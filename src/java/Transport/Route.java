@@ -18,11 +18,16 @@ import java.util.List;
  * @author Fluffy
  */
 public class Route {
-    
+  private String clg;
+  
     
     private String id;
     private String name;
-
+//public Route{
+    //}
+    public Route(String clg){
+        this.clg=clg;
+    }
     public String getId() {
         return id;
     }
@@ -40,21 +45,21 @@ public class Route {
     }
     
     
-    public static List<Route> getAll(){
+    public static List<Route> getAll(String clg){
     
          Connection conn=null;
     Statement stmt=null;
    List<Route> list=new ArrayList<Route>();
         try{
             
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from busroutes order by id");
                     
                     
                     rs.beforeFirst();
                     while(rs.next()){
-                       Route r =new Route();
+                       Route r =new Route(clg);
                        r.setId(rs.getString("id"));
                        r.setName(rs.getString("name"));
                        list.add(r);

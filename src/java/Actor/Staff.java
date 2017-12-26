@@ -24,8 +24,16 @@ public class Staff {
     String sex;
     String mobile;
     String email;
+private String clg;
+//public Staff(){
+    
+//}
+public Staff(String clg,String id){
+    this.clg=clg;
+this.id=id;
+} 
 
-    public String getId() {
+public String getId() {
         return id;
     }
 
@@ -71,10 +79,7 @@ public class Staff {
     }
     Councillor councillor;
     
-    public Staff(String id){
-    
-        this.id=id;
-    }
+  
     
     public  Councillor getCouncillorDetails(){
         if(councillor==null){
@@ -84,21 +89,21 @@ public class Staff {
     return councillor; 
     }
     
-    public static Staff getByid(String id){
+    public static Staff getByid(String id,String clg){
     Staff s=null;
     
          Connection conn=null;
     Statement stmt=null;
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from staff_general where staffid like '"+id+"'");
                     
                     
                     rs.beforeFirst();
                     if(rs.next()){
-                        s=new Staff(rs.getString("staffid"));
+                        s=new Staff(rs.getString("staffid"),clg);
                         s.setName(rs.getString("tittle")+rs.getString("name").toUpperCase());
                         s.setSex(rs.getString("gender"));
                         s.setDesg(rs.getString("desg"));

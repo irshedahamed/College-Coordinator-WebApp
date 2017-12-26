@@ -21,9 +21,18 @@ import java.util.Date;
 public class OutPass {
     private String id;
     private String expiry;
+private String clg;
 
-    public OutPass(String id) {
+    public String getClg() {
+        return clg;
+    }
+
+    public void setClg(String clg) {
+        this.clg = clg;
+    }
+    public OutPass(String id,String clg) {
         this.id = id;
+        this.clg = clg;
     }
 
     public String getId() {
@@ -45,7 +54,7 @@ public class OutPass {
        Statement stmt=null;
        int update=0;
        try{
-           conn=new dbcon().getConnection("sjitportal");
+           conn=new dbcon(clg).getConnection("portal");
            stmt=conn.createStatement();
            
            String sql="insert into outpass values('"+requestid+"','"+this.id+"',now())";
@@ -80,7 +89,7 @@ public class OutPass {
    
         try{
             
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
     String sql="select * from outpass where rollno like '"+id+"' and expiry >= now()-INTERVAL 6 HOUR";
     
@@ -108,15 +117,15 @@ public class OutPass {
     return valid;
     }
       
-      public static String getnextID(String type){
+      public static String getnextID(String type,String clg){
         Connection  conn=null;
         Statement stmt=null;
         int res=0;
           try{
             
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
-    String sql="select MAX(CONVERT(SUBSTR(id,13,8),unsigned int)) as res  from sjitportal.outpass where id like '%STAFF%'";
+    String sql="select MAX(CONVERT(SUBSTR(id,13,8),unsigned int)) as res  from outpass where id like '%STAFF%'";
     
     ResultSet rs=stmt.executeQuery(sql);
                     

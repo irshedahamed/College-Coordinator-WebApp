@@ -25,8 +25,14 @@ public class WorkingTiming {
     private String timing;
     private String date;
     private String batch;
-
-    public String getBatch() {
+private String clg;
+//public WorkingTiming(){
+    
+//}
+public WorkingTiming(String clg){
+    this.clg=clg;
+}  
+public String getBatch() {
         return batch;
     }
 
@@ -66,14 +72,14 @@ public class WorkingTiming {
         this.date = date;
     }
     
-    public static boolean checkDate(String date , String batch , String dept)
+    public static boolean checkDate(String date , String batch , String dept,String clg)
     {
         boolean result=false ;
         try {
             Connection con = null;
             Statement st = null;
             
-            con = new dbcon().getConnection("sjitportal");
+            con = new dbcon(clg).getConnection("portal");
             st = con.createStatement();
             
             ResultSet rs = st.executeQuery("select * from working_timing where date like '"+date+"' and batch like '"+batch+"' and dept like '"+dept+"' ");
@@ -92,11 +98,11 @@ public class WorkingTiming {
     return result;
     }
     
-    public static String insertTiming(WorkingTiming wrk)
+    public static String insertTiming(WorkingTiming wrk,String clg)
     {
         try {
             Connection con = null;
-            con = new dbcon().getConnection("sjitportal");
+            con = new dbcon(clg).getConnection("portal");
             PreparedStatement st
                     = con.prepareStatement("insert into working_timing values(?,?,?,?,?)");
             st.setString(1, wrk.getSem());

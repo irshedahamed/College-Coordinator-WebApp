@@ -83,8 +83,9 @@ public class DelForms extends HttpServlet {
 
      for(String a:values)
     {
-        
-        con= new dbconnection.dbcon().getConnection(request.getParameter("db"));
+         String clg = (String)request.getSession().getAttribute("clg");
+     
+        con= new dbconnection.dbcon(clg).getConnection(request.getParameter("db"));
         st = con.createStatement();
        st.executeUpdate("delete from circular where sno like '"+a+"';");
         //response.getWriter().println("delete from circular where sno like '"+a+"';");

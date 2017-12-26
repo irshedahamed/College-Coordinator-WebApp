@@ -82,7 +82,9 @@ public class batchupdate extends HttpServlet {
         {
         String batch = request.getParameter("batch");
         String regulation = request.getParameter("regulation");
-        Connection con = new dbconnection.dbcon().getConnection("sjitportal");
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+        Connection con = new dbconnection.dbcon(clg).getConnection("portal");
         Statement st = con.createStatement();
            st.executeUpdate("insert into regulations values('"+batch+"','"+regulation+"','New')");
             response.sendRedirect("admin/batch.jsp");

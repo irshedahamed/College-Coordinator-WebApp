@@ -22,7 +22,9 @@ public class TimingServlet extends HttpServlet {
         String date = request.getParameter("date");
         String batch = request.getParameter("batch");
         String dept = request.getParameter("dept");
-        boolean result = WorkingTiming.checkDate(date,batch,dept);
+        String clg = (String)request.getSession().getAttribute("clg");
+      
+        boolean result = WorkingTiming.checkDate(date,batch,dept,clg);
         String json = new Gson().toJson(result);
         response.setContentType("application/json");
         response.getWriter().write(json);
@@ -32,13 +34,16 @@ public class TimingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //  processRequest(request, response);
-        WorkingTiming w = new WorkingTiming();
+      String clg = (String)request.getSession().getAttribute("clg");
+      
+        WorkingTiming w = new WorkingTiming(clg);
         w.setDept( request.getParameter("dept"));
         w.setBatch(request.getParameter("batch"));
         w.setTiming(request.getParameter("time"));
         w.setDate( request.getParameter("date"));
         w.setSem(request.getParameter("sem"));
-        String result = WorkingTiming.insertTiming(w);
+        
+        String result = WorkingTiming.insertTiming(w,clg);
         String json = new Gson().toJson(result);
         response.setContentType("application/json");
         response.getWriter().write(json);

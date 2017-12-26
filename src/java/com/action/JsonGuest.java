@@ -83,8 +83,10 @@ public class JsonGuest extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       //  processRequest(request, response);
-       String mobile=request.getParameter("mobile");
-     Guest g=Guest.getByMobile(mobile);
+       String clg = (String)request.getSession().getAttribute("clg");
+      
+      String mobile=request.getParameter("mobile");
+     Guest g=Guest.getByMobile(mobile,clg);
        
               
                 String json;

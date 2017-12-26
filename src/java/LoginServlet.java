@@ -81,8 +81,9 @@ public class LoginServlet extends HttpServlet {
                     String sql = "select * from student_login_details where rollno='"+regno+"' and password='"+dob+"'"  ;  
                     
                     
-                   
-                  dbcon d = new dbcon();
+                    String clg = (String)request.getSession().getAttribute("clg");
+     
+                  dbcon d = new dbcon(clg);
                con = d.getConnection("login");
                   statement = con.createStatement();
                     ResultSet rs = statement.executeQuery(sql);

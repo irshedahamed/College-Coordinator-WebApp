@@ -142,7 +142,9 @@ public class maincircularupload extends HttpServlet {
         
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection1 = new dbcon().getConnection("sjitportal");
+            String clg = (String)request.getSession().getAttribute("clg");
+     
+            Connection connection1 = new dbcon(clg).getConnection("portal");
             Statement statement1 = connection1.createStatement();
 
             statement1.executeUpdate("insert into circular values("+null+",'" + name + "','" + desc + "','" + type + "','"+ UPLOAD_DIRECTORY + "')");

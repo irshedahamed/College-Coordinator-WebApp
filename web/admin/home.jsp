@@ -10,6 +10,7 @@
 
     <%
         try {
+            String clg = (String)session.getAttribute("clg");
             String username = session.getAttribute("username").toString();
             String password = session.getAttribute("password").toString();
 
@@ -34,8 +35,11 @@
         <link href="../css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom CSS -->
-        <link href="../css/simple-sidebar.css" rel="stylesheet">
-
+        <script>
+            
+    alert("<%=clg%>");
+            
+        </script>
 
 
     </head>

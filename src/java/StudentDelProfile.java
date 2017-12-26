@@ -86,9 +86,11 @@ public class StudentDelProfile extends HttpServlet {
        String sql;
        
        try{
-              con=new dbcon().getConnection(Find.sdept(rollno));
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+           con=new dbcon(clg).getConnection(Find.sdept(rollno));
                 del=con.createStatement();
-                con1=new dbcon().getConnection("login");
+                con1=new dbcon(clg).getConnection("login");
                 stmt1=con1.createStatement();
                 sql = "select * from student_login_details  where rollno='" + rollno + "' and password='"+pass+"'";
                  ResultSet rs=stmt1.executeQuery(sql);

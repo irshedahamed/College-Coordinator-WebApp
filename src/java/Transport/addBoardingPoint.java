@@ -74,8 +74,9 @@ public class addBoardingPoint extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
+       String clg = (String)request.getSession().getAttribute("clg");
        String boardingpt=request.getParameter("boardingpt");
-       if(BoardingPoint.add(boardingpt))
+       if(BoardingPoint.add(boardingpt,clg))
            response.getWriter().println("Successfully Added!!");
        else
            response.getWriter().println("Some Error Occured");

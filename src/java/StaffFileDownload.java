@@ -81,7 +81,9 @@ public class StaffFileDownload extends HttpServlet {
     InputStream inputstream = null;  
      
       try{
-      con = new dbcon().getConnection(Find.sdept(request.getParameter("staffid")));
+       String clg = (String)request.getSession().getAttribute("clg");
+     
+          con = new dbcon(clg).getConnection(Find.sdept(request.getParameter("staffid")));
       stmt=con.createStatement();
       ResultSet rs= stmt.executeQuery("select * from staff_files where staffid='"+request.getParameter("staffid")+"'");
       if(rs.next())

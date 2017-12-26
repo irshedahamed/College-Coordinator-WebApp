@@ -208,7 +208,9 @@ public class updateStudent extends HttpServlet {
        
       try
       {
-          conn=new dbcon().getConnection(dept);   
+           String clg = (String)request.getSession().getAttribute("clg");
+      
+          conn=new dbcon(clg).getConnection(dept);   
       stmt=conn.createStatement();
       if(formname.equals("general"))
       {

@@ -88,9 +88,10 @@ public class regupdate extends HttpServlet {
             String batch = session.getAttribute("batch").toString();
             String sec = session.getAttribute("sec").toString();
             String dept = session.getAttribute("dept").toString();
-           
+            String clg = (String)request.getSession().getAttribute("clg");
+      
             
-            Connection  con = new dbcon().getConnection(dept);
+            Connection  con = new dbcon(clg).getConnection(dept);
             String subcode = null,rollno,mark;
             int count=0;
             Statement st3=null,st4=null;

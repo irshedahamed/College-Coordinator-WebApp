@@ -74,9 +74,10 @@ public class processOutPassStaff extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       //  processRequest(request, response);
-        
-      OutPass op=new OutPass(request.getParameter("rollno"));
-         if(op.insert(OutPass.getnextID("Staff")))
+         String clg = (String)request.getSession().getAttribute("clg");
+      
+      OutPass op=new OutPass(request.getParameter("rollno"),clg);
+         if(op.insert(OutPass.getnextID("Staff",clg)))
            response.getWriter().write("Out Pass Generated and valid for 6 hours");
       
        

@@ -18,24 +18,24 @@ import java.util.List;
  */
 public class MarkSMS {
 
-    public static String getContent(String rollno, String sem, String exam) throws SQLException {
+    public static String getContent(String rollno, String sem, String exam,String clg) throws SQLException {
         String marks = "";
         String pass;
         String name;
         String status;
         String content = "";
         int i = 0;
-        Subjects s = new Subjects();
+        Subjects s = new Subjects(clg);
         s.setSem(sem);
-        String batch=Student.getById(rollno).getBatch();
-        s.setAyear(Find.getAcyear(batch, sem));
-        s.setRegulation(Batch.getRegulation(batch));
-        List<String> list = Subjects.getTherorySubCode(Find.sdept(rollno), s);
+        String batch=Student.getById(rollno,clg).getBatch();
+        s.setAyear(Find.getAcyear(batch, sem,clg));
+        s.setRegulation(Batch.getRegulation(batch,clg));
+        List<String> list = Subjects.getTherorySubCode(Find.sdept(rollno), s,clg);
         for (String p : list) {
-            Mark m = new Mark();
+            Mark m = new Mark(clg);
             m.setRollno(rollno);
             m.setSubcode(p);
-            List<Mark> li = Mark.getExamMark(Find.sdept(rollno), m);
+            List<Mark> li = Mark.getExamMark(Find.sdept(rollno), m,clg);
             String markc = null, markm = null, marku = null;
             for (Mark mi : li) {
                 if (mi.getType().equals("model" + exam)) {
@@ -56,8 +56,8 @@ public class MarkSMS {
             } else {
                 marks += subcode + ":" + mark + ", ";
             }
-            name = Student.getById(rollno).getName();
-            int num = Result.numSubFailed(rollno, sem, exam);
+            name = Student.getById(rollno,clg).getName();
+            int num = Result.numSubFailed(rollno, sem, exam,clg);
             if (num == 0) {
                 pass = "PASSED";
                 status = "happy";

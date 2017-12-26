@@ -80,11 +80,13 @@ public class SendPasswordSMS extends HttpServlet {
         //processRequest(request, response);
       String user=request.getParameter("user");
                  String number=null;
-                 Student s=Student.getById(user);
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+                 Student s=Student.getById(user,clg);
                  if(s!=null)
-                 number=Parent.getNumber(s.getId());
+                 number=Parent.getNumber(s.getId(),clg);
                  else{
-                 Staff st=Staff.getByid(user);
+                 Staff st=Staff.getByid(user,clg);
                  if(st!=null)
                      number=st.getMobile();
                
@@ -97,7 +99,7 @@ public class SendPasswordSMS extends HttpServlet {
                 
                      if(number.equals(request.getParameter("mobile"))){
                      //send sms
-                     Authenticate a=new Authenticate();
+                     Authenticate a=new Authenticate(clg);
                      a.setUsername(user);
                          SMSTemplate.send(number,"Your password is : "+a.findPassword());
                     response.sendRedirect("index.jsp?msg=Your password has been sent to "+number);

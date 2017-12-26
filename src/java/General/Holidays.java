@@ -26,8 +26,14 @@ public class Holidays {
     String batch;
     String from;
     String till;
-
-    public String getName() {
+private String clg;
+//public Holidays(){
+    
+//}   
+public Holidays(String clg){
+    this.clg=clg;
+}
+public String getName() {
         return name;
     }
 
@@ -72,7 +78,7 @@ public class Holidays {
        Statement stmt=null;
        int update=0;
        try{
-           conn=new dbcon().getConnection(dept);
+           conn=new dbcon(clg).getConnection(dept);
            stmt=conn.createStatement();
            
            String sql;
@@ -111,12 +117,12 @@ public class Holidays {
     
     }
 
-    public static List<String> getAllNames(){
+    public static List<String> getAllNames(String clg){
         List<String> list=new ArrayList<String>();
         Connection conbatch=null;
         Statement stmt=null;
         try{
-         conbatch = new dbcon().getConnection("sjitportal");
+         conbatch = new dbcon(clg).getConnection("portal");
                      stmt = conbatch.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from holidays");
                     
@@ -145,19 +151,19 @@ public class Holidays {
     }
     
     
-    public static List<Holidays> getAll(String dept){
+    public static List<Holidays> getAll(String dept,String clg ){
         List<Holidays> list=new ArrayList<Holidays>();
         Connection conbatch=null;
         Statement stmt=null;
         try{
-         conbatch = new dbcon().getConnection(dept);
+         conbatch = new dbcon(clg).getConnection(dept);
                      stmt = conbatch.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from holidays");
                     
                     rs.beforeFirst();
                     while(rs.next())
                     {
-                    Holidays l=new Holidays();
+                    Holidays l=new Holidays(clg);
                     l.setName(rs.getString("name"));
                     l.setDept(dept);
                     l.setFrom(rs.getString("from"));

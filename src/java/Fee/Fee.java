@@ -19,7 +19,7 @@ public class Fee {
     
     return subCategory;
     }
-    protected String tution;
+   protected String tution;
     protected String transport;
     protected String hostel;
     protected String placement;
@@ -67,17 +67,17 @@ public class Fee {
         this.placement = placement;
     }
     
-    public static Fee getFeeById(String id){
+    public static Fee getFeeById(String id,String clg){
     
-    return getFeeById(id,AcademicYear.getFeeYear().getYear() );
+    return getFeeById(id,AcademicYear.getFeeYear(clg).getYear(),clg);
     }
     
-    public static Fee getFeeById(String id,String acyear){
+    public static Fee getFeeById(String id,String acyear,String clg){
     
     String cyear=acyear;
-    Student s=Student.getById(id);
-    List<BasicFee> fee=BasicFee.getByBatch(s.getBatch());
-    SpecialFee sfee=SpecialFee.getFee(id, cyear);
+    Student s=Student.getById(id,clg);
+    List<BasicFee> fee=BasicFee.getByBatch(s.getBatch(),clg);
+    SpecialFee sfee=SpecialFee.getFee(id, cyear,clg);
             if(sfee==null){
                 
                 String type="";

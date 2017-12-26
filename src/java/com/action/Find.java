@@ -200,16 +200,16 @@ public class Find {
     return temp;
     }
     
-    public static String getAcyear(String batch,String sem){
+    public static String getAcyear(String batch,String sem,String clg){
     
         int s;
         if(Integer.valueOf(sem)%2==0)
-               s= getSem(batch,AcademicYear.getCurrentYear().getYear(),"Even");
+               s= getSem(batch,AcademicYear.getCurrentYear(clg).getYear(),"Even");
         else
-            s= getSem(batch,AcademicYear.getCurrentYear().getYear(),"Odd");
+            s= getSem(batch,AcademicYear.getCurrentYear(clg).getYear(),"Odd");
       
         
-    int year=Integer.valueOf(AcademicYear.getCurrentYear().getYear()) -( (s-(Integer.valueOf(sem)))/2);
+    int year=Integer.valueOf(AcademicYear.getCurrentYear(clg).getYear()) -( (s-(Integer.valueOf(sem)))/2);
      
     return  String.valueOf(year); 
     }

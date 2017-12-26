@@ -18,15 +18,20 @@ import java.util.List;
  * @author Fluffy
  */
 public class RouteMap {
-    
+    private String clg;
     private String boardingpt1;
     private String boardingpt2;
    // private String routeid;
     //private String priority;
     //private Integer seqno;
     
-
-    public String getBoardingpt1() {
+//public RouteMap(){
+    
+//}
+public RouteMap(String clg){
+    this.clg=clg;
+}    
+public String getBoardingpt1() {
         return boardingpt1;
     }
 
@@ -66,21 +71,21 @@ public class RouteMap {
     }
     */
     
-        public static List<RouteMap> getByBoardingpt1(String bp1){
+        public static List<RouteMap> getByBoardingpt1(String bp1,String clg){
     
          Connection conn=null;
     Statement stmt=null;
    List<RouteMap> list=new ArrayList<RouteMap>();
         try{
             
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from routemap where boardingpoint1 like '"+bp1+"'");
                     
                     
                     rs.beforeFirst();
                     while(rs.next()){
-                       RouteMap rm =new RouteMap();
+                       RouteMap rm =new RouteMap(clg);
                        rm.setBoardingpt1(rs.getString("boardingpoint1"));
                        rm.setBoardingpt2(rs.getString("boardingpoint2"));
                       /*rm.setBoardingpt(rs.getString("boardingpt"));
@@ -112,7 +117,7 @@ public class RouteMap {
        Statement stmt=null;
        int update=0;
        try{
-           conn=new dbcon().getConnection("sjitportal");
+           conn=new dbcon(clg).getConnection("portal");
            stmt=conn.createStatement();
            String sql="insert into routemap values('"+boardingpt1+"','"+boardingpt2+"')";
             update+=stmt.executeUpdate(sql);
@@ -138,14 +143,14 @@ public class RouteMap {
            return false;
     }
            
-           public static List<RouteMap> getAll(){
+           public static List<RouteMap> getAll(String clg){
     
          Connection conn=null;
     Statement stmt=null;
    List<RouteMap> list=new ArrayList<RouteMap>();
         try{
             
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from boardingpts order by name");
                     
@@ -153,7 +158,7 @@ public class RouteMap {
                     rs.beforeFirst();
                     while(rs.next()){
                         //System.out.println(rs.getString("name"));
-                       RouteMap rm =new RouteMap();
+                       RouteMap rm =new RouteMap(clg);
                        rm.setBoardingpt1(rs.getString("name"));
                        //rm.setBoardingpt2(rs.getString("boardingpoint2"));
                        list.add(rm);

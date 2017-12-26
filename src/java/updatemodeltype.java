@@ -90,15 +90,16 @@ public class updatemodeltype extends HttpServlet {
             String dept = session.getAttribute("dept").toString();
             String batch=session.getAttribute("batch").toString();
             String sec=session.getAttribute("sec").toString();
+             String clg = (String)request.getSession().getAttribute("clg");
+      
             
-            
-            Connection  con = new dbcon().getConnection(dept);
+            Connection  con = new dbcon(clg).getConnection(dept);
   
          
             Statement st1=null;
             st1 = con.createStatement();
           
-            for(Student s:Student.getAll(dept, batch, sec))
+            for(Student s:Student.getAll(dept, batch, sec,clg))
             {
                             
                 

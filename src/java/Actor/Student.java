@@ -21,6 +21,10 @@ import java.util.List;
  * @author Lenovo
  */
 public class Student {
+
+    public static Student getById(String toString) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     String id;
     String name;
     String dept;
@@ -36,8 +40,14 @@ public class Student {
     String roomno;
     String course;
     String model_type;
-
-    public String getModel_type() {
+private String clg;
+//public Student(){
+    
+//}    
+public Student(String clg){
+    this.clg=clg;
+}
+public String getModel_type() {
         return model_type;
     }
 
@@ -347,7 +357,7 @@ public void setRoomno(String roomno){
     
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_admission_details where rollno like '"+id+"'");
                     
@@ -384,14 +394,14 @@ public void setRoomno(String roomno){
     return a;
     }
      
-    public static List<Student> getAll(String dept,String batch,String sec){
+    public static List<Student> getAll(String dept,String batch,String sec,String clg){
         
                Connection conn=null;
     Statement stmt=null;
     List<Student> list=new ArrayList<Student>();
         try{
             
-    conn=new dbcon().getConnection(dept);
+    conn=new dbcon(clg).getConnection(dept);
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_personal where batch like '"+batch+"' "
                             + "and sec like '"+sec+"' order by CONVERT(regno,UNSIGNED)");
@@ -399,7 +409,7 @@ public void setRoomno(String roomno){
                     
                     rs.beforeFirst();
                     while(rs.next()){
-                        Student s=new Student();
+                        Student s=new Student(clg);
                         s.setBatch(rs.getString("batch"));
                         s.setId(rs.getString("rollno"));
                         s.setDept(Find.sdept(s.getId()));
@@ -436,21 +446,21 @@ public void setRoomno(String roomno){
     }
     
 
-      public static Student getById(String id){
+      public static Student getById(String id,String clg){
         
                Connection conn=null;
     Statement stmt=null;
     Student s=null;
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_personal where rollno like '"+id+"'");
                     
                     
                     rs.beforeFirst();
                     if(rs.next()){
-                        s=new Student();
+                        s=new Student(clg);
                         s.setBatch(rs.getString("batch"));
                         s.setDept(Find.sdept(id));
                         s.setRegno(rs.getString("regno"));
@@ -1002,7 +1012,7 @@ public class General{
        Statement stmt=null;
        
        try{
-           conn=new dbcon().getConnection(Find.sdept(id));
+           conn=new dbcon(clg).getConnection(Find.sdept(id));
             PreparedStatement pstmt;
             String sql1="update student_general set dob="+"?"+", caste='"+caste+"', community='"+community+
                     "', parents_annual_income='"+parentincome+"', religion='"+religion+"', nationality='"+nationality+
@@ -1275,7 +1285,7 @@ public class Visa{
     
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_academic_details where rollno like '"+id+"'");
                     
@@ -1328,7 +1338,7 @@ public class Visa{
     
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_contact_details where rollno like '"+id+"'");
                     
@@ -1375,7 +1385,7 @@ private  FatherDetails fetchFatherDetails(){
     
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_father_details where rollno like '"+id+"'");
                     
@@ -1420,7 +1430,7 @@ private  MotherDetails fetchMotherDetails(){
     
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_mother_details where rollno like '"+id+"'");
                     
@@ -1465,7 +1475,7 @@ private  General fetchGeneralDetails(){
     
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_general where rollno like '"+id+"'");
                     
@@ -1512,7 +1522,7 @@ private  LocalGuardian fetchLocalGuardianDetails(){
     
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_local_guardian where rollno like '"+id+"'");
                     
@@ -1556,7 +1566,7 @@ private  LocalGuardian2 fetchLocalGuardian2Details(){
     
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_local_guardian2 where rollno like '"+id+"'");
                     
@@ -1600,7 +1610,7 @@ private  OtherDetails fetchOtherDetails(){
     
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_other_details where rollno like '"+id+"'");
                     
@@ -1646,7 +1656,7 @@ private  Passport fetchPassportDetails(){
     
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_passport_details where rollno like '"+id+"'");
                     
@@ -1684,7 +1694,7 @@ private Visa fetchVisaDetails(){
     
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from student_visa_details where rollno like '"+id+"'");
                     

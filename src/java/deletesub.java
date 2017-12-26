@@ -97,8 +97,9 @@ String dept = parts[4]; // 004
 String subcode = parts[5];
 
 String sec = parts[6]; // 004
- 
-                  Connection connection1 = new dbcon().getConnection(Find.sdept(staffid));
+  String clg = (String)request.getSession().getAttribute("clg");
+     
+                  Connection connection1 = new dbcon(clg).getConnection(Find.sdept(staffid));
             Statement statement1 = connection1.createStatement();
         String sql = "delete from subject_allocation where acyear='"+acyear+"' and staffid='"+staffid+"'and sem='"+sem+"' and dept='"+dept+"' and subcode='"+subcode+"' and sec='"+sec+"'";
         
@@ -117,7 +118,9 @@ String sec = parts[6]; // 004
                   String acyear=request.getParameter("acyear");
                   String staffid=request.getParameter("staffid");
                   String sem=request.getParameter("semister");
-                   Connection connection1 = new dbcon().getConnection(Find.sdept(staffid));
+                  String clg = (String)request.getSession().getAttribute("clg");
+     
+                  Connection connection1 = new dbcon(clg).getConnection(Find.sdept(staffid));
             Statement statement1 = connection1.createStatement();
         String sql = "delete from other_incharge where acyear='"+acyear+"' and staffid='"+staffid+"'and semister='"+sem+"' ";
         

@@ -21,12 +21,12 @@ import java.util.logging.Logger;
  */
 public class College {
     
-    public static List<Circular> getAll(String type){
+    public static List<Circular> getAll(String type,String clg){
     List<Circular> list = new ArrayList<Circular>();
     Connection conn=null;
     Statement stmt=null;
     try{
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from circular where type like '"+type+"' order by sno desc");
                     

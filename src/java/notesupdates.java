@@ -213,7 +213,9 @@ String UPLOAD_DIRECTORY="hello";
             descp=name;
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection1 = new dbcon().getConnection(dept);
+          String clg = (String)request.getSession().getAttribute("clg");
+     
+            Connection connection1 = new dbcon(clg).getConnection(dept);
             Statement statement1 = connection1.createStatement();
             String by=request.getSession().getAttribute("username").toString();
             statement1.executeUpdate("insert into notes values("+null+",'" + ayear + "','" + sem + "','" + subcode + "','" + notes + "','" + name + "','" + UPLOAD_DIRECTORY + "','"+descp+"','"
@@ -231,11 +233,11 @@ String UPLOAD_DIRECTORY="hello";
                                   String newsem;
                                   if(!department.equals(dept)){
                                   ResultSet rs;
-                                  connection1 = new dbcon().getConnection(department);
+                                  connection1 = new dbcon(clg).getConnection(department);
                                   statement1 = connection1.createStatement();
                                   response.getWriter().println(department);
                                   String regulation="";
-                                  for(Batch b:Batch.getAll()){
+                                  for(Batch b:Batch.getAll(clg)){
                                   if(b.getBatch().equals(batch))
                                       regulation=b.getRegulation();
                                   }

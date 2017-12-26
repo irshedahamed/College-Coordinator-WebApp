@@ -84,7 +84,9 @@ public class receiveTechProcessAPIResponse extends HttpServlet {
      
        Fee.TechProcess tp=(Fee.TechProcess) request.getSession().getAttribute("TPRequest");
        String resMsg=tp.getTransactionStatus(msg);
-       TechProcessResponse tpr=new TechProcessResponse();
+      String clg = (String)request.getSession().getAttribute("clg");
+      
+       TechProcessResponse tpr=new TechProcessResponse(clg);
        if(resMsg.equals("failed T")){
        tpr.setRollno(tp.getCustID());
        tpr.setRefno(tp.getRefno());

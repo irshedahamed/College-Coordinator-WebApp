@@ -25,8 +25,14 @@ public class Batch {
     private String batch;
     private String regulation;
     private String status;
-
-    public String getStatus() {
+private String clg;
+//public Batch(){
+    
+//}
+public Batch(String clg){
+    this.clg=clg;
+}  
+public String getStatus() {
         return status;
     }
 
@@ -50,18 +56,18 @@ public class Batch {
         this.regulation = regulation;
     }
 
-    public static Batch getByYrIncharge(String id) {
-        Batch b = new Batch();
+    public static Batch getByYrIncharge(String id,String clg) {
+        Batch b = new Batch(clg);
         Connection conbatch = null;
         Statement stmt = null;
         try {
-            conbatch = new dbcon().getConnection("sjitportal");
+            conbatch = new dbcon(clg).getConnection("portal");
             stmt = conbatch.createStatement();
             ResultSet rs = stmt.executeQuery("select * from regulations where batch in (select batch from yearincharge where id='" + id + "')");
 
             rs.beforeFirst();
             if (rs.next()) {
-                b = new Batch();
+                b = new Batch(clg);
                 b.setBatch(rs.getString("batch"));
                 b.setRegulation(rs.getString("regulation"));
                 b.setStatus(rs.getString("status"));
@@ -86,19 +92,19 @@ public class Batch {
 
     }
 
-    public static List<Batch> getAll() {
+    public static List<Batch> getAll(String clg) {
 
         List<Batch> batch = new ArrayList<Batch>();
         Connection conbatch = null;
         Statement stmt = null;
         try {
-            conbatch = new dbcon().getConnection("sjitportal");
+            conbatch = new dbcon(clg).getConnection("portal");
             stmt = conbatch.createStatement();
             ResultSet rs = stmt.executeQuery("select * from regulations");
 
             rs.beforeFirst();
             while (rs.next()) {
-                Batch b = new Batch();
+                Batch b = new Batch(clg);
                 b.setBatch(rs.getString("batch"));
                 b.setRegulation(rs.getString("regulation"));
                 b.setStatus(rs.getString("status"));
@@ -123,9 +129,9 @@ public class Batch {
         return batch;
     }
 
-    public static String getHTMLContent() {
+    public static String getHTMLContent(String clg) {
         String res = "";
-        for (Batch b : getAll()) {
+        for (Batch b : getAll(clg)) {
             if (b.getStatus().equals("Alumni") || b.getStatus().equals("New")) {
                 res += "<option value='" + b.getBatch() + "'>" + b.getBatch() + "(" + b.getStatus() + ")" + "</option>";
             } else {
@@ -135,9 +141,9 @@ public class Batch {
         return res;
     }
 
-    public static String getRegulation(String batch) throws SQLException {
+    public static String getRegulation(String batch,String clg) throws SQLException {
         String regulation = null;
-        Connection con = new dbcon().getConnection("sjitportal");
+        Connection con = new dbcon(clg).getConnection("portal");
         PreparedStatement st = null;
         try {
             String sql = "select * from regulations where batch=?";
@@ -159,9 +165,9 @@ public class Batch {
         }
         return regulation;
     }
-    public static String getRegulationHTMLContent() {
+    public static String getRegulationHTMLContent(String clg) {
         String res = "";
-        for (Batch b : getAll()) {
+        for (Batch b : getAll(clg)) {
             res += "<option value='" + b.getRegulation() + "'>" + b.getRegulation() + "</option>";
         }
         return res;

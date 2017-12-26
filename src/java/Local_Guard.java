@@ -98,7 +98,9 @@ public class Local_Guard extends HttpServlet {
        
 
       //Class.forName("com.mysql.jdbc.Driver").newInstance();
-      Connection con = new dbcon().getConnection(Find.sdept(rollno));
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+      Connection con = new dbcon(clg).getConnection(Find.sdept(rollno));
         Statement st = con.createStatement();
            st.executeUpdate("insert into student_local_guardian2 values('"+rollno+"','"+name+"','"+phoneno+"','"+doorno+"','"+street+"','"+area+"','"+city+"','"+pincode+"')");
             //response.sendRedirect("admin/batch.jsp");

@@ -82,8 +82,9 @@ public class RemoveBonus extends HttpServlet {
                 dept=request.getParameter("dept");    
                 else
                 dept=(String)request.getSession().getAttribute("dept");
-                
-            conn=new dbcon().getConnection(dept);
+ String clg = (String)request.getSession().getAttribute("clg");
+                     
+            conn=new dbcon(clg).getConnection(dept);
             stmt=conn.createStatement();
             stmt1=conn.createStatement();
             

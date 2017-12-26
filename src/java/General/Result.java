@@ -65,17 +65,17 @@ public class Result {
     }
         return result;
     }*/
-    public static int numSubFailed(String rollno, String sem, String exam) throws SQLException {
+    public static int numSubFailed(String rollno, String sem, String exam,String clg) throws SQLException {
         int fail = 0;
-        Subjects s = new Subjects();
+        Subjects s = new Subjects(clg);
         s.setSem(sem);
-        s.setRegulation(Batch.getRegulation(Student.getById(rollno).getBatch()));
-        List<String> list = Subjects.getTherorySubCode(Find.sdept(rollno), s);
+        s.setRegulation(Batch.getRegulation(Student.getById(rollno,clg).getBatch(),clg));
+        List<String> list = Subjects.getTherorySubCode(Find.sdept(rollno), s,clg);
         for (String p : list) {
-            Mark m = new Mark();
+            Mark m = new Mark(clg);
             m.setRollno(rollno);
             m.setSubcode(p);
-            List<Mark> li = Mark.getExamMark(Find.sdept(rollno), m);
+            List<Mark> li = Mark.getExamMark(Find.sdept(rollno), m,clg);
             String markc = null, markm = null, marku = null;
             for (Mark mi : li) {
                 if (mi.getType().equals("model" + exam)) {

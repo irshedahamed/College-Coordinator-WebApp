@@ -74,7 +74,7 @@ public class receiveTechProcessResponse extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
-       
+       String clg = (String)request.getSession().getAttribute("clg");
        
        String msg=request.getParameter("msg");
        String mercode=request.getParameter("tpsl_mrct_cd");
@@ -82,7 +82,7 @@ public class receiveTechProcessResponse extends HttpServlet {
      
        TechProcess tp=(TechProcess) request.getSession().getAttribute("TPRequest");
        String resMsg=tp.getTransactionStatus(msg);
-       TechProcessResponse tpr=new TechProcessResponse();
+       TechProcessResponse tpr=new TechProcessResponse(clg);
        if(resMsg.equals("failed T")){
        tpr.setRollno(tp.getCustID());
        tpr.setRefno(tp.getRefno());

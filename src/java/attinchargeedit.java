@@ -91,7 +91,9 @@ public class attinchargeedit extends HttpServlet {
         int edit=0;
         String dept=request.getParameter("dept");
         try{
-            conn=new dbcon().getConnection(dept);
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+            conn=new dbcon(clg).getConnection(dept);
             stmt=conn.createStatement();
             for(int i=0;i<count;i++)
         {

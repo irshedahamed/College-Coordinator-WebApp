@@ -76,7 +76,8 @@ public class Switcher extends HttpServlet {
             throws ServletException, IOException {
        // processRequest(request, response);
        String dept=request.getParameter("dept");
-        Authenticate a=new Authenticate();
+       String clg = (String)request.getSession().getAttribute("clg"); 
+       Authenticate a=new Authenticate(clg);
         a.setUsername(dept);
         
         request.getRequestDispatcher("LoginServlet?uname="+a.getUsername()+"&pass="+a.findPassword()).forward(request, response);

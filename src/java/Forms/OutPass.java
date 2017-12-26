@@ -27,7 +27,20 @@ public class OutPass {
     private String from;
     private String till;
     private String requestid;
+    private String clg;
 
+    public OutPass(String clg){
+    this.clg = clg;
+    }
+    
+    public String getClg() {
+        return clg;
+    }
+
+    public void setClg(String clg) {
+        this.clg = clg;
+    }
+    
     public String getRequestid() {
         return requestid;
     }
@@ -82,7 +95,7 @@ public class OutPass {
        Statement stmt=null;
        int update=0;
        try{
-           conn=new dbcon().getConnection("sjitportal");
+           conn=new dbcon(clg).getConnection("portal");
            stmt=conn.createStatement();
            String sql;
            sql="select * from outpassform where rollno='"+rollno+"' and status='Waiting for Response' and reason='"+reason+"'";
@@ -139,14 +152,14 @@ public class OutPass {
     List<OutPass> list=new ArrayList<OutPass>();
         try{
             
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from outpassform where rollno like '"+rollno+"'");
                     
                     
                     rs.beforeFirst();
                     while(rs.next()){
-                        OutPass o=new OutPass();
+                        OutPass o=new OutPass(clg);
                         o.setFrom(rs.getString("from"));
                         o.setTill(rs.getString("till"));
                        // o.setLetter(rs.getString("letter"));
@@ -172,21 +185,21 @@ public class OutPass {
     return list;
     }
     
-    public static List<OutPass> getAllPending(){
+    public static List<OutPass> getAllPending(String clg){
         Connection conn=null;
     Statement stmt=null;
     List<OutPass> list=new ArrayList<OutPass>();
      
     try{
             
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from outpassform where status like 'Waiting%'");
                     
                     
                     rs.beforeFirst();
                     while(rs.next()){
-                        OutPass o=new OutPass();
+                        OutPass o=new OutPass(clg);
                         o.setFrom(rs.getString("from"));
                         o.setTill(rs.getString("till"));
                        // o.setLetter(rs.getString("letter"));
@@ -213,7 +226,8 @@ public class OutPass {
     }
     
     public String getSMSContent(){
-        if(Student.getById(rollno).getAccomodation().equalsIgnoreCase("hostel"))
+        
+        if(Student.getById(rollno,clg).getAccomodation().equalsIgnoreCase("hostel"))
     return "Dear Parent, Based on  your request  outpass has been granted from "+Find.getFormattedDate(from)+"  to "+Find.getFormattedDate(LocalDate.parse(till).plusDays(1).toString().replace("-",""))+" 7 AM";
     else
             return null;
@@ -221,13 +235,13 @@ public class OutPass {
     
     
     
-     public static OutPass getbyIdReturnDate(String id,String till){
+     public static OutPass getbyIdReturnDate(String id,String till,String clg){
         Connection conn=null;
     Statement stmt=null;
-   OutPass o=new OutPass();
+   OutPass o=new OutPass(clg);
         try{
             
-                    conn=new dbcon().getConnection("sjitportal");
+                    conn=new dbcon(clg).getConnection("portal");
                     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from outpassform where rollno like '"+id+"' and till ='"+till+"' -  INTERVAL 24 HOUR ");
                     

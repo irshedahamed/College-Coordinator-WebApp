@@ -76,10 +76,11 @@ public class receiveMUResponse extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
-       MUResponse mu=new MUResponse();
+      String clg = (String)request.getSession().getAttribute("clg");
+       MUResponse mu=new MUResponse(clg);
        if(request.getSession().getAttribute("username")!=null)
        mu.setRollno(request.getSession().getAttribute("username").toString());
-       mu.setAcyear(AcademicYear.getFeeYear().getYear());
+       mu.setAcyear(AcademicYear.getFeeYear(clg).getYear());
        mu.setBankchrge(request.getParameter("bankChrge"));
        mu.setHandleID(request.getParameter("HandleID"));
        mu.setMerchantrefno(request.getParameter("MerchantRefNo"));

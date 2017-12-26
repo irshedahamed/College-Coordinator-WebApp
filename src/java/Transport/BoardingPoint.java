@@ -23,13 +23,18 @@ import java.util.List;
  * @author Lenovo
  */
 public class BoardingPoint {
+private String clg;
+public BoardingPoint(){
     
-    
+}
+public BoardingPoint(String clg){
+    this.clg=clg;
+}    
     
     
 
     
-    public static List<String> getAll(){
+    public static List<String> getAll(String clg){
         
          List<String> Boardingpts=new ArrayList<String>();
            Connection conn=null;
@@ -37,7 +42,7 @@ public class BoardingPoint {
    
         try{
             
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from boardingpts order by name");
                     
@@ -63,21 +68,21 @@ public class BoardingPoint {
         return Boardingpts;
     } 
     
-    public static String getHTMLContent(){
+    public static String getHTMLContent(String clg){
         String res="";
-        for(String point:getAll()){
+        for(String point:getAll(clg)){
             res+="<option value='"+point+"'>"+point+"</option>";
     }
     return res;
    
     }
     
-    public static boolean add(String boardingpt){
+    public static boolean add(String boardingpt,String clg){
      Connection conn=null;
        Statement stmt=null;
        int update=0;
        try{
-           conn=new dbcon().getConnection("sjitportal");
+           conn=new dbcon(clg).getConnection("portal");
            stmt=conn.createStatement();
            String sql="insert into boardingpts values(null,'"+boardingpt+"')";
             update+=stmt.executeUpdate(sql);

@@ -44,13 +44,15 @@ public class MarkResource {
 
     @Context
     private UriInfo context;
-
+private String clg;
     /**
      * Creates a new instance of MarkResource
      */
-    public MarkResource() {
-    }
-
+    //public MarkResource() {
+    //}
+public MarkResource(String clg){
+    this.clg=clg;
+}
     /**
      * Retrieves representation of an instance of RESTful.MarkResource
      * @param auth
@@ -74,18 +76,20 @@ public class MarkResource {
             JSONObject json=(JSONObject) parse.parse(body);
             rollno=(String) json.get("rollno");
             sem=(String) json.get("sem");
-       Subjects s = new Subjects();
+         
+            Subjects s = new Subjects(clg);
         s.setSem(sem);
-        Student stu=Student.getById(rollno);
-        s.setAyear(Find.getAcyear(stu.getBatch(), sem));
-        s.setRegulation(Batch.getRegulation(stu.getBatch()));
-        List<String> list = Subjects.getTherorySubCode(stu.getDept(), s);
+        Student stu=Student.getById(rollno,clg);
+        s.setAyear(Find.getAcyear(stu.getBatch(), sem,clg));
+        
+        s.setRegulation(Batch.getRegulation(stu.getBatch(),clg));
+        List<String> list = Subjects.getTherorySubCode(stu.getDept(), s,clg);
         for(String subcode:list){
-                    Mark m = new Mark();
+                    Mark m = new Mark(clg);
                     m.setSubcode(subcode);
                     m.setRollno(rollno);
                     
-                    mlist.addAll(Mark.getExamMark("", m));
+                    mlist.addAll(Mark.getExamMark("", m,clg));
 
                 }
         

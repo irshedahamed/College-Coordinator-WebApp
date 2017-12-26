@@ -82,7 +82,9 @@ String subcode="";
 String reg = "";
 String hh="";
 try{
-    Connection con= new dbcon().getConnection(request.getParameter("dept"));
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+    Connection con= new dbcon(clg).getConnection(request.getParameter("dept"));
     Statement st = con.createStatement();
 if (Array != null) {
 for (int i = 0; i < Array.length; i++) {

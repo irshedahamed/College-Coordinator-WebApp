@@ -83,7 +83,9 @@ public class CouncillorAttEdit extends HttpServlet {
                Connection conn=null;
         Statement stmt=null;
         String user= request.getSession().getAttribute("username").toString();
-        Staff s=new Staff(user);
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+        Staff s=new Staff(user,clg);
         try{
         int count=Integer.parseInt(request.getSession().getAttribute("count").toString());
        // System.out.println(count);
@@ -94,7 +96,7 @@ public class CouncillorAttEdit extends HttpServlet {
         
        // String dept=request.getParameter("dept");
         try{
-            conn=new dbcon().getConnection(s.getCouncillorDetails().getDept());
+            conn=new dbcon(clg).getConnection(s.getCouncillorDetails().getDept());
             stmt=conn.createStatement();
             for(int i=0;i<count;i++)
         {

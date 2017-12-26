@@ -28,8 +28,13 @@ public class Authenticate extends HttpServlet {
     private String Password;
     private String type;
     private String photo;
+    private String clg;
+//public Authenticate(){
     
-
+//}
+  public Authenticate(String clg){
+      this.clg=clg;
+  }
     public String getUsername() {
         return Username;
     }
@@ -119,7 +124,7 @@ public class Authenticate extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
         
-        Authenticate a=new Authenticate();
+        Authenticate a=new Authenticate(clg);
         a.setUsername(request.getParameter("user"));
         a.setPassword(request.getParameter("pass"));
      
@@ -150,13 +155,14 @@ public class Authenticate extends HttpServlet {
         Connection conn=null;
         Statement stmt=null;
         try{
-           conn=new dbcon().getConnection("login");
+      
+            conn=new dbcon(clg).getConnection("login");
            stmt=conn.createStatement();
            String sql="select * from student_login_details where rollno like '"+Username+"' and password like '"+Password+"'";
            ResultSet rs=stmt.executeQuery(sql);
            if(rs.next()){
                type="student";
-               photo="${pageContext.request.contextPath}/StudentPhotos/Batch"+Student.getById(Username).getBatch()+"/"+Username.toUpperCase()+".JPG";
+               photo="${pageContext.request.contextPath}/StudentPhotos/Batch"+Student.getById(Username,clg).getBatch()+"/"+Username.toUpperCase()+".JPG";
                flag=true;
            }else{
            rs.close();
@@ -198,7 +204,8 @@ public class Authenticate extends HttpServlet {
         Connection conn=null;
         Statement stmt=null;
         try{
-           conn=new dbcon().getConnection("login");
+      
+            conn=new dbcon(clg).getConnection("login");
            stmt=conn.createStatement();
            String sql="select * from student_login_details where rollno like '"+Username+"' ";
            ResultSet rs=stmt.executeQuery(sql);

@@ -91,7 +91,9 @@ public class councillorattupdate extends HttpServlet {
       String acyr=c.getAcademicyr();
       String semister=c.getSemister();
       int sem=Find.getSem(batch, acyr, semister);
-      Connection con = new dbconnection.dbcon().getConnection(dept);
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+      Connection con = new dbconnection.dbcon(clg).getConnection(dept);
       Statement st = con.createStatement();
       Statement st1 = con.createStatement();
       String sql="select * from student_personal where batch='"+batch+"'";

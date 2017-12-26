@@ -61,12 +61,12 @@ public class Notes extends Downloadable{
     }
     
     
-       public static List<Notes> getAll(String dept,Notes n){
+       public static List<Notes> getAll(String dept,Notes n,String clg){
     List<Notes> list = new ArrayList<Notes>();
     Connection conn=null;
     Statement stmt=null;
     try{
-    conn=new dbcon().getConnection(dept);
+    conn=new dbcon(clg).getConnection(dept);
     stmt = conn.createStatement();
      String path = Base.path+"/notes/"+n.getAcademicyr()+"/"+dept+"/"+"%"+"/"+n.getSem()+"/"+n.getSubcode()+"/"+n.getType()+"/";
        

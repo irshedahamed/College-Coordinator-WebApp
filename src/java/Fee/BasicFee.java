@@ -26,11 +26,15 @@ public class BasicFee extends Fee{
     private String type;
     
     private String acyear;
-
-    public String getBatch() {
+      private String clg ;
+//public BasicFee(){
+//}
+        public String getBatch() {
         return batch;
     }
-
+        public  BasicFee(String clg){
+            this.clg=clg;
+        }
     public void setBatch(String batch) {
         this.batch = batch;
     }
@@ -50,7 +54,7 @@ public class BasicFee extends Fee{
        Statement stmt=null;
        int update=0;
        try{
-           conn=new dbcon().getConnection("sjitportal");
+           conn=new dbcon(clg).getConnection("portal");
            stmt=conn.createStatement();
            
            String sql;
@@ -86,7 +90,7 @@ public class BasicFee extends Fee{
        Statement stmt=null;
        int update=0;
        try{
-           conn=new dbcon().getConnection("sjitportal");
+           conn=new dbcon(clg).getConnection("portal");
            stmt=conn.createStatement();
            
            String sql;
@@ -121,21 +125,21 @@ public class BasicFee extends Fee{
     return null;
     }
     
-    public static List<BasicFee> getByBatch(String batch){
+    public static List<BasicFee> getByBatch(String batch,String clg){
     
             Connection conn=null;
     Statement stmt=null;
     List<BasicFee> list=new ArrayList<BasicFee>();
         try{
             
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from basic_fee where batch like '"+batch+"'");
                     
                     
                     rs.beforeFirst();
                     while(rs.next()){
-                        BasicFee b=new BasicFee();
+                        BasicFee b=new BasicFee(clg);
                         b.setBatch(rs.getString("batch"));
                         b.setHostel(rs.getString("hostel"));
                         b.setPlacement(rs.getString("placement"));

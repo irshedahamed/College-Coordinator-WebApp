@@ -60,9 +60,9 @@ public class showReceipt extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-
+String clg = (String)request.getSession().getAttribute("clg");
     String mup=request.getParameter("mup");
-    MUResponse mupno=MUResponse.getbyMUP(mup);
+    MUResponse mupno=MUResponse.getbyMUP(mup,clg);
         request.getSession().setAttribute("MUResponse",mupno);
        // request.setAttribute("acyear", mupno.getAcyear());
         request.setAttribute("paid", "Y");

@@ -84,7 +84,9 @@ public class DateCheck extends HttpServlet {
             String dept = request.getParameter("dept");
             String batch = request.getParameter("batch");
             String sem = request.getParameter("sem");
-            con = new dbcon().getConnection("sjitportal");
+               String clg = (String)request.getSession().getAttribute("clg");
+      
+            con = new dbcon(clg).getConnection("portal");
             String sql = "select * from exam_date where dept=? and batch=? and sem=?";
             st = con.prepareStatement(sql);
             st.setString(1, dept);

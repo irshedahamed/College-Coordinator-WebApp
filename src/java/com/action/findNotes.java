@@ -86,7 +86,10 @@ public class findNotes extends HttpServlet {
        n.setType(request.getParameter("type"));
        
        String result="";
-       for(Notes note:Notes.getAll(dept, n)){
+                               
+                           String clg = (String)request.getSession().getAttribute("clg");
+ 
+       for(Notes note:Notes.getAll(dept, n,clg)){
            System.err.println(note.getDesc());
            if(note.getType().equals("class_notes")){
                if(note.getSubCategory()!=null)

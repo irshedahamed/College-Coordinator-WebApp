@@ -30,7 +30,9 @@ public class LabJsonServlet extends HttpServlet {
                     String department = request.getParameter("department");
                     String batch = request.getParameter("batch");
                      Class.forName("com.mysql.jdbc.Driver").newInstance();
-                    Connection con = new dbcon().getConnection("sjitportal");
+                        String clg = (String)request.getSession().getAttribute("clg");
+      
+                     Connection con = new dbcon(clg).getConnection("portal");
                     Statement st= con.createStatement();
                     String sql="select * from regulations where batch='"+batch+"'";
                     ResultSet rs= st.executeQuery(sql);
@@ -46,7 +48,7 @@ public class LabJsonServlet extends HttpServlet {
                     String json = null;
                     
                         Class.forName("com.mysql.jdbc.Driver").newInstance();
-                        con = new dbcon().getConnection(department);
+                        con = new dbcon(clg).getConnection(department);
                         st = con.createStatement();
                         rs=st.executeQuery("select subcode,subname from subject_sem_table where sem='"+semester+"' and subtype='lab' and regulation='"+regulation+"'");
                         while(rs.next())

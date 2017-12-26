@@ -87,8 +87,9 @@ public class MarkForm extends HttpServlet {
         if(id.equals("batch"))
         {
             String dept = request.getParameter("dept");
-            
-           Connection con = new dbcon().getConnection(dept);
+ String clg = (String)request.getSession().getAttribute("clg");
+                 
+           Connection con = new dbcon(clg).getConnection(dept);
             List<String> list = new ArrayList<String>();
            Statement st=con.createStatement();
            ResultSet rs = st.executeQuery("select distinct(sem) from subject_allocation where dept='"+dept+"' and staffid='"+staffid+"'");

@@ -241,8 +241,10 @@ public class ExcelStudentUpload extends HttpServlet {
                 
                 rows.next();
                  while (rows.hasNext()) {
-                      Connection conn=new dbcon().getConnection(sheet.getSheetName());
-                 Connection conn1=new dbcon().getConnection("login");
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+                     Connection conn=new dbcon(clg).getConnection(sheet.getSheetName());
+                 Connection conn1=new dbcon(clg).getConnection("login");
                  stmt=conn.createStatement();
                  stmt1=conn1.createStatement();
                  
@@ -487,7 +489,7 @@ public class ExcelStudentUpload extends HttpServlet {
       }catch(Exception e){
           try {
                 e.printStackTrace();
-                Connection con1=new dbcon().getConnection(sheet.getSheetName());
+                Connection con1=new dbcon(clg).getConnection(sheet.getSheetName());
                 Statement del=con1.createStatement();
                 String sql="delete from student_general where rollno='"+rollno+"'";
                 del.executeUpdate(sql);

@@ -35,7 +35,13 @@ public class Guest {
     String reason;
     String sex;
     String numpeople;
+private String clg;
+//public Guest(){
 
+//}
+public Guest(String clg){
+    this.clg=clg;
+}
     public String getNumpeople() {
         return numpeople;
     }
@@ -125,7 +131,7 @@ public class Guest {
    
     
     try{
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
     String id;
                     ResultSet rs=stmt.executeQuery("select * from guest where id like '"+this.id+"%'");
@@ -169,8 +175,8 @@ public class Guest {
         return false;
     }
     
-    public static Guest getById(String gid){
-        Guest g=new  Guest();
+    public static Guest getById(String gid,String clg){
+        Guest g=new  Guest(clg);
         
         
           Connection conn=null;
@@ -180,7 +186,7 @@ public class Guest {
    
     
     try{
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from guest where id like '"+gid+"'");
                     
@@ -214,8 +220,8 @@ public class Guest {
     }
     
     
-     public static Guest getByMobile(String mobile){
-        Guest g=new  Guest();
+     public static Guest getByMobile(String mobile,String clg){
+        Guest g=new  Guest(clg);
         
         
           Connection conn=null;
@@ -225,7 +231,7 @@ public class Guest {
    
     
     try{
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from guest where mobile like '"+mobile+"'");
                     

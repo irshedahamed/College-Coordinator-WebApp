@@ -29,7 +29,13 @@ private String mup;
 private String journalno;
 private String txndate;
 private String status;
-
+private String clg;
+//public IBResponse(){
+    
+//}
+public IBResponse(String clg){
+    this.clg=clg;
+}
     public String getRollno() {
         return rollno;
     }
@@ -75,7 +81,7 @@ Connection conn=null;
        Statement stmt=null;
        int update=0;
        try{
-           conn=new dbcon().getConnection("sjitportal");
+           conn=new dbcon(clg).getConnection("portal");
            stmt=conn.createStatement();
            
            String sql;
@@ -103,14 +109,14 @@ Connection conn=null;
        else
            return false;
     }
- public static Map<MUResponse,IBResponse> fetchby(List<MUResponse> mup,String From,String To) 
+ public static Map<MUResponse,IBResponse> fetchby(List<MUResponse> mup,String From,String To,String clg) 
     {
         Map<MUResponse,IBResponse> map = new HashMap<MUResponse, IBResponse>();
       try{  
         Connection con = null;
         Statement st = null;
         
-        con = new dbcon().getConnection("sjitportal");
+        con = new dbcon(clg).getConnection("portal");
         
         st = con.createStatement();
        
@@ -122,7 +128,7 @@ Connection conn=null;
          if (rs.previous())
         {
           
-            IBResponse i=new IBResponse();
+            IBResponse i=new IBResponse(clg);
             i.setMup(rs.getString("mup"));
             i.setRollno(rs.getString("rollno"));
             i.setStatus(rs.getString("status"));

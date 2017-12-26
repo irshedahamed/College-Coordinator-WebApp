@@ -89,8 +89,9 @@ public class SectionUpdate extends HttpServlet {
                     Statement stmt1 = null;
         try
         {
-           
-            con= new dbcon().getConnection(dept);
+            String clg = (String)request.getSession().getAttribute("clg");
+     
+            con= new dbcon(clg).getConnection(dept);
            // response.getWriter().println(dept);
             stmt = con.createStatement();
             stmt1=con.createStatement();

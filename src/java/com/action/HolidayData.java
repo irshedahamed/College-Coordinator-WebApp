@@ -82,7 +82,9 @@ public class HolidayData extends HttpServlet {
     String dept=request.getParameter("dept");
     String batch=request.getParameter("batch");
     String name=request.getParameter("name");
-    List<Holidays> list=Holidays.getAll(dept);
+    String clg = (String)request.getSession().getAttribute("clg");
+      
+    List<Holidays> list=Holidays.getAll(dept,clg);
     for(Holidays h:list){
         if(h.getName().equals(name)&&h.getBatch().equals(batch)){
         

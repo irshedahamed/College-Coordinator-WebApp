@@ -92,7 +92,9 @@ public class ElectiveJson extends HttpServlet {
                 String regulation=request.getParameter("regulation");
                 List<String> list = new ArrayList<String>();
                 try{
-                conn=new dbcon().getConnection(dept);
+                     String clg = (String)request.getSession().getAttribute("clg");
+      
+                conn=new dbcon(clg).getConnection(dept);
                 stmt=conn.createStatement();
                 String sql="select * from subject_sem_table where ayear like 'elective%' and sem='"+sem+"' and regulation='"+regulation+"'";
                 ResultSet rs=stmt.executeQuery(sql);

@@ -27,7 +27,8 @@ import org.jsoup.select.Elements;
  * @author Home
  */
 public class SMSTemplate {
-public static String sendwithID(String number,String message,String id){
+    
+public static String sendwithID(String number,String message,String id,String clg){
         String txnid="";
          InputStream input = null;
             HttpURLConnection connection = null;
@@ -36,7 +37,8 @@ public static String sendwithID(String number,String message,String id){
          Statement stmt=null;
          String user=null,pass=null;
          try{
-         conn=new dbcon().getConnection("sjitportal");
+                
+             conn=new dbcon(clg).getConnection("portal");
          stmt=conn.createStatement();
          String sql="select value from credentials where ckey like 'smsuser'";
          ResultSet rs=stmt.executeQuery(sql);
@@ -117,7 +119,11 @@ public static String sendwithID(String number,String message,String id){
 
 
     
-    public static String send(String number,String message){
-    return sendwithID(number,message,"STJOSE");
+    public static String send(String number,String message,String clg){
+    return sendwithID(number,message,"STJOSE",clg);
 }
+
+    public static void send(String number, String smsContent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

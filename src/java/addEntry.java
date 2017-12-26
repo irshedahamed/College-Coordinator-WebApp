@@ -77,8 +77,9 @@ public class addEntry extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
-       
-       Entry e=new Entry();
+ String clg = (String)request.getSession().getAttribute("clg");
+            
+       Entry e=new Entry(clg);
        boolean act=false;
        e.setRollno(request.getParameter("rollno"));
        e.setBy(request.getParameter("by"));
@@ -98,7 +99,7 @@ public class addEntry extends HttpServlet {
              
              
              
-             SMSTemplate.send(Parent.getNumber(e.getRollno()),message);
+             SMSTemplate.send(Parent.getNumber(e.getRollno(),clg),message);
          }
         
          if(act)

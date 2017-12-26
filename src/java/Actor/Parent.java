@@ -17,12 +17,12 @@ import java.sql.Statement;
  * @author Home
  */
 public class Parent {
-    public static String getNumber(String rollno){
+    public static String getNumber(String rollno,String clg){
     Connection conn=null;
        Statement stmt=null;
        String number="";
        try{
-           conn=new dbcon().getConnection(Find.sdept(rollno));
+           conn=new dbcon(clg).getConnection(Find.sdept(rollno));
            stmt=conn.createStatement();
            String sql="select mobile from student_father_details where rollno='"+rollno+"'";
        ResultSet rs=stmt.executeQuery(sql);

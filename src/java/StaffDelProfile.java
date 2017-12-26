@@ -85,9 +85,11 @@ public class StaffDelProfile extends HttpServlet {
        Statement stmt=null,stmt1=null;
        
        try{
-              con=new dbcon().getConnection(Find.sdept(staffid));
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+           con=new dbcon(clg).getConnection(Find.sdept(staffid));
                 stmt=con.createStatement();
-                con1=new dbcon().getConnection("login");
+                con1=new dbcon(clg).getConnection("login");
                 stmt1=con1.createStatement();
                 String sql;
                 sql = "select * from staff_login_details  where staffid='" + staffid + "' and password='"+pass+"'";

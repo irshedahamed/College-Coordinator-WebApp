@@ -80,7 +80,9 @@ public class InsertYear1 extends HttpServlet {
         String YearString = request.getParameter("YearString");
         String Year = request.getParameter("Year");
         
-        AcademicYear a = new AcademicYear();
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+        AcademicYear a = new AcademicYear(clg);
         boolean insertYear;
         
         try {

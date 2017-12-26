@@ -94,7 +94,9 @@ public class staffmarkupdate extends HttpServlet {
             String dept = session.getAttribute("dept").toString();
             String exam = session.getAttribute("exam").toString();
             String rollno=null,mark=null;
-             Connection  con = new dbcon().getConnection(dept);
+             String clg = (String)request.getSession().getAttribute("clg");
+      
+            Connection  con = new dbcon(clg).getConnection(dept);
              Statement st= con.createStatement();
              ResultSet rs2;
              Statement st1=con.createStatement();

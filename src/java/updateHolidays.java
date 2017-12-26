@@ -74,7 +74,9 @@ public class updateHolidays extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
-        Holidays h=new Holidays();
+       String clg = (String)request.getSession().getAttribute("clg");
+      
+       Holidays h=new Holidays(clg);
         h.setName(request.getParameter("name"));
         h.setDept(request.getParameter("dept"));
         h.setBatch(request.getParameter("batch"));

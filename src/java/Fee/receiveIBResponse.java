@@ -75,7 +75,8 @@ public class receiveIBResponse extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        // processRequest(request, response);
-       IBResponse res=new IBResponse();
+      String clg = (String)request.getSession().getAttribute("clg");
+       IBResponse res=new IBResponse(clg);
        res.setRollno(request.getSession().getAttribute("username").toString());
        res.setMup(request.getParameter("RefNo"));
        res.setJournalno(request.getParameter("JournalNo"));

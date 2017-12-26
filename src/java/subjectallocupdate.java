@@ -85,8 +85,9 @@ public class subjectallocupdate extends HttpServlet {
             
 
             String staffid=request.getParameter("staff");
-            
-            Connection connection1 = new dbcon().getConnection(Find.sdept(staffid));
+             String clg = (String)request.getSession().getAttribute("clg");
+      
+            Connection connection1 = new dbcon(clg).getConnection(Find.sdept(staffid));
             Statement statement1 = connection1.createStatement();
             String num = request.getParameter("numbersub");
             Integer n = Integer.parseInt(num);

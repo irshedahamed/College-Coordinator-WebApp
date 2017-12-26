@@ -122,8 +122,9 @@ public class GuestEntry extends HttpServlet {
             
             response.getWriter().print("Written");
         }else{
-       
-        Guest g=new Guest();
+        String clg = (String)request.getSession().getAttribute("clg");
+     
+        Guest g=new Guest(clg);
         String action=request.getParameter("entry");
        String category=request.getParameter("category");
        g.setSex(request.getParameter("sex"));
@@ -137,7 +138,7 @@ public class GuestEntry extends HttpServlet {
        g.setNumpeople(request.getParameter("numpeople"));
        g.insert(category, UPLOAD_DIRECTORY+"photo.jpg");
        
-      Entry e=new Entry();
+      Entry e=new Entry(clg);
        boolean act=false;
        e.setRollno(g.getId());
        

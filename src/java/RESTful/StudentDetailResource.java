@@ -36,13 +36,15 @@ public class StudentDetailResource {
 
     @Context
     private UriInfo context;
-
+private String clg;
     /**
      * Creates a new instance of StudentDetailResource
      */
-    public StudentDetailResource() {
-    }
-
+   // public StudentDetailResource() {
+    //}
+public StudentDetailResource(String clg){
+    this.clg=clg;
+}
     /**
      * Retrieves representation of an instance of RESTful.StudentDetailResource
      * @return an instance of java.lang.String
@@ -57,7 +59,7 @@ public class StudentDetailResource {
         try {
             JSONObject json = (JSONObject) parse.parse(body);
             rollno=(String) json.get("rollno");
-            s = Student.getById(rollno);
+            s = Student.getById(rollno,clg);
             //list = Student.getAll(s.getDept(), s.getBatch(), s.getSec());
             //list.add(s);
             

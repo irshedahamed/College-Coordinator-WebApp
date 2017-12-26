@@ -103,7 +103,9 @@ public class StaffProfileEdit extends HttpServlet {
        Statement stmt=null;
        try
        {
-            con=new dbcon().getConnection(Find.sdept(id));
+        String clg = (String)request.getSession().getAttribute("clg");
+     
+           con=new dbcon(clg).getConnection(Find.sdept(id));
             stmt=con.createStatement();
        String sql="update staff_general set tittle='"+title+"', name='"+name+"', desg='"+desg+"', doj='"+doj+"',"
                + "gender='"+gender+"', add1='"+add1+"', add2='"+add2+"', city='"+city+"', state='"+state+"', "

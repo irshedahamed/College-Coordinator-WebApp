@@ -104,8 +104,9 @@ public class SubjectAdd extends HttpServlet {
        
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            
-            Connection conn=new dbcon().getConnection("sjitportal");
+             String clg = (String)request.getSession().getAttribute("clg");
+     
+            Connection conn=new dbcon(clg).getConnection("portal");
             Statement stmt=conn.createStatement();
             ResultSet rs=stmt.executeQuery("select subcode from subject_table where subcode like '"+subcode+"'");
              if(!rs.next())
@@ -117,7 +118,7 @@ public class SubjectAdd extends HttpServlet {
         if(conn!=null)
             ;//conn.close();
             
-             conn=new dbcon().getConnection(dept);
+             conn=new dbcon(clg).getConnection(dept);
              stmt=conn.createStatement();
              flag=stmt.executeUpdate("insert into subject_sem_table values('"+subcode+"','"+regulation+"','"+subname+"','"+
                     sem+"','"+type+"','"+ayear+"')");

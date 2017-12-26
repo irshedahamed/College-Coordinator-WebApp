@@ -89,7 +89,9 @@ public class ElectiveUpdate extends HttpServlet {
        Connection conn=null;
        Statement stmt=null;
        try{
-       conn=new dbcon().getConnection(dept);
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+           conn=new dbcon(clg).getConnection(dept);
        stmt=conn.createStatement();
        ResultSet rs=stmt.executeQuery("select ayear from subject_sem_table where sem='"+sem+"' and subcode='"+subcode+"' and regulation='"+regulation+"'");
        if(rs.next())

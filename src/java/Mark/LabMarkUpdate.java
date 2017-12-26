@@ -37,25 +37,27 @@ public class LabMarkUpdate extends HttpServlet {
             String ayear = session.getAttribute("ayear").toString();
             String mark;
             int count = 0;
-            Subjects s = new Subjects();
+             String clg = (String)request.getSession().getAttribute("clg");
+      
+            Subjects s = new Subjects(clg);
             s.setAyear(ayear);
             s.setRegulation(regulation);
             s.setSem(sem);
-            List<String> Subcodelist = Subjects.getLabSubCode(dept, s);
+            List<String> Subcodelist = Subjects.getLabSubCode(dept, s,clg);
             for (String subcode : Subcodelist) {
-                List<Student> list = Student.getAll(dept, batch, "%");
+                List<Student> list = Student.getAll(dept, batch, "%",clg);
                 for (Student stu : list) {
                     String a1 = stu.getId() + "_" + count;
                     mark = request.getParameter(a1);
                     if (mark == null) {
                         continue;
                     }
-                    Mark m = new Mark();
+                    Mark m = new Mark(clg);
                     m.setRollno(stu.getId());
                     m.setSubcode(subcode);
                     m.setType(exam);
                     m.setMark(mark);
-                    Mark m1 = new Mark();
+                    Mark m1 = new Mark(clg);
                     m1.insertOrUpdateMarks(dept, m);
                 }
                 count++;

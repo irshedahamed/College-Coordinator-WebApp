@@ -80,8 +80,9 @@ public class addMapping extends HttpServlet {
         String boardingpt1=request.getParameter("boardingpt1");
         String boardingpt2=request.getParameter("boardingpt2");
         //String priority=request.getParameter("priority");
-        
-        RouteMap r=new RouteMap();
+ String clg = (String)request.getSession().getAttribute("clg");
+             
+        RouteMap r=new RouteMap(clg);
         r.setBoardingpt1(boardingpt1);
          r.setBoardingpt2(boardingpt2);
      //   r.setPriority(priority);

@@ -88,8 +88,8 @@ public class redirectPay extends HttpServlet {
         rd.forward(request, response);
        }
        else if(mode.equals("others")){
-       
-           TechProcess tp=new TechProcess();
+       String clg = (String)request.getSession().getAttribute("clg");
+           TechProcess tp=new TechProcess(clg);
            tp.setUser("SJIT");
       tp.setAmount(mu.getTotalamt());
       tp.setCustID(mu.getRollno());

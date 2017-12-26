@@ -40,7 +40,9 @@ protected void doGet(HttpServletRequest request,
         
          HttpSession session = request.getSession(true);
         String departmentname= session.getAttribute("deptname").toString();
-             Connection connection = new dbcon().getConnection(departmentname);
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+        Connection connection = new dbcon(clg).getConnection(departmentname);
               Statement stmt = connection.createStatement();  
          
         ResultSet rs = stmt.executeQuery("Select * from subject_sem_table where sem='"+sem+"',dept='"+dept+"'  ");  

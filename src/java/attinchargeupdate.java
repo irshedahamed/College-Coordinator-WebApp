@@ -87,7 +87,9 @@ public class attinchargeupdate extends HttpServlet {
       String date = session.getAttribute("date").toString();
       String batch = session.getAttribute("batch").toString();
       String dept = session.getAttribute("dept").toString();
-      Connection con = new dbconnection.dbcon().getConnection(dept);
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+      Connection con = new dbconnection.dbcon(clg).getConnection(dept);
       Statement st = con.createStatement();
       Statement st1 = con.createStatement();
       String sql="select * from student_personal where batch='"+batch+"'";

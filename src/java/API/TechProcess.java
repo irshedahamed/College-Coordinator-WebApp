@@ -79,8 +79,9 @@ public class TechProcess extends HttpServlet {
       response.getWriter().print("Authentication Error");
       return;
       }
-       
-      Fee.TechProcess tp=new Fee.TechProcess();
+    String clg = (String)request.getSession().getAttribute("clg");
+          
+      Fee.TechProcess tp=new Fee.TechProcess(clg);
       
       tp.setUser(request.getParameter("user"));
       tp.setAmount(request.getParameter("amount"));

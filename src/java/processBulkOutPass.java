@@ -82,7 +82,9 @@ public class processBulkOutPass extends HttpServlet {
     {
         for(int i = 0 ; i < id.length ; i++)
         {
-            final     OutPass p=new OutPass();
+    final      String clg = (String)request.getSession().getAttribute("clg");
+     
+            final     OutPass p=new OutPass(clg);
      p.setRollno(id[i]);
      p.setReason(request.getParameter("reason"));
      p.setFrom(request.getParameter("from"));
@@ -93,19 +95,19 @@ public class processBulkOutPass extends HttpServlet {
         
       //  System.err.println(res);
         if(p.getStatus().equals("Accepted")&&res){
-       final General.OutPass op=new General.OutPass(p.getRollno());
+       final General.OutPass op=new General.OutPass(p.getRollno(),clg);
      
         if(op.insert(p.getRequestid())){
             
-            if(Student.getById(p.getRollno()).getAccomodation().equalsIgnoreCase("hostel")){
+            if(Student.getById(p.getRollno(),clg).getAccomodation().equalsIgnoreCase("hostel")){
             
             new Thread(new Runnable(){
          
          @Override
          public void run(){
         if(op.insert(p.getRequestid())){
-            if(Student.getById(p.getRollno()).getAccomodation().equalsIgnoreCase("hostel"))
-            SMSTemplate.send(Parent.getNumber(p.getRollno()),p.getSMSContent());
+            if(Student.getById(p.getRollno(),clg).getAccomodation().equalsIgnoreCase("hostel"))
+            SMSTemplate.send(Parent.getNumber(p.getRollno(),clg),p.getSMSContent());
         }
         }
      }).start();
@@ -116,7 +118,7 @@ public class processBulkOutPass extends HttpServlet {
             response.getWriter().write("<b>");
             response.getWriter().print(i+1);
             response.getWriter().write(".");
-            response.getWriter().write(Student.getById(id[i]).getName());
+            response.getWriter().write(Student.getById(id[i],clg).getName());
             response.getWriter().write("</b><br>");
             response.setContentType("text/html;charset=UTF-8");
          response.getWriter().println("<link href='css/bootstrap.min.css' rel='stylesheet'>");

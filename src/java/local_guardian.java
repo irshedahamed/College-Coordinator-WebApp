@@ -97,7 +97,9 @@ public class local_guardian extends HttpServlet {
        
 
       //Class.forName("com.mysql.jdbc.Driver").newInstance();
-      Connection con = new dbcon().getConnection("sjitportal");
+      String clg = (String)request.getSession().getAttribute("clg");
+     
+      Connection con = new dbcon(clg).getConnection("portal");
         Statement st = con.createStatement();
            st.executeUpdate("update localguardian set rollno='"+rollno+"', name='"+name+"',phoneno='"+phoneno+"',doorno='"+doorno+"',street='"+street+"',area='"+area+"',city='"+city+"',pincode='"+pincode+"' where rollno='"+rollno+"'");
             //response.sendRedirect("admin/batch.jsp");

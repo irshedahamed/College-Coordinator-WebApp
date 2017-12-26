@@ -83,7 +83,9 @@ public class JsonSMS extends HttpServlet {
         
             json = new Gson().toJson("Authentication Error !!!");
         if(proceed){ 
-          String res=SMSTemplate.sendwithID(number, message,request.getParameter("senderid"));
+             String clg = (String)request.getSession().getAttribute("clg");
+      
+            String res=SMSTemplate.sendwithID(number, message,request.getParameter("senderid"),clg);
             if(!res.equals(""))
                         json = new Gson().toJson("Sent"+res);
                         else
@@ -115,7 +117,9 @@ public class JsonSMS extends HttpServlet {
         Statement stmt=null;
         boolean proceed=false;
         try{
-        conn=new dbcon().getConnection("login");
+           String clg = (String)request.getSession().getAttribute("clg");
+      
+            conn=new dbcon(clg).getConnection("login");
         stmt=conn.createStatement();
         ResultSet rs=stmt.executeQuery("select * from other_login_details where id='"+request.getSession().getAttribute("username").toString()+"' and password='"+request.getSession().getAttribute("password").toString()+"'");
         if(rs.next())
@@ -136,7 +140,9 @@ public class JsonSMS extends HttpServlet {
         
             json = new Gson().toJson("Authentication Error !!!");
         if(proceed){ 
-         String res=SMSTemplate.send(number, message);
+            String clg = (String)request.getSession().getAttribute("clg");
+      
+            String res=SMSTemplate.send(number, message,clg);
             if(!res.equals(""))
                         json = new Gson().toJson("Sent"+res);
                         else

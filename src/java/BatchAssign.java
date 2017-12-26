@@ -39,7 +39,9 @@ public class BatchAssign extends HttpServlet {
             throws ServletException, IOException {
         
         try {
-            AcademicYear a = new AcademicYear();
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+            AcademicYear a = new AcademicYear(clg);
             String Year = request.getParameter("Year");
             String Current = request.getParameter("current");
             boolean batchAssign = a.batchAssign(Current,Year);

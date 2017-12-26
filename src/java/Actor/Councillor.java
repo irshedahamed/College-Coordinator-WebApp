@@ -18,9 +18,16 @@ import java.sql.Statement;
  *
  * @author Home
  */
-public class Councillor {
 
-    public String getDept() {
+public class Councillor {
+private String clg;
+//public Councillor(){
+    
+//}   
+public Councillor(String clg){
+    this.clg=clg;
+}
+public String getDept() {
         return dept;
     }
 
@@ -65,8 +72,8 @@ public class Councillor {
     String academicyr;
     String semister;
     public Councillor(){
-              academicyr=AcademicYear.getCurrentYear().getYear() ;
-        semister=AcademicYear.getCurrentYear().getCurrent();
+              academicyr=AcademicYear.getCurrentYear(clg).getYear() ;
+        semister=AcademicYear.getCurrentYear(clg).getCurrent();
  
     
     }
@@ -75,7 +82,7 @@ public class Councillor {
     Statement stmt=null;
         try{
             
-    conn=new dbcon().getConnection(Find.sdept(id));
+    conn=new dbcon(clg).getConnection(Find.sdept(id));
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from councillor where academicyr='"+academicyr+"' and semister like '"+semister+"' and staffid like'"+id+"'");
                     

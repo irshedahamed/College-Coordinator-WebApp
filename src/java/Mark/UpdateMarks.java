@@ -21,12 +21,14 @@ public class UpdateMarks extends HttpServlet {
             String subcode = request.getParameter("subject");
             String mark = request.getParameter("mark");
             String rollno = request.getParameter("rollno");
-            Mark m = new  Mark();
+               String clg = (String)request.getSession().getAttribute("clg");
+      
+            Mark m = new  Mark(clg);
             m.setRollno(rollno);
             m.setSubcode(subcode);
             m.setType(exam);
             m.setMark(mark);
-            Mark m1 = new Mark();
+            Mark m1 = new Mark(clg);
         try {
             String result = m1.insertOrUpdateMarks(dept, m);
             PrintWriter out = response.getWriter();

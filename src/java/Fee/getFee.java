@@ -75,11 +75,11 @@ public class getFee extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       //  processRequest(request, response);
-      
+      String clg = (String)request.getSession().getAttribute("clg");
       String batch=request.getParameter("batch");
       String type=request.getParameter("type");
       String json=null;
-      for(BasicFee bf:BasicFee.getByBatch(batch)){
+      for(BasicFee bf:BasicFee.getByBatch(batch,clg)){
       if(bf.getType().equals(type))
           json=new Gson().toJson(bf);
         

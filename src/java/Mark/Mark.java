@@ -26,8 +26,14 @@ public class Mark {
     private String subcode;
     private String type;
     private String mark;
-
-    public String getRollno() {
+private String clg;
+//public Mark(){
+    
+//}
+public Mark(String clg){
+    this.clg=clg;
+}  
+public String getRollno() {
         return rollno;
     }
 
@@ -60,10 +66,10 @@ public class Mark {
     }
 
     public String insertOrUpdateMarks(String dept, Mark m) throws SQLException {
-        Connection con = new dbcon().getConnection(dept);
+        Connection con = new dbcon(clg).getConnection(dept);
         PreparedStatement st1 = null, st = null, st2 = null;
         try {
-            if (!Mark.isMarkAvailable(dept, m)) {
+            if (!Mark.isMarkAvailable(dept, m,clg)) {
                 String sql = "insert into marks values(?,?,?,?)";
                 st = con.prepareStatement(sql);
                 st.setString(1, m.getRollno());
@@ -107,13 +113,13 @@ public class Mark {
 
     public  void fetchMark(){
         try {
-            this.setMark(getUserMark("", this ).getMark());
+            this.setMark(getUserMark("", this,clg ).getMark());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-    public static Mark getUserMark(String dept, Mark m) throws SQLException {
-        Connection con = new dbcon().getConnection(Find.sdept(m.getRollno()));
+    public static Mark getUserMark(String dept, Mark m,String clg) throws SQLException {
+        Connection con = new dbcon(clg).getConnection(Find.sdept(m.getRollno()));
         PreparedStatement st1 = null;
         try {
             String sql1 = "select * from marks where rollno=? and subcode=? and type=? ";
@@ -141,8 +147,8 @@ public class Mark {
         return m;
     }
 
-    public static boolean isMarkAvailable(String dept, Mark m) throws SQLException {
-        Connection con = new dbcon().getConnection(dept);
+    public static boolean isMarkAvailable(String dept, Mark m,String clg) throws SQLException {
+        Connection con = new dbcon(clg).getConnection(dept);
         PreparedStatement st1 = null;
         try {
             String sql1 = "select * from marks where rollno=? and subcode=? and type=? ";
@@ -167,9 +173,9 @@ public class Mark {
         return false;
     }
 
-    public static List<Mark> getExamMark(String dept, Mark m) throws SQLException {
+    public static List<Mark> getExamMark(String dept, Mark m,String clg) throws SQLException {
         List<Mark> list = new ArrayList<Mark>();
-        Connection con = new dbcon().getConnection(Find.sdept(m.getRollno()));
+        Connection con = new dbcon(clg).getConnection(Find.sdept(m.getRollno()));
         PreparedStatement st1 = null;
         try {
             String sql1 = "select * from marks where rollno=? and subcode=? ";
@@ -178,7 +184,7 @@ public class Mark {
             st1.setString(2, m.getSubcode());
             ResultSet rs = st1.executeQuery();
             while(rs.next()) {
-                Mark mi = new Mark();
+                Mark mi = new Mark(clg);
                 mi.setRollno(m.getRollno());
                 mi.setSubcode(rs.getString("subcode"));
                 mi.setType(rs.getString("type"));

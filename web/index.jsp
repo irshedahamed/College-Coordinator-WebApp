@@ -11,6 +11,8 @@
          newsession.invalidate();
 
     }
+    newsession = request.getSession();
+    newsession.setAttribute("clg", "sjit");
         if(request.getParameter("msg")!=null){
         %>
         <script>

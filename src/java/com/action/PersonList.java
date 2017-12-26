@@ -78,7 +78,9 @@ public class PersonList extends HttpServlet {
                 String regulation=request.getParameter("regulation");
                 List<String> list = new ArrayList<String>();
                 try{
-                conn=new dbcon().getConnection(dept);
+                   String clg = (String)request.getSession().getAttribute("clg");
+      
+                    conn=new dbcon(clg).getConnection(dept);
                 stmt=conn.createStatement();
                 String sql=null;
                 if(meet.equals("Student"))

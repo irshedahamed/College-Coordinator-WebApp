@@ -81,12 +81,14 @@ public class batchStauts extends HttpServlet {
         //processRequest(request, response);
         try
         {
-    for(Batch batch:Batch.getAll())
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+            for(Batch batch:Batch.getAll(clg))
     {
             String value = request.getParameter("status_"+batch.getBatch());
     
         
-        Connection con= new dbconnection.dbcon().getConnection("sjitportal");
+        Connection con= new dbconnection.dbcon(clg).getConnection("portal");
         Statement st = con.createStatement();
         if(value.equals("Delete"))
        st.executeUpdate("delete from regulations where batch='"+batch.getBatch()+"'");           

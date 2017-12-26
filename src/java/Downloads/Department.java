@@ -18,12 +18,12 @@ import java.util.List;
  * @author Home
  */
 public class Department {
-     public static List<Circular> getAll(String dept,String type){
+     public static List<Circular> getAll(String dept,String type,String clg){
     List<Circular> list = new ArrayList<Circular>();
     Connection conn=null;
     Statement stmt=null;
     try{
-    conn=new dbcon().getConnection(dept);
+    conn=new dbcon(clg).getConnection(dept);
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from deptuploads where type like '"+type+"' order by sno desc");
                     

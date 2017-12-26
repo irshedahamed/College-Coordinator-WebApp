@@ -37,22 +37,24 @@ public class ExamUpdate extends HttpServlet {
         String sem = request.getParameter("sem");
         String exam = request.getParameter("exam");
         String ayear = request.getParameter("ayear");
-        
-        String regulation = Batch.getRegulation(batch);
+         String clg = (String)request.getSession().getAttribute("clg");
+      
+        String regulation = Batch.getRegulation(batch,clg);
         
             String mark;
             int count = 0;
-            Subjects s = new Subjects();
+              
+            Subjects s = new Subjects(clg);
             s.setAyear(ayear);
             s.setRegulation(regulation);
             s.setSem(sem);
             List<String> Subcodelist;
                                     if(exam.contains("lab"))
-                                Subcodelist= Subjects.getLabSubCode(dept, s);
+                                Subcodelist= Subjects.getLabSubCode(dept, s,clg);
                                 else
-                                Subcodelist= Subjects.getTherorySubCode(dept, s);
+                                Subcodelist= Subjects.getTherorySubCode(dept, s,clg);
         for (String subcode : Subcodelist) {
-                List<Student> list = Student.getAll(dept, batch, sec);
+                List<Student> list = Student.getAll(dept, batch, sec,clg);
                 for (Student stu : list) {
                     String a1 = stu.getId() + "_" + count;
                     mark = request.getParameter(a1);
@@ -64,12 +66,12 @@ public class ExamUpdate extends HttpServlet {
                     }else if(mark.equals("")){
                     continue;
                     }
-                    Mark m = new Mark();
+                    Mark m = new Mark(clg);
                     m.setRollno(stu.getId());
                     m.setSubcode(subcode);
                     m.setType(exam);
                     m.setMark(mark);
-                    Mark m1 = new Mark();
+                    Mark m1 = new Mark(clg);
                     m1.insertOrUpdateMarks(dept, m);
                 }
                 count++;

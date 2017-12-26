@@ -20,8 +20,13 @@ import java.util.List;
 public class SpecialFee extends Fee{
     private String rollno;
     private String academicyr;
-    
-
+    private String clg;
+   // public SpecialFee(){
+        
+ //   }
+    public SpecialFee(String clg){
+       this.clg=clg;
+    }
     public String getRollno() {
         return rollno;
     }
@@ -45,7 +50,7 @@ public class SpecialFee extends Fee{
        Statement stmt=null;
        int update=0;
        try{
-           conn=new dbcon().getConnection("sjitportal");
+           conn=new dbcon(clg).getConnection("portal");
            stmt=conn.createStatement();
            
            String sql;
@@ -76,7 +81,7 @@ public class SpecialFee extends Fee{
            return false;
     }
     
-    public static SpecialFee getFee(String rollno,String academicyr){
+    public static SpecialFee getFee(String rollno,String academicyr,String clg){
     
     
             Connection conn=null;
@@ -84,14 +89,14 @@ public class SpecialFee extends Fee{
   SpecialFee b=null;
         try{
             
-    conn=new dbcon().getConnection("sjitportal");
+    conn=new dbcon(clg).getConnection("portal");
     stmt = conn.createStatement();
                     ResultSet rs=stmt.executeQuery("select * from spl_fee where rollno like '"+rollno+"' and academicyr like '"+academicyr+"'");
                     
                     
                     rs.beforeFirst();
                     if(rs.next()){
-                         b=new SpecialFee();
+                         b=new SpecialFee(clg);
                         b.setRollno(rs.getString("rollno"));
                         b.setHostel(rs.getString("hostel"));
                         b.setPlacement(rs.getString("placement"));

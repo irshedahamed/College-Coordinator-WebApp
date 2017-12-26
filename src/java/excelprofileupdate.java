@@ -167,10 +167,12 @@ String UPLOAD_DIRECTORY="hello";
                   
 		sheet = (XSSFSheet) sheets.next();
                 String name1=sheet.getSheetName();
-                Connection con = new dbconnection.dbcon().getConnection(name1);  
+                 String clg = (String)request.getSession().getAttribute("clg");
+     
+                Connection con = new dbconnection.dbcon(clg).getConnection(name1);  
                 Statement st = con.createStatement();
                 Statement stmt1;
-                Connection conn1=new dbcon().getConnection("login");
+                Connection conn1=new dbcon(clg).getConnection("login");
                  stmt1=conn1.createStatement();
                 
 		XSSFRow row; 
@@ -239,7 +241,8 @@ rows.next();
                                 response.getWriter().println("exceptionthrown");
                          e.printStackTrace();
                          try{
-                         Connection con1=new dbcon().getConnection(sheet.getSheetName());
+                        
+                             Connection con1=new dbcon(clg).getConnection(sheet.getSheetName());
                     Statement del=con1.createStatement();
                     String sql="delete from staff_personal_details where rollno='"+id+"'";
                     del.executeUpdate(sql);

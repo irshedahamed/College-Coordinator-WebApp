@@ -80,8 +80,8 @@ public class generateMUP extends HttpServlet {
         String params="";
         int sum=0;
         Student s=Student.getById(request.getSession().getAttribute("username").toString());
-        
-        Fee f=Fee.getFeeById(s.getId());
+        String clg = (String)request.getSession().getAttribute("clg");
+        Fee f=Fee.getFeeById(s.getId(),clg);
         params += "HandleID=" + "H_MULTHIRD";
         int i=1;
         for(String type:Fee.getsubCategory()){

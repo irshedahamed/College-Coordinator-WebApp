@@ -34,8 +34,14 @@ public class TechProcessResponse {
     private String tpsl_txn_id;
     private String time;
     private String bal_amount;
-
-    public String getBal_amount() {
+private String clg;
+//public TechProcessResponse(){
+    
+//}
+public TechProcessResponse(String clg){
+    
+}  
+public String getBal_amount() {
         return bal_amount;
     }
 
@@ -139,7 +145,7 @@ public class TechProcessResponse {
        Statement stmt=null;
        int update=0;
        try{
-           conn=new dbcon().getConnection("sjitportal");
+           conn=new dbcon(clg).getConnection("portal");
            stmt=conn.createStatement();
            
            String sql;
@@ -195,14 +201,14 @@ public class TechProcessResponse {
        setRqst_token(splitres[10].split("=")[1]);
     
     }
-    public static List<TechProcessResponse> fetchby(List<MUResponse> mup,String From,String To)
+    public static List<TechProcessResponse> fetchby(List<MUResponse> mup,String From,String To,String clg)
     {
         List<TechProcessResponse> list = new ArrayList<TechProcessResponse>();
       try{  
         Connection con = null;
         Statement st = null;
         
-        con = new dbcon().getConnection("sjitportal");
+        con = new dbcon(clg).getConnection("portal");
         
         st = con.createStatement();
         for(MUResponse mu:mup){
@@ -212,7 +218,7 @@ public class TechProcessResponse {
          rs.afterLast();
          if (rs.previous())
         {
-            TechProcessResponse m=new TechProcessResponse();
+            TechProcessResponse m=new TechProcessResponse(clg);
             m.setRefno(rs.getString("mupno"));
             m.setRollno(rs.getString("clientid"));
             m.setTime(rs.getString("time"));

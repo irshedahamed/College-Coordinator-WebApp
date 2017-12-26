@@ -17,12 +17,17 @@ import java.sql.Statement;
  * @author Home
  */
 public class TechProcess {
-    
-    static{
-    Connection conn=null;
+private String clg;
+
+public TechProcess(String clg){
+ Connection conn=null;
          Statement stmt=null;
          try{
-         conn=new dbcon().getConnection("sjitportal");
+        
+
+ //String clg = (String)request.getSession().getAttribute("clg");
+
+             conn=new dbcon(clg).getConnection("portal");
          stmt=conn.createStatement();
          String sql="select value from credentials where ckey like 'TPencKey'";
          ResultSet rs=stmt.executeQuery(sql);
@@ -47,8 +52,8 @@ public class TechProcess {
              ex.printStackTrace();
              }
          }
-    }
-  
+}    
+
    private static String merchantCode="L2857";
    private String refno;
    private String user;

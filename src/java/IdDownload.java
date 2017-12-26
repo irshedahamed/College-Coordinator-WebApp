@@ -128,7 +128,9 @@ rowhead.createCell((short) 10).setCellValue("Pin");
 String sec = "%";
  int j = 1;
 for(String dept:department){ 
-             for (Student s : Student.getAll(dept,batch,sec)) {
+ String clg = (String)request.getSession().getAttribute("clg");
+     
+    for (Student s : Student.getAll(dept,batch,sec,clg)) {
                  String dD = s.getAdmissionDetails().getDoa();
                  SimpleDateFormat daDate = new SimpleDateFormat("yyyy-MM-dd");
                  Date dao = new Date();

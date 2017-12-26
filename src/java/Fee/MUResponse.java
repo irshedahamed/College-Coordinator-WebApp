@@ -26,7 +26,7 @@ public class MUResponse {
     private String rollno;
     private String acyear;
 
-
+private String  clg;
     private String refno;
     private String status;
     private String bankchrge;
@@ -35,6 +35,12 @@ public class MUResponse {
     private String merchantrefno;
     private String msg;
     private String handleID;
+    //public MUResponse(){
+        
+    //}
+    public MUResponse(String clg){
+        this.clg=clg;
+    }
     public String getRollno() {
         return rollno;
     }
@@ -127,7 +133,7 @@ public class MUResponse {
        Statement stmt=null;
        int update=0;
        try{
-           conn=new dbcon().getConnection("sjitportal");
+           conn=new dbcon(clg).getConnection("portal");
            stmt=conn.createStatement();
            
            String sql;
@@ -156,14 +162,14 @@ public class MUResponse {
        else
            return false;
     }
-    public static ArrayList<MUResponse> fetchby(String acyear)
+    public static ArrayList<MUResponse> fetchby(String acyear,String clg)
     {
         ArrayList<MUResponse> List =  new ArrayList<MUResponse>();
       try{  
         Connection con = null;
         Statement st = null;
         
-        con = new dbcon().getConnection("sjitportal");
+        con = new dbcon(clg).getConnection("portal");
         
         st = con.createStatement();
         
@@ -173,7 +179,7 @@ public class MUResponse {
          
          while (rs.next())
         {
-            MUResponse m = new MUResponse();
+            MUResponse m = new MUResponse(clg);
             m.setRefno(rs.getString("mup"));
             m.setRollno(rs.getString("rollno"));
             m.setTotalamt(rs.getString("totalamt"));
@@ -199,14 +205,14 @@ public class MUResponse {
     
     }
     
-    public static List<MUResponse> getPaidMUP(String rollno){
+    public static List<MUResponse> getPaidMUP(String rollno,String clg){
     
         List<MUResponse> list=new ArrayList<MUResponse>();
         try{  
         Connection con = null;
         Statement st = null;
         
-        con = new dbcon().getConnection("sjitportal");
+        con = new dbcon(clg).getConnection("portal");
         
         st = con.createStatement();
         
@@ -216,7 +222,7 @@ public class MUResponse {
          
          while (rs.next())
         {
-            MUResponse m = new MUResponse();
+            MUResponse m = new MUResponse(clg);
             m.setRefno(rs.getString("mup"));
             m.setRollno(rs.getString("rollno"));
             m.setTotalamt(rs.getString("totalamt"));
@@ -237,8 +243,8 @@ public class MUResponse {
     e.printStackTrace();
     }
         
-            List<TechProcessResponse> paidlist=TechProcessResponse.fetchby(list, "1990-01-01", "3000-01-01");
-            Map<MUResponse,IBResponse> paidmap=IBResponse.fetchby(list,"1990-01-01", "3000-01-01");
+            List<TechProcessResponse> paidlist=TechProcessResponse.fetchby(list, "1990-01-01", "3000-01-01",clg);
+            Map<MUResponse,IBResponse> paidmap=IBResponse.fetchby(list,"1990-01-01", "3000-01-01",clg);
             
             for(int i=0;i<list.size();i++){
                 MUResponse m=list.get(i);
@@ -262,7 +268,7 @@ public class MUResponse {
     return list;
     }
 
-    public static MUResponse getbyMUP(String mup)
+    public static MUResponse getbyMUP(String mup,String clg)
     {
                MUResponse m=null;
      
@@ -270,7 +276,7 @@ public class MUResponse {
         Connection con = null;
         Statement st = null;
         
-        con = new dbcon().getConnection("sjitportal");
+        con = new dbcon(clg).getConnection("portal");
         
         st = con.createStatement();
         
@@ -280,7 +286,7 @@ public class MUResponse {
          
          while (rs.next())
         {
-            m = new MUResponse();
+            m = new MUResponse(clg);
             m.setRefno(rs.getString("mup"));
             m.setRollno(rs.getString("rollno"));
             m.setTotalamt(rs.getString("totalamt"));

@@ -75,9 +75,9 @@ public class updateSpecialFee extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
       //  processRequest(request, response);
-      
-      SpecialFee s=new SpecialFee();
-      s.setAcademicyr(AcademicYear.getFeeYear().getYear());
+      String clg = (String)request.getSession().getAttribute("clg");
+      SpecialFee s=new SpecialFee(clg);
+      s.setAcademicyr(AcademicYear.getFeeYear(clg).getYear());
       s.setRollno(request.getParameter("id"));
       s.setTution(request.getParameter("tution"));
       s.setPlacement(request.getParameter("placement"));

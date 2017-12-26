@@ -28,8 +28,14 @@ public class Entry {
     private Timestamp in;
     private Timestamp out;
     private String by;
-
-    public String getBy() {
+private String clg;
+//public Entry(){
+    
+//}
+public Entry(String clg){
+    this.clg=clg;
+}  
+public String getBy() {
         return by;
     }
 
@@ -63,18 +69,18 @@ public class Entry {
     }
 
    public String getSMSContent(String action){
-        if(Student.getById(rollno).getAccomodation().equalsIgnoreCase("hostel")){
+        if(Student.getById(rollno,clg).getAccomodation().equalsIgnoreCase("hostel")){
        if(action.equals("IN"))
-           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") reported to hostel on "+new Date();
+           return "Your ward "+Student.getById(rollno,clg).getName()+"("+rollno+") reported to hostel on "+new Date();
        else
-           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") left from  hostel at "+new Date()+"";
+           return "Your ward "+Student.getById(rollno,clg).getName()+"("+rollno+") left from  hostel at "+new Date()+"";
         
         }else{
             
        if(action.equals("IN"))
-           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") has entered our premises at "+new Date();
+           return "Your ward "+Student.getById(rollno,clg).getName()+"("+rollno+") has entered our premises at "+new Date();
        else
-           return "Your ward "+Student.getById(rollno).getName()+"("+rollno+") left our premises at "+new Date()+"";
+           return "Your ward "+Student.getById(rollno,clg).getName()+"("+rollno+") left our premises at "+new Date()+"";
        
         }
    }
@@ -84,7 +90,7 @@ public class Entry {
        Statement stmt=null;
        int update=0;
        try{
-           conn=new dbcon().getConnection("sjitportal");
+           conn=new dbcon(clg).getConnection("portal");
            stmt=conn.createStatement();
            if(by==null)
                by="self";
@@ -117,7 +123,7 @@ public class Entry {
        Statement stmt=null;
        int update=0;
        try{
-           conn=new dbcon().getConnection("sjitportal");
+           conn=new dbcon(clg).getConnection("portal");
            stmt=conn.createStatement();
             if(by==null)
                by="self";
@@ -157,7 +163,7 @@ public class Entry {
     }
      
      
-     public static Set<String> getUnreportedList(String date){
+     public static Set<String> getUnreportedList(String date,String clg){
         Connection conn=null;
        Statement stmt=null;
        Statement stmt2=null;
@@ -165,7 +171,7 @@ public class Entry {
        Set<String> list=new TreeSet<String>();
        
        try{
-           conn=new dbcon().getConnection("sjitportal");
+           conn=new dbcon(clg).getConnection("portal");
            stmt=conn.createStatement();
            stmt2=conn.createStatement();
            String sql="select opf.rollno,opf.`from`,opf.till,op.expiry,opf.sno,e.outtime from outpass op,outpassform opf,entry e where opf.till='"+date+"'- INTERVAL 24 HOUR and opf.status='Accepted' and op.id=CONCAT(opf.prefix,opf.sno) and e.rollno=opf.rollno and e.outtime>op.expiry and e.outtime<=op.expiry+interval 6 hour;";

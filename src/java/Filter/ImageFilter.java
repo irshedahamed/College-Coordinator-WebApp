@@ -112,7 +112,9 @@ public class ImageFilter implements Filter {
         }
             String username=req.getSession().getAttribute("username").toString();
             System.out.println(username);
-            Authenticate a=new Authenticate();
+                      String clg = (String)req.getSession().getAttribute("clg");
+     
+            Authenticate a=new Authenticate(clg);
             a.setUsername(username);
             a.setPassword(a.findPassword());
             

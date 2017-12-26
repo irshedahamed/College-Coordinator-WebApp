@@ -79,7 +79,9 @@ public class pendingDetails extends HttpServlet {
         String rollno=request.getParameter("rollno").trim();
         String json=null;
                 System.out.print(rollno);
-        for(OutPass op:OutPass.getAllPending()){
+                  String clg = (String)request.getSession().getAttribute("clg");
+     
+                for(OutPass op:OutPass.getAllPending(clg)){
             if(op.getRollno().equals(rollno))
                 json=new Gson().toJson(op);
         
