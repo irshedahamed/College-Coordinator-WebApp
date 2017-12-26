@@ -4,6 +4,7 @@
     Author     : Home
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
@@ -195,9 +196,10 @@
 
                                     <%
                                         Connection con = new dbcon().getConnection("sjitportal");
-                                        Statement stmt = con.createStatement();
+                                        //Statement stmt = con.createStatement();
                                         String sql = "select * from circular";
-                                        ResultSet rs = stmt.executeQuery(sql);
+                                        PreparedStatement stmt=con.prepareStatement(sql);
+                                        ResultSet rs = stmt.executeQuery();
 
                                         while (rs.next()) {
                                             String name = rs.getString("name");

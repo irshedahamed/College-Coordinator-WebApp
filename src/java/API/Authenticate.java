@@ -10,6 +10,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -153,28 +154,36 @@ public class Authenticate extends HttpServlet {
     
         boolean flag=false;
         Connection conn=null;
-        Statement stmt=null;
+        PreparedStatement stmt=null;
         try{
-      
-            conn=new dbcon(clg).getConnection("login");
-           stmt=conn.createStatement();
-           String sql="select * from student_login_details where rollno like '"+Username+"' and password like '"+Password+"'";
-           ResultSet rs=stmt.executeQuery(sql);
+            
+           conn=new dbcon(clg).getConnection("login");
+           String sql="select * from student_login_details where rollno like ? and password like ? ";
+           stmt=conn.prepareStatement(sql);
+           stmt.setString(1, Username);
+           stmt.setString(2, Password);
+           ResultSet rs=stmt.executeQuery();
            if(rs.next()){
                type="student";
                photo="${pageContext.request.contextPath}/StudentPhotos/Batch"+Student.getById(Username,clg).getBatch()+"/"+Username.toUpperCase()+".JPG";
                flag=true;
            }else{
            rs.close();
-           sql="select * from staff_login_details where staffid like '"+Username+"' and password like '"+Password+"'";
-           rs=stmt.executeQuery(sql);
+           sql="select * from staff_login_details where staffid like ? and password like ? ";
+           stmt=conn.prepareStatement(sql);
+           stmt.setString(1, Username);
+           stmt.setString(2, Password);
+           rs= stmt.executeQuery();
            if(rs.next()){
                type="staff";
                photo="${pageContext.request.contextPath}/StaffPhotos/"+Username.toUpperCase()+".JPG";
                flag=true;
            }else{
-           sql="select * from other_login_details where id like '"+Username+"' and password like '"+Password+"'";
-           rs=stmt.executeQuery(sql);
+           sql="select * from other_login_details where id like ? and password like ? ";
+           stmt=conn.prepareStatement(sql);
+           stmt.setString(1, Username);
+           stmt.setString(2, Password);
+           rs=stmt.executeQuery();
            if(rs.next()){
                type=rs.getString("type");
                flag=true;
@@ -202,26 +211,30 @@ public class Authenticate extends HttpServlet {
     public String findPassword(){
         String pwd=null;
         Connection conn=null;
-        Statement stmt=null;
+        PreparedStatement stmt=null;
         try{
-      
-            conn=new dbcon(clg).getConnection("login");
-           stmt=conn.createStatement();
-           String sql="select * from student_login_details where rollno like '"+Username+"' ";
-           ResultSet rs=stmt.executeQuery(sql);
+           conn=new dbcon(clg).getConnection("login");
+           String sql="select * from student_login_details where rollno like ? ";
+           stmt=conn.prepareStatement(sql);
+           stmt.setString(1, Username);
+           ResultSet rs = stmt.executeQuery();
            if(rs.next()){
                type="student";
                pwd=rs.getString("password");
            }else{
            rs.close();
-           sql="select * from staff_login_details where staffid like '"+Username+"' ";
-           rs=stmt.executeQuery(sql);
+           sql="select * from staff_login_details where staffid like ? ";
+           stmt=conn.prepareStatement(sql);
+           stmt.setString(1, Username);
+           rs = stmt.executeQuery();
            if(rs.next()){
                type="staff";
                pwd=rs.getString("password");
            }else{
-           sql="select * from other_login_details where id like '"+Username+"' ";
-           rs=stmt.executeQuery(sql);
+           sql="select * from other_login_details where id like ? ";
+           stmt=conn.prepareStatement(sql);
+           stmt.setString(1, Username);
+           rs = stmt.executeQuery();
            if(rs.next()){
                     type=rs.getString("type");
                pwd=rs.getString("password");

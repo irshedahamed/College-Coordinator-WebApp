@@ -4,6 +4,7 @@
     Author     : Arun
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
@@ -210,8 +211,9 @@
                                                         try {
                                                             Class.forName("com.mysql.jdbc.Driver").newInstance();
                                                             Connection conn = new dbcon().getConnection("sjitportal");
-                                                            Statement stmt = conn.createStatement();
-                                                            ResultSet rs = stmt.executeQuery("select distinct(regulation) from regulations");
+                                                            //Statement stmt = conn.createStatement();
+                                                            PreparedStatement stmt=conn.prepareStatement("select distinct(regulation) from regulations");
+                                                            ResultSet rs = stmt.executeQuery();
                                                             String regulation = null;
                                                             while (rs.next()) {
                                                                 regulation = rs.getString("regulation");
