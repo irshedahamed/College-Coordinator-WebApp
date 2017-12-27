@@ -69,57 +69,59 @@
         <div id="wrapper" class="toggled">
             <div id="sidebar-wrapper">
 
-                <%        Connection con = new dbcon().getConnection(Find.sdept(username));
-                    Statement stmtd = con.createStatement();
-                    ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
-                    if (rsd.next()) {
-                %>
-                <ul class="sidebar-nav">
-                    <li class="sidebar-brand">
-                        <a href="#menu-toggle1" id="menu-toggle1">
-
-                        </a>
-                    </li>
+                <%  Connection con=new dbcon().getConnection(Find.sdept(username));
+   // Statement stmtd=con.createStatement();
+    //ResultSet rsd=stmtd.executeQuery("select * from staff_general where staffid='"+username+"'");
+    Staff s=Staff.getByid(username);
+    if(s!=null)
+    {
+    %>
+    <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#menu-toggle1" id="menu-toggle1">
+                       
+                    </a>
+                </li>
+                <center>
+                    <img src="../../images/face.jpg" height="95px">
+                    
+                               
+                           
+                        
+                   
+                </center>
+                <br>
+                <br>
+                
+                <li >
+                
                     <center>
-                        <img src="../../images/face.jpg" height="95px">
-
-
-
-
-
-                    </center>
-                    <br>
-                    <br>
-
-                    <li>
-
-                    <center>
-                        <a href="#"><b><%=rsd.getString("tittle") + rsd.getString("name")%></b></a>
-                    </center>
-                    </li>
-                    <li>
-                    <center>
-                        <a href="#"><b><%=username%></b></a>
+                    <a href="#"><b><%=s.getName()%></b></a>
                     </center>
                     </li>
-                    <li >
+                <li>
                     <center>
-                        <a href="#"><b><%=rsd.getString("desg")%></b></a>
+                    <a href="#"><b><%=username%></b></a>
                     </center>
                     </li>
-                    <li >
-                    <center>
-                        <a href="#"><b><%=Find.sdept(username).toUpperCase()%></b></a>
-                    </center>
-                    </li>
-                </ul>
-            </div>
-
+                <li >
+                <center>
+                    <a href="#"><b><%=s.getDesg()%></b></a>
+                </center>
+                </li>
+                <li >
+                <center>
+                    <a href="#"><b><%=Find.sdept(username).toUpperCase()%></b></a>
+                </center>
+                </li>
+            </ul>
+        </div>
+		        
 	<%}
-        if(stmtd!=null)
-            stmtd.close();
-        if(con!=null)
-            ;//con.close();
+        //if(stmtd!=null)
+          //  stmtd.close();
+        //if(con!=null)
+          //  con.close();
         %>
 		
 		<header id="page-header"  class="fixed-header">
@@ -168,15 +170,7 @@
 
     </ul>
 </li>
-<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="">View Marks</a>
-    <ul class="sub-menu">
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmarkbonus.jsp">Consolidated Report</a></li>
-	<li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmark.jsp">View Marks</a></li>
-
-	
-
-    </ul>
-</li>
+<li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="viewmarkbonus.jsp"</a>View Marks</li>
 <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="../home.jsp">Staff View</a>
 
 </ul>						</nav>
@@ -201,7 +195,7 @@
                       <tr>
                           
        <%
-       Staff s=new Staff(username);
+      // Staff s=new Staff(username);
        
        for(Student stu:Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(),s.getCouncillorDetails().getSec())){
        %>
@@ -261,39 +255,46 @@
 	</footer>
 
 
+
+
+
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-        $("#menu-toggle1").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+     $("#menu-toggle1").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
     </script>
 
 
-    <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
+<script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%        } else {
-            response.sendRedirect("../../index.jsp");
-        }
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
+<%
+          
+    }
+    else
+    {
+        response.sendRedirect("../../index.jsp");
+    }
+        //            if(sttt!=null)
+          //                  sttt.close();
+            //                  if(connn!=null)
+              //                  connn.close();
+    }
+catch(Exception e)
+    {
         e.printStackTrace();
         response.sendRedirect("../../index.jsp");
     }
-
-
-%>
+    
+          
+          %>
 </html>

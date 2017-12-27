@@ -4,6 +4,7 @@
     Author     : Home
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="com.action.Find"%>
@@ -15,19 +16,27 @@
 <%
 
 Connection conn=null;
-Statement stmt=null;
+//Statement stmt=null;
 try{
 conn=new dbcon().getConnection("first");
-stmt=conn.createStatement();
-
-String sql="select * from subject_allocation where batch='"+request.getParameter("batch")+
-        "'and sem='"+request.getParameter("sem")+
-        "'and dept='"+request.getParameter("dept")+
-        "'and subcode='"+request.getParameter("subject").split("-")[0] +
-        "'and sec='"+request.getParameter("sec")+
-        "'and acyear='"+request.getParameter("acyear")+
-        "'and sbatch='"+request.getParameter("sbatch")+"'";
-ResultSet rs=stmt.executeQuery(sql);
+//stmt=conn.createStatement();
+String batch=request.getParameter("batch");
+String sem=request.getParameter("sem");
+String dept=request.getParameter("dept");
+String subcode=request.getParameter("subject").split("-")[0];
+String sec=request.getParameter("sec");
+String acyear=request.getParameter("acyear");
+String sbatch=request.getParameter("sbatch");
+String sql="select * from subject_allocation where batch=?and sem=? and dept=?and subcode=?and sec=?and acyear=?and sbatch=?";
+PreparedStatement  st= conn.prepareStatement(sql);
+st.setString(1, batch);
+st.setString(2, sem);
+st.setString(3, dept);
+st.setString(4, subcode);
+st.setString(5, sec);
+st.setString(6, acyear);
+st.setString(7, sbatch);
+ResultSet rs=st.executeQuery();
 if(rs.next())
     out.write("true");
 else
@@ -37,8 +46,8 @@ else
 e.printStackTrace();
 
 }finally{
-    if(stmt!=null)
-    stmt.close();
+  //  if(stmt!=null)
+   // stmt.close();
     if(conn!=null)
     ;//conn.close();
 

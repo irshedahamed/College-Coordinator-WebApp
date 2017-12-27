@@ -43,19 +43,26 @@
                             <%
 
                                 Connection con = new dbcon().getConnection("cse");
-                                Statement st = con.createStatement();
-                                Statement st1 = con.createStatement();
-                                Statement st2 = con.createStatement();
+                              //  Statement st = con.createStatement();
+                             //   Statement st1 = con.createStatement();
+                               // Statement st2 = con.createStatement();
 
                                 int count = 0;
-                                String sql = "select * from student_personal where batch='" + batch + "' and dept='" + request.getSession().getAttribute("deptname").toString() + "' and sec='" + sec + "' group by rollno";
-                                ResultSet rs = st.executeQuery(sql);
+                                String dept=request.getSession().getAttribute("deptname").toString();
+                                String sql = "select * from student_personal where batch=? and dept=? and sec=? group by rollno";
+                                PreparedStatement st=con.prepareStatement(sql);
+                                st.setString(1, batch);
+                                st.setString(2, dept);
+                                st.setString(3, sec);
+                                ResultSet rs = st.executeQuery();
                                 ResultSet rs1, rs2;
                                 String rollno = null, name = null, subject = null;
                                 //String[] str1=new String[100];
                                 //String[] str2=new String[100];
-                                String sql2 = "select * from subject_sem_table where sem='" + sem + "'";
-                                rs2 = st2.executeQuery(sql2);
+                                String sql2 = "select * from subject_sem_table where sem=?";
+                                PreparedStatement st2=con.prepareStatement(sql2);
+                                st2.setString(1, sem);
+                                rs2 = st2.executeQuery();
                                 while (rs2.next()) {
                             %>
                             <th><%=rs2.getString("subcode")%></th>
@@ -79,8 +86,12 @@
                         <td><%=name%></td>
                         <%
                             while (rs2.next()) {
-                                String sql1 = "select * from hourattendence where rollno='" + rn + "' and sem='" + sem + "'";
-                                rs1 = st1.executeQuery(sql1);
+                                String sql1 = "select * from hourattendence where rollno=? and sem=?";
+                                PreparedStatement st1=con.prepareStatement(sql1);
+                                st1.setString(1, rn);
+                                st1.setString(2, sem);
+                                
+                                rs1 = st1.executeQuery();
                                 subject = rs2.getString("subcode");
                                 count = 0;
                                 while (rs1.next()) {

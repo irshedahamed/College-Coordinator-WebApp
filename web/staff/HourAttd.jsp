@@ -330,19 +330,23 @@
                                                                 <select id="dept" name="dept" required onchange="sltdept1();">
                                                                     <option  disabled selected>Select</option>
                                                                     <%
-                                                                        //int i=Integer.parseInt(request.getParameter("val"));
-                                                                        Class.forName("com.mysql.jdbc.Driver").newInstance();
-                                                                        Connection connection = new dbcon().getConnection("cse");
-                                                                        Statement statement = connection.createStatement();
-
-                                                                        ResultSet rs = statement.executeQuery("select distinct(dept) from subject_allocation where staffid='cs009'");
-
-                                                                        String dept;
-
-                                                                        while (rs.next()) {
-                                                                            dept = rs.getString("dept");
-
-
+                                                                            //int i=Integer.parseInt(request.getParameter("val"));
+                    Class.forName("com.mysql.jdbc.Driver").newInstance();
+              Connection connection = new dbcon().getConnection("cse");
+            //  Statement statement = connection.createStatement();
+              PreparedStatement statement= connection.prepareStatement("select distinct(dept) from subject_allocation where staffid='cs009'");
+              ResultSet rs= statement.executeQuery();
+                   
+              String dept;
+                    
+                    
+              while(rs.next())
+              {
+                  dept=rs.getString("dept");
+                  
+                  
+              
+              
                                                                     %>
                                                                     <option value="<%=dept%>"><%=dept%></option>
                                                                     <% }
@@ -523,7 +527,9 @@
         if (connn != null) {
             ;//connn.close();
         }
-    }catch (Exception e) {
+    
+}
+}catch (Exception e) {
         e.printStackTrace();
         response.sendRedirect("../index.jsp");
     }

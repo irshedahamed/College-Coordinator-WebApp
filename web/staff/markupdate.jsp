@@ -206,10 +206,11 @@
         <div id="wrapper" class="toggled">
             <div id="sidebar-wrapper">
                 <%        Connection con = new dbcon().getConnection(Find.sdept(username));
-                    Statement stmtd = con.createStatement();
-                    ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
-                    if (rsd.next()) {
-                %>
+                 //   Statement stmtd = con.createStatement();
+                   // ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
+                    //if (rsd.next()) {
+    Staff s=Staff.getByid(username);
+%>
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
                         <a href="#menu-toggle1" id="menu-toggle1">
@@ -222,7 +223,7 @@
                     <br>
                     <li >
                     <center>
-                        <a href="#"><b><%=rsd.getString("tittle") + rsd.getString("name")%></b></a>
+                        <a href="#"><b><%=s.getName()%></b></a>
                     </center>
                     </li>
                     <li>
@@ -232,7 +233,7 @@
                     </li>
                     <li>
                     <center>
-                        <a href="#"><b><%=rsd.getString("desg")%></b></a>
+                        <a href="#"><b><%=s.getDesg()%></b></a>
                     </center>
                     </li>
                     <li >
@@ -243,13 +244,13 @@
                 </ul>
             </div>
 
-            <%}
-                if (stmtd != null) {
-                    stmtd.close();
-                }
-                if (con != null) {
-                    ;//con.close();
-                }
+            <%//}
+      //          if (stmtd != null) {
+        //            stmtd.close();
+          //      }
+            //    if (con != null) {
+              //      ;//con.close();
+                //}
             %>
 
             <header id="page-header"  class="fixed-header">
@@ -300,7 +301,7 @@
                                     <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="displayform.jsp">Forms</a>
                                     </li>
                                     <%
-                                        Staff s = new Staff(username);
+                                      //  Staff s = new Staff(username);
                                         if (s.getCouncillorDetails().getBatch() != null) {
                                     %>
                                     <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="councillor/home.jsp">Councillor View</a>
@@ -330,8 +331,10 @@
                                                                         //int i=Integer.parseInt(request.getParameter("val"));
                                                                         Class.forName("com.mysql.jdbc.Driver").newInstance();
                                                                         Connection connection = new dbcon().getConnection(Find.sdept(username));
-                                                                        Statement statement = connection.createStatement();
-                                                                        ResultSet rs = statement.executeQuery("select distinct(dept) from subject_allocation where staffid='" + username + "'");
+                                                                      //  Statement statement = connection.createStatement();
+                                                                      PreparedStatement statement=connection.prepareStatement("select distinct(dept) from subject_allocation where staffid=?");
+                                                                      statement.setString(1, username);
+                                                                      ResultSet rs = statement.executeQuery();
                                                                         String dept;
                                                                         while (rs.next()) {
                                                                             dept = rs.getString("dept");

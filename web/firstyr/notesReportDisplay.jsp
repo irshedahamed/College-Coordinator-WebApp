@@ -1,4 +1,5 @@
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="General.AcademicYear"%>
 <%-- 
     Document   : PasswordReport
@@ -192,8 +193,10 @@ h2{
                     ResultSet rs3;
                     ResultSet rs4;
                     List<String> list = new ArrayList<String>();
-                     Statement st2 = con.createStatement();
-                    rs2=st2.executeQuery("select regulation from regulations where batch='"+batch+"'");
+                    // Statement st2 = con.createStatement();
+                    PreparedStatement st2=con.prepareStatement("select regulation from regulations where batch=?");
+                     st2.setString(1, batch);
+                    rs2=st2.executeQuery();
                         String regulation=new String();
                         if(rs2.next())
                         {
@@ -202,12 +205,16 @@ h2{
                         
                         
                         con = new dbcon().getConnection(dept);
-                       Statement st = con.createStatement();
-                    Statement st1 = con.createStatement();
-                     Statement st3 = con.createStatement();
-                     Statement st4 = con.createStatement();   
-                        
-                    rs=st.executeQuery("select * from subject_sem_table where sem='"+semester+"' and (ayear like '%elective%"+ayear+"%'or ayear like 'all') and regulation='"+regulation+"' and subtype='theory'");    
+                       //Statement st = con.createStatement();
+                   // Statement st1 = con.createStatement();
+                   //  Statement st3 = con.createStatement();
+                    // Statement st4 = con.createStatement();   
+                        PreparedStatement st=con.prepareStatement("select * from subject_sem_table where sem=? and (ayear like '%elective%'?'%'or ayear like 'all') and regulation=? and subtype='theory'");
+                        st.setString(1, semester);
+                        st.setString(2, ayear);
+                        st.setString(3, regulation);
+                                
+                    rs=st.executeQuery();    
                         while(rs.next())
                         {
                             String subc=rs.getString("subcode");
@@ -250,8 +257,12 @@ h2{
                         String classnotes = new String();
                         classnotes="class_notes";
                         for(j=0;j<5;j++){
-                            
-                            rs1=st1.executeQuery("select * from notes where subcode='"+subc+"' and sem='"+semester+"' and acadamic_yr='"+ayear+"' and notes_type='"+classnotes+"' and subCategory='"+(j+1)+"'");
+                            PreparedStatement st1=con.prepareStatement("select * from notes where subcode=? and sem=? and acadamic_yr=? and notes_type=? and subCategory='"+(j+1)+"'");
+                            st1.setString(1, subc);
+                            st1.setString(2, semester);
+                            st1.setString(3, ayear);
+                            st1.setString(4, classnotes);
+                            rs1=st1.executeQuery();
                         
                             if(rs1.next()){
                             String t= rs1.getString("time");
@@ -274,8 +285,12 @@ h2{
                         String cycleques = new String();
                         cycleques="cycle_test_que";
                         for(k=0;k<3;k++){
-                        
-                            rs3=st3.executeQuery("select * from notes where subcode='"+subc+"' and sem='"+semester+"' and acadamic_yr='"+ayear+"' and notes_type='"+cycleques+"' and subCategory='"+(k+1)+"'");
+                        PreparedStatement st3=con.prepareStatement("select * from notes where subcode=? and sem=? and acadamic_yr=? and notes_type=? and subCategory='"+(k+1)+"'");
+                        st3.setString(1, subc);
+                        st3.setString(2, semester);
+                        st3.setString(3, ayear);
+                        st3.setString(4, cycleques);
+                            rs3=st3.executeQuery();
                             if(rs3.next()){
                             String t1=rs3.getString("time");
                             %>
@@ -291,8 +306,11 @@ h2{
                     {
                         String s[]=new String[15];
                         s[l]=list1.get(l);
-                        
-                        rs4=st4.executeQuery("select * from notes where subcode='"+subc+"' and sem='"+semester+"' and acadamic_yr='"+ayear+"' and notes_type='"+s[l]+"'");
+                        PreparedStatement st4=con.prepareStatement("select * from notes where subcode=? and sem=? and acadamic_yr=? and notes_type='"+s[l]+"'");
+                        st4.setString(1, subc);
+                        st4.setString(2, semester);
+                        st4.setString(3, ayear);
+                        rs4=st4.executeQuery();
                         if(rs4.next())
                         {
                            

@@ -51,8 +51,9 @@
                     out.print("<select id='lbatch" + i + "' name='lbatch" + i + "'>");
                     out.print("<option>select</option>");
                     Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt1 = conbatch.createStatement();
-                    ResultSet rs1 = stmt1.executeQuery("select batch from regulations");
+                   // Statement stmt1 = conbatch.createStatement();
+                   PreparedStatement stmt1=conbatch.prepareStatement("select batch from regulations");
+                   ResultSet rs1 = stmt1.executeQuery();
                     String batch = null;
                     rs1.beforeFirst();
                     while (rs1.next()) {

@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="General.Batch"%>
 <%@page import="General.AcademicYear"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
@@ -293,19 +295,22 @@
  <option disabled selected>Select   </option>
                 <%
                 Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select batch from regulations");
+                    //Statement stmt = conbatch.createStatement();
+                    //reparedStatement stmt=conbatch.prepareStatement("select batch from regulations");
+                    List<Batch> blist=Batch.getAll();
+                   // ResultSet rs=stmt.executeQuery();
                     String batch=null;
-                    rs.beforeFirst();
-                    while(rs.next())
-                    {
-                        batch=rs.getString("batch");
+                    //rs.beforeFirst();
+             //       while(rs.next())
+             for(Batch b : blist)       
+             {
+                        batch=b.getBatch();
                 %>
                 <option value=<%=batch%>><%=batch%></option>
                 <%
                 }
-  if(stmt!=null)
-                            stmt.close();
+ // if(stmt!=null)
+   //                         stmt.close();
                               if(conbatch!=null)
                                 ;//conbatch.close();
                 %>

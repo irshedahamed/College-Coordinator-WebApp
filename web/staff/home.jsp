@@ -55,9 +55,10 @@
             <div id="sidebar-wrapper">
 
                 <%        Connection con = new dbcon().getConnection(Find.sdept(username));
-                    Statement stmtd = con.createStatement();
-                    ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
-                    if (rsd.next()) {
+                    //Statement stmtd = con.createStatement();
+                   // ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
+                    //if (rsd.next()) {
+                Staff s=Staff.getByid(username);
                 %>
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
@@ -79,7 +80,7 @@
                     <li >
 
                     <center>
-                        <a href="#"><b><%=rsd.getString("tittle") + rsd.getString("name")%></b></a>
+                        <a href="#"><b><%=s.getName()%></b></a>
                     </center>
                     </li>
                     <li>
@@ -89,7 +90,7 @@
                     </li>
                     <li >
                     <center>
-                        <a href="#"><b><%=rsd.getString("desg")%></b></a>
+                        <a href="#"><b><%=s.getDesg()%></b></a>
                     </center>
                     </li>
                     <li >
@@ -100,13 +101,13 @@
                 </ul>
             </div>
 
-            <%}
-                if (stmtd != null) {
-                    stmtd.close();
-                }
-                if (con != null) {
-                    ;//con.close();
-                }
+            <%//}
+               // if (stmtd != null) {
+                 //   stmtd.close();
+               // }
+         //       if (con != null) {
+           //         ;//con.close();
+             //   }
             %>
 
             <header id="page-header"  class="fixed-header">
@@ -177,7 +178,7 @@
                                     </li>
 
                                     <%
-                                        Staff s = new Staff(username);
+               //                         Staff s = new Staff(username);
                                         if (s.getCouncillorDetails().getBatch() != null) {
                                     %>
                                     <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="councillor/home.jsp">Councillor View</a>

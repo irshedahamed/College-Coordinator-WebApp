@@ -3,6 +3,7 @@
     Created on : Aug 21, 2015, 2:07:12 PM
     Author     : Divya Sri
 --%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="dbconnection.dbcon"%>
@@ -28,9 +29,12 @@
                 String rollno = session.getAttribute("username").toString();
                 Connection con = new dbcon().getConnection(deptname);
                 Connection con1 = new dbcon().getConnection("sjitportal");
-                Statement st = con.createStatement();
-                Statement st1 = con1.createStatement();
-                ResultSet rs1 = st.executeQuery("select * from overallattendence where sem='" + id + "' and rollno='" + rollno + "' ");
+              //  Statement st = con.createStatement();
+              //  Statement st1 = con1.createStatement();
+              PreparedStatement st=con.prepareStatement("select * from overallattendence where sem=? and rollno=? ");
+              st.setString(1, id);
+              st.setString(2, rollno);
+              ResultSet rs1 = st.executeQuery();
                 int i = 1;
                 String date;
                 while (rs1.next()) {
@@ -49,9 +53,9 @@
                 if (st != null) {
                     st.close();
                 }
-                if (st1 != null) {
-                    st1.close();
-                }
+                //if (st1 != null) {
+                  //  st1.close();
+               // }
                 if (con1 != null) {
                     ;//con1.close();
                 }

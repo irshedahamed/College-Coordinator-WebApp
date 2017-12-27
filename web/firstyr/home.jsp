@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Base"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
@@ -142,8 +143,9 @@ $(window).load(function(){$(".tabs").tabtab({animateHeight:!1,fixedHeight:!1}),$
 <div align="left">
         <%
     Connection conbatch = new dbcon().getConnection("sjitportal");
-                    Statement stmt = conbatch.createStatement();
-                    ResultSet rst=stmt.executeQuery("select * from circular where type='circular'");
+                    //Statement stmt = conbatch.createStatement();
+                     PreparedStatement stmt=conbatch.prepareStatement("select * from circular where type='circular'");
+                    ResultSet rst=stmt.executeQuery();
                     String com1=null,name1=null,description1=null,path1=null;
                     rst.beforeFirst();
                     while(rst.next())
@@ -179,8 +181,9 @@ $(window).load(function(){$(".tabs").tabtab({animateHeight:!1,fixedHeight:!1}),$
         
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection connection1 = new dbcon().getConnection("sjitportal");
-            Statement statement1 = connection1.createStatement();
-            ResultSet rs11 = statement1.executeQuery("select * from exam_circular");
+         //   Statement statement1 = connection1.createStatement();
+          PreparedStatement statement1=connection1.prepareStatement("select * from exam_circular");
+         ResultSet rs11 = statement1.executeQuery();
             String path2=Base.path+"/portal/exam/";
             
             
@@ -213,9 +216,9 @@ $(window).load(function(){$(".tabs").tabtab({animateHeight:!1,fixedHeight:!1}),$
 
 <%
      conbatch = new dbcon().getConnection("sjitportal");
-                     stmt = conbatch.createStatement();
-    
-    rst=stmt.executeQuery("select * from circular where type='event'");
+      //               stmt = conbatch.createStatement();
+     PreparedStatement  stmtt=conbatch.prepareStatement("select * from circular where type='event'");
+    rst=stmtt.executeQuery();
                     rst.beforeFirst();
                     while(rst.next())
                     {

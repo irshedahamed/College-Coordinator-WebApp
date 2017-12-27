@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Base"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
@@ -153,8 +154,10 @@
           try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection connection1 = new dbcon().getConnection(request.getParameter("dept"));
-            Statement statement1 = connection1.createStatement();
-            ResultSet rs = statement1.executeQuery("select filename,descp from notes where path = '"+path+"'");
+            //Statement statement1 = connection1.createStatement();
+            PreparedStatement statement1=connection1.prepareStatement("select filename,descp from notes where path =?");
+            statement1.setString(1, path);
+            ResultSet rs = statement1.executeQuery();
             
             
             while(rs.next())

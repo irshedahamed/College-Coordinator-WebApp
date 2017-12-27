@@ -27,7 +27,7 @@
     String index1 = request.getParameter("index1");
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     Connection connection = new dbcon().getConnection(Find.sdept(username));
-    Statement statement = connection.createStatement();
+  //  Statement statement = connection.createStatement();
     if (index.equals("i1")) {
 %>
 <label class="input">
@@ -134,8 +134,11 @@
                     String batch = request.getParameter("index2");
                     String section = request.getParameter("index4");
                     String sem = request.getParameter("index3");
-
-                    ResultSet rs1 = statement.executeQuery("select * from subject_allocation where batch='" + batch + "' and staffid='cs009' and sem='" + sem + "' and sec='" + section + "'");
+                    PreparedStatement statement=connection.prepareStatement("select * from subject_allocation where batch=? and staffid='cs009' and sem=? and sec=?");
+                    statement.setString(1, batch);
+                    statement.setString(2, sem);
+                    statement.setString(3, section);
+                    ResultSet rs1 = statement.executeQuery();
 
                     String sub;
 
@@ -196,9 +199,9 @@
 
     %>
 
-<%                        if (statement != null) {
-                statement.close();
-            }
+<%    //                    if (statement != null) {
+        //        statement.close();
+          //  }
             if (connection != null) {
                 connection.close();
             }

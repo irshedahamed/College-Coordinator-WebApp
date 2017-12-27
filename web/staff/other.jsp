@@ -128,12 +128,13 @@
                                 <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>EXPERIENCE DETAILS</b></font><br><br><br>
                                             <TABLE WIDTH=30% align ="center" border="1">
                                                 <%
-                                                    username = "cs001";
+                                                         username = "cs001";
                                                     String departmentname = session.getAttribute("deptname").toString();
                                                     Connection connection = new dbcon().getConnection(departmentname);
-                                                    Statement statement = connection.createStatement();
-
-                                                    ResultSet rs = statement.executeQuery("select * from staff_experience_details where rollno=" + "'" + username + "'");
+                                                   // Statement statement = connection.createStatement();
+                                                   PreparedStatement  statement=connection.prepareStatement("select * from staff_experience_details where rollno=?");
+                                                   statement.setString(1, username);
+                                                    ResultSet rs = statement.executeQuery();
                                                     String rollno = "", noc = "", post = "", f = "", t = "", tm = "";
 
                                                     while (rs.next()) {
@@ -184,7 +185,9 @@
                                 <div class="dm3-tab"><div class="dm3-tab-inner"><center> <font size="5px"><b>CONFERENCE DETAILS</b></font><br><br><br>
                                             <TABLE WIDTH=30% align ="center" border="1"><br>
                                                 <%
-                                                    ResultSet rs2 = statement.executeQuery("select * from staff_conference_details where rollno=" + "'" + username + "'");
+                                                    PreparedStatement st=connection.prepareStatement("select * from staff_conference_details where rollno=?");
+                                                    st.setString(1, username);
+                                                    ResultSet rs2 = statement.executeQuery();
                                                     String nop = "", dop = "", place = "";
 
                                                     while (rs2.next()) {
@@ -207,7 +210,7 @@
                                                         <TD><b>Place</b></TD>
                                                         <TD><%= place%></TD>
                                                     </TR>
-
+                                                    
                                                 </center>
 
 
@@ -217,7 +220,9 @@
                                 <div class="dm3-tab"><div class="dm3-tab-inner"><center><font size="5px"><b>JOURNAL DETAILS</b></font><br><br><br>
                                             <TABLE WIDTH=30% align ="center" border="1"><br>
                                                 <%
-                                                    ResultSet rs3 = statement.executeQuery("select * from staff_journals_details where rollno=" + "'" + username + "'");
+                                                    PreparedStatement stt=connection.prepareStatement("select * from staff_journals_details where rollno=?");
+                                                    stt.setString(1, username);
+                                                    ResultSet rs3 = statement.executeQuery();
                                                     String noj = "", yop = "";
 
                                                     while (rs3.next()) {
@@ -240,7 +245,7 @@
                                                     <%
                                                         }
                                                     %></TABLE></center></div></div>
-
+                               
                             </div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li><li><a href="#">3</a></li></ul></div>
                     </div></div></section>
 
@@ -294,13 +299,18 @@
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
 <%
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-    } catch (Exception e) {
+    
+    }
+    else
+    {
+        response.sendRedirect("../index.jsp");
+    }
+    }
+catch(Exception e)
+    {
         e.printStackTrace();
         response.sendRedirect("../index.jsp");
     }
-
-%>
+    
+    %>
 </html>

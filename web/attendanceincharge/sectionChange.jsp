@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -131,8 +132,10 @@
                                                 <%                        String dept = request.getParameter("dept");
                                                     String batch = request.getParameter("batch");
                                                     Connection con = new dbcon().getConnection(dept);
-                                                    Statement stmt = con.createStatement();
-                                                    ResultSet rs = stmt.executeQuery("select name,rollno,sec from student_personal where batch like '" + batch + "'");
+                                                    //Statement stmt = con.createStatement();
+                                                    PreparedStatement stmt=con.prepareStatement("select name,rollno,sec from student_personal where batch like ?");
+                                                    stmt.setString(1, batch);
+                                                    ResultSet rs = stmt.executeQuery();
                                                     //String batch=null;
                                                     rs.beforeFirst();
                                                     while (rs.next()) {

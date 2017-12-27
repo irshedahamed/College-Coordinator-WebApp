@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="Actor.Councillor"%>
 <%@page import="Actor.Student"%>
 <%@page import="Actor.Staff"%>
@@ -70,11 +71,12 @@
         <div id="wrapper" class="toggled">
             <div id="sidebar-wrapper">
 
-                <%        Connection con = new dbcon().getConnection(Find.sdept(username));
-                    Statement stmtd = con.createStatement();
-                    ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
-                    if (rsd.next()) {
-                %>
+                <% Connection con=new dbcon().getConnection(Find.sdept(username));
+    //Statement stmtd=con.createStatement();
+    Staff s=Staff.getByid(username);
+    //ResultSet rsd=stmtd.executeQuery("select * from staff_general where staffid='"+username+"'");
+    if(s!=null)
+    {%>
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
                         <a href="#menu-toggle1" id="menu-toggle1">
@@ -95,7 +97,7 @@
                     <li>
 
                     <center>
-                        <a href="#"><b><%=rsd.getString("tittle") + rsd.getString("name")%></b></a>
+                        <a href="#"><b><%=s.getName()%></b></a>
                     </center>
                     </li>
                     <li>
@@ -105,7 +107,7 @@
                     </li>
                     <li >
                     <center>
-                        <a href="#"><b><%=rsd.getString("desg")%></b></a>
+                        <a href="#"><b><%=s.getDesg()%></b></a>
                     </center>
                     </li>
                     <li >
@@ -117,9 +119,9 @@
             </div>
 
             <%}
-                if (stmtd != null) {
-                    stmtd.close();
-                }
+              //  if (stmtd != null) {
+                //    stmtd.close();
+          //      }
                 if (con != null) {
                     ;//con.close();
                 }
@@ -200,7 +202,7 @@
                             <br><br><br><br>
 
                             <%
-                                Staff s = new Staff(username);
+            //                    Staff s = new Staff(username);
                                 //String dept = request.getParameter("dept");
                                 String date = request.getParameter("datepicker");
                                 //String sem = request.getParameter("sem");
@@ -245,53 +247,69 @@
                                         </tr>
                                     </thead>
                                     <%
-
-                                        Connection conn = null;
-                                        Statement st = null;
-                                        Statement st1 = null;
-                                        Statement st2 = null;
-
-                                        try {
-
-                                            conn = new dbcon().getConnection(s.getCouncillorDetails().getDept());
-                                            st = conn.createStatement();
-                                            st1 = conn.createStatement();
-                                            st2 = conn.createStatement();
-
-                                            int count = 0;
-
-                                            String sql = "select * from councillor_attendance where date='" + date + "' and sem='" + Find.getSem(s.getCouncillorDetails().getBatch(), s.getCouncillorDetails().getAcademicyr(), s.getCouncillorDetails().getSemister()) + "'";
-                                            ResultSet rs = st.executeQuery(sql);
-                                            int sno = 1;
-                                            while (rs.next()) {
-
-                                                String rollno = rs.getString("rollno");
-                                                String reason = rs.getString("reason");
-                                                // String date1=String.valueOf(rs.getDate("date"));
-
-                                                sql = "select * from student_personal where rollno='" + rollno + "' and batch='" + s.getCouncillorDetails().getBatch() + "' order by name";
-                                                ResultSet rs1 = st1.executeQuery(sql);
-                                                if (rs1.next()) {
-
-                                                    String name = rs1.getString("name");
-                                                    String regno = rs1.getString("regno");
-                                                    ResultSet rs2 = st2.executeQuery("select count(*) as days from councillor_attendance where rollno='" + rollno + "' and sem='" + Find.getSem(s.getCouncillorDetails().getBatch(), s.getCouncillorDetails().getAcademicyr(), s.getCouncillorDetails().getSemister()) + "'");
-                                                    String days = "0";
-                                                    if (rs2.next()) {
-                                                        days = String.valueOf(rs2.getInt("days") - 1);
-                                                    }
-                                                    //   days=String.valueOf(rs2.getInt("days"));
-
-                                                    String fname = "", fmobile = "", mname = "", mmobile = "";
-                                                    rs2 = st2.executeQuery("select f.fathers_name,f.mobile,m.mothers_name,m.mobileno from student_father_details f,student_mother_details m where f.rollno='" + rollno + "' and m.rollno='" + rollno + "'");
-                                                    if (rs2.next()) {
-                                                        fname = rs2.getString("fathers_name");
-                                                        fmobile = rs2.getString("mobile");
-                                                        mname = rs2.getString("mothers_name");
-                                                        mmobile = rs2.getString("mobileno");
-                                                    }
-
-                                    %>
+ Connection conn=null;
+        //Statement st=null;
+       // Statement st1=null;
+        //Statement st2=null;
+        
+        
+	try{
+            
+       
+      
+       
+        
+         conn = new dbcon().getConnection(s.getCouncillorDetails().getDept());
+        // st=conn.createStatement();
+        // st1=conn.createStatement();
+         //st2=conn.createStatement();
+         
+        int count =0;
+        
+        String sql="select * from councillor_attendance where date=? and sem='"+Find.getSem(s.getCouncillorDetails().getBatch(), s.getCouncillorDetails().getAcademicyr(), s.getCouncillorDetails().getSemister())+"'";
+        PreparedStatement st=conn.prepareStatement(sql);
+        st.setString(1, date);
+        ResultSet rs=st.executeQuery();
+        int sno=1;
+        while(rs.next())
+        {
+           
+        String rollno=rs.getString("rollno");
+        String reason=rs.getString("reason");
+       // String date1=String.valueOf(rs.getDate("date"));
+        
+        //sql=;
+        PreparedStatement st1 =conn.prepareStatement("select * from student_personal where rollno= and batch=? order by name");
+        st1.setString(1, rollno);
+        st1.setString(2, s.getCouncillorDetails().getBatch());
+        ResultSet rs1=st1.executeQuery();
+        if(rs1.next())
+        {    
+            
+            
+        String name=rs1.getString("name");
+        String regno=rs1.getString("regno");
+        PreparedStatement st2=conn.prepareStatement("select count(*) as days from councillor_attendance where rollno=? and sem='"+Find.getSem(s.getCouncillorDetails().getBatch(), s.getCouncillorDetails().getAcademicyr(), s.getCouncillorDetails().getSemister())+"");
+        st2.setString(1, rollno);
+        ResultSet rs2=st2.executeQuery();
+        String days="0";
+        if(rs2.next())
+        days=String.valueOf(rs2.getInt("days")-1);
+         //   days=String.valueOf(rs2.getInt("days"));
+        
+        String fname="",fmobile="",mname="",mmobile="";
+         
+         PreparedStatement st3=conn.prepareStatement("select f.fathers_name,f.mobile,m.mothers_name,m.mobileno from student_father_details f,student_mother_details m where f.rollno=? and m.rollno=?");
+         st3.setString(1, rollno);
+         st3.setString(2, rollno);
+         rs2=st3.executeQuery();
+         if(rs2.next()){
+         fname=rs2.getString("fathers_name");
+         fmobile=rs2.getString("mobile");
+         mname=rs2.getString("mothers_name");
+         mmobile=rs2.getString("mobileno");
+         }
+                                        %>
 
                                     <tr>
                                         <td><%=sno++%></td>
@@ -309,32 +327,27 @@
 
                                     <%
 
-                                                    count++;
+count++; 
 
-                                                }
-                                            }
-                                            if (st2 != null) {
-                                                st2.close();
-                                            }
-
-                                            session.setAttribute("count", count);
-                                            session.setAttribute("date", date);
-
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
-                                        } finally {
-                                            if (st != null) {
-                                                st.close();
-                                            }
-                                            if (st1 != null) {
-                                                st1.close();
-                                            }
-
-                                            if (conn != null) {
-                                                ;//conn.close();
-                                            }
-                                        }
-                                    %>
+}
+}
+//if(st2!=null)
+  //  st2.close();
+        
+        session.setAttribute("count",count);
+        session.setAttribute("date",date);
+        
+}catch(Exception e){
+e.printStackTrace();
+}finally{
+    //                        if(st!=null)
+      //                      st.close();
+        //                    if(st1!=null)
+          //                  st1.close();
+        
+            //                if(conn!=null)
+              //                  conn.close();
+}                                           %>
 
 
 
