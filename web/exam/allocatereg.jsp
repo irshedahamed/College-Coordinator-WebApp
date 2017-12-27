@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="dbconnection.dbcon"%>
@@ -58,9 +59,12 @@
     </thead>
     
     <%
-        Statement st = con.createStatement();
-        String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by regno,rollno";
-     ResultSet rs=st.executeQuery(sql2);
+        //Statement st = con.createStatement();
+        String sql2= "select * from student_personal where batch=? and sec=? order by regno,rollno";
+     PreparedStatement st=con.prepareStatement(sql2);
+     st.setString(1, batch);
+     st.setString(2, sec);
+        ResultSet rs=st.executeQuery();
      int i=1;
      while(rs.next())
      {

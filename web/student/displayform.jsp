@@ -4,6 +4,7 @@
     Author     : Divya Sri
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Base"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
@@ -32,8 +33,10 @@
                                 try {
                                     Class.forName("com.mysql.jdbc.Driver").newInstance();
                                     Connection connection1 = new dbcon().getConnection("sjitportal");
-                                    Statement statement1 = connection1.createStatement();
-                                    ResultSet rs = statement1.executeQuery("select filename,descp from forms where location = '" + path + "'");
+                                    //Statement statement1 = connection1.createStatement();
+                                    PreparedStatement statement1=connection1.prepareStatement("select filename,descp from forms where location = ?");
+                                    statement1.setString(1, path);
+                                    ResultSet rs = statement1.executeQuery();
 
                                     while (rs.next()) {
                                         String file = rs.getString("filename");

@@ -49,12 +49,14 @@
                         String tdate = request.getParameter("datepicker2");
 
                         Connection con = new dbcon().getConnection(Find.sdept(username));
-                        Statement st = con.createStatement();
-                        Statement st1 = con.createStatement();
+                        //Statement st = con.createStatement();
+                        //Statement st1 = con.createStatement();
 
                         int count = 0;
-                        String sql = "select * from subject_sem_table where sem='" + sem + "'";
-                        ResultSet rs = st.executeQuery(sql);
+                        String sql = "select * from subject_sem_table where sem=?";
+                        PreparedStatement st=con.prepareStatement(sql);
+                        st.setString(1, sem);
+                        ResultSet rs = st.executeQuery();
                         ResultSet rs1;
                         String rollno = null, name = null;
                         //String[] str1=new String[100];
@@ -102,8 +104,10 @@
                             for (int i = 1; i <= d; i++) {
                                 String dt = simpledataformat.format(c1.getTime());
 
-                                String sql1 = "select * from hourattendence where rollno='" + username + "'";
-                                rs1 = st1.executeQuery(sql1);
+                                String sql1 = "select * from hourattendence where rollno=?";
+                                PreparedStatement st1=con.prepareStatement(sql1);
+                                st1.setString(1, username);
+                                rs1 = st1.executeQuery();
                         %>
                          <!--    <h1><%=dt%></h1> -->
                         <%
@@ -139,9 +143,9 @@
                         if (st != null) {
                             st = null;
                         }
-                        if (st1 != null) {
-                            st1.close();
-                        }
+                     //   if (st1 != null) {
+                       //     st1.close();
+                     //   }
                         if (con != null) {
                             ;//con.close();
                         }

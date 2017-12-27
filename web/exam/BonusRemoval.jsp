@@ -3,6 +3,7 @@
     Created on : 25 Aug, 2016, 8:42:27 PM
     Author     : Home
 --%>
+<%@page import="java.sql.PreparedStatement"%>
 <%-- 
     Document   : BonusQuery
     Created on : 25 Aug, 2016, 7:54:36 PM
@@ -165,11 +166,11 @@
 
                             <%
                                 Connection conn=null;
-                                Statement stmt=null;
+                                //Statement stmt=null;
             
                                 try{
                                 conn=new dbcon().getConnection(dept);
-                                stmt=conn.createStatement();
+                               // stmt=conn.createStatement();
                             %>
 
                             <center><table  class="bordered">
@@ -182,17 +183,22 @@
                                     </thead>
 
                                     <% 
-                                   String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
-                                    ResultSet rs=stmt.executeQuery(sql2);
+                                   String sql2= "select * from student_personal where batch=? and sec=? order by rollno";
+                                   PreparedStatement stmt=conn.prepareStatement(sql2);
+                                   stmt.setString(1, batch);
+                                   stmt.setString(2, sec);
+                                   ResultSet rs=stmt.executeQuery();
                                  while(rs.next())
                                  {
                                   String rollno=rs.getString("rollno");
                                     String name = rs.getString("name");
                                     %>
                                     <%
-                                        String bsql="select * from bonuscut where rollno='"+rollno+"'";
-                                        Statement bstmt=conn.createStatement();
-                                        ResultSet brs=bstmt.executeQuery(bsql);
+                                        String bsql="select * from bonuscut where rollno=?";
+                                        //Statement bstmt=conn.createStatement();
+                                        PreparedStatement bstmt=conn.prepareStatement(bsql);
+                                        bstmt.setString(1, rollno);
+                                        ResultSet brs=bstmt.executeQuery();
                                         int assessment=0;
                                         if(brs.next())
                                         {if(Integer.valueOf(brs.getString("assessment"))<=Integer.valueOf(exam)){
@@ -219,8 +225,8 @@
                                     e.printStackTrace();
                                 }finally{
                 
-                                    if(stmt!=null)
-                                        stmt.close();
+                               //     if(stmt!=null)
+                                 //       stmt.close();
                                     if(conn!=null)
                                     ;//conn.close();
                                 }

@@ -4,6 +4,7 @@
     Author     : Home
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="General.AcademicYear"%>
 <%@page import="com.action.Base"%>
 <%@page import="com.action.Find"%>
@@ -159,14 +160,15 @@
                                 <fieldset>					
                                     <section>
                                         <%           Connection connection = null;
-                                            Statement statement = null;
+                                         //   Statement statement = null;
                                             try {
 
                                                 String departmentname = Find.dept(username);
 
-                                                connection = new dbcon().getConnection("sjitportal");
-                                                statement = connection.createStatement();
-                                                ResultSet rs = statement.executeQuery("select distinct(regulation) from regulations ");
+                                                connection = new dbcon().getConnection("portal");
+                                                //statement = connection.createStatement();
+                                                PreparedStatement statement=connection.prepareStatement("select distinct(regulation) from regulations ");
+                                                ResultSet rs = statement.executeQuery();
                                                 String regulation = "";
 
                                         %>   
@@ -216,9 +218,9 @@
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             } finally {
-                                                if (statement != null) {
-                                                    statement.close();
-                                                }
+                                            //    if (statement != null) {
+                                              //      statement.close();
+                                                //}
                                                 if (connection != null) {
                                                     connection.close();
                                                 }

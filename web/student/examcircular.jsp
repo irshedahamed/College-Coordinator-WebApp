@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Base"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
@@ -177,8 +178,9 @@
                 try {
                     Class.forName("com.mysql.jdbc.Driver").newInstance();
                     Connection connection1 = new dbcon().getConnection("sjitportal");
-                    Statement statement1 = connection1.createStatement();
-                    ResultSet rs = statement1.executeQuery("select * from exam_circular");
+                    //Statement statement1 = connection1.createStatement();
+                    PreparedStatement statement1=connection1.prepareStatement("select * from exam_circular");
+                    ResultSet rs = statement1.executeQuery();
                     String path = Base.path + "/portal/exam/";
                     session.setAttribute("path", path);
 

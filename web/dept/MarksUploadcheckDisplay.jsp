@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Find"%>
 <%@page import="General.AcademicYear"%>
 <%@page import="Actor.Student"%>
@@ -145,9 +146,11 @@ h2{
         String regulation=null;
         String subcode ,rollno;
         
-        Statement st= con.createStatement();
-        String sql="select * from regulations where batch='"+batch+"'";
-        ResultSet rs= st.executeQuery(sql);
+       // Statement st= con.createStatement();
+        String sql="select * from regulations where batch=?";
+        PreparedStatement st=con.prepareStatement(sql);
+        st.setString(1, batch);
+        ResultSet rs= st.executeQuery();
         while(rs.next())
         {
             regulation=rs.getString("regulation");
@@ -183,9 +186,13 @@ h2{
         <th>Exam Type</th>
         <%
             con = new dbcon().getConnection(dept);
-    st=con.createStatement();
-               String sql1 ="select * from subject_sem_table where regulation='"+regulation+"' and sem='"+sem+"' and (ayear like '%elective%"+"17"+"%' or ayear like 'all')  and subtype='theory' order by subcode" ;
-     rs=st.executeQuery(sql1);
+   // st=con.createStatement();
+               String sql1 ="select * from subject_sem_table where regulation=? and sem=? and (ayear like '%elective%"+"17"+"%' or ayear like 'all')  and subtype='theory' order by subcode" ;
+               PreparedStatement stt=con.prepareStatement(sql1);
+               stt.setString(1, regulation);
+               stt.setString(2, sem);
+               
+               rs=stt.executeQuery();
         
         while(rs.next())
         {
@@ -198,8 +205,10 @@ h2{
         
         %>
        <%               
-                            Statement s4=con.createStatement(); 
-                             ResultSet rssub=s4.executeQuery("select * from subject_sem_table where subcode='"+subcode+"'" );
+                     //       Statement s4=con.createStatement(); 
+                     PreparedStatement s4=con.prepareStatement("select * from subject_sem_table where subcode=?" );
+                     s4.setString(1, subcode);
+                     ResultSet rssub=s4.executeQuery();
                 
                 String subjname="";
                     while(rssub.next())
@@ -208,8 +217,13 @@ h2{
                         subjname=rssub.getString("subname");
     %>      
     <%               
-          Statement s5=con.createStatement();
-            ResultSet rsss= s5.executeQuery("select * from subject_allocation where batch='"+batch+"' and sem='"+sem+"' and subcode='"+subcode+"' and sec='"+sec+"'");
+        //  Statement s5=con.createStatement();
+        PreparedStatement s5=con.prepareStatement("select * from subject_allocation where batch=? and sem=? and subcode=? and sec=?");
+        s5.setString(1, batch);
+        s5.setString(2, sem);
+        s5.setString(3, subcode);
+        s5.setString(4, sec);
+        ResultSet rsss= s5.executeQuery();
                    
               String staffname = new String();
                     
@@ -250,25 +264,35 @@ rs.close();
     
     <%
          
-       String sql5 ="select * from subject_sem_table where regulation='"+regulation+"' and sem='"+sem+"' and (ayear like '%elective%"+"17"+"%' or ayear like 'all')  and subtype='theory' order by subcode" ;
-       Statement st1 = con.createStatement();
-     ResultSet rs1=st1.executeQuery(sql5);
+       String sql5 ="select * from subject_sem_table where regulation=? and sem=? and (ayear like '%elective%"+"17"+"%' or ayear like 'all')  and subtype='theory' order by subcode" ;
+      // Statement st1 = con.createStatement();
+     PreparedStatement st1=con.prepareStatement(sql5);
+     st1.setString(1, regulation);
+     st1.setString(2, sem);
+     
+      ResultSet rs1=st1.executeQuery();
   String pk=new String();
                 
         while(rs1.next())
         {
         subcode = rs1.getString("subcode");
-        String sql6 = "select * from marks_table where  subcode='"+subcode+"' " ;
+        String sql6 = "select * from marks_table where  subcode=? " ;
    
-        Statement st2 = con.createStatement();
-        ResultSet rs2 = st2.executeQuery(sql6);
+     //   Statement st2 = con.createStatement();
+     PreparedStatement  st2=con.prepareStatement(sql6);
+     st2.setString(1, subcode);
+     ResultSet rs2 = st2.executeQuery();
        int counta1=0,counta2=0;
         while(rs2.next())
         {                  
          rollno=rs2.getString("rollno");
-         String sqlm="select '"+exam+"' from student_personal where rollno='"+rollno+"' and sec='"+sec+"'";
-         Statement s3=con.createStatement();
-         ResultSet rss=s3.executeQuery(sqlm);
+         String sqlm="select ? from student_personal where rollno=? and sec=?";
+         //Statement s3=con.createStatement();
+         PreparedStatement s3=con.prepareStatement(sqlm);
+         s3.setString(1, exam);
+         s3.setString(2, rollno);
+         s3.setString(3, sec);
+         ResultSet rss=s3.executeQuery();
          String section=new String();
              
          String marks= rs2.getString(exam);

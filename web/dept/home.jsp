@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Base"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.sql.ResultSet"%>
@@ -170,8 +171,9 @@
                                             <div style="width:100%;height:300px;line-height:3em;overflow-y:scroll;padding:5px; solid #149dd2;">
                                                 <div align="left">
                                                     <%            Connection conbatch = new dbcon().getConnection("sjitportal");
-                                                        Statement stmt = conbatch.createStatement();
-                                                        ResultSet rst = stmt.executeQuery("select * from circular where type='circular'");
+                                                   //     Statement stmt = conbatch.createStatement();
+                                                   PreparedStatement  stmt=conbatch.prepareStatement("select * from circular where type='circular'");
+                                                   ResultSet rst = stmt.executeQuery();
                                                         String com1 = null, name1 = null, description1 = null, path1 = null;
                                                         rst.beforeFirst();
                                                         while (rst.next()) {
@@ -211,8 +213,9 @@
                                                         try {
                                                             Class.forName("com.mysql.jdbc.Driver").newInstance();
                                                             Connection connection1 = new dbcon().getConnection(Find.sdept(username));
-                                                            Statement statement1 = connection1.createStatement();
-                                                            ResultSet rs = statement1.executeQuery("select * from deptuploads");
+                                                           // Statement statement1 = connection1.createStatement();
+                                                            PreparedStatement statement1=connection1.prepareStatement("select * from deptuploads");
+                                                           ResultSet rs = statement1.executeQuery();
 
                                                             while (rs.next()) {
                                                                 String file = rs.getString("name");
@@ -265,8 +268,9 @@
                                                     <%
                                                         Class.forName("com.mysql.jdbc.Driver").newInstance();
                                                         Connection connection1 = new dbcon().getConnection("sjitportal");
-                                                        Statement statement1 = connection1.createStatement();
-                                                        ResultSet rs11 = statement1.executeQuery("select * from exam_circular");
+                                                    //    Statement statement1 = connection1.createStatement();
+                                                    PreparedStatement statement1=connection1.prepareStatement("select * from exam_circular");
+                                                    ResultSet rs11 = statement1.executeQuery();
                                                         String path2 = Base.path + "/portal/exam/";
 
                                                         while (rs11.next()) {
@@ -303,8 +307,9 @@
                                                         try {
                                                             Class.forName("com.mysql.jdbc.Driver").newInstance();
                                                             Connection connection2 = new dbcon().getConnection(Find.sdept(username));
-                                                            Statement statement2 = connection2.createStatement();
-                                                            ResultSet rs = statement2.executeQuery("select * from deptuploads");
+                                                         //   Statement statement2 = connection2.createStatement();
+                                                         PreparedStatement statement2=connection2.prepareStatement("select * from deptuploads");
+                                                         ResultSet rs = statement2.executeQuery();
 
                                                             while (rs.next()) {
                                                                 String file = rs.getString("name");
@@ -345,9 +350,9 @@
                                                     %>
                                                     <%
                                                         conbatch = new dbcon().getConnection("sjitportal");
-                                                        stmt = conbatch.createStatement();
-
-                                                        rst = stmt.executeQuery("select * from circular where type='event'");
+                                                     //   stmt = conbatch.createStatement();
+                                                      PreparedStatement stmtt=conbatch.prepareStatement("select * from circular where type='event'");
+                                                        rst = stmtt.executeQuery();
                                                         rst.beforeFirst();
                                                         while (rst.next()) {
                                                             name1 = rst.getString("name");

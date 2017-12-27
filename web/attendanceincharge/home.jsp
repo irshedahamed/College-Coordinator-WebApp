@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
@@ -147,8 +148,9 @@
                                             <div style="width:100%;height:300px;line-height:3em;overflow-y:scroll;padding:5px; solid : #149dd2;">
                                                 <div align="left">
                                                     <%            Connection conbatch = new dbcon().getConnection("sjitportal");
-                                                        Statement stmt = conbatch.createStatement();
-                                                        ResultSet rst = stmt.executeQuery("select * from circular where type='circular'");
+                                                        //Statement stmt = conbatch.createStatement();
+                                                        PreparedStatement stmt=conbatch.prepareStatement("select * from circular where type='circular'");
+                                                        ResultSet rst = stmt.executeQuery();
                                                         String com1 = null, name1 = null, description1 = null, path1 = null;
                                                         rst.beforeFirst();
                                                         while (rst.next()) {
@@ -183,9 +185,9 @@
                                                 <div align="left">
                                                     <%
                                                         conbatch = new dbcon().getConnection("sjitportal");
-                                                        stmt = conbatch.createStatement();
-
-                                                        rst = stmt.executeQuery("select * from circular where type='event'");
+                                               //         stmt = conbatch.createStatement();
+                                                        PreparedStatement stmtt=conbatch.prepareStatement("select * from circular where type='event'");
+                                                        rst = stmtt.executeQuery();
                                                         rst.beforeFirst();
                                                         while (rst.next()) {
                                                             name1 = rst.getString("name");
@@ -283,4 +285,4 @@
 
     %>
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-</html>
+</html> 

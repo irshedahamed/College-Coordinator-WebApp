@@ -4,6 +4,7 @@
     Author     : aravind
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Find"%>
 <%@page import="java.io.File"%>
 <%@page import="java.sql.ResultSet"%>
@@ -193,31 +194,42 @@
                 Connection con = new dbcon().getConnection("first");
                 Connection consub = new dbcon().getConnection("sjitportal");
                 String sql;
+                PreparedStatement st=null;
                 if (username.contains("mat")) {
                     sql = "select staffid,staffname from staff_table where staffid like '%ma%' or staffid like '%MA%' or staffid like '%EN%' or staffid like '%en%'";
+                    st=con.prepareStatement(sql);
+                    
                 } else {
                     sql = "select staffid,staffname from staff_table where staffid like '%PY%' or staffid like '%py%' or staffid like '%sc%' or staffid like '%SC%'";
+                st=con.prepareStatement(sql);
                 }
 
-                Statement st = con.createStatement();
+               // Statement st = con.createStatement();
                 ResultSet rs1 = st.executeQuery(sql);
-                Statement st1 = con.createStatement();
-                Statement st2 = con.createStatement();
-                Statement stsubj = consub.createStatement();
+               // Statement st1 = con.createStatement();
+               // Statement st2 = con.createStatement();
+               // Statement stsubj = consub.createStatement();
                 int sno = 0;
                 while (rs1.next()) {
                     int wflag = 0;
                     int count1 = 0, count2 = 0, sp = 0;
                     String staffid = rs1.getString("staffid").toString();
                     String staffname = rs1.getString("staffname").toString();
-
+                    PreparedStatement sthrs=null;
                     if (request.getParameter("sem").equals("Even")) {
-                        sql = "select SUM(CONVERT(no_of_hours,UNSIGNED INT)) as value1 from subject_allocation where staffid='" + staffid + "' and acyear='" + acyear + "' and (sem like '02' or sem like '04' or sem like '06' or sem like '08')  ";
+                        sql = "select SUM(CONVERT(no_of_hours,UNSIGNED INT)) as value1 from subject_allocation where staffid=?and acyear=? and (sem like '02' or sem like '04' or sem like '06' or sem like '08')  ";
+                    sthrs=con.prepareStatement(sql);
+                    sthrs.setString(1, staffid);
+                    sthrs.setString(2, acyear);
                     } else {
-                        sql = "select SUM(CONVERT(no_of_hours,UNSIGNED INT)) as value1 from subject_allocation where staffid='" + staffid + "' and acyear='" + acyear + "' and (sem like '01' or sem like '03' or sem like '05' or sem like '07')  ";
+                        sql = "select SUM(CONVERT(no_of_hours,UNSIGNED INT)) as value1 from subject_allocation where staffid=? and acyear=? and (sem like '01' or sem like '03' or sem like '05' or sem like '07')  ";
+                        sthrs=con.prepareStatement(sql);
+                    sthrs.setString(1, staffid);
+                    sthrs.setString(2, acyear);
                     }
-                    Statement sthrs = con.createStatement();
-                    ResultSet rshrs = sthrs.executeQuery(sql);
+                    //Statement sthrs = con.createStatement();
+                    
+                    ResultSet rshrs = sthrs.executeQuery();
                     String totalnohrs = "---";
                     if (rshrs.next()) {
                         totalnohrs = String.valueOf(rshrs.getInt("value1"));
@@ -226,35 +238,56 @@
                     if (sthrs != null) {
                         sthrs.close();
                     }
-
+                    PreparedStatement st1=null;
                     if (request.getParameter("sem").equals("Even")) {
-                        sql = "select * from subject_allocation where staffid='" + staffid + "' and subtype='theory' and acyear='" + acyear + "' and (sem like '02' or sem like '04' or sem like '06' or sem like '08')";
+                        sql = "select * from subject_allocation where staffid=? and subtype='theory' and acyear=? and (sem like '02' or sem like '04' or sem like '06' or sem like '08')";
+                    st1=con.prepareStatement(sql);
+                    st1.setString(1, staffid);
+                    st1.setString(2, acyear);
                     } else {
-                        sql = "select * from subject_allocation where staffid='" + staffid + "' and subtype='theory' and acyear='" + acyear + "' and (sem like '01' or sem like '03' or sem like '05' or sem like '07')";
-                    }
-
-                    ResultSet rs2 = st1.executeQuery(sql);
+                        sql = "select * from subject_allocation where staffid=? and subtype='theory' and acyear=? and (sem like '01' or sem like '03' or sem like '05' or sem like '07')";
+                    
+                    st1=con.prepareStatement(sql);
+                    st1.setString(1, staffid);
+                    st1.setString(2, acyear);}
+                    
+                    ResultSet rs2 = st1.executeQuery();
                     while (rs2.next()) {
                         count1++;
                     }
-
+                    PreparedStatement  st2=null;
                     if (request.getParameter("sem").equals("Even")) {
-                        sql = "select * from subject_allocation where staffid='" + staffid + "' and subtype='lab' and acyear='" + acyear + "' and (sem like '02' or sem like '04' or sem like '06' or sem like '08')";
+                        sql = "select * from subject_allocation where staffid=? and subtype='lab' and acyear=? and (sem like '02' or sem like '04' or sem like '06' or sem like '08')";
+                    st2=con.prepareStatement(sql);
+                    st2.setString(1, staffid);
+                    st2.setString(2, acyear);
                     } else {
-                        sql = "select * from subject_allocation where staffid='" + staffid + "' and subtype='lab' and acyear='" + acyear + "' and (sem like '01' or sem like '03' or sem like '05' or sem like '07')";
+                        sql = "select * from subject_allocation where staffid=? and subtype='lab' and acyear=? and (sem like '01' or sem like '03' or sem like '05' or sem like '07')";
+                    st2=con.prepareStatement(sql);
+                    st2.setString(1, staffid);
+                    st2.setString(2, acyear);
+                 
                     }
 
                     String work = "", wsql;
-
-                    wsql = "select a.works as other from other_incharge a where a.staffid='" + staffid + "' and a.acyear='" + acyear + "' and a.semister='" + request.getParameter("sem") + "'";
-                    Statement wstmt = con.createStatement();
-                    ResultSet wrs = wstmt.executeQuery(wsql);
+                    String sem=request.getParameter("sem") ;
+                    wsql = "select a.works as other from other_incharge a where a.staffid=? and a.acyear=? and a.semister=?";
+                    //Statement wstmt = con.createStatement();
+                    PreparedStatement  wstmt=con.prepareStatement(wsql);
+                    wstmt.setString(1, staffid);
+                    wstmt.setString(2, acyear);
+                    wstmt.setString(3, sem);
+                    ResultSet wrs = wstmt.executeQuery();
                     if (wrs.next()) {
                         work += wrs.getString("other");
                     }
 
-                    wsql = "select * from councillor where staffid='" + staffid + "' and academicyr='" + acyear + "' and semister='" + request.getParameter("sem") + "'";
-                    wrs = wstmt.executeQuery(wsql);
+                 //   wsql = ;
+                    PreparedStatement  wstmtt=con.prepareStatement("select * from councillor where staffid=? and academicyr=? and semister=?");
+                    wstmtt.setString(1, staffid);
+                    wstmtt.setString(2, acyear);
+                    wstmtt.setString(3,  sem);
+                    wrs = wstmtt.executeQuery();
 
                     if (wrs.next()) {
                         if (!work.endsWith(",")) {
@@ -270,7 +303,7 @@
                         work = "---";
                     }
 
-                    ResultSet rs3 = st2.executeQuery(sql);
+                    ResultSet rs3 = st2.executeQuery();
                     while (rs3.next()) {
                         count2++;
                     }
@@ -297,7 +330,7 @@
 
                 <%
                     int i = 0;
-                    String subcode, dept, sec, sem, hrs = "", subcode1 = "", dept1 = "", sec1 = "", sem1 = "", hrs1 = "";
+                    String subcode, dept, sec, hrs = "", subcode1 = "", dept1 = "", sec1 = "", sem1 = "", hrs1 = "";
                     if (sp == 0) {
                 %>
                 <td>---</td><td>----</td>
@@ -361,8 +394,9 @@
 
 
                 <% if (!subcode.equals(" ")) {
-
-                        ResultSet rssub = stsubj.executeQuery("select subname from subject_table where subcode='" + subcode + "'");
+                    PreparedStatement stsubj=consub.prepareStatement("select subname from subject_table where subcode=?");
+                    stsubj.setString(1, subcode);
+                        ResultSet rssub = stsubj.executeQuery();
 
                         String subjname = "";
                         if (rssub.next()) {
@@ -379,7 +413,9 @@
 
                 %>
                 <% if (!subcode1.equals(" ")) {
-                        ResultSet rssub = stsubj.executeQuery("select subname from subject_table where subcode='" + subcode1 + "'");
+                    PreparedStatement stsubj=consub.prepareStatement("select subname from subject_table where subcode=?");
+                    stsubj.setString(1, subcode1);
+                        ResultSet rssub = stsubj.executeQuery();
 
                         String subjname = "";
                         if (rssub.next()) {
@@ -428,9 +464,9 @@
 
             %>
         </table>
-        <%                    if (stsubj != null) {
-                stsubj.close();
-            }
+        <%  //                  if (stsubj != null) {
+           //     stsubj.close();
+           // }
             if (consub != null) {
                 consub.close();
             }
@@ -451,31 +487,48 @@
 
             <%                Connection con = new dbcon().getConnection("first");
                 Connection con1 = new dbcon().getConnection("sjitportal");
-                Statement st = con.createStatement();
-                Statement st1 = con1.createStatement();
+             //   Statement st = con.createStatement();
+               // Statement st1 = con1.createStatement();
                 String sql;
+                PreparedStatement st=null;  
                 if (request.getParameter("sem").equals("Even")) {
-                    sql = "select * from subject_allocation where staffid='" + id + "'  and acyear='" + acyear + "' and (sem like '02' or sem like '04' or sem like '06' or sem like '08')";
+                    sql = "select * from subject_allocation where staffid=?  and acyear=? and (sem like '02' or sem like '04' or sem like '06' or sem like '08')";
+                st=con.prepareStatement(sql);
+                st.setString(1, id);
+                st.setString(2, acyear);
+                
                 } else {
-                    sql = "select * from subject_allocation where staffid='" + id + "'  and acyear='" + acyear + "' and (sem like '01' or sem like '03' or sem like '05' or sem like '07')";
+                    sql = "select * from subject_allocation where staffid=?  and acyear=? and (sem like '01' or sem like '03' or sem like '05' or sem like '07')";
+                st=con.prepareStatement(sql);
+                st.setString(1, id);
+                st.setString(2, acyear);
+                
                 }
 
-                ResultSet rs1 = st.executeQuery(sql);
+                ResultSet rs1 = st.executeQuery();
 
                 ResultSet rs2;
                 String batch, subcode, subname = null, dept, sec, sem;
                 int wflag = 0;
                 String work = "", wsql;
-
-                wsql = "select a.works as other from other_incharge a where a.staffid='" + id + "' and a.acyear='" + acyear + "' and a.semister='" + request.getParameter("sem") + "'";
-                Statement wstmt = con.createStatement();
-                ResultSet wrs = wstmt.executeQuery(wsql);
+                 sem=request.getParameter("sem");
+                wsql = "select a.works as other from other_incharge a where a.staffid=? and a.acyear=? and a.semister=?";
+               // Statement wstmt = con.createStatement();
+               PreparedStatement wstmt=con.prepareStatement(wsql);
+               wstmt.setString(1, id);
+               wstmt.setString(2, acyear);
+               wstmt.setString(3, sem);
+               ResultSet wrs = wstmt.executeQuery();
                 if (wrs.next()) {
                     work += wrs.getString("other");
                 }
 
-                wsql = "select * from councillor where staffid='" + id + "' and academicyr='" + acyear + "' and semister='" + request.getParameter("sem") + "'";
-                wrs = wstmt.executeQuery(wsql);
+                wsql = "select * from councillor where staffid=? and academicyr=? and semister=?";
+               PreparedStatement  wstmtt=con.prepareStatement(wsql);
+               wstmtt.setString(1, id);
+               wstmtt.setString(2, acyear);
+               wstmtt.setString(3, sem);
+                wrs = wstmt.executeQuery();
 
                 if (wrs.next()) {
                     if (!work.endsWith(",")) {
@@ -494,7 +547,9 @@
                     dept = rs1.getString("dept");
                     subcode = rs1.getString("subcode");
                     sec = rs1.getString("sec").toUpperCase();
-                    rs2 = st1.executeQuery("select subname from subject_table where subcode='" + subcode + "'");
+                    PreparedStatement st1=con.prepareStatement("select subname from subject_table where subcode=?");
+                    st1.setString(1, subcode);
+                    rs2 = st1.executeQuery();
                     while (rs2.next()) {
                         subname = rs2.getString("subname");
                     }
@@ -524,10 +579,10 @@
                     ;//con.close();
                 }
 
-                if (st1 != null) {
-                    st1.close();
-                }
-                if (con1 != null) {
+     //           if (st1 != null) {
+       //             st1.close();
+         //       }
+                 if (con1 != null) {
                     ;//con1.close();
                 }
             %>
@@ -566,8 +621,9 @@
 
         <%
             Connection conn = new dbcon().getConnection("first");
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select a.staffid,a.staffname,b.tittle from staff_table a,staff_general b where a.staffid=b.staffid order by b.desg desc,b.staffid asc");
+            //Statement stmt = conn.createStatement();
+            PreparedStatement stmt=conn.prepareStatement("select a.staffid,a.staffname,b.tittle from staff_table a,staff_general b where a.staffid=b.staffid order by b.desg desc,b.staffid asc");
+            ResultSet rs = stmt.executeQuery();
 
             int sno = 0;
             while (rs.next()) {
@@ -576,16 +632,24 @@
                 String staffname = rs.getString("tittle") + rs.getString("staffname");
 
                 String work = "", wsql;
-
-                wsql = "select a.works as other from other_incharge a where a.staffid='" + staffid + "' and a.acyear='" + acyear + "' and a.semister='" + request.getParameter("sem") + "'";
-                Statement wstmt = conn.createStatement();
-                ResultSet wrs = wstmt.executeQuery(wsql);
+                String sem=request.getParameter("sem");
+                wsql = "select a.works as other from other_incharge a where a.staffid=? and a.acyear=? and a.semister=?";
+                //Statement wstmt = conn.createStatement();
+                PreparedStatement wstmt=conn.prepareStatement(wsql);
+                wstmt.setString(1, staffid);
+                wstmt.setString(2, acyear);
+                wstmt.setString(3, sem);
+                ResultSet wrs = wstmt.executeQuery();
                 if (wrs.next()) {
                     work += wrs.getString("other");
                 }
 
-                wsql = "select * from councillor where staffid='" + staffid + "' and academicyr='" + acyear + "' and semister='" + request.getParameter("sem") + "'";
-                wrs = wstmt.executeQuery(wsql);
+                wsql = "select * from councillor where staffid=? and academicyr=? and semister=?";
+                PreparedStatement  wstmtt=conn.prepareStatement(wsql);
+                wstmtt.setString(1, staffid);
+                wstmtt.setString(2, acyear);
+                wstmtt.setString(3, sem);
+                wrs = wstmtt.executeQuery();
 
                 if (wrs.next()) {
                     if (!work.endsWith(",")) {
@@ -602,16 +666,22 @@
                     wstmt.close();
                 }
 
-                Statement sum = conn.createStatement();
+                //Statement sum = conn.createStatement();
                 String sql;
-
+                PreparedStatement sum=null;
                 if (request.getParameter("sem").equals("Even")) {
-                    sql = "select subtype,SUM(CONVERT(no_of_hours,UNSIGNED INT)) as value1 from subject_allocation where staffid='" + staffid + "' and acyear='" + acyear + "' and (sem like '02' or sem like '04' or sem like '06' or sem like '08') group by subtype ";
+                    sql = "select subtype,SUM(CONVERT(no_of_hours,UNSIGNED INT)) as value1 from subject_allocation where staffid=? and acyear=? and (sem like '02' or sem like '04' or sem like '06' or sem like '08') group by subtype ";
+                sum=conn.prepareStatement(sql);
+                sum.setString(1, staffid);
+                sum.setString(2, acyear);
                 } else {
-                    sql = "select subtype,SUM(CONVERT(no_of_hours,UNSIGNED INT)) as value1 from subject_allocation where staffid='" + staffid + "' and acyear='" + acyear + "' and (sem like '01' or sem like '03' or sem like '05' or sem like '07') group by subtype ";
+                    sql = "select subtype,SUM(CONVERT(no_of_hours,UNSIGNED INT)) as value1 from subject_allocation where staffid=? and acyear=? and (sem like '01' or sem like '03' or sem like '05' or sem like '07') group by subtype ";
+                 sum=conn.prepareStatement(sql);
+                sum.setString(1, staffid);
+                sum.setString(2, acyear);
                 }
 
-                ResultSet rsum = sum.executeQuery(sql);
+                ResultSet rsum = sum.executeQuery();
                 int theory = 0, lab = 0;
                 while (rsum.next()) {
                     String abc = rsum.getString("subtype");

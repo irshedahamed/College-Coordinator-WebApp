@@ -3,6 +3,7 @@
     Created on : 27 Dec, 2016, 9:25:23 PM
     Author     : Home
 --%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Find"%>+
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
@@ -73,20 +74,25 @@
 
                         if (user.equals("student") || user.equals("staff")) {
                             Connection conn = null;
-                            Statement stmt = null;
+                           // Statement stmt = null;
                             try {
 
                                 // Class.forName("com.mysql.jdbc.Driver").newInstance();                      
                                 conn = new dbcon().getConnection("sjitportal?zeroDateTimeBehavior=convertToNull");
 
-                                stmt = conn.createStatement();
-                                String sql;
+                             //   stmt = conn.createStatement();
+                             PreparedStatement stmt = null;  
+                             String sql;
                                 if (user.equals("student")) {
-                                    sql = "select a.rollno,a.intime,a.outtime,b.rollno,b.name,b.mobileno from entry a," + dept + ".student_personal b where a.rollno like '" + id + "' and a.rollno=b.rollno";
+                                    sql = "select a.rollno,a.intime,a.outtime,b.rollno,b.name,b.mobileno from entry a," + dept + ".student_personal b where a.rollno like '"+id+"' and a.rollno=b.rollno";
+                                    stmt=conn.prepareStatement(sql);
+                                    
                                 } else {
-                                    sql = "select a.rollno,a.intime,a.outtime,CONCAT(b.tittle,b.name) as name,b.mobile1 as mobileno,b.desg from entry a," + dept + ".staff_general b where a.rollno like '" + id + "' and a.rollno=b.staffid";
+                                    sql = "select a.rollno,a.intime,a.outtime,CONCAT(b.tittle,b.name) as name,b.mobile1 as mobileno,b.desg from entry a," + dept + ".staff_general b where a.rollno like '"+id+"' and a.rollno=b.staffid";
+                                stmt=conn.prepareStatement(sql);
+                                
                                 }
-                                ResultSet rs = stmt.executeQuery(sql);
+                                ResultSet rs = stmt.executeQuery();
 
 
                     %>
@@ -174,30 +180,32 @@
                     <%} catch (Exception e) {
                             e.printStackTrace();
                         } finally {
-                            try {
-                                if (stmt != null) {
-                                    stmt.close();
-                                }
-                                if (conn != null) {
-                                    ;//conn.close();
-                                }
-                            } catch (SQLException ex) {
-                                ex.printStackTrace();
-                            }
+                           // try {
+                           //     if (stmt != null) {
+                             //       stmt.close();
+                               // }
+                          //      if (conn != null) {
+                               //     ;//conn.close();
+                             //   }
+                           //  } catch (SQLException ex) {
+                             //   ex.printStackTrace();
+                      //      }
                         }
                     } else {
                         Connection conn = null;
-                        Statement stmt = null;
+                      //  Statement stmt = null;
                         try {
 
                             // Class.forName("com.mysql.jdbc.Driver").newInstance();                      
                             conn = new dbcon().getConnection("sjitportal?zeroDateTimeBehavior=convertToNull");
 
-                            stmt = conn.createStatement();
+                            //stmt = conn.createStatement();
                             String sql;
 
-                            sql = "select a.rollno,a.intime,a.outtime,b.name,b.sex,b.mobile,b.meet,b.reason from entry a,guest b where a.rollno like '" + id + "' and a.rollno=b.id";
-                            ResultSet rs = stmt.executeQuery(sql);
+                            sql = "select a.rollno,a.intime,a.outtime,b.name,b.sex,b.mobile,b.meet,b.reason from entry a,guest b where a.rollno like '"+id+"' and a.rollno=b.id";
+                            PreparedStatement stmt=conn.prepareStatement(sql);
+                           
+                            ResultSet rs = stmt.executeQuery();
 
 
                     %>
@@ -274,16 +282,16 @@
                     <%} catch (Exception e) {
                             e.printStackTrace();
                         } finally {
-                            try {
-                                if (stmt != null) {
-                                    stmt.close();
-                                }
-                                if (conn != null) {
-                                    ;//conn.close();
-                                }
-                            } catch (SQLException ex) {
-                                ex.printStackTrace();
-                            }
+                            //try {
+                               // if (stmt != null) {
+                                 //   stmt.close();
+                           //     }
+                              //  if (conn != null) {
+                                //    ;//conn.close();
+              //                  }
+                //            } catch (SQLException ex) {
+                  //              ex.printStackTrace();
+                    //        }
                         }
                     %>
 

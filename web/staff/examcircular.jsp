@@ -138,124 +138,134 @@
                                             <div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
                                                 <div align="left">
                                                     <%
-                                                        //  String deptname = request.getSession().getAttribute("deptname").toString();
-                                                        List<String> list = new ArrayList<String>();
-                                                        List<String> list1 = new ArrayList<String>();
-                                                        List<String> list2 = new ArrayList<String>();
-                                                        try {
-                                                            Class.forName("com.mysql.jdbc.Driver").newInstance();
-                                                            Connection connection1 = new dbcon().getConnection("sjitportal");
-                                                            Statement statement1 = connection1.createStatement();
-                                                            ResultSet rs = statement1.executeQuery("select * from exam_circular");
+                                                             //  String deptname = request.getSession().getAttribute("deptname").toString();
 
-                                                            while (rs.next()) {
-                                                                String file = rs.getString("file_name");
-                                                                String desc = rs.getString("descp");
-                                                                String path = rs.getString("location");
-                                                                list.add(file);
-                                                                list1.add(desc);
-                                                                list2.add(path);
-
-                                                            }
-
-                                                    %>
-
-                                                    <%                for (int i = 0; i < list.size(); i++) {
-                                                            String str = list.get(i);
-                                                            //session.setAttribute(str,list.get(i));
-                                                            session.setAttribute("path", list2.get(i));
-
-
-                                                    %>
-                                                    <a href="${pageContext.request.contextPath}/notesdownload?ind1=<%=str%>&type1=<%=list2.get(i)%>" ><%= list1.get(i)%></a>
-                                                    <br>
-                                                    <%
-
-                                                            }
-                                                            session.setAttribute("size", list.size());
-                                                            if (statement1 != null) {
-                                                                statement1.close();
-                                                            }
-                                                            if (connection1 != null) {
-                                                                connection1.close();
-                                                            }
-                                                        } catch (Exception e) {
-
-                                                        }
-                                                    %>
-                                                </div>
-                                        </center>
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-                        </div></div></section>
-
-
-            <footer id="footer-widgets">
-                <div class="container clearfix">
-                    Powered by St.Joseph's
-                </div>
-            </footer>
-            <!-- #page-container -->
-        </div>
-    </div>
-
-    <footer id="page-footer">
-        <div class="container clearfix">
-            <div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
-            <button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
-            <nav id="footer-nav">
-                <ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
-                    <li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
-                    <li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
-                    <li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
-                </ul>			</nav>
-        </div>
-    </footer>
+        List<String> list = new ArrayList<String>();
+        List<String> list1 = new ArrayList<String>();
+        List<String> list2 = new ArrayList<String>();
+          try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            Connection connection1 = new dbcon().getConnection("sjitportal");
+       //     Statement statement1 = connection1.createStatement();
+       PreparedStatement statement1=connection1.prepareStatement("select * from exam_circular");
+       ResultSet rs = statement1.executeQuery();
+           
+            
+            while(rs.next())
+            {
+                String file = rs.getString("file_name");
+                String desc = rs.getString("descp");
+                String path = rs.getString("location");
+                 list.add(file);
+                 list1.add(desc);
+                 list2.add(path);
+                 
+            }
+            
+            %>
+            
+            <%
+           
+            for(int i=0; i<list.size();i++)
+              {
+                  String str=list.get(i);
+                  //session.setAttribute(str,list.get(i));
+                  session.setAttribute("path",list2.get(i));
+                
+                      
+            %>
+            <a href="${pageContext.request.contextPath}/notesdownload?ind1=<%=str %>&type1=<%=list2.get(i)%>" ><%= list1.get(i) %></a>
+<br>
+<%
+                  
+           }
+            session.setAttribute("size",list.size());
+                         if(statement1!=null)
+                            statement1.close();
+                             // if(connection1!=null)
+                               // connection1.close();
+          }
+          catch(Exception e)
+          {
+               
+          }
+%>
+</div>
+</center>
+</div>
+</div>
 
 
 
+</div>
+</div></div></section>
 
 
-    <script src="../js/jquery.js"></script>
+						<footer id="footer-widgets">
+			<div class="container clearfix">
+								Powered by St.Joseph's
+							</div>
+		</footer>
+			<!-- #page-container -->
+			</div>
+			</div>
+
+	<footer id="page-footer">
+		<div class="container clearfix">
+			<div class="copy">© All rights reserved, IncredibleBytes, 2014</div>
+			<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>
+			<nav id="footer-nav">
+				<ul id="menu-footer-menu" class="menu"><li id="menu-item-775" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-775"><a href="index.html">Home</a></li>
+<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="courses/index.html">Courses</a></li>
+<li id="menu-item-776" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-776"><a href="blog/index.html">Blog</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-788"><a href="contact-2/index.html">Contact</a></li>
+</ul>			</nav>
+		</div>
+	</footer>
+
+
+
+
+
+<script src="../js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../js/bootstrap.min.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
-        $("#menu-toggle1").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+     $("#menu-toggle1").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
     </script>
 
 
-    <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
+<script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
 <%
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
+          
+    }
+    else
+    {
+        response.sendRedirect("../index.jsp");
+    }
+                    //        if(sttt!=null)
+                      //      sttt.close();
+                        //      if(connn!=null)
+                          //      connn.close();
+    }
+catch(Exception e)
+    {
         e.printStackTrace();
         response.sendRedirect("../index.jsp");
     }
-
-
-%>
+    
+          
+          %>
 </html>
