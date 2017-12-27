@@ -4,6 +4,8 @@
     Author     : Home
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="Actor.Student"%>
 <%-- 
     Document   : editatt
     Created on : Jul 20, 2016, 10:03:39 AM
@@ -75,21 +77,24 @@
                 <%
 
                     Connection con = null;
-                    Statement st = null;
-                    Statement st1 = null;
-                    Statement st2 = null;
+                  //  Statement st = null;
+                  //  Statement st1 = null;
+                    //Statement st2 = null;
 
                     try {
 
                         con = new dbcon().getConnection(dept);
-                        st = con.createStatement();
-                        st1 = con.createStatement();
-                        st2 = con.createStatement();
+                  //      st = con.createStatement();
+                      //  st1 = con.createStatement();
+                        //st2 = con.createStatement();
 
                         int count = 0;
 
-                        String sql = "select * from overallattendence where date='" + date + "' and sem='" + sem + "'";
-                        ResultSet rs = st.executeQuery(sql);
+                        String sql = "select * from overallattendence where date=? and sem=?";
+                        PreparedStatement st=con.prepareStatement(sql);
+                        st.setString(1, date);
+                        st.setString(2, sem);
+                        ResultSet rs = st.executeQuery();
                         int sno = 1;
                         while (rs.next()) {
 
@@ -97,26 +102,34 @@
                             String reason = rs.getString("reason");
                             // String date1=String.valueOf(rs.getDate("date"));
 
-                            sql = "select * from student_personal where rollno='" + rollno + "' and batch='" + batch + "' order by name";
-                            ResultSet rs1 = st1.executeQuery(sql);
-                            if (rs1.next()) {
+                            //sql = ;
+                           Student s=Student.getById(rollno);
+                           
+                           // PreparedStatement st1=con.prepareStatement("select * from student_personal where rollno=? and batch=? order by name");
+                           // st1.setString(1, rollno);
+                           // st1.setString(2, batch);
+                           // ResultSet rs1 = st1.executeQuery();
+                            //if (rs1.next()) 
 
-                                String name = rs1.getString("name");
-                                String regno = rs1.getString("regno");
-                                ResultSet rs2 = st2.executeQuery("select count(*) as days from overallattendence where rollno='" + rollno + "' and sem='" + sem + "'");
+                                String name = s.getName();
+                                String regno = s.getRegno();
+                                PreparedStatement st2=con.prepareStatement("select count(*) as days from overallattendence where rollno=? and sem=?");
+                                st2.setString(1, rollno);
+                                st2.setString(2, sem);
+                                ResultSet rs2 = st2.executeQuery();
                                 String days = "0";
                                 if (rs2.next()) {
                                     days = String.valueOf(rs2.getInt("days") - 1);
                                 }
 
                                 String fname = "", fmobile = "", mname = "", mmobile = "";
-                                rs2 = st2.executeQuery("select f.fathers_name,f.mobile,m.mothers_name,m.mobileno from student_father_details f,student_mother_details m where f.rollno='" + rollno + "' and m.rollno='" + rollno + "'");
-                                if (rs2.next()) {
-                                    fname = rs2.getString("fathers_name");
-                                    fmobile = rs2.getString("mobile");
-                                    mname = rs2.getString("mothers_name");
-                                    mmobile = rs2.getString("mobileno");
-                                }
+                               // rs2 = st2.executeQuery("select f.fathers_name,f.mobile,m.mothers_name,m.mobileno from student_father_details f,student_mother_details m where f.rollno='" + rollno + "' and m.rollno='" + rollno + "'");
+                                //if (rs2.next()) {
+                                    fname = s.getFatherDetails().getFathername();
+                                    fmobile = s.getFatherDetails().getMobile();
+                                    mname = s.getMotherDetails().getMothername();
+                                    mmobile = s.getMotherDetails().getMobile();
+                                //}
 
                 %>
 
@@ -137,11 +150,11 @@
                 <%
                                 count++;
 
-                            }
+                            
                         }
-                        if (st2 != null) {
-                            st2.close();
-                        }
+                  //      if (st2 != null) {
+                    //        st2.close();
+                 //       }
 
                         session.setAttribute("count", count);
                         session.setAttribute("date", date);
@@ -149,12 +162,12 @@
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
-                        if (st != null) {
-                            st.close();
-                        }
-                        if (st1 != null) {
-                            st1.close();
-                        }
+                   //     if (st != null) {
+                     //       st.close();
+                       // }
+                //        if (st1 != null) {
+                  //          st1.close();
+                    //    }
 
                         if (con != null) {
                             ;//con.close();

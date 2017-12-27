@@ -232,9 +232,11 @@
             <div id="sidebar-wrapper">
 
                 <%        Connection con = new dbcon().getConnection(Find.sdept(username));
-                    Statement stmtd = con.createStatement();
-                    ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
-                    if (rsd.next()) {
+                    //Statement stmtd = con.createStatement();
+                    //PreparedStatement stmtd=con.prepareStatement();
+                    //ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
+                    //if (rsd.next()) {
+                Staff s=Staff.getByid(username);
                 %>
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
@@ -256,7 +258,7 @@
                     <li >
 
                     <center>
-                        <a href="#"><b><%=rsd.getString("tittle") + rsd.getString("name")%></b></a>
+                        <a href="#"><b><%=s.getName()%></b></a>
                     </center>
                     </li>
                     <li>
@@ -266,7 +268,7 @@
                     </li>
                     <li >
                     <center>
-                        <a href="#"><b><%=rsd.getString("desg")%></b></a>
+                        <a href="#"><b><%=s.getDesg()%></b></a>
                     </center>
                     </li>
                     <li >
@@ -278,12 +280,12 @@
             </div>
 
             <%}
-                if (stmtd != null) {
-                    stmtd.close();
-                }
-                if (con != null) {
-                    ;//con.close();
-                }
+  //              if (stmtd != null) {
+    //                stmtd.close();
+      //          }
+        //        if (con != null) {
+          //          ;//con.close();
+            //    }
             %>
 
             <header id="page-header"  class="fixed-header">
@@ -385,9 +387,10 @@
                                                                         //int i=Integer.parseInt(request.getParameter("val"));
                                                                         Class.forName("com.mysql.jdbc.Driver").newInstance();
                                                                         Connection connection = new dbcon().getConnection(Find.sdept(username));
-                                                                        Statement statement = connection.createStatement();
-
-                                                                        ResultSet rs = statement.executeQuery("select distinct(dept) from subject_allocation where staffid='" + username + "'");
+                                                                      //  Statement statement = connection.createStatement();
+                                                                      PreparedStatement statement= connection.prepareStatement("select distinct(dept) from subject_allocation where staffid=?");
+                                                                      statement.setString(1, username);
+                                                                        ResultSet rs = statement.executeQuery();
 
                                                                         String dept;
 

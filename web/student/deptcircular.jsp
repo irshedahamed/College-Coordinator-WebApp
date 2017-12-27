@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="Actor.Student"%>
 <%@page import="com.action.Base"%>
 <%@page import="com.action.Find"%>
@@ -189,8 +190,9 @@ String deptname = Find.sdept(username);
           try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection connection1 = new dbcon().getConnection(Find.sdept(username));
-            Statement statement1 = connection1.createStatement();
-            ResultSet rs = statement1.executeQuery("select * from deptuploads");
+            //Statement statement1 = connection1.createStatement();
+            PreparedStatement statement1=connection1.prepareStatement("select * from deptuploads");
+            ResultSet rs = statement1.executeQuery();
             
             
             while(rs.next())
@@ -254,8 +256,9 @@ String deptname = Find.sdept(username);
           try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection connection2 = new dbcon().getConnection(Find.sdept(username));
-            Statement statement2 = connection2.createStatement();
-            ResultSet rs = statement2.executeQuery("select * from deptuploads");
+           // Statement statement2 = connection2.createStatement();
+           PreparedStatement statement2=connection2.prepareStatement("select * from deptuploads");
+           ResultSet rs = statement2.executeQuery();
             
             
             while(rs.next())

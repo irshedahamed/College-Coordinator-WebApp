@@ -83,11 +83,14 @@
                         session.setAttribute("sem", sem);
 
                         Connection con = new dbcon().getConnection(dept);
-                        Statement st = con.createStatement();
+                       // Statement st = con.createStatement();
 
                         int count = 0;
-                        String sql = "select *,CONVERT(regno,UNSIGNED INT) as sno from student_personal where batch='" + batch + "' and sec='" + sec + "' order by sno,name";
-                        ResultSet rs = st.executeQuery(sql);
+                        String sql = "select *,CONVERT(regno,UNSIGNED INT) as sno from student_personal where batch=? and sec=? order by sno,name";
+                        PreparedStatement st=con.prepareStatement(sql);
+                        st.setString(1, batch);
+                        st.setString(2, sec);
+                        ResultSet rs = st.executeQuery();
                         //String[] str1=new String[100];
                         //String[] str2=new String[100];
 

@@ -3,6 +3,7 @@
     Created on : 25 Aug, 2016, 8:42:27 PM
     Author     : Home
 --%>
+<%@page import="java.sql.PreparedStatement"%>
 <%-- 
     Document   : BonusQuery
     Created on : 25 Aug, 2016, 7:54:36 PM
@@ -162,11 +163,11 @@
         <input type="hidden" name="section" value="<%=sec%>">
         <%
             Connection conn=null;
-            Statement stmt=null;
+           // Statement stmt=null;
             
             try{
             conn=new dbcon().getConnection((String)session.getAttribute("dept"));
-            stmt=conn.createStatement();
+           // stmt=conn.createStatement();
               %>
         
         <center><table  class="bordered">
@@ -178,17 +179,23 @@
                 </thead>
                 
         <% 
-       String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
-        ResultSet rs=stmt.executeQuery(sql2);
+     //  String sql2= ;
+       PreparedStatement stmt=conn.prepareStatement("select * from student_personal where batch=? and sec=? order by rollno");
+      stmt.setString(1, batch);
+      stmt.setString(2, sec);
+      
+       ResultSet rs=stmt.executeQuery();
      while(rs.next())
      {
       String rollno=rs.getString("rollno");
         String name = rs.getString("name");
          %>
          <%
-             String bsql="select * from bonuscut where rollno='"+rollno+"'";
-             Statement bstmt=conn.createStatement();
-             ResultSet brs=bstmt.executeQuery(bsql);
+            // String bsql=;
+            // Statement bstmt=conn.createStatement();
+            PreparedStatement bstmt=conn.prepareStatement("select * from bonuscut where rollno=?");
+            bstmt.setString(1, rollno);
+            ResultSet brs=bstmt.executeQuery();
              int assessment=0;
              if(brs.next())
              {if(Integer.valueOf(brs.getString("assessment"))<=Integer.valueOf(exam)){
@@ -214,10 +221,10 @@
                 e.printStackTrace();
             }finally{
                 
-                if(stmt!=null)
-                    stmt.close();
-                if(conn!=null)
-                ;//conn.close();
+       //         if(stmt!=null)
+         //           stmt.close();
+           //     if(conn!=null)
+             //   ;//conn.close();
             }
 
         

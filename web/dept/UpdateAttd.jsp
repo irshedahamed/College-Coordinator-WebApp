@@ -4,6 +4,8 @@
     Author     : Aravind Tyson Edited By Arun
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="Actor.Student"%>
 <%@page import="java.sql.*"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -96,19 +98,20 @@
                     session.setAttribute("sem", sem);
 
                     Connection con = new dbcon().getConnection(dept);
-                    Statement st = con.createStatement();
+                   // Statement st = con.createStatement();
 
                     int count = 0;
-                    String sql = "select * from student_personal where batch='" + batch + "' and dept='" + dept + "' and sec='" + sec + "'";
-                    ResultSet rs = st.executeQuery(sql);
+                   // String sql = "select * from student_personal where batch='" + batch + "' and dept='" + dept + "' and sec='" + sec + "'";
+                    
+                    //ResultSet rs = st.executeQuery(sql);
                     //String[] str1=new String[100];
                     //String[] str2=new String[100];
-
-                    while (rs.next()) {
-
+                    List<Student> blist=Student.getAll(dept, batch, sec);
+                   // while (rs.next()) {
+                   for(Student s : blist){
                         count++;
-                        String rollno = rs.getString("rollno");
-                        String name = rs.getString("name");
+                        String rollno = s.getId();
+                        String name = s.getName();
                         String str1 = "str1" + count;
                         session.setAttribute(str1, rollno);
                         /*str1[count]=rollno;
@@ -192,11 +195,11 @@
 
                 <% }
                     session.setAttribute("count", count);
-                    rs.close();
+          //          rs.close();
 
-                    if (st != null) {
-                        st.close();
-                    }
+            //        if (st != null) {
+              //          st.close();
+                //    }
                     if (con != null) {
                         ;//con.close();
                     }

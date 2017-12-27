@@ -363,9 +363,9 @@ document.getElementById("displaycontent").innerHTML = response;
                     //int i=Integer.parseInt(request.getParameter("val"));
                     Class.forName("com.mysql.jdbc.Driver").newInstance();
               Connection connection = new dbcon().getConnection(Find.dept(username));
-              Statement statement = connection.createStatement();
-                    
-              ResultSet rs= statement.executeQuery("select staffid,staffname from staff_table");
+            //  Statement statement = connection.createStatement();
+               PreparedStatement statement=connection.prepareStatement("select staffid,staffname from staff_table");
+              ResultSet rs= statement.executeQuery();
                    
               String staffname,staffid = "";
                     
