@@ -1,3 +1,4 @@
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.ResultSet"%>
@@ -120,8 +121,9 @@
                                         <div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
                                             <div align="left">
                                                 <%        Connection conbatch = new dbcon().getConnection("sjitportal");
-                                                    Statement stmt = conbatch.createStatement();
-                                                    ResultSet rs = stmt.executeQuery("select * from circular where type='circular'");
+                                                 //   Statement stmt = conbatch.createStatement();
+                                                 PreparedStatement stmt=conbatch.prepareStatement("select * from circular where type='circular'");
+                                                 ResultSet rs = stmt.executeQuery();
                                                     String com = null, name = null, description = null, path = null;
                                                     rs.beforeFirst();
                                                     while (rs.next()) {

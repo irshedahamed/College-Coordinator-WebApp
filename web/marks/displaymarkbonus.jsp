@@ -6,6 +6,7 @@
 
 
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="General.Batch"%>
 <%@page import="Subjects.Subjects"%>
 <%@page import="java.util.List"%>
@@ -226,15 +227,18 @@ and open the template in the editor.
                         rollno = stu.getId();
                         name = stu.getName();
                         String regno = stu.getRegno();
-                        Statement st3 = con.createStatement();
+                        //Statement st3 = con.createStatement();
                         bonus = bonusreq;
                         String forSqlexam=null;
                         if(exam.equals("labmodel"))
                             forSqlexam="3";
                         else
                             forSqlexam=exam;
-                        String sql7 = "select * from bonuscut where rollno='" + rollno + "' and assessment <='" + forSqlexam + "'";
-                        ResultSet rs3 = st3.executeQuery(sql7);
+                        String sql7 = "select * from bonuscut where rollno=? and assessment <=?";
+                        PreparedStatement st3=con.prepareStatement(sql7);
+                        st3.setString(1, rollno);
+                        st3.setString(2, forSqlexam);
+                        ResultSet rs3 = st3.executeQuery();
                         if (rs3.next()) {
                             bonus = 0;
                         }

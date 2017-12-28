@@ -41,11 +41,12 @@
                 <%
                 
                 Connection con = new dbcon().getConnection(dept);
-        Statement st=con.createStatement();
-        Statement st1=con.createStatement();
-        Statement st2=con.createStatement();
+     //   Statement st=con.createStatement();
+       // Statement st1=con.createStatement();
+      //  Statement st2=con.createStatement();
         String sql1="select * from hourattendence";
-        ResultSet rs1=st1.executeQuery(sql1);
+        PreparedStatement st1=con.prepareStatement(sql1);
+        ResultSet rs1=st1.executeQuery();
        
         int flag=0;
         String sql;
@@ -62,124 +63,209 @@
         {
             case '0':if(flag==0)
             {
-                     sql="insert into hourattendence(rollno,date,sem,zero) values('"+rollno+"','"+date+"','"+sem+"','"+subject+"')";
-                     st.executeUpdate(sql);
-                     st2.executeUpdate("insert into overallattendence(rollno,date,sem) values('"+rollno+"','"+date+"','"+sem+"')");
+                     PreparedStatement st=con.prepareStatement("insert into hourattendence(rollno,date,sem,zero) values(?,?,?,?)");
+                     st.setString(1, rollno);
+                     st.setString(2, date);
+                     st.setString(3, sem);
+                     st.setString(4, subject);
+                     st.executeUpdate();
                      
+                     PreparedStatement st2=con.prepareStatement("insert into overallattendence(rollno,date,sem) values(?,?,?)");
+                     st2.setString(1, rollno);
+                     st2.setString(2, date);
+                     st2.setString(3, sem);
+                     st2.executeUpdate();
             }
             else
             {
-                     sql="update hourattendence set zero='"+subject+"' where rollno='"+rollno+"' and date='"+date+"'";
-                     
-                     st.executeUpdate(sql);
+                     sql="update hourattendence set zero=? where rollno=? and date=?";
+                     PreparedStatement stt=con.prepareStatement(sql);
+                     stt.setString(1, subject);
+                     stt.setString(2, rollno);
+                     stt.setString(3, date);
+                     stt.executeUpdate();
             }
                      break;
             
             case '1':if(flag==0)
             {
-                     sql="insert into hourattendence(rollno,date,sem,one) values('"+rollno+"','"+date+"','"+sem+"','"+subject+"')";
-                     st.executeUpdate(sql);
+                   
+                     PreparedStatement st=con.prepareStatement("insert into hourattendence(rollno,date,sem,one) values(?,?,?,?)");
+                     st.setString(1, rollno);
+                     st.setString(2, date);
+                     st.setString(3, sem);
+                     st.setString(4, subject);
+                     st.executeUpdate();
             }
             else
             {
-                     sql="update hourattendence set one='"+subject+"' where rollno='"+rollno+"' and date='"+date+"'";
-                     st.executeUpdate(sql);
+                    
+                     sql="update hourattendence set one=? where rollno=? and date=?";
+                     PreparedStatement stt=con.prepareStatement(sql);
+                     stt.setString(1, subject);
+                     stt.setString(2, rollno);
+                     stt.setString(3, date);
+                      stt.executeUpdate();
             }
                      break;
             
             case '2':if(flag==0)
             {
-                     sql="insert into hourattendence(rollno,date,sem,two) values('"+rollno+"','"+date+"','"+sem+"','"+subject+"')";
-                     st.executeUpdate(sql);
+                     PreparedStatement st=con.prepareStatement("insert into hourattendence(rollno,date,sem,two) values(?,?,?,?)");
+                     st.setString(1, rollno);
+                     st.setString(2, date);
+                     st.setString(3, sem);
+                     st.setString(4, subject);
+                     st.executeUpdate();
             }
             else
             {
-                     sql="update hourattendence set two='"+subject+"' where rollno='"+rollno+"' and date='"+date+"'";
-                     st.executeUpdate(sql);
+                     sql="update hourattendence set two=? where rollno=? and date=?";
+                     PreparedStatement stt=con.prepareStatement(sql);
+                     stt.setString(1, subject);
+                     stt.setString(2, rollno);
+                     stt.setString(3, date);
+                      stt.executeUpdate();
             }
                      break;
             
             case '3':if(flag==0)
             {
-                     sql="insert into hourattendence(rollno,date,sem,three) values('"+rollno+"','"+date+"','"+sem+"','"+subject+"')";
-                     st.executeUpdate(sql);
+                     PreparedStatement st=con.prepareStatement("insert into hourattendence(rollno,date,sem,three) values(?,?,?,?)");
+                     st.setString(1, rollno);
+                     st.setString(2, date);
+                     st.setString(3, sem);
+                     st.setString(4, subject);
+                     st.executeUpdate();
             }
             else
             {
-                     sql="update hourattendence set three='"+subject+"' where rollno='"+rollno+"' and date='"+date+"'";
-                     st.executeUpdate(sql);
+                     sql="update hourattendence set three=? where rollno=? and date=?";
+                     PreparedStatement stt=con.prepareStatement(sql);
+                     stt.setString(1, subject);
+                     stt.setString(2, rollno);
+                     stt.setString(3, date);
+                      stt.executeUpdate();
             }
                      break;
             
             case '4':if(flag==0)
             {
-                     sql="insert into hourattendence(rollno,date,sem,four) values('"+rollno+"','"+date+"','"+sem+"','"+subject+"')";
-                     st.executeUpdate(sql);
+                     PreparedStatement st=con.prepareStatement("insert into hourattendence(rollno,date,sem,four) values(?,?,?,?)");
+                     st.setString(1, rollno);
+                     st.setString(2, date);
+                     st.setString(3, sem);
+                     st.setString(4, subject);
+                     st.executeUpdate();
             }
             else
             {
-                     sql="update hourattendence set four='"+subject+"' where rollno='"+rollno+"' and date='"+date+"'";
-                     st.executeUpdate(sql);
+                     sql="update hourattendence set four=? where rollno=? and date=?";
+                     PreparedStatement stt=con.prepareStatement(sql);
+                     stt.setString(1, subject);
+                     stt.setString(2, rollno);
+                     stt.setString(3, date);
+                      stt.executeUpdate();
             }
                      break;
             
             case '5':if(flag==0)
             {
-                     sql="insert into hourattendence(rollno,date,sem,five) values('"+rollno+"','"+date+"','"+sem+"','"+subject+"')";
-                     st.executeUpdate(sql);
+                     PreparedStatement st=con.prepareStatement("insert into hourattendence(rollno,date,sem,five) values(?,?,?,?)");
+                     st.setString(1, rollno);
+                     st.setString(2, date);
+                     st.setString(3, sem);
+                     st.setString(4, subject);
+                     st.executeUpdate();
             }
             else
             {
-                     sql="update hourattendence set five='"+subject+"' where rollno='"+rollno+"' and date='"+date+"'";
-                     st.executeUpdate(sql);
+                     sql="update hourattendence set five=? where rollno=? and date=?";
+                     PreparedStatement stt=con.prepareStatement(sql);
+                     stt.setString(1, subject);
+                     stt.setString(2, rollno);
+                     stt.setString(3, date);
+                      stt.executeUpdate();
             }
                      break;
             
             case '6':if(flag==0)
             {
-                     sql="insert into hourattendence(rollno,date,sem,six) values('"+rollno+"','"+date+"','"+sem+"','"+subject+"')";
-                     st.executeUpdate(sql);
+                     PreparedStatement st=con.prepareStatement("insert into hourattendence(rollno,date,sem,six) values(?,?,?,?)");
+                     st.setString(1, rollno);
+                     st.setString(2, date);
+                     st.setString(3, sem);
+                     st.setString(4, subject);
+                     st.executeUpdate();
             }
             else
             {
-                     sql="update hourattendence set six='"+subject+"' where rollno='"+rollno+"' and date='"+date+"'";
-                     st.executeUpdate(sql);
+                     sql="update hourattendence set six=? where rollno=? and date=?";
+                     PreparedStatement stt=con.prepareStatement(sql);
+                     stt.setString(1, subject);
+                     stt.setString(2, rollno);
+                     stt.setString(3, date);
+                      stt.executeUpdate();
             }
                      break;
             
             case '7':if(flag==0)
             {
-                     sql="insert into hourattendence(rollno,date,sem,seven) values('"+rollno+"','"+date+"','"+sem+"','"+subject+"')";
-                     st.executeUpdate(sql);
+                     PreparedStatement st=con.prepareStatement("insert into hourattendence(rollno,date,sem,seven) values(?,?,?,?)");
+                     st.setString(1, rollno);
+                     st.setString(2, date);
+                     st.setString(3, sem);
+                     st.setString(4, subject);
+                     st.executeUpdate();
             }
             else
             {
-                     sql="update hourattendence set seven='"+subject+"' where rollno='"+rollno+"' and date='"+date+"'";
-                     st.executeUpdate(sql);
+                     sql="update hourattendence set seven=? where rollno=? and date=?";
+                     PreparedStatement stt=con.prepareStatement(sql);
+                     stt.setString(1, subject);
+                     stt.setString(2, rollno);
+                     stt.setString(3, date);
+                      stt.executeUpdate();
             }
                      break;
             
             case '8':if(flag==0)
             {
-                     sql="insert into hourattendence(rollno,date,sem,eight) values('"+rollno+"','"+date+"','"+sem+"','"+subject+"')";
-                     st.executeUpdate(sql);
+                     PreparedStatement st=con.prepareStatement("insert into hourattendence(rollno,date,sem,eight) values(?,?,?,?)");
+                     st.setString(1, rollno);
+                     st.setString(2, date);
+                     st.setString(3, sem);
+                     st.setString(4, subject);
+                     st.executeUpdate();
             }
             else
             {
-                     sql="update hourattendence set eight='"+subject+"' where rollno='"+rollno+"' and date='"+date+"'";
-                     st.executeUpdate(sql);
+                     sql="update hourattendence set eight=? where rollno=? and date=?";
+                     PreparedStatement stt=con.prepareStatement(sql);
+                     stt.setString(1, subject);
+                     stt.setString(2, rollno);
+                     stt.setString(3, date);
+                      stt.executeUpdate();
             }
                      break;
             
             case '9':if(flag==0)
             {
-                     sql="insert into hourattendence(rollno,date,sem,nine) values('"+rollno+"','"+date+"','"+sem+"','"+subject+"')";
-                     st.executeUpdate(sql);
+                     PreparedStatement st=con.prepareStatement("insert into hourattendence(rollno,date,sem,nine) values(?,?,?,?)");
+                     st.setString(1, rollno);
+                     st.setString(2, date);
+                     st.setString(3, sem);
+                     st.setString(4, subject);
+                     st.executeUpdate();
             }
             else
             {
-                     sql="update hourattendence set nine='"+subject+"' where rollno='"+rollno+"' and date='"+date+"'";
-                     st.executeUpdate(sql);
+                     sql="update hourattendence set nine=? where rollno=? and date=?";
+                     PreparedStatement stt=con.prepareStatement(sql);
+                     stt.setString(1, subject);
+                     stt.setString(2, rollno);
+                     stt.setString(3, date);
+                      stt.executeUpdate();
             }
                      break;    
         }
@@ -187,15 +273,16 @@
         
         <%
             
-                            if(st!=null)
-                            st.close();
+                    //        if(st!=null)
+                      //      st.close();
                             if(st1!=null)
                                 st1.close();
-                            if(st2!=null)
-                                st2.close();
+                          //  if(st2!=null)
+                        //        st2.close();
                               if(con!=null)
                                 ;//con.close();}
         }
+}
        /* Connection con = new dbcon().getConnection(dept);
         Statement st=con.createStatement();
         
