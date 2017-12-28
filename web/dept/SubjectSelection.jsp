@@ -165,7 +165,7 @@
 
                                                 String departmentname = Find.dept(username);
 
-                                                connection = new dbcon().getConnection("portal");
+                                                connection = new dbcon().getConnection("sjitportal");
                                                 //statement = connection.createStatement();
                                                 PreparedStatement statement=connection.prepareStatement("select distinct(regulation) from regulations ");
                                                 ResultSet rs = statement.executeQuery();

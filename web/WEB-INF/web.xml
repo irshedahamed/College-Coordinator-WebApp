@@ -4,6 +4,29 @@
         <filter-name>ImageFilter</filter-name>
         <filter-class>Filter.ImageFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>EntryFilter</filter-name>
+        <filter-class>Filter.EntryFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EntryFilter</filter-name>
+        <url-pattern>/account/*</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
+        <url-pattern>/staff/*</url-pattern>
+        <url-pattern>/student/*</url-pattern>
+        <url-pattern>/firstyr/*</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
+        <url-pattern>/reception/*</url-pattern>
+        <url-pattern>/dept/*</url-pattern>
+        <url-pattern>/exam/*</url-pattern>
+        <url-pattern>/yearincharge/*</url-pattern>
+        <url-pattern>/hostel/*</url-pattern>
+        <url-pattern>/staffincharge/*</url-pattern>
+        <url-pattern>/placement/*</url-pattern>
+        <url-pattern>/transport/*</url-pattern>
+        <url-pattern>/principal/*</url-pattern>
+        <url-pattern>/idcard/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>ImageFilter</filter-name>
         <url-pattern>/LocalGuardian25/*</url-pattern>
