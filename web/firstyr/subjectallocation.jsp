@@ -1,3 +1,4 @@
+<%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
@@ -962,17 +963,20 @@
                                                     <%                    //int i=Integer.parseInt(request.getParameter("val"));
                                                         Class.forName("com.mysql.jdbc.Driver").newInstance();
                                                         Connection connection = new dbcon().getConnection("first");
-                                                        Statement statement = connection.createStatement();
-                                                        String sql = "";
+                                                       // Statement statement = connection.createStatement();
+                                                       PreparedStatement statement =null;
+                                                       String sql = "";
                                                         ResultSet rs = null;
 
                                                         if (username.contains("mat")) {
                                                             sql = "select staffid,staffname from staff_table where staffid like '%ma%' or staffid like '%MA%' or staffid like '%EN%' or staffid like '%en%'";
+                                                       statement=connection.prepareStatement(sql);
                                                         } else {
                                                             sql = "select staffid,staffname from staff_table where staffid like '%PY%' or staffid like '%py%' or staffid like '%sc%' or staffid like '%SC%'";
+                                                        statement=connection.prepareStatement(sql);
                                                         }
 
-                                                        rs = statement.executeQuery(sql);
+                                                        rs = statement.executeQuery();
 
                                                         String staffname, staffid = "";
 
@@ -1186,20 +1190,22 @@
                                                         <%
                                                             try {
                                                                 Connection conbatch = new dbcon().getConnection("sjitportal");
-                                                                Statement stmt = conbatch.createStatement();
-                                                                ResultSet rsbatch = stmt.executeQuery("select batch from regulations");
+                                                             //   Statement stmt = conbatch.createStatement();
+                                                             List<Batch> blist=Batch.getAll();
+                                                          //   ResultSet rsbatch = stmt.executeQuery("select batch from regulations");
                                                                 String batch = null;
-                                                                rs.beforeFirst();
-                                                                while (rsbatch.next()) {
-                                                                    batch = rsbatch.getString("batch");
+                                                              //  rs.beforeFirst();
+                                                                //while (rsbatch.next()) 
+                                                                for(Batch b : blist){
+                                                                    batch = b.getBatch();
                                                         %>
                                                         <option value=<%=batch%>><%=batch%></option>
                                                         <%
                                                             }
 
-                                                            if (stmt != null) {
-                                                                stmt.close();
-                                                            }
+                                                            //if (stmt != null) {
+                                                              //  stmt.close();
+                                                           // }
                                                             if (conbatch != null) {
                                                                 ;//conbatch.close();
                                                             }

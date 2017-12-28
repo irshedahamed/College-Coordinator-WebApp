@@ -347,15 +347,18 @@
                                                         //int i=Integer.parseInt(request.getParameter("val"));
                                                         Class.forName("com.mysql.jdbc.Driver").newInstance();
                                                         Connection connection = new dbcon().getConnection("first");
-                                                        Statement statement = connection.createStatement();
-                                                        String sql;
+                                                       // Statement statement = connection.createStatement();
+                                                       PreparedStatement statement=null; 
+                                                       String sql;
                                                         if (username.contains("mat")) {
                                                             sql = "select staffid,staffname from staff_table where staffid like '%ma%' or staffid like '%MA%' or staffid like '%EN%' or staffid like '%en%'";
+                                                       statement=connection.prepareStatement(sql);
                                                         } else {
                                                             sql = "select staffid,staffname from staff_table where staffid like '%PY%' or staffid like '%py%' or staffid like '%sc%' or staffid like '%SC%'";
+                                                        statement=connection.prepareStatement(sql);
                                                         }
 
-                                                        ResultSet rs = statement.executeQuery(sql);
+                                                        ResultSet rs = statement.executeQuery();
 
                                                         String staffname, staffid = "";
 

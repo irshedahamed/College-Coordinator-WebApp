@@ -16,7 +16,7 @@
     String index1 = request.getParameter("index1");
     Class.forName("com.mysql.jdbc.Driver").newInstance();
     Connection connection = new dbcon().getConnection(Find.sdept(username));
-    Statement statement = connection.createStatement();
+    //Statement statement = connection.createStatement();
     if (index.equals("i1")) {
 %>
 <label class="input">
@@ -27,7 +27,10 @@
             <option disabled selected>Select</option>
             <%
                 //int i=Integer.parseInt(request.getParameter("val"));
-                ResultSet rs = statement.executeQuery("select distinct(batch) from subject_allocation where dept='" + request.getParameter("index1") + "' and staffid='" + username + "'");
+                PreparedStatement statement=connection.prepareStatement("select distinct(batch) from subject_allocation where dept=? and staffid=?");
+                statement.setString(1, index1);
+                statement.setString(2, username);
+                ResultSet rs = statement.executeQuery();
 
                 String batch;
 
@@ -57,8 +60,11 @@
                 <%
                     //int i=Integer.parseInt(request.getParameter("val"));
                     String batch = request.getParameter("index2");
-
-                    ResultSet rs1 = statement.executeQuery("select distinct(sem) from subject_allocation where dept='" + request.getParameter("index1") + "' and staffid='" + username + "' and batch='" + batch + "'");
+                    PreparedStatement statement=connection.prepareStatement("select distinct(sem) from subject_allocation where dept=? and staffid=? and batch=?");
+                    statement.setString(1, index1);
+                    statement.setString(2, username);
+                    statement.setString(3, batch);
+                    ResultSet rs1 = statement.executeQuery();
 
                     String sem;
 
@@ -92,8 +98,12 @@
                     //int i=Integer.parseInt(request.getParameter("val"));
                     String batch = request.getParameter("index2");
                     String sem = request.getParameter("index3");
-
-                    ResultSet rs1 = statement.executeQuery("select distinct(sec) from subject_allocation where dept='" + request.getParameter("index1") + "' and staffid='" + username + "' and batch='" + batch + "' and sem='" + sem + "'");
+                    PreparedStatement statement=connection.prepareStatement("select distinct(sec) from subject_allocation where dept=? and staffid=? and batch=? and sem=?");
+                    statement.setString(1, index1);
+                    statement.setString(2, username);
+                    statement.setString(3, batch);
+                    statement.setString(4, sem);
+                    ResultSet rs1 = statement.executeQuery();
 
                     String section;
 
@@ -127,8 +137,13 @@
                     String batch = request.getParameter("index2");
                     String section = request.getParameter("index4");
                     String sem = request.getParameter("index3");
-
-                    ResultSet rs1 = statement.executeQuery("select * from subject_allocation where dept='" + request.getParameter("index1") + "' and batch='" + batch + "' and staffid='" + username + "' and sem='" + sem + "' and sec='" + section + "'");
+                    PreparedStatement statement=connection.prepareStatement("select * from subject_allocation where dept=? and batch=? and staffid=? and sem=? and sec=?");
+                    statement.setString(1, index1);
+                    statement.setString(2, batch);
+                    statement.setString(3, username);
+                    statement.setString(4, sem);
+                    statement.setString(5, section);
+                    ResultSet rs1 = statement.executeQuery();
 
                     String sub;
 
@@ -186,9 +201,9 @@
     </label></label>
     <%
                     }
-        if (statement != null) {
-            statement.close();
-        }
+  //      if (statement != null) {
+    //        statement.close();
+      //  }
         if (connection != null) {
             connection.close();
         }

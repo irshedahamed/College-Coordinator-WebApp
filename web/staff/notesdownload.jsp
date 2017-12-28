@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="General.Batch"%>
 <%@page import="General.AcademicYear"%>
 <%@page import="Actor.Staff"%>
@@ -76,10 +77,11 @@
 <div id="sidebar-wrapper">
     
     <% 
-    Connection con=new dbcon().getConnection(Find.sdept(username));
-    Statement stmtd=con.createStatement();
-    ResultSet rsd=stmtd.executeQuery("select * from staff_general where staffid='"+username+"'");
-    if(rsd.next())
+   Connection con=new dbcon().getConnection(Find.sdept(username));
+  //  Statement stmtd=con.createStatement();
+    //ResultSet rsd=stmtd.executeQuery("select * from staff_general where staffid='"+username+"'");
+    Staff s=Staff.getByid(username);
+    if(s!=null)
     {
     %>
     <ul class="sidebar-nav">
@@ -102,7 +104,7 @@
                 <li >
                 
                     <center>
-                    <a href="#"><b><%=rsd.getString("tittle")+rsd.getString("name")%></b></a>
+                    <a href="#"><b><%=s.getName()%></b></a>
                     </center>
                     </li>
                 <li>
@@ -112,7 +114,7 @@
                     </li>
                 <li >
                 <center>
-                    <a href="#"><b><%=rsd.getString("desg")%></b></a>
+                    <a href="#"><b><%=s.getDesg()%></b></a>
                 </center>
                 </li>
                 <li >
@@ -124,10 +126,10 @@
         </div>
 		        
 	<%}
-        if(stmtd!=null)
-            stmtd.close();
-        if(con!=null)
-            ;//con.close();
+      //  if(stmtd!=null)
+        //    stmtd.close();
+        //if(con!=null)
+          //  con.close();
         %>
 		
 		<header id="page-header"  class="fixed-header">
@@ -195,7 +197,7 @@
 </li>
 
 <%
-Staff s = new Staff(username);
+//Staff s = new Staff(username);
 if(s.getCouncillorDetails().getBatch()!=null)
 {
 %>
@@ -263,8 +265,26 @@ if(s.getCouncillorDetails().getBatch()!=null)
                 <label class="select">
             
            <select id="batch" name="batch">
-            <%= Batch.getHTMLContent()%>
-               </select>
+            <%
+                Connection conbatch = new dbcon().getConnection("sjitportal");
+                //    Statement stmt = conbatch.createStatement();
+                //PreparedStatement stmt=conbatch.prepareStatement("select batch from regulations");
+                List<Batch> blist=Batch.getAll();
+                //ResultSet rs=stmt.executeQuery();
+                    String batch=null;
+                  //  rs.beforeFirst();
+                    //while(rs.next())
+                    for(Batch b : blist){
+                        batch=b.getBatch();
+                %>
+                <option value=<%=batch%>><%=batch%></option>
+                <%
+                }
+            //      if(stmt!=null)
+              //              stmt.close();
+                         //     if(conbatch!=null)
+                           //     conbatch.close();
+                %></select>
                 
                 <%
     }
@@ -399,10 +419,10 @@ if(s.getCouncillorDetails().getBatch()!=null)
     {
         response.sendRedirect("../index.jsp");
     }
-  if(sttt!=null)
-                            sttt.close();
-                              if(connn!=null)
-                                ;//connn.close();
+//  if(sttt!=null)
+  //                          sttt.close();
+    //                          if(connn!=null)
+      //                          connn.close();
     }
 catch(Exception e)
     {

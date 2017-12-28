@@ -4,6 +4,7 @@
     Author     : aravind
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.io.File"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -182,12 +183,15 @@ and open the template in the editor.
                 </thead>
 
                 <%
-                    String sql2 = "select * from student_personal where batch='" + batch + "' and sec='" + sec + "' order by rollno";
+                    //String sql2 = ;
                     Connection con = new dbcon().getConnection(dept);
 
-                    Statement st = con.createStatement();
-
-                    ResultSet rs = st.executeQuery(sql2);
+                 //   Statement st = con.createStatement();
+                 PreparedStatement st=con.prepareStatement("select * from student_personal where batch='" + batch + "' and sec='" + sec + "' order by rollno");
+                 st.setString(1, batch);
+                 st.setString(2, sec);
+                 
+                    ResultSet rs = st.executeQuery();
 
                     while (rs.next()) {
                         rollno = rs.getString("rollno");
@@ -200,9 +204,13 @@ and open the template in the editor.
                     <td>
                         <%
 
-                            sql2 = "select * from overallattendence where rollno='" + rollno + "' and sem='" + sem + "'";
-                            Statement st1 = con.createStatement();
-                            ResultSet rs2 = st1.executeQuery(sql2);
+                            //sql2 = ;
+                            //Statement st1 = con.createStatement();
+                            PreparedStatement st1=con.prepareStatement("select * from overallattendence where rollno='" + rollno + "' and sem='" + sem + "'");
+                            st1.setString(1, rollno);
+                            st1.setString(2, sem);
+                           
+                            ResultSet rs2 = st1.executeQuery();
                             int count = 0;
 
                             while (rs2.next()) {

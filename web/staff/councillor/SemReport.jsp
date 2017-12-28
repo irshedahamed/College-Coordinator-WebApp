@@ -69,10 +69,12 @@
         <div id="wrapper" class="toggled">
             <div id="sidebar-wrapper">
 
-                <%        Connection con = new dbcon().getConnection(Find.sdept(username));
-                    Statement stmtd = con.createStatement();
-                    ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
-                    if (rsd.next()) {
+                <%      Connection con=new dbcon().getConnection(Find.sdept(username));
+   // Statement stmtd=con.createStatement();
+   // ResultSet rsd=stmtd.executeQuery("select * from staff_general where staffid='"+username+"'");
+   Staff s=Staff.getByid(username);
+   if(s!= null)
+    {
                 %>
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
@@ -91,35 +93,35 @@
                     <br>
                     <br>
 
-                    <li>
-
+                <li>
+                
                     <center>
-                        <a href="#"><b><%=rsd.getString("tittle") + rsd.getString("name")%></b></a>
+                    <a href="#"><b><%=s.getName()%></b></a>
                     </center>
                     </li>
-                    <li>
+                <li>
                     <center>
-                        <a href="#"><b><%=username%></b></a>
+                    <a href="#"><b><%=username%></b></a>
                     </center>
                     </li>
-                    <li >
-                    <center>
-                        <a href="#"><b><%=rsd.getString("desg")%></b></a>
-                    </center>
-                    </li>
-                    <li >
-                    <center>
-                        <a href="#"><b><%=Find.sdept(username).toUpperCase()%></b></a>
-                    </center>
-                    </li>
-                </ul>
-            </div>
-	        
+                <li >
+                <center>
+                    <a href="#"><b><%=s.getDesg()%></b></a>
+                </center>
+                </li>
+                <li >
+                <center>
+                    <a href="#"><b><%=Find.sdept(username).toUpperCase()%></b></a>
+                </center>
+                </li>
+            </ul>
+        </div>
+		        
 	<%}
-        if(stmtd!=null)
-            stmtd.close();
+      //  if(stmtd!=null)
+        //    stmtd.close();
         if(con!=null)
-            ;//con.close();
+            con.close();
         %>
 		
 		<header id="page-header"  class="fixed-header">

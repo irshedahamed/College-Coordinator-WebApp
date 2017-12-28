@@ -183,8 +183,10 @@
                                                 <%
                                                     Class.forName("com.mysql.jdbc.Driver").newInstance();
                                                     Connection connection = new dbcon().getConnection(Find.sdept(username));
-                                                    Statement statement = connection.createStatement();
-                                                    ResultSet rs = statement.executeQuery("select * from staff_personal where staffid=" + "'" + username + "'");
+                                                   // Statement statement = connection.createStatement();
+                                                   PreparedStatement statement=connection.prepareStatement("select * from staff_personal where staffid=" + "?");
+                                                   statement.setString(1,  username);
+                                                   ResultSet rs = statement.executeQuery();
                                                     String dob = "", bg = "", father = "", mother = "", caste = "", relegion = "", nation = "";
 
                                                     if (rs.next()) {
@@ -239,87 +241,90 @@
                                             <TABLE WIDTH=30% align ="center" border="1">
                                                 <%
                                                     Class.forName("com.mysql.jdbc.Driver").newInstance();
+              PreparedStatement st1=connection.prepareStatement("select * from staff_files where staffid=?");
+              st1.setString(1, username);
+             rs= st1.executeQuery();
+             String pan="",aadhar="",pf="",passport="";
+             
+              if(rs.next())
+              {
+                  pan=rs.getString("panno");
+                  aadhar=rs.getString("aadharno");
+                  passport=rs.getString("passno");
+                  pf=rs.getString("pfno");
+                  %> 
+                  <TR CLASS="defaultText odd-row">
+               <TD><b>Provident Fund Number</b></TD>
+               <TD><%= pf %></TD>
+           </TR>
+           <%if(aadhar.length()>0 && aadhar!=null)
+           {
+           %>
+		   <TR CLASS="defaultText">
+               <TD><b>AADHAR Card Number</b></TD>
+               <TD><a href="../StaffFileDownload?staffid=<%=username%>&option=aadharsc&ext=<%= aadhar.substring(aadhar.indexOf('.'),aadhar.length()) %>"><%= aadhar.substring(0, aadhar.indexOf('.')) %></a></TD>
+           </TR>
+	<%
+        }
+        %>	   
+           <%
+               if(pan.length()>0 && pan!=null)
+           {
+           %>
 
-                                                    rs = statement.executeQuery("select * from staff_files where staffid=" + "'" + username + "'");
-                                                    String pan = "", aadhar = "", pf = "", passport = "";
+        <TR CLASS="defaultText odd-row">
+               <TD><b>PAN Card Number</b></TD>
+               <TD><a href="../StaffFileDownload?staffid=<%=username%>&option=pansc&ext=<%= pan.substring(pan.indexOf('.'),pan.length()) %>"><%= pan.substring(0, pan.indexOf('.')) %></a></TD>
+          </TR>
+	<%}%>
+                   <%
+                       if(passport.length()>0 && passport!=null)
+           {
+           %>
 
-                                                    if (rs.next()) {
-                                                        pan = rs.getString("panno");
-                                                        aadhar = rs.getString("aadharno");
-                                                        passport = rs.getString("passno");
-                                                        pf = rs.getString("pfno");
-                                                %> 
-                                                <TR CLASS="defaultText odd-row">
-                                                    <TD><b>Provident Fund Number</b></TD>
-                                                    <TD><%= pf%></TD>
-                                                </TR>
-                                                <%if (aadhar.length() > 0 && aadhar != null) {
-                                                %>
-                                                <TR CLASS="defaultText">
-                                                    <TD><b>AADHAR Card Number</b></TD>
-                                                    <TD><a href="../StaffFileDownload?staffid=<%=username%>&option=aadharsc&ext=<%= aadhar.substring(aadhar.indexOf('.'), aadhar.length())%>"><%= aadhar.substring(0, aadhar.indexOf('.'))%></a></TD>
-                                                </TR>
-                                                <%
-                                                    }
-                                                %>	   
-                                                <%
-                                                    if (pan.length() > 0 && pan != null) {
-                                                %>
-
-                                                <TR CLASS="defaultText odd-row">
-                                                    <TD><b>PAN Card Number</b></TD>
-                                                    <TD><a href="../StaffFileDownload?staffid=<%=username%>&option=pansc&ext=<%= pan.substring(pan.indexOf('.'), pan.length())%>"><%= pan.substring(0, pan.indexOf('.'))%></a></TD>
-                                                </TR>
-                                                <%}%>
-                                                <%
-                                                    if (passport.length() > 0 && passport != null) {
-                                                %>
-
-                                                <TR CLASS="defaultText">
-                                                    <TD><b>PASSPORT  Number</b></TD>
-                                                    <TD><a href="../StaffFileDownload?staffid=<%=username%>&option=passsc&ext=<%= passport.substring(passport.indexOf('.'), passport.length())%>"><%= passport.substring(0, passport.indexOf('.'))%></a></TD>
-                                                </TR>
-                                                <%
-                                                    }
-                                                %>
-                                            </TABLE> <br>
-                                        </center>
-                                    </div>
-                                </div>
-
-                                <%
-                                    }
-                                    if (statement != null) {
-                                        statement.close();
-                                    }
-                                    if (connection != null) {
-                                        connection.close();
-                                    }
-                                %>
-                            </div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li></ul></div>
-                    </div></div></section>
-
-        </section>
-        <footer id="footer-widgets">
-            <div class="container clearfix">
-                Powered by St.Joseph's
-            </div>
-        </footer>
-        <!-- #page-container -->
-    </div>
+          <TR CLASS="defaultText">
+                <TD><b>PASSPORT  Number</b></TD>
+               <TD><a href="../StaffFileDownload?staffid=<%=username%>&option=passsc&ext=<%= passport.substring(passport.indexOf('.'),passport.length()) %>"><%= passport.substring(0, passport.indexOf('.')) %></a></TD>
+           </TR>
+           <%
+           }
+           %>
+          </TABLE> <br>
+</center>
 </div>
-<footer id="page-footer">
-    <div class="container clearfix">
-        <div class="copy"></div>
-        <!--<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>-->
-        <nav id="footer-nav">
-            <ul id="menu-footer-menu" class="menu">
-                <li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="../credits.html">Credits</a></li>
-                <li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-770"><a href="../index.jsp">Logout</a></li>
+</div>
+           	
+           <%
+               }
+                    //    if(statement!=null)
+                      //      statement.close();
+                        //      if(connection!=null)
+                          //      connection.close();
+           %>
+</div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li></ul></div>
+</div></div></section>
 
-            </ul>			</nav>
-    </div>
-</footer>
+</section>
+						<footer id="footer-widgets">
+			<div class="container clearfix">
+								Powered by St.Joseph's
+							</div>
+		</footer>
+			<!-- #page-container -->
+			</div>
+			</div>
+<footer id="page-footer">
+		<div class="container clearfix">
+			<div class="copy"></div>
+			<!--<button type="button" id="back-to-top"><span class="fa fa-angle-up"></span></button>-->
+			<nav id="footer-nav">
+				<ul id="menu-footer-menu" class="menu">
+<li id="menu-item-770" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-770"><a href="../credits.html">Credits</a></li>
+<li id="menu-item-788" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-770"><a href="../index.jsp">Logout</a></li>
+
+                                </ul>			</nav>
+		</div>
+	</footer>
 
 
 
@@ -327,34 +332,39 @@
 
 <script src="../js/jquery.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="../js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
 
-<!-- Menu Toggle Script -->
-<script>
-    $("#menu-toggle").click(function (e) {
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
     });
-    $("#menu-toggle1").click(function (e) {
+     $("#menu-toggle1").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
         ilass("toggled");
     });
-</script>
+    </script>
 
 
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
 <%
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-    } catch (Exception e) {
+    
+    }
+    else
+    {
+        response.sendRedirect("../index.jsp");
+    }
+    }
+catch(Exception e)
+    {
         e.printStackTrace();
         response.sendRedirect("../index.jsp");
     }
-
-%>
+    
+    %>
 </html>

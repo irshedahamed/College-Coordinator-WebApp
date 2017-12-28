@@ -15,7 +15,7 @@
                               String index1=request.getParameter("index1");
                               Class.forName("com.mysql.jdbc.Driver").newInstance();
                Connection connection = new dbcon().getConnection((String)request.getSession().getAttribute("deptname"));
-               Statement statement = connection.createStatement();
+             //  Statement statement = connection.createStatement();
             if(index.equals("i1"))
             {
                            %>
@@ -28,8 +28,8 @@
             <%
                     //int i=Integer.parseInt(request.getParameter("val"));
                     
-                    
-               ResultSet rs= statement.executeQuery("select distinct(batch) from subject_allocation ");
+               PreparedStatement statement=connection.prepareStatement("select distinct(batch) from subject_allocation ");
+               ResultSet rs= statement.executeQuery();
                    
               String batch;
                     
@@ -64,8 +64,9 @@
                 <%
                     //int i=Integer.parseInt(request.getParameter("val"));
                     String batch=request.getParameter("index2");
-                   
-             ResultSet rs1= statement.executeQuery("select distinct(sem) from subject_allocation where batch='"+batch+"'");
+              PreparedStatement st=connection.prepareStatement("select distinct(sem) from subject_allocation where batch=?");
+              st.setString(1, batch);
+             ResultSet rs1= st.executeQuery();
                    
               String sem;
                     
@@ -104,8 +105,10 @@
                     //int i=Integer.parseInt(request.getParameter("val"));
                     String batch=request.getParameter("index2");
                     String sem=request.getParameter("index3");
-                    
-               ResultSet rs1= statement.executeQuery("select distinct(sec) from subject_allocation where  batch='"+batch+"' and sem='"+sem+"'");
+                    PreparedStatement stt=connection.prepareStatement("select distinct(sec) from subject_allocation where  batch=? and sem=?");
+                    stt.setString(1, batch);
+                    stt.setString(2, sem);
+               ResultSet rs1= stt.executeQuery();
                    
               String section;
                     
@@ -144,8 +147,11 @@
                     String batch=request.getParameter("index2");
                     String section=request.getParameter("index4");
                     String sem=request.getParameter("index3");
-                    
-               ResultSet rs1= statement.executeQuery("select * from subject_allocation where batch='"+batch+"' and sem='"+sem+"' and sec='"+section+"'");
+                  PreparedStatement sttt=connection.prepareStatement("select * from subject_allocation where batch=? and sem=? and sec=?");
+                  sttt.setString(1, batch);
+                  sttt.setString(2, sem);
+                  sttt.setString(3, section);
+               ResultSet rs1= sttt.executeQuery();
                    
               String sub;
                     
@@ -208,8 +214,8 @@
                 </label></label>
             <%
             }
-                            if(statement!=null)
-                            statement.close();
+         //                   if(statement!=null)
+           //                 statement.close();
                               if(connection!=null)
                                 connection.close();
             

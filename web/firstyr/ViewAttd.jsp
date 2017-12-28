@@ -4,6 +4,8 @@
     Author     : Aravind Tyson
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="Actor.Student"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.*"%>
@@ -43,19 +45,27 @@
                             <%
 
                                 Connection con = new dbcon().getConnection(request.getParameter("dept"));
-                                Statement st = con.createStatement();
-                                Statement st1 = con.createStatement();
-                                Statement st2 = con.createStatement();
+//                                Statement st = con.createStatement();
+  //                              Statement st1 = con.createStatement();
+    //                            Statement st2 = con.createStatement();
 
                                 int count = 0;
-                                String sql = "select * from student_personal where batch='" + batch + "' and sec='" + sec + "' group by rollno";
-                                ResultSet rs = st.executeQuery(sql);
-                                ResultSet rs1, rs2;
+                                String sql = "select * from student_personal where batch=? and sec=? group by rollno";
+                                PreparedStatement  st=con.prepareStatement(sql);
+                                st.setString(1, batch);
+                                st.setString(2, sec);
+                                ResultSet rs = st.executeQuery();
+                             
+        
+                                
+                                     ResultSet rs1, rs2;
                                 String rollno = null, name = null, subject = null;
                                 //String[] str1=new String[100];
                                 //String[] str2=new String[100];
-                                String sql2 = "select * from subject_sem_table where sem='" + sem + "'";
-                                rs2 = st2.executeQuery(sql2);
+                                String sql2 = "select * from subject_sem_table where sem=?";
+                                PreparedStatement st2=con.prepareStatement(sql2);
+                                st2.setString(1, sem);
+                                rs2 = st2.executeQuery();
                                 while (rs2.next()) {
                             %>
                             <th><%=rs2.getString("subcode")%></th>
@@ -79,8 +89,11 @@
                         <td><%=name%></td>
                         <%
                             while (rs2.next()) {
-                                String sql1 = "select * from hourattendence where rollno='" + rn + "' and sem='" + sem + "'";
-                                rs1 = st1.executeQuery(sql1);
+                                String sql1 = "select * from hourattendence where rollno=? and sem=?";
+                                PreparedStatement st1=con.prepareStatement(sql1);
+                                st1.setString(1, rn);
+                                st1.setString(2, sem);
+                                rs1 = st1.executeQuery();
                                 subject = rs2.getString("subcode");
                                 count = 0;
                                 while (rs1.next()) {

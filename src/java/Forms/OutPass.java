@@ -213,8 +213,12 @@ public class OutPass {
     }
     
     public String getSMSContent(){
+        String gender = "She";
+        if(Student.getById(rollno).getSex().equalsIgnoreCase("male")){
+            gender = "He";
+        }
         if(Student.getById(rollno).getAccomodation().equalsIgnoreCase("hostel"))
-    return "Dear Parent, Based on  your request  outpass has been granted from "+Find.getFormattedDate(from)+"  to "+Find.getFormattedDate(LocalDate.parse(till).plusDays(1).toString().replace("-",""))+" 7 AM";
+    return "Dear Parent, Your Ward Has Been Granted Permission To Leave The Hostel On "+Find.getFormattedDate(from)+" , And  "+gender+" Should Return On Or Before "+Find.getFormattedDate(LocalDate.parse(till).plusDays(1).toString().replace("-",""))+" ( 7 AM )";
     else
             return null;
     }

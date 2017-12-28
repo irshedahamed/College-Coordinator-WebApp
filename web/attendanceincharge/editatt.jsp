@@ -40,8 +40,8 @@
                 <%
 
                     Connection con = null;
-                    Statement st = null;
-                    Statement st1 = null;
+                   // Statement st = null;
+               //     Statement st1 = null;
 
                     String dept = request.getParameter("dept");
                     try {
@@ -50,19 +50,24 @@
                         String sem = request.getParameter("sem");
 
                         con = new dbcon().getConnection(dept);
-                        st = con.createStatement();
-                        st1 = con.createStatement();
+                 //       st = con.createStatement();
+                   //     st1 = con.createStatement();
                         int count = 0;
-                        String sql = "select * from overallattendence where date='" + date + "'";
-                        ResultSet rs = st.executeQuery(sql);
+                        String sql = "select * from overallattendence where date=?";
+                        PreparedStatement st=con.prepareStatement(sql);
+                        st.setString(1, date);
+                        ResultSet rs = st.executeQuery();
 
                         while (rs.next()) {
 
                             String rollno = rs.getString("rollno");
                             String date1 = String.valueOf(rs.getDate("date"));
 
-                            sql = "select name from student_personal where rollno='" + rollno + "' and batch='" + batch + "' order by name";
-                            ResultSet rs1 = st1.executeQuery(sql);
+                            //sql = ;
+                            PreparedStatement st1=con.prepareStatement("select name from student_personal where rollno=? and batch=? order by name");
+                            st1.setString(1, rollno);
+                            st1.setString(2, batch);
+                            ResultSet rs1 = st1.executeQuery();
                             if (rs1.next()) {
 
                                 String name = rs1.getString("name");
@@ -95,12 +100,12 @@
                     } catch (Exception e) {
                         e.printStackTrace();
                     } finally {
-                        if (st != null) {
-                            st.close();
-                        }
-                        if (st1 != null) {
-                            st1.close();
-                        }
+               //         if (st != null) {
+                 //           st.close();
+                   //     }
+                     //   if (st1 != null) {
+                       //     st1.close();
+                     //   }
 
                         if (con != null) {
                             ;//con.close();

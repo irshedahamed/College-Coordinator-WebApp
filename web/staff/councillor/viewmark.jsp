@@ -4,6 +4,7 @@
     Author     : fedexfan
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="Actor.Councillor"%>
 <%@page import="Actor.Student"%>
 <%@page import="Actor.Staff"%>
@@ -80,10 +81,12 @@
     
     <% 
     Connection con=new dbcon().getConnection(Find.sdept(username));
-    Statement stmtd=con.createStatement();
-    ResultSet rsd=stmtd.executeQuery("select * from staff_general where staffid='"+username+"'");
-    if(rsd.next())
-    {
+   // Statement stmtd=con.createStatement();
+   //PreparedStatement stmtd=con.prepareStatement();
+   Staff s = Staff.getByid(username);
+   //ResultSet rsd=stmtd.executeQuery("select * from staff_general where staffid='"+username+"'");
+    //if(rsd.next())
+   // {
     %>
     <ul class="sidebar-nav">
                 <li class="sidebar-brand">
@@ -105,7 +108,7 @@
                 <li>
                 
                     <center>
-                    <a href="#"><b><%=rsd.getString("tittle")+rsd.getString("name")%></b></a>
+                    <a href="#"><b><%=s.getName()%></b></a>
                     </center>
                     </li>
                 <li>
@@ -115,7 +118,7 @@
                     </li>
                 <li >
                 <center>
-                    <a href="#"><b><%=rsd.getString("desg")%></b></a>
+                    <a href="#"><b><%=s.getDesg()%></b></a>
                 </center>
                 </li>
                 <li >
@@ -126,9 +129,9 @@
             </ul>
         </div>
 		        
-	<%}
-        if(stmtd!=null)
-            stmtd.close();
+	<%
+      //  if(stmtd!=null)
+        //    stmtd.close();
         if(con!=null)
             ;//con.close();
         %>
