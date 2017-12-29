@@ -39,10 +39,9 @@
             <div id="sidebar-wrapper">
 
                 <%        Connection con = new dbcon().getConnection(Find.sdept(username));
-                   // Statement stmtd = con.createStatement();
-                    Staff s=Staff.getByid(username);
-                   //ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
-                 //   if (rsd.next()) {
+                    Statement stmtd = con.createStatement();
+                    ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
+                    if (rsd.next()) {
                 %>
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
@@ -64,7 +63,7 @@
                     <li >
 
                     <center>
-                        <a href="#"><b><%=s.getName()%></b></a>
+                        <a href="#"><b><%=rsd.getString("tittle") + rsd.getString("name")%></b></a>
                     </center>
                     </li>
                     <li>
@@ -74,7 +73,7 @@
                     </li>
                     <li >
                     <center>
-                        <a href="#"><b><%=s.getDesg()%></b></a>
+                        <a href="#"><b><%=rsd.getString("desg")%></b></a>
                     </center>
                     </li>
                     <li >
@@ -85,10 +84,10 @@
                 </ul>
             </div>
 
-            <%//}
-                //if (stmtd != null) {
-                  //  stmtd.close();
-         //       }
+            <%}
+                if (stmtd != null) {
+                    stmtd.close();
+                }
                 if (con != null) {
                     ;//con.close();
                 }
@@ -159,7 +158,7 @@
                                     </li>
 
                                     <%
-           //                             Staff s = new Staff(username);
+                                        Staff s = new Staff(username);
                                         if (s.getCouncillorDetails().getBatch() != null) {
                                     %>
                                     <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="councillor/home.jsp">Councillor View</a>
@@ -183,32 +182,30 @@
                                                 <%
                                                     Class.forName("com.mysql.jdbc.Driver").newInstance();
                                                     Connection connection = new dbcon().getConnection(Find.sdept(username));
-                                              
-                                                    //     Statement statement = connection.createStatement();
-                                                 //   ResultSet rs = statement.executeQuery("select * from staff_general where staffid=" + "'" + username + "'");
-                                                   // String title = "", name = "", desg = "", doj = "", gender = "", add1 = "", add2 = "", city = "", state = "", pincode = "", padd1 = "", padd2 = "";
-                                                    //String pcity = "", pstate = "", ppincode = "", mobile1 = "", mobile2 = "", email = "", ll = "";
-                                                    //if (rs.next()) {
-                                                    String[] b = s.getName().split(".");
-                                                     String   title = b[0];
-                                                     String   name = b[1];
-                                                   String     desg = s.getDesg();
-                                                     String   doj = String.valueOf(s.getDoj());
-                                                      String  gender = s.getSex();
-                                                      String  add1 = s.getAdd1();
-                                                     String   add2 = s.getAdd2();
-                                                     String   city = s.getCity();
-                                                      String  state = s.getState();
-                                                      String  pincode = s.getPincode();
-                                                       String  padd1 = s.getPadd1();
-                                                      String   padd2 = s.getPadd2();
-                                                       String  pcity = s.getPcity();
-                                                      String  pstate = s.getPstate();
-                                                      String    ppincode = s.getPpincode();
-                                                      String  mobile1 = s.getMobile1();
-                                                      String  mobile2 = s.getMobile2();
-                                                      String  email = s.getEmail();
-                                                    String    ll = s.getLl();
+                                                    Statement statement = connection.createStatement();
+                                                    ResultSet rs = statement.executeQuery("select * from staff_general where staffid=" + "'" + username + "'");
+                                                    String title = "", name = "", desg = "", doj = "", gender = "", add1 = "", add2 = "", city = "", state = "", pincode = "", padd1 = "", padd2 = "";
+                                                    String pcity = "", pstate = "", ppincode = "", mobile1 = "", mobile2 = "", email = "", ll = "";
+                                                    if (rs.next()) {
+                                                        title = rs.getString("tittle");
+                                                        name = rs.getString("name");
+                                                        desg = rs.getString("desg");
+                                                        doj = String.valueOf(rs.getDate("doj"));
+                                                        gender = rs.getString("gender");
+                                                        add1 = rs.getString("add1");
+                                                        add2 = rs.getString("add2");
+                                                        city = rs.getString("city");
+                                                        state = rs.getString("state");
+                                                        pincode = rs.getString("pincode");
+                                                        padd1 = rs.getString("padd1");
+                                                        padd2 = rs.getString("padd2");
+                                                        pcity = rs.getString("pcity");
+                                                        pstate = rs.getString("pstate");
+                                                        ppincode = rs.getString("ppincode");
+                                                        mobile1 = rs.getString("mobile1");
+                                                        mobile2 = rs.getString("mobile2");
+                                                        email = rs.getString("email");
+                                                        ll = rs.getString("ll");
                                                 %> 
 
 
@@ -269,7 +266,7 @@
 
 
                                                 <%
-                                                    
+                                                    }
                                                 %>
                                             </TABLE> <br>
                                         </center>
@@ -281,7 +278,7 @@
                                             <TABLE WIDTH=30% align ="center" border="1"><br>
                                                 <TR CLASS="defaultText odd-row">
                                                     <TD><b>Address</b></TD>
-                                                      <TD><%= padd1%></TD>
+                                                    <TD><%= padd1%></TD>
                                                 </TR>
                                                 <TR CLASS="defaultText">
                                                     <TD><b></b></TD>
@@ -312,12 +309,12 @@
 
                                 <%
 
- //                                   if (statement != null) {
-   //                                     statement.close();
-     //                               }
-       //                             if (connection != null) {
-         //                               connection.close();
-           //                         }
+                                    if (statement != null) {
+                                        statement.close();
+                                    }
+                                    if (connection != null) {
+                                        connection.close();
+                                    }
                                 %>
                             </div><ul class="dm3-tabs-nav"><li><a href="#">1</a></li><li><a href="#">2</a></li></ul></div>
                     </div></div></section>
