@@ -75,7 +75,8 @@
                             </thead>
                             <%
 
-                                String username = session.getAttribute("username").toString();
+                                        String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
                                 String department = request.getParameter("dept");
 
@@ -88,7 +89,7 @@
                                 }
 
                                 for (String dept : depts) {
-                                    for (String s : General.Entry.getUnreportedList(date)) {
+                                    for (String s : General.Entry.getUnreportedList(date,clg)) {
                                         Student stu = Student.getById(s);
                                         String rollno = stu.getId();
                                         String regno = null;
@@ -97,12 +98,12 @@
                                         String name = stu.getName();
 
                                         String phone;
-                                        phone = Parent.getNumber(rollno);
-                                        OutPass o = OutPass.getbyIdReturnDate(rollno, date);
+                                        phone = Parent.getNumber(rollno,clg);
+                                        OutPass o = OutPass.getbyIdReturnDate(rollno, date,clg);
 
                                         if (Find.sdept(stu.getId()).equals(dept) && Hostel.AuthenticateAccess(username, stu)) {
 
-                                            String num = Parent.getNumber(rollno);
+                                            String num = Parent.getNumber(rollno,clg);
                             %>
 
                             <tr>

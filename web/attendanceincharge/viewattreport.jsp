@@ -14,20 +14,8 @@
 <!DOCTYPE html>
 <html>
     <%
-        try {
-
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type = rsss.getString("type");
-                }
-                if (type.equals("yearincharge")) {
+                    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
 
@@ -184,7 +172,7 @@ and open the template in the editor.
 
                 <%
                     //String sql2 = ;
-                    Connection con = new dbcon().getConnection(dept);
+                    Connection con = new dbcon(clg).getConnection(dept);
 
                  //   Statement st = con.createStatement();
                  PreparedStatement st=con.prepareStatement("select * from student_personal where batch='" + batch + "' and sec='" + sec + "' order by rollno");
@@ -260,23 +248,4 @@ and open the template in the editor.
     </center>
     <a href ="viewattreport.jsp?word=yes&sem=<%=sem%>&batch=<%=batch%>&section=<%=sec%>&dept=<%=dept%>" >Export to word</a>
 </body>
-<%
-
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        }
-
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-//        response.sendRedirect("../index.jsp");
-    }
-
-%>
 </html>

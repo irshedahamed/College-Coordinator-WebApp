@@ -39,9 +39,12 @@
 
                                         <tbody>
                                             <%
+                                                  String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+       
                                                 String dept = request.getParameter("dept");
                                                 String batch = request.getParameter("batch");
-                                                for (Student s : Student.getAll(dept, batch, "%")) {
+                                                for (Student s : Student.getAll(dept, batch, "%",clg)) {
                                                     // batch=rs.getString("batch");
 %>
                                             <tr>
@@ -54,7 +57,7 @@
                                                     <select id="section" name="update<%=s.getId()%>" required>
                                                         <option value="<%=s.getGeneral().getBoarding()%>"><%=s.getGeneral().getBoarding()%></option>
                                                         <option value="HOSTELER">HOSTELER</option>
-                                                        <%out.write(BoardingPoint.getHTMLContent()); %>
+                                                        <%out.write(BoardingPoint.getHTMLContent(clg)); %>
 
                                                     </select>
                                                 </td>

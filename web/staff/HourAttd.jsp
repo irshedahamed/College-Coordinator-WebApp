@@ -11,16 +11,8 @@
 <!DOCTYPE html>
 <html>
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-
+                  String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
     <head>
@@ -299,7 +291,7 @@
 
                                     </li>
 
-                                    <%    Staff s = new Staff(username);
+                                    <%    Staff s = new Staff(username,clg);
                                         if (s.getCouncillorDetails().getBatch() != null) {
                                     %>
                                     <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="councillor/home.jsp">Councillor View</a>
@@ -332,7 +324,7 @@
                                                                     <%
                                                                             //int i=Integer.parseInt(request.getParameter("val"));
                     Class.forName("com.mysql.jdbc.Driver").newInstance();
-              Connection connection = new dbcon().getConnection("cse");
+              Connection connection = new dbcon(clg).getConnection("cse");
             //  Statement statement = connection.createStatement();
               PreparedStatement statement= connection.prepareStatement("select distinct(dept) from subject_allocation where staffid='cs009'");
               ResultSet rs= statement.executeQuery();
@@ -517,22 +509,8 @@
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
 <%
 
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
 
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    
+        
 }
-}catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
 %>
 </html>

@@ -18,16 +18,8 @@
 
 <html>
     <%
-
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from student_login_details where rollno='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
+            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
                 session.setAttribute("deptname", Find.sdept(username));
                 MUResponse mu = (MUResponse) session.getAttribute("MUResponse");
@@ -134,7 +126,7 @@
                     if (request.getParameter("acyear") != null) {
                         f = Fee.Fee.getFeeById(s.getId(), request.getParameter("acyear"));
                     } else {
-                        f = Fee.Fee.getFeeById(s.getId());
+                        f = Fee.Fee.getFeeById(s.getId(),clg);
                     }
                     String bankcharge = "<br>Bank Charges";
                     String bankamount = "<br>" + bcharge;
@@ -222,22 +214,5 @@
             }</script>
     </body>
 
-    <%
-
-            } else {
-                response.sendRedirect("./index.jsp");
-            }
-            if (sttt != null) {
-                sttt.close();
-            }
-            if (connn != null) {
-                ;//connn.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("./index.jsp");
-        }
-
-
-    %>
+  
 </html>

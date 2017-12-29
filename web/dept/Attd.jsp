@@ -18,8 +18,11 @@
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/sky-forms.css" rel="stylesheet">
         <link rel="stylesheet" href="../css/jquery-ui1.css">
+        <%
+                        String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
-
+%>
 
         <!-- Custom CSS -->
         <script src="../js/jquery-1.10.2.js"></script>
@@ -128,7 +131,7 @@
                                                             <label class="select">
 
                                                                 <select id="batch" name="batch" required >
-                                                                    <%=Batch.getHTMLContent()%>
+                                                                    <%=Batch.getHTMLContent(clg)%>
 
 
                                                                 </select>

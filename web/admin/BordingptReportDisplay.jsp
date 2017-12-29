@@ -124,7 +124,9 @@ and open the template in the editor.
     <body>
         <%
             String dept = request.getParameter("dept");
-
+    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+       
             String batch = request.getParameter("batch");
 %>
     <center><h2>St. Joseph's Institute of Technology, Chennai-119</h2></center>
@@ -153,7 +155,7 @@ and open the template in the editor.
 
                 int sno = 0;
 
-                List<Student> list = Student.getAll(dept, batch, "%");
+                List<Student> list = Student.getAll(dept, batch, "%",clg);
 
                 for (Student s : list) {
 

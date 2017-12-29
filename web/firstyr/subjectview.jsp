@@ -5,20 +5,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en-US">
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type1 = rsss.getString("type");
-                }
-                if (type1.equals("first")) {
-
+                   String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
 
@@ -346,7 +334,7 @@
                                                     <%
                                                         //int i=Integer.parseInt(request.getParameter("val"));
                                                         Class.forName("com.mysql.jdbc.Driver").newInstance();
-                                                        Connection connection = new dbcon().getConnection("first");
+                                                        Connection connection = new dbcon(clg).getConnection("first");
                                                        // Statement statement = connection.createStatement();
                                                        PreparedStatement statement=null; 
                                                        String sql;
@@ -450,31 +438,5 @@
     <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
 
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
-%>
 </html>

@@ -9,19 +9,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <html lang="en-US">
 <% 
-   try
-    {
-    String username = session.getAttribute("username").toString();
-    String password = session.getAttribute("password").toString();
-    
-    Connection connn = new dbcon().getConnection("login");
-    Statement sttt = connn.createStatement();
-    String type1 ="";
-    ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='"+username+"' and password='"+password+"'");
-    if(rsss.isBeforeFirst())
-    {
-        
-    
+             String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+   
     
     %>
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
@@ -77,10 +67,10 @@
 <div id="sidebar-wrapper">
     
     <% 
-   Connection con=new dbcon().getConnection(Find.sdept(username));
+   Connection con=new dbcon(clg).getConnection(Find.sdept(username));
   //  Statement stmtd=con.createStatement();
     //ResultSet rsd=stmtd.executeQuery("select * from staff_general where staffid='"+username+"'");
-    Staff s=Staff.getByid(username);
+    Staff s=Staff.getByid(username,clg);
     if(s!=null)
     {
     %>
@@ -226,7 +216,7 @@ if(s.getCouncillorDetails().getBatch()!=null)
                                                             Academic Year:</b></div>
                 <label class="select">
             <select id="ayear" name="ayear">
-         <%=AcademicYear.getHTMLContent() %>   
+         <%=AcademicYear.getHTMLContent(clg) %>   
             </select>
                     <i></i>
                 </label>
@@ -266,10 +256,10 @@ if(s.getCouncillorDetails().getBatch()!=null)
             
            <select id="batch" name="batch">
             <%
-                Connection conbatch = new dbcon().getConnection("sjitportal");
+                Connection conbatch = new dbcon(clg).getConnection("portal");
                 //    Statement stmt = conbatch.createStatement();
                 //PreparedStatement stmt=conbatch.prepareStatement("select batch from regulations");
-                List<Batch> blist=Batch.getAll();
+                List<Batch> blist=Batch.getAll(clg);
                 //ResultSet rs=stmt.executeQuery();
                     String batch=null;
                   //  rs.beforeFirst();
@@ -412,23 +402,4 @@ if(s.getCouncillorDetails().getBatch()!=null)
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-   
-    }
-    else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-//  if(sttt!=null)
-  //                          sttt.close();
-    //                          if(connn!=null)
-      //                          connn.close();
-    }
-catch(Exception e)
-    {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-    
-    %>
 </html>

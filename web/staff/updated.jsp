@@ -21,6 +21,9 @@
     <body>
 
         <%
+                    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
             String visible = "";
             String a1 = request.getParameter("word");
             if (a1 != null) {
@@ -45,10 +48,9 @@
             String exam = session.getAttribute("exam").toString();
             try
     {
-    String username = session.getAttribute("username").toString();
-    String password = session.getAttribute("password").toString();
+  String password = session.getAttribute("password").toString();
     
-    Connection connn = new dbcon().getConnection(Find.sdept(username));
+    Connection connn = new dbcon(clg).getConnection(Find.sdept(username));
     //Statement sttt = connn.createStatement();
     String type1 ="";
     PreparedStatement sttt=connn.prepareStatement("select * from staff_table where staffid=?");

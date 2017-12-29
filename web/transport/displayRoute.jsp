@@ -31,20 +31,8 @@
 <html lang="en-US">
 
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type = rsss.getString("type");
-                }
-                if (type.equals("transport")) {
-
+                   String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
     <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
@@ -148,7 +136,7 @@
 
                                                         <select id="route" name="route" required>
                                                             <option >Select</option>
-                                                            <%                                                        List<RouteMap> list = RouteMap.getAll();
+                                                            <%                                                        List<RouteMap> list = RouteMap.getAll(clg);
                                                                 for (RouteMap r : list) {
                                                             %>
                                                             <option value="<%=r.getBoardingpt1()%>"><%=r.getBoardingpt1()%></option>
@@ -198,7 +186,7 @@
                                         <%
                                             int i = 0;
                                             //System.out.println(bp1);
-                                            for (RouteMap rm : RouteMap.getByBoardingpt1(bp1)) {
+                                            for (RouteMap rm : RouteMap.getByBoardingpt1(bp1,clg)) {
                                         %>
                                         <tr>
                                             <td><%=++i%></td>
@@ -259,25 +247,6 @@
 
 
     <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
-    <%
-                } else {
-                    response.sendRedirect("../index.jsp");
-                }
-            }
-
-            if (sttt != null) {
-                sttt.close();
-            }
-            if (connn != null) {
-                ;//connn.close();
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("../index.jsp");
-        }
-
-    %>
+    
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
 </html>

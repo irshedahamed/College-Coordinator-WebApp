@@ -25,6 +25,9 @@
                     <div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
                         <div align="left">
                             <%
+                                          String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
                                 String form = request.getParameter("index");
 
                                 String path = Base.path + "/forms/" + form + "/";
@@ -32,7 +35,7 @@
                                 List<String> listdescp = new ArrayList<String>();
                                 try {
                                     Class.forName("com.mysql.jdbc.Driver").newInstance();
-                                    Connection connection1 = new dbcon().getConnection("sjitportal");
+                                    Connection connection1 = new dbcon(clg).getConnection("portal");
                                     //Statement statement1 = connection1.createStatement();
                                     PreparedStatement statement1=connection1.prepareStatement("select filename,descp from forms where location = ?");
                                     statement1.setString(1, path);

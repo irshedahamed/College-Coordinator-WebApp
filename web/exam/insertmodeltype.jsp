@@ -26,7 +26,10 @@
                 
         </thead>
         <%
-        String dept = request.getParameter("dept");
+                   String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
+            String dept = request.getParameter("dept");
         String batch = request.getParameter("batch");
         String sec = request.getParameter("section");
         
@@ -41,7 +44,7 @@
         String[] name = new String[100];
       
         
-        for(Student s:Student.getAll(dept, batch, sec))
+        for(Student s:Student.getAll(dept, batch, sec,clg))
         {
             regno[i]= s.getRegno();
             name[i] = s.getName();

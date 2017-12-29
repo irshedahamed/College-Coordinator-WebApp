@@ -23,6 +23,9 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css"> 
         <script type = "text/javascript"  src = "${pageContext.request.contextPath}/js/NumberToWords.js"></script>
         <%
+                       String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
             String dept = request.getParameter("dept");
             String batch = request.getParameter("batch");
             String sec = request.getParameter("section");
@@ -254,9 +257,9 @@
                                         </tr>
                                     </thead>
                                     <%
-                                        List<Student> list = Student.getAll(dept, batch, sec);
+                                        List<Student> list = Student.getAll(dept, batch, sec,clg);
                                         int i = 0;
-                                        Mark m = new Mark();
+                                        Mark m = new Mark(clg);
                                         m.setSubcode(subcode);
                                         m.setType(exam);
                                         for (Student stu : list) {
@@ -274,10 +277,10 @@
                                         %>
 
                                         <td width="150px">
-                                            <% if (!Mark.isMarkAvailable(dept, m)) {%>
+                                            <% if (!Mark.isMarkAvailable(dept, m,clg)) {%>
                                             <input type="text" style="background-color: white; " class="marks" size="3" maxlength="3" id="<%=a1%>">
                                             <% } else {%>
-                                            <input type="text" style="background-color: white; " class="marks" size="3" maxlength="3" id="<%=a1%>" value="<%=Mark.getUserMark(dept, m).getMark()%>">
+                                            <input type="text" style="background-color: white; " class="marks" size="3" maxlength="3" id="<%=a1%>" value="<%=Mark.getUserMark(dept, m,clg).getMark()%>">
                                             <% }%><span class="outof"></span></td>
                                         <td id="words<%=a1%>"></td>
                                         <td style="padding: 10px;"><input type="button" class="click" id="submit"  value="Update" /></td>

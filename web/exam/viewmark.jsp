@@ -9,24 +9,9 @@
 <!DOCTYPE html>
 <html lang="en-US">
       <% 
-   try
-    {
-    String username = session.getAttribute("username").toString();
-    String password = session.getAttribute("password").toString();
-    
-    Connection connn = new dbcon().getConnection("login");
-    Statement sttt = connn.createStatement();
-    String type ="";
-    ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='"+username+"' and password='"+password+"'");
-    if(rsss.isBeforeFirst())
-    {
-        while(rsss.next())
-        {
-            type = rsss.getString("type");
-        }
-        if(type.equals("exam"))
-        {
-    
+              String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+  
     
     %>
 
@@ -177,10 +162,10 @@
             <select id="batch" name="batch" required>
                 <option disabled selected>Select   </option>
                 <%
-                Connection conbatch = new dbcon().getConnection("sjitportal");
+                Connection conbatch = new dbcon(clg).getConnection("portal");
                     //Statement stmt = conbatch.createStatement();
                     //PreparedStatement stmt=conbatch.prepareStatement();
-                    List <Batch> blist=Batch.getAll();
+                    List <Batch> blist=Batch.getAll(clg);
                     //ResultSet rs=stmt.executeQuery("select batch from regulations");
                     String batch=null;
                     //rs.beforeFirst();
@@ -311,28 +296,5 @@
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-    }
-        else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-    }
-    else
-    {
-        response.sendRedirect("../index.jsp");
-    }
 
-                            if(sttt!=null)
-                            sttt.close();
-                              if(connn!=null)
-                                ;//connn.close();
-    }
-catch(Exception e)
-    {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-    
-    %>
 </html>

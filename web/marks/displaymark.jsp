@@ -24,6 +24,9 @@
         <title>View Mark</title>
     </head>
     <%
+                   String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
         String dept = request.getParameter("dept");
         if (dept == null) {
             dept = session.getAttribute("dept").toString();
@@ -33,7 +36,7 @@
         String sem = request.getParameter("sem");
         String exam = request.getParameter("exam");
         String ayear = request.getParameter("ayear");
-        String regulation = Batch.getRegulation(batch);
+        String regulation = Batch.getRegulation(batch,clg);
         session.setAttribute("regulation", regulation);
         session.setAttribute("sem", sem);
         session.setAttribute("batch", batch);
@@ -58,7 +61,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             Academic Year: 20<%=ayear%>-20<%=(Integer.valueOf(ayear) + 1)%></h3>
-            <% for (Batch b : Batch.getAll()) {
+            <% for (Batch b : Batch.getAll(clg)) {
                     if (b.getBatch().equals(batch)) {
             %>
         <h3 style="">Year/Sec: <%=b.getStatus()%>-<%=dept.toUpperCase()%>-<%=sec%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -102,15 +105,15 @@
                         <th name="cc">Register No</th>
                         <th>Name</th>
                             <%
-                                Subjects s = new Subjects();
+                                Subjects s = new Subjects(clg);
                                 s.setAyear(ayear);
                                 s.setRegulation(regulation);
                                 s.setSem(sem);
                                 List<String> Subcodelist;
                                                         if(exam.contains("lab"))
-                                Subcodelist= Subjects.getLabSubCode(dept, s);
+                                Subcodelist= Subjects.getLabSubCode(dept, s,clg);
                                 else
-                                Subcodelist= Subjects.getTherorySubCode(dept, s);
+                                Subcodelist= Subjects.getTherorySubCode(dept, s,clg);
                                 for (String subcode : Subcodelist) {
                             %>
                         <th><%=subcode%></th>
@@ -122,7 +125,7 @@
                 </thead>
                 <%
                     int i = 0;
-                    List<Student> list = Student.getAll(dept, batch, sec);
+                    List<Student> list = Student.getAll(dept, batch, sec,clg);
                     for (Student stu : list) {
                 %>
                 <tr>
@@ -131,12 +134,12 @@
                     <td><%=stu.getName()%></td>
                     <%
                         for (String subcode : Subcodelist) {
-                            Mark m = new Mark();
+                            Mark m = new Mark(clg);
                             m.setRollno(stu.getId());
                             m.setSubcode(subcode);
                             m.setType(exam);
                     %>
-                    <td><%=Mark.getUserMark(dept, m).getMark()%></td>
+                    <td><%=Mark.getUserMark(dept, m,clg).getMark()%></td>
                     <%
                         } i++;
                     %><td></td>

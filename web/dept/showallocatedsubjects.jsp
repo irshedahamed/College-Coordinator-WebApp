@@ -15,26 +15,9 @@
 <!DOCTYPE html>
 <html>
     <% 
-   try
-    {
-    String username = session.getAttribute("username").toString();
-    String password = session.getAttribute("password").toString();
-    
-    Connection connn = new dbcon().getConnection("login");
-    Statement sttt = connn.createStatement();
-    String type1 ="";
-    ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='"+username+"' and password='"+password+"'");
-    if(rsss.isBeforeFirst())
-    {
-        while(rsss.next())
-        {
-            type1 = rsss.getString("type");
-        }
-        if(type1.equals("dept"))
-        {
-            request.getSession().setAttribute("deptname", Find.dept(username));
-    
-    %>
+               String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+ %>
     
     <head>
         <style>
@@ -194,8 +177,8 @@ h2{
                 
                 
                 <%
-                Connection con=new dbcon().getConnection(Find.dept(username)); 
-                  Connection consub=new dbcon().getConnection("sjitportal");
+                Connection con=new dbcon(clg).getConnection(Find.dept(username)); 
+                  Connection consub=new dbcon(clg).getConnection("portal");
                            
          //        Statement st = con.createStatement();
           PreparedStatement st=con.prepareStatement("select a.staffid,a.staffname,b.tittle from staff_table a,staff_general b where a.staffid=b.staffid order by b.desg desc,b.staffid asc");
@@ -493,8 +476,8 @@ h2{
             
             <%
            
-            Connection con=new dbcon().getConnection(Find.dept(username));
-            Connection con1= new dbcon().getConnection("sjitportal");
+            Connection con=new dbcon(clg).getConnection(Find.dept(username));
+            Connection con1= new dbcon(clg).getConnection("portal");
           //  Statement st = con.createStatement();
             //Statement st1 = con1.createStatement();
             String sql;
@@ -568,7 +551,7 @@ h2{
             }
             
                             if(st!=null)
-                            sttt.close();
+                            st.close();
                               if(con!=null)
                                 ;//con.close();
                              
@@ -612,7 +595,7 @@ h2{
                     </thead>
                     
                     <%
-                    Connection conn=new dbcon().getConnection(Find.dept(username));
+                    Connection conn=new dbcon(clg).getConnection(Find.dept(username));
                 //    Statement stmt=conn.createStatement();
                  PreparedStatement stmt=conn.prepareStatement("select a.staffid,a.staffname,b.tittle from staff_table a,staff_general b where a.staffid=b.staffid order by b.desg desc,b.staffid asc");
                 ResultSet rs = stmt.executeQuery();
@@ -710,28 +693,4 @@ h2{
             <a href ="showallocatedsubjects.jsp?word=yes&staff=<%=id%>&acyear=<%=acyear%>&sem=<%=request.getParameter("sem")%>" >Export to word</a>
     </body>
 </div>
-    <%
-    }
-        else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-    }
-    else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-
-                            if(sttt!=null)
-                            sttt.close();
-                              if(connn!=null)
-                                ;//connn.close();
-    }
-catch(Exception e)
-    {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-    
-    %>
 </html>

@@ -14,17 +14,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from student_login_details where rollno='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-
-                session.setAttribute("deptname", Find.sdept(username));
+                   String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
 
@@ -211,10 +202,10 @@
                 </div>
                 <div class="panel-body">
                     <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab1primary"><%out.write(Circular.getHTMLContent(College.getAll("circular")));%></div>
-                        <div class="tab-pane fade" id="tab2primary"><%out.write(Circular.getHTMLContent(Department.getAll(Find.sdept(rollno), "%")));%></div>
-                        <div class="tab-pane fade" id="tab3primary"><%out.write(Circular.getHTMLContent(Exam.getAll()));%></div>
-                        <div class="tab-pane fade" id="tab4primary"><%out.write(Circular.getHTMLContent(College.getAll("event")));%></div>
+                        <div class="tab-pane fade in active" id="tab1primary"><%out.write(Circular.getHTMLContent(College.getAll("circular",clg)));%></div>
+                        <div class="tab-pane fade" id="tab2primary"><%out.write(Circular.getHTMLContent(Department.getAll(Find.sdept(rollno), "%",clg)));%></div>
+                        <div class="tab-pane fade" id="tab3primary"><%out.write(Circular.getHTMLContent(Exam.getAll(clg)));%></div>
+                        <div class="tab-pane fade" id="tab4primary"><%out.write(Circular.getHTMLContent(College.getAll("event",clg)));%></div>
                        
                     </div>
                 </div>
@@ -280,22 +271,4 @@
     <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
-
-%>
 </html>

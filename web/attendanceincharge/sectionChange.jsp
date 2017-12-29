@@ -6,20 +6,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type1 = rsss.getString("type");
-                }
-                if (type1.equals("yearincharge")) {
-
+              String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
 
@@ -131,7 +119,7 @@
                                             <tbody>
                                                 <%                        String dept = request.getParameter("dept");
                                                     String batch = request.getParameter("batch");
-                                                    Connection con = new dbcon().getConnection(dept);
+                                                    Connection con = new dbcon(clg).getConnection(dept);
                                                     //Statement stmt = con.createStatement();
                                                     PreparedStatement stmt=con.prepareStatement("select name,rollno,sec from student_personal where batch like ?");
                                                     stmt.setString(1, batch);
@@ -238,17 +226,5 @@
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
 
-%>
 </html>

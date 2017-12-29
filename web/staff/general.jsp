@@ -6,16 +6,8 @@
 <%@page import="java.sql.*"%>
 <html lang="en-US">
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-
+                   String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
 
@@ -38,9 +30,9 @@
         <div id="wrapper" class="toggled">
             <div id="sidebar-wrapper">
 
-                <%        Connection con = new dbcon().getConnection(Find.sdept(username));
+                <%        Connection con = new dbcon(clg).getConnection(Find.sdept(username));
                    // Statement stmtd = con.createStatement();
-                    Staff s=Staff.getByid(username);
+                    Staff s=Staff.getByid(username,clg);
                    //ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
                  //   if (rsd.next()) {
                 %>
@@ -182,7 +174,7 @@
                                             <TABLE WIDTH=30% align ="center" border="1">
                                                 <%
                                                     Class.forName("com.mysql.jdbc.Driver").newInstance();
-                                                    Connection connection = new dbcon().getConnection(Find.sdept(username));
+                                                    Connection connection = new dbcon(clg).getConnection(Find.sdept(username));
                                               
                                                     //     Statement statement = connection.createStatement();
                                                  //   ResultSet rs = statement.executeQuery("select * from staff_general where staffid=" + "'" + username + "'");
@@ -372,14 +364,4 @@
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
-%>
 </html>

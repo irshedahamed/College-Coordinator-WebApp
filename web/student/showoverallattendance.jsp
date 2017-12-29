@@ -24,11 +24,14 @@
             </tr>
 
             <%
+                      String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
                 String id = request.getParameter("index");
                 String deptname = session.getAttribute("deptname").toString();
                 String rollno = session.getAttribute("username").toString();
-                Connection con = new dbcon().getConnection(deptname);
-                Connection con1 = new dbcon().getConnection("sjitportal");
+                Connection con = new dbcon(clg).getConnection(deptname);
+                Connection con1 = new dbcon(clg).getConnection("portal");
               //  Statement st = con.createStatement();
               //  Statement st1 = con1.createStatement();
               PreparedStatement st=con.prepareStatement("select * from overallattendence where sem=? and rollno=? ");

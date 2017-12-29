@@ -39,7 +39,9 @@
         <%
             String dept = request.getParameter("dept");
             String batch = request.getParameter("batch");
-
+    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+       
         %>
         <script type="text/javascript" lang="javascript">
             $(document).ready(function () {
@@ -130,7 +132,7 @@
 
                                     try {
 
-                                        con = new dbcon().getConnection(dept);
+                                        con = new dbcon(clg).getConnection(dept);
                                         //st = con.createStatement();
                                         
                                         String sql = "";
@@ -156,7 +158,7 @@
                                             if (batch.equals("staff")) {
                                                 phone = rs1.getString("mobile1");
                                             } else {
-                                                phone = Parent.getNumber(rollno);
+                                                phone = Parent.getNumber(rollno,clg);
                                             }
 
 

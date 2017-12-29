@@ -10,11 +10,12 @@
       					
 		
                           <%
-                              String username = session.getAttribute("username").toString();
-                              String index=request.getParameter("index");
+                                       String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+   String index=request.getParameter("index");
                               String index1=request.getParameter("index1");
                               Class.forName("com.mysql.jdbc.Driver").newInstance();
-               Connection connection = new dbcon().getConnection((String)request.getSession().getAttribute("deptname"));
+               Connection connection = new dbcon(clg).getConnection((String)request.getSession().getAttribute("deptname"));
              //  Statement statement = connection.createStatement();
             if(index.equals("i1"))
             {

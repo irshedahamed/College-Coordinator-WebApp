@@ -12,17 +12,8 @@
 <!DOCTYPE html>
 <html>
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-
-
+            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
     %>
     <head>
         <meta charset="UTF-8">
@@ -231,10 +222,10 @@
         <div id="wrapper" class="toggled">
             <div id="sidebar-wrapper">
 
-                <%  Connection con=new dbcon().getConnection(Find.sdept(username));
+                <%  Connection con=new dbcon(clg).getConnection(Find.sdept(username));
     //Statement stmtd=con.createStatement();
     //ResultSet rsd=stmtd.executeQuery("select * from staff_general where staffid='"+username+"'");
-    Staff s=Staff.getByid(username);
+    Staff s=Staff.getByid(username,clg);
     //if(s!=null)
     //{
     %>
@@ -387,7 +378,7 @@ if(s.getCouncillorDetails().getBatch()!=null)
                 <%
                     //int i=Integer.parseInt(request.getParameter("val"));
                     Class.forName("com.mysql.jdbc.Driver").newInstance();
-              Connection connection = new dbcon().getConnection(Find.sdept(username));
+              Connection connection = new dbcon(clg).getConnection(Find.sdept(username));
              // Statement statement = connection.createStatement();
                PreparedStatement statement=connection.prepareStatement("select distinct(dept) from subject_allocation where staffid=?");
               statement.setString(1, username);
@@ -550,28 +541,4 @@ if(s.getCouncillorDetails().getBatch()!=null)
  </body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-                 if(statement!=null)
-                            statement.close();
-                      //        if(connection!=null)
-                        //        connection.close();
-            
-    }
-    else
-    {
-        response.sendRedirect("../index.jsp");
-     }
-  //f(sttt!=null)
-    //                        sttt.close();
-      //                        if(connn!=null)
-        //                        connn.close();
-    }
-catch(Exception e)
-    {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-    
-          
-          %>
 </html>

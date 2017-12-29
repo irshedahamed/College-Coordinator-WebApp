@@ -138,9 +138,12 @@
                                                 <select id="batch" name="batch" required>
                                                     <option disabled selected>Select</option>
                                                     <%
-                Connection conbatch = new dbcon().getConnection("sjitportal");
+            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
+                                                        Connection conbatch = new dbcon(clg).getConnection("portal");
                    // Statement stmt = conbatch.createStatement();
-                   List<Batch> blist=Batch.getAll();
+                   List<Batch> blist=Batch.getAll(clg);
                //    ResultSet rs=stmt.executeQuery();
                     String batch=null;
                  //   rs.beforeFirst();

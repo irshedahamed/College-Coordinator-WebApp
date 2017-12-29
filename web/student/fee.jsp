@@ -22,17 +22,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from student_login_details where rollno='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-
-                session.setAttribute("deptname", Find.sdept(username));
+                    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
 
@@ -225,8 +216,8 @@
 
                                         <%
                                             int sno = 0;
-                                            for (MUResponse paid : MUResponse.getPaidMUP(username)) {
-                                                if (paid.getAcyear().equals(AcademicYear.getFeeYear().getYear())) {
+                                            for (MUResponse paid : MUResponse.getPaidMUP(username,clg)) {
+                                                if (paid.getAcyear().equals(AcademicYear.getFeeYear(clg).getYear())) {
                                                     paidCurrent = true;
                                                 }
                                         %>
@@ -252,7 +243,7 @@
                                         </thead>
 
                                         <%                    try {
-                        Fee.Fee f = Fee.Fee.getFeeById(s.getId());
+                        Fee.Fee f = Fee.Fee.getFeeById(s.getId(),clg);
                         for (String type : Fee.Fee.getsubCategory()) {%>
                                         <tr>
                                             <td><%=Fee.Find.getType(type)%></td>
@@ -330,21 +321,4 @@
     <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
-
-%>
 </html>

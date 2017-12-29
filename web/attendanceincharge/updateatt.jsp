@@ -68,6 +68,8 @@
                         </tr>
                     </thead>
                     <%
+            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
                         String dept = request.getParameter("dept");
                         String sec = request.getParameter("section");
@@ -82,7 +84,7 @@
                         session.setAttribute("date", date);
                         session.setAttribute("sem", sem);
 
-                        Connection con = new dbcon().getConnection(dept);
+                        Connection con = new dbcon(clg).getConnection(dept);
                        // Statement st = con.createStatement();
 
                         int count = 0;

@@ -47,7 +47,9 @@
          </tr>
     </thead>
     <%
-        
+                    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
         String Acyear = (String) request.getAttribute("Acyear");
         String Batch = (String) request.getAttribute("Batch");
         String Dept = (String) request.getAttribute("Dept");
@@ -55,8 +57,8 @@
         String To = (String) request.getAttribute("To");
         
        int sno=0;        
-         ArrayList<MUResponse> List = (ArrayList<MUResponse>) MUResponse.fetchby(Acyear);
-           for(Map.Entry<MUResponse,IBResponse> entry : IBResponse.fetchby(List, From, To).entrySet())
+         ArrayList<MUResponse> List = (ArrayList<MUResponse>) MUResponse.fetchby(Acyear,clg);
+           for(Map.Entry<MUResponse,IBResponse> entry : IBResponse.fetchby(List, From, To,clg).entrySet())
          {   
              MUResponse m=entry.getKey();
              IBResponse i=entry.getValue();

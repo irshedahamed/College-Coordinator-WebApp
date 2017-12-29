@@ -11,19 +11,8 @@
 <html lang="en-US">
 
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type = rsss.getString("type");
-                }
-                if (type.equals("yearincharge")) {
+            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
 
     %>
@@ -147,7 +136,7 @@
                                             <center><div style="color:#333333; margin-top: -75px;font-family: inherit;font-size:2.5em;">College Circular<br><br></div></center>
                                             <div style="width:100%;height:300px;line-height:3em;overflow-y:scroll;padding:5px; solid : #149dd2;">
                                                 <div align="left">
-                                                    <%            Connection conbatch = new dbcon().getConnection("sjitportal");
+                                                    <%            Connection conbatch = new dbcon(clg).getConnection("portal");
                                                         //Statement stmt = conbatch.createStatement();
                                                         PreparedStatement stmt=conbatch.prepareStatement("select * from circular where type='circular'");
                                                         ResultSet rst = stmt.executeQuery();
@@ -184,7 +173,7 @@
 
                                                 <div align="left">
                                                     <%
-                                                        conbatch = new dbcon().getConnection("sjitportal");
+                                                        conbatch = new dbcon(clg).getConnection("portal");
                                                //         stmt = conbatch.createStatement();
                                                         PreparedStatement stmtt=conbatch.prepareStatement("select * from circular where type='event'");
                                                         rst = stmtt.executeQuery();
@@ -264,25 +253,5 @@
 
 
     <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
-    <%
-                } else {
-                    response.sendRedirect("../index.jsp");
-                }
-            }
-
-            if (sttt != null) {
-                sttt.close();
-            }
-            if (connn != null) {
-                ;//connn.close();
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("../index.jsp");
-        }
-
-    %>
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
 </html> 

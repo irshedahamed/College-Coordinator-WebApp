@@ -137,7 +137,12 @@
                                                     Batch:</b></div>
                                             <label class="select">
                                                 <select id="batch" name="batch" required>
-                                                   <%=Batch.getHTMLContent() %>
+                                                    <%
+                                                                    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
+                                                        %>
+                                                    <%=Batch.getHTMLContent(clg) %>
                                                 </select>
                                                 <i></i>
                                             </label></label>

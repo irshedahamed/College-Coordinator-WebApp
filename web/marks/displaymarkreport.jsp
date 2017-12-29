@@ -199,8 +199,12 @@
     <body>
 
         <%
+                        String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
             String a = request.getParameter("word");
             if (a != null) {
+            
                 if (a.equals("yes")) {
                     String formName = "";
                     formName = "test.doc";
@@ -225,7 +229,7 @@
             }
             String batch = request.getParameter("batch");
             String sec = request.getParameter("section");
-            Connection con = new dbcon().getConnection("sjitportal");
+            Connection con = new dbcon(clg).getConnection("portal");
 
             String sem = request.getParameter("sem");
             String exam = request.getParameter("exam");
@@ -241,7 +245,7 @@
              
             //ResultSet rs = st.executeQuery(sql);
             //while (rs.next()) {
-                regulation =  Batch.getRegulation(batch);
+                regulation =  Batch.getRegulation(batch,clg);
             //}
             session.setAttribute("regulation", regulation);
             session.setAttribute("sem", sem);
@@ -270,7 +274,7 @@
                             <th>Register No</th>
                             <th>Name</th>
                                 <%
-                                    con = new dbcon().getConnection(dept);
+                                    con = new dbcon(clg).getConnection(dept);
 //                                    st = con.createStatement();
 
                                //     String sql1 = ;
@@ -299,7 +303,7 @@
                     </thead>
 
                     <%
-                        List<Student> blist=Student.getAll(dept, batch, sec);
+                        List<Student> blist=Student.getAll(dept, batch, sec,clg);
                         //String sql2 = "select *,CONVERT(regno,UNSIGNED INT) as sno from student_personal where batch='" + batch + "' and sec='" + sec + "' order by sno,name";
                         //rs = st.executeQuery(sql2);
                         for(Student s : blist) {

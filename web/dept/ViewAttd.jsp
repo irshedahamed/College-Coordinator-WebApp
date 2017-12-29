@@ -19,6 +19,9 @@
 
     <body>
         <%
+                        String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
             String batch = request.getParameter("batch");
             String sec = request.getParameter("section");
             String sem = request.getParameter("sem");
@@ -42,7 +45,7 @@
 
                             <%
 
-                                Connection con = new dbcon().getConnection("cse");
+                                Connection con = new dbcon(clg).getConnection("cse");
                               //  Statement st = con.createStatement();
                              //   Statement st1 = con.createStatement();
                                // Statement st2 = con.createStatement();

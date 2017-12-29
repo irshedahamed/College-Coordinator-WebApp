@@ -20,10 +20,13 @@
         <title>JSP Page</title>
     </head>
     <%
+                    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
         String dept = request.getParameter("dept");
         String batch = request.getParameter("batch");
         String sec = request.getParameter("section");
-        Connection con = new dbcon().getConnection(dept);
+        Connection con = new dbcon(clg).getConnection(dept);
    
         String sem = request.getParameter("sem");
         String exam = request.getParameter("exam");

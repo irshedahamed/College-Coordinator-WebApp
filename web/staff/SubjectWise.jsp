@@ -11,19 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-
-
-    %>
+   
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -231,12 +219,15 @@
         <div id="wrapper" class="toggled">
             <div id="sidebar-wrapper">
 
-                <%        Connection con = new dbcon().getConnection(Find.sdept(username));
+                <%              String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+   
+                    Connection con = new dbcon(clg).getConnection(Find.sdept(username));
                     //Statement stmtd = con.createStatement();
                     //PreparedStatement stmtd=con.prepareStatement();
                     //ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
                     //if (rsd.next()) {
-                Staff s=Staff.getByid(username);
+                Staff s=Staff.getByid(username,clg);
                 %>
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
@@ -279,15 +270,7 @@
                 </ul>
             </div>
 
-            <%}
-  //              if (stmtd != null) {
-    //                stmtd.close();
-      //          }
-        //        if (con != null) {
-          //          ;//con.close();
-            //    }
-            %>
-
+           
             <header id="page-header"  class="fixed-header">
 
                 <div id="page-header-inner">
@@ -353,7 +336,8 @@
                                     </li>
 
                                     <%
-                                        Staff s = new Staff(username);
+                                      
+
                                         if (s.getCouncillorDetails().getBatch() != null) {
                                     %>
                                     <li id="menu-item-764" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor menu-item-has-children menu-item-768"><a href="councillor/home.jsp">Councillor View</a>
@@ -386,7 +370,7 @@
                                                                     <%
                                                                         //int i=Integer.parseInt(request.getParameter("val"));
                                                                         Class.forName("com.mysql.jdbc.Driver").newInstance();
-                                                                        Connection connection = new dbcon().getConnection(Find.sdept(username));
+                                                                        Connection connection = new dbcon(clg).getConnection(Find.sdept(username));
                                                                       //  Statement statement = connection.createStatement();
                                                                       PreparedStatement statement= connection.prepareStatement("select distinct(dept) from subject_allocation where staffid=?");
                                                                       statement.setString(1, username);
@@ -406,7 +390,8 @@
                                                                             statement.close();
                                                                         }
                                                                         if (connection != null) {
-                                                                            connection.close();%>
+                                                                            connection.close();
+}%>
 
                                                                 </select>
                                                                 <i></i>                                    </label>
@@ -553,22 +538,5 @@
 </body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
 
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    }catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
-%>
 </html>

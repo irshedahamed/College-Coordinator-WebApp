@@ -15,20 +15,9 @@
 <!DOCTYPE html>
 <html>
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type1 = rsss.getString("type");
-                }
-                if (type1.equals("first")) {
-    %>
+                    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+ %>
 
     <head>
         <style>
@@ -191,8 +180,8 @@
 
 
             <%
-                Connection con = new dbcon().getConnection("first");
-                Connection consub = new dbcon().getConnection("sjitportal");
+                Connection con = new dbcon(clg).getConnection("first");
+                Connection consub = new dbcon(clg).getConnection("portal");
                 String sql;
                 PreparedStatement st=null;
                 if (username.contains("mat")) {
@@ -485,8 +474,8 @@
             <th><center>In Charge</center></th>  
             </tr>
 
-            <%                Connection con = new dbcon().getConnection("first");
-                Connection con1 = new dbcon().getConnection("sjitportal");
+            <%                Connection con = new dbcon(clg).getConnection("first");
+                Connection con1 = new dbcon(clg).getConnection("portal");
              //   Statement st = con.createStatement();
                // Statement st1 = con1.createStatement();
                 String sql;
@@ -573,7 +562,7 @@
                 }
 
                 if (st != null) {
-                    sttt.close();
+                    st.close();
                 }
                 if (con != null) {
                     ;//con.close();
@@ -620,7 +609,7 @@
         </thead>
 
         <%
-            Connection conn = new dbcon().getConnection("first");
+            Connection conn = new dbcon(clg).getConnection("first");
             //Statement stmt = conn.createStatement();
             PreparedStatement stmt=conn.prepareStatement("select a.staffid,a.staffname,b.tittle from staff_table a,staff_general b where a.staffid=b.staffid order by b.desg desc,b.staffid asc");
             ResultSet rs = stmt.executeQuery();
@@ -721,24 +710,4 @@
     <a href ="showallocatedsubjects.jsp?word=yes&staff=<%=id%>&acyear=<%=acyear%>" >Export to word</a>
 </body>
 </div>
-<%
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        //response.sendRedirect("../index.jsp?a=123");
-    }
-
-%>
 </html>

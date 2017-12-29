@@ -110,6 +110,9 @@ h2{
         <title>MarksUploadCheck</title>
     </head>
     <%
+                   String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
         String dept = request.getParameter("dept");
         if(dept==null)
         {
@@ -117,7 +120,7 @@ h2{
         }
         String batch = request.getParameter("batch");
         
-        Connection con = new dbcon().getConnection("sjitportal");
+        Connection con = new dbcon(clg).getConnection("portal");
    
         String sem = request.getParameter("sem");
         String exam1 = request.getParameter("exam");

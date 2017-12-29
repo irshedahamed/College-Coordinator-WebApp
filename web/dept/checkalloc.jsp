@@ -17,7 +17,10 @@
     Connection conn = null;
     Statement stmt = null;
     try {
-        conn = new dbcon().getConnection(Find.dept(session.getAttribute("username").toString()));
+              String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
+        conn = new dbcon(clg).getConnection(Find.dept(session.getAttribute("username").toString()));
         stmt = conn.createStatement();
 
         String sql = "select * from subject_allocation where batch='" + request.getParameter("batch")

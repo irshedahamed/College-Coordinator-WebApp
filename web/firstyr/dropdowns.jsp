@@ -14,6 +14,9 @@
         
     
 <%
+                String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
             Connection conn = null;
             Statement stmt = null;
             ResultSet rs = null;
@@ -51,7 +54,7 @@
               out.print("<select id='batch"+i+"' name='batch"+i+"'>");
                 out.print("<option value='null' required>select</option>");
                 
-                  Connection conbatch = new dbcon().getConnection("sjitportal");
+                  Connection conbatch = new dbcon(clg).getConnection("portal");
                     Statement stmt1 = conbatch.createStatement();
                     ResultSet rs1=stmt1.executeQuery("select batch from regulations");
                     String batch=null;

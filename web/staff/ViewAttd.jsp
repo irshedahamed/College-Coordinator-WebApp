@@ -4,6 +4,8 @@
     Author     : Aravind Tyson
 --%>
 
+<%@page import="Actor.Student"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.*"%>
@@ -30,6 +32,8 @@
                     </tr>
                 </thead>
                 <%
+            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
  String dept = request.getParameter("dept");
         String sec=request.getParameter("section");
@@ -45,12 +49,12 @@
         session.setAttribute("fdate",fdate);
         session.setAttribute("tdate",tdate);
         
-        Connection con = new dbcon().getConnection(dept);
+        Connection con = new dbcon(clg).getConnection(dept);
         Statement st=con.createStatement();
         //Statement st1=con.createStatement();
         
         int count =0;
-        List<Student>list=Student.getAll(dept, batch, sec);
+        List<Student>list=Student.getAll(dept, batch, sec,clg);
         // String sql="select * from student_personal where batch='"+batch+"' and dept='"+dept+"' and sec='"+sec+"' group by rollno";
         //ResultSet rs=st.executeQuery(sql);
         ResultSet rs1;

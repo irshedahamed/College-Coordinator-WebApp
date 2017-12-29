@@ -174,7 +174,11 @@ h2{
                     <center> 
                     <h3><b>Batch : </b></h3>
                         <select id="batch" name="batch" required> 
-                <%=Batch.getHTMLContent() %>
+    <%    
+                                String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+%>
+                            <%=Batch.getHTMLContent(clg) %>
             </select>
             <label> From :  <input type="date" name="from" placeholder ="dd-mm-yyyy">
             </label>

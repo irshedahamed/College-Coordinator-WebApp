@@ -12,20 +12,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type1 = rsss.getString("type");
-                }
-                if (type1.equals("first")) {
-
+                 String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
     <head>
@@ -57,16 +45,16 @@
             <%
                 try {
                     String dept = Find.sdept(rollno);
-                    Subjects s = new Subjects();
-                    Mark m = new Mark();
+                    Subjects s = new Subjects(clg);
+                    Mark m = new Mark(clg);
                     s.setSem(sem);
-                    s.setRegulation(Batch.getRegulation(Student.getById(rollno).getBatch()));
-                    List<String> list = Subjects.getTherorySubCode(dept, s);
+                    s.setRegulation(Batch.getRegulation(Student.getById(rollno).getBatch(),clg));
+                    List<String> list = Subjects.getTherorySubCode(dept, s,clg);
                     for (String subcode : list) {
-                        subname = Subjects.getBySubcode(dept, subcode).getSubname();
+                        subname = Subjects.getBySubcode(dept, subcode,clg).getSubname();
                         m.setRollno(rollno);
                         m.setSubcode(subcode);
-                        List<Mark> li = Mark.getExamMark(dept, m);
+                        List<Mark> li = Mark.getExamMark(dept, m,clg);
                         for (Mark mi : li) {
                             if (mi.getType().equals("model1")) {
                                 model1 = mi.getMark();
@@ -120,23 +108,4 @@
             %>
         </table></center>
 </body>
-<%            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
-%>
 </html>

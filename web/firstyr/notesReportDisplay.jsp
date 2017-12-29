@@ -179,12 +179,15 @@ h2{
             
                 
                 <%
-           String semester = request.getParameter("sem");
+                    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
+                    String semester = request.getParameter("sem");
                     String ayear=request.getParameter("ayear");
                     String batch=request.getParameter("batch");
                     String dept = request.getParameter("dept");
                     //batch.substring(, endIndex)
-                    Connection con = new dbcon().getConnection("sjitportal");
+                    Connection con = new dbcon(clg).getConnection("portal");
                     
                    
                     ResultSet rs;
@@ -204,7 +207,7 @@ h2{
                         }
                         
                         
-                        con = new dbcon().getConnection(dept);
+                        con = new dbcon(clg).getConnection(dept);
                        //Statement st = con.createStatement();
                    // Statement st1 = con.createStatement();
                    //  Statement st3 = con.createStatement();

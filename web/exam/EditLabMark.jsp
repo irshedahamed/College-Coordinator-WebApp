@@ -18,19 +18,9 @@
 <!DOCTYPE html>
 <html>
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type = rsss.getString("type");
-                }
-                if (type.equals("exam")) {
-    %>
+               String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+ %>
     <head>
         <link href="../css/tabledesign.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -42,7 +32,7 @@
         String exam = request.getParameter("exam");
         String ayear = request.getParameter("ayear");
         
-        String regulation = Batch.getRegulation(batch);
+        String regulation = Batch.getRegulation(batch,clg);
         session.setAttribute("regulation", regulation);
         session.setAttribute("sem", sem);
         session.setAttribute("ayear", ayear);
@@ -61,11 +51,11 @@
                         <th>Register No</th>
                         <th>Name</th>
                             <%
-                                Subjects s = new Subjects();
+                                Subjects s = new Subjects(clg);
                                 s.setAyear(ayear);
                                 s.setRegulation(regulation);
                                 s.setSem(sem);
-                                List<String> Subcodelist = Subjects.getLabSubCode(dept, s);
+                                List<String> Subcodelist = Subjects.getLabSubCode(dept, s,clg);
                                 for (String subcode : Subcodelist) {
                             %>
                         <th><%=subcode%></th>
@@ -73,7 +63,7 @@
                     </tr>
                 </thead>
                 <%
-                    List<Student> list = Student.getAll(dept, batch, "%");
+                    List<Student> list = Student.getAll(dept, batch, "%",clg);
                     for (Student stu : list) {
                 %>
                 <tr>
@@ -83,13 +73,13 @@
                     <%
                         int i = 0;
                         for (String sub : Subcodelist) {
-                            Mark m = new Mark();
+                            Mark m = new Mark(clg);
                             m.setRollno(stu.getId());
                             m.setSubcode(sub);
                             m.setType(exam);
                             String a1 = stu.getId() + "_" + i;;
-                            if (Mark.isMarkAvailable(dept, m)) {
-                                m = Mark.getUserMark(dept, m);
+                            if (Mark.isMarkAvailable(dept, m,clg)) {
+                                m = Mark.getUserMark(dept, m,clg);
                                  
                     %>
                     <td><input type="text" size="3" class="marks" maxlength="3" name="<%=a1%>" id="<%=a1%>" value="<%=m.getMark()%>"></td>
@@ -109,24 +99,4 @@
         </center>
     </form>
 </body>
-<%
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
-%>
 </html>

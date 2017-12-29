@@ -16,18 +16,8 @@
 <!DOCTYPE html>
 <html>
     <%
-        try {
-
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-
-                session.setAttribute("deptname", Find.sdept(username));
+                  String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
 
@@ -147,7 +137,7 @@ and open the template in the editor.
                 response.setHeader("Content-Disposition", "inline; filename=" + filepath);
             }
         }
-        Staff s = new Staff(username);
+        Staff s = new Staff(username,clg);
         String dept = s.getCouncillorDetails().getDept();
         String batch = s.getCouncillorDetails().getBatch();
         String sec = s.getCouncillorDetails().getSec();
@@ -184,7 +174,7 @@ and open the template in the editor.
             </thead>
 
             <%
-                for (Student stu : Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(), s.getCouncillorDetails().getSec())) {
+                for (Student stu : Student.getAll(s.getCouncillorDetails().getDept(), s.getCouncillorDetails().getBatch(), s.getCouncillorDetails().getSec(),clg)) {
 
                     rollno = stu.getId();
                     name = stu.getName();
@@ -195,7 +185,7 @@ and open the template in the editor.
 
                 <td>
                     <%
-                        Connection con = new dbcon().getConnection(dept);
+                        Connection con = new dbcon(clg).getConnection(dept);
 
                         String sql2 = "select * from councillor_attendance where rollno='" + rollno + "' and sem='" + sem + "'";
                         Statement st1 = con.createStatement();
@@ -242,22 +232,5 @@ and open the template in the editor.
     </center>
     <a href ="SemReportDisplay.jsp?word=yes&sem=<%=sem%>&batch=<%=batch%>&section=<%=sec%>&dept=<%=dept%>" >Export to word</a>
 </body>
-<%
 
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-//        response.sendRedirect("../index.jsp");
-    }
-
-%>
 </html>

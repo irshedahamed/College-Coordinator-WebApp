@@ -138,7 +138,9 @@ and open the template in the editor.
             }
             String sec = request.getParameter("sec");
             String batch = request.getParameter("batch");
-
+    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+       
         %>
 
 
@@ -165,7 +167,7 @@ and open the template in the editor.
                     </thead>
                     <%            for (String dept : depts) {
 
-                            for (Student s : Student.getAll(dept, batch, sec)) {
+                            for (Student s : Student.getAll(dept, batch, sec,clg)) {
 
 
                     %>

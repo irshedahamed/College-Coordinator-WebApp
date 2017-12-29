@@ -6,19 +6,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type1 = rsss.getString("type");
-                }
-                if (type1.equals("yearincharge")) {
+            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
 
     %>
@@ -92,7 +81,7 @@
                                 <div class="dm3-tab"><div class="dm3-tab-inner"><center><h2>College Circular</h2><br><br>
                                             <div style="width:60%;height:300px;line-height:3em;overflow:scroll;padding:5px;border:1px solid #149dd2;background-color: #fff;">
                                                 <div align="left">
-                                                    <%        Connection conbatch = new dbcon().getConnection("sjitportal");
+                                                    <%        Connection conbatch = new dbcon(clg).getConnection("portal");
                                                       //  Statement stmt = conbatch.createStatement();
                                                         PreparedStatement stmt=conbatch.prepareStatement("select * from circular where type='circular'");
                                                         ResultSet rs = stmt.executeQuery();
@@ -110,10 +99,10 @@
                                                     <%
                                                         }
 
-                                                        if (sttt != null) {
-                                                            sttt.close();
+                                                        if (stmt != null) {
+                                                            stmt.close();
                                                         }
-                                                        if (connn != null) {
+                                                        if (conbatch != null) {
                                                            ;//connn.close();
                                                        }
                                             //            if (stmt != null) {
@@ -189,17 +178,5 @@
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
 
-%>
 </html>

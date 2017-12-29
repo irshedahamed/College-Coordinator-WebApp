@@ -195,9 +195,12 @@
                             <input type="submit" id="submit" value="Submit" />
                             <br><br></div></form>
                             <%
+                                    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+       
                                 if (request.getParameter("search") != null) {
                                     String id = request.getParameter("search");
-                                    Staff s1=Staff.getByid(id);
+                                    Staff s1=Staff.getByid(id,clg);
                                     //Connection connection = new dbcon().getConnection(Find.sdept(id));
                                    // Statement statement = connection.createStatement();
                                    // ResultSet rs11 = statement.executeQuery("select * from staff_general where staffid='" + id + "'");

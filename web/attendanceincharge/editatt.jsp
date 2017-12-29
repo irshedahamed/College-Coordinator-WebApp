@@ -28,6 +28,8 @@
                 <thead>
                     <%
                         String date = request.getParameter("datepicker");
+            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
                     %>
 
@@ -49,7 +51,7 @@
                         String batch = request.getParameter("batch");
                         String sem = request.getParameter("sem");
 
-                        con = new dbcon().getConnection(dept);
+                        con = new dbcon(clg).getConnection(dept);
                  //       st = con.createStatement();
                    //     st1 = con.createStatement();
                         int count = 0;

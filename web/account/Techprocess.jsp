@@ -46,6 +46,8 @@
                             </tr>
                         </thead>
                         <%
+            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
                             String Acyear = (String) request.getAttribute("Acyear");
                             String Batch = (String) request.getAttribute("Batch");
@@ -54,8 +56,8 @@
                             String To = (String) request.getAttribute("To");
 
                             int sno = 0;
-                            ArrayList<MUResponse> List = (ArrayList<MUResponse>) MUResponse.fetchby(Acyear);
-                            for (TechProcessResponse i : TechProcessResponse.fetchby(List, From, To)) {
+                            ArrayList<MUResponse> List = (ArrayList<MUResponse>) MUResponse.fetchby(Acyear,clg);
+                            for (TechProcessResponse i : TechProcessResponse.fetchby(List, From, To,clg)) {
 
                                 String p = i.getRefno();
                                 if (p != null) {

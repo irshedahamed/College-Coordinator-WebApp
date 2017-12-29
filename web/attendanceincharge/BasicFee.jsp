@@ -18,8 +18,8 @@
 
     <%
        
-            String username = session.getAttribute("username").toString();
-            String clg = (String)session.getAttribute("clg");
+                       String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
     <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->

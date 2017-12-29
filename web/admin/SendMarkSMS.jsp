@@ -37,7 +37,9 @@
             String batch = request.getParameter("batch");
             String sem = request.getParameter("sem");
             String exam = request.getParameter("exam");
-
+    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+       
         %>
         <script type="text/javascript" lang="javascript">
             $(document).ready(function () {
@@ -135,7 +137,7 @@
        
        
         
-         con = new dbcon().getConnection(dept);
+         con = new dbcon(clg).getConnection(dept);
          st=con.createStatement();
          //st1=con.createStatement();
         int count =0;
@@ -146,14 +148,14 @@
        // st1.setString(1, batch);
        // ResultSet rs1=st1.executeQuery();
        // while(rs1.next())
-       List<Student> blist=Student.getAll(dept, batch, "%");
+       List<Student> blist=Student.getAll(dept, batch, "%",clg);
        for(Student s : blist)
        {    
             String rollno=s.getId();
             String regno=s.getRegno();
             String name=s.getName();
-            String message=General.MarkSMS.getContent(rollno, sem, exam);
-            String phone=Parent.getNumber(rollno);
+            String message=General.MarkSMS.getContent(rollno, sem, exam,clg);
+            String phone=Parent.getNumber(rollno,clg);
                         
         
         %>

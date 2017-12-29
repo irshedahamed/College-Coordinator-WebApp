@@ -31,6 +31,9 @@
 
     <body>
         <%
+                       String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
             String dept = request.getParameter("dept");
             String date = request.getParameter("datepicker");
             String sem = request.getParameter("sem");
@@ -83,7 +86,7 @@
 
                     try {
 
-                        con = new dbcon().getConnection(dept);
+                        con = new dbcon(clg).getConnection(dept);
                   //      st = con.createStatement();
                       //  st1 = con.createStatement();
                         //st2 = con.createStatement();

@@ -130,6 +130,9 @@ and open the template in the editor.
         <title></title>
     </head>
     <%
+                   String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
         String dept = request.getParameter("dept");
         if (dept == null) {
             dept = session.getAttribute("dept").toString();
@@ -139,7 +142,7 @@ and open the template in the editor.
         String sem = request.getParameter("sem");
         String exam = request.getParameter("exam");
         String ayear = request.getParameter("ayear");
-        String regulation = Batch.getRegulation(batch);
+        String regulation = Batch.getRegulation(batch,clg);
         String  rollno, name;
         session.setAttribute("regulation", regulation);
         session.setAttribute("sem", sem);
@@ -197,15 +200,15 @@ and open the template in the editor.
                             <%
                                 int bonusreq = Integer.parseInt(request.getParameter("bonus"));
 
-    Subjects s = new Subjects();
+    Subjects s = new Subjects(clg);
                                 s.setAyear(ayear);
                                 s.setRegulation(regulation);
                                 s.setSem(sem);
                                 List<String> Subcodelist;
                                                         if(exam.contains("lab"))
-                                Subcodelist= Subjects.getLabSubCode(dept, s);
+                                Subcodelist= Subjects.getLabSubCode(dept, s,clg);
                                 else
-                                Subcodelist= Subjects.getTherorySubCode(dept, s);
+                                Subcodelist= Subjects.getTherorySubCode(dept, s,clg);
                                 for (String subco : Subcodelist) {
                                                         %>
                         <th><%=subco%></th>
@@ -218,12 +221,12 @@ and open the template in the editor.
                 </thead>
 
                 <%
-                    Connection con = new dbcon().getConnection(dept);
+                    Connection con = new dbcon(clg).getConnection(dept);
 
                     int bonus = bonusreq;
                     // String sql2= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
                     
-                    for (Student stu:Student.getAll(dept, batch, sec)) {
+                    for (Student stu:Student.getAll(dept, batch, sec,clg)) {
                         rollno = stu.getId();
                         name = stu.getName();
                         String regno = stu.getRegno();
@@ -255,7 +258,7 @@ and open the template in the editor.
                         for(String subcode:Subcodelist){
 
                             //subcode = rs1.getString("subcode");
-                            Mark m = new Mark();
+                            Mark m = new Mark(clg);
                             m.setRollno(rollno);
                             m.setSubcode(subcode);
                             
@@ -263,7 +266,7 @@ and open the template in the editor.
                              boolean show=false;
                             if(exam.equals("labmodel")){
                             m.setType(exam);
-                            String mark=Mark.getUserMark(dept, m).getMark();    
+                            String mark=Mark.getUserMark(dept, m,clg).getMark();    
                             if(mark!=null)
                                 {
                                     if(!mark.equals("A"))
@@ -281,7 +284,7 @@ and open the template in the editor.
                                     total*=5;
                                     
                           }else{
-                            List<Mark> li = Mark.getExamMark(dept, m);
+                            List<Mark> li = Mark.getExamMark(dept, m,clg);
                             
                             String markc = null, markm = null, marku = null,zmark=null;
                             if (li.size() != 0) {

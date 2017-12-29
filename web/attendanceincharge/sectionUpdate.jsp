@@ -6,24 +6,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <% 
-   try
-    {
-    String username = session.getAttribute("username").toString();
-    String password = session.getAttribute("password").toString();
-    
-    Connection connn = new dbcon().getConnection("login");
-    Statement sttt = connn.createStatement();
-    String type1 ="";
-    ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='"+username+"' and password='"+password+"'");
-    if(rsss.isBeforeFirst())
-    {
-        while(rsss.next())
-        {
-            type1 = rsss.getString("type");
-        }
-        if(type1.equals("yearincharge"))
-        {
-    
+            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
     
     %>
 
@@ -148,7 +132,7 @@
                                                             Batch:</b></div>
                 <label class="select">
             <select id="batch" name="batch" required>
-                <option value="<%=Batch.getByYrIncharge(username).getBatch()%>" ><%=Batch.getByYrIncharge(username).getBatch()%></option>
+                <option value="<%=Batch.getByYrIncharge(username,clg).getBatch()%>" ><%=Batch.getByYrIncharge(username,clg).getBatch()%></option>
                                                 
             </select>
                     <i></i>
@@ -216,23 +200,5 @@
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-    }
-        else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-    }
-    else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-    }
-catch(Exception e)
-    {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-    
-    %>
+
 </html>

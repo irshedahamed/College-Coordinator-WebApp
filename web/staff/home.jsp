@@ -14,18 +14,11 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
+                  String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+      String password = (String)session.getAttribute("password");
 
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-
-                session.setAttribute("deptname", Find.sdept(username));
-
+       
     %>
     <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
     <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -54,11 +47,11 @@
         <div id="wrapper" class="toggled">
             <div id="sidebar-wrapper">
 
-                <%        Connection con = new dbcon().getConnection(Find.sdept(username));
+                <%        Connection con = new dbcon(clg).getConnection(Find.sdept(username));
                     //Statement stmtd = con.createStatement();
                    // ResultSet rsd = stmtd.executeQuery("select * from staff_general where staffid='" + username + "'");
                     //if (rsd.next()) {
-                Staff s=Staff.getByid(username);
+                Staff s=Staff.getByid(username,clg);
                 %>
                 <ul class="sidebar-nav">
                     <li class="sidebar-brand">
@@ -217,10 +210,10 @@
                 </div>
                 <div class="panel-body">
                     <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab1primary"><%out.write(Circular.getHTMLContent(College.getAll("circular")));%></div>
-                        <div class="tab-pane fade" id="tab2primary"><%out.write(Circular.getHTMLContent(Department.getAll(Find.sdept(username), "%")));%></div>
-                        <div class="tab-pane fade" id="tab3primary"><%out.write(Circular.getHTMLContent(Exam.getAll()));%></div>
-                        <div class="tab-pane fade" id="tab4primary"><%out.write(Circular.getHTMLContent(College.getAll("event")));%></div>
+                        <div class="tab-pane fade in active" id="tab1primary"><%out.write(Circular.getHTMLContent(College.getAll("circular",clg)));%></div>
+                        <div class="tab-pane fade" id="tab2primary"><%out.write(Circular.getHTMLContent(Department.getAll(Find.sdept(username), "%",clg)));%></div>
+                        <div class="tab-pane fade" id="tab3primary"><%out.write(Circular.getHTMLContent(Exam.getAll(clg)));%></div>
+                        <div class="tab-pane fade" id="tab4primary"><%out.write(Circular.getHTMLContent(College.getAll("event",clg)));%></div>
                        
                     </div>
                 </div>
@@ -282,22 +275,4 @@ $("#menu-toggle1").click(function (e) {
     <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
-
-%>
 </html>

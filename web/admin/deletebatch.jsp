@@ -9,21 +9,9 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type = rsss.getString("type");
-                }
-                if (type.equals("admin")) {
-
-
+    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+           
     %>
 
     <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
@@ -185,7 +173,7 @@
                                     <% //Connection con = new dbconnection.dbcon().getConnection("sjitportal");
                                         //Statement st = con.createStatement();
                                        //  ResultSet rs = st.executeQuery("select * from regulations");
-                                        List<Batch> list = Batch.getAll();
+                                        List<Batch> list = Batch.getAll(clg);
                                         for(Batch b : list){
                                           
                                         String batch = b.getBatch();
@@ -281,23 +269,4 @@
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
-%>
 </html>

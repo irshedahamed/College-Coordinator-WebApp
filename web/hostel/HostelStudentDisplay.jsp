@@ -11,24 +11,9 @@
 <%@page import="java.util.List"%>
 
 <% 
-   try
-    {
-    String username = session.getAttribute("username").toString();
-    String password = session.getAttribute("password").toString();
-    
-    Connection connn = new dbcon().getConnection("login");
-    Statement sttt = connn.createStatement();
-    String type ="";
-    ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='"+username+"' and password='"+password+"'");
-    if(rsss.isBeforeFirst())
-    {
-        while(rsss.next())
-        {
-            type = rsss.getString("type");
-        }
-        if(type.equals("hostel"))
-        {
-    
+              String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+  
     
     %>
 
@@ -69,14 +54,14 @@
             int i = 0;
             String rollno = request.getParameter("rollno");
             Student s = Student.getById(rollno);
-            java.sql.Connection con = new dbcon().getConnection("sjitportal");
+            java.sql.Connection con = new dbcon(clg).getConnection("portal");
             Statement st = con.createStatement();
           //  String data = "select roomno from room_change where rollno='" + rollno + "'";
             //ResultSet rs = st.executeQuery(data);
             if (true) {
                 //String roomno = rs.getString("roomno");
 
-                java.sql.Connection conn = new dbcon().getConnection("sjitportal?zeroDateTimeBehavior=convertToNull");
+                java.sql.Connection conn = new dbcon(clg).getConnection("portal?zeroDateTimeBehavior=convertToNull");
                 Statement stt = conn.createStatement();
 
                 String date = "select intime,outtime from entry  where rollno ='" + rollno + "'";
@@ -275,28 +260,4 @@
     
     
     
-    <%
-    }
-        else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-    }
-    else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-
-                            if(sttt!=null)
-                            sttt.close();
-                              if(connn!=null)
-                                ;//connn.close();
-    }
-catch(Exception e)
-    {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-    
-    %>
 </html>

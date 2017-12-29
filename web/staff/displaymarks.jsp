@@ -16,15 +16,8 @@
 <!DOCTYPE html>
 <html>
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from staff_login_details where staffid='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
+                    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
 
     %>
@@ -57,9 +50,9 @@
                     </tr>
                 </thead>
                 <%
-                    List<Student> list = Student.getAll(dept, batch, sec);
+                    List<Student> list = Student.getAll(dept, batch, sec,clg);
                     int p = 0;
-                    Mark m = new Mark();
+                    Mark m = new Mark(clg);
                     m.setSubcode(subcode);
                     m.setType(exam);
                     for (Student stu : list) {
@@ -70,7 +63,7 @@
                     <td><%=stu.getId()%></td>
                     <td><%=stu.getRegno()%></td>
                     <td><%=stu.getName().toUpperCase()%></td>
-                    <td><%= Mark.getUserMark(dept, m).getMark()%></td>
+                    <td><%= Mark.getUserMark(dept, m,clg).getMark()%></td>
                     <%
                             p++;
                         }
@@ -79,18 +72,5 @@
             </table></center>
     </form>
 </body>
-<%           } else {
-            response.sendRedirect("../index.jsp");
-        }
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-%>
+
 </html>

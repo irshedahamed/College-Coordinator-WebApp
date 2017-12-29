@@ -17,19 +17,8 @@
 <html lang="en-US">
 
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type = rsss.getString("type");
-                }
-                if (type.equals("hostel")) {
+                String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
 
     %>
@@ -151,7 +140,7 @@
                                                 <th>OUT PASS</th></tr></thead>
                                                     <%
                                                         List<Student> newlist = new ArrayList<Student>();
-                                                        List<Student> list = Student.getAll(dept, batch, "%");
+                                                        List<Student> list = Student.getAll(dept, batch, "%",clg);
                                                         for (Student s : list) {
                                                             boolean flag = Hostel.AuthenticateAccess(username, s);
 
@@ -244,24 +233,4 @@
 
 
 
-            <%
-                        } else {
-                            response.sendRedirect("../index.jsp");
-                        }
-                    } else {
-                        response.sendRedirect("../index.jsp");
-                    }
-
-                    if (sttt != null) {
-                        sttt.close();
-                    }
-                    if (connn != null) {
-                        ;//connn.close();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    response.sendRedirect("../index.jsp");
-                }
-
-            %>
             </html>

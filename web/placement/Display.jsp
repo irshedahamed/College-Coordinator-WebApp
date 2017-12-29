@@ -22,20 +22,8 @@
 <!DOCTYPE html>
 <html>
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type = rsss.getString("type");
-                }
-                if (type.equals("placement")) {
-
+               String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
     <head>
@@ -114,7 +102,7 @@
                 </tr>
             </thead>
             <%    int sno = 0;
-                for (Student s : Student.getAll(request.getParameter("dept"), batch, "%")) {
+                for (Student s : Student.getAll(request.getParameter("dept"), batch, "%",clg)) {
             %>
             <tr>
                 <td><%=++sno%></td>
@@ -167,7 +155,7 @@
 
                 <td><%=s.getFatherDetails().getLandline()%></td>
                 <td><%=s.getMobile()%></td>
-                <td><%=Parent.getNumber(s.getId())%></td>
+                <td><%=Parent.getNumber(s.getId(),clg)%></td>
                 <td><%=s.getMailid()%></td>
                 <td><%=s.getAdmissionDetails().getSport()%></td>
                 <td><%=s.getGeneral().getNationality()%></td>
@@ -211,24 +199,5 @@
         </table>
 
     </body>
-    <%
-                } else {
-                    response.sendRedirect("../index.jsp");
-                }
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-
-            if (sttt != null) {
-                sttt.close();
-            }
-            if (connn != null) {
-                ;//connn.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("../index.jsp");
-        }
-
-    %>
+    
 </html>

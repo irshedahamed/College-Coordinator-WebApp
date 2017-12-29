@@ -14,16 +14,8 @@
 <!DOCTYPE html>
 <html>
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from student_login_details where rollno='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-
+                String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
     <head>
@@ -48,7 +40,7 @@
                         String fdate = request.getParameter("datepicker1");
                         String tdate = request.getParameter("datepicker2");
 
-                        Connection con = new dbcon().getConnection(Find.sdept(username));
+                        Connection con = new dbcon(clg).getConnection(Find.sdept(username));
                         //Statement st = con.createStatement();
                         //Statement st1 = con.createStatement();
 
@@ -159,21 +151,4 @@
             </center>
         </form>
     </body>
-    <%
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-            if (sttt != null) {
-                sttt.close();
-            }
-            if (connn != null) {
-                ;//connn.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("../index.jsp");
-        }
-
-
-    %>
-</html>
+  </html>

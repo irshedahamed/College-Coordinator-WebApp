@@ -15,20 +15,8 @@
 <!DOCTYPE html>
 <html>
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type1 = rsss.getString("type");
-                }
-                if (type1.equals("dept")) {
-
+                 String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
 
@@ -183,7 +171,7 @@
 
 
             <%
-                Connection con = new dbcon().getConnection(Find.dept(username));
+                Connection con = new dbcon(clg).getConnection(Find.dept(username));
                // Statement st = con.createStatement();
                PreparedStatement st=con.prepareStatement("select * from staff_table");
                ResultSet rs1 = st.executeQuery();
@@ -351,8 +339,8 @@
                 <th><center>SUBJECT NAME</center></th>
                 </tr>
 
-                <%                Connection con = new dbcon().getConnection(Find.dept(username));
-                    Connection con1 = new dbcon().getConnection("sjitportal");
+                <%                Connection con = new dbcon(clg).getConnection(Find.dept(username));
+                    Connection con1 = new dbcon(clg).getConnection("portal");
                  //   Statement st = con.createStatement();
                    // Statement st1 = con1.createStatement();
                     String sql = "";
@@ -421,7 +409,7 @@
         <%               int wflag = 0;
             String work = "", wsql;
              sem= request.getParameter("sem");
-            con = new dbcon().getConnection(Find.dept(username));
+            con = new dbcon(clg).getConnection(Find.dept(username));
             wsql = "select a.works as other from other_incharge a where a.staffid=? and a.acyear=? and a.semister=?";
             //Statement wstmt = con.createStatement();
             PreparedStatement wstmt=con.prepareStatement(wsql);
@@ -490,24 +478,4 @@
 
 </body>
 </div>
-<%
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
-%>
 </html>

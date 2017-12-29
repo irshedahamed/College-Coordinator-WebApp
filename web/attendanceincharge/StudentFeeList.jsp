@@ -104,13 +104,15 @@
                                     </tr>
                                 </thead>
                                 <%
+                                                String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
                                     String dept = request.getParameter("dept");
-                                    String username = session.getAttribute("username").toString();
-                                    String batch = Batch.getByYrIncharge(username).getBatch();
-                                    List<Student> list = Student.getAll(dept, batch, "_");
+                                    String batch = Batch.getByYrIncharge(username,clg).getBatch();
+                                    List<Student> list = Student.getAll(dept, batch, "_",clg);
 
                                     for (Student s : list) {
-                                        Fee f = Fee.getFeeById(s.getId());
+                                        Fee f = Fee.getFeeById(s.getId(),clg);
 
                                 %>
 

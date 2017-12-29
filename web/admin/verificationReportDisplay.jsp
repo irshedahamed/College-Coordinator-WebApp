@@ -132,6 +132,9 @@ and open the template in the editor.
             } else {
                 depts.add(deptReq);
             }
+                        String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
             String sec = request.getParameter("sec");
             String batch = request.getParameter("batch");
             for (String dept : depts) {
@@ -169,7 +172,7 @@ and open the template in the editor.
                 </thead>
                 <%
                     int sno=1;
-                    for(Student s:Student.getAll(dept, batch, sec)){
+                    for(Student s:Student.getAll(dept, batch, sec,clg)){
                 %>
 
                 <tr>

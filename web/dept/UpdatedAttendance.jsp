@@ -36,7 +36,10 @@
         <br>
 
         <%
-            Connection con = new dbcon().getConnection(dept);
+                       String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
+            Connection con = new dbcon(clg).getConnection(dept);
           //  Statement st = con.createStatement();
             //Statement st1 = con.createStatement();
          //   Statement st2 = con.createStatement();

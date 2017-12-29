@@ -14,11 +14,13 @@
 
 
 <%
+            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
 Connection conn=null;
 //Statement stmt=null;
 try{
-conn=new dbcon().getConnection("first");
+conn=new dbcon(clg).getConnection("first");
 //stmt=conn.createStatement();
 String batch=request.getParameter("batch");
 String sem=request.getParameter("sem");

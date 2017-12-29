@@ -17,7 +17,10 @@
        <%
            try
            {
-        String dept=session.getAttribute("dept").toString();
+                    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
+               String dept=session.getAttribute("dept").toString();
         String sec=session.getAttribute("sec").toString();
         String batch=session.getAttribute("batch").toString();
         String hour=session.getAttribute("hour").toString();
@@ -40,7 +43,7 @@
                 
                 <%
                 
-                Connection con = new dbcon().getConnection(dept);
+                Connection con = new dbcon(clg).getConnection(dept);
      //   Statement st=con.createStatement();
        // Statement st1=con.createStatement();
       //  Statement st2=con.createStatement();

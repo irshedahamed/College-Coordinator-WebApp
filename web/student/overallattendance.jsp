@@ -165,10 +165,10 @@
 
 
     <%
+            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
-        String username = session.getAttribute("username").toString();
-
-        Connection conection = new dbcon().getConnection(Find.sdept(username));
+        Connection conection = new dbcon(clg).getConnection(Find.sdept(username));
         //Statement st1 = conection.createStatement();
         String batch = "", name = "", rollno = "", course = "", sec = "";
 

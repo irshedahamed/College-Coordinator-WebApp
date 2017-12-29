@@ -21,9 +21,11 @@
         </tr>
             
             <%
-           
-            Connection con=new dbcon().getConnection("cse");
-            Connection con1= new dbcon().getConnection("sjitportal");
+                       String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
+            Connection con=new dbcon(clg).getConnection("cse");
+            Connection con1= new dbcon(clg).getConnection("portal");
             Statement st = con.createStatement();
             Statement st1 = con1.createStatement();
             ResultSet rs1 = st.executeQuery("select * from subject_allocation where staffid='"+id+"'");

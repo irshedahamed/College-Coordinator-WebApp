@@ -154,6 +154,9 @@
             }
             String dept = "", sec = "", batch = "", sem = "", exam = "", modeltype = "";
             try {
+                            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
                 dept = request.getParameter("dept");
                 sec = request.getParameter("section");
                 batch = request.getParameter("batch");
@@ -163,7 +166,7 @@
 
         %>
 
-        <%                Connection con = new dbcon().getConnection(dept);
+        <%                Connection con = new dbcon(clg).getConnection(dept);
         //    Statement st = con.createStatement();
           //  Statement st1 = con.createStatement();
         %>
@@ -257,11 +260,11 @@
 
                     int max = 0, f = 0, p = 0, a = 0, gtotal = 0;
                     float pp = 0, classavg = 0;
-                    for (Student stu : Student.getAll(dept, batch, sec)) {
-                        Mark m = new Mark();
+                    for (Student stu : Student.getAll(dept, batch, sec,clg)) {
+                        Mark m = new Mark(clg);
                         m.setRollno(stu.getId());
                         m.setSubcode(sc);
-                        List<Mark> li = Mark.getExamMark(dept, m);
+                        List<Mark> li = Mark.getExamMark(dept, m,clg);
                         String markc = null, markm = null, marku = null;
 
                         int total = 0;

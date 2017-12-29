@@ -114,7 +114,10 @@
                 <label class="select">
             <select id="batch" name="batch" required>
                 <option disabled selected>Select</option>
-                     <%=Batch.getHTMLContent()%>
+                <%            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+%>
+                <%=Batch.getHTMLContent(clg)%>
                
             </select>
                     <i></i>
@@ -126,7 +129,7 @@
                                             <label class="select">
                                                 <select id="ayear" name="ayear">
                                                     <option>Select</option>
-                                                    <%= AcademicYear.getHTMLContent()%>
+                                                    <%= AcademicYear.getHTMLContent(clg)%>
 
                                                 </select>  
                                                 <i></i>

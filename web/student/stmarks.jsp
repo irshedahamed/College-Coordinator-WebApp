@@ -19,15 +19,8 @@
 <!DOCTYPE html>
 <html>
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from student_login_details where rollno='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
+                    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
     %>
     <head>
@@ -71,20 +64,20 @@
                 </tr>
             </thead>
 
-            <%          Subjects s = new Subjects();
+            <%          Subjects s = new Subjects(clg);
         s.setSem(sem);
-        s.setAyear(Find.getAcyear(batch, sem));
-        s.setRegulation(Batch.getRegulation(Student.getById(username).getBatch()));
-        List<String> list = Subjects.getTherorySubCode(Find.sdept(username), s);
+        s.setAyear(Find.getAcyear(batch, sem,clg));
+        s.setRegulation(Batch.getRegulation(Student.getById(username).getBatch(),clg));
+        List<String> list = Subjects.getTherorySubCode(Find.sdept(username), s,clg);
         for(String subcode:list){
-                    Mark m = new Mark();
+                    Mark m = new Mark(clg);
                     m.setSubcode(subcode);
                     m.setType(exam);
                     m.setRollno(rollno1);
             %>
             <tr>
-                <td><%=subcode%>-<%=Subjects.getBySubcode(Find.sdept(username), subcode).getSubname() %></td>
-                <td><%= Mark.getUserMark(dept, m).getMark()%></td>
+                <td><%=subcode%>-<%=Subjects.getBySubcode(Find.sdept(username), subcode,clg).getSubname() %></td>
+                <td><%= Mark.getUserMark(dept, m,clg).getMark()%></td>
             </tr>
 
 
@@ -103,23 +96,4 @@
 
 
     </body>
-    <%
-               
-                
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-            if (sttt != null) {
-                sttt.close();
-            }
-            if (connn != null) {
-                ;//connn.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("../index.jsp");
-        }
-
-
-    %>
-</html>
+ </html>

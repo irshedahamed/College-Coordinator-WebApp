@@ -88,7 +88,9 @@
                 col="nine";
             }    
 	
-        
+                    String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+
         String dept = request.getParameter("dept");
         String sec=request.getParameter("section");
         String batch=request.getParameter("batch");
@@ -103,7 +105,7 @@
         session.setAttribute("date",date);
          session.setAttribute("sem",sem);
         
-        Connection con = new dbcon().getConnection(dept);
+        Connection con = new dbcon(clg).getConnection(dept);
         //Statement st=con.createStatement();
         
         int count =0;
@@ -111,7 +113,7 @@
        // ResultSet rs=st.executeQuery(sql);
         //String[] str1=new String[100];
         //String[] str2=new String[100];
-        List<Student> blist= Student.getAll(dept, batch, sec);
+        List<Student> blist= Student.getAll(dept, batch, sec,clg);
         for(Student s : blist)
         {
            

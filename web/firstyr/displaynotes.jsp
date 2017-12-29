@@ -11,26 +11,9 @@
 <!DOCTYPE html>
 <html lang="en-US">
       <% 
-   try
-    {
-    String username = session.getAttribute("username").toString();
-    String password = session.getAttribute("password").toString();
-    
-    Connection connn = new dbcon().getConnection("login");
-    Statement sttt = connn.createStatement();
-    String type1 ="";
-    ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='"+username+"' and password='"+password+"'");
-    if(rsss.isBeforeFirst())
-    {
-        while(rsss.next())
-        {
-            type1 = rsss.getString("type");
-        }
-        if(type1.equals("first"))
-        {
-    
-    
-    %>
+              String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
+  %>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -153,7 +136,7 @@
         list1.add(path);
           try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            Connection connection1 = new dbcon().getConnection(request.getParameter("dept"));
+            Connection connection1 = new dbcon(clg).getConnection(request.getParameter("dept"));
             //Statement statement1 = connection1.createStatement();
             PreparedStatement statement1=connection1.prepareStatement("select filename,descp from notes where path =?");
             statement1.setString(1, path);
@@ -257,28 +240,5 @@
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-    }
-        else
-    {
-        response.sendRedirect("../index.jsp");
-    }
-    }
-    else
-    {
-        response.sendRedirect("../index.jsp");
-    }
 
-                            if(sttt!=null)
-                            sttt.close();
-                              if(connn!=null)
-                                ;//connn.close();
-    }
-catch(Exception e)
-    {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-    
-    %>
 </html>

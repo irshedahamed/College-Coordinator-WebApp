@@ -29,19 +29,8 @@
 <html lang="en-US">
 
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type = rsss.getString("type");
-                }
-                if (type.equals("placement")) {
+                  String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
 
     %>
@@ -153,7 +142,7 @@
                                                         <select id="batch" name="batch" required>
                                                             <option disabled selected>Select</option>
                                                             <%
-                                                                out.write(Batch.getHTMLContent());
+                                                                out.write(Batch.getHTMLContent(clg));
                                                             %>
                                                         </select>
                                                         <i></i>
@@ -215,25 +204,6 @@
 
 
     <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
-    <%
-                } else {
-                    response.sendRedirect("../index.jsp");
-                }
-            }
-
-            if (sttt != null) {
-                sttt.close();
-            }
-            if (connn != null) {
-                ;//connn.close();
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("../index.jsp");
-        }
-
-    %>
+    
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
 </html>

@@ -21,6 +21,8 @@
             ResultSet rs = null;
 
             try {
+            String clg = (String)session.getAttribute("clg");
+        String username = (String)session.getAttribute("username");
 
                 String index = request.getParameter("index");
                 int n = Integer.parseInt(index);
@@ -50,7 +52,7 @@
                     out.print("<label class='input'><label class='select'>");
                     out.print("<select id='lbatch" + i + "' name='lbatch" + i + "'>");
                     out.print("<option>select</option>");
-                    Connection conbatch = new dbcon().getConnection("sjitportal");
+                    Connection conbatch = new dbcon(clg).getConnection("portal");
                    // Statement stmt1 = conbatch.createStatement();
                    PreparedStatement stmt1=conbatch.prepareStatement("select batch from regulations");
                    ResultSet rs1 = stmt1.executeQuery();
