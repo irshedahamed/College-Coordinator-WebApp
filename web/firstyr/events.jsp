@@ -1,4 +1,5 @@
-<%@page import="com.mysql.jdbc.PreparedStatement"%>
+
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Statement"%>

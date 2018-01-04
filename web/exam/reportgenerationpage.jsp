@@ -164,8 +164,8 @@
         %>
 
         <%                Connection con = new dbcon().getConnection(dept);
-        //    Statement st = con.createStatement();
-          //  Statement st1 = con.createStatement();
+           // Statement st = con.createStatement();
+           // Statement st1 = con.createStatement();
         %>
     <center><h2>St. Joseph's Institute of Technology, Chennai-119</h2></center>
     <center><h2>Department of <%=dept.toUpperCase()%></h2></center>
@@ -181,7 +181,6 @@
         PreparedStatement st=con.prepareStatement(sql);
         st.setString(1, batch);
         st.setString(2, sec);
-        
         ResultSet strength = st.executeQuery();
         strength.next();
         String tstrength = strength.getString(1);
@@ -246,7 +245,7 @@
                 stt.setString(2, sem);
                 stt.setString(3, dept);
                 stt.setString(4, sec);
-                ResultSet rs = st.executeQuery();
+                ResultSet rs = stt.executeQuery();
                 ResultSet rs1 = null;
 
                 while (rs.next()) {
