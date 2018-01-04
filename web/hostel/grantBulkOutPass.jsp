@@ -131,7 +131,7 @@
             <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
 
                         <section class="landing">
-                            <form class="skyform" action="${pageContext.request.contextPath}/processBulkOutPass" method="post">
+                            <form class="skyform" action="${pageContext.request.contextPath}/processOutPass" method="post">
                                 <fieldset>
                                     <table class="bordered">
                                         <input type="hidden" id="status" value="Accepted"> 

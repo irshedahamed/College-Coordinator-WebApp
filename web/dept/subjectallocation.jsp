@@ -1,4 +1,3 @@
-<%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
 <!DOCTYPE html>
@@ -1019,9 +1018,9 @@ $(document).on('change','.lsbatch',function(e){
                     //int i=Integer.parseInt(request.getParameter("val"));
                     Class.forName("com.mysql.jdbc.Driver").newInstance();
               Connection connection = new dbcon().getConnection(Find.dept(username));
-             // Statement statement = connection.createStatement();
-               PreparedStatement statement=connection.prepareStatement("select staffid,staffname from staff_table");
-              ResultSet rs= statement.executeQuery();
+              Statement statement = connection.createStatement();
+                    
+              ResultSet rs= statement.executeQuery("select staffid,staffname from staff_table");
                    
               String staffname,staffid = "";
                     
@@ -1238,24 +1237,20 @@ $(document).on('change','.lsbatch',function(e){
                 try
                 {
                     Connection conbatch = new dbcon().getConnection("sjitportal");
-                  //  Statement stmt = conbatch.createStatement();
-                  List<Batch> blist=Batch.getAll();
-                  
-                          
-                  //ResultSet rsbatch=stmt.executeQuery("select batch from regulations");
+                    Statement stmt = conbatch.createStatement();
+                    ResultSet rsbatch=stmt.executeQuery("select batch from regulations");
                     String batch=null;
-                    //rs.beforeFirst();
-                   // while(rsbatch.next())
-                  for(Batch b : blist)
-                   {
-                        batch=b.getBatch();
+                    rs.beforeFirst();
+                    while(rsbatch.next())
+                    {
+                        batch=rsbatch.getString("batch");
                 %>
                 <option value=<%=batch%>><%=batch%></option>
                 <%
                 }
 
-                    //        if(stmt!=null)
-                      //      stmt.close();
+                            if(stmt!=null)
+                            stmt.close();
                               if(conbatch!=null)
                                 ;//conbatch.close();
                 %>

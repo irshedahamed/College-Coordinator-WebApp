@@ -6,8 +6,7 @@
     </filter>
     <filter-mapping>
         <filter-name>ImageFilter</filter-name>
-        <url-pattern>/StudentPhotos/*</url-pattern>
-        <url-pattern>/StaffPhotos/*</url-pattern>
+        <url-pattern>/LocalGuardian25/*</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
@@ -308,10 +307,6 @@
     <servlet>
         <servlet-name>addBoardingPoint</servlet-name>
         <servlet-class>Transport.addBoardingPoint</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>processBulkOutPass</servlet-name>
-        <servlet-class>processBulkOutPass</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>findNotes</servlet-name>
@@ -664,10 +659,6 @@
     <servlet-mapping>
         <servlet-name>addBoardingPoint</servlet-name>
         <url-pattern>/addBoardingPoint</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>processBulkOutPass</servlet-name>
-        <url-pattern>/processBulkOutPass</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>findNotes</servlet-name>
