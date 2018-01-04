@@ -1,3 +1,8 @@
+<%-- 
+    Document   : getmarks
+    Created on : 04 JAN, 2018, 2:00:11 PM
+    Author     : Keertheswaran
+--%>
 <%@page import="General.AcademicYear"%>
 <%@page import="General.Batch"%>
 <%@page import="com.action.Find"%>
@@ -106,7 +111,7 @@
                                         <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="regnoupdate.jsp">Update Register No.</a></li>
 
                                         <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="BonusQuery.jsp">Bonus Assignment</a></li>
-                                                <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="StudentNo.jsp">Student no display</a></li>
+                                        <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="StudentNo.jsp">Student no display</a></li>
 
                                     </ul>
                                 </li>
@@ -127,8 +132,8 @@
 
 
             <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-                        <center>  <form action="EditMark.jsp" class="sky-form" method="post" target="_blank">
-                                <header>Student Details</header>
+                        <center>  <form action="StudentDsipNo.jsp" class="sky-form" method="post" target="_blank">
+                                <header>Student Number</header>
                                 <fieldset>					
                                     <section>
                                         <label class="input">
@@ -144,19 +149,6 @@
                                                 <i></i>                                    </label>
                                         </label>
 
-                                        <br><br>
-                                        <label class="input">
-                                            <div align="left" size="3px"><b>
-                                                    Academic Year:</b></div>
-                                            <label class="select">
-                                                <select id="ayear" name="ayear">
-                                                    
-                                                    <%= AcademicYear.getHTMLContent() %>
-
-                                                </select>
-                                                <i></i>
-                                            </label>
-                                        </label>
                                         <br> <br>
 
                                         <label class="input">
@@ -179,6 +171,7 @@
 
                                                 <select id="section" name="section" required>
                                                     <option disabled selected>select</option>
+                                                    <option value="%">ALL</option>
                                                     <option value="A">A</option>
                                                     <option value="B">B</option>
                                                     <option value="C">C</option>
@@ -189,53 +182,7 @@
                                         </label>
                                         <br> <br>
 
-                                        <label class="input">
-                                            <div align="left" size="3px"><b>
-                                                    SEM </b></div>
-                                            <label class="select">
-
-                                                <select id="sem" name="sem" required>
-                                                    <option disabled selected>select</option>
-                                                    <option value="01">1</option>
-                                                    <option value="02">2</option>
-                                                    <option value="03">3</option>
-                                                    <option value="04">4</option>
-                                                    <option value="05">5</option>
-                                                    <option value="06">6</option>
-                                                    <option value="07">7</option>
-                                                    <option value="08">8</option>
-                                                </select>
-                                                <i></i>
-                                                <br> <br>
-                                            </label></label>
-
-                                        <label class="input">
-                                            <div align="left" size="3px"><b>
-                                                    EXAM</b></div>
-                                            <label class="select">
-
-                                                <select id="exam" name="exam" required>
-                                                    <option disabled selected>select</option>
-                                                    <option value="cycle1">Cycle 1</option>
-                                                    <option value="cycle2">Cycle 2</option>
-                                                    <option value="cycle3">Cycle 3</option>
-                                                    <option value="model1">Model 1</option>
-                                                    <option value="model2">Model 2</option>
-                                                    <option value="model3">Model 3</option>
-                                                    <option value="unit1">Unit 1</option>
-                                                    <option value="unit2">Unit 2</option>
-                                                    <option value="unit3">Unit 3</option>
-                                                    <option value="zremodel1">Remodel 1</option>
-                                                    <option value="zremodel2">Remodel 2</option>
-                                                    <option value="zremodel3">Remodel 3</option>
-                                                    <option value="labmodel">Labmodel</option>
-                                                    
-
-                                                </select>
-                                                <i></i>
-                                                <br> <br>
-                                            </label></label>
-                                    </section>
+                                                                          </section>
 
 
                                     <div align="left">
@@ -254,8 +201,7 @@
                         </footer>
                         <!-- #page-container -->
                     </div>
-                </div>
-
+              
                 <footer id="page-footer">
                     <div class="container clearfix">
                         <div class="copy"></div>
