@@ -147,13 +147,14 @@
                                     $("#transport").val("");
                                     $("#placement").val("");
                                     $("#hostel").val("");
+                                    $("#development").val("");
 
                                 } else {
                                     $("#tution").val(response.tution);
                                     $("#transport").val(response.transport);
                                     $("#placement").val(response.placement);
                                     $("#hostel").val(response.hostel);
-
+                                    $("#developemnt").val(response.hostel);
                                 }
 
                             });
@@ -229,6 +230,12 @@
                                                 <div align="left" size="3px"><b>
                                                         Hostel : </b></div> 
                                                 <input type="input" id="hostel"  name="hostel" >
+                                            </label> </label>
+                                         <br>
+                                        <label class="input"><label class="input">
+                                                <div align="left" size="3px"><b>
+                                                        Development : </b></div> 
+                                                <input type="input" id="development"  name="development" >
                                             </label> </label>
 
                                         <input type="submit" class="button" value="Submit"  id="submit" >

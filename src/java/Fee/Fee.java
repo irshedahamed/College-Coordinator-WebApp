@@ -23,6 +23,7 @@ public class Fee {
     protected String transport;
     protected String hostel;
     protected String placement;
+    protected String development;
     public String getByType(String type){
         if(type.equals("tution"))
             return tution;
@@ -32,6 +33,9 @@ public class Fee {
             return placement;
          else  if(type.equals("hostel"))
             return hostel;
+         else  if(type.equals("development"))
+            return development;
+         
         else
         return null;
     }
@@ -65,6 +69,13 @@ public class Fee {
 
     public void setPlacement(String placement) {
         this.placement = placement;
+    }
+     public String getDevelopment() {
+        return development;
+    }
+
+    public void setDevelopment(String development) {
+        this.development = development;
     }
     
     public static Fee getFeeById(String id){

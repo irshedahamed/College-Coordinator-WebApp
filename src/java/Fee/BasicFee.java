@@ -57,7 +57,7 @@ public class BasicFee extends Fee{
                   sql="delete from basic_fee where batch='"+batch+"' and type='"+type+"' and acyear='"+acyear+"'";
                         stmt.executeUpdate(sql);
        
-           sql="insert into basic_fee values('"+batch+"','"+acyear+"','"+type+"','"+tution+"','"+transport+"','"+placement+"','"+hostel+"')";
+           sql="insert into basic_fee values('"+batch+"','"+acyear+"','"+type+"','"+tution+"','"+transport+"','"+placement+"','"+hostel+"','"+development+"')";
        update+=stmt.executeUpdate(sql);
        
      
@@ -90,7 +90,7 @@ public class BasicFee extends Fee{
            stmt=conn.createStatement();
            
            String sql;
-           sql="insert into basic_fee values('"+batch+"','"+acyear+"','"+type+"','"+tution+"','"+transport+"','"+placement+"','"+hostel+"')";
+           sql="insert into basic_fee values('"+batch+"','"+acyear+"','"+type+"','"+tution+"','"+transport+"','"+placement+"','"+hostel+"','"+development+"')";
        update+=stmt.executeUpdate(sql);
        
      
@@ -142,7 +142,7 @@ public class BasicFee extends Fee{
                         b.setTransport(rs.getString("transport"));
                         b.setTution(rs.getString("tution"));
                         b.setType(rs.getString("type"));
-                        
+                        b.setDevelopment(rs.getString("development"));
                         list.add(b);
                     }
     }catch(Exception e){

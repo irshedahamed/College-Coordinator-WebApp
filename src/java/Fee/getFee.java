@@ -78,7 +78,7 @@ public class getFee extends HttpServlet {
       
       String batch=request.getParameter("batch");
       String type=request.getParameter("type");
-      String json=null;
+      String json= null;
       for(BasicFee bf:BasicFee.getByBatch(batch)){
       if(bf.getType().equals(type))
           json=new Gson().toJson(bf);
