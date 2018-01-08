@@ -58,16 +58,17 @@
                     var id = $(this).parent().parent().attr("id");
                     var tution = $(this).parent().parent().find("#tution").val();
                     var transport = $(this).parent().parent().find("#transport").val();
-
+                    var development = $(this).parent().parent().find("#development").val();
                     var placement = $(this).parent().parent().find("#placement").val();
                     var hostel = $(this).parent().parent().find("#hostel").val();
-
+                    
                     $.post('../updateSpecialFee', {
                         id: id,
                         tution: tution,
                         transport: transport,
                         placement: placement,
-                        hostel: hostel
+                        hostel: hostel,
+                        development : development
                     }, function (response) {
                         console.log(response);
                         if (response === "success")
@@ -96,10 +97,11 @@
                                         <th>Register Number</th>
                                         <th >Roll No</th>
                                         <th>Name</th>
-                                        <th>Tution</th>
+                                        <th>Tuition</th>
                                         <th>Transport</th>
                                         <th>Placement</th>
                                         <th>Hostel</th>
+                                        <th>Development</th>
                                         <th>Save</th>
                                     </tr>
                                 </thead>
@@ -123,20 +125,12 @@
                                     <td><input type="text" class="amount" value="<%=f.getTransport()%>" id="transport" style="background:white"></td>
                                     <td><input type="text" class="amount" value="<%=f.getPlacement()%>" id="placement" style="background:white"></td>
                                     <td><input type="text" class="amount" value="<%=f.getHostel()%>" id="hostel" style="background:white"></td>
+                                    <td><input type="text" class="amount" value="<%=f.getDevelopment()%>" id="development" style="background:white"></td>
                                     <td><input type="button" value="Update" id="submit" class="update"></td>
                                 </tr>      
                                 <%
-
                                     }
-
-
                                 %>
-
-
-
-
-
-
                             </table>
                             <input type="hidden" name="dept" value="<%=dept%>">
                             <br><br>   

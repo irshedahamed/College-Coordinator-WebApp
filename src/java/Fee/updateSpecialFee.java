@@ -83,6 +83,7 @@ public class updateSpecialFee extends HttpServlet {
       s.setPlacement(request.getParameter("placement"));
       s.setTransport(request.getParameter("transport"));
       s.setHostel(request.getParameter("hostel"));
+      s.setDevelopment(request.getParameter("development"));
       
       if(s.insert())
           response.getWriter().write("success");
