@@ -83,6 +83,7 @@ public class setFee extends HttpServlet {
        bf.setTransport(request.getParameter("transport"));
        bf.setTution(request.getParameter("tution"));
        bf.setType(request.getParameter("type"));
+       bf.setDevelopment(request.getParameter("development"));
        
        if(bf.insert())
            response.getWriter().print("Successfully Updated!!!");

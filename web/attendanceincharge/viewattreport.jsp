@@ -4,6 +4,7 @@
     Author     : aravind
 --%>
 
+<%@page import="Actor.Student"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.io.File"%>
 <%@page import="java.sql.ResultSet"%>
@@ -183,19 +184,10 @@ and open the template in the editor.
                 </thead>
 
                 <%
-                    //String sql2 = ;
                     Connection con = new dbcon().getConnection(dept);
-
-                 //   Statement st = con.createStatement();
-                 PreparedStatement st=con.prepareStatement("select * from student_personal where batch='" + batch + "' and sec='" + sec + "' order by rollno");
-                 st.setString(1, batch);
-                 st.setString(2, sec);
-                 
-                    ResultSet rs = st.executeQuery();
-
-                    while (rs.next()) {
-                        rollno = rs.getString("rollno");
-                        name = rs.getString("name");
+                        for(Student s : Student.getAll(dept, batch, sec)) {
+                        rollno = s.getId();
+                        name = s.getName();
                 %>
                 <tr>
                     <td><%=rollno.toUpperCase()%></td>        
@@ -203,10 +195,7 @@ and open the template in the editor.
 
                     <td>
                         <%
-
-                            //sql2 = ;
-                            //Statement st1 = con.createStatement();
-                            PreparedStatement st1=con.prepareStatement("select * from overallattendence where rollno='" + rollno + "' and sem='" + sem + "'");
+                            PreparedStatement st1=con.prepareStatement("select * from overallattendence where rollno=? and sem=?");
                             st1.setString(1, rollno);
                             st1.setString(2, sem);
                            
@@ -245,10 +234,6 @@ and open the template in the editor.
 
 
                 <%       }
-
-                    if (st != null) {
-                        st.close();
-                    }
 
                     if (con != null) {
                         ;//con.close();

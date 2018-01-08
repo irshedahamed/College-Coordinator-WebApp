@@ -26,6 +26,8 @@ public class Find {
                                 + " <b>optional</b>";
     else if(type.equals("Hostel"))
         return "Hostel Fee<br><b>-Optional</b>";
+    else if(type.equals("Development"))
+        return "Development Fee<br><b>-Optional</b>";
     else
         return null;
     }
@@ -39,6 +41,8 @@ public class Find {
             return "Placement & Training";
          else  if(colname.equals("hostel"))
             return "Hostel";
+         else  if(colname.equals("development"))
+            return "Development";
         else
         return null;
     }

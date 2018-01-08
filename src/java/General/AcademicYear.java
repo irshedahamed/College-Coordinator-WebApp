@@ -80,7 +80,12 @@ public class AcademicYear {
                   st.executeUpdate("update academicyr set current = 'n'");   
           
                   int i =   st.executeUpdate("update academicyr set current ='"+Current+"' where year ='"+Year+"' "); 
-           
+                  if(Current.equals("odd"))
+                  {
+                      int year =Integer.parseInt(Year);
+                      year =year-1;
+                       st.executeUpdate("update academicyr set current ='fee' where year ='"+year+"' ");                
+                  }
             if(st!=null)
                             st.close();
                               if(con!=null)
