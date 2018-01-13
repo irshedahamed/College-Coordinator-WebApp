@@ -41,6 +41,7 @@ public class dbcon {
             if(conn==null || conn.isClosed()){
                  Class.forName("com.mysql.jdbc.Driver").newInstance();
 
+
                  conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"root","1234");
                  connectionPool.put(dbname+clg, conn);
 
