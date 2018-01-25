@@ -266,7 +266,7 @@
                                         %>
                                     </table>
                                     <form method="post" action="../generateMUP">
-                                        <input type="submit" id="submit" value="Generate  Challan">
+                                        <input type="submit"  id="submit" value="Generate  Challan">
                                     </form>
 
                                     <%
