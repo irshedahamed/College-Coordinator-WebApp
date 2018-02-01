@@ -29,7 +29,7 @@
             if (rsss.isBeforeFirst()) {
 
                 session.setAttribute("deptname", Find.sdept(username));
-                MUResponse mu = MUResponse.getbyMUP("MU006547868");
+                MUResponse mu = (MUResponse) session.getAttribute("MUResponse");
                 boolean feepaid = false;
                 if (request.getAttribute("paid") != null) {
                     if (request.getAttribute("paid").toString().equals("Y")) {
@@ -162,7 +162,7 @@
                         <div style="float: none; clear: both;">
                             <%=getContent(s, Detail + bankcharge, Amount + bankamount, String.valueOf((sum + bankchr)), feepaid, mupno)%>
                         </div>
-                      </div>
+                    </div>
                 </div>
                 <br><br><br>
 

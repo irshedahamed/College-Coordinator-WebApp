@@ -364,6 +364,10 @@
         <servlet-name>LabMarkUpdate</servlet-name>
         <servlet-class>Mark.LabMarkUpdate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EntryChallan</servlet-name>
+        <servlet-class>Fee.EntryChallan</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -719,6 +723,10 @@
     <servlet-mapping>
         <servlet-name>LabMarkUpdate</servlet-name>
         <url-pattern>/LabMarkUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EntryChallan</servlet-name>
+        <url-pattern>/EntryChallan</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
