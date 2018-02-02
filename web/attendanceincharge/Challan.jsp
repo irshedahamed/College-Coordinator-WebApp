@@ -116,7 +116,7 @@
                                         <ul class="sub-menu">
                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="BasicFee.jsp">Basic Fee</a>
                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SpecialFee.jsp">Individual Fee</a>
-                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="Challan.jsp">Challan Entry</a>
+                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="Challan.jsp">Payment View</a>
                                         </ul></li>
 
                                     <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 "><a href="#">Student Update</a>
@@ -146,7 +146,7 @@
 
                                 <form class="sky-form" action="ChallanEntry.jsp" method="post">
 
-                                    <header>Challan Entry</header>
+                                    <header>Payment View / Challan Entry</header>
 
                                     <fieldset>                  
 
