@@ -202,7 +202,7 @@
                                         ResultSet brs=bstmt.executeQuery();
                                         int assessment=0;
                                         if(brs.next())
-                                        {if(Integer.valueOf(brs.getString("assessment"))<=Integer.valueOf(exam)){
+                                        {if((Integer.valueOf(brs.getString("assessment")) <= Integer.valueOf(exam))  && sem.equals(brs.getString("sem"))){
                                     %>
                                     <tr  style="background: #e1070a;">
                                         <%}else{%>
