@@ -234,10 +234,11 @@ and open the template in the editor.
                             forSqlexam="3";
                         else
                             forSqlexam=exam;
-                        String sql7 = "select * from bonuscut where rollno=? and assessment <=?";
+                        String sql7 = "select * from bonuscut where rollno=? and assessment <=? and sem=?";
                         PreparedStatement st3=con.prepareStatement(sql7);
                         st3.setString(1, rollno);
                         st3.setString(2, forSqlexam);
+                        st3.setString(3, sem);
                         ResultSet rs3 = st3.executeQuery();
                         if (rs3.next()) {
                             bonus = 0;
