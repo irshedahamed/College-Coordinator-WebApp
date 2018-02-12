@@ -243,8 +243,10 @@ h2{
                     ResultSet rs7;
 
                     List<String> list = new ArrayList<String>();
-                     Statement st2 = con.createStatement();
-                    rs2=st2.executeQuery("select regulation from regulations where batch='"+batch+"'");
+                     //Statement st2 = con.createStatement();
+                    PreparedStatement st2=con.prepareStatement("select regulation from regulations where batch=?");
+                    st2.setString(1,batch);
+                     rs2=st2.executeQuery();
                         String regulation=new String();
                         if(rs2.next())
                         {

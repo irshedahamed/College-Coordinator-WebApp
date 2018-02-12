@@ -187,7 +187,7 @@ and open the template in the editor.
                     Connection con = new dbcon().getConnection(dept);
 
                  //   Statement st = con.createStatement();
-                 PreparedStatement st=con.prepareStatement("select * from student_personal where batch='" + batch + "' and sec='" + sec + "' order by rollno");
+                 PreparedStatement st=con.prepareStatement("select * from student_personal where batch=? and sec=? order by rollno");
                  st.setString(1, batch);
                  st.setString(2, sec);
                  
@@ -206,7 +206,7 @@ and open the template in the editor.
 
                             //sql2 = ;
                             //Statement st1 = con.createStatement();
-                            PreparedStatement st1=con.prepareStatement("select * from overallattendence where rollno='" + rollno + "' and sem='" + sem + "'");
+                            PreparedStatement st1=con.prepareStatement("select * from overallattendence where rollno=? and sem=?");
                             st1.setString(1, rollno);
                             st1.setString(2, sem);
                            

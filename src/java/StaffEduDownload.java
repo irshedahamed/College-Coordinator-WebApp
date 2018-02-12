@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.servlet.ServletException;
@@ -77,13 +78,19 @@ public class StaffEduDownload extends HttpServlet {
     response.setContentType("APPLICATION/OCTET-STREAM");   
     response.setHeader("Content-Disposition","attachment; filename=\"" +request.getParameter("filename")+ "\"");   
       Connection con=null;
-      Statement stmt=null;
+     // Statement stmt=null;
     InputStream inputstream = null;  
      
       try{
       con = new dbcon().getConnection(Find.sdept(request.getParameter("staffid")));
-      stmt=con.createStatement();
-      ResultSet rs= stmt.executeQuery("select * from staff_edu where staffid='"+request.getParameter("staffid")+"' and filename='"+request.getParameter("filename")+"'");
+      //stmt=con.createStatement();
+      String staffid=request.getParameter("staffid");
+      String filename=request.getParameter("filename");
+          PreparedStatement stmt=con.prepareStatement("select * from staff_edu where staffid=? and filename=?");
+          stmt.setString(1, staffid);
+          stmt.setString(2, filename);
+          ResultSet rs= stmt.executeQuery();
+      
       if(rs.next())
       {
       inputstream=rs.getBinaryStream("marksheet");
@@ -92,8 +99,8 @@ public class StaffEduDownload extends HttpServlet {
       {e.printStackTrace();}
       finally{
           try{
-      if(stmt!=null)
-                            stmt.close();
+//      if(stmt!=null)
+  //                          stmt.close();
                               if(con!=null)
                                 ;//con.close();
           }catch(Exception e)

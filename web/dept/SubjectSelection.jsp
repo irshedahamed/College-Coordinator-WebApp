@@ -1,4 +1,4 @@
-<%-- 
+f<%-- 
     Document   : SubjectSelection
     Created on : 17 Jul, 2016, 10:58:27 AM
     Author     : Home
@@ -165,7 +165,7 @@
 
                                                 String departmentname = Find.dept(username);
 
-                                                connection = new dbcon().getConnection("portal");
+                                                connection = new dbcon().getConnection("sjitportal");
                                                 //statement = connection.createStatement();
                                                 PreparedStatement statement=connection.prepareStatement("select distinct(regulation) from regulations ");
                                                 ResultSet rs = statement.executeQuery();

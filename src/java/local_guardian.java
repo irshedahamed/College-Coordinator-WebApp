@@ -8,6 +8,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -98,8 +99,18 @@ public class local_guardian extends HttpServlet {
 
       //Class.forName("com.mysql.jdbc.Driver").newInstance();
       Connection con = new dbcon().getConnection("sjitportal");
-        Statement st = con.createStatement();
-           st.executeUpdate("update localguardian set rollno='"+rollno+"', name='"+name+"',phoneno='"+phoneno+"',doorno='"+doorno+"',street='"+street+"',area='"+area+"',city='"+city+"',pincode='"+pincode+"' where rollno='"+rollno+"'");
+        //Statement st = con.createStatement();
+            PreparedStatement st=con.prepareStatement("update localguardian set rollno=?, name=?,phoneno=?,doorno=?,street=?,area=?,city=?,pincode=? where rollno=?");
+            st.setString(1, rollno);
+            st.setString(2, name);
+            st.setString(3,phoneno);
+            st.setString(4, doorno);
+            st.setString(5,street);
+            st.setString(6, area);
+            st.setString(7, city);
+            st.setString(8, pincode);
+            st.setString(9, rollno);
+        st.executeUpdate();
             //response.sendRedirect("admin/batch.jsp");
             response.getWriter().write("Successfully updated!");
             

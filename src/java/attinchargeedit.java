@@ -8,6 +8,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -82,7 +83,7 @@ public class attinchargeedit extends HttpServlet {
         
         
         Connection conn=null;
-        Statement stmt=null;
+       // Statement stmt=null;
         try{
         int count=Integer.parseInt(request.getSession().getAttribute("count").toString());
         String date=request.getSession().getAttribute("date").toString();
@@ -92,14 +93,18 @@ public class attinchargeedit extends HttpServlet {
         String dept=request.getParameter("dept");
         try{
             conn=new dbcon().getConnection(dept);
-            stmt=conn.createStatement();
-            for(int i=0;i<count;i++)
+         //   stmt=conn.createStatement();
+            
+         for(int i=0;i<count;i++)
         {
         rollno=request.getParameter("val"+i);
         if(rollno!=null)
         {
-         String sql="delete from overallattendence where rollno='"+rollno+"' and date='"+date+"'";   
-         edit+=stmt.executeUpdate(sql);
+         String sql="delete from overallattendence where rollno=? and date=?";   
+         PreparedStatement stmt=conn.prepareStatement(sql);
+         stmt.setString(1, rollno);
+         stmt.setString(2, date);
+         edit+=stmt.executeUpdate();
          response.getWriter().println(rollno+date);
         
         }
@@ -111,14 +116,14 @@ public class attinchargeedit extends HttpServlet {
        }catch(Exception e){
            e.printStackTrace();
        }finally{
-            try {
-                if(stmt!=null)
-                    stmt.close();
-                if(conn!=null)
-                    ;//conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(attinchargeedit.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try {
+//                if(stmt!=null)
+//                    stmt.close();
+//                if(conn!=null)
+//                    ;//conn.close();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(attinchargeedit.class.getName()).log(Level.SEVERE, null, ex);
+//            }
        }
         
         }catch(Exception e){
@@ -126,14 +131,14 @@ public class attinchargeedit extends HttpServlet {
         
         }finally{
         
-            try {
-                if(stmt!=null)
-                    stmt.close();
-                if(conn!=null)
-                    ;//conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(attinchargeedit.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try {
+//                if(stmt!=null)
+//                    stmt.close();
+//                if(conn!=null)
+//                    ;//conn.close();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(attinchargeedit.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         }
         
     }

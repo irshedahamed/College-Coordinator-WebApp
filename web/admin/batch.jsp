@@ -23,7 +23,6 @@
                 }
                 if (type.equals("admin")) {
 
-
     %>
     <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
     <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -36,9 +35,7 @@
 
         <!-- Custom CSS -->
         <link href="../css/simple-sidebar.css" rel="stylesheet">
-
-
-    </head>
+        </head>
 
     <body class="home page page-id-115 page-template-default has-toolbar">
         <div id="wrapper" class="toggled">
@@ -200,7 +197,14 @@
                                             </label>
                                         </label>
                                         <br><br> 
-                                        <div align="right">
+                    <input type="hidden" id="msgg" value="<%=request.getParameter("msg")%>"/>
+                    <script>
+                        var a=document.getElementById("msgg").value;
+                        if(a!=null){
+                            alert("Successfully Updated");
+                        }
+                    </script>
+                    <div align="right">
                                             <input type="submit" id="submit" value="Submit" /></div>
                                     </section>
                                 </fieldset>

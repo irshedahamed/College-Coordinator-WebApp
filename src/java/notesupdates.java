@@ -25,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import static java.lang.System.out;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import org.apache.commons.fileupload.FileItem;
@@ -214,10 +215,20 @@ String UPLOAD_DIRECTORY="hello";
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection connection1 = new dbcon().getConnection(dept);
-            Statement statement1 = connection1.createStatement();
+           // Statement statement1 = connection1.createStatement();
             String by=request.getSession().getAttribute("username").toString();
-            statement1.executeUpdate("insert into notes values("+null+",'" + ayear + "','" + sem + "','" + subcode + "','" + notes + "','" + name + "','" + UPLOAD_DIRECTORY + "','"+descp+"','"
-                   +subCategory+"','"+by + "',now())");
+            PreparedStatement statement1=null;
+               statement1=connection1.prepareStatement("insert into notes values("+null+",?,?,?,?,?,?,?,?,?,now())");
+            statement1.setString(1, ayear);
+            statement1.setString(2, sem);
+            statement1.setString(3, subcode);
+            statement1.setString(4, notes);
+            statement1.setString(5, name);
+            statement1.setString(6, UPLOAD_DIRECTORY);
+            statement1.setString(7,descp);
+            statement1.setString(8, subCategory);
+            statement1.setString(9, by);
+            statement1.executeUpdate();
              if(statement1!=null)
                             statement1.close();
                               if(connection1!=null)
@@ -232,14 +243,18 @@ String UPLOAD_DIRECTORY="hello";
                                   if(!department.equals(dept)){
                                   ResultSet rs;
                                   connection1 = new dbcon().getConnection(department);
-                                  statement1 = connection1.createStatement();
+                             //     statement1 = connection1.createStatement();
                                   response.getWriter().println(department);
                                   String regulation="";
                                   for(Batch b:Batch.getAll()){
                                   if(b.getBatch().equals(batch))
                                       regulation=b.getRegulation();
                                   }
-                                  rs=statement1.executeQuery("select * from subject_sem_table where subcode like '"+subcode+"' and regulation like'"+regulation+"'");
+                               
+                                  PreparedStatement statement2=connection1.prepareStatement("select * from subject_sem_table where subcode like ? and regulation like ?");
+                                  statement2.setString(1,subcode);
+                                  statement2.setString(2,regulation);
+                                  rs=statement2.executeQuery();
                                   if(rs.next())
                                   {
                                       response.getWriter().println(department+"insert");
@@ -256,9 +271,17 @@ String UPLOAD_DIRECTORY="hello";
                                   out.write(data);
                                   }
                                    
-                                  
-         statement1.executeUpdate("insert into notes values("+null+",'" + ayear + "','" + sem + "','" + subcode + "','" + notes + "','" + name + "','" + UPLOAD_DIRECTORY + "','"+descp+"','"
-                   +subCategory+"','"+by + "',now())");
+                        PreparedStatement  statement3=connection1.prepareStatement("insert into notes values("+null+",?,?,?,?,?,?,?,?,?,now())");
+                          statement3.setString(1, ayear);
+                          statement3.setString(2,sem);
+                          statement3.setString(3, subcode);
+                          statement3.setString(4, notes);
+                          statement3.setString(5, name);
+                          statement3.setString(6, UPLOAD_DIRECTORY);
+                          statement3.setString(7, descp);
+                          statement3.setString(8, subCategory);
+                          statement3.setString(9, by);
+         statement3.executeUpdate();
              
                                   
                                   }

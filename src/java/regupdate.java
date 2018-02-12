@@ -8,6 +8,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -93,15 +94,18 @@ public class regupdate extends HttpServlet {
             Connection  con = new dbcon().getConnection(dept);
             String subcode = null,rollno,mark;
             int count=0;
-            Statement st3=null,st4=null;
+           // Statement st3=null,st4=null;
             ResultSet rs3=null,rs4=null;
             
-            st3 = con.createStatement();
-            st4 = con.createStatement();
+            //st3 = con.createStatement();
+            //st4 = con.createStatement();
             
             
-                String sql3 = "select * from student_personal where batch='"+batch+"' and sec='"+sec+"'";
-                rs3 = st3.executeQuery(sql3);
+                String sql3 = "select * from student_personal where batch=? and sec=?";
+              PreparedStatement st3=con.prepareStatement(sql3);
+              st3.setString(1, batch);
+              st3.setString(2, sec);
+                rs3 = st3.executeQuery();
                  int j = 1;
                 while(rs3.next())
                 {
@@ -111,12 +115,16 @@ public class regupdate extends HttpServlet {
                     String str="reg"+rollno;
                     String regno = request.getParameter(str);
                     String name=request.getParameter("name"+rollno);
-                    String sql5="update student_personal set regno='"+regno+"',name='"+name+"' where rollno='"+rollno+"'";
-                    
+                    String sql5="update student_personal set regno=?,name=? where rollno=?";
+                    PreparedStatement st4=null;
                     
                     if(regno!=null)
                     if(regno.trim()!="")
-                    st4.executeUpdate(sql5);
+                    st4=con.prepareStatement(sql5);
+                    st4.setString(1,regno);
+                    st4.setString(2,name);
+                    st4.setString(3, rollno);
+                        st4.executeUpdate();
                     j++; 
                    
                 } 
@@ -125,8 +133,8 @@ public class regupdate extends HttpServlet {
        
                               if(st3!=null)
                                 st3.close();
-                                if(st4!=null)
-                            st4.close();
+                          //      if(st4!=null)
+                           // st4.close();
                               if(con!=null)
                                 ;//con.close();
         } catch (Exception ex) {

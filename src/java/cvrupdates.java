@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import static java.lang.System.out;
+import java.sql.PreparedStatement;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -178,9 +179,14 @@ public class cvrupdates extends HttpServlet {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection connection1 = new dbcon().getConnection(request.getSession().getAttribute("deptname").toString());
-            Statement statement1 = connection1.createStatement();
+       //     Statement statement1 = connection1.createStatement();
+PreparedStatement statement1=connection1.prepareStatement("insert into deptuploads values("+null+",?,?,?,?)");
 
-            statement1.executeUpdate("insert into deptuploads values("+null+",'" + name + "','" + desc + "','" + type + "','"+ UPLOAD_DIRECTORY + "')");
+statement1.setString(1, name);
+statement1.setString(2, desc);
+statement1.setString(3, type);
+statement1.setString(4, UPLOAD_DIRECTORY);
+            statement1.executeUpdate();
              request.getRequestDispatcher("dept/result.jsp").forward(request, response);
               if(statement1!=null)
                             statement1.close();

@@ -10,6 +10,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -100,16 +101,42 @@ public class StaffProfileEdit extends HttpServlet {
        String email=request.getParameter("email");
        String ll=request.getParameter("ll");
        Connection con=null;
-       Statement stmt=null;
+      // Statement stmt=null;
        try
        {
             con=new dbcon().getConnection(Find.sdept(id));
-            stmt=con.createStatement();
-       String sql="update staff_general set tittle='"+title+"', name='"+name+"', desg='"+desg+"', doj='"+doj+"',"
-               + "gender='"+gender+"', add1='"+add1+"', add2='"+add2+"', city='"+city+"', state='"+state+"', "
-               + "pincode='"+pincode+"', padd1='"+padd1+"', padd2='"+padd2+"', pcity='"+pcity+"', pstate='"+pstate+"',"
-               + "ppincode='"+ppincode+"', mobile1='"+mobile1+"', mobile2='"+mobile2+"', email='"+email+"', ll='"+ll+"' where staffid='"+id+"'";
-       stmt.executeUpdate(sql);
+           // stmt=con.createStatement();
+       String sql="update staff_general set tittle=?, name=?, desg=?, doj=?,"
+               + "gender=?, add1=?, add2=?, city=?, state=?, "
+               + "pincode=?, padd1=?, padd2=?, pcity=?, pstate=?,"
+               + "ppincode=?, mobile1=?, mobile2=?, email=?, ll=? where staffid=?";
+           PreparedStatement stmt=con.prepareStatement(sql);
+           stmt.setString(1, title);
+           stmt.setString(2,name);
+           stmt.setString(3,desg);
+           stmt.setString(4, doj);
+            stmt.setString(5, gender);
+             stmt.setString(6, add1);
+              stmt.setString(7, add2);
+               stmt.setString(8, city);
+                stmt.setString(9, state);
+                 stmt.setString(10, pincode);
+                  stmt.setString(11, padd1);
+                   stmt.setString(12, padd2);
+                    stmt.setString(13, pcity);
+                     stmt.setString(14, pstate);
+                      stmt.setString(15, ppincode);
+                       stmt.setString(16, mobile1);
+                        stmt.setString(17, mobile2);
+                         stmt.setString(18,email);
+                          stmt.setString(19, ll);
+                          stmt.setString(20, id);
+                     
+                     
+                   
+                   
+             
+       stmt.executeUpdate();
        sql="update staff_table set staffname='"+name+"' where staffid='"+id+"'";
        stmt.executeUpdate(sql);
        response.getWriter().println("Successfully updated!!!");
@@ -126,8 +153,8 @@ public class StaffProfileEdit extends HttpServlet {
        {
        if(con!=null)
            ;//con.close();
-       if(stmt!=null)
-           stmt.close();
+      // if(stmt!=null)
+        //   stmt.close();
        }
        catch(Exception e)
        {

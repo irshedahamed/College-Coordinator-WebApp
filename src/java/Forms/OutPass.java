@@ -9,6 +9,7 @@ import Actor.Student;
 import com.action.Find;
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -79,13 +80,16 @@ public class OutPass {
     
      public boolean insert(){
         Connection conn=null;
-       Statement stmt=null;
+         PreparedStatement stmt=null;
        int update=0;
        try{
            conn=new dbcon().getConnection("sjitportal");
-           stmt=conn.createStatement();
+           //stmt=conn.createStatement();
            String sql;
-           sql="select * from outpassform where rollno='"+rollno+"' and status='Waiting for Response' and reason='"+reason+"'";
+           sql="select * from outpassform where rollno=? and status='Waiting for Response' and reason=?";
+           stmt=conn.prepareStatement(sql);
+           stmt.setString(1, rollno);
+           stmt.setString(2, reason);
            ResultSet rs=stmt.executeQuery(sql);
            
            if(rs.next())
@@ -135,13 +139,14 @@ public class OutPass {
 
     public List<OutPass> getbyIdAll(){
         Connection conn=null;
-    Statement stmt=null;
+    PreparedStatement stmt=null;
     List<OutPass> list=new ArrayList<OutPass>();
         try{
             
     conn=new dbcon().getConnection("sjitportal");
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from outpassform where rollno like '"+rollno+"'");
+    stmt = conn.prepareStatement("select * from outpassform where rollno like ?");
+    stmt.setString(1, rollno);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -174,14 +179,14 @@ public class OutPass {
     
     public static List<OutPass> getAllPending(){
         Connection conn=null;
-    Statement stmt=null;
+        PreparedStatement stmt=null;
     List<OutPass> list=new ArrayList<OutPass>();
      
     try{
             
     conn=new dbcon().getConnection("sjitportal");
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from outpassform where status like 'Waiting%'");
+    stmt = conn.prepareStatement("select * from outpassform where status like 'Waiting%'");
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -223,13 +228,16 @@ public class OutPass {
     
      public static OutPass getbyIdReturnDate(String id,String till){
         Connection conn=null;
-    Statement stmt=null;
+    PreparedStatement stmt=null;
    OutPass o=new OutPass();
         try{
             
                     conn=new dbcon().getConnection("sjitportal");
-                    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from outpassform where rollno like '"+id+"' and till ='"+till+"' -  INTERVAL 24 HOUR ");
+                    stmt = conn.prepareStatement("select * from outpassform where rollno like ? and till = ? -  INTERVAL 24 HOUR ");
+                    stmt.setString(1, id);
+                    stmt.setString(2, till);
+                   
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();

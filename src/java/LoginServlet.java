@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dbconnection.dbcon;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -68,7 +69,7 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html");
                 Boolean flag=false;
 		Connection con=null;
-                Statement   statement=null;
+                //Statement   statement=null;
 		try{    
 			Class.forName("com.mysql.jdbc.Driver");  
                        PrintWriter out = response.getWriter();
@@ -78,22 +79,32 @@ public class LoginServlet extends HttpServlet {
                      
                     //response.sendRedirect("index1.html");
                     
-                    String sql = "select * from student_login_details where rollno='"+regno+"' and password='"+dob+"'"  ;  
+                    String sql = "select * from student_login_details where rollno=? and password=? " ;  
                     
                     
                    
                   dbcon d = new dbcon();
                con = d.getConnection("login");
-                  statement = con.createStatement();
-                    ResultSet rs = statement.executeQuery(sql);
+                  //statement = con.createStatement();
+                    PreparedStatement statement=con.prepareStatement(sql);
+                    statement.setString(1, regno);
+                    statement.setString(2, dob);
+                  ResultSet rs = statement.executeQuery();
                     if(!rs.isBeforeFirst())
                     {
-                        sql = "select * from staff_login_details where staffid='"+regno+"' and password='"+dob+"'";
-                        rs = statement.executeQuery(sql);
+                        sql = "select * from staff_login_details where staffid=? and password=?";
+                       PreparedStatement st=con.prepareStatement(sql);
+                       st.setString(1, regno);
+                       st.setString(2, dob);
+                        rs = st.executeQuery();
                         if(!rs.isBeforeFirst())
                         {
-                            sql = "select * from other_login_details where id='"+regno+"' and password='"+dob+"'";
-                            rs= statement.executeQuery(sql);
+                            sql = "select * from other_login_details where id=? and password=?";
+                           PreparedStatement stt=con.prepareStatement(sql);
+                       stt.setString(1, regno);
+                       stt.setString(2, dob);
+                        
+                            rs= stt.executeQuery();
                           flag = true;
                         }
                         else
@@ -201,14 +212,14 @@ public class LoginServlet extends HttpServlet {
 		      PrintWriter out = response.getWriter();
                       out.println(ex);
 		    }finally{
-                    try {
-                        if(statement!=null)
-                            statement.close();
-                        if(con!=null)
-                            ;//con.close();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+//                    try {
+//                        if(statement!=null)
+//                            statement.close();
+//                        if(con!=null)
+//                            ;//con.close();
+//                    } catch (SQLException ex) {
+//                        Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
                 }
                
                 

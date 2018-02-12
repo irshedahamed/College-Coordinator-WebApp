@@ -8,6 +8,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.servlet.ServletException;
@@ -85,16 +86,18 @@ public class SectionUpdate extends HttpServlet {
                   
                   
                         Connection con = null; 
-                    Statement stmt = null;
-                    Statement stmt1 = null;
+                //    Statement stmt = null;
+                  //  Statement stmt1 = null;
         try
         {
            
             con= new dbcon().getConnection(dept);
            // response.getWriter().println(dept);
-            stmt = con.createStatement();
-            stmt1=con.createStatement();
-            ResultSet rs=stmt.executeQuery("select rollno from student_personal where batch like '"+batch+"'");
+          //  stmt = con.createStatement();
+            //stmt1=con.createStatement();
+            PreparedStatement stmt=con.prepareStatement("select rollno from student_personal where batch like ?");
+            stmt.setString(1, batch);
+            ResultSet rs=stmt.executeQuery();
                    // rs.beforeFirst();
                     while(rs.next())
                     { 
@@ -102,9 +105,12 @@ public class SectionUpdate extends HttpServlet {
                         String section=request.getParameter("section"+rollno);
                             
                     
-                        if(!section.equalsIgnoreCase("No Change"))                            
-                            count+=stmt1.executeUpdate("update student_personal set sec='"+section+"' where rollno like '"+rollno+"'");
-                          
+                        if(!section.equalsIgnoreCase("No Change"))   {                         
+                             PreparedStatement stmt1=con.prepareStatement("update student_personal set sec=? where rollno like ?");
+                            stmt1.setString(1, section);
+                            stmt1.setString(2, rollno);
+                             count+=stmt1.executeUpdate();
+                        }
                            
                         
                     }
@@ -118,19 +124,19 @@ public class SectionUpdate extends HttpServlet {
 
 
 finally{
-try{
-if(stmt!=null)
-    stmt.close();
-if(stmt1!=null)
-    stmt1.close();
-
-if(con!=null)
-    ;//con.close();
-}
-        catch(Exception e)
-        {
-        e.printStackTrace();
-        }
+//try{
+//if(stmt!=null)
+//    stmt.close();
+//if(stmt1!=null)
+//    stmt1.close();
+//
+//if(con!=null)
+//    ;//con.close();
+//}
+//        catch(Exception e)
+//        {
+//        e.printStackTrace();
+//        }
         }
     }
     /**

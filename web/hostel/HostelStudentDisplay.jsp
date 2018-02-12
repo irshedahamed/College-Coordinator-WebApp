@@ -1,4 +1,5 @@
  
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="General.Hostel"%>
 <%@page import="Actor.Student"%>
 <%@page import="com.action.Find"%>
@@ -77,10 +78,11 @@
                 //String roomno = rs.getString("roomno");
 
                 java.sql.Connection conn = new dbcon().getConnection("sjitportal?zeroDateTimeBehavior=convertToNull");
-                Statement stt = conn.createStatement();
-
-                String date = "select intime,outtime from entry  where rollno ='" + rollno + "'";
-                ResultSet rss = stt.executeQuery(date);
+           //     Statement stt = conn.createStatement();
+           PreparedStatement stt=conn.prepareStatement("select intime,outtime from entry  where rollno =?");
+           stt.setString(1, rollno);
+                //String date = ;
+                ResultSet rss = stt.executeQuery();
 
 
         %>

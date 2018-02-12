@@ -10,6 +10,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -86,16 +87,19 @@ public class ElectiveJson extends HttpServlet {
         //processRequest(request, response);
            
                 Connection conn=null;
-                Statement stmt=null;
+                //Statement stmt=null;
                 String sem=request.getParameter("sem");
                 String dept=request.getParameter("dept");
                 String regulation=request.getParameter("regulation");
                 List<String> list = new ArrayList<String>();
                 try{
                 conn=new dbcon().getConnection(dept);
-                stmt=conn.createStatement();
-                String sql="select * from subject_sem_table where ayear like 'elective%' and sem='"+sem+"' and regulation='"+regulation+"'";
-                ResultSet rs=stmt.executeQuery(sql);
+                    
+                String sql="select * from subject_sem_table where ayear like 'elective%' and sem=? and regulation=?";
+                PreparedStatement stmt=conn.prepareStatement(sql);
+                stmt.setString(1, sem);
+                stmt.setString(2, regulation);
+                ResultSet rs=stmt.executeQuery();
                 while(rs.next())
                 {
                 String a=rs.getString("subname");
@@ -112,14 +116,14 @@ public class ElectiveJson extends HttpServlet {
                     e.printStackTrace();
                 }
                 finally{
-                    try {
-                        if(stmt!=null)
-                            stmt.close();
-                        if(conn!=null)
-                            ;//conn.close();
-                    } catch (SQLException ex) {
-                  ex.printStackTrace();
-                    }
+//                    try {
+//       //                 if(stmt!=null)
+//         //                   stmt.close();
+//                        if(conn!=null)
+//                            ;//conn.close();
+//                    } catch (SQLException ex) {
+//                  ex.printStackTrace();
+//                    }
                 }
                 
     }

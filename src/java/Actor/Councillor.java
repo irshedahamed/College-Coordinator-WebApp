@@ -10,6 +10,7 @@ import General.AcademicYear;
 import com.action.Find;
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -72,12 +73,17 @@ public class Councillor {
     }
     public void getCouncillor(String id){
         Connection conn=null;
-    Statement stmt=null;
-        try{
+   // Statement stmt=null;
+        PreparedStatement stmt=null;
+   try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from councillor where academicyr='"+academicyr+"' and semister like '"+semister+"' and staffid like'"+id+"'");
+   // stmt = conn.createStatement();
+   stmt=conn.prepareStatement("select * from councillor where academicyr=? and semister like ? and staffid like ? ");
+   stmt.setString(1, academicyr);
+   stmt.setString(2, semister);
+   stmt.setString(3, id);
+   ResultSet rs=stmt.executeQuery();
                     
                     rs.beforeFirst();
                     if(rs.next()){
