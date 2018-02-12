@@ -88,6 +88,11 @@
                                 mark.val(Math.round((parseInt(mark.val()) / 1.4)));
                             }
                         }
+                        if (parseInt(maxmark) === 41) {
+                            if (mark.val() !== 'A') {
+                                mark.val(Math.round((parseInt(mark.val()) / 0.85)));
+                            }
+                        }
                         
                         var subcode = $("#code").text();
                         var type = $("#type").val();
@@ -146,6 +151,11 @@
                              if (parseInt(maxmark) === 140) {
                             if (mark.val() !== 'A') {
                                 mark.val(Math.round((parseInt(mark.val()) / 1.4)));
+                            }
+                        }
+                            if (parseInt(maxmark) === 41) {
+                            if (mark.val() !== 'A') {
+                                mark.val(Math.round((parseInt(mark.val()) / 0.85)));
                             }
                         }
                             var subcode = $("#code").text();
@@ -246,6 +256,7 @@
                                     <option >140</option>
                                     <%} else if (exam.contains("unit")) {%>
                                     <option selected>48</option>
+                                    <option >41</option>
                                     <%} else {%>
                                     <option selected>30</option>
                                     <option >60</option>

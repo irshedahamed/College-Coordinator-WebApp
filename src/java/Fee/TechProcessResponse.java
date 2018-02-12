@@ -20,6 +20,7 @@ import java.util.List;
  * @author Home
  */
 public class TechProcessResponse {
+
     private String rollno;
     private String user;
     private String refno;
@@ -97,9 +98,7 @@ public class TechProcessResponse {
     public void setRqst_token(String rqst_token) {
         this.rqst_token = rqst_token;
     }
-    
 
-    
     public String getRollno() {
         return rollno;
     }
@@ -131,41 +130,40 @@ public class TechProcessResponse {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
-      public boolean insert(){
-    Connection conn=null;
-       Statement stmt=null;
-       int update=0;
-       try{
-           conn=new dbcon().getConnection("sjitportal");
-           stmt=conn.createStatement();
-           
-           String sql;
-           sql="insert into techprocess values('"+rollno+"','"+refno+"','"+status+
-                   "','"+msg+"','"+err_msg+"','"+clnt_txn_ref+"','"+tpsl_bank_cd+
-                   "','"+tpsl_txn_id+"','"+amount+"','"+time+"','"+bal_amount+"','"+rqst_token+"','"+user+"')";
-       update+=stmt.executeUpdate(sql);
-       
-     
-       
-       }catch(Exception e){
-       e.printStackTrace();
-       }finally{
-           try {
-               if(stmt!=null)
-                   stmt.close();
-               if(conn!=null)
+
+    public boolean insert() {
+        Connection conn = null;
+        Statement stmt = null;
+        int update = 0;
+        try {
+            conn = new dbcon().getConnection("sjitportal");
+            stmt = conn.createStatement();
+
+            String sql;
+            sql = "insert into techprocess values('" + rollno + "','" + refno + "','" + status
+                    + "','" + msg + "','" + err_msg + "','" + clnt_txn_ref + "','" + tpsl_bank_cd
+                    + "','" + tpsl_txn_id + "','" + amount + "','" + time + "','" + bal_amount + "','" + rqst_token + "','" + user + "')";
+            update += stmt.executeUpdate(sql);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null)
                    ;//conn.close();
-           } catch (SQLException ex) {
-               ex.printStackTrace();
-           }
-       
-       }
-       if(update==1)
-           return true;
-       else
-           return false;
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+        if (update == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public String getUser() {
@@ -175,66 +173,101 @@ public class TechProcessResponse {
     public void setUser(String user) {
         this.user = user;
     }
-    
-    public void setFromResMsg(String resMsg,TechProcess tp){
-        
-       String[] splitres=resMsg.split("\\|");
-       setUser(tp.getUser());
-       setRollno(tp.getCustID());
-       setRefno(tp.getRefno());
-       setStatus(splitres[0].split("=")[1]);
-       setMsg(splitres[1].split("=")[1]);
-       setErr_msg(splitres[2].split("=")[1]);
-       setClnt_txn_ref(splitres[3].split("=")[1]);
-       setTpsl_bank_cd(splitres[4].split("=")[1]);
-       setTpsl_txn_id(splitres[5].split("=")[1]);
-       setAmount(splitres[6].split("=")[1]);
-       setTime(splitres[7].split("=")[1]);
-       setBal_amount(splitres[9].split("=")[1]);
-       setRqst_token(splitres[10].split("=")[1]);
-    
+
+    public void setFromResMsg(String resMsg, TechProcess tp) {
+
+        String[] splitres = resMsg.split("\\|");
+        setUser(tp.getUser());
+        setRollno(tp.getCustID());
+        setRefno(tp.getRefno());
+        setStatus(splitres[0].split("=")[1]);
+        setMsg(splitres[1].split("=")[1]);
+        setErr_msg(splitres[2].split("=")[1]);
+        setClnt_txn_ref(splitres[3].split("=")[1]);
+        setTpsl_bank_cd(splitres[4].split("=")[1]);
+        setTpsl_txn_id(splitres[5].split("=")[1]);
+        setAmount(splitres[6].split("=")[1]);
+        setTime(splitres[7].split("=")[1]);
+        setBal_amount(splitres[9].split("=")[1]);
+        setRqst_token(splitres[10].split("=")[1]);
+
     }
-    public static List<TechProcessResponse> fetchby(List<MUResponse> mup,String From,String To)
-    {
+
+    public static List<TechProcessResponse> fetchby(List<MUResponse> mup, String From, String To) {
         List<TechProcessResponse> list = new ArrayList<TechProcessResponse>();
-      try{  
-        Connection con = null;
-        Statement st = null;
-        
-        con = new dbcon().getConnection("sjitportal");
-        
-        st = con.createStatement();
-        for(MUResponse mu:mup){
-           
-        ResultSet rs = st.executeQuery("Select * from techprocess where mupno = '"+mu.getRefno()+"' and status like '0300'");
-        
-         rs.afterLast();
-         if (rs.previous())
-        {
-            TechProcessResponse m=new TechProcessResponse();
-            m.setRefno(rs.getString("mupno"));
-            m.setRollno(rs.getString("clientid"));
-            m.setTime(rs.getString("time"));
-            m.setAmount(rs.getString("txn_amount"));
-            
-            Date d=new SimpleDateFormat("dd-MM-yyyy").parse((m.getTime().split(" ")[0]));
-            
-            if(d.compareTo(new SimpleDateFormat("yyyy-MM-dd").parse(From))>=0 && d.compareTo(new SimpleDateFormat("yyyy-MM-dd").parse(To))<=0 )
-            list.add(m);
-        }
-         rs.close();
-        }
-        if(st!=null)
+        try {
+            Connection con = null;
+            Statement st = null;
+
+            con = new dbcon().getConnection("sjitportal");
+
+            st = con.createStatement();
+            for (MUResponse mu : mup) {
+
+                ResultSet rs = st.executeQuery("Select * from techprocess where mupno = '" + mu.getRefno() + "' and status like '0300'");
+
+                rs.afterLast();
+                if (rs.previous()) {
+                    TechProcessResponse m = new TechProcessResponse();
+                    m.setRefno(rs.getString("mupno"));
+                    m.setRollno(rs.getString("clientid"));
+                    m.setTime(rs.getString("time"));
+                    m.setAmount(rs.getString("txn_amount"));
+
+                    Date d = new SimpleDateFormat("dd-MM-yyyy").parse((m.getTime().split(" ")[0]));
+
+                    if (d.compareTo(new SimpleDateFormat("yyyy-MM-dd").parse(From)) >= 0 && d.compareTo(new SimpleDateFormat("yyyy-MM-dd").parse(To)) <= 0) {
+                        list.add(m);
+                    }
+                }
+                rs.close();
+            }
+            if (st != null) {
                 st.close();
-            if(con!=null)
+            }
+            if (con != null)
                 ;//con.close();
-           
-      }catch(Exception e){
-    e.printStackTrace();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+
     }
-    
-       
-      return list;
-    
+
+    public static TechProcessResponse getByMup(String mup) {
+        TechProcessResponse t = null;
+        try {
+            Connection con = null;
+            Statement st = null;
+            con = new dbcon().getConnection("sjitportal");
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery("Select * from techprocess where mupno = '" + mup + "'");
+            rs.beforeFirst();
+            while (rs.next()) {
+                t = new TechProcessResponse();
+                t.setAmount(rs.getString("txn_amount"));
+                t.setClnt_txn_ref(rs.getString("client_txn_ref"));
+                t.setRollno(rs.getString("clientid"));
+                t.setRefno(rs.getString("mupno"));
+                t.setStatus(rs.getString("status"));
+                t.setMsg(rs.getString("message"));
+                t.setErr_msg(rs.getString("err_msg"));
+                t.setTpsl_bank_cd(rs.getString("tpsl_bank_cd"));
+                t.setTpsl_txn_id(rs.getString("tpsl_txn_id"));
+                t.setAmount(rs.getString("txn_amount"));
+                t.setTime(rs.getString("time"));
+                t.setBal_amount(rs.getString("bal_amt"));
+                t.setRqst_token(rs.getString("req_token"));
+                t.setUser(rs.getString("user"));
+            }
+            if (st != null) {
+                st.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return t;
     }
 }
