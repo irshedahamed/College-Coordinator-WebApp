@@ -80,12 +80,16 @@ public class AcademicYear {
             con = new dbcon().getConnection("sjitportal");
             st = con.prepareStatement("update academicyr set current = 'n'");
             
-                  st.executeUpdate();   
-          st=con.prepareStatement("update academicyr set current =? where year =? ");
-          st.setString(1, Current);
-          st.setString(2, Year);
-                  int i =   st.executeUpdate(); 
-           
+                  st.executeUpdate("update academicyr set current = 'n'");   
+          
+                  int i =   st.executeUpdate("update academicyr set current ='"+Current+"' where year ='"+Year+"' "); 
+                  if(Current.equals("odd"))
+                  {
+                      int year =Integer.parseInt(Year);
+                      year =year-1;
+                       st.executeUpdate("update academicyr set current ='fee' where year ='"+year+"' ");                
+                  }
+
             if(st!=null)
                             st.close();
                               if(con!=null)

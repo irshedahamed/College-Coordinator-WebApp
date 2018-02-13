@@ -115,6 +115,7 @@
                                         <ul class="sub-menu">
                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="BasicFee.jsp">Basic Fee</a>
                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="SpecialFee.jsp">Individual Fee</a>
+                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="Challan.jsp">Payment View</a>    
                                         </ul></li>
 
                                     <li id="menu-item-777" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777 "><a href="#">Student Update</a>
@@ -147,12 +148,14 @@
                                     $("#transport").val("");
                                     $("#placement").val("");
                                     $("#hostel").val("");
+                                    $("#development").val("");
 
                                 } else {
                                     $("#tution").val(response.tution);
                                     $("#transport").val(response.transport);
                                     $("#placement").val(response.placement);
                                     $("#hostel").val(response.hostel);
+                                    $("#development").val(response.development);
 
                                 }
 
@@ -229,6 +232,13 @@
                                                 <div align="left" size="3px"><b>
                                                         Hostel : </b></div> 
                                                 <input type="input" id="hostel"  name="hostel" >
+                                            </label> </label>
+                                        
+                                        <br>
+                                        <label class="input"><label class="input">
+                                                <div align="left" size="3px"><b>
+                                                        Development : </b></div> 
+                                                <input type="input" id="development"  name="development" >
                                             </label> </label>
 
                                         <input type="submit" class="button" value="Submit"  id="submit" >

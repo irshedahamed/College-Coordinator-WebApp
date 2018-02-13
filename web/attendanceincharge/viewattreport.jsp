@@ -4,6 +4,7 @@
     Author     : aravind
 --%>
 
+<%@page import="Actor.Student"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.io.File"%>
 <%@page import="java.sql.ResultSet"%>
@@ -183,8 +184,8 @@ and open the template in the editor.
                 </thead>
 
                 <%
-                    //String sql2 = ;
                     Connection con = new dbcon().getConnection(dept);
+
 
                  //   Statement st = con.createStatement();
                  PreparedStatement st=con.prepareStatement("select * from student_personal where batch=? and sec=? order by rollno");
@@ -203,6 +204,7 @@ and open the template in the editor.
 
                     <td>
                         <%
+
 
                             //sql2 = ;
                             //Statement st1 = con.createStatement();
@@ -245,10 +247,6 @@ and open the template in the editor.
 
 
                 <%       }
-
-                    if (st != null) {
-                        st.close();
-                    }
 
                     if (con != null) {
                         ;//con.close();

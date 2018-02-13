@@ -24,11 +24,11 @@ import java.util.Map;
  */
 public class IBResponse {
 
-private String rollno;
-private String mup;
-private String journalno;
-private String txndate;
-private String status;
+    private String rollno;
+    private String mup;
+    private String journalno;
+    private String txndate;
+    private String status;
 
     public String getRollno() {
         return rollno;
@@ -70,91 +70,115 @@ private String status;
         this.status = status;
     }
 
-public boolean insert(){
-Connection conn=null;
-       Statement stmt=null;
-       int update=0;
-       try{
-           conn=new dbcon().getConnection("sjitportal");
-           stmt=conn.createStatement();
-           
-           String sql;
-           sql="insert into ibresponse values('"+rollno+"','"+mup+"','"+journalno+"','"+txndate+"','"+status+"')";
-           
-       update+=stmt.executeUpdate(sql);
-       
-     
-       
-       }catch(Exception e){
-       e.printStackTrace();
-       }finally{
-           try {
-               if(stmt!=null)
-                   stmt.close();
-               if(conn!=null)
+    public boolean insert() {
+        Connection conn = null;
+        Statement stmt = null;
+        int update = 0;
+        try {
+            conn = new dbcon().getConnection("sjitportal");
+            stmt = conn.createStatement();
+
+            String sql;
+            sql = "insert into ibresponse values('" + rollno + "','" + mup + "','" + journalno + "','" + txndate + "','" + status + "')";
+
+            update += stmt.executeUpdate(sql);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null)
                    ;//conn.close();
-           } catch (SQLException ex) {
-               ex.printStackTrace();
-           }
-       
-       }
-       if(update==1)
-           return true;
-       else
-           return false;
-    }
- public static Map<MUResponse,IBResponse> fetchby(List<MUResponse> mup,String From,String To) 
-    {
-        Map<MUResponse,IBResponse> map = new HashMap<MUResponse, IBResponse>();
-      try{  
-        Connection con = null;
-        Statement st = null;
-        
-        con = new dbcon().getConnection("sjitportal");
-        
-        st = con.createStatement();
-       
-        for(MUResponse mu:mup){
-        ResultSet rs = st.executeQuery("Select * from ibresponse where mup = '"+mu.getRefno()+"' and status='Y'");
-        
-         rs.afterLast();
-         
-         if (rs.previous())
-        {
-          
-            IBResponse i=new IBResponse();
-            i.setMup(rs.getString("mup"));
-            i.setRollno(rs.getString("rollno"));
-            i.setStatus(rs.getString("status"));
-            i.setJournalno(rs.getString("journalno"));
-            i.setTxndate(rs.getString("txndate"));
-           
-     
-     String[] t = i.getTxndate().split(" ");
-     
-      Date txndate = new SimpleDateFormat("dd/MM/yyyy").parse(t[0]);
-      Date FromDate = new SimpleDateFormat("yyyy-MM-dd").parse(From);
-      Date ToDate = new SimpleDateFormat("yyyy-MM-dd").parse(To);
-      
-      if(txndate.compareTo(FromDate) >= 0 && txndate.compareTo(ToDate) <= 0)
-      {
-    
-      map.put(mu, i);
-      }
-      
-         }
-         rs.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
         }
-                     
-        if(st!=null)
-                st.close();
-            if(con!=null)
-                ;//con.close();
-           
-      }catch(Exception e){
-    e.printStackTrace();
+        if (update == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
-      
-      return map;
+
+    public static Map<MUResponse, IBResponse> fetchby(List<MUResponse> mup, String From, String To) {
+        Map<MUResponse, IBResponse> map = new HashMap<MUResponse, IBResponse>();
+        try {
+            Connection con = null;
+            Statement st = null;
+
+            con = new dbcon().getConnection("sjitportal");
+
+            st = con.createStatement();
+
+            for (MUResponse mu : mup) {
+                ResultSet rs = st.executeQuery("Select * from ibresponse where mup = '" + mu.getRefno() + "' and status='Y'");
+
+                rs.afterLast();
+
+                if (rs.previous()) {
+
+                    IBResponse i = new IBResponse();
+                    i.setMup(rs.getString("mup"));
+                    i.setRollno(rs.getString("rollno"));
+                    i.setStatus(rs.getString("status"));
+                    i.setJournalno(rs.getString("journalno"));
+                    i.setTxndate(rs.getString("txndate"));
+
+                    String[] t = i.getTxndate().split(" ");
+
+                    Date txndate = new SimpleDateFormat("dd/MM/yyyy").parse(t[0]);
+                    Date FromDate = new SimpleDateFormat("yyyy-MM-dd").parse(From);
+                    Date ToDate = new SimpleDateFormat("yyyy-MM-dd").parse(To);
+
+                    if (txndate.compareTo(FromDate) >= 0 && txndate.compareTo(ToDate) <= 0) {
+
+                        map.put(mu, i);
+                    }
+
+                }
+                rs.close();
+            }
+
+            if (st != null) {
+                st.close();
+            }
+            if (con != null)
+                ;//con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return map;
+    }
+
+    public static IBResponse getByMup(String mup) {
+        IBResponse i = null;
+        try {
+            Connection con = null;
+            Statement st = null;
+            con = new dbcon().getConnection("sjitportal");
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery("Select * from ibresponse where mup = '" + mup + "'");
+            rs.beforeFirst();
+            while (rs.next()) {
+                i = new IBResponse();
+                i.setRollno(rs.getString("rollno"));
+                i.setMup(rs.getString("mup"));
+                i.setJournalno(rs.getString("journalno"));
+                i.setTxndate(rs.getString("txndate"));
+                i.setStatus(rs.getString("status"));
+            }
+            if (st != null) {
+                st.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return i;
     }
 }

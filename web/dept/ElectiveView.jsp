@@ -278,7 +278,7 @@
                                                 String sem=request.getParameter("sem");
                                                  regulation=request.getParameter("regulation");
                                                 PreparedStatement st=con.prepareStatement("select * from subject_sem_table where ayear like 'elective%"+acyear+"%' and sem=? and regulation=?");
-                                               
+
                                                 st.setString(1, sem);
                                                 st.setString(2, regulation);
                                                 ResultSet rs = st.executeQuery();

@@ -130,6 +130,7 @@
                                         <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="regnoupdate.jsp">Update Register No.</a></li>
 
                                         <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="BonusQuery.jsp">Bonus Assignment</a></li>
+                                        <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="StudentNo.jsp">Student no display</a></li>
 
                                     </ul>
                                 </li>
@@ -201,7 +202,7 @@
                                         ResultSet brs=bstmt.executeQuery();
                                         int assessment=0;
                                         if(brs.next())
-                                        {if(Integer.valueOf(brs.getString("assessment"))<=Integer.valueOf(exam)){
+                                        {if((Integer.valueOf(brs.getString("assessment")) <= Integer.valueOf(exam))  && sem.equals(brs.getString("sem"))){
                                     %>
                                     <tr  style="background: #e1070a;">
                                         <%}else{%>

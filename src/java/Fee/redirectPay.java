@@ -91,7 +91,8 @@ public class redirectPay extends HttpServlet {
        
            TechProcess tp=new TechProcess();
            tp.setUser("SJIT");
-      tp.setAmount(mu.getTotalamt());
+          double amount = Double.parseDouble(mu.getTotalamt())+ Double.parseDouble(mu.getBankchrge());
+      tp.setAmount(String.valueOf(amount));
       tp.setCustID(mu.getRollno());
       tp.setRefno(mu.getRefno());
       tp.setReturnURL("https://" + request.getServerName()+"/receiveTechProcessResponse");

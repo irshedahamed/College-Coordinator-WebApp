@@ -14,7 +14,7 @@ import java.util.List;
  * @author Home
  */
 public class Fee {
-    private static final String[] subCategory={"tution","transport","placement"};//hostel yet to decide
+    private static final String[] subCategory={"tution","transport","placement","development"};//hostel yet to decide
     public static final String[] getsubCategory(){
     
     return subCategory;
@@ -23,6 +23,7 @@ public class Fee {
     protected String transport;
     protected String hostel;
     protected String placement;
+    protected String development;
     public String getByType(String type){
         if(type.equals("tution"))
             return tution;
@@ -32,6 +33,8 @@ public class Fee {
             return placement;
          else  if(type.equals("hostel"))
             return hostel;
+        else  if(type.equals("development"))
+            return development;
         else
         return null;
     }
@@ -53,6 +56,14 @@ public class Fee {
 
     public String getHostel() {
         return hostel;
+    }
+
+    public String getDevelopment() {
+        return development;
+    }
+
+    public void setDevelopment(String development) {
+        this.development = development;
     }
 
     public void setHostel(String hostel) {

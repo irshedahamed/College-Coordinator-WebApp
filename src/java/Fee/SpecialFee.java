@@ -52,7 +52,7 @@ public class SpecialFee extends Fee{
                   sql="delete from spl_fee where rollno='"+rollno+"' and academicyr='"+academicyr+"'";
                         stmt.executeUpdate(sql);
        
-           sql="insert into spl_fee values('"+rollno+"','"+academicyr+"','"+tution+"','"+transport+"','"+placement+"','"+hostel+"')";
+           sql="insert into spl_fee values('"+rollno+"','"+academicyr+"','"+tution+"','"+transport+"','"+placement+"','"+hostel+"','"+development+"')";
        update+=stmt.executeUpdate(sql);
        
      
@@ -98,6 +98,7 @@ public class SpecialFee extends Fee{
                         b.setTransport(rs.getString("transport"));
                         b.setTution(rs.getString("tution"));
                         b.setAcademicyr(rs.getString("academicyr"));
+                        b.setDevelopment(rs.getString("development"));
                         
                        
                     }

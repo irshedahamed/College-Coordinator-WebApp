@@ -6,8 +6,6 @@
 package dbconnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -36,13 +34,16 @@ public class dbcon {
     
     private static Connection getConnection(String dbname,String clg){
         
-        Connection conn=connectionPool.get(dbname+clg);
+        Connection conn=connectionPool.get(clg+dbname);
           try { 
             if(conn==null || conn.isClosed()){
                  Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+
                  conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+dbname,"root","1234");
                  connectionPool.put(dbname+clg, conn);
-        }
+
+                 }
         
         } catch (Exception ex) {
             Logger.getLogger(dbcon.class.getName()).log(Level.SEVERE, null, ex);

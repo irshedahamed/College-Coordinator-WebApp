@@ -83,6 +83,17 @@
                                 mark.val(Math.round((parseInt(mark.val()) / 2)));
                             }
                         }
+                        if (parseInt(maxmark) === 140) {
+                            if (mark.val() !== 'A') {
+                                mark.val(Math.round((parseInt(mark.val()) / 1.4)));
+                            }
+                        }
+                        if (parseInt(maxmark) === 41) {
+                            if (mark.val() !== 'A') {
+                                mark.val(Math.round((parseInt(mark.val()) / 0.85)));
+                            }
+                        }
+                        
                         var subcode = $("#code").text();
                         var type = $("#type").val();
                         var dept = $("#dept").val();
@@ -137,6 +148,16 @@
                                     mark.val(Math.round((parseInt(mark.val()) / 2)));
                                 }
                             }
+                             if (parseInt(maxmark) === 140) {
+                            if (mark.val() !== 'A') {
+                                mark.val(Math.round((parseInt(mark.val()) / 1.4)));
+                            }
+                        }
+                            if (parseInt(maxmark) === 41) {
+                            if (mark.val() !== 'A') {
+                                mark.val(Math.round((parseInt(mark.val()) / 0.85)));
+                            }
+                        }
                             var subcode = $("#code").text();
                             var type = $("#type").val();
                             var dept = $("#dept").val();
@@ -193,6 +214,11 @@
                                 }
                             });
                         }
+                            if (parseInt(maxmark) === 140) {
+                            if (mark.val() !== 'A') {
+                                mark.val(Math.round((parseInt(mark.val()) / 1.4)));
+                            }
+                        }
                     }
                 });
             });
@@ -227,8 +253,10 @@
                                 <select style=" background: transparent;font-size: 14px;height: 29px;padding: 5px;width:150px;" id="max" >
                                     <%if (exam.contains("model")) {%>
                                     <option selected>100</option>
+                                    <option >140</option>
                                     <%} else if (exam.contains("unit")) {%>
                                     <option selected>48</option>
+                                    <option >41</option>
                                     <%} else {%>
                                     <option selected>30</option>
                                     <option >60</option>

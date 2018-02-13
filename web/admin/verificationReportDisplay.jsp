@@ -175,7 +175,7 @@ and open the template in the editor.
                 <tr>
                     <td><%=sno++%></td>
                     <td><%=s.getId().toUpperCase()%><br><%=s.getRegno() %></td>
-                    <td><%=s.getName().toUpperCase()%></td>
+                    <td><%=s.getName().toUpperCase()%><br><%=s.getMobile()%><br><%=s.getMailid()%></td>
 
                     <td><%=s.getFatherDetails().getFathername().toUpperCase()%><br><%=s.getFatherDetails().getMobile() %><br>(<%=s.getFatherDetails().getMail() %>)</td>
                     <td><%=s.getMotherDetails().getMothername().toUpperCase()%><br><%=s.getMotherDetails().getMobile() %><br>(<%=s.getMotherDetails().getMail() %>)</td>         

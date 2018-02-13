@@ -4,10 +4,17 @@
         <filter-name>ImageFilter</filter-name>
         <filter-class>Filter.ImageFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>Filter.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>ImageFilter</filter-name>
-        <url-pattern>/StudentPhotos/*</url-pattern>
-        <url-pattern>/StaffPhotos/*</url-pattern>
+        <url-pattern>/LocalGuardian25/*</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
@@ -310,10 +317,6 @@
         <servlet-class>Transport.addBoardingPoint</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>processBulkOutPass</servlet-name>
-        <servlet-class>processBulkOutPass</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>findNotes</servlet-name>
         <servlet-class>com.action.findNotes</servlet-class>
     </servlet>
@@ -368,6 +371,10 @@
     <servlet>
         <servlet-name>LabMarkUpdate</servlet-name>
         <servlet-class>Mark.LabMarkUpdate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EntryChallan</servlet-name>
+        <servlet-class>Fee.EntryChallan</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -666,10 +673,6 @@
         <url-pattern>/addBoardingPoint</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>processBulkOutPass</servlet-name>
-        <url-pattern>/processBulkOutPass</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>findNotes</servlet-name>
         <url-pattern>/findNotes</url-pattern>
     </servlet-mapping>
@@ -728,6 +731,10 @@
     <servlet-mapping>
         <servlet-name>LabMarkUpdate</servlet-name>
         <url-pattern>/LabMarkUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EntryChallan</servlet-name>
+        <url-pattern>/EntryChallan</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

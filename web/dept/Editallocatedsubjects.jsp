@@ -184,17 +184,21 @@
 
             <%
                 Connection con = new dbcon().getConnection(Find.dept(username));
+
               //  Statement st = con.createStatement();
               PreparedStatement st=con.prepareStatement("select * from staff_table");
               ResultSet rs1 = st.executeQuery();
               //  Statement st1 = con.createStatement();
                 //Statement st2 = con.createStatement();
 
+               
+
                 while (rs1.next()) {
                     int count1 = 0, count2 = 0, sp = 0;
                     String staffid = rs1.getString("staffid").toString();
                     String staffname = rs1.getString("staffname").toString();
                     String sql = "";
+
                     PreparedStatement st1=null;
                     if (request.getParameter("sem").equals("Even")) {
                         sql = "select * from subject_allocation where staffid=? and subtype='theory' and acyear=? and (sem like '02' or sem like '04' or sem like '06' or sem like '08')";
@@ -210,11 +214,13 @@
                     }
 
                     ResultSet rs2 = st1.executeQuery();
+
                     while (rs2.next()) {
                         count1++;
                     }
                      PreparedStatement st2=null;
                     if (request.getParameter("sem").equals("Even")) {
+
                         sql = "select * from subject_allocation where staffid=? and subtype='lab' and acyear=? and (sem like '02' or sem like '04' or sem like '06' or sem like '08')";
                    st2=con.prepareStatement(sql);
                    st2.setString(1, staffid);
@@ -227,7 +233,7 @@
                     
                     }
 
-                    ResultSet rs3 = st2.executeQuery();
+                    ResultSet rs3 = st2.executeQuery(sql);
                     while (rs3.next()) {
                         count2++;
                     }
@@ -324,10 +330,11 @@
                     ;//con.close();
                 }
 
+
         //        if (st1 != null) {
           //          st1.close();
             //    }
-                if (con != null) {
+              if (con != null) {
                     ;//con.close();
                 }
             %>
@@ -351,6 +358,7 @@
 
                 <%                Connection con = new dbcon().getConnection(Find.dept(username));
                     Connection con1 = new dbcon().getConnection("sjitportal");
+
               //      Statement st = con.createStatement();
                 //    Statement st1 = con1.createStatement();
                     String sql = "";
@@ -378,6 +386,7 @@
                         dept = rs1.getString("dept");
                         subcode = rs1.getString("subcode");
                         sec = rs1.getString("sec");
+
                         PreparedStatement st1=con1.prepareStatement("select subname from subject_table where subcode=?");
                         st1.setString(1, subcode);
                         rs2 = st1.executeQuery();
@@ -419,6 +428,7 @@
         <%               int wflag = 0;
             String work = "", wsql;
             con = new dbcon().getConnection(Find.dept(username));
+
             sem=request.getParameter("sem");
             wsql = "select a.works as other from other_incharge a where a.staffid=? and a.acyear=? and a.semister=?";
           //  Statement wstmt = con.createStatement();
@@ -430,6 +440,7 @@
             if (wrs.next()) {
                 work += wrs.getString("other");
             }
+
 
          //   wsql = ;
            PreparedStatement wstmtt=con.prepareStatement("select * from councillor where staffid=? and academicyr=? and semister=?");

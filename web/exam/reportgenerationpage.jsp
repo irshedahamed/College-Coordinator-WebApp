@@ -164,9 +164,10 @@
         %>
 
         <%                Connection con = new dbcon().getConnection(dept);
+
            // Statement st = con.createStatement();
            // Statement st1 = con.createStatement();
-        %>
+      %>
     <center><h2>St. Joseph's Institute of Technology, Chennai-119</h2></center>
     <center><h2>Department of <%=dept.toUpperCase()%></h2></center>
     <center><h2>Model Examination-<%=exam%></h2></center>
@@ -177,11 +178,16 @@
     <h2 style="margin-left: 10px;">SEC: <%=sec%></h2>
 
     <%
+
         String sql = "select count(*) from student_personal where batch=? and sec=? and model_type like '" + "%" + "'";
         PreparedStatement st=con.prepareStatement(sql);
         st.setString(1, batch);
         st.setString(2, sec);
         ResultSet strength = st.executeQuery();
+
+       // String sql = "select count(*) from student_personal where batch='" + batch + "' and sec='" + sec + "' and model_type like '" + "%" + "'";
+       // ResultSet strength = st.executeQuery(sql);
+
         strength.next();
         String tstrength = strength.getString(1);
     %>
@@ -233,19 +239,23 @@
 
             for (int i = 0; i < 7; i++) {
 
-                String sql1 = "select staff_general.tittle,subject_sem_table.subcode,subject_sem_table.subname,staff_table.staffname from " + depts[i] + ".staff_general,subject_sem_table," + depts[i] + ".subject_allocation," + depts[i] + ".staff_table where subject_allocation.batch=? "
-                        + "and subject_allocation.sem=? and subject_allocation.dept=? and subject_allocation.sec=? and subject_sem_table.subtype='theory' "
+                String sql1 = "select staff_general.tittle,subject_sem_table.subcode,subject_sem_table.subname,staff_table.staffname from " + depts[i] + ".staff_general,subject_sem_table," + depts[i] + ".subject_allocation," + depts[i] + ".staff_table where subject_allocation.batch='" + batch + "' "
+                        + "and subject_allocation.sem='" + sem + "' and subject_allocation.dept='" + dept + "' and subject_allocation.sec='" + sec + "' and subject_sem_table.subtype='theory' "
                         + "and subject_sem_table.subcode=subject_allocation.subcode and subject_allocation.staffid=staff_table.staffid and staff_general.staffid=staff_table.staffid and (subject_allocation.sbatch like '0' or subject_allocation.sbatch like '1' or subject_allocation.sbatch like '')";
 
                 String sql11 = "select staff_general.tittle,subject_sem_table.subcode,subject_sem_table.subname,staff_table.staffname from " + depts[i] + ".staff_general,subject_sem_table," + depts[i] + ".subject_allocation," + depts[i] + ".staff_table where subject_allocation.batch='" + batch + "' "
                         + "and subject_allocation.sem='" + sem + "' and subject_allocation.dept='" + dept + "' and subject_allocation.sec='" + sec + "' and subject_sem_table.subtype='theory' "
                         + "and subject_sem_table.subcode=subject_allocation.subcode and subject_allocation.staffid=staff_table.staffid and staff_table.staffid=staff_general.staffid;";
+
                 PreparedStatement stt=con.prepareStatement(sql1);
                 stt.setString(1, batch);
                 stt.setString(2, sem);
                 stt.setString(3, dept);
                 stt.setString(4, sec);
                 ResultSet rs = stt.executeQuery();
+
+
+            
                 ResultSet rs1 = null;
 
                 while (rs.next()) {
