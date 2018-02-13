@@ -34,17 +34,18 @@ public class UpdateMarks extends HttpServlet {
                 mt.setSubcode(subcode);
                 mt.setType(sp);
                 mt = Mark.getUserMark(dept, mt);
-                if(mt!=null){
-                int ma = Integer.parseInt(mt.getMark());
-                if (ma < 30) {
-                    flag = 1;
-                    out.println("Not Updated");
-                }
+                if (mt.getMark() != null && !(mt.getMark().equals("A")) && !(mt.getMark().equals("N"))) {
+                    int ma = Integer.parseInt(mt.getMark());
+                    if (ma < 30) {
+                        flag = 1;
+                        out.println("Not Updated");
+                    }
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(UpdateMarks.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } if(flag!=1) {
+        }
+        if (flag != 1) {
             Mark m = new Mark();
             m.setRollno(rollno);
             m.setSubcode(subcode);
