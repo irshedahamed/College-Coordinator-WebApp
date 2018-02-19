@@ -15,21 +15,8 @@
 <!DOCTYPE html>
 <html>
     <%
-        try {
             String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-                while (rsss.next()) {
-                    type1 = rsss.getString("type");
-                }
-                if (type1.equals("dept")) {
-
-
+       
     %>
 
 
@@ -233,7 +220,7 @@
                     
                     }
 
-                    ResultSet rs3 = st2.executeQuery(sql);
+                    ResultSet rs3 = st2.executeQuery();
                     while (rs3.next()) {
                         count2++;
                     }
@@ -499,24 +486,5 @@
 
 </body>
 </div>
-<%
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
 
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
-%>
 </html>

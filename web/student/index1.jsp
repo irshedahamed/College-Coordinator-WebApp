@@ -10,15 +10,7 @@
 <%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Connection"%>
 <%
-    try {
         String username = session.getAttribute("username").toString();
-        String password = session.getAttribute("password").toString();
-
-        Connection connn = new dbcon().getConnection("login");
-        Statement sttt = connn.createStatement();
-        String type1 = "";
-        ResultSet rsss = sttt.executeQuery("select * from student_login_details where rollno='" + username + "' and password='" + password + "'");
-        if (rsss.isBeforeFirst()) {
 
 %>
 
@@ -199,29 +191,7 @@
 
     %>
 
-<%    //                    if (statement != null) {
-        //        statement.close();
-          //  }
-            if (connection != null) {
-                connection.close();
-            }
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
-
-
-%>                          
+                   
 
 
 

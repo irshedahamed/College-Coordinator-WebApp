@@ -14,17 +14,8 @@
 <!DOCTYPE html>
 <html>
     <%
-        try {
             String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from student_login_details where rollno='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-
-
+          
     %>
     <head>
         <link href="../css/tabledesign.css" rel="stylesheet">
@@ -159,21 +150,4 @@
             </center>
         </form>
     </body>
-    <%
-            } else {
-                response.sendRedirect("../index.jsp");
-            }
-            if (sttt != null) {
-                sttt.close();
-            }
-            if (connn != null) {
-                ;//connn.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect("../index.jsp");
-        }
-
-
-    %>
 </html>
