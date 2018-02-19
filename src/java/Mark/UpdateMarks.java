@@ -20,49 +20,27 @@ public class UpdateMarks extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        int flag = 0;
         String dept = request.getParameter("dept");
         String exam = request.getParameter("exam");
         String subcode = request.getParameter("subject");
         String mark = request.getParameter("mark");
         String rollno = request.getParameter("rollno");
-        if (exam.contains("z")) {
-            try {
-                String sp = exam.substring(3);
-                Mark mt = new Mark();
-                mt.setRollno(rollno);
-                mt.setSubcode(subcode);
-                mt.setType(sp);
-                mt = Mark.getUserMark(dept, mt);
-                if (mt.getMark() != null && !(mt.getMark().equals("A")) && !(mt.getMark().equals("N"))) {
-                    int ma = Integer.parseInt(mt.getMark());
-                    if (ma < 30) {
-                        flag = 1;
-                        out.println("Not Updated");
-                    }
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(UpdateMarks.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        if (flag != 1) {
-            Mark m = new Mark();
-            m.setRollno(rollno);
-            m.setSubcode(subcode);
-            m.setType(exam);
-            m.setMark(mark);
-            Mark m1 = new Mark();
-            try {
-                String result = m1.insertOrUpdateMarks(dept, m);
+        Mark m = new Mark();
+        m.setRollno(rollno);
+        m.setSubcode(subcode);
+        m.setType(exam);
+        m.setMark(mark);
+        Mark m1 = new Mark();
+        try {
+            String result = m1.insertOrUpdateMarks(dept, m);
 
-                if (result.equals("Updated")) {
-                    out.println("Updated");
-                } else {
-                    out.println("NotUpdated");
-                }
-            } catch (SQLException ex) {
-                System.err.println(ex.getMessage());
+            if (result.equals("Updated")) {
+                out.println("Updated");
+            } else {
+                out.println("NotUpdated");
             }
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
         }
     }
 }

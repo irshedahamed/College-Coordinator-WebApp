@@ -176,12 +176,13 @@
                                     <%
                                         // String bsql=;
                                         // Statement bstmt=conn.createStatement();
-                                        PreparedStatement bstmt = conn.prepareStatement("select * from bonuscut where rollno=?");
+                                        PreparedStatement bstmt = conn.prepareStatement("select * from bonuscut where rollno=? and sem=?");
                                         bstmt.setString(1, rollno);
+                                        bstmt.setString(2, sem);
                                         ResultSet brs = bstmt.executeQuery();
                                         int assessment = 0;
                                         if (brs.next()) {
-                                            if ((Integer.valueOf(brs.getString("assessment")) <= Integer.valueOf(exam))  && sem.equals(brs.getString("sem"))) {
+                                            if ((Integer.valueOf(brs.getString("assessment")) <= Integer.valueOf(exam)) && sem.equals(brs.getString("sem"))) {
                                     %>
                                     <tr  style="background: #e1070a;">
                                         <%} else {%>
