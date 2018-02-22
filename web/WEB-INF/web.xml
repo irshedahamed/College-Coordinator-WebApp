@@ -400,6 +400,10 @@
         <servlet-name>EntryChallan</servlet-name>
         <servlet-class>Fee.EntryChallan</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EndDate</servlet-name>
+        <servlet-class>Mark.EndDate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -759,6 +763,10 @@
     <servlet-mapping>
         <servlet-name>EntryChallan</servlet-name>
         <url-pattern>/EntryChallan</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EndDate</servlet-name>
+        <url-pattern>/EndDate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

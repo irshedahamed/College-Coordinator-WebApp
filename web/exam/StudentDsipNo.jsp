@@ -24,6 +24,7 @@
         <title>View Mark</title>
     </head>
     <%
+        
         String dept = request.getParameter("dept");
         if (dept == null) {
             dept = session.getAttribute("dept").toString();
