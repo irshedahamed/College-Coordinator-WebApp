@@ -477,15 +477,12 @@ if(s.getCouncillorDetails().getBatch()!=null)
             
             <select id="exam" name="exam" required >
                 <option disabled selected>select</option>
-                <option value="model1">Model 1</option>
-                <option value="model2">Model 2</option>
-                <option value="model3">Model 3</option>
+                <option value="unit1">IAE 1</option>
+                <option value="unit2">IAE 2</option>
+                <option value="unit3">IAE 3</option>
+                <option value="unit4">IAE 4</option>
+                <option value="model3">Model (IAE 5)</option>
                 <option value="cycle1">Cycle 1</option>
-                <option value="cycle2">Cycle 2</option>
-                <option value="cycle3">Cycle 3</option>
-                <option value="unit1">Unit 1</option>
-                <option value="unit2">Unit 2</option>
-                <option value="unit3">Unit 3</option>
             </select>
                     <i></i>
                 </label></label>

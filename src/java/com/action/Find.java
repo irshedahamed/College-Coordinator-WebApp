@@ -233,6 +233,40 @@ public class Find {
     return 0;
     }
     
+    public static int calcBonus(int mark,String category){
+        float t=0.0F;   
+        if(category.equals("8+")){
+            if (mark>=45){
+            return 100;
+           }else{
+               t = (float) (((float)mark/75.0)*100.0);
+               t += t/2;
+               return (int)(t+0.99);
+           }
+        }
+        if(category.equals("7+")){
+            if (mark>=41){
+                return 100;
+           }else{
+               t = (float) ((mark/75.0)*100.0);
+               t += t/2;
+               return (int)(t+0.99);
+           }
+        }
+        if(category.equals("<7")){
+            if (mark>=38){
+            return 100;
+           }else{
+               t = (float) ((mark/75.0)*100.0);
+               t += t/2;
+               return (int)(t+0.99);
+           }
+        }
+        if(category.equals("0")){
+        return 100;
+        }
+    return 0;
+    }  
     public static int calculateTotal(String markm,String markc,String marku){
     
         int m,c,u;
