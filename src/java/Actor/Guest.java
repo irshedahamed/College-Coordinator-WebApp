@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -174,15 +175,16 @@ public class Guest {
         
         
           Connection conn=null;
-    Statement stmt=null;
+        PreparedStatement    stmt=null;
    String previd=null;
    
    
     
     try{
     conn=new dbcon().getConnection("sjitportal");
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from guest where id like '"+gid+"'");
+    stmt = conn.prepareStatement("select * from guest where id like ?");
+    stmt.setString(1, gid);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     if(rs.next()){
@@ -219,15 +221,16 @@ public class Guest {
         
         
           Connection conn=null;
-    Statement stmt=null;
+         PreparedStatement stmt=null;
    String previd=null;
    
    
     
     try{
     conn=new dbcon().getConnection("sjitportal");
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from guest where mobile like '"+mobile+"'");
+    stmt = conn.prepareStatement("select * from guest where mobile like ?");
+    stmt.setString(1, mobile);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     if(rs.next()){

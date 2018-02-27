@@ -7,6 +7,7 @@ import General.Batch;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -87,12 +88,18 @@ public class batchStauts extends HttpServlet {
     
         
         Connection con= new dbconnection.dbcon().getConnection("sjitportal");
-        Statement st = con.createStatement();
-        if(value.equals("Delete"))
-       st.executeUpdate("delete from regulations where batch='"+batch.getBatch()+"'");           
-            else
-       st.executeUpdate("update  regulations set status='"+value+"' where batch='"+batch.getBatch()+"'");
-        
+        //Statement st = con.createStatement();
+        PreparedStatement  st=null;
+        if(value.equals("Delete")){
+       st=con.prepareStatement("delete from regulations where batch=?");
+        st.setString(1, batch.getBatch());
+            st.executeUpdate();           
+    }else{
+            st=con.prepareStatement("update  regulations set status=? where batch=?");
+            st.setString(1,value);
+            st.setString(2, batch.getBatch());
+       st.executeUpdate();
+        }
      
           if(st!=null)
                             st.close();

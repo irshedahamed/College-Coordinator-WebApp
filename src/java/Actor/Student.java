@@ -348,14 +348,15 @@ public void setRoomno(String roomno){
     
          
                Connection conn=null;
-    Statement stmt=null;
+         PreparedStatement stmt=null;
    Admission a=null;
     
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_admission_details where rollno like '"+id+"'");
+    stmt = conn.prepareStatement("select * from student_admission_details where rollno like ?");
+    stmt.setString(1, id);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -393,14 +394,16 @@ public void setRoomno(String roomno){
     public static List<Student> getAll(String dept,String batch,String sec){
         
                Connection conn=null;
-    Statement stmt=null;
+    PreparedStatement stmt=null;
     List<Student> list=new ArrayList<Student>();
         try{
             
     conn=new dbcon().getConnection(dept);
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_personal where batch like '"+batch+"' "
-                            + "and sec like '"+sec+"' order by CONVERT(regno,UNSIGNED)");
+    stmt = conn.prepareStatement("select * from student_personal where batch like ? "
+                            + "and sec like ? order by CONVERT(regno,UNSIGNED)");
+    stmt.setString(1, batch);
+    stmt.setString(2, sec);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -445,13 +448,14 @@ public void setRoomno(String roomno){
       public static Student getById(String id){
         
                Connection conn=null;
-    Statement stmt=null;
+    PreparedStatement stmt=null;
     Student s=null;
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_personal where rollno like '"+id+"'");
+    stmt = conn.prepareStatement("select * from student_personal where rollno like ?");
+    stmt.setString(1, id);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -1276,14 +1280,15 @@ public class Visa{
     
          
                Connection conn=null;
-    Statement stmt=null;
+    PreparedStatement stmt=null;
    Academic a=null;
     
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_academic_details where rollno like '"+id+"'");
+    stmt = conn.prepareStatement("select * from student_academic_details where rollno like ?");
+    stmt.setString(1, id);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -1329,14 +1334,15 @@ public class Visa{
     
          
                Connection conn=null;
-    Statement stmt=null;
+    PreparedStatement stmt=null;
    Contact c=null;
     
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_contact_details where rollno like '"+id+"'");
+    stmt = conn.prepareStatement("select * from student_contact_details where rollno like ?");
+    stmt.setString(1, id);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -1376,14 +1382,15 @@ private  FatherDetails fetchFatherDetails(){
    
          
                Connection conn=null;
-    Statement stmt=null;
+    PreparedStatement stmt=null;
    FatherDetails c=null;
     
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_father_details where rollno like '"+id+"'");
+    stmt = conn.prepareStatement("select * from student_father_details where rollno like ?");
+    stmt.setString(1, id);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -1421,14 +1428,15 @@ private  MotherDetails fetchMotherDetails(){
     
          
                Connection conn=null;
-    Statement stmt=null;
+    PreparedStatement stmt=null;
    MotherDetails c=null;
     
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_mother_details where rollno like '"+id+"'");
+    stmt = conn.prepareStatement("select * from student_mother_details where rollno like ?");
+    stmt.setString(1, id);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -1466,14 +1474,15 @@ private  General fetchGeneralDetails(){
     
          
                Connection conn=null;
-    Statement stmt=null;
+    PreparedStatement stmt=null;
    General c=null;
     
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_general where rollno like '"+id+"'");
+    stmt = conn.prepareStatement("select * from student_general where rollno like ?");
+    stmt.setString(1, id);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -1513,14 +1522,15 @@ private  LocalGuardian fetchLocalGuardianDetails(){
     
          
                Connection conn=null;
-    Statement stmt=null;
+    PreparedStatement stmt=null;
    LocalGuardian c=null;
     
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_local_guardian where rollno like '"+id+"'");
+    stmt = conn.prepareStatement("select * from student_local_guardian where rollno like ?");
+    stmt.setString(1, id);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -1557,14 +1567,15 @@ private  LocalGuardian2 fetchLocalGuardian2Details(){
     
          
                Connection conn=null;
-    Statement stmt=null;
+    PreparedStatement stmt=null;
    LocalGuardian2 c=null;
     
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_local_guardian2 where rollno like '"+id+"'");
+    stmt = conn.prepareStatement("select * from student_local_guardian2 where rollno like ?");
+    stmt.setString(1, id);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -1601,14 +1612,15 @@ private  OtherDetails fetchOtherDetails(){
     
          
                Connection conn=null;
-    Statement stmt=null;
+    PreparedStatement stmt=null;
    OtherDetails c=null;
     
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_other_details where rollno like '"+id+"'");
+    stmt = conn.prepareStatement("select * from student_other_details where rollno like ?");
+    stmt.setString(1, id);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -1647,14 +1659,15 @@ private  Passport fetchPassportDetails(){
     
          
                Connection conn=null;
-    Statement stmt=null;
+    PreparedStatement stmt=null;
    Passport c=null;
     
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_passport_details where rollno like '"+id+"'");
+    stmt = conn.prepareStatement("select * from student_passport_details where rollno like ?");
+    stmt.setString(1, id);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();
@@ -1685,14 +1698,15 @@ private Visa fetchVisaDetails(){
     
          
                Connection conn=null;
-    Statement stmt=null;
+   PreparedStatement stmt=null;
    Visa c=null;
     
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from student_visa_details where rollno like '"+id+"'");
+    stmt = conn.prepareStatement("select * from student_visa_details where rollno like ?");
+    stmt.setString(1, id);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();

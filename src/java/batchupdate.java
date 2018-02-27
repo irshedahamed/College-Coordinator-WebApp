@@ -6,6 +6,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.servlet.ServletException;
@@ -83,9 +84,12 @@ public class batchupdate extends HttpServlet {
         String batch = request.getParameter("batch");
         String regulation = request.getParameter("regulation");
         Connection con = new dbconnection.dbcon().getConnection("sjitportal");
-        Statement st = con.createStatement();
-           st.executeUpdate("insert into regulations values('"+batch+"','"+regulation+"','New')");
-            response.sendRedirect("admin/batch.jsp");
+      //  Statement st = con.createStatement();
+            PreparedStatement st=con.prepareStatement("insert into regulations values(?,?,'New')");
+            st.setString(1, batch);
+            st.setString(2,regulation);
+      st.executeUpdate();
+            response.sendRedirect("admin/batch.jsp?msg=hi");
               if(st!=null)
                             st.close();
                               if(con!=null)

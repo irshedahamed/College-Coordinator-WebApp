@@ -7,6 +7,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -90,8 +91,11 @@ public class MarkForm extends HttpServlet {
             
            Connection con = new dbcon().getConnection(dept);
             List<String> list = new ArrayList<String>();
-           Statement st=con.createStatement();
-           ResultSet rs = st.executeQuery("select distinct(sem) from subject_allocation where dept='"+dept+"' and staffid='"+staffid+"'");
+          // Statement st=con.createStatement();
+            PreparedStatement st=con.prepareStatement("select distinct(sem) from subject_allocation where dept=? and staffid=?");
+            st.setString(1, dept);
+            st.setString(2, staffid);
+          ResultSet rs = st.executeQuery();
             if(st!=null)
                             st.close();
                               if(con!=null)

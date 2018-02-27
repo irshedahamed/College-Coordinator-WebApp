@@ -41,9 +41,11 @@ protected void doGet(HttpServletRequest request,
          HttpSession session = request.getSession(true);
         String departmentname= session.getAttribute("deptname").toString();
              Connection connection = new dbcon().getConnection(departmentname);
-              Statement stmt = connection.createStatement();  
-         
-        ResultSet rs = stmt.executeQuery("Select * from subject_sem_table where sem='"+sem+"',dept='"+dept+"'  ");  
+            //  Statement stmt = connection.createStatement();  
+         PreparedStatement stmt=connection.prepareStatement("Select * from subject_sem_table where sem=?,dept=?  ");
+         stmt.setString(1, sem);
+         stmt.setString(2, dept);
+        ResultSet rs = stmt.executeQuery();  
         while(rs.next()){
             cellobj = new JSONObject();
             cellobj.put("id", rs.getString(1));

@@ -9,6 +9,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Arrays;
 import java.util.List;
@@ -99,10 +100,15 @@ String subcode = parts[5];
 String sec = parts[6]; // 004
  
                   Connection connection1 = new dbcon().getConnection(Find.sdept(staffid));
-            Statement statement1 = connection1.createStatement();
-        String sql = "delete from subject_allocation where acyear='"+acyear+"' and staffid='"+staffid+"'and sem='"+sem+"' and dept='"+dept+"' and subcode='"+subcode+"' and sec='"+sec+"'";
-        
-         statement1.executeUpdate(sql);
+            //Statement statement1 = connection1.createStatement();
+        String sql = "delete from subject_allocation where acyear=? and staffid=?and sem=? and dept=? and subcode=? and sec=?";
+                PreparedStatement statement1=connection1.prepareStatement(sql);
+                statement1.setString(1,staffid);
+                statement1.setString(2, sem);
+                statement1.setString(3, dept);
+                statement1.setString(4, subcode);
+                statement1.setString(6, sec);
+         statement1.executeUpdate();
          
        
             
@@ -118,14 +124,20 @@ String sec = parts[6]; // 004
                   String staffid=request.getParameter("staffid");
                   String sem=request.getParameter("semister");
                    Connection connection1 = new dbcon().getConnection(Find.sdept(staffid));
-            Statement statement1 = connection1.createStatement();
-        String sql = "delete from other_incharge where acyear='"+acyear+"' and staffid='"+staffid+"'and semister='"+sem+"' ";
-        
-         statement1.executeUpdate(sql);
+          //  Statement statement1 = connection1.createStatement();
+        //String sql =;
+        PreparedStatement statement1=connection1.prepareStatement( "delete from other_incharge where acyear=? and staffid=?and semister=? ");
+        statement1.setString(1, acyear);
+        statement1.setString(2, staffid);
+        statement1.setString(3, sem);
+         statement1.executeUpdate();
          
-       sql = "delete from councillor where academicyr='"+acyear+"' and staffid='"+staffid+"'and semister='"+sem+"' ";
-        
-         statement1.executeUpdate(sql);
+   String    sql = "delete from councillor where academicyr=? and staffid=?and semister=? ";
+        PreparedStatement statementt1=connection1.prepareStatement(sql);
+        statementt1.setString(1, acyear);
+        statementt1.setString(2, staffid);
+        statementt1.setString(3, sem);
+         statementt1.executeUpdate();
             
               if(statement1!=null)
                             statement1.close();

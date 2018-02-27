@@ -8,6 +8,7 @@ package Actor;
 import com.action.Find;
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,13 +20,14 @@ import java.sql.Statement;
 public class Parent {
     public static String getNumber(String rollno){
     Connection conn=null;
-       Statement stmt=null;
+        PreparedStatement stmt=null;
        String number="";
        try{
            conn=new dbcon().getConnection(Find.sdept(rollno));
-           stmt=conn.createStatement();
-           String sql="select mobile from student_father_details where rollno='"+rollno+"'";
-       ResultSet rs=stmt.executeQuery(sql);
+           stmt=conn.prepareStatement("select mobile from student_father_details where rollno=?");
+           stmt.setString(1, rollno);
+          // String sql=;
+       ResultSet rs=stmt.executeQuery();
        
        if(rs.next())
        {
@@ -34,8 +36,10 @@ public class Parent {
        if(number==null || number.trim().equals("")||number.equals("NA"))
        {  
        
-           sql="select mobileno from student_mother_details where rollno='"+rollno+"'";
-           rs=stmt.executeQuery(sql);
+          String sql="select mobileno from student_mother_details where rollno=?";
+           stmt=conn.prepareStatement(sql);
+           stmt.setString(1, rollno);
+           rs=stmt.executeQuery();
            if(rs.next())
        {
            

@@ -9,6 +9,7 @@ import Actor.Student;
 import com.action.Find;
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -42,14 +43,17 @@ public class OutPass {
     
       public boolean insert(String requestid){
         Connection conn=null;
-       Statement stmt=null;
+          PreparedStatement stmt=null;
        int update=0;
        try{
            conn=new dbcon().getConnection("sjitportal");
-           stmt=conn.createStatement();
+           //stmt=conn.createStatement();
            
-           String sql="insert into outpass values('"+requestid+"','"+this.id+"',now())";
-       update+=stmt.executeUpdate(sql);
+           String sql="insert into outpass values(?,?,now())";
+           stmt=conn.prepareStatement(sql);
+           stmt.setString(1, requestid);
+           stmt.setString(2, this.id);
+           update+=stmt.executeUpdate();
        
      
        
@@ -75,16 +79,17 @@ public class OutPass {
       public  boolean isExpired(){
         
                Connection conn=null;
-                 Statement stmt=null;
+                 PreparedStatement stmt=null;
                  boolean valid=false;
    
         try{
             
     conn=new dbcon().getConnection("sjitportal");
-    stmt = conn.createStatement();
-    String sql="select * from outpass where rollno like '"+id+"' and expiry >= now()-INTERVAL 6 HOUR";
     
-    ResultSet rs=stmt.executeQuery(sql);
+    String sql="select * from outpass where rollno like ? and expiry >= now()-INTERVAL 6 HOUR";
+    stmt=conn.prepareStatement(sql);
+    stmt.setString(1, id);
+    ResultSet rs=stmt.executeQuery();
                     
                     rs.beforeFirst();
                     if(rs.next()){
@@ -110,15 +115,15 @@ public class OutPass {
       
       public static String getnextID(String type){
         Connection  conn=null;
-        Statement stmt=null;
+        PreparedStatement stmt=null;
         int res=0;
           try{
             
     conn=new dbcon().getConnection("sjitportal");
-    stmt = conn.createStatement();
+  //  stmt = conn.createStatement();
     String sql="select MAX(CONVERT(SUBSTR(id,13,8),unsigned int)) as res  from sjitportal.outpass where id like '%STAFF%'";
-    
-    ResultSet rs=stmt.executeQuery(sql);
+    stmt=conn.prepareStatement(sql);
+    ResultSet rs=stmt.executeQuery();
                     
                     rs.beforeFirst();
                     if(rs.next()){

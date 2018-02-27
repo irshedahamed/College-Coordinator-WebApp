@@ -14,6 +14,23 @@
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 <html lang="en-US">
+     <%
+        try {
+            String username = session.getAttribute("username").toString();
+            String password = session.getAttribute("password").toString();
+
+            Connection connn = new dbcon().getConnection("login");
+            Statement sttt = connn.createStatement();
+            String type = "";
+            ResultSet rsss = sttt.executeQuery("select * from other_login_details where id='" + username + "' and password='" + password + "'");
+            if (rsss.isBeforeFirst()) {
+                while (rsss.next()) {
+                    type = rsss.getString("type");
+                }
+                if (type.equals("admin")) {
+
+
+    %>
     <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
     <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
@@ -197,14 +214,15 @@
                             <%
                                 if (request.getParameter("search") != null) {
                                     String id = request.getParameter("search");
+                                    
+                                    Connection connection = new dbcon().getConnection(Find.sdept(id));
                                     Staff s1=Staff.getByid(id);
-                                    //Connection connection = new dbcon().getConnection(Find.sdept(id));
-                                   // Statement statement = connection.createStatement();
+                                        // Statement statement = connection.createStatement();
                                    // ResultSet rs11 = statement.executeQuery("select * from staff_general where staffid='" + id + "'");
                                   //   if (rs11.next()) {
                             %>
 
-                    <img style="position:absolute;left: 1000px;top:250px;" src="../../StaffPhotos/<%=id.toUpperCase()%>.JPG" height="120px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
+                     <img style="position:absolute;left: 1000px;top:250px;" src="../../StaffPhotos/<%=id.toUpperCase()%>.JPG" height="120px" onerror="this.onerror=null;this.src='../images/face.jpg';" />
 
                     <center> <form method="post" name="general" action="${pageContext.request.contextPath}/StaffProfileEdit">
 
@@ -220,15 +238,7 @@
                                     </td>
 
                                     <td>
-                                        <% 
-                                            String[] name = s1.getName().split(".");
-                                        
-                                        %>
-
-                                        <label>Title :</label> <input type="text" style="background: white" name="title"  value="<%=name[0]%>" >
-                                    </td>
-                                    <td>
-                                        <label> Name :</label><input type="text" style="background: white" id="name" name="name" value="<%=name[1]%>">
+                                        <label> Name :</label><input type="text" style="background: white" id="name" name="name" value="<%=s1.getName()%>">
                                     </td>
                                     <td><label>Designation :</label><input type="text" style="background: white" id="desg" name="desg" value="<%=s1.getDesg()%>">
                                     </td>
@@ -359,5 +369,26 @@ $("#wrapper").toggleClass("toggled");
 <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
+<%
+            }
+
+        } else {
+            response.sendRedirect("../index.jsp");
+        }
+
+        if (sttt != null) {
+            sttt.close();
+        }
+        if (connn != null) {
+            ;//connn.close();
+        }
+    
+}
+} catch (Exception e) {
+        e.printStackTrace();
+        response.sendRedirect("../index.jsp");
+    }
+
+%>
 
 </html>

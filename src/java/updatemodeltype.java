@@ -9,6 +9,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -95,16 +96,18 @@ public class updatemodeltype extends HttpServlet {
             Connection  con = new dbcon().getConnection(dept);
   
          
-            Statement st1=null;
-            st1 = con.createStatement();
+          //  Statement st1=null;
+           // st1 = con.createStatement();
           
             for(Student s:Student.getAll(dept, batch, sec))
             {
                             
-                
-                String sql1 = "update student_personal set model_type ='"+request.getParameter(s.getId())+"' where rollno = '"+s.getId()+"'" ;
-             
-            st1.executeUpdate(sql1);
+                String rollno=request.getParameter(s.getId());
+                String sql1 = "update student_personal set model_type =? where rollno =?" ;
+                PreparedStatement st1=con.prepareStatement(sql1);
+                st1.setString(1, rollno);
+                st1.setString(2, s.getId());
+            st1.executeUpdate();
             
            
            

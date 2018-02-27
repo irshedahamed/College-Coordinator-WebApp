@@ -9,6 +9,7 @@ import com.action.Find;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.servlet.ServletException;
@@ -92,10 +93,12 @@ public class councillorattupdate extends HttpServlet {
       String semister=c.getSemister();
       int sem=Find.getSem(batch, acyr, semister);
       Connection con = new dbconnection.dbcon().getConnection(dept);
-      Statement st = con.createStatement();
-      Statement st1 = con.createStatement();
-      String sql="select * from student_personal where batch='"+batch+"'";
-      ResultSet rs = st.executeQuery(sql);
+     // Statement st = con.createStatement();
+      //Statement st1 = con.createStatement();
+      String sql="select * from student_personal where batch=?";
+            PreparedStatement st=con.prepareStatement(sql);
+            st.setString(1, batch);
+      ResultSet rs = st.executeQuery();
       
               while(rs.next())
               {
@@ -103,15 +106,20 @@ public class councillorattupdate extends HttpServlet {
                   String value = request.getParameter(rollno+"val");
                   String reason=request.getParameter(rollno+"reason");
                   if(value!=null)
-                      if(value.equals("Absent"))
-                  st1.executeUpdate("insert into councillor_attendance values('"+rollno+"','"+date+"','"+sem+"','"+reason+"')");
-              }
+                      if(value.equals("Absent")){
+                PreparedStatement st1=con.prepareStatement("insert into councillor_attendance values(?,?,?,?)");
+                st1.setString(1, rollno);
+                st1.setString(2,date);
+                st1.setInt(3, sem);
+                st1.setString(4, reason);
+                          st1.executeUpdate();
+              }}
               
               response.getWriter().println("Successfully updated");
                 if(st!=null)
                             st.close();
-                if(st1!=null)
-                    st1.close();
+            //    if(st1!=null)
+              //      st1.close();
                               if(con!=null)
                                 ;//con.close();
         }catch(Exception e)

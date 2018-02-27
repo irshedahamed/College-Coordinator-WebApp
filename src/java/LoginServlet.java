@@ -31,6 +31,8 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+       
+        
         String regno = request.getParameter("uname");
         String dob = request.getParameter("pass");
         String s3 = "student";
@@ -71,6 +73,8 @@ public class LoginServlet extends HttpServlet {
                         s3 = rs.getString("type");
                         System.out.println(s3);
                     }
+
+
 
                     HttpSession session = request.getSession(true);
                     if (s1.equalsIgnoreCase(regno) && s2.equalsIgnoreCase(dob)) {
@@ -117,6 +121,7 @@ public class LoginServlet extends HttpServlet {
 
                         response.sendRedirect("index.jsp?user=" + s1);
                     }
+
                 }
             } else {
                 response.sendRedirect("index.jsp");

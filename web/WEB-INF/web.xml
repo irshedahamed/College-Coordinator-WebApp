@@ -8,6 +8,30 @@
         <filter-name>AdminFilter</filter-name>
         <filter-class>Filter.AdminFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>StudentFilter</filter-name>
+        <filter-class>Filter.StudentFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AccountFilter</filter-name>
+        <filter-class>Filter.AccountFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>DeptFilter</filter-name>
+        <filter-class>Filter.DeptFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>DeptFilter</filter-name>
+        <url-pattern>/dept*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AccountFilter</filter-name>
+        <url-pattern>/account*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>StudentFilter</filter-name>
+        <url-pattern>/student/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>AdminFilter</filter-name>
         <url-pattern>/admin/*</url-pattern>
@@ -376,6 +400,10 @@
         <servlet-name>EntryChallan</servlet-name>
         <servlet-class>Fee.EntryChallan</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EndDate</servlet-name>
+        <servlet-class>Mark.EndDate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -735,6 +763,10 @@
     <servlet-mapping>
         <servlet-name>EntryChallan</servlet-name>
         <url-pattern>/EntryChallan</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EndDate</servlet-name>
+        <url-pattern>/EndDate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

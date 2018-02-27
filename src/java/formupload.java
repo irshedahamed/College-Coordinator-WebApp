@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import static java.lang.System.out;
+import java.sql.PreparedStatement;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -192,9 +193,12 @@ String UPLOAD_DIRECTORY="hello";
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection connection1 = new dbcon().getConnection("sjitportal");
-            Statement statement1 = connection1.createStatement();
-
-            statement1.executeUpdate("insert into forms values("+null+",'" + name + "','" + UPLOAD_DIRECTORY + "','"+desc+"')");
+         //   Statement statement1 = connection1.createStatement();
+            PreparedStatement statement1=connection1.prepareStatement("insert into forms values("+null+",?,?,?)");
+            statement1.setString(1, name);
+            statement1.setString(2, UPLOAD_DIRECTORY);
+            statement1.setString(3, desc);
+            statement1.executeUpdate();
                        request.getRequestDispatcher("admin/result.jsp").forward(request, response);
                        
                          if(statement1!=null)
