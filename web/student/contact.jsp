@@ -158,11 +158,8 @@
                         <div class="dm3-tabs-testimonials" data-autoscroll="5"><div class="dm3-tabs">
                                 <center><font size="5px"><b>GENERAL DETAILS</b></font><br><br>
                                     <%
-
-                                        String departmentname = session.getAttribute("deptname").toString();
-                                        //Connection connection = new dbcon().getConnection(departmentname);
-                                        //statement statement = connection.createStatement();
                                         Student s = Student.getById(username);
+                                        String departmentname =s.getDept() ;
                                         String accomodation = null;
 
                                         accomodation = s.getAccomodation();

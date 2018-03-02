@@ -28,8 +28,8 @@
     </head>
     <%        String dept = "", rollno1 = username, subname = "";
 
-        dept = session.getAttribute("deptname").toString();
-
+        
+        dept = Student.getById(username).getDept();;
         
         //Statement st1= con.createStatement();
         //ResultSet rs1 = st1.executeQuery("select batch from student_personal where rollno='"+rollno1+"'");

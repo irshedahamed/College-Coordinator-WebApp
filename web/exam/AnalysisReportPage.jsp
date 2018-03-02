@@ -152,14 +152,13 @@
                     response.setHeader("Content-Disposition", "inline; filename=" + filepath);
                 }
             }
-            String dept = "", sec = "", batch = "", sem = "", exam = "", modeltype = "";
+            String dept = "", sec = "", batch = "", sem = "", exam = "";
             try {
                 dept = request.getParameter("dept");
                 sec = request.getParameter("section");
                 batch = request.getParameter("batch");
                 sem = request.getParameter("sem");
-                exam = request.getParameter("examtype");
-                modeltype = request.getParameter("modeltype");
+                exam = request.getParameter("exam");
 
         %>
 
@@ -169,7 +168,7 @@
         %>
     <center><h2>St. Joseph's Institute of Technology, Chennai-119</h2></center>
     <center><h2>Department of <%=dept.toUpperCase()%></h2></center>
-    <center><h2>Model Examination-<%=exam%></h2></center>
+    <center><h2>Internal Assessment Examination-<%=exam.substring(exam.length()-1) %></h2></center>
 
     <h2 style="margin-left: 10px;">BRANCH: <%=dept.toUpperCase()%></h2>
     <h2 style="margin-left: 10px;">BATCH: <%=batch%></h2>
@@ -249,32 +248,27 @@
 
                     int max = 0, f = 0, p = 0, a = 0, gtotal = 0;
                     float pp = 0, classavg = 0;
-                    for (Student stu : Student.getAll(dept, batch, sec)) {
+                     for (Student stu : Student.getAll(dept, batch, sec)) {
                         Mark m = new Mark();
                         m.setRollno(stu.getId());
                         m.setSubcode(sc);
-                        List<Mark> li = Mark.getExamMark(dept, m);
-                        String markc = null, markm = null, marku = null;
-
+                        m.setType(exam);
+                        Mark.getUserMark(dept, m);
+                        String mark = null;
+                        mark = m.getMark();
                         int total = 0;
-
-                        for (Mark mi : li) {
-                            if (mi.getType().equals("model" + exam)) {
-                                markm = mi.getMark();
-                            } else if (mi.getType().equals("unit" + exam)) {
-                                marku = mi.getMark();
-                            } else if (mi.getType().equals("cycle" + exam)) {
-                                markc = mi.getMark();
-                            }
+                        if(mark!=null && !mark.equals("A") && !mark.equals("N") ){
+                        total = Integer.parseInt(mark);
                         }
-
-                        if (markm == null || markm.equals("A")) {
+                        if (mark == null || mark.equals("A")) {
                             a++;
                         } else {
                             p++;
                         }
-
-                        total = Find.calculateTotal(markm, markc, marku);
+                        if(exam.contains("unit")){
+                            float mk = (float)(((float)total/75.0)*100.0);
+                            total = (int)mk;
+                        }
                         gtotal += total;
                         if (max < total) {
                             max = (int) total;
@@ -356,7 +350,7 @@
 
     </div>
 
-    <center><a id="exportword" href ="reportgenerationpage.jsp?word=yes&dept=<%=dept%>&section=<%=sec%>&batch=<%=batch%>&sem=<%=sem%>&examtype=<%=exam%>&modeltype=<%=modeltype%>" >Export to word</a>
+    <center><a id="exportword" href ="reportgenerationpage.jsp?word=yes&dept=<%=dept%>&section=<%=sec%>&batch=<%=batch%>&sem=<%=sem%>&exam=<%=exam%>" >Export to word</a>
     </center>
 
 </body>

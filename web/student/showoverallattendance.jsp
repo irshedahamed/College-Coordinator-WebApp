@@ -3,6 +3,7 @@
     Created on : Aug 21, 2015, 2:07:12 PM
     Author     : Divya Sri
 --%>
+<%@page import="Actor.Student"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -25,8 +26,8 @@
 
             <%
                 String id = request.getParameter("index");
-                String deptname = session.getAttribute("deptname").toString();
                 String rollno = session.getAttribute("username").toString();
+                String deptname = Student.getById(rollno).getDept();
                 Connection con = new dbcon().getConnection(deptname);
                 Connection con1 = new dbcon().getConnection("sjitportal");
               //  Statement st = con.createStatement();
