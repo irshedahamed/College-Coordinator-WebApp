@@ -280,6 +280,7 @@
                         }
 
                     }
+                        f-=a;
 
                     pp = (float) (p + a - f) / (float) (p + a) * 100;
                     classavg = gtotal / (float) p;
