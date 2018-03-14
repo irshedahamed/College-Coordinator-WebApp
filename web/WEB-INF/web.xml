@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>25</param-value>
+    </context-param>
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+    <context-param>
+        <param-name>user</param-name>
+        <param-value>noreply@stjosephstechnology.ac.in</param-value>
+    </context-param>
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value>noreply@sjit</param-value>
+    </context-param>
     <filter>
         <filter-name>ImageFilter</filter-name>
         <filter-class>Filter.ImageFilter</filter-class>
@@ -376,6 +396,14 @@
         <servlet-name>EntryChallan</servlet-name>
         <servlet-class>Fee.EntryChallan</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EmailUtility</servlet-name>
+        <servlet-class>EmailUtility</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendMailAttachServlet</servlet-name>
+        <servlet-class>SendMailAttachServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -735,6 +763,14 @@
     <servlet-mapping>
         <servlet-name>EntryChallan</servlet-name>
         <url-pattern>/EntryChallan</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmailUtility</servlet-name>
+        <url-pattern>/EmailUtility</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendMailAttachServlet</servlet-name>
+        <url-pattern>/SendMailAttachServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
