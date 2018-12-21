@@ -8,6 +8,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -72,8 +73,8 @@ public class RemoveBonus extends HttpServlet {
         String batch=request.getParameter("batch");
         String exam=request.getParameter("exam");
                   
-             Statement stmt=null;
-             Statement stmt1=null;
+          //   Statement stmt=null;
+         //    Statement stmt1=null;
             Connection conn = null;
             try{
                 String dept;
@@ -84,11 +85,14 @@ public class RemoveBonus extends HttpServlet {
                 dept=(String)request.getSession().getAttribute("dept");
                 
             conn=new dbcon().getConnection(dept);
-            stmt=conn.createStatement();
-            stmt1=conn.createStatement();
+           // stmt=conn.createStatement();
+          //  stmt1=conn.createStatement();
             
-            String sql= "select * from student_personal where batch='"+batch+"' and sec='"+sec+"' order by rollno";
-           ResultSet rs=stmt.executeQuery(sql);
+            String sql= "select * from student_personal where batch=? and sec=? order by rollno";
+                PreparedStatement stmt=conn.prepareStatement(sql);
+                stmt.setString(1, batch);
+                stmt.setString(2, sec);
+            ResultSet rs=stmt.executeQuery();
      while(rs.next())
      {
          
@@ -100,13 +104,20 @@ public class RemoveBonus extends HttpServlet {
         
             if(request.getParameter(rollno).equals("add"))
         {
-        sql="insert into bonuscut values('"+rollno+"','"+sem+"','"+exam+"')";
-        stmt1.executeUpdate(sql);
+        sql="insert into bonuscut values(?,?,?)";
+        PreparedStatement stmt1=conn.prepareStatement(sql);
+        stmt1.setString(1, rollno);
+        stmt1.setString(2,sem);
+        stmt1.setString(3, exam);
+        stmt1.executeUpdate();
         response.getWriter().println("Bonus Removed for"+rollno);
         }
         else if(request.getParameter(rollno).equals("delete")){
-            sql="delete from bonuscut where rollno='"+rollno+"' and sem ='"+sem+"'";
-        stmt1.executeUpdate(sql);
+            sql="delete from bonuscut where rollno=? and sem =?";
+        PreparedStatement stmt1=conn.prepareStatement(sql);
+        stmt1.setString(1, rollno);
+        stmt1.setString(2, sem);
+            stmt1.executeUpdate();
             response.getWriter().println("Bonus Added for"+rollno);
         
 
@@ -116,17 +127,17 @@ public class RemoveBonus extends HttpServlet {
             }catch(Exception e){
                 e.printStackTrace();
             }finally{
-                try {
-                    if(stmt!=null)
-                        stmt.close();
-                       if(stmt1!=null)
-                        stmt1.close();
-                
-                    if(conn!=null)
-                        ;//conn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(RemoveBonus.class.getName()).log(Level.SEVERE, null, ex);
-                }
+//                try {
+//                    if(stmt!=null)
+//                        stmt.close();
+//                       if(stmt1!=null)
+//                        stmt1.close();
+//                
+//                    if(conn!=null)
+//                        ;//conn.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(RemoveBonus.class.getName()).log(Level.SEVERE, null, ex);
+//                }
             }
     }
 

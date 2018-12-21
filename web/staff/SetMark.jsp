@@ -255,8 +255,7 @@
                                     <option selected>100</option>
                                     <option >140</option>
                                     <%} else if (exam.contains("unit")) {%>
-                                    <option selected>48</option>
-                                    <option >41</option>
+                                    <option selected>75</option>
                                     <%} else {%>
                                     <option selected>30</option>
                                     <option >60</option>

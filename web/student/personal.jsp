@@ -6,17 +6,8 @@
 <%@page import="java.sql.*"%>
 <html lang="en-US">
     <%
-        try {
-            String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from student_login_details where rollno='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-
-
+        String username = session.getAttribute("username").toString();
+      
     %>
 
     <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:04:48 GMT -->
@@ -167,7 +158,7 @@
                                             <%
                                                 try {
 
-                                                    String departmentname = session.getAttribute("deptname").toString();
+                                                    String departmentname =  s1.getDept();
                                                     //Connection connection = new dbcon().getConnection(departmentname);
                                                     //Statement statement = connection.createStatement();
                                                     //ResultSet rs= statement.executeQuery("select * from student_personal where rollno='"+username+"'");
@@ -474,21 +465,5 @@
     <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
 <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-<%
-        } else {
-            response.sendRedirect("../index.jsp");
-        }
-        if (sttt != null) {
-            sttt.close();
-        }
-        if (connn != null) {
-            ;//connn.close();
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect("../index.jsp");
-    }
 
-
-%>
 </html>

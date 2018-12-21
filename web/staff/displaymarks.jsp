@@ -40,11 +40,15 @@
         String sem = request.getParameter("sem");
         String exam = request.getParameter("exam");
         String subcode = request.getParameter("subject");
+        String s = exam.toUpperCase();
+        if(exam.contains("unit")){
+            s = exam.replace("unit","IAE");
+        }
     %>
     <body>
     <center><h1><u>DEPARTMENT OF <%=dept.toUpperCase()%></u></h1></center>
     <center><h1><u>BATCH:</u> <%=batch%>      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                      <u> SEM:</u> <%=sem%></h1></center>
-    <center><h1><%=exam.toUpperCase()%> EXAM MARK LIST</h1></center>
+    <center><h1><%=s.toUpperCase()%> EXAM MARK LIST</h1></center>
     <form action="${pageContext.request.contextPath}/markupdate" method="post">
         <center> <table class="bordered">
                 <thead>

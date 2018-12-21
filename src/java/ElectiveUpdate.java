@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -8,6 +8,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -87,16 +88,25 @@ public class ElectiveUpdate extends HttpServlet {
        String ayear=request.getParameter("ayear");
        String year=null;
        Connection conn=null;
-       Statement stmt=null;
+      // Statement stmt=null;
        try{
        conn=new dbcon().getConnection(dept);
-       stmt=conn.createStatement();
-       ResultSet rs=stmt.executeQuery("select ayear from subject_sem_table where sem='"+sem+"' and subcode='"+subcode+"' and regulation='"+regulation+"'");
+       //stmt=conn.createStatement();
+           PreparedStatement stmt=conn.prepareStatement("select ayear from subject_sem_table where sem=? and subcode=? and regulation=?");
+           stmt.setString(1, sem);
+           stmt.setString(2, subcode);
+           stmt.setString(3, regulation);
+       ResultSet rs=stmt.executeQuery();
        if(rs.next())
        {
        year=rs.getString("ayear");
        ayear=year+","+ayear;
-       stmt.executeUpdate("update subject_sem_table set ayear='"+ayear+"' where sem='"+sem+"' and subcode='"+subcode+"' and regulation='"+regulation+"'");
+       PreparedStatement stmtt=conn.prepareStatement("update subject_sem_table set ayear=? where sem=? and subcode=? and regulation=?");
+       stmtt.setString(1, ayear);
+       stmtt.setString(2, sem);
+       stmtt.setString(3, subcode);
+       stmtt.setString(4, regulation);
+       stmtt.executeUpdate();
        response.sendRedirect("dept/ElectiveAdded.jsp?msg=Elective Assigned Successfully!!");
        }
        else{
@@ -109,14 +119,14 @@ public class ElectiveUpdate extends HttpServlet {
        
            e.printStackTrace();
        }finally{
-           try {
-               if(stmt!=null)
-                   stmt.close();
-               if(conn!=null)
-                   ;//conn.close();
-           } catch (SQLException ex) {
-           ex.printStackTrace();
-           }
+       //    try {
+           //    if(stmt!=null)
+             //      stmt.close();
+         //      if(conn!=null)
+           //        ;//conn.close();
+   //        } catch (SQLException ex) {
+     //      ex.printStackTrace();
+       //    }
        }
     }
 

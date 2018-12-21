@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import static java.lang.System.out;
+import java.sql.PreparedStatement;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -177,9 +178,13 @@ public class exam_upload extends HttpServlet {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection connection1 = new dbcon().getConnection("sjitportal");
-            Statement statement1 = connection1.createStatement();
+           // Statement statement1 = connection1.createStatement();
 
-            statement1.executeUpdate("insert into exam_circular values("+null+",'" + name + "','" + UPLOAD_DIRECTORY + "','" + desc + "')");
+            PreparedStatement statement1=connection1.prepareStatement("insert into exam_circular values("+null+",?,?,?)");
+            statement1.setString(1,name);
+            statement1.setString(2, UPLOAD_DIRECTORY);
+            statement1.setString(3, desc);
+            statement1.executeUpdate();
              request.getRequestDispatcher("dept/result.jsp").forward(request, response);
             
                             if(statement1!=null)

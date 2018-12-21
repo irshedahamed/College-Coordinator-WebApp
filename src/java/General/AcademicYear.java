@@ -7,6 +7,7 @@ package General;
 
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -53,11 +54,13 @@ public class AcademicYear {
     {
         
         Connection con = null;
-            Statement st = null;
+            PreparedStatement st = null;
             
             con = new dbcon().getConnection("sjitportal");
-            st = con.createStatement();
-           int i =   st.executeUpdate("insert into academicyr values('"+Year+"','"+YearString+"','n')");
+            st = con.prepareStatement("insert into academicyr values(?,?,'n')");
+            st.setString(1, Year);
+            st.setString(2, YearString);
+           int i =   st.executeUpdate();
             
               if(st!=null)
                             st.close();
@@ -72,10 +75,10 @@ public class AcademicYear {
     {
       
         Connection con = null;
-            Statement st = null;
+            PreparedStatement st = null;
             
             con = new dbcon().getConnection("sjitportal");
-            st = con.createStatement();
+            st = con.prepareStatement("update academicyr set current = 'n'");
             
                   st.executeUpdate("update academicyr set current = 'n'");   
           
@@ -86,6 +89,7 @@ public class AcademicYear {
                       year =year-1;
                        st.executeUpdate("update academicyr set current ='fee' where year ='"+year+"' ");                
                   }
+
             if(st!=null)
                             st.close();
                               if(con!=null)
@@ -100,11 +104,11 @@ public class AcademicYear {
     
         List<AcademicYear> list=new ArrayList<AcademicYear>();
         Connection conbatch=null;
-        Statement stmt=null;
+        PreparedStatement stmt=null;
         try{
          conbatch = new dbcon().getConnection("sjitportal");
-                     stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from academicyr");
+                     stmt = conbatch.prepareStatement("select * from academicyr");
+                    ResultSet rs=stmt.executeQuery();
                     
                     rs.afterLast();
                     while(rs.previous())
@@ -140,11 +144,11 @@ public class AcademicYear {
         
                    AcademicYear a=new AcademicYear();
         Connection conbatch=null;
-        Statement stmt=null;
+        PreparedStatement stmt=null;
         try{
          conbatch = new dbcon().getConnection("sjitportal");
-                     stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from academicyr where current not like 'n'");
+                     stmt = conbatch.prepareStatement("select * from academicyr where current not like 'n'");
+                    ResultSet rs=stmt.executeQuery();
                     
                     rs.afterLast();
                     while(rs.previous())
@@ -178,11 +182,11 @@ public class AcademicYear {
         
                    AcademicYear a=null;
         Connection conbatch=null;
-        Statement stmt=null;
+        PreparedStatement stmt=null;
         try{
          conbatch = new dbcon().getConnection("sjitportal");
-                     stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from academicyr where current not like 'n'");
+                     stmt = conbatch.prepareStatement("select * from academicyr where current not like 'n'");
+                    ResultSet rs=stmt.executeQuery();
                     
                     rs.afterLast();
                     while(rs.previous())

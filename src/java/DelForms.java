@@ -7,6 +7,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -76,7 +77,7 @@ public class DelForms extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
              Connection con=null;
-    Statement st=null;
+    //Statement st=null;
             try
         {
     String[] values = request.getParameterValues("delselect");
@@ -85,8 +86,10 @@ public class DelForms extends HttpServlet {
     {
         
         con= new dbconnection.dbcon().getConnection(request.getParameter("db"));
-        st = con.createStatement();
-       st.executeUpdate("delete from circular where sno like '"+a+"';");
+        //st = con.createStatement();
+        PreparedStatement st=con.prepareStatement("delete from circular where sno like ?;");
+        st.setString(1, a);
+        st.executeUpdate();
         //response.getWriter().println("delete from circular where sno like '"+a+"';");
                               
     }
@@ -94,8 +97,8 @@ public class DelForms extends HttpServlet {
     {
         e.printStackTrace();
     }finally{
-            try{ if(st!=null)
-                            st.close();
+            try{ //if(st!=null)
+                   //         st.close();
                               if(con!=null)
                                 ;//con.close();
          }catch(Exception e){

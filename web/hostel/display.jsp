@@ -4,6 +4,7 @@
     Author     : Home
 --%>
 
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="Actor.Student"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -121,7 +122,7 @@
 
                             <%
                                 Connection conn = null;
-                                Statement stmt = null;
+                                //Statement stmt = null;
                                 try {
                                     String[] depts = new String[15];
                                     if (deptReq.equals("all")) {
@@ -133,11 +134,13 @@
                                     // Class.forName("com.mysql.jdbc.Driver").newInstance();                      
                                     conn = new dbcon().getConnection("sjitportal");
 
-                                    stmt = conn.createStatement();
+                                   // stmt = conn.createStatement();
                                     String sql;
                                     for (String dept : depts) {
                                         sql = "select a.rollno,a.reason,a.from,a.till,b.rollno,b.name from outpassform a," + dept + ".student_personal b where  (`from` >= '" + dateonentry + "' and `from` <= '" + enddate + "')  and a.rollno=b.rollno and a.status='Accepted'";
-                                        ResultSet rs = stmt.executeQuery(sql);
+                                       PreparedStatement stmt=conn.prepareStatement(sql);
+                                       
+                                        ResultSet rs = stmt.executeQuery();
 
                             
 
@@ -179,16 +182,16 @@
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 } finally {
-                                    try {
-                                        if (stmt != null) {
-                                            stmt.close();
-                                        }
-                                        if (conn != null) {
-                                            ;//conn.close();
-                                        }
-                                    } catch (SQLException ex) {
-                                        ex.printStackTrace();
-                                    }
+//                                    try {
+//                                       // if (stmt != null) {
+//                                         //    stmt.close();
+//                                       // }
+//                                        if (conn != null) {
+//                                            ;//conn.close();
+//                                        }
+//                                    } catch (SQLException ex) {
+//                                        ex.printStackTrace();
+//                                    }
                                 }%>
                         </table>
                     </center>     

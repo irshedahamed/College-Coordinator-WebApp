@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="Actor.Staff"%>
 <%@page import="com.action.Find"%>
 <%@page import="dbconnection.dbcon"%>
@@ -183,13 +184,17 @@
                                                 <%
                                                     Class.forName("com.mysql.jdbc.Driver").newInstance();
                                                     Connection connection = new dbcon().getConnection(Find.sdept(username));
-                                              
+                                            
                                                     //     Statement statement = connection.createStatement();
                                                  //   ResultSet rs = statement.executeQuery("select * from staff_general where staffid=" + "'" + username + "'");
                                                    // String title = "", name = "", desg = "", doj = "", gender = "", add1 = "", add2 = "", city = "", state = "", pincode = "", padd1 = "", padd2 = "";
                                                     //String pcity = "", pstate = "", ppincode = "", mobile1 = "", mobile2 = "", email = "", ll = "";
                                                     //if (rs.next()) {
-                                                     String   name = s.getName();
+
+                                                    
+                                                    String name=s.getName();
+
+                                                    
                                                    String     desg = s.getDesg();
                                                      String   doj = String.valueOf(s.getDoj());
                                                       String  gender = s.getSex();

@@ -185,9 +185,18 @@ and open the template in the editor.
 
                 <%
                     Connection con = new dbcon().getConnection(dept);
-                        for(Student s : Student.getAll(dept, batch, sec)) {
-                        rollno = s.getId();
-                        name = s.getName();
+
+
+                 //   Statement st = con.createStatement();
+                 PreparedStatement st=con.prepareStatement("select * from student_personal where batch=? and sec=? order by rollno");
+                 st.setString(1, batch);
+                 st.setString(2, sec);
+                 
+                    ResultSet rs = st.executeQuery();
+
+                    while (rs.next()) {
+                        rollno = rs.getString("rollno");
+                        name = rs.getString("name");
                 %>
                 <tr>
                     <td><%=rollno.toUpperCase()%></td>        
@@ -195,6 +204,10 @@ and open the template in the editor.
 
                     <td>
                         <%
+
+
+                            //sql2 = ;
+                            //Statement st1 = con.createStatement();
                             PreparedStatement st1=con.prepareStatement("select * from overallattendence where rollno=? and sem=?");
                             st1.setString(1, rollno);
                             st1.setString(2, sem);

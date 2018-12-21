@@ -183,6 +183,10 @@
                     {
                         for (i = 0; i < list.length; i++) {
                             var x = list[i];
+                            if(x==="unit1" || x==="unit2" || x==="unit3" ||"unit4" ){
+                                  var res = x.replace(/unit/gi, "IAE");
+                                  x = res;
+                            }
                             if (x[0] === 'z') {
                                 x = x.substring(1);
                             }

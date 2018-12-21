@@ -244,20 +244,22 @@
                 <label class="select">
             
             <select id="exam" name="exam" required>
-                <option disabled selected>select</option>
-                <option value="cycle1">Cycle 1</option>
-                <option value="cycle2">Cycle 2</option>
-                <option value="cycle3">Cycle 3</option>
+                   <option disabled selected>select</option>
+                <option value="unit1">IAE 1</option>
+                <option value="zreunit1">ReIAE 1</option>
+                <option value="unit2">IAE 2</option>
+                <option value="zreunit2">ReIAE 2</option>
+                <option value="unit3">IAE 3</option>
+                <option value="zreunit3">ReIAE 3</option>
+                <option value="unit4">IAE 4</option>               
+                <option value="zreunit4">ReIAE 4</option>
+                <option value="model3">Model(IAE 5)</option>
+                <option value="zremodel3">ReModel(IAE 5)</option>                
                 <option value="model1">Model 1</option>
+                <option value="zremodel1">ReModel 1</option>  
                 <option value="model2">Model 2</option>
-                <option value="model3">Model 3</option>
-                <option value="unit1">Unit 1</option>
-                <option value="unit2">Unit 2</option>
-                <option value="unit3">Unit 3</option>
-                <option value="zremodel1">Remodel 1</option>
-                <option value="zremodel2">Remodel 2</option>
-                <option value="zremodel3">Remodel 3</option>
-                <option value="labmodel">Labmodel</option>  
+                <option value="zremodel2">ReModel 2</option>    
+                <option value="cycle1">Cycle 1</option>     
             </select>
                     <i></i>
             <br> <br>

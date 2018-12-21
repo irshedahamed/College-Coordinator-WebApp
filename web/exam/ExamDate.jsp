@@ -1,15 +1,11 @@
-<%-- 
-    Document   : LaModelbMark
-    Created on : Sep 24, 2017, 11:21:54 PM
-    Author     : irshed
---%>
 <%@page import="General.AcademicYear"%>
+<%@page import="java.util.List"%>
 <%@page import="General.Batch"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="com.action.Find"%>
-<%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
+<%@page import="dbconnection.dbcon"%>
 <%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -39,9 +35,42 @@
         <link type="text/css" media="all" href="../wp-content/cache/autoptimize/css/autoptimize_0ec4a90d60c511554f757138ccde0bea.css" rel="stylesheet" /><title>Home</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/sky-forms.css" rel="stylesheet">
+        <script type = "text/javascript"  src = "${pageContext.request.contextPath}/js/jquery.js"></script>
 
         <!-- Custom CSS -->
+        <script>
+            $(document).ready(function () {
 
+                var dept, batch, sem, exam;
+                $("#dept").change(function () {
+                    dept = $("#dept").val();
+
+                });
+
+                $("#batch").change(function () {
+                    batch = $("#batch").val();
+
+                });
+                $("#sem").change(function () {
+                    sem = $("#sem").val();
+                });
+                $("#exam").change(function () {
+                    exam = $("#exam").val();
+
+                    if (exam !== "all") {
+
+                        $.get("../EndDate", {
+                            dept: dept,
+                            batch: batch,
+                            sem: sem,
+                            exam: exam
+                        }, function (response) {
+                            $("#end").val(response);
+                        });
+                    }
+                });
+            });
+        </script>
 
 
     </head>
@@ -67,22 +96,17 @@
 
 
 
-
-
-
-
                             <nav id="main-nav">
                                 <ul id="menu-main-menu" class="menu"><li id="menu-item-778" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="home.jsp">Home</a></li>
 
 
 
 
-                                    <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Marks</a>
+                                    <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page   current-menu-item page_item page-item-115 current_page_item menu-item-778"><a href="#">Marks</a>
                                         <ul class="sub-menu">
                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="updatemarks.jsp">Update Marks</a></li>
 
                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmark.jsp">View Marks</a></li>
-                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="ExamDate.jsp">End Date Entry</a></li>
 
 
 
@@ -91,7 +115,7 @@
                                 </li>
 
 
-                                <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page  "><a href="#">Report Generation</a>
+                                <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Report Generation</a>
                                     <ul class="sub-menu">
                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="AnalysisReport.jsp">Exam Report</a></li>
                                         <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="reportgeneration.jsp">Marks Report Staff</a></li>
@@ -119,7 +143,6 @@
                                 </li>
 
 
-                                <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="ModelLabMark.jsp">Model Lab</a>
 
                                 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="circular.jsp">Circular</a>
                                 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="events.jsp">Events</a>
@@ -128,6 +151,10 @@
                                 <li id="menu-item-769" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-777"><a href="examuploads.jsp">Exam Uploads</a>
 
                                 </li></ul>						</nav>	
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -135,8 +162,8 @@
 
 
             <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
-                        <center>  <form action="EditLabMark.jsp" class="sky-form" method="post" target="_blank">
-                                <header>Model Lab Mark Update</header>
+                        <center>  <form action="${pageContext.request.contextPath}/EndDate" class="sky-form" method="post" >
+                                <header>Date Allotment</header>
                                 <fieldset>					
                                     <section>
                                         <label class="input">
@@ -144,38 +171,30 @@
                                             <label class="select">
 
                                                 <select id="dept" name="dept" required>
-                                                    <option  disabled selected>Select</option>
+                                                    <option disabled selected>select</option>
+                                                    <option value="all">ALL</option>
+                                                    <option value="cse">CSE</option>
+                                                    <option value="it">IT</option>
+                                                    <option value="civil">CIVIL</option>
+                                                    <option value="mech">MECH</option>
+                                                    <option value="eee">EEE</option>
+                                                    <option value="ece">ECE</option>
 
-                                                    <%=Find.getDeptHTMLContent()%>
+                                                </select>
 
                                                 </select>
                                                 <i></i>                                    </label>
                                         </label>
 
                                         <br><br>
-                                        <label class="input">
-                                            <div align="left" size="3px"><b>
-                                                    Academic Year:</b></div>
-                                            <label class="select">
-                                                <select id="ayear" name="ayear">
-
-                                                    <%= AcademicYear.getHTMLContent()%>
-
-                                                </select>
-                                                <i></i>
-                                            </label>
-                                        </label>
-                                        <br> <br>
 
                                         <label class="input">
                                             <div align="left" size="3px"><b>
                                                     Batch:</b></div>
                                             <label class="select">
                                                 <select id="batch" name="batch" required>
-                                                    <option disabled selected>Select</option>
-                                                    <%
-                                                        out.write(Batch.getHTMLContent());
-                                                    %>
+                                                    <option disabled selected>Select   </option>
+                                                    <%=Batch.getHTMLContent()%>
                                                 </select>
                                                 <i></i>
                                             </label></label>
@@ -205,15 +224,41 @@
                                                     EXAM</b></div>
                                             <label class="select">
 
-                                                <select id="exam" name="exam" required>
+                                                <select id="exam" name="exam"  required>
                                                     <option disabled selected>select</option>
-                                                    <option value="modellab1">Model Lab 1</option>
-                                                    <option value="modellab2">Model Lab 2</option>
-                                                    <option value="modellab3">Model Lab 3</option>
+                                                    <option value="unit1">IAE 1</option>
+                                                    <option value="zreunit1">ReIAE 1</option>
+                                                    <option value="unit2">IAE 2</option>
+                                                    <option value="zreunit2">ReIAE 2</option>
+                                                    <option value="unit3">IAE 3</option>
+                                                    <option value="zreunit3">ReIAE 3</option>
+                                                    <option value="unit4">IAE 4</option>               
+                                                    <option value="zreunit4">ReIAE 4</option>
+                                                    <option value="model3">Model(IAE 5)</option>
+                                                    <option value="zremodel3">ReModel(IAE 5)</option>                
+                                                    <option value="model1">Model 1</option>
+                                                    <option value="zremodel1">ReModel 1</option>  
+                                                    <option value="model2">Model 2</option>
+                                                    <option value="zremodel2">ReModel 2</option>    
+                                                    <option value="cycle1">Cycle 1</option>       
+                                                    <option value="labmodel">Labmodel</option>           
                                                 </select>
                                                 <i></i>
                                                 <br> <br>
                                             </label></label>
+                                        <label class="input">
+                                            <div align="left" size="3px" id="div7"><b>
+                                                    End Date</b></div>
+                                            <label class="input">
+
+                                                <input type="date" id="end"   name="end" />
+                                                <p id="a"></p>
+
+                                                <i></i>
+                                                <br> <br>
+                                            </label></label>
+
+
                                     </section>
 
 
@@ -249,6 +294,7 @@
 
 
 
+
                 <script src="../js/jquery.js"></script>
 
                 <!-- Bootstrap Core JavaScript -->
@@ -272,9 +318,8 @@
                         if (sttt != null) {
                             sttt.close();
                         }
-                        if (connn != null) {
-                            connn.close();
-                        }
+                        if (connn != null)
+                                                ;//connn.close();
                     } catch (Exception e) {
                         e.printStackTrace();
                         response.sendRedirect("../index.jsp");

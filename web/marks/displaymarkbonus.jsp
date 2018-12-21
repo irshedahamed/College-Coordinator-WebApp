@@ -165,7 +165,7 @@ and open the template in the editor.
         %>
         <div id="yourTableIdName1">
             <center><h2>St. Joseph's Institute of Technology, Chennai-119</h2></center>
-            <center><h2>Model -<%=exam%> Marks Report</h2>
+            <center><h2>Assessment -<%=exam%> Marks Report</h2>
 
                 <h2 style="margin-left: 0px;">Batch: <%=batch%>      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -175,7 +175,7 @@ and open the template in the editor.
                 <h2 style="margin-left: 0px;">Semester No: <%=sem%>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    Category: MODEL-<%=exam%>
+                    Category: Assessment-<%=exam%>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
                     Section: <%=sec%></h2>
@@ -261,6 +261,7 @@ and open the template in the editor.
                             m.setSubcode(subcode);
                             
                              int total = 0;
+                             int gtotal=0;
                              boolean show=false;
                             if(exam.equals("labmodel")){
                             m.setType(exam);
@@ -268,22 +269,164 @@ and open the template in the editor.
                             if(mark!=null)
                                 {
                                     if(!mark.equals("A"))
-                                total=Integer.parseInt(mark);
+                                gtotal=Integer.parseInt(mark);
                                 else
-                                        total=0;
+                                        gtotal=0;
                                     
                                     show=true;
                                 }
                                 if (bonus != 0) {
 
-                                        total+=10;
+                                        gtotal+=10;
                                     
                                 }
-                                    total*=5;
+                                    gtotal*=5;
                                     
                           }else{
                             List<Mark> li = Mark.getExamMark(dept, m);
+                            int flag =0;
+                            String marku1=null,marku2=null,zmarku1=null,zmarku2=null; 
+                            String markm3=null,zmarkm3=null;
+                            switch(Integer.parseInt(exam)){
+                                case 1:
+                                    if(li.size()!=0){
+                                        show=true;
+                                    for (Mark mi : li) {
+                                    if (mi.getType().equals("unit1")) {
+                                        marku1 = mi.getMark();
+                                    } else if (mi.getType().equals("unit2")) {
+                                        marku2 = mi.getMark();
+                                    } else if (mi.getType().equals("zreunit1")) {
+                                        zmarku1 = mi.getMark();
+                                    }
+                                    else if (mi.getType().equals("zreunit2")) {
+                                        zmarku2 = mi.getMark();
+                                    }
+                                }
+                                    int u1=0;
+                                    if(marku1!=null && !marku1.equals("A") && !marku1.equals("N")){
+                                       total = Integer.parseInt(marku1);
+                                       if(Integer.parseInt(marku1)<34){
+                                           if(zmarku1!=null && !zmarku1.equals("A") && !zmarku1.equals("N")){
+                                               if(Integer.parseInt(zmarku1)>34){
+                                               u1=1;
+                                               }
+                                         }
+                                       }else{
+                                            u1 =1;
+                                       }                                       
+                                    }
+                                    if(marku2!=null && !marku2.equals("A") && !marku2.equals("N")){
+                                       total += Integer.parseInt(marku2);
+                                       float x = (float)(((float)total/150.0)*100.0);
+                                       gtotal= (int)(x+0.99);
+                                       if(Integer.parseInt(marku2)<34 && u1!=0){
+                                           if(zmarku2!=null && !zmarku2.equals("A") && !zmarku2.equals("N")){
+                                               if(Integer.parseInt(zmarku2)>34 && u1!=0){
+                                                if (bonus != 0) {
+   
+                                               gtotal=Find.calcBonus(total, Student.getById(rollno).getModel_type());
+                                                }                                           
+                                               }
+                                         }
+                                       }else{if (bonus != 0) {
+   
+                                               gtotal=Find.calcBonus(total, Student.getById(rollno).getModel_type());
+                                                }
+                                       }                                       
+                                    }
+                                    }                       
+                                    break;
+                                case 2:
+                                    if(li.size()!=0){
+                                        show=true;
+                                    for (Mark mi : li) {
+                                    if (mi.getType().equals("unit3")) {
+                                        marku1 = mi.getMark();
+                                    } else if (mi.getType().equals("unit4")) {
+                                        marku2 = mi.getMark();
+                                    } else if (mi.getType().equals("zreunit3")) {
+                                        zmarku1 = mi.getMark();
+                                    }
+                                    else if (mi.getType().equals("zreunit4")) {
+                                        zmarku2 = mi.getMark();
+                                    }
+                                }
+                                     int u1=0;
+                                    if(marku1!=null && !marku1.equals("A") && !marku1.equals("N")){
+                                       total = Integer.parseInt(marku1);
+                                       if(Integer.parseInt(marku1)<34){
+                                           if(zmarku1!=null && !zmarku1.equals("A") && !zmarku1.equals("N")){
+                                               if(Integer.parseInt(zmarku1)>34){
+                                               u1=1;
+                                               }
+                                         }
+                                       }else{
+                                            u1 =1;
+                                       }                                       
+                                    }
+                                    if(marku2!=null && !marku2.equals("A") && !marku2.equals("N")){
+                                       total += Integer.parseInt(marku2);
+                                       float x = (float)(((float)total/150.0)*100.0);
+                                       gtotal= (int)(x+0.99);
+                                       float  temp = (float) (((float)total/150.0)*75.0);
+                                       if(Integer.parseInt(marku2)<34 && u1!=0){
+                                           if(zmarku2!=null && !zmarku2.equals("A") && !zmarku2.equals("N")){
+                                               if(Integer.parseInt(zmarku2)>34 && u1!=0){
+                                                 if(bonus!=0){  
+                                               gtotal=Find.calcBonus((int)temp, Student.getById(rollno).getModel_type());
+                                                 }
+                                               }
+                                         }
+                                       }else{
+                                           if (bonus != 0) {
+   
+                                               gtotal=Find.calcBonus((int)temp, Student.getById(rollno).getModel_type());
+                                                }
+                                           }                                       
+                                    }
+                                    }
+                                    break;
+                                case 3:
+                                     if(li.size()!=0){
+                                        show=true;
+                                    for (Mark mi : li) {
+                                    if (mi.getType().equals("model3")) {
+                                        markm3 = mi.getMark();
+                                    } else if (mi.getType().equals("zremodel3")) {
+                                        zmarkm3 = mi.getMark();
+                                    }
+                                }
+                                     if(markm3!=null && !markm3.equals("A") && !markm3.equals("N")){
+                                       total += Integer.parseInt(markm3);
+                                        float  mark = (float) (((float)Integer.parseInt(markm3))*0.75);
+                                        if(Student.getById(rollno).getModel_type().equals("<7")){
+                                            mark+=0.5;
+                                        }
+                                       if(Integer.parseInt(markm3)<45){
+                                           if(zmarkm3!=null && !zmarkm3.equals("A") && !zmarkm3.equals("N")){
+                                               
+                                               if(Integer.parseInt(zmarkm3)>=45){
+                                                  if(bonus!=0){
+                                                   total=Find.calcBonus((int)mark, Student.getById(rollno).getModel_type());
+                                                }
+                                               }
+                                         }
+                                       }else{
+                                            if(bonus!=0){
+                                                   total=Find.calcBonus((int)mark, Student.getById(rollno).getModel_type());
+                                                }
+                                       }                                       
+                                    }
+                                    
+                                    gtotal += total;
+                                     }
+                                    
+                                    break;
+                                        
+                            }
                             
+                            if(flag!=0){
                             String markc = null, markm = null, marku = null,zmark=null;
                             if (li.size() != 0) {
                                 show=true;
@@ -299,54 +442,52 @@ and open the template in the editor.
                                         zmark = mi.getMark();
                                     }
                                 }
-                                total = Find.calculateTotal(markm, markc, marku);
+                                gtotal = Find.calculateTotal(markm, markc, marku);
 
                                 //bonus logic
                                 if (bonus != 0) {
 
-                                        total += Find.calculateBonus(total, Student.getById(rollno).getModel_type()) ;
+                                        gtotal += Find.calculateBonus(gtotal, Student.getById(rollno).getModel_type()) ;
                                     
                                 }
                                 
                                 if(zmark!=null){
-                                
                                 if (bonus != 0) {
                                     
                                     if(!zmark.equals("A")){
                                         
                                         if(markm.equals("A")){
                                         markm=zmark;
-                                        if(total<Find.calculateTotal(markm, markc, marku))
-                                            total=Find.calculateTotal(markm, markc, marku);
-                                        total += Find.calculateBonus(Find.calculateTotal(markm, markc, marku), Student.getById(rollno).getModel_type());
+                                        if(gtotal<Find.calculateTotal(markm, markc, marku))
+                                            gtotal=Find.calculateTotal(markm, markc, marku);
+                                        gtotal += Find.calculateBonus(Find.calculateTotal(markm, markc, marku), Student.getById(rollno).getModel_type());
                                         
                                         
                                         } else  {
-                                            if(total<Integer.valueOf(zmark))
-                                                total=Integer.valueOf(zmark);
-                                        total += Find.calculateBonus(Integer.valueOf(zmark), Student.getById(rollno).getModel_type()) ;
+                                            if(gtotal<Integer.valueOf(zmark))
+                                                gtotal=Integer.valueOf(zmark);
+                                        gtotal += Find.calculateBonus(Integer.valueOf(zmark), Student.getById(rollno).getModel_type()) ;
                                     }
                                     }
                                 }else{
 					if(!zmark.equals("A"))
-						if(total<Integer.valueOf(zmark))	
-                                                    total=Integer.valueOf(zmark);
+						if(gtotal<Integer.valueOf(zmark))	
+                                                    gtotal=Integer.valueOf(zmark);
 
 					}
-                                
-                                
-                                
+                                                              
                                 }
                             }
                             }
+                            }
                             if(show){
-                                if(total>100)
-                                total=100;
+                                if(gtotal>100)
+                                gtotal=100;
 
                     %>
 
 
-                    <td><%=total%></td>
+                    <td><%=gtotal%></td>
 
                     <%
                     } else {

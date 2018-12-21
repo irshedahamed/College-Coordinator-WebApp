@@ -9,6 +9,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -99,8 +100,17 @@ public class Local_Guard extends HttpServlet {
 
       //Class.forName("com.mysql.jdbc.Driver").newInstance();
       Connection con = new dbcon().getConnection(Find.sdept(rollno));
-        Statement st = con.createStatement();
-           st.executeUpdate("insert into student_local_guardian2 values('"+rollno+"','"+name+"','"+phoneno+"','"+doorno+"','"+street+"','"+area+"','"+city+"','"+pincode+"')");
+        //Statement st = con.createStatement();
+            PreparedStatement st=con.prepareStatement("insert into student_local_guardian2 values(?,?,?,?,?,?,?,?)");
+            st.setString(1,rollno);
+            st.setString(2, name);
+            st.setString(3,phoneno);
+            st.setString(4, doorno);
+            st.setString(5, street);
+            st.setString(6, area);
+            st.setString(7, city);
+            st.setString(8, pincode);
+        st.executeUpdate();
             //response.sendRedirect("admin/batch.jsp");
             response.getWriter().write("Successfully updated!");
             

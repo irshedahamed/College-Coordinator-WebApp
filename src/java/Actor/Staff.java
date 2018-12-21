@@ -8,6 +8,7 @@ package Actor;
 import com.action.Find;
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -198,12 +199,13 @@ public class Staff {
     Staff s=null;
     
          Connection conn=null;
-    Statement stmt=null;
+        PreparedStatement stmt=null;
         try{
             
     conn=new dbcon().getConnection(Find.sdept(id));
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from staff_general where staffid like '"+id+"'");
+    stmt = conn.prepareStatement("select * from staff_general where staffid like ?");
+    stmt.setString(1, id);
+                    ResultSet rs=stmt.executeQuery();
                     
                     
                     rs.beforeFirst();

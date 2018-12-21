@@ -101,6 +101,7 @@
                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="updatemarks.jsp">Update Marks</a></li>
 
                                             <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmark.jsp">View Marks</a></li>
+                                            <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="ExamDate.jsp">End Date Entry</a></li>
 
 
 
@@ -111,6 +112,7 @@
 
                                 <li id="menu-item-764" class="menu-item menu-item-type-post_type menu-item-object-page"><a href="#">Report Generation</a>
                                     <ul class="sub-menu">
+                                           <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="AnalysisReport.jsp">Exam Report</a></li>
                                         <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="reportgeneration.jsp">Marks Report Staff</a></li>
 
                                         <li id="menu-item-812" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-812"><a href="viewmarkbonus.jsp">Marks Report Student</a></li>
@@ -151,12 +153,11 @@
 
             <section class="section-content section-bg" style="background-color:#f5f5f5;"><div class="container clearfix"><div class="entry-content">
                         <form method="post" action="${pageContext.request.contextPath}/RemoveBonus">
-                            <%
-                                    String sem=request.getParameter("sem");
-                                    String sec=request.getParameter("section");
-                                    String batch=request.getParameter("batch");
-                                    String exam=request.getParameter("exam");
-                                    String dept=request.getParameter("dept");
+                            <%                                String sem = request.getParameter("sem");
+                                String sec = request.getParameter("section");
+                                String batch = request.getParameter("batch");
+                                String exam = request.getParameter("exam");
+                                String dept = request.getParameter("dept");
                             %>
                             <input type="hidden" name="exam" value="<%=exam%>">	
                             <input type="hidden" name="sem" value="<%=sem%>">
@@ -166,12 +167,12 @@
 
 
                             <%
-                                Connection conn=null;
+                                Connection conn = null;
                                 //Statement stmt=null;
-            
-                                try{
-                                conn=new dbcon().getConnection(dept);
-                               // stmt=conn.createStatement();
+
+                                try {
+                                    conn = new dbcon().getConnection(dept);
+                                    // stmt=conn.createStatement();
                             %>
 
                             <center><table  class="bordered">
@@ -183,31 +184,33 @@
 
                                     </thead>
 
-                                    <% 
-                                   String sql2= "select * from student_personal where batch=? and sec=? order by rollno";
-                                   PreparedStatement stmt=conn.prepareStatement(sql2);
-                                   stmt.setString(1, batch);
-                                   stmt.setString(2, sec);
-                                   ResultSet rs=stmt.executeQuery();
-                                 while(rs.next())
-                                 {
-                                  String rollno=rs.getString("rollno");
-                                    String name = rs.getString("name");
+                                    <%
+                                        String sql2 = "select * from student_personal where batch=? and sec=? order by rollno";
+                                        PreparedStatement stmt = conn.prepareStatement(sql2);
+                                        stmt.setString(1, batch);
+                                        stmt.setString(2, sec);
+                                        ResultSet rs = stmt.executeQuery();
+                                        while (rs.next()) {
+                                            String rollno = rs.getString("rollno");
+                                            String name = rs.getString("name");
                                     %>
                                     <%
-                                        String bsql="select * from bonuscut where rollno=?";
+                                        String bsql = "select * from bonuscut where rollno=? and sem=?";
                                         //Statement bstmt=conn.createStatement();
-                                        PreparedStatement bstmt=conn.prepareStatement(bsql);
+                                        PreparedStatement bstmt = conn.prepareStatement(bsql);
                                         bstmt.setString(1, rollno);
-                                        ResultSet brs=bstmt.executeQuery();
-                                        int assessment=0;
-                                        if(brs.next())
-                                        {if((Integer.valueOf(brs.getString("assessment")) <= Integer.valueOf(exam))  && sem.equals(brs.getString("sem"))){
+                                        bstmt.setString(2, sem);
+                                        ResultSet brs = bstmt.executeQuery();
+                                        int assessment = 0;
+                                        if (brs.next()) {
+                                            if ((Integer.valueOf(brs.getString("assessment")) <= Integer.valueOf(exam)) && sem.equals(brs.getString("sem"))) {
                                     %>
                                     <tr  style="background: #e1070a;">
-                                        <%}else{%>
+                                        <%   } else {
+                                        %>
                                     <tr>
-                                        <%  }}else{
+                                        <%  }
+                                        } else {
                                         %>
                                     <tr>
                                         <%}%>
@@ -220,19 +223,19 @@
 
 
                                     <%
-                         }
-        
-                                }catch(Exception e){
-                                    e.printStackTrace();
-                                }finally{
-                
-                               //     if(stmt!=null)
-                                 //       stmt.close();
-                                    if(conn!=null)
-                                    ;//conn.close();
-                                }
+                                            }
 
-        
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        } finally {
+
+                                            //     if(stmt!=null)
+                                            //       stmt.close();
+                                            if (conn != null)
+                                    ;//conn.close();
+                                        }
+
+
                                     %>
                                 </table>
 
@@ -273,14 +276,14 @@
 
 <!-- Menu Toggle Script -->
 <script>
-$("#menu-toggle").click(function (e) {
-    e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
-});
-$("#menu-toggle1").click(function (e) {
-    e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
-});
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+            $("#menu-toggle1").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
 </script>
 
 

@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -143,9 +144,13 @@ public class maincircularupload extends HttpServlet {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection connection1 = new dbcon().getConnection("sjitportal");
-            Statement statement1 = connection1.createStatement();
-
-            statement1.executeUpdate("insert into circular values("+null+",'" + name + "','" + desc + "','" + type + "','"+ UPLOAD_DIRECTORY + "')");
+           // Statement statement1 = connection1.createStatement();
+            PreparedStatement statement1=connection1.prepareStatement("insert into circular values("+null+",?,?,?,?)");
+            statement1.setString(1, name);
+            statement1.setString(2, desc);
+            statement1.setString(3, type);
+            statement1.setString(4,  UPLOAD_DIRECTORY);
+            statement1.executeUpdate();
              request.getRequestDispatcher("admin/result.jsp").forward(request, response);
               if(statement1!=null)
                             statement1.close();

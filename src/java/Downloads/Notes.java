@@ -8,6 +8,7 @@ package Downloads;
 import com.action.Base;
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -64,13 +65,14 @@ public class Notes extends Downloadable{
        public static List<Notes> getAll(String dept,Notes n){
     List<Notes> list = new ArrayList<Notes>();
     Connection conn=null;
-    Statement stmt=null;
+           PreparedStatement stmt=null;
     try{
     conn=new dbcon().getConnection(dept);
-    stmt = conn.createStatement();
+    
      String path = Base.path+"/notes/"+n.getAcademicyr()+"/"+dept+"/"+"%"+"/"+n.getSem()+"/"+n.getSubcode()+"/"+n.getType()+"/";
-       
-                    ResultSet rs=stmt.executeQuery("select * from notes where path like '"+path+"'");
+                    stmt = conn.prepareStatement("select * from notes where path like ?");
+                    stmt.setString(1, path);
+                    ResultSet rs=stmt.executeQuery();
                     
                     rs.beforeFirst();
                     while(rs.next()){

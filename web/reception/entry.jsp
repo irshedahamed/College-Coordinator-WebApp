@@ -3,9 +3,6 @@
     Created on : 18 Nov, 2016, 7:16:34 PM
     Author     : Home
 --%>
-<%@page import="Actor.Staff"%>
-<%@page import="Actor.Student"%>
-<%@page import="java.sql.PreparedStatement"%>
 <%@page import="General.OutPass"%>
 <%@page import="java.util.Date"%>
 <%@page import="com.action.Find"%>
@@ -180,15 +177,15 @@
                                         <br><br></div></form>
                                         <%                        String rollno = request.getParameter("search");
                                             Connection con = null;
-                                           // Statement stmt = null;
+                                            Statement stmt = null;
                                             ResultSet rs10 = null;
-                                            //String sql = "select * from student_personal where rollno like '" + rollno + "'";
+                                            String sql = "select * from student_personal where rollno like '" + rollno + "'";
                                             if (request.getParameter("search") != null) {
-                                                        Student s = Student.getById(rollno);
-                                              //  try {
-                                                     //PreparedStatement stmt=null;
-                                                   // con = new dbcon().getConnection(Find.sdept(rollno));
-                                                 //   stmt = con.createStatement();
+
+                                                try {
+
+                                                    con = new dbcon().getConnection(Find.sdept(rollno));
+                                                    stmt = con.createStatement();
 
 
                                         %>
@@ -196,11 +193,11 @@
 
                                     <%                               boolean found = false;
                                         if (!Find.sdept(rollno).equals("first")) {
-                                          //  rs10 = stmt.executeQuery(sql);
+                                            rs10 = stmt.executeQuery(sql);
 
-                                           // if (rs10.next()) {
-                                              //  found = true;
-                                                String batch = s.getBatch();
+                                            if (rs10.next()) {
+                                                found = true;
+                                                String batch = rs10.getString("batch");
                                     %>
                                     <center> 
 
@@ -228,7 +225,7 @@
                                                 </td><td></td>
                                                 <td>
                                                     <label>Category :</label><select name="acc" >
-                                                        <option value="<%=s.getAccomodation()%>">Student(<%=s.getAccomodation()%>)</option>
+                                                        <option value="<%=rs10.getString("accomodation")%>">Student(<%=rs10.getString("accomodation")%>)</option>
 
                                                     </select></td></tr>             
                                             <tr>
@@ -243,12 +240,12 @@
                                             <tr >
 
                                                 <td>
-                                                    <label>Name :</label><input type="text"  style="background: white" id="stuname" name="stuname" value="<%=s.getName()%>">
+                                                    <label>Name :</label><input type="text"  style="background: white" id="stuname" name="stuname" value="<%=rs10.getString("name")%>">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <label>Batch & Dept :</label><input type="text"  style="background: white" id="batch" name="batch" value="<%=s.getBatch()+ "-" + Find.sdept(rollno).toUpperCase() + "-" + s.getSec().toUpperCase()%>">
+                                                    <label>Batch & Dept :</label><input type="text"  style="background: white" id="batch" name="batch" value="<%=rs10.getString("batch") + "-" + Find.sdept(rollno).toUpperCase() + "-" + rs10.getString("sec").toUpperCase()%>">
                                                 </td>
 
 
@@ -256,7 +253,7 @@
                                             <tr>
                                                 <td>
                                                     <label>Gender :</label><select name="gender" >
-                                                        <option value="<%=s.getSex()%>"><%=s.getSex()%></option>
+                                                        <option value="<%=rs10.getString("gender")%>"><%=rs10.getString("gender")%></option>
 
                                                     </select></td>
 
@@ -304,7 +301,7 @@
 
 
                                             <center>             
-                                                <input type="hidden" class="button" name="rollno" value="<%=s.getId()%>">
+                                                <input type="hidden" class="button" name="rollno" value="<%=rs10.getString("rollno")%>">
                                                 <input type="hidden" class="button" value=""  name="entry" >
                                                 <div style="position: relative;left: -30px;"> 
                                                     <label> Self  :</label>  <input type="radio"  style="background: white" name="by" value="Self" class="enable">
@@ -328,29 +325,28 @@
 
                                     <%
 
-                                              //  if (stmt != null) {
-                                                //    stmt.close();
-                                              //  }
+                                                if (stmt != null) {
+                                                    stmt.close();
+                                                }
 
                                                 if (con != null) {
                                                     ;//con.close();
                                                 }
-                                            
+                                            }
                                         }
                                         if (!found) {
 
                                             try {
 
                                                 con = new dbcon().getConnection(Find.sdept(rollno));
-                                                //stmt = con.createStatement();
+                                                stmt = con.createStatement();
                                     %>
                                     <center> 
 
                                         <%
-                                            //sql = "select * from staff_general where staffid like '" + rollno + "'";
-                                           // ResultSet rs = stmt.executeQuery(sql);
-                                           //  if (rs.next()) {
-                                        Staff st=Staff.getByid(rollno);
+                                            sql = "select * from staff_general where staffid like '" + rollno + "'";
+                                            ResultSet rs = stmt.executeQuery(sql);
+                                            if (rs.next()) {
                                         %>
 
                                         <table cellspacing="10">
@@ -387,10 +383,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <%
-                                                    String[] str = st.getName().split(".");
-                                                    
-                                                    %><label> Name :</label><input type="text" style="background: white" id="dob" name="dob" value="<%=str[0] + str[1].toUpperCase()%>">
+                                                    <label> Name :</label><input type="text" style="background: white" id="dob" name="dob" value="<%=rs.getString("tittle") + rs.getString("name").toUpperCase()%>">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -398,19 +391,19 @@
                                                 </td>          
                                             </tr>
                                             <tr>      
-                                                <td><label>Designation :</label><input type="text" style="background: white" id="caste" name="caste" value="<%=st.getDesg()%>">
+                                                <td><label>Designation :</label><input type="text" style="background: white" id="caste" name="caste" value="<%=rs.getString("desg")%>">
                                                 </td></tr>
                                             <tr>
 
                                                 <td>
-                                                    <label>Gender :</label><input type="text" style="background: white" id="pincome" name="pincome" value="<%=st.getSex()%>">
+                                                    <label>Gender :</label><input type="text" style="background: white" id="pincome" name="pincome" value="<%=rs.getString("gender")%>">
                                                 </td>
                                             </tr>
                                             <tr>
 
 
                                                 <td>
-                                                    <label> Mobile  :</label><input type="text" style="background: white" id="nationality" name="nationality" value="<%=st.getMobile1()%>">
+                                                    <label> Mobile  :</label><input type="text" style="background: white" id="nationality" name="nationality" value="<%=rs.getString("mobile1")%>">
                                                 </td>
 
 
@@ -454,10 +447,10 @@
                                 </center>
 
                                 <%
-                                                    
-                                      //              if (stmt != null) {
-                                        //                stmt.close();
-                                          //          }
+                                                    }
+                                                    if (stmt != null) {
+                                                        stmt.close();
+                                                    }
 
                                                     if (con != null) {
                                                         ;//con.close();
@@ -467,19 +460,19 @@
                                                 }
                                             }
 
-                            //            } catch (Exception e) {
-                              //              e.printStackTrace();
-                                //        } finally {
-                                  //          try {
-                                    //            if (con != null) {
-                                        //            ;//con.close();
-                                      //          }
-                                          //      if (stmt != null) {
-                                            //        stmt.close();
-                                              //  }
-                                       //     } catch (Exception e) {
-                                         //       e.printStackTrace();
-                                           // }
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        } finally {
+                                            try {
+                                                if (con != null) {
+                                                    ;//con.close();
+                                                }
+                                                if (stmt != null) {
+                                                    stmt.close();
+                                                }
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
                                         }
                                     }
                                 %>
@@ -536,17 +529,16 @@
             } else {
                 response.sendRedirect("../index.jsp");
             }
-        
+        }
 
-  //      if (sttt != null) {
-    //        sttt.close();
-      //  }
-//        if (connn != null) {
-  //          ;//connn.close();
-    //    }
-// else {
-  //          response.sendRedirect("../index.jsp");
-    //    }
+        if (sttt != null) {
+            sttt.close();
+        }
+        if (connn != null) {
+            ;//connn.close();
+        } else {
+            response.sendRedirect("../index.jsp");
+        }
     } catch (Exception e) {
         e.printStackTrace();
         response.sendRedirect("../index.jsp");

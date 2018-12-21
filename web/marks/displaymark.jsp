@@ -40,12 +40,16 @@
         session.setAttribute("sec", sec);
         session.setAttribute("dept", dept);
         session.setAttribute("exam", exam);
+        String sss = exam.toUpperCase();
+        if(exam.contains("unit")){
+            sss = exam.replace("unit","IAE");
+        }
     %>
     <body>
     <center> <img src="../images/logo2.png" height="165px" width="700px" /></center>
     <div id="yourTableIdName1">
         <center><h2 style="font-size: 22px;">DEPARTMENT OF <%=Find.getDeptFullForm(dept).toUpperCase()%> </h2></center>
-        <center><h3>MARKS REPORT - <%=exam.toUpperCase()%> EXAM</h3></center>
+        <center><h3>MARKS REPORT - <%=sss.toUpperCase()%> EXAM</h3></center>
         <center><h3 style="">BATCH: <%=batch%>      
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -75,7 +79,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             Max Marks:
             <% if (exam.contains("unit")) {%>
-            48
+            75
             <% } else if (exam.contains("cycle")) {%>
             30
             <%

@@ -7,6 +7,7 @@ package Downloads;
 
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,11 +22,12 @@ public class Department {
      public static List<Circular> getAll(String dept,String type){
     List<Circular> list = new ArrayList<Circular>();
     Connection conn=null;
-    Statement stmt=null;
+         PreparedStatement stmt=null;
     try{
     conn=new dbcon().getConnection(dept);
-    stmt = conn.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from deptuploads where type like '"+type+"' order by sno desc");
+    stmt = conn.prepareStatement("select * from deptuploads where type like ? order by sno desc");
+    stmt.setString(1, type);
+                    ResultSet rs=stmt.executeQuery();
                     
                     rs.beforeFirst();
                     while(rs.next()){

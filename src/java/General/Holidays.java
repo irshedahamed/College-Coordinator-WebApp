@@ -7,6 +7,7 @@ package General;
 
 import dbconnection.dbcon;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -69,20 +70,28 @@ public class Holidays {
    
     public boolean insert(){
         Connection conn=null;
-       Statement stmt=null;
+        PreparedStatement stmt=null;
        int update=0;
        try{
            conn=new dbcon().getConnection(dept);
-           stmt=conn.createStatement();
+           
            
            String sql;
-           sql="select * from holidays where name='"+name+"' and batch ='"+batch+"'";
-           ResultSet rs=stmt.executeQuery(sql);
+           sql="select * from holidays where name=? and batch =?";
+           stmt=conn.prepareStatement(sql);
+           stmt.setString(1, name);
+           stmt.setString(2, batch);
+           ResultSet rs=stmt.executeQuery();
            if(rs.next()){
            update+=update(stmt);
            }else{
-           sql="insert into holidays values('"+name+"','"+batch+"','"+from+"','"+till+"')";
-       update+=stmt.executeUpdate(sql);
+           //sql=;
+           stmt=conn.prepareStatement("insert into holidays values(?,?,?,?)");
+           stmt.setString(1, name);
+           stmt.setString(2, batch);
+           stmt.setString(3, from);
+           stmt.setString(4, till);
+           update+=stmt.executeUpdate();
            }
      
        
@@ -114,11 +123,11 @@ public class Holidays {
     public static List<String> getAllNames(){
         List<String> list=new ArrayList<String>();
         Connection conbatch=null;
-        Statement stmt=null;
+        PreparedStatement stmt=null;
         try{
          conbatch = new dbcon().getConnection("sjitportal");
-                     stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from holidays");
+                     stmt = conbatch.prepareStatement("select * from holidays");
+                    ResultSet rs=stmt.executeQuery();
                     
                     rs.beforeFirst();
                     while(rs.next())
@@ -148,11 +157,11 @@ public class Holidays {
     public static List<Holidays> getAll(String dept){
         List<Holidays> list=new ArrayList<Holidays>();
         Connection conbatch=null;
-        Statement stmt=null;
+        PreparedStatement stmt=null;
         try{
          conbatch = new dbcon().getConnection(dept);
-                     stmt = conbatch.createStatement();
-                    ResultSet rs=stmt.executeQuery("select * from holidays");
+                     stmt = conbatch.prepareStatement("select * from holidays");
+                    ResultSet rs=stmt.executeQuery();
                     
                     rs.beforeFirst();
                     while(rs.next())

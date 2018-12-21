@@ -22,6 +22,10 @@ import java.util.logging.Logger;
  */
 public class Mark {
 
+//    static boolean isDateAvailable(String dept, EnddateCheck m) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+
     private String rollno;
     private String subcode;
     private String type;

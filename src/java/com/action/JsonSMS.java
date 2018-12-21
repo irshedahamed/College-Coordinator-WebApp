@@ -10,6 +10,7 @@ import dbconnection.dbcon;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -112,25 +113,29 @@ public class JsonSMS extends HttpServlet {
         String json=null;
         
         Connection conn=null;
-        Statement stmt=null;
+       // Statement stmt=null;
         boolean proceed=false;
         try{
         conn=new dbcon().getConnection("login");
-        stmt=conn.createStatement();
-        ResultSet rs=stmt.executeQuery("select * from other_login_details where id='"+request.getSession().getAttribute("username").toString()+"' and password='"+request.getSession().getAttribute("password").toString()+"'");
+        String username=   request.getSession().getAttribute("username").toString();
+        String password=request.getSession().getAttribute("password").toString();
+        PreparedStatement stmt=conn.prepareStatement("select * from other_login_details where id=? and password=?");
+        stmt.setString(1, username);
+        stmt.setString(2, password);
+        ResultSet rs=stmt.executeQuery();
         if(rs.next())
             proceed=true;
         
         }catch(Exception e){e.printStackTrace();}finally{
-            try {
-                if(stmt!=null)
-                    stmt.close();
-                if(conn!=null)
-                    ;//conn.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        
+//            try {
+//                if(stmt!=null)
+//                    stmt.close();
+//                if(conn!=null)
+//                    ;//conn.close();
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//            }
+//        
         }
         
         

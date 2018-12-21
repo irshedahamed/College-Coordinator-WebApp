@@ -71,12 +71,16 @@ public class WorkingTiming {
         boolean result=false ;
         try {
             Connection con = null;
-            Statement st = null;
+            PreparedStatement st = null;
             
             con = new dbcon().getConnection("sjitportal");
-            st = con.createStatement();
+            st = con.prepareStatement("select * from working_timing where date like ? and batch like ? and dept like ? ");
+            st.setString(1, date);
+            st.setString(2, batch);
+            st.setString(3, dept);
+                    
             
-            ResultSet rs = st.executeQuery("select * from working_timing where date like '"+date+"' and batch like '"+batch+"' and dept like '"+dept+"' ");
+            ResultSet rs = st.executeQuery();
             
             while(rs.next())
             {

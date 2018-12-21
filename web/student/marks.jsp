@@ -7,16 +7,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <%
-        try {
             String username = session.getAttribute("username").toString();
-            String password = session.getAttribute("password").toString();
-
-            Connection connn = new dbcon().getConnection("login");
-            Statement sttt = connn.createStatement();
-            String type1 = "";
-            ResultSet rsss = sttt.executeQuery("select * from student_login_details where rollno='" + username + "' and password='" + password + "'");
-            if (rsss.isBeforeFirst()) {
-
+      
 
     %>
 
@@ -329,15 +321,14 @@
 
                                             <select id="exam" name="exam" required>
                                                 <option disabled selected>select</option>
-                                                <option value="cycle1">Cycle 1</option>
-                                                <option value="cycle2">Cycle 2</option>
-                                                <option value="cycle3">Cycle 3</option>
-                                                <option value="model1">Model 1</option>
-                                                <option value="model2">Model 2</option>
-                                                <option value="model3">Model 3</option>
-                                                <option value="unit1">Unit 1</option>
-                                                <option value="unit2">Unit 2</option>
-                                                <option value="unit3">Unit 3</option>
+                                                <option value="unit1">IAE 1</option>
+                                                <option value="unit2">IAE 2</option>
+                                                <option value="unit3">IAE 3</option>
+                                                <option value="unit4">IAE 4</option>               
+                                                <option value="model3">Model(IAE 5)</option>
+                                                <option value="model1">Model 1</option>  
+                                                <option value="model2">Model 2</option>   
+                                                <option value="cycle1">Cycle 1</option>     
 
                                             </select>
                                             <i></i>
@@ -387,36 +378,18 @@
 
             <!-- Menu Toggle Script -->
             <script>
-                             $("#menu-toggle").click(function (e) {
-                                 e.preventDefault();
-                                 $("#wrapper").toggleClass("toggled");
-                             });
-                             $("#menu-toggle1").click(function (e) {
-                                 e.preventDefault();
-                                 $("#wrapper").toggleClass("toggled");
-                             });
+                                        $("#menu-toggle").click(function (e) {
+                                            e.preventDefault();
+                                            $("#wrapper").toggleClass("toggled");
+                                        });
+                                        $("#menu-toggle1").click(function (e) {
+                                            e.preventDefault();
+                                            $("#wrapper").toggleClass("toggled");
+                                        });
             </script>
 
 
             <script type="text/javascript" defer src="../wp-content/cache/autoptimize/js/autoptimize_b9dd1eab85c72cde0d539343c70a43c2.js"></script></body>
 
             <!-- Mirrored from educator.incrediblebytes.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Feb 2015 13:07:32 GMT -->
-            <%
-
-                    } else {
-                        response.sendRedirect("../index.jsp");
-                    }
-                    if (sttt != null) {
-                        sttt.close();
-                    }
-                    if (connn != null) {
-                        ;//connn.close();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    response.sendRedirect("../index.jsp");
-                }
-
-
-            %>
             </html>
